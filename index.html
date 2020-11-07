@@ -709,90 +709,14 @@
 
       
         
-          
-            <h1 id="图的存储"><a href="#图的存储" class="headerlink" title="图的存储"></a>图的存储</h1><p>我假设您有关于图的<a target="_blank" rel="noopener" href="https://oi-wiki.org/graph/concept/">基本概念</a>. 因为这些东西只是一些简单的定义. 各位朋友看看就好. 当然, 看到不懂的东西再查找也是可以的.</p>
-<p> 如果要把一个图存储起来,有几种方式?</p>
-<p>观察一个图, 我们发现我们需要存储的是点与点之间的连接关系, 也就是边.</p>
-<p><strong>方法1.</strong> 使用一个矩阵, 表示点之间的关系.</p>
-<p>如果是有向图的话,枚举两点之间的联系. 就可以“表示”边.</p>
-<p>也就是$a_{i,j}$表示$i$到$j$节点是不是连边.</p>
-<p><img src="https://i.loli.net/2020/11/07/8jBvtIfOUczlbqF.png" alt="image-20201107220229009"></p>
-<p><strong>约定.</strong> $u,v$是图上的两个节点.$mp[][]$是一个二维矩阵.</p>
-<p><strong>复杂度.</strong></p>
-<ul>
-<li><p>查询边$(u,v)$存在性: $\mathcal O(1)$</p>
-<ul>
-<li><code>return mp[u][v];</code></li>
-</ul>
-</li>
-<li><p>遍历一个点$u$的所有出边$v$:$\mathcal O(n)$</p>
-<ul>
-<li><code>for(i = 1;i&lt;=n;i++) if(mp[u][i]) printf(&quot;出边到%d,\n&quot;,i);</code></li>
-</ul>
-</li>
-<li><p>遍历图: <script type="math/tex">\mathcal O(n^2)</script></p>
-<ul>
-<li>```cpp<br>void dfs(int u) {<br>  if (vis[u]) return;<br>  vis[u] = true;<br>  for (int v = 1; v &lt;= n; ++v) {<pre><code>if (mp[u][v]) &#123;
-  dfs(v);
-&#125;
-</code></pre>  }<br>}<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 空间开销:$\mathcal O(n^2)$</span><br><span class="line"></span><br><span class="line">注意到, 刚刚的空间开销太大了, 有没有什么方法去弥补这一不足?</span><br><span class="line"></span><br><span class="line">其实矩阵不用开那么大, 我们只需要关注每一个节点可以到达的地方是什么. 这样, 我们可以对于每一个点开一个vector. **也就是**;</span><br><span class="line"></span><br><span class="line">**方法2.** 开&#96;vector&#96;存储</span><br><span class="line"></span><br><span class="line">大概类似于这样:</span><br><span class="line"></span><br><span class="line">![image-20201107222534115](https:&#x2F;&#x2F;i.loli.net&#x2F;2020&#x2F;11&#x2F;07&#x2F;4uFOnEhNmIgACyM.png)</span><br><span class="line"></span><br><span class="line">**复杂度**.</span><br><span class="line"></span><br><span class="line">- 查询是否存在$u$到$v$的边: $O(\text&#123;degree&#125;(u))$</span><br><span class="line"></span><br><span class="line">  - &#96;for(i:mp[u]) if(mp[u][i]&#x3D;&#x3D;v) return 1;else return 0; &#96;</span><br><span class="line"></span><br><span class="line">- 遍历所有出边:$O(\text&#123;degree&#125;(u))$.</span><br><span class="line"></span><br><span class="line">  - &#96;for(i:mp[u])&#96;.</span><br><span class="line"></span><br><span class="line">- 遍历图:$O(n+m)$</span><br><span class="line"></span><br><span class="line">  - &#96;&#96;&#96;cpp</span><br><span class="line">    void dfs(int u) &#123;</span><br><span class="line">      if (vis[u]) return;</span><br><span class="line">      vis[u] &#x3D; true;</span><br><span class="line">      for (i:mp[u]) dfs(mp[u][i]);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-<li><p>空间复杂度: $O(m)$.</p>
-</li>
-</ul>
-<hr>
-<p><strong>方法3. 链式前向星</strong></p>
-<p>我们可以用链表的方式实现邻接表.也就是这样:</p>
-<p><img src="https://i.loli.net/2020/11/07/ojt8uPQ6DZL4ShN.png" alt="image-20201107223439577"></p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> head[N],cnt = <span class="number">0</span>, to[N], nxt[N];</span><br><span class="line"><span class="comment">// head[u] 和 cnt 的初始值都为 0</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> v)</span> </span>&#123;</span><br><span class="line">  nxt[++cnt] = head[u];  <span class="comment">// 当前边的后继</span></span><br><span class="line">  head[u] = cnt;         <span class="comment">// 起点 u 的第一条边</span></span><br><span class="line">  to[cnt] = v;           <span class="comment">// 当前边的终点</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 遍历 u 的出边</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = head[u]; i!=<span class="number">0</span>; i = nxt[i]) &#123;</span><br><span class="line">  <span class="keyword">int</span> v = to[i];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>复杂度</strong>.</p>
-<ul>
-<li><p>查询是否存在$u$到$v$的边: $O(\text{degree}(u))$</p>
-<ul>
-<li><code>for(i = head[u];i;i =nxt[i]) &#123; if(v==to[i]) return 1;else return 0;&#125;</code></li>
-</ul>
-</li>
-<li><p>遍历所有出边:$O(\text{degree}(u))$.</p>
-<ul>
-<li><code>for(i = head[u];i;i = nxt[i])</code>.</li>
-</ul>
-</li>
-<li><p>遍历图:$O(n+m)$</p>
-<ul>
-<li>```cpp<br>void dfs(int u) {<br>  if (vis[u]) return;<br>  vis[u] = true;<br>  for (int i = head[u]; i; i = nxt[i]) dfs(to[i]);<br>}<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 空间复杂度: $O(m)$.</span><br><span class="line"></span><br><span class="line"># 最短路算法</span><br><span class="line"></span><br><span class="line">## Floyd</span><br><span class="line"></span><br><span class="line">### 用Floyd 求解最短路</span><br><span class="line"></span><br><span class="line">Floyd本质上是一个**动态规划**的思想，每一次循环更新**经过前k个节点，i到j的最短路径**. 基于的是一个比较明显的不等式:</span><br><span class="line"></span><br><span class="line">![image-20201107224605699](https:&#x2F;&#x2F;i.loli.net&#x2F;2020&#x2F;11&#x2F;07&#x2F;6Rs9zecaSGP5bNC.png)</span><br><span class="line"></span><br><span class="line">比如这样:</span><br><span class="line"></span><br><span class="line">&#96;&#96;&#96;cpp</span><br><span class="line">for (int k &#x3D; 1; k &lt;&#x3D; n; ++k)</span><br><span class="line">        for (int i &#x3D; 1; i &lt;&#x3D; n; ++i)</span><br><span class="line">            for (int j &#x3D; 1; j &lt;&#x3D; n; ++j)</span><br><span class="line">                dist[i][j] &#x3D; min(dist[i][j], dist[i][k] + dist[k][j]);</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-</ul>
-<p>其中<code>dist[u][v]</code>数组表示$u\to v$的距离. </p>
-<h3 id="用Floyd-传递闭包"><a href="#用Floyd-传递闭包" class="headerlink" title="用Floyd 传递闭包"></a>用Floyd 传递闭包</h3><p>传递闭包的含义指通过传递性推导出尽量多的元素之间的关系. 比如<a target="_blank" rel="noopener" href="http://poj.org/problem?id=3660">这个例子</a>.</p>
-<p>我们可以想到, 如果A打败B, B 打败C, A就会打败C. 回想求解最短路的时候的思路与之类似, 所以可以用这个传递闭包:</p>
-<p><img src="C:/Users/Admin/AppData/Roaming/Typora/typora-user-images/image-20201107225313896.png" alt="image-20201107225313896"></p>
-<p>所以核心代码就可以这样写:</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++) &#123;</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">1</span>; k &lt;= n; k++) &#123;</span><br><span class="line">				<span class="keyword">if</span> (s[j][i] &amp;&amp; s[i][k])</span><br><span class="line">					s[j][k] = <span class="number">1</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-<p><a target="_blank" rel="noopener" href="http://poj.org/problem?id=1094">这里</a>是一个小练习.</p>
-<h2 id="SPFA"><a href="#SPFA" class="headerlink" title="SPFA"></a>SPFA</h2><p><img src="https://cdn.luogu.com.cn/upload/pic/26431.png" alt="img"></p>
-<p><strong>请慎用该算法. 在一些差分约束的习题中, 请留意出题人是不是特别恨spfa. 如果是的话, 请使用DFS版本的SPFA.</strong></p>
-<p>SPFA的想法也不难.想到只更新可能更新的点. 要满足什么条件呢?</p>
-<ul>
-<li>只让当前点能到达的点入队</li>
-<li>如果一个点已经在队列里，不要重复入队</li>
-<li>如果一条边未被更新，那么它的终点不入队</li>
-</ul>
-<p>也就是这样:(BFS)</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">SPFA</span><span class="params">(<span class="keyword">int</span> s)</span></span>&#123; <span class="comment">// s --&gt; starting</span></span><br><span class="line">    <span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt; Q; <span class="comment">// Q--&gt; Queue</span></span><br><span class="line">    Q.push(s);</span><br><span class="line">    <span class="keyword">while</span> (!Q.empty())&#123;</span><br><span class="line">        <span class="keyword">int</span> u = Q.front(); <span class="comment">//u is the current node</span></span><br><span class="line">        Q.pop();</span><br><span class="line">        vis[p] = <span class="number">0</span>; <span class="comment">// vis means if it is in stack</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = head[p]; i != <span class="number">0</span>; i = nxt[i]) &#123;</span><br><span class="line">            <span class="keyword">int</span> v = to[i];</span><br><span class="line">            <span class="keyword">if</span> (dist[v] &gt; dist[u] + w[i])&#123; <span class="comment">// dist[x] means minium distance from 0-&gt;x.</span></span><br><span class="line">                dist[v] = dist[u] + w[i]);</span><br><span class="line">                <span class="keyword">if</span> (!vis[v])&#123;</span><br><span class="line">                    vis[v] = <span class="number">1</span>;</span><br><span class="line">                    Q.push(v);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>SPFA也可以判负权环，我们可以用一个数组记录每个顶点进队的次数，当一个顶点<strong>进队n次</strong>时，就说明存在负权环。</p>
-<p>(DFS)</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">spfa</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">	vst[x]=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">int</span> i,j,t=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(i=head[x];i;i=nxt[i])&#123;</span><br><span class="line">		<span class="keyword">if</span>(t==<span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">int</span> y=to[i];</span><br><span class="line">		<span class="keyword">if</span>(dis[y]&gt;dis[x]+w[i])&#123;</span><br><span class="line">			dis[y]=dis[x]+w[i];</span><br><span class="line">			t=spfa(y);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="Dijkstra"><a href="#Dijkstra" class="headerlink" title="Dijkstra"></a>Dijkstra</h2><p><strong>假设图上没有负边权.</strong> 根据贪心方法, 如果经过的边数更多, 距离也会更大. 基于这一贪心思想, 我们不难发现想出这个策略:我们可以不断取出<strong>离顶点最近</strong>而<strong>没有被访问过</strong>的点，松弛它和它能到达的所有点.我们用一个优先队列来维护所有节点。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Dij</span><span class="params">(<span class="keyword">int</span> s)</span></span>&#123;</span><br><span class="line">    dist[s] = <span class="number">0</span>;</span><br><span class="line">    Q.push(mp(<span class="number">0</span>, s));</span><br><span class="line">    <span class="keyword">while</span> (!Q.empty())&#123;</span><br><span class="line">        <span class="keyword">int</span> u = Q.top().second;</span><br><span class="line">        Q.pop();</span><br><span class="line">        <span class="keyword">if</span> (vis[u])</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        vis[u] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = head[u]; i != <span class="number">0</span>; i = next[i])&#123;</span><br><span class="line">            <span class="keyword">int</span> v = to[i];</span><br><span class="line">            dist[v] = min(dist[v], dist[u] + w[i]);</span><br><span class="line">            <span class="keyword">if</span> (!vis[v])</span><br><span class="line">                Q.push(mp(dist[v], v));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="最短路可行的边"><a href="#最短路可行的边" class="headerlink" title="最短路可行的边"></a>最短路可行的边</h2><p>一条边$ x\to y$ 在 $s\to t$的最短路上, 当且仅当$dis(s, x) + v(x, y) + dis(y,t) = dis(s,t)$.</p>
-<p>其中 $dis(x, y)$ 表示 $x$ 到 $y $最短路长度.</p>
-<p>用单源最短路算法求 s 到每个点的最短路, 将所有边反转求 t 到每个点的最短路（即原图中每个点到 t 的最短路） 然后判断每条边是否满足条件.</p>
-
-          
+          <h1 id="图的存储"><a href="#图的存储" class="headerlink" title="图的存储"></a>图的存储</h1><p>我假设您有关于图的<a target="_blank" rel="noopener" href="https://oi-wiki.org/graph/concept/">基本概念</a>. 因为这些东西只是一些简单的定义. 各位朋友看看就好. 当然, 看到不懂的东西再查找也是可以的.</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/10/23/day1/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
