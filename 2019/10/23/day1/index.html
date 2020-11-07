@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="图论," />
 
 
 
@@ -79,15 +79,23 @@
 
 
 
-<meta name="description" content="蒟蒻shzaiz的博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="SHZAIZ的博客">
-<meta property="og:url" content="http://example.com/index.html">
+<meta name="description" content="图的存储我假设您有关于图的基本概念. 因为这些东西只是一些简单的定义. 各位朋友看看就好. 当然, 看到不懂的东西再查找也是可以的.  如果要把一个图存储起来,有几种方式? 观察一个图, 我们发现我们需要存储的是点与点之间的连接关系, 也就是边. 方法1. 使用一个矩阵, 表示点之间的关系. 如果是有向图的话,枚举两点之间的联系. 就可以“表示”边. 也就是$a_{i,j}$表示$i$到$j$节点">
+<meta property="og:type" content="article">
+<meta property="og:title" content="G1-图论基础">
+<meta property="og:url" content="http://example.com/2019/10/23/day1/index.html">
 <meta property="og:site_name" content="SHZAIZ的博客">
-<meta property="og:description" content="蒟蒻shzaiz的博客">
+<meta property="og:description" content="图的存储我假设您有关于图的基本概念. 因为这些东西只是一些简单的定义. 各位朋友看看就好. 当然, 看到不懂的东西再查找也是可以的.  如果要把一个图存储起来,有几种方式? 观察一个图, 我们发现我们需要存储的是点与点之间的连接关系, 也就是边. 方法1. 使用一个矩阵, 表示点之间的关系. 如果是有向图的话,枚举两点之间的联系. 就可以“表示”边. 也就是$a_{i,j}$表示$i$到$j$节点">
 <meta property="og:locale">
+<meta property="og:image" content="https://i.loli.net/2020/11/07/8jBvtIfOUczlbqF.png">
+<meta property="og:image" content="https://i.loli.net/2020/11/07/ojt8uPQ6DZL4ShN.png">
+<meta property="og:image" content="c:/Users/Admin/AppData/Roaming/Typora/typora-user-images/image-20201107225313896.png">
+<meta property="og:image" content="https://cdn.luogu.com.cn/upload/pic/26431.png">
+<meta property="article:published_time" content="2019-10-23T06:05:37.000Z">
+<meta property="article:modified_time" content="2020-11-07T15:16:38.665Z">
 <meta property="article:author" content="shzaiz">
+<meta property="article:tag" content="图论">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2020/11/07/8jBvtIfOUczlbqF.png">
 
 
 
@@ -117,13 +125,13 @@
 
 
 
-  <link rel="canonical" href="http://example.com/"/>
+  <link rel="canonical" href="http://example.com/2019/10/23/day1/"/>
 
 
 
 
 
-  <title>SHZAIZ的博客</title>
+  <title>G1-图论基础 | SHZAIZ的博客</title>
   
 
 
@@ -142,8 +150,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -304,307 +311,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/07/intro/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SHZAIZ的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/11/07/intro/" itemprop="url">退役记:引言</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-11-07T21:36:00+08:00">
-                2020-11-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%97%B2%E8%81%8A/" itemprop="url" rel="index">
-                    <span itemprop="name">闲聊</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Announcement"><a href="#Announcement" class="headerlink" title="Announcement"></a>Announcement</h1><p>CSP结束, NOIP将要开始. 为了纪念我学习算法竞赛的点点滴滴, 同时为了给未来的同学们一条比较平坦的路, 所以在接下来的27天里, 每一天, 我会提出一个算法知识点, 并且尽力去解释明白它的动机和拓展. 如果有什么问题, 希望大家有什么问题都可以评论告诉我. 在这时候大家也进行复习一下. </p>
-<p><del>原来我认为是30天的, 但是一看只有27天了. 有几天会双更/三更的.</del></p>
-<h1 id="Requirements"><a href="#Requirements" class="headerlink" title="Requirements"></a>Requirements</h1><p>默认大家会使用基本的<strong>C++语言</strong>且掌握基本的<strong>贪心、搜索、动态规划</strong>思想.</p>
-<h1 id="Categories"><a href="#Categories" class="headerlink" title="Categories"></a>Categories</h1><p>接下来是一个目录. 您在这里可以看到相关目录.</p>
-<p>现在应该还是空的.</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2019/10/23/simple_dp/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SHZAIZ的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/10/23/simple_dp/" itemprop="url">简单DP复习</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-10-23T14:05:37+08:00">
-                2019-10-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/DP/" itemprop="url" rel="index">
-                    <span itemprop="name">DP</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="Serial-DP"><a href="#Serial-DP" class="headerlink" title="Serial DP"></a>Serial DP</h1><h2 id="Problem-1-Zero-Remainder-Sum"><a href="#Problem-1-Zero-Remainder-Sum" class="headerlink" title="Problem 1. Zero Remainder Sum"></a>Problem 1. <a target="_blank" rel="noopener" href="https://codeforces.com/problemset/problem/1433/F">Zero Remainder Sum</a></h2><ul>
-<li><p>Hint: You may use search algorithm to handle this complicated transitions between states.</p>
-</li>
-<li><p>Takeaway: setting states like$f[i][j]$ as the current coordinate is quite common in graphs like this.</p>
-</li>
-</ul>
-<p>Code implementation:</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/10/23/simple_dp/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
 
   
 
@@ -634,9 +343,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/10/23/day1/" itemprop="url">G1-图论基础</a></h1>
+          <h1 class="post-title" itemprop="name headline">G1-图论基础</h1>
         
 
         <div class="post-meta">
@@ -708,9 +415,7 @@
       
 
       
-        
-          
-            <h1 id="图的存储"><a href="#图的存储" class="headerlink" title="图的存储"></a>图的存储</h1><p>我假设您有关于图的<a target="_blank" rel="noopener" href="https://oi-wiki.org/graph/concept/">基本概念</a>. 因为这些东西只是一些简单的定义. 各位朋友看看就好. 当然, 看到不懂的东西再查找也是可以的.</p>
+        <h1 id="图的存储"><a href="#图的存储" class="headerlink" title="图的存储"></a>图的存储</h1><p>我假设您有关于图的<a target="_blank" rel="noopener" href="https://oi-wiki.org/graph/concept/">基本概念</a>. 因为这些东西只是一些简单的定义. 各位朋友看看就好. 当然, 看到不懂的东西再查找也是可以的.</p>
 <p> 如果要把一个图存储起来,有几种方式?</p>
 <p>观察一个图, 我们发现我们需要存储的是点与点之间的连接关系, 也就是边.</p>
 <p><strong>方法1.</strong> 使用一个矩阵, 表示点之间的关系.</p>
@@ -792,8 +497,6 @@
 <p>其中 $dis(x, y)$ 表示 $x$ 到 $y $最短路长度.</p>
 <p>用单源最短路算法求 s 到每个点的最短路, 将所有边反转求 t 到每个点的最短路（即原图中每个点到 t 的最短路） 然后判断每条边是否满足条件.</p>
 
-          
-        
       
     </div>
     
@@ -808,14 +511,36 @@
 
     <footer class="post-footer">
       
-
+        <div class="post-tags">
+          
+            <a href="/tags/%E5%9B%BE%E8%AE%BA/" rel="tag"># 图论</a>
+          
+        </div>
       
 
       
+      
+      
 
       
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/10/23/simple_dp/" rel="prev" title="简单DP复习">
+                简单DP复习 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
       
-        <div class="post-eof"></div>
+
+      
       
     </footer>
   </div>
@@ -825,10 +550,11 @@
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -836,6 +562,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -856,8 +586,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -917,6 +656,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%BE%E7%9A%84%E5%AD%98%E5%82%A8"><span class="nav-number">1.</span> <span class="nav-text">图的存储</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%A8Floyd-%E4%BC%A0%E9%80%92%E9%97%AD%E5%8C%85"><span class="nav-number">1.0.1.</span> <span class="nav-text">用Floyd 传递闭包</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SPFA"><span class="nav-number">1.1.</span> <span class="nav-text">SPFA</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dijkstra"><span class="nav-number">1.2.</span> <span class="nav-text">Dijkstra</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%8F%AF%E8%A1%8C%E7%9A%84%E8%BE%B9"><span class="nav-number">1.3.</span> <span class="nav-text">最短路可行的边</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -1057,6 +812,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
