@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="闲聊," />
+  <meta name="keywords" content="数据结构,并查集,题解," />
 
 
 
@@ -79,17 +79,19 @@
 
 
 
-<meta name="description" content="AnnouncementCSP结束, NOIP将要开始. 为了纪念我学习算法竞赛的点点滴滴, 同时为了给未来的同学们一条比较平坦的路, 所以在接下来的27天里, 每一天, 我会提出一个算法知识点, 并且尽力去解释明白它的动机和拓展. 如果有什么问题, 希望大家有什么问题都可以评论告诉我. 在这时候大家也进行复习一下.  原来我认为是30天的, 但是一看只有27天了. 有几天会双更&#x2F;三更的.">
+<meta name="description" content="题意有两种指令, M i j表示合并第$i$和第$j$列. C i j 表示询问两个编号之间有多少舰队.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="退役记:引言">
-<meta property="og:url" content="http://example.com/2020/11/05/intro/index.html">
+<meta property="og:title" content="银河英雄传说">
+<meta property="og:url" content="http://example.com/2020/11/09/P1196/index.html">
 <meta property="og:site_name" content="SHZAIZ的博客">
-<meta property="og:description" content="AnnouncementCSP结束, NOIP将要开始. 为了纪念我学习算法竞赛的点点滴滴, 同时为了给未来的同学们一条比较平坦的路, 所以在接下来的27天里, 每一天, 我会提出一个算法知识点, 并且尽力去解释明白它的动机和拓展. 如果有什么问题, 希望大家有什么问题都可以评论告诉我. 在这时候大家也进行复习一下.  原来我认为是30天的, 但是一看只有27天了. 有几天会双更&#x2F;三更的.">
+<meta property="og:description" content="题意有两种指令, M i j表示合并第$i$和第$j$列. C i j 表示询问两个编号之间有多少舰队.">
 <meta property="og:locale">
-<meta property="article:published_time" content="2020-11-05T13:36:00.000Z">
-<meta property="article:modified_time" content="2020-11-08T13:31:16.158Z">
+<meta property="article:published_time" content="2020-11-08T23:46:00.000Z">
+<meta property="article:modified_time" content="2020-11-08T23:47:03.462Z">
 <meta property="article:author" content="shzaiz">
-<meta property="article:tag" content="闲聊">
+<meta property="article:tag" content="数据结构">
+<meta property="article:tag" content="并查集">
+<meta property="article:tag" content="题解">
 <meta name="twitter:card" content="summary">
 
 
@@ -120,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://example.com/2020/11/05/intro/"/>
+  <link rel="canonical" href="http://example.com/2020/11/09/P1196/"/>
 
 
 
 
 
-  <title>退役记:引言 | SHZAIZ的博客</title>
+  <title>银河英雄传说 | SHZAIZ的博客</title>
   
 
 
@@ -321,7 +323,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/05/intro/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/09/P1196/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -338,7 +340,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">退役记:引言</h1>
+          <h1 class="post-title" itemprop="name headline">银河英雄传说</h1>
         
 
         <div class="post-meta">
@@ -350,8 +352,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-11-05T21:36:00+08:00">
-                2020-11-05
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-11-09T07:46:00+08:00">
+                2020-11-09
               </time>
             
 
@@ -360,28 +362,6 @@
             
           </span>
 
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%97%B2%E8%81%8A/" itemprop="url" rel="index">
-                    <span itemprop="name">闲聊</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -410,17 +390,13 @@
       
 
       
-        <h1 id="Announcement"><a href="#Announcement" class="headerlink" title="Announcement"></a>Announcement</h1><p>CSP结束, NOIP将要开始. 为了纪念我学习算法竞赛的点点滴滴, 同时为了给未来的同学们一条比较平坦的路, 所以在接下来的27天里, 每一天, 我会提出一个算法知识点, 并且尽力去解释明白它的动机和拓展. 如果有什么问题, 希望大家有什么问题都可以评论告诉我. 在这时候大家也进行复习一下. </p>
-<p><del>原来我认为是30天的, 但是一看只有27天了. 有几天会双更/三更的.</del></p>
+        <h1 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h1><p>有两种指令, <code>M i j</code>表示合并第$i$和第$j$列. <code>C i j</code> 表示询问两个编号之间有多少舰队.</p>
 <a id="more"></a>
-<h1 id="Requirements"><a href="#Requirements" class="headerlink" title="Requirements"></a>Requirements</h1><p>默认大家会使用基本的<strong>C++语言</strong>且掌握基本的<strong>贪心、搜索、动态规划</strong>思想.</p>
-<h1 id="Categories"><a href="#Categories" class="headerlink" title="Categories"></a>Categories</h1><p>接下来是一个目录. 您在这里可以看到相关目录.</p>
-<h2 id="图论"><a href="#图论" class="headerlink" title="图论"></a>图论</h2><ol>
-<li><a target="_blank" rel="noopener" href="http://shzaiz.github.io/2020/11/07/day1/">图论基础</a></li>
-</ol>
-<h2 id="数学基础"><a href="#数学基础" class="headerlink" title="数学基础"></a>数学基础</h2><ol>
-<li><a target="_blank" rel="noopener" href="http://shzaiz.github.io/2020/11/08/day2/">关于和式的一些思考</a></li>
-</ol>
+<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><ul>
+<li>直接用带权并查集维护即可.</li>
+<li>对于每一个点, 记录所属链的头结点, 该点到头结点的距离以及它所在集合的大小.</li>
+</ul>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> using_debug_output 1</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> using_temp_file 0</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> this_is_a_real_file_output 0</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> fo(i,x) for(int i = 1;i&lt;=x;i++)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> fo_(i,b,x) for(int i = b;i&lt;=x;i++)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> re(i,x,b) for(int i = x;i&gt;b;i--)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N 300105</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> deb <span class="meta-keyword">if</span>(using_debug_output)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> fil <span class="meta-keyword">if</span>(using_temp_file)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> realfl <span class="meta-keyword">if</span>(this_is_a_real_file_output)</span></span><br><span class="line"><span class="keyword">int</span> fa[N], d[N], num[N], t;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(x!= fa[x])&#123;</span><br><span class="line">		<span class="keyword">int</span> ff = fa[x];</span><br><span class="line">		fa[x] = find(fa[x]);</span><br><span class="line">		d[x]+=d[ff];</span><br><span class="line">		num[x]+=num[fa[x]];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> fa[x];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y )</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> xx = find(x); <span class="keyword">int</span> yy = find(y);</span><br><span class="line">	<span class="keyword">if</span>(xx != yy)&#123;</span><br><span class="line">		fa[xx] = yy; d[xx] = d[yy]+num[yy];</span><br><span class="line">		num[yy]+=num[xx];</span><br><span class="line">		num[xx] = num[yy];</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">ask</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> xx = find(a); <span class="keyword">int</span> yy = find(b);</span><br><span class="line">	<span class="keyword">if</span>(xx!=yy) <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">return</span> <span class="built_in">abs</span>(d[a]-d[b])<span class="number">-1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="function">realfl <span class="title">freopen</span><span class="params">(<span class="string">&quot;P1196.in&quot;</span>,<span class="string">&quot;r&quot;</span>,<span class="built_in">stdin</span>)</span></span>;</span><br><span class="line">	<span class="function">realfl <span class="title">freopen</span><span class="params">(<span class="string">&quot;P1196.out&quot;</span>,<span class="string">&quot;w&quot;</span>,<span class="built_in">stdout</span>)</span></span>;</span><br><span class="line">	<span class="keyword">int</span> t;</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;t;</span><br><span class="line">	fo(i,<span class="number">30005</span>) fa[i] = i,num[i] = <span class="number">1</span>;</span><br><span class="line">	fo(i,t)&#123;</span><br><span class="line">		<span class="keyword">char</span> op;<span class="built_in">cin</span>&gt;&gt;op;</span><br><span class="line">		<span class="keyword">int</span> a,b;<span class="built_in">cin</span>&gt;&gt;a&gt;&gt;b;</span><br><span class="line">		<span class="keyword">if</span>(op==<span class="string">&#x27;M&#x27;</span>) merge(a,b);</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(op==<span class="string">&#x27;C&#x27;</span>) <span class="built_in">cout</span>&lt;&lt;ask(a,b)&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -438,7 +414,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/%E9%97%B2%E8%81%8A/" rel="tag"># 闲聊</a>
+            <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag"># 数据结构</a>
+          
+            <a href="/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/" rel="tag"># 并查集</a>
+          
+            <a href="/tags/%E9%A2%98%E8%A7%A3/" rel="tag"># 题解</a>
           
         </div>
       
@@ -451,8 +431,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/10/23/simple_dp/" rel="next" title="简单DP复习">
-                <i class="fa fa-chevron-left"></i> 简单DP复习
+              <a href="/2020/11/08/day2/" rel="next" title="关于和式的一些基础">
+                <i class="fa fa-chevron-left"></i> 关于和式的一些基础
               </a>
             
           </div>
@@ -460,10 +440,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/11/07/day1/" rel="prev" title="G1-图论基础">
-                G1-图论基础 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -595,7 +571,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Announcement"><span class="nav-number">1.</span> <span class="nav-text">Announcement</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Requirements"><span class="nav-number">2.</span> <span class="nav-text">Requirements</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Categories"><span class="nav-number">3.</span> <span class="nav-text">Categories</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BE%E8%AE%BA"><span class="nav-number">3.1.</span> <span class="nav-text">图论</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80"><span class="nav-number">3.2.</span> <span class="nav-text">数学基础</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A2%98%E6%84%8F"><span class="nav-number">1.</span> <span class="nav-text">题意</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%86%E6%9E%90"><span class="nav-number">2.</span> <span class="nav-text">分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81"><span class="nav-number">3.</span> <span class="nav-text">代码</span></a></li></ol></div>
             
 
           </div>
