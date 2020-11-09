@@ -92,9 +92,19 @@
 <meta property="og:image" content="https://i.loli.net/2020/11/09/QiCcgbxptwjUWIo.png">
 <meta property="og:image" content="https://i.loli.net/2020/11/09/c1VyOjdiuTJ2wWs.png">
 <meta property="og:image" content="https://i.loli.net/2020/11/09/589JWya7nzBGsZu.png">
+<meta property="og:image" content="https://i.loli.net/2020/11/09/gK7SdtuTHOFvjy9.png">
+<meta property="og:image" content="https://i.loli.net/2020/11/09/HNFVQ5gzLXatT3K.png">
 <meta property="og:image" content="https://i.loli.net/2020/11/09/rJCvSNVTpA5q9lf.png">
+<meta property="og:image" content="https://i.loli.net/2020/11/09/V2CFcWT9SX76Byg.png">
+<meta property="og:image" content="https://i.loli.net/2020/11/09/v8zIpL7rXQnN35i.png">
+<meta property="og:image" content="https://i.loli.net/2020/11/09/OEdQs1cFbx2KaiI.png">
+<meta property="og:image" content="https://i.loli.net/2020/11/09/cv4be7f2F1Z8Eit.png">
+<meta property="og:image" content="https://i.loli.net/2020/11/09/nCAiGgbSJsBWzH4.png">
+<meta property="og:image" content="https://i.loli.net/2020/11/09/mpA57FT14lW2NeZ.png">
+<meta property="og:image" content="https://i.loli.net/2020/11/09/mSHV5y34hB9aMNu.png">
+<meta property="og:image" content="https://i.loli.net/2020/11/09/Iecul5sbydUZq7h.png">
 <meta property="article:published_time" content="2020-11-09T00:53:18.000Z">
-<meta property="article:modified_time" content="2020-11-09T03:23:10.778Z">
+<meta property="article:modified_time" content="2020-11-09T06:18:00.188Z">
 <meta property="article:author" content="shzaiz">
 <meta property="article:tag" content="数学">
 <meta name="twitter:card" content="summary">
@@ -479,21 +489,101 @@
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">exgcd</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b,<span class="keyword">int</span> &amp;x,<span class="keyword">int</span> &amp;y)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(b==<span class="number">0</span>) &#123;</span><br><span class="line">		x = <span class="number">1</span>; y = <span class="number">0</span>; <span class="keyword">return</span> a;</span><br><span class="line">		<span class="comment">// 1x + 0y = a;</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> d = exgcd(b,a%b,x,y);</span><br><span class="line">	<span class="keyword">int</span> t =x;</span><br><span class="line">	x = y;</span><br><span class="line">	y = t-(a/b)*y;</span><br><span class="line">	<span class="keyword">return</span> d;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="最小公倍数怎么办"><a href="#最小公倍数怎么办" class="headerlink" title="最小公倍数怎么办?"></a>最小公倍数怎么办?</h2><p>我们知道一个等式:$gcd(a,b)\times lcm(a,b) = ab$.</p>
 <p>这样就可以了.</p>
-<h1 id="数论函数的介绍"><a href="#数论函数的介绍" class="headerlink" title="数论函数的介绍"></a>数论函数的介绍</h1><p>定义域为正整数，值域为整数的函数称为数论函数。OI中常用的数论函数有μ，φ等. 我们就接下来花一点时间介绍一下这些函数.</p>
+<h1 id="数论函数的介绍"><a href="#数论函数的介绍" class="headerlink" title="数论函数的介绍"></a>数论函数的介绍</h1><h2 id="积性函数和完全积性函数"><a href="#积性函数和完全积性函数" class="headerlink" title="积性函数和完全积性函数"></a>积性函数和完全积性函数</h2><p>定义域为正整数，值域为整数的函数称为数论函数。OI中常用的数论函数有μ，φ等. 我们就接下来花一点时间介绍一下这些函数.</p>
 <p>数论函数分为两类, 完全积性函数和一般积性函数.</p>
 <ul>
 <li>完全积性函数$f(ab)=f(a)f(b)$.</li>
 <li>一般积性函数$f(ab)=f(a)f(b)，a \perp b$.</li>
 </ul>
-<p>在继续了解之前, 我们先了解一下比较基础的函数:</p>
+<h2 id="基础的数论函数一览"><a href="#基础的数论函数一览" class="headerlink" title="基础的数论函数一览"></a>基础的数论函数一览</h2><p>在继续了解之前, 我们先了解一下比较基础的函数(这些函数名字都是我瞎取的):</p>
 <ul>
 <li>Index函数: $id(n)=n$.</li>
 <li>1函数 : $1(n)=1$</li>
 <li>单位元函数: $\epsilon(n)=\left\{\begin{array}{rcl}1&amp;n=1\\0&amp;n\neq 1\end{array}\right.$</li>
-<li>d函数: $d(n)=\sum_{d|n}1$</li>
-<li></li>
+<li>因子个数函数: $d(n)=\sum_{d|n}1$</li>
+<li>因子的和函数: $\sigma(n)=\sum_{d|n}d$</li>
 </ul>
-<h1 id="欧拉函数-1"><a href="#欧拉函数-1" class="headerlink" title="欧拉函数"></a>欧拉函数</h1><h2 id="积性的理解"><a href="#积性的理解" class="headerlink" title="积性的理解"></a>积性的理解</h2><p><img src="https://i.loli.net/2020/11/09/rJCvSNVTpA5q9lf.png" alt="image-20201109112016069">所以这是一个欧拉函数是一个积性函数.</p>
+<h2 id="一个重要的运算"><a href="#一个重要的运算" class="headerlink" title="一个重要的运算"></a>一个重要的运算</h2><p>还有一个常见的运算, 也就是变相的乘法($*$), 狄利克雷卷积.</p>
+<ul>
+<li>$(f*g)_{(n)}=\sum_{d|n}f(d)\times g(\frac{n}{d})$.</li>
+</ul>
+<p>稍微手算一波可以发现这东西有:</p>
+<p><strong>交换律</strong>:$(f<em>g)_=\sum_{d|n}f(d)\times g(\frac{n}{d})=\sum_{d|n}f(\frac{n}{d})\times g(d)=(g</em>f)_{(n)}$. 因子的位置换了一下. 先枚举$n/d$还是先枚举$d$没啥区别.</p>
+<p><strong>结合律</strong>:</p>
+<script type="math/tex; mode=display">
+((f*g)*h)_{(n)}=\sum_{d|n}h(\frac{n}{d})\sum_{k|d}f(k)\times g(\frac{d}{k})\\
+
+ =\sum_{d|n}\sum_{k|d}f(k)\times g(\frac{d}{k})\times h(\frac{n}{d}) \cdots(1)\\
+
+ =\sum_{k|n}\sum_{q|\frac{n}{k}}f(k)\times g(q)\times h(\frac{n}{kq}) \cdots(2)\\
+
+=\sum_{k|n}f(k)\sum_{q|\frac{n}{k}}g(q)\times h(\frac{n}{kq})\\
+ =(f*(g*h))_{(n)}\\</script><p>下面我来解释一下从(1)到(2)是怎么回事.</p>
+<p><img src="https://i.loli.net/2020/11/09/gK7SdtuTHOFvjy9.png" alt="image-20201109130642511"></p>
+<p><strong>分配律</strong>.</p>
+<script type="math/tex; mode=display">
+(f*(g+h))_{(n)}=\sum_{d|n}f(d)\times(g(\frac{n}{d})+h(\frac{n}{d}))\\
+=\sum_{d|n}f(d)\times g(\frac{n}{d})+f(d)\times h(\frac{n}{d})\\
+=(f*g)_{(n)}+(f*h)_{(n)}</script><p><strong>一些函数再这里面的运算满足</strong>:</p>
+<p><strong>例子1.</strong> $f*\epsilon=f$.</p>
+<p><img src="https://i.loli.net/2020/11/09/HNFVQ5gzLXatT3K.png" alt="image-20201109131817836"></p>
+<p><strong>一个比较有意思的关系</strong>.一个积性函数，卷上另一个积性函数，还是积性函数。</p>
+<p>设$n=a\times b，\gcd(a,b)=1$，f、g为两个积性函数，$h=f*g$。</p>
+<p>说明一下:</p>
+<script type="math/tex; mode=display">
+h(n)=\sum_{T|n}f(T)\times g(\frac nT)\\
+
+=\sum_{d_1|a,d_2|b}f(d_1)\times f(d_2)\times g(\frac{a}{d_1})\times g(\frac{b}{d_2})\\
+
+=\sum_{d_1|a}f(d_1)\times g(\frac a{d_1})\sum_{d_2|b}f(d_2)\times g(\frac b{d_2})\\
+
+=h(a)\times h(b)</script><h1 id="欧拉函数-1"><a href="#欧拉函数-1" class="headerlink" title="欧拉函数"></a>欧拉函数</h1><h2 id="积性的理解"><a href="#积性的理解" class="headerlink" title="积性的理解"></a>积性的理解</h2><p><img src="https://i.loli.net/2020/11/09/rJCvSNVTpA5q9lf.png" alt="image-20201109112016069">所以这是一个欧拉函数是一个积性函数.</p>
+<h2 id="重要的性质–-varphi-1-id"><a href="#重要的性质–-varphi-1-id" class="headerlink" title="重要的性质–$\varphi*1=id$"></a>重要的性质–$\varphi*1=id$</h2><p>前面我们提到过, $\varphi(n)=p^c-p^{c-1}$. 并且也求出来了单个$\varphi$值的计算方法.$\varphi(n)=n\times\prod_{i=1}^k1-\frac{1}{p_i}$. 下面, 我们来看一下$\varphi $和数论函数有什么联系.</p>
+<script type="math/tex; mode=display">
+\varphi*1=id</script><p>说明:</p>
+<p><img src="https://i.loli.net/2020/11/09/V2CFcWT9SX76Byg.png" alt="image-20201109133132427"></p>
+<h1 id="mu-函数"><a href="#mu-函数" class="headerlink" title="$\mu$ 函数"></a>$\mu$ 函数</h1><p>还记得刚刚的唯一分解定理吗? 现在, 我们需要再那个的基础上添砖加瓦. 首先我们给出定义:</p>
+<p>假设我们把一个数$n$唯一分解掉, 写成这样的形式: $n=\prod_{i=1}^{k}p_i^{c_i}$. 我们规定$\mu$函数的定义为:</p>
+<script type="math/tex; mode=display">
+\mu(n)=\left\{\begin{array}{rcl}1&n=1\\(-1)^k&\forall c_i,c_i\le1\\0&\exists c_i>1\end{array}\right.</script><p><img src="https://i.loli.net/2020/11/09/v8zIpL7rXQnN35i.png" alt="image-20201109133822424"></p>
+<p>根据定义可以求算出来.</p>
+<h2 id="mu-的积性"><a href="#mu-的积性" class="headerlink" title="$\mu$的积性"></a>$\mu$的积性</h2><p>因为$a,b$互质, $a$的质因数，与b的质因数互不相同。显然可以得到.</p>
+<h2 id="与数论函数之间的联系"><a href="#与数论函数之间的联系" class="headerlink" title="与数论函数之间的联系"></a>与数论函数之间的联系</h2><p><strong>联系1</strong>. </p>
+<script type="math/tex; mode=display">
+\mu*1=\epsilon</script><p><img src="https://i.loli.net/2020/11/09/OEdQs1cFbx2KaiI.png" alt="image-20201109134323613"></p>
+<p><strong>联系2.</strong></p>
+<script type="math/tex; mode=display">
+id*\mu=\varphi</script><p>两边同时卷上函数$1$, 就可以得到.</p>
+<p><strong>联系3</strong>. </p>
+<script type="math/tex; mode=display">
+\frac{\varphi(n)}{n}=\sum_{d|n}\frac{\mu(d)}{d}</script><p><img src="https://i.loli.net/2020/11/09/cv4be7f2F1Z8Eit.png" alt="image-20201109134859772"></p>
+<p><strong>联系4</strong>. 这次, 我们来考虑任意两个数论函数. $f(n)$和$g(n)$. 假设我们已知$g(n) = \sum_{d|n}f(d)$, 如何求$f(n)$的表达式呢?</p>
+<script type="math/tex; mode=display">
+f(n)=\sum_{d|n}\mu(d)\times g(\frac{n}{d})</script><p><img src="https://i.loli.net/2020/11/09/nCAiGgbSJsBWzH4.png" alt="image-20201109135429888"></p>
+<h1 id="同余系下"><a href="#同余系下" class="headerlink" title="同余系下"></a>同余系下</h1><p>我们经常会见到对$998244353$取模这种题目. 同余系下, 我们怎么做加, 减, 乘, 除, 乘方以及排列组合?</p>
+<p>直观理解一下同余系的概念:</p>
+<p><img src="https://i.loli.net/2020/11/09/mpA57FT14lW2NeZ.png" alt="image-20201109135841703"></p>
+<h2 id="模意义下的加法"><a href="#模意义下的加法" class="headerlink" title="模意义下的加法"></a>模意义下的加法</h2><script type="math/tex; mode=display">
+(a+b)\bmod c = a\bmod c + b \bmod c</script><h2 id="模意义下的减法"><a href="#模意义下的减法" class="headerlink" title="模意义下的减法"></a>模意义下的减法</h2><p>不能有负数, 怎么办? 可以先加上一个mod, 再取模防止出现负数.</p>
+<script type="math/tex; mode=display">
+(a-b)\bmod c = ((a\bmod c-b\bmod c )+c)\bmod c</script><h2 id="模意义下的乘法"><a href="#模意义下的乘法" class="headerlink" title="模意义下的乘法"></a>模意义下的乘法</h2><script type="math/tex; mode=display">
+(a\times b)\bmod c =(a\bmod c \times b\bmod c) \bmod c</script><h2 id="模意义下的除法"><a href="#模意义下的除法" class="headerlink" title="模意义下的除法"></a>模意义下的除法</h2><p>欸? 整数还好, 要是小数, 这里可是没有小数啊! 怎么办?</p>
+<p>想想除法其实还有一种理解方式就是乘法的逆运算! 正因为这样, 我们更多情况下叫它“<strong>逆元</strong>”.</p>
+<blockquote>
+<p><img src="https://i.loli.net/2020/11/09/mSHV5y34hB9aMNu.png" alt="image-20201109140536931"></p>
+</blockquote>
+<h3 id="求逆元的几种方法"><a href="#求逆元的几种方法" class="headerlink" title="求逆元的几种方法"></a>求逆元的几种方法</h3><h4 id="费马小定理"><a href="#费马小定理" class="headerlink" title="费马小定理"></a>费马小定理</h4><p>当$p$为质数时，$a$关于mod p的逆元为$a^{p-2}$mod p。用快速幂就可以完成。</p>
+<h4 id="扩展欧几里得算法-1"><a href="#扩展欧几里得算法-1" class="headerlink" title="扩展欧几里得算法"></a>扩展欧几里得算法</h4><p>扩展欧几里得算法可以求逆元的原因<a target="_blank" rel="noopener" href="https://blog.csdn.net/greenary/article/details/79343176">在这里</a>. 这里我们简单描述一下应该怎么做.</p>
+<ul>
+<li>给定模数n，求a的逆元</li>
+<li>即$ax=1(mod n) $也就是 $ax-ny=1$</li>
+<li>所以可用扩展欧几里得， $ax+by=gcd（a，b）$求逆元，即求$x$的值。</li>
+<li><strong>注意：</strong><br>存在逆元的判断条件是<br>$a，m$互质。</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">exgcd(a, m, x, y);</span><br><span class="line">LL ans = (x&lt;=<span class="number">0</span>) ? (x%m+m) : x;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; ans &lt;&lt; <span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure>
+<h4 id="线性求逆元-一"><a href="#线性求逆元-一" class="headerlink" title="线性求逆元(一)"></a>线性求逆元(一)</h4><p>假设现在要求$ i $的逆元,设 $p=iq+r$，则有$iq+r≡0 (mod p)$. 注意到 $p$ 是质数，因此 $r $不为 0，$r$ 的逆元存在。</p>
+<p>等式两边乘$ i^{-1} r^{-1} $.</p>
+<p><img src="https://i.loli.net/2020/11/09/Iecul5sbydUZq7h.png" alt="image-20201109141553438"></p>
 
       
     </div>
@@ -680,7 +770,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B4%E9%99%A4%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="nav-number">1.</span> <span class="nav-text">整除的性质</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B4%A8%E6%95%B0"><span class="nav-number">2.</span> <span class="nav-text">质数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%BB%E6%89%BE%E8%B4%A8%E6%95%B0"><span class="nav-number">2.1.</span> <span class="nav-text">寻找质数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AC%A7%E6%8B%89%E5%87%BD%E6%95%B0"><span class="nav-number">2.2.</span> <span class="nav-text">欧拉函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%83%E4%B9%A0-%E6%B7%B1%E5%85%A5%E5%85%B3%E4%BA%8E%E5%9B%A0%E6%95%B0%E4%B8%AA%E6%95%B0%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">2.3.</span> <span class="nav-text">练习: 深入关于因数个数的问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%80%E5%A4%A7%E5%85%AC%E5%9B%A0%E6%95%B0"><span class="nav-number">3.</span> <span class="nav-text">最大公因数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E7%AE%97%E6%B3%95"><span class="nav-number">3.1.</span> <span class="nav-text">欧几里得算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%A9%E5%B1%95%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E7%AE%97%E6%B3%95"><span class="nav-number">3.2.</span> <span class="nav-text">扩展欧几里得算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%80%E5%B0%8F%E5%85%AC%E5%80%8D%E6%95%B0%E6%80%8E%E4%B9%88%E5%8A%9E"><span class="nav-number">3.3.</span> <span class="nav-text">最小公倍数怎么办?</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E8%AE%BA%E5%87%BD%E6%95%B0%E7%9A%84%E4%BB%8B%E7%BB%8D"><span class="nav-number">4.</span> <span class="nav-text">数论函数的介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%AC%A7%E6%8B%89%E5%87%BD%E6%95%B0-1"><span class="nav-number">5.</span> <span class="nav-text">欧拉函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A7%AF%E6%80%A7%E7%9A%84%E7%90%86%E8%A7%A3"><span class="nav-number">5.1.</span> <span class="nav-text">积性的理解</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B4%E9%99%A4%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="nav-number">1.</span> <span class="nav-text">整除的性质</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B4%A8%E6%95%B0"><span class="nav-number">2.</span> <span class="nav-text">质数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%BB%E6%89%BE%E8%B4%A8%E6%95%B0"><span class="nav-number">2.1.</span> <span class="nav-text">寻找质数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AC%A7%E6%8B%89%E5%87%BD%E6%95%B0"><span class="nav-number">2.2.</span> <span class="nav-text">欧拉函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%83%E4%B9%A0-%E6%B7%B1%E5%85%A5%E5%85%B3%E4%BA%8E%E5%9B%A0%E6%95%B0%E4%B8%AA%E6%95%B0%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">2.3.</span> <span class="nav-text">练习: 深入关于因数个数的问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%80%E5%A4%A7%E5%85%AC%E5%9B%A0%E6%95%B0"><span class="nav-number">3.</span> <span class="nav-text">最大公因数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E7%AE%97%E6%B3%95"><span class="nav-number">3.1.</span> <span class="nav-text">欧几里得算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%A9%E5%B1%95%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E7%AE%97%E6%B3%95"><span class="nav-number">3.2.</span> <span class="nav-text">扩展欧几里得算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%80%E5%B0%8F%E5%85%AC%E5%80%8D%E6%95%B0%E6%80%8E%E4%B9%88%E5%8A%9E"><span class="nav-number">3.3.</span> <span class="nav-text">最小公倍数怎么办?</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E8%AE%BA%E5%87%BD%E6%95%B0%E7%9A%84%E4%BB%8B%E7%BB%8D"><span class="nav-number">4.</span> <span class="nav-text">数论函数的介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A7%AF%E6%80%A7%E5%87%BD%E6%95%B0%E5%92%8C%E5%AE%8C%E5%85%A8%E7%A7%AF%E6%80%A7%E5%87%BD%E6%95%B0"><span class="nav-number">4.1.</span> <span class="nav-text">积性函数和完全积性函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E7%9A%84%E6%95%B0%E8%AE%BA%E5%87%BD%E6%95%B0%E4%B8%80%E8%A7%88"><span class="nav-number">4.2.</span> <span class="nav-text">基础的数论函数一览</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E4%B8%AA%E9%87%8D%E8%A6%81%E7%9A%84%E8%BF%90%E7%AE%97"><span class="nav-number">4.3.</span> <span class="nav-text">一个重要的运算</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%AC%A7%E6%8B%89%E5%87%BD%E6%95%B0-1"><span class="nav-number">5.</span> <span class="nav-text">欧拉函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A7%AF%E6%80%A7%E7%9A%84%E7%90%86%E8%A7%A3"><span class="nav-number">5.1.</span> <span class="nav-text">积性的理解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E8%A6%81%E7%9A%84%E6%80%A7%E8%B4%A8%E2%80%93-varphi-1-id"><span class="nav-number">5.2.</span> <span class="nav-text">重要的性质–$\varphi*1&#x3D;id$</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mu-%E5%87%BD%E6%95%B0"><span class="nav-number">6.</span> <span class="nav-text">$\mu$ 函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#mu-%E7%9A%84%E7%A7%AF%E6%80%A7"><span class="nav-number">6.1.</span> <span class="nav-text">$\mu$的积性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8E%E6%95%B0%E8%AE%BA%E5%87%BD%E6%95%B0%E4%B9%8B%E9%97%B4%E7%9A%84%E8%81%94%E7%B3%BB"><span class="nav-number">6.2.</span> <span class="nav-text">与数论函数之间的联系</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%90%8C%E4%BD%99%E7%B3%BB%E4%B8%8B"><span class="nav-number">7.</span> <span class="nav-text">同余系下</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E6%84%8F%E4%B9%89%E4%B8%8B%E7%9A%84%E5%8A%A0%E6%B3%95"><span class="nav-number">7.1.</span> <span class="nav-text">模意义下的加法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E6%84%8F%E4%B9%89%E4%B8%8B%E7%9A%84%E5%87%8F%E6%B3%95"><span class="nav-number">7.2.</span> <span class="nav-text">模意义下的减法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E6%84%8F%E4%B9%89%E4%B8%8B%E7%9A%84%E4%B9%98%E6%B3%95"><span class="nav-number">7.3.</span> <span class="nav-text">模意义下的乘法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E6%84%8F%E4%B9%89%E4%B8%8B%E7%9A%84%E9%99%A4%E6%B3%95"><span class="nav-number">7.4.</span> <span class="nav-text">模意义下的除法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B1%82%E9%80%86%E5%85%83%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E6%B3%95"><span class="nav-number">7.4.1.</span> <span class="nav-text">求逆元的几种方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B4%B9%E9%A9%AC%E5%B0%8F%E5%AE%9A%E7%90%86"><span class="nav-number">7.4.1.1.</span> <span class="nav-text">费马小定理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%89%A9%E5%B1%95%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E7%AE%97%E6%B3%95-1"><span class="nav-number">7.4.1.2.</span> <span class="nav-text">扩展欧几里得算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E6%B1%82%E9%80%86%E5%85%83-%E4%B8%80"><span class="nav-number">7.4.1.3.</span> <span class="nav-text">线性求逆元(一)</span></a></li></ol></li></ol></li></ol></li></ol></div>
             
 
           </div>
