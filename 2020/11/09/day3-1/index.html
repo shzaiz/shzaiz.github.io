@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="数学," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="数论是十分重要的. 一些思想也被其他地方运用. 这里是数论的简单介绍. 注意本文出现的记号.  $x|y$表示$x$整除$y$. 也就是$x$是$y$的因数.  $x\bmod  y$表示x除以y得到的余数. $x\perp y$表示$x,y$互质. $\gcd(a,b)$ ab的最大公因数 $lcm(a,b)$ a,b的最小公倍数  求积符号： $\prod$ 符号, 表示满足特定条件的数的积.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数论初步">
+<meta property="og:url" content="http://example.com/2020/11/09/day3-1/index.html">
+<meta property="og:site_name" content="SHZAIZ的博客">
+<meta property="og:description" content="数论是十分重要的. 一些思想也被其他地方运用. 这里是数论的简单介绍. 注意本文出现的记号.  $x|y$表示$x$整除$y$. 也就是$x$是$y$的因数.  $x\bmod  y$表示x除以y得到的余数. $x\perp y$表示$x,y$互质. $\gcd(a,b)$ ab的最大公因数 $lcm(a,b)$ a,b的最小公倍数  求积符号： $\prod$ 符号, 表示满足特定条件的数的积.">
+<meta property="og:locale">
+<meta property="og:image" content="https://i.loli.net/2020/11/09/df96KajwtoBs1GT.png">
+<meta property="og:image" content="https://i.loli.net/2020/11/09/31TF28y9j7dIlcU.png">
+<meta property="og:image" content="https://i.loli.net/2020/11/09/St1P85dLupnWezR.png">
+<meta property="og:image" content="https://i.loli.net/2020/11/09/QiCcgbxptwjUWIo.png">
+<meta property="og:image" content="https://i.loli.net/2020/11/09/c1VyOjdiuTJ2wWs.png">
+<meta property="og:image" content="https://i.loli.net/2020/11/09/589JWya7nzBGsZu.png">
+<meta property="og:image" content="https://i.loli.net/2020/11/09/rJCvSNVTpA5q9lf.png">
+<meta property="article:published_time" content="2020-11-09T00:53:18.000Z">
+<meta property="article:modified_time" content="2020-11-09T03:23:10.778Z">
+<meta property="article:author" content="shzaiz">
+<meta property="article:tag" content="数学">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2020/11/09/df96KajwtoBs1GT.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://example.com/2020/11/09/day3-1/"/>
+
+
+
+
+
+  <title>数论初步 | SHZAIZ的博客</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">SHZAIZ的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">蒟蒻的博客</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+            Schedule
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            Sitemap
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/09/day3-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SHZAIZ的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">数论初步</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-11-09T08:53:18+08:00">
+                2020-11-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%80%BB%E7%BB%93/" itemprop="url" rel="index">
+                    <span itemprop="name">总结</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>数论是十分重要的. 一些思想也被其他地方运用. <a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%95%B0%E8%AE%BA/">这里</a>是数论的简单介绍.</p>
+<p><strong>注意本文出现的记号</strong>.</p>
+<ul>
+<li>$x|y$表示$x$整除$y$. 也就是$x$是$y$的因数. </li>
+<li>$x\bmod  y$表示x除以y得到的余数.</li>
+<li>$x\perp y$表示$x,y$互质.</li>
+<li>$\gcd(a,b)$ ab的最大公因数</li>
+<li><p>$lcm(a,b)$ a,b的最小公倍数</p>
+</li>
+<li><p>求积符号： $\prod$ 符号, 表示满足特定条件的数的积. 举几个例子：</p>
+<ul>
+<li>$\prod_{i=1}^ni$ 表示 $n$ 的阶乘, 即 $n!$ . 在组合数学常见符号中会讲到. </li>
+<li>$\prod_{i=1}^na_i$ 表示 $a_1\times a_2\times a_3\times \dotsb\times a_n$ . </li>
+<li>$\prod_{x|d}x$ 表示 $d$ 的所有因数的乘积. </li>
+</ul>
+</li>
+<li>阶乘符号 $!$ ,  $n!$ 表示 $1\times 2\times 3\times \dotsb \times n$ . 特别地,  $0!=1$.</li>
+<li>$\lfloor x\rfloor$ , 表示小于等于 $x$ 的最大的整数. 常用于分数, 比如分数的向下取整 $\left\lfloor\frac{x}{y}\right\rfloor$ . 在本节中, 没有特殊说明的话默认自带这个符号.</li>
+<li>$\lceil x\rceil$ , 与向下取整符号相对, 表示大于等于 $x$ 的最小的整数. </li>
+</ul>
+<a id="more"></a>
+<h1 id="整除的性质"><a href="#整除的性质" class="headerlink" title="整除的性质"></a>整除的性质</h1><p>我们可以不难直观理解这些性质:</p>
+<ul>
+<li>若$d|a$,则对于任意整数$k$有$d|ka$</li>
+<li>若$a|b$且$b|a$，则有 $a=b$   ……对称性</li>
+<li>若$c|b$，$b|a$，则 $c|a$      ……传递性</li>
+<li>若$c|a$，$d|b$,则 $cd|ab$</li>
+<li>若$c|a$，$c|b$，则 $c|(ma+nb)$</li>
+<li>若$n∈N^*$，则 $(a－b)|(an－bn)$。</li>
+<li>若n为奇数，则$(a＋b)|(an＋bn)$;</li>
+<li>若n为偶数，则 $(a＋b)|(an－bn)$</li>
+<li>任意n个连续正整数的乘积必能被n!整除</li>
+</ul>
+<h1 id="质数"><a href="#质数" class="headerlink" title="质数"></a>质数</h1><p>质数是指在大于1的自然数中，除了1和它本身以外不再有其他因数的自然数。 对于一个单一的质数, 我们可以在$O\sqrt n$的时间里面判定. 也就是一个一个试,试到$\sqrt n$. 因为因数总是成对出现的.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isPrime</span><span class="params">(a)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (a &lt; <span class="number">2</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i * i &lt;= a; ++i)</span><br><span class="line">    <span class="keyword">if</span> (a % i == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="寻找质数"><a href="#寻找质数" class="headerlink" title="寻找质数"></a>寻找质数</h2><p>如果要筛出一连串的质数, 应该怎么办? 一个简单的想法就是每一次找到一个$n$就同时筛掉$kn$, $k\in N$.</p>
+<p><img src="https://i.loli.net/2020/11/09/df96KajwtoBs1GT.png" alt="image-20201109092147583"></p>
+<p>这也被叫做<strong>埃拉托斯特尼筛法</strong>. 它的时间复杂度是$\mathcal O(n\log\log n)$.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">eth</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">int</span> p = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= n; ++i) pri[i] = <span class="number">1</span>;</span><br><span class="line">  pri[<span class="number">0</span>] = pri[<span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">    <span class="keyword">if</span> (pri[i]) &#123;</span><br><span class="line">      prime[p++] = i;</span><br><span class="line">      <span class="keyword">if</span> (i * i &lt;= n)</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = i * i; j &lt;= n; j += i)&#123;</span><br><span class="line">        	pri[j] = <span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> p;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这显然还有优化空间. 发现有许多重复标记的. </p>
+<p><img src="https://i.loli.net/2020/11/09/31TF28y9j7dIlcU.png" alt="image-20201109093351883"></p>
+<p>如果能让每个合数都只被标记一次,也就是被他的最小最小质因子标记就可以了. 如何实现? 我们先来了解欧拉函数$\varphi$.</p>
+<h2 id="欧拉函数"><a href="#欧拉函数" class="headerlink" title="欧拉函数"></a>欧拉函数</h2><p>欧拉函数是小于或等于n的正整数中与n互质的数的数目. 我们应该怎样求算欧拉函数的值呢? </p>
+<p>首先我们应该知道, 任何一个数字都是可以被 <strong>唯一分解为若干质因数的乘积的</strong>. 也就是对于任意自然数N都有<img src="https://i.loli.net/2020/11/09/St1P85dLupnWezR.png" alt="image-20201109094400817">成立.</p>
+<p>所以, 有没有什么方法来了解这个式子到底是什么? 我们要做的只是一点分类讨论: 注意, 默认$p$指质数.</p>
+<ul>
+<li>如果$n=1$, 根据定义, $\varphi (1) = 1$.</li>
+<li>如果$n$是质数, 那么不难发现比他小的都与他互质.$\varphi (p ) = p-1$.</li>
+<li>如果$n=p^k$, $\varphi (n )$是多少?<ul>
+<li>举个例子$\varphi (8) = \varphi(2^3)$只有当一个数不包含质数$p$，才可能与$n$互质。而包含质数$p$的数一共有$p^{k-1}$个($\sum_{i=1}^n$$n\choose i$)，即$1×p,2×p,3×p,…,p^{k-1}×p$，把它们去除，剩下的就是与$n$互质的数。也就是$\varphi(p^k)=p^k-p^{k-1}$.</li>
+<li>提取公因式, 可以发现:$\varphi(p^k) = p^k(1-\frac{1}{p})$.</li>
+<li>插入$k=1$, 就可以是一个特例.</li>
+</ul>
+</li>
+<li>如果n可以分解成两个互质的整数之积:<ul>
+<li>$φ(n) = φ(p1p2) = φ(p1)φ(p2)$.</li>
+<li>至于这个, 我们就需要建议去<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%AC%A7%E6%8B%89%E5%87%BD%E6%95%B0">百度百科</a>的相关证明. 比较复杂, 就不再说了.</li>
+</ul>
+</li>
+</ul>
+<p>基于此, 我们可以了解$\varphi$(n)的计算公式:</p>
+<p><img src="https://i.loli.net/2020/11/09/QiCcgbxptwjUWIo.png" alt="image-20201109101052933"></p>
+<p><img src="https://i.loli.net/2020/11/09/c1VyOjdiuTJ2wWs.png" alt="image-20201109100946304"></p>
+<p>基于这个特性, 我们可以写出这样的代码:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> m[N],phi[N],p[N],cnt=<span class="number">0</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">shai</span><span class="params">(<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">	phi[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>;i&lt;=n;i++)&#123;</span><br><span class="line">		<span class="keyword">if</span>(m[i]==<span class="number">0</span>)&#123;</span><br><span class="line">			<span class="comment">// Case 1.</span></span><br><span class="line">			p[++cnt] = i;</span><br><span class="line">			phi[i] = i<span class="number">-1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>;j&lt;=cnt &amp;&amp; p[j]*i&lt;=n;j++)&#123;</span><br><span class="line">			m[p[j]*i] = <span class="number">1</span>; <span class="comment">// not prime</span></span><br><span class="line">			<span class="keyword">if</span>(i%p[j]==<span class="number">0</span>)&#123;</span><br><span class="line">				phi[p[j]*i] = phi[i]*p[j]; <span class="comment">//Case 2.</span></span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;<span class="keyword">else</span> phi[p[j]*i] = phi[i]*(p[j]<span class="number">-1</span>); <span class="comment">// Case 3.</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>phi</code>存储的是$\varphi $函数的值. $p$是当前质数集合. $m$指的是当前这个是不是质数. </p>
+<p>顺便求了一下质数. 存到了$p$里面.</p>
+<h2 id="练习-深入关于因数个数的问题"><a href="#练习-深入关于因数个数的问题" class="headerlink" title="练习: 深入关于因数个数的问题"></a>练习: 深入关于因数个数的问题</h2><p><strong>例子1</strong>. 求因子数一定的最小数. (例子:2个因子的最小数为6(2*3). 4只是($2^2$,算1个因子))</p>
+<ul>
+<li>想法1. 枚举每一个数, 判断它的因子数.</li>
+<li>想法2. 依据唯一分解定理, 我们可以枚举要装哪几个素数, 考虑用<code>dfs</code>解决.</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int unsigned long long</span></span><br><span class="line"><span class="keyword">int</span> p[<span class="number">16</span>] = &#123;<span class="number">2</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">7</span>,<span class="number">11</span>,<span class="number">13</span>,<span class="number">17</span>,<span class="number">19</span>,<span class="number">23</span>,<span class="number">29</span>,<span class="number">31</span>,<span class="number">37</span>,<span class="number">41</span>,<span class="number">43</span>,<span class="number">47</span>,<span class="number">53</span>&#125;;</span><br><span class="line"><span class="keyword">int</span> ans=~<span class="number">0U</span>LL , n;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> i,<span class="keyword">int</span> tmp,<span class="keyword">int</span> num,<span class="keyword">int</span> last)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(num&gt;n || i&gt;=<span class="number">16</span>) <span class="keyword">return</span> ;</span><br><span class="line">	<span class="keyword">if</span>(num==n) &#123;</span><br><span class="line">		ans = min (ans, tmp); <span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>;i&lt;=last;i++)&#123;</span><br><span class="line">		<span class="keyword">if</span>(tmp/p[i]&gt;ans) <span class="keyword">break</span>;</span><br><span class="line">		dfs(i+<span class="number">1</span>,tmp = tmp * p[i],num * (i + <span class="number">1</span>), i);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="最大公因数"><a href="#最大公因数" class="headerlink" title="最大公因数"></a>最大公因数</h1><h2 id="欧几里得算法"><a href="#欧几里得算法" class="headerlink" title="欧几里得算法"></a>欧几里得算法</h2><p>这是写在高中教科书上的. 就不再说了.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">gcd</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (b == <span class="number">0</span>) <span class="keyword">return</span> a;</span><br><span class="line">  <span class="keyword">return</span> gcd(b, a % b);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="扩展欧几里得算法"><a href="#扩展欧几里得算法" class="headerlink" title="扩展欧几里得算法"></a>扩展欧几里得算法</h2><p>这是在gcd的基础上维护了几个参数, 使得常用于求$ax+by = \gcd(a,b)$的一组可行解答.</p>
+<p><img src="https://i.loli.net/2020/11/09/589JWya7nzBGsZu.png" alt="image-20201109110356700"></p>
+<p>所以代码可以这样写:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">exgcd</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b,<span class="keyword">int</span> &amp;x,<span class="keyword">int</span> &amp;y)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(b==<span class="number">0</span>) &#123;</span><br><span class="line">		x = <span class="number">1</span>; y = <span class="number">0</span>; <span class="keyword">return</span> a;</span><br><span class="line">		<span class="comment">// 1x + 0y = a;</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> d = exgcd(b,a%b,x,y);</span><br><span class="line">	<span class="keyword">int</span> t =x;</span><br><span class="line">	x = y;</span><br><span class="line">	y = t-(a/b)*y;</span><br><span class="line">	<span class="keyword">return</span> d;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="最小公倍数怎么办"><a href="#最小公倍数怎么办" class="headerlink" title="最小公倍数怎么办?"></a>最小公倍数怎么办?</h2><p>我们知道一个等式:$gcd(a,b)\times lcm(a,b) = ab$.</p>
+<p>这样就可以了.</p>
+<h1 id="数论函数的介绍"><a href="#数论函数的介绍" class="headerlink" title="数论函数的介绍"></a>数论函数的介绍</h1><p>定义域为正整数，值域为整数的函数称为数论函数。OI中常用的数论函数有μ，φ等. 我们就接下来花一点时间介绍一下这些函数.</p>
+<p>数论函数分为两类, 完全积性函数和一般积性函数.</p>
+<ul>
+<li>完全积性函数$f(ab)=f(a)f(b)$.</li>
+<li>一般积性函数$f(ab)=f(a)f(b)，a \perp b$.</li>
+</ul>
+<p>在继续了解之前, 我们先了解一下比较基础的函数:</p>
+<ul>
+<li>Index函数: $id(n)=n$.</li>
+<li>1函数 : $1(n)=1$</li>
+<li>单位元函数: $\epsilon(n)=\left\{\begin{array}{rcl}1&amp;n=1\\0&amp;n\neq 1\end{array}\right.$</li>
+<li>d函数: $d(n)=\sum_{d|n}1$</li>
+<li></li>
+</ul>
+<h1 id="欧拉函数-1"><a href="#欧拉函数-1" class="headerlink" title="欧拉函数"></a>欧拉函数</h1><h2 id="积性的理解"><a href="#积性的理解" class="headerlink" title="积性的理解"></a>积性的理解</h2><p><img src="https://i.loli.net/2020/11/09/rJCvSNVTpA5q9lf.png" alt="image-20201109112016069">所以这是一个欧拉函数是一个积性函数.</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag"># 数学</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/11/09/P2590/" rel="next" title="P2590">
+                <i class="fa fa-chevron-left"></i> P2590
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/shzaiz" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://bilibili.com/yourname" target="_blank" title="Bilibili">
+                      
+                        <i class="fa fa-fw fa-bilibili"></i>Bilibili</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B4%E9%99%A4%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="nav-number">1.</span> <span class="nav-text">整除的性质</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B4%A8%E6%95%B0"><span class="nav-number">2.</span> <span class="nav-text">质数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%BB%E6%89%BE%E8%B4%A8%E6%95%B0"><span class="nav-number">2.1.</span> <span class="nav-text">寻找质数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AC%A7%E6%8B%89%E5%87%BD%E6%95%B0"><span class="nav-number">2.2.</span> <span class="nav-text">欧拉函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%83%E4%B9%A0-%E6%B7%B1%E5%85%A5%E5%85%B3%E4%BA%8E%E5%9B%A0%E6%95%B0%E4%B8%AA%E6%95%B0%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">2.3.</span> <span class="nav-text">练习: 深入关于因数个数的问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%80%E5%A4%A7%E5%85%AC%E5%9B%A0%E6%95%B0"><span class="nav-number">3.</span> <span class="nav-text">最大公因数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E7%AE%97%E6%B3%95"><span class="nav-number">3.1.</span> <span class="nav-text">欧几里得算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%A9%E5%B1%95%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E7%AE%97%E6%B3%95"><span class="nav-number">3.2.</span> <span class="nav-text">扩展欧几里得算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%80%E5%B0%8F%E5%85%AC%E5%80%8D%E6%95%B0%E6%80%8E%E4%B9%88%E5%8A%9E"><span class="nav-number">3.3.</span> <span class="nav-text">最小公倍数怎么办?</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E8%AE%BA%E5%87%BD%E6%95%B0%E7%9A%84%E4%BB%8B%E7%BB%8D"><span class="nav-number">4.</span> <span class="nav-text">数论函数的介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%AC%A7%E6%8B%89%E5%87%BD%E6%95%B0-1"><span class="nav-number">5.</span> <span class="nav-text">欧拉函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A7%AF%E6%80%A7%E7%9A%84%E7%90%86%E8%A7%A3"><span class="nav-number">5.1.</span> <span class="nav-text">积性的理解</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">shzaiz</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
