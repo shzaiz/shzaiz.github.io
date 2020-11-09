@@ -608,6 +608,190 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/09/day3-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SHZAIZ的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/11/09/day3-2/" itemprop="url">一些经常犯错的地方</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-11-09T08:53:18+08:00">
+                2020-11-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%80%BB%E7%BB%93/" itemprop="url" rel="index">
+                    <span itemprop="name">总结</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="时间超时"><a href="#时间超时" class="headerlink" title="时间超时"></a>时间超时</h1><p>一些DP试题总是喜欢要我们猜测状态设计. 这时候我们就需要考虑时间复杂度的计算. 时间复杂度是一个 <strong>量级</strong>形式的选择. 而不是特别具体的东西.</p>
+<h2 id="基本技巧"><a href="#基本技巧" class="headerlink" title="基本技巧"></a>基本技巧</h2><blockquote>
+<p> 一般情况下，算法中基本操作重复执行的次数是问题规模n的某个函数，用T(n)表示，若有某个辅助函数f(n)，使得当n趋近于无穷大时，T(n)/f(n)的极限值为不等于零的常数，则称f(n)是T(n)的同数量级函数。记作T(n)=O(f(n))，称O(f(n))为算法的渐进时间复杂度(<em>O是数量级的符号</em> )，简称时间复杂度。</p>
+</blockquote>
+<p>稍微计算出基本操作的执行次数T(n), 忽略低次项,常数,等等.</p>
+<p><strong>这东西反正看多了一眼就大概估摸出来大小合不合适了.</strong></p>
+<p>如果有dfs之类的东西, 要算的话, 有主引理.</p>
+<p><img src="https://i.loli.net/2020/11/09/EAro2UYsmHzk6Qa.png" alt="image-20201109163718749"></p>
+<h2 id="在1s内的要求"><a href="#在1s内的要求" class="headerlink" title="在1s内的要求"></a>在1s内的要求</h2><p>计算机在$1s$里面可以做$10^9$次操作.</p>
+<ul>
+<li>$O(\log n)\to  10^{18}$</li>
+<li>$O(n)\to 10^7$</li>
+<li>$O(n\log n)\to 10^5 \sim 5 * 10^5$</li>
+<li>$O(n^2)\to1000 \sim 5000$</li>
+<li>$O(n^3)\to 200 \sim 500$</li>
+<li>$O(2^n) \to20 \sim 24$</li>
+<li>$O(n!) \to 12$</li>
+</ul>
+<h1 id="空间爆炸"><a href="#空间爆炸" class="headerlink" title="空间爆炸"></a>空间爆炸</h1><h2 id="计算机内存的换算"><a href="#计算机内存的换算" class="headerlink" title="计算机内存的换算"></a>计算机内存的换算</h2><blockquote>
+<p>8bit(位)=1Byte(字节Byte)</p>
+<p>1024Byte(字节)=1KB</p>
+<p>1024KB=1MB</p>
+<p>1024MB=1GB</p>
+</blockquote>
+<p>比如程序说要用512MB的内存, 有4,194,304bit可用空间. 然而一个int是4位. 也就是开1,048,576的int数组.</p>
+<h2 id="各种类型的内存占用"><a href="#各种类型的内存占用" class="headerlink" title="各种类型的内存占用"></a>各种类型的内存占用</h2><p><img src="https://i.loli.net/2020/11/09/zJwemlh31CSfGkU.png" alt="image-20201109164757983"></p>
+<p>也可以用如下代码跑出来:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;sizeof(char)=&quot;</span>&lt;&lt;<span class="keyword">sizeof</span>(<span class="keyword">char</span>)&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;sizeof(short)=&quot;</span>&lt;&lt;<span class="keyword">sizeof</span>(<span class="keyword">short</span>)&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;sizeof(int)=&quot;</span>&lt;&lt;<span class="keyword">sizeof</span>(<span class="keyword">int</span>)&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;sizeof(unsigned int)=&quot;</span>&lt;&lt;<span class="keyword">sizeof</span>(<span class="keyword">unsigned</span> <span class="keyword">int</span>)&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;sizeof(long)=&quot;</span>&lt;&lt;<span class="keyword">sizeof</span>(<span class="keyword">long</span>)&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;sizeof(long long)=&quot;</span>&lt;&lt;<span class="keyword">sizeof</span>(<span class="keyword">long</span> <span class="keyword">long</span>)&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;sizeof(float)=&quot;</span>&lt;&lt;<span class="keyword">sizeof</span>(<span class="keyword">float</span>)&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;sizeof(double)=&quot;</span>&lt;&lt;<span class="keyword">sizeof</span>(<span class="keyword">double</span>)&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<h1 id="变量重复"><a href="#变量重复" class="headerlink" title="变量重复"></a>变量重复</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> fa[<span class="number">20</span>][N];</span><br><span class="line">...</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> u,<span class="keyword">int</span> fa)</span></span>&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>之后, 就会得到很烦人的东西. 一改就改错. 所以建议命名习惯:</p>
+<ul>
+<li>全局变量<code>fa</code>, 中间<code>ff</code>.</li>
+<li><p>树状数组/线段树使用<code>ll/rr</code></p>
+</li>
+<li><p><code>dp/f[]</code>作为动态规划</p>
+</li>
+<li><strong>永远不要按照C++PrimerPlus/ 其他长的要死乱七八糟的命名法则! IDE没有自动不全, 浪费时间干什么?</strong></li>
+</ul>
+<h1 id="数组-1"><a href="#数组-1" class="headerlink" title="数组+1"></a>数组+1</h1><p>在模拟测试中, 有时候使用<code>sort</code>函数时候会忘了+1. 细节一定要注意到.</p>
+<h1 id="打错文件读入读出"><a href="#打错文件读入读出" class="headerlink" title="打错文件读入读出"></a>打错文件读入读出</h1><p>建议:</p>
+<ul>
+<li>关闭标准控制台, 转而全用文件读入读出写.</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/09/P2590/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1625,152 +1809,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/07/CSPT2-%E9%A2%98%E8%A7%A3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SHZAIZ的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/11/07/CSPT2-%E9%A2%98%E8%A7%A3/" itemprop="url">儒略历题解</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-11-07T18:20:23+08:00">
-                2020-11-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index">
-                    <span itemprop="name">题解</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h1><p>反正挺明确的.</p>
-<h1 id="做法"><a href="#做法" class="headerlink" title="做法"></a>做法</h1><p>或一下，根据给出的 p,q 看看哪一位固定了，最后的时候如果这一位固定了，那就乘 1，没固定就乘 2，<strong>注意特盼 n=0,m=0 的情况</strong>。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> deb <span class="meta-keyword">if</span>(debug)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> debug =<span class="number">0</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> fo(i,x) for(int i=1;i&lt;=(x);++i)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> fo_(i,b,x) for(int i = b;i&lt;=x;++i)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> re(i,b,x) for(int i = b;i&gt;=x;--i)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N 100010</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ull unsigned long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span> &gt; ok[N];</span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	freopen(<span class="string">&quot;zoo.in&quot;</span>,<span class="string">&quot;r&quot;</span>,<span class="built_in">stdin</span>);</span><br><span class="line">	freopen(<span class="string">&quot;zoo.out&quot;</span>,<span class="string">&quot;w&quot;</span>,<span class="built_in">stdout</span>);</span><br><span class="line">	<span class="keyword">int</span> n,m,c,k;</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;n&gt;&gt;m&gt;&gt;c&gt;&gt;k;</span><br><span class="line">	ull an = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>(m==<span class="number">0</span> &amp;&amp; n==<span class="number">0</span>) &#123;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;18446744073709551616&quot;</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">	fo(i,n) &#123;</span><br><span class="line">		ull x;<span class="built_in">cin</span>&gt;&gt;x;</span><br><span class="line">		an |= x;</span><br><span class="line">	&#125;</span><br><span class="line">	deb <span class="built_in">cout</span>&lt;&lt;an&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	fo(i,m)&#123;</span><br><span class="line">		<span class="keyword">int</span> x,y;</span><br><span class="line">		<span class="built_in">cin</span>&gt;&gt;x&gt;&gt;y;</span><br><span class="line">		ok[x].push_back(y);</span><br><span class="line">	&#125;</span><br><span class="line">	ull ans = <span class="number">1U</span>LL;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = k<span class="number">-1</span>;i&gt;=<span class="number">0</span>;i--)&#123;</span><br><span class="line">		deb <span class="built_in">cout</span>&lt;&lt;((an&gt;&gt;i)&amp;(<span class="number">1U</span>LL))&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">		<span class="keyword">int</span> x = (an&gt;&gt;i)&amp;(<span class="number">1U</span>LL);</span><br><span class="line">		<span class="keyword">if</span>(x)&#123;</span><br><span class="line">			ans*=<span class="number">2</span>;</span><br><span class="line">		&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">			deb <span class="built_in">cout</span>&lt;&lt;<span class="string">&quot;sz&quot;</span>&lt;&lt;ok[i].size()&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">			<span class="keyword">if</span>(ok[i].size()==<span class="number">0</span>) ans*=<span class="number">2</span>;</span><br><span class="line">			<span class="keyword">else</span> ans*=<span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125; </span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;ans-n;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="提醒"><a href="#提醒" class="headerlink" title="提醒"></a>提醒</h1><p>数据范围!!!!!!</p>
-<p>Fuck !</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1821,7 +1859,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1843,7 +1881,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
