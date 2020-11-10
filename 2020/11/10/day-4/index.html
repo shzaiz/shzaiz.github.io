@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="图论," />
 
 
 
@@ -79,17 +79,20 @@
 
 
 
-<meta name="description" content="蒟蒻shzaiz的博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="schedule">
-<meta property="og:url" content="http://example.com/schedule/index.html">
+<meta name="description" content="这一次, 我们来简单了解一下一些图论中的常见基本算法模型概览.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="再说图论">
+<meta property="og:url" content="http://example.com/2020/11/10/day-4/index.html">
 <meta property="og:site_name" content="SHZAIZ的博客">
-<meta property="og:description" content="蒟蒻shzaiz的博客">
+<meta property="og:description" content="这一次, 我们来简单了解一下一些图论中的常见基本算法模型概览.">
 <meta property="og:locale">
-<meta property="article:published_time" content="2020-11-09T04:28:31.704Z">
-<meta property="article:modified_time" content="2020-11-09T04:28:31.704Z">
+<meta property="og:image" content="https://i.loli.net/2020/11/10/qTHfhwbDRQKa1yA.png">
+<meta property="article:published_time" content="2020-11-10T05:15:32.000Z">
+<meta property="article:modified_time" content="2020-11-10T06:10:46.222Z">
 <meta property="article:author" content="shzaiz">
+<meta property="article:tag" content="图论">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2020/11/10/qTHfhwbDRQKa1yA.png">
 
 
 
@@ -119,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://example.com/schedule/"/>
+  <link rel="canonical" href="http://example.com/2020/11/10/day-4/"/>
 
 
 
 
 
-  <title>Schedule | SHZAIZ的博客</title>
+  <title>再说图论 | SHZAIZ的博客</title>
   
 
 
@@ -144,7 +147,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail page-calendar">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -285,18 +288,186 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block schedule">
-    <div id="schedule">
-      <ul id="event-list">
-      </ul>
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/10/day-4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SHZAIZ的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">再说图论</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-11-10T13:15:32+08:00">
+                2020-11-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%80%BB%E7%BB%93/" itemprop="url" rel="index">
+                    <span itemprop="name">总结</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>这一次, 我们来简单了解一下一些图论中的常见基本算法模型概览.</p>
+<a id="more"></a>
+<h1 id="拆点-分层图"><a href="#拆点-分层图" class="headerlink" title="拆点/分层图"></a>拆点/分层图</h1><p>先看例子<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P4568">飞行路线</a>:</p>
+<p>我们能把这个转化成一个比较轻松的问题. </p>
+<p><img src="https://i.loli.net/2020/11/10/qTHfhwbDRQKa1yA.png" alt="image-20201110140837012"></p>
+<h1 id="Tarjan缩点"><a href="#Tarjan缩点" class="headerlink" title="Tarjan缩点"></a>Tarjan缩点</h1><p>一个图上经常有环. 有时候情况需要在有向无环图上进行. 我们需要对于一张图缩点. 缩点是求解强连通分量<sup><a href="#fn_1" id="reffn_1">1</a></sup>的一中好方法</p>
+<p>缩点经常使用Tarjan算法. Tarjan-SCC.</p>
+<p>关于缩点, <a target="_blank" rel="noopener" href="https://oi-wiki.org/graph/scc/">OI Wiki</a>在这个部分做了详细周到的说明. 同样在<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1J741157yN?p=5">这里</a>我做了个动画模拟了一下.</p>
+<blockquote id="fn_1">
+<sup>1</sup>. 有向图 G 强连通是指，G 中任意两个结点连通.强连通分量（Strongly Connected Components，SCC）的定义是：极大的强连通子图。<a href="#reffn_1" title="Jump back to footnote [1] in the text."> &#8617;</a>
+</blockquote>
+<p>我们直接看代码</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> dfn[N], low[N], dfncnt, s[N], vis[N], tp; <span class="comment">// s是一个栈</span></span><br><span class="line"><span class="keyword">int</span> scc[N], sc; <span class="comment">// 结点 i 所在 scc 的编号</span></span><br><span class="line"><span class="keyword">int</span> sz[N];      <span class="comment">// 强连通 i 的大小</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">tarjan</span><span class="params">(<span class="keyword">int</span> u)</span> </span>&#123;</span><br><span class="line">  low[u] = dfn[u] = ++dfncnt, s[++tp] = u, vis[u] = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = h[u]; i; i = e[i].nex) &#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">int</span> &amp;v = e[i].t;</span><br><span class="line">    <span class="keyword">if</span> (!dfn[v]) &#123;</span><br><span class="line">      tarjan(v);</span><br><span class="line">      low[u] = min(low[u], low[v]); <span class="comment">// (1)</span></span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (vis[v]) &#123;</span><br><span class="line">      low[u] = min(low[u], dfn[v]); <span class="comment">// (2)</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">    <span class="comment">//===== 退栈操作</span></span><br><span class="line">  <span class="keyword">if</span> (dfn[u] == low[u]) &#123;</span><br><span class="line">    ++sc;</span><br><span class="line">    <span class="keyword">while</span> (s[tp] != u) &#123;</span><br><span class="line">      scc[s[tp]] = sc;</span><br><span class="line">      sz[sc]++;</span><br><span class="line">      vis[s[tp]] = <span class="number">0</span>;</span><br><span class="line">      --tp;</span><br><span class="line">    &#125;</span><br><span class="line">    scc[s[tp]] = sc;</span><br><span class="line">    sz[sc]++;</span><br><span class="line">    vis[s[tp]] = <span class="number">0</span>;</span><br><span class="line">    --tp;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="拓扑排序"><a href="#拓扑排序" class="headerlink" title="拓扑排序"></a>拓扑排序</h1><p>对于DAG, 有时候使用动态规划需要使用拓扑排序更新集合.</p>
+<p>其实<a target="_blank" rel="noopener" href="https://oi-wiki.org/graph/topo/">OI Wiki</a>的讲解同样详细. 核心思想是维持一个入度为 0 的顶点的集合. 我们接着来看代码.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">toposort</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> Q[N];</span><br><span class="line">	<span class="keyword">int</span> iq = <span class="number">0</span> ;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span> ; i &lt;= n ; i++)&#123;</span><br><span class="line">		<span class="keyword">if</span>(ind[i] == <span class="number">0</span>)&#123;</span><br><span class="line">			Q[iq++] = i;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; iq ; i++)&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> k = head[Q[i]] ; k != <span class="number">-1</span> ; k = e[k].nxt)&#123;</span><br><span class="line">			ind[e[k].to] -- ;</span><br><span class="line">			<span class="keyword">if</span>(ind[e[k].to] == <span class="number">0</span>)&#123;</span><br><span class="line">				Q[iq++] = e[k].to;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; iq; i ++)</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; Q[i] &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>; </span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h1 id="差分约束"><a href="#差分约束" class="headerlink" title="差分约束"></a><a target="_blank" rel="noopener" href="https://oi-wiki.org/graph/diff-constraints/#_1">差分约束</a></h1>
+      
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E5%9B%BE%E8%AE%BA/" rel="tag"># 图论</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/11/10/%E6%88%91%E7%9C%81%E8%80%83%E7%94%9F%E8%BF%B7%E6%83%91%E8%A1%8C%E4%B8%BA/" rel="next" title="我省考生迷惑行为">
+                <i class="fa fa-chevron-left"></i> 我省考生迷惑行为
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
 
           </div>
           
@@ -327,8 +498,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -404,6 +584,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8B%86%E7%82%B9-%E5%88%86%E5%B1%82%E5%9B%BE"><span class="nav-number">1.</span> <span class="nav-text">拆点&#x2F;分层图</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Tarjan%E7%BC%A9%E7%82%B9"><span class="nav-number">2.</span> <span class="nav-text">Tarjan缩点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F"><span class="nav-number">3.</span> <span class="nav-text">拓扑排序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B7%AE%E5%88%86%E7%BA%A6%E6%9D%9F"><span class="nav-number">4.</span> <span class="nav-text">差分约束</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -537,6 +733,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
@@ -924,6 +1124,26 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
   
 
 
