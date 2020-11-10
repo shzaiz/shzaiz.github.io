@@ -79,12 +79,12 @@
 
 
 
-<meta name="description" content="树与图 树对于图而言是一种相对于简单的结构. 如果有 \(n\)个节点的话, \(n-1\)条边就足够了. 树也有一些特点. 这些特点更加的简单.  树只有唯一一个根，且子树不相交 除根以外，每个元素只能有一个前驱（父结点），可以有零个或多个后继(子结点) 如果\(v_i\)是\(v_j\)的双亲，则\(L(v_i) &#x3D; L(v_j)-1\),也就是说双亲比孩子节点的层次小1  接下">
+<meta name="description" content="Trees and Graphs 树对于图而言是一种相对于简单的结构. 如果有 \(n\)个节点的话, \(n-1\)条边就足够了. 树也有一些特点. 这些特点更加的简单.  树只有唯一一个根，且子树不相交 除根以外，每个元素只能有一个前驱（父结点），可以有零个或多个后继(子结点) 如果\(v_i\)是\(v_j\)的双亲，则\(L(v_i) &#x3D; L(v_j)-1\),也就是说双亲比孩子">
 <meta property="og:type" content="article">
 <meta property="og:title" content="关于树的事情">
 <meta property="og:url" content="http://example.com/2020/11/09/day3_3/index.html">
 <meta property="og:site_name" content="SHZAIZ的博客">
-<meta property="og:description" content="树与图 树对于图而言是一种相对于简单的结构. 如果有 \(n\)个节点的话, \(n-1\)条边就足够了. 树也有一些特点. 这些特点更加的简单.  树只有唯一一个根，且子树不相交 除根以外，每个元素只能有一个前驱（父结点），可以有零个或多个后继(子结点) 如果\(v_i\)是\(v_j\)的双亲，则\(L(v_i) &#x3D; L(v_j)-1\),也就是说双亲比孩子节点的层次小1  接下">
+<meta property="og:description" content="Trees and Graphs 树对于图而言是一种相对于简单的结构. 如果有 \(n\)个节点的话, \(n-1\)条边就足够了. 树也有一些特点. 这些特点更加的简单.  树只有唯一一个根，且子树不相交 除根以外，每个元素只能有一个前驱（父结点），可以有零个或多个后继(子结点) 如果\(v_i\)是\(v_j\)的双亲，则\(L(v_i) &#x3D; L(v_j)-1\),也就是说双亲比孩子">
 <meta property="og:locale">
 <meta property="og:image" content="https://i.loli.net/2020/11/09/A1sGO9Drg58RcjM.png">
 <meta property="og:image" content="https://i.loli.net/2020/11/09/JGohIlrVRWCjSX4.png">
@@ -92,7 +92,7 @@
 <meta property="og:image" content="https://i.loli.net/2020/11/09/jTGiAvgd5SCNK4V.png">
 <meta property="og:image" content="https://i.loli.net/2020/11/09/9J2Xkyz5ZBnH1aN.png">
 <meta property="article:published_time" content="2020-11-09T14:21:47.000Z">
-<meta property="article:modified_time" content="2020-11-10T08:59:35.281Z">
+<meta property="article:modified_time" content="2020-11-10T13:06:33.508Z">
 <meta property="article:author" content="shzaiz">
 <meta property="article:tag" content="图论">
 <meta property="article:tag" content="DP">
@@ -397,7 +397,7 @@
       
 
       
-        <h1 id="树与图">树与图</h1>
+        <h1 id="trees-and-graphs">Trees and Graphs</h1>
 <p>树对于图而言是一种相对于简单的结构. 如果有 <span class="math inline">\(n\)</span>个节点的话, <span class="math inline">\(n-1\)</span>条边就足够了. 树也有一些特点. 这些特点更加的简单.</p>
 <ul>
 <li>树只有唯一一个根，且子树不相交</li>
@@ -407,19 +407,19 @@
 <p>接下来, 我们来介绍一下树上的常见的一些算法.</p>
 <a id="more"></a>
 <p><span class="math inline">\(\odot \Delta \odot\)</span></p>
-<h1 id="最近公共祖先lca">最近公共祖先(LCA)</h1>
+<h1 id="lowest-common-ancestorslca">Lowest Common Ancestors(LCA)</h1>
 <figure>
 <img src="https://i.loli.net/2020/11/09/A1sGO9Drg58RcjM.png" alt="image-20201109185102669" /><figcaption aria-hidden="true">image-20201109185102669</figcaption>
 </figure>
 <p>按照层数一层一层往上跳太慢了. 有没有什么办法加速这个过程呢?</p>
-<h2 id="方法一.-倍增">方法一. 倍增</h2>
+<h2 id="mt1.-multiply-by-2k">Mt1. Multiply by <span class="math inline">\(2^k\)</span></h2>
 <p>碰巧的是, 在寒假在家<del>颓废</del>的时候做了个<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1N7411G7JD">视频</a>出来. 这里可以稍微看一下, 大概8min.</p>
 <p>这里给出代码实现:</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> using_debug_output 1</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> using_temp_file 0</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> this_is_a_real_file_output 1</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> fo(i,b,x) for(int i = b;i&lt;=x;i++)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> re(i,x,b) for(int i = x;i&gt;b;i--)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N 1000010</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> deb <span class="meta-keyword">if</span>(using_debug_output)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> fil <span class="meta-keyword">if</span>(using_temp_file)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> realfl <span class="meta-keyword">if</span>(this_is_a_real_file_output)</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Edge</span>&#123;</span></span><br><span class="line">	<span class="keyword">int</span> to,nxt;</span><br><span class="line">&#125;e[N];</span><br><span class="line"><span class="keyword">int</span> cnt = <span class="number">0</span>,head[N];</span><br><span class="line"><span class="keyword">int</span> n,m,s;</span><br><span class="line"><span class="keyword">int</span> fa[N][<span class="number">22</span>], dep[N];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">adde</span><span class="params">(<span class="keyword">int</span> u,<span class="keyword">int</span> v)</span></span>&#123;</span><br><span class="line">	e[++cnt].to = v;</span><br><span class="line">	e[cnt].nxt = head[u];</span><br><span class="line">	head[u] = cnt;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs1</span><span class="params">(<span class="keyword">int</span> u,<span class="keyword">int</span> fat)</span></span>&#123;</span><br><span class="line">	dep[u] = dep[fat]+<span class="number">1</span>;</span><br><span class="line">	fa[u][<span class="number">0</span>] = fat;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>;i&lt;=<span class="number">20</span>;i++)&#123;</span><br><span class="line">		fa[u][i] = fa[fa[u][i<span class="number">-1</span>]][i<span class="number">-1</span>];</span><br><span class="line">	&#125;	</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = head[u];i;i = e[i].nxt)&#123;</span><br><span class="line">		<span class="keyword">int</span> v = e[i].to;</span><br><span class="line">		<span class="keyword">if</span>(v == fat) <span class="keyword">continue</span>;</span><br><span class="line">		dfs1(v,u);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lca</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(dep[x]&gt;dep[y]) swap(x,y); </span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">20</span>;i&gt;=<span class="number">0</span>;i--) &#123;</span><br><span class="line">		<span class="keyword">if</span>(dep[fa[y][i]]&lt;dep[x] || fa[y][i]==<span class="number">0</span>) <span class="keyword">continue</span>;</span><br><span class="line">		y = fa[y][i];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(x==y) <span class="keyword">return</span> x;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">20</span>;i&gt;=<span class="number">0</span>;i--)&#123;</span><br><span class="line">		<span class="keyword">if</span>(fa[y][i] == fa[x][i]|| fa[y][i]==<span class="number">0</span>|| fa[x][i]==<span class="number">0</span>) <span class="keyword">continue</span>;</span><br><span class="line">		x = fa[x][i];</span><br><span class="line">		y = fa[y][i];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> fa[x][<span class="number">0</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;n&gt;&gt;m&gt;&gt;s;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>;i&lt;n;i++)&#123;</span><br><span class="line">		<span class="keyword">int</span> x,y;<span class="built_in">cin</span>&gt;&gt;x&gt;&gt;y; adde(x,y);adde(y,x);</span><br><span class="line">	&#125;</span><br><span class="line">	dfs1(s,<span class="number">0</span>);</span><br><span class="line">	</span><br><span class="line">	fo(i,<span class="number">1</span>,m)&#123;</span><br><span class="line">		<span class="keyword">int</span> x,y;<span class="built_in">cin</span>&gt;&gt;x&gt;&gt;y;</span><br><span class="line">		<span class="built_in">cout</span>&lt;&lt;lca(x,y)&lt;&lt;<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h2 id="方法2.-树链剖分">方法2. 树链剖分</h2>
+<h2 id="mt2.-tree-cutting">Mt2. Tree cutting</h2>
 <p>碰巧的是, 我在这里也做了一个<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1xE411j7WF">视频</a>来讲解. 建议全程关声音. 还有, 说“显然LCA是4”那一句有问题.</p>
 <p>由于树链剖分十分的难调. 这里不推荐这样做.</p>
-<h2 id="方法3.-tarjan提出的离线方法求最近公共祖先">方法3. Tarjan提出的离线方法求最近公共祖先</h2>
+<h2 id="mt3.-tarjans-lca-algorithmoffline">Mt3. Tarjan’s LCA algorithm(offline)</h2>
 <p>这个方法只用于离线处理. 所以请按照要求使用.</p>
 <p><a target="_blank" rel="noopener" href="https://riteme.site/blog/2016-2-1/lca.html">算法</a>大概是这样的:</p>
 <blockquote>
@@ -429,7 +429,7 @@
 <p>机(yu)智(chun)的Link发现了找LCA的好方法，即如果两个结点都被岩浆烧掉时，他们的LCA即为那棵子树上岩浆最高的位置。</p>
 </blockquote>
 <p>需要一点并查集的东西.</p>
-<h2 id="练习">练习</h2>
+<h2 id="ex.">Ex.</h2>
 <p>约定:<span class="math inline">\(d[]\)</span>数组是深度.</p>
 <p><strong>练习1. </strong> 给出树上两个点<span class="math inline">\(u,v\)</span>, 如何求两点之间的路径长? (假设两点之间每条边边权为1)</p>
 <p><strong>解答</strong>. 首先要先走到<span class="math inline">\(lca(u,v)\)</span>. 走动<span class="math inline">\(d[u]-d[lca(u,v)]\)</span>. 然后从它在走到<span class="math inline">\(d[v]\)</span>. 走动<span class="math inline">\(d[v]-d[lca(u,v)]\)</span>. 总共是<span class="math inline">\(d[u]+d[v]-2d[lca(u,v)]\)</span>.</p>
@@ -447,31 +447,31 @@
 <img src="https://i.loli.net/2020/11/09/JGohIlrVRWCjSX4.png" alt="image-20201109190927674" /><figcaption aria-hidden="true">image-20201109190927674</figcaption>
 </figure>
 <p><strong>想法2</strong>. 两个起点的距离 + 两个终点的距离 &gt;= 两条路径的长度和</p>
-<h1 id="树上差分">树上差分</h1>
+<h1 id="differential-on-trees">Differential on Trees</h1>
 <p>对于一类简单的树上修改问题, 我们可以不用去写树链剖分, 转而写一个比较基础好些的方式. 多用于处理路径问题.</p>
 <p>树上差分能够实现的操作，用线段树、树剖、LCT等等也可以实现，但它的优势在于实现简单，可以避免在考场上出现写题五分钟、调试两小时的情况.</p>
-<h2 id="点差分">点差分</h2>
+<h2 id="differential-on-points">Differential on points</h2>
 <p>设将两点<span class="math inline">\(u,v\)</span>之间路径上的所有点权增加<span class="math inline">\(x\)</span>，<span class="math inline">\(o=LCA(u,v)\)</span>,<span class="math inline">\(o\)</span>的父亲节点为<span class="math inline">\(p\)</span>，则操作如下：</p>
 <p><code>diff[u]+=x,diff[v]+=x,diff[o]-=x,diff[p]-=x;</code></p>
 <figure>
 <img src="https://i.loli.net/2020/11/09/FtZH9U8SQGlNjhp.png" alt="image-20201109192055889" /><figcaption aria-hidden="true">image-20201109192055889</figcaption>
 </figure>
-<h2 id="边差分">边差分</h2>
+<h2 id="differential-on-edges">Differential on Edges</h2>
 <p>设将两点u,v之间路径上的所有边权增加x，o=LCA(u,v)，以每条边两端深度较大的节点存储该边的差分数组，则操作如下：</p>
 <p><code>diff[u]+=x,diff[v]+=x,diff[o]-=2*x;</code></p>
 <figure>
 <img src="https://i.loli.net/2020/11/09/jTGiAvgd5SCNK4V.png" alt="image-20201109192407924" /><figcaption aria-hidden="true">image-20201109192407924</figcaption>
 </figure>
-<h2 id="练习-1">练习</h2>
+<h2 id="ex">Ex</h2>
 <p><strong>练习1.</strong> <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3258">(松鼠的新家)</a> 对于多组路径上的点差分.</p>
 <p><strong>参考代码.</strong> <a target="_blank" rel="noopener" href="https://paste.ubuntu.com/p/KYgvZtVSSC/">这里</a>是一份不太好的代码实现.</p>
 <p><strong>练习2.</strong> <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3128">(挤奶网络)</a> 看看经过路上哪一个点最多.</p>
 <p><strong>参考代码</strong>. 无.</p>
-<h1 id="最小生成树">最小生成树</h1>
+<h1 id="minimum-spanning-tree">Minimum Spanning Tree</h1>
 <p>巧妙的是, 有人提前已经做好了视频. 大家来欣赏一下这个<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Eb41177d1?from=search&amp;seid=3678498576958365686">视频</a>. 这里, 判环可以用并查集实现.</p>
-<h1 id="树上倍增">树上倍增</h1>
+<h1 id="mul-on-tree">Mul On Tree</h1>
 <p>树上其实还可以维护倍增的信息.</p>
-<h2 id="例子1.-严格次小生成树">例子1. <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P4180"><em>严格</em>次小生成树</a></h2>
+<h2 id="eg1.-mst-ish-problem">Eg1. <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P4180">MST-ish problem</a></h2>
 <p>首先，kruskal求最小生成树. 然后考虑替换最小生成树. 首先我们来思考一个弱化版本的:</p>
 <ul>
 <li>怎么求<strong>不严格</strong>次小生成树?
@@ -679,7 +679,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A0%91%E4%B8%8E%E5%9B%BE"><span class="nav-number">1.</span> <span class="nav-text">树与图</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88lca"><span class="nav-number">2.</span> <span class="nav-text">最近公共祖先(LCA)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E4%B8%80.-%E5%80%8D%E5%A2%9E"><span class="nav-number">2.1.</span> <span class="nav-text">方法一. 倍增</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E6%B3%952.-%E6%A0%91%E9%93%BE%E5%89%96%E5%88%86"><span class="nav-number">2.2.</span> <span class="nav-text">方法2. 树链剖分</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E6%B3%953.-tarjan%E6%8F%90%E5%87%BA%E7%9A%84%E7%A6%BB%E7%BA%BF%E6%96%B9%E6%B3%95%E6%B1%82%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88"><span class="nav-number">2.3.</span> <span class="nav-text">方法3. Tarjan提出的离线方法求最近公共祖先</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%83%E4%B9%A0"><span class="nav-number">2.4.</span> <span class="nav-text">练习</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A0%91%E4%B8%8A%E5%B7%AE%E5%88%86"><span class="nav-number">3.</span> <span class="nav-text">树上差分</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%82%B9%E5%B7%AE%E5%88%86"><span class="nav-number">3.1.</span> <span class="nav-text">点差分</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BE%B9%E5%B7%AE%E5%88%86"><span class="nav-number">3.2.</span> <span class="nav-text">边差分</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%83%E4%B9%A0-1"><span class="nav-number">3.3.</span> <span class="nav-text">练习</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91"><span class="nav-number">4.</span> <span class="nav-text">最小生成树</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A0%91%E4%B8%8A%E5%80%8D%E5%A2%9E"><span class="nav-number">5.</span> <span class="nav-text">树上倍增</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E5%AD%901.-%E4%B8%A5%E6%A0%BC%E6%AC%A1%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91"><span class="nav-number">5.1.</span> <span class="nav-text">例子1. 严格次小生成树</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#trees-and-graphs"><span class="nav-number">1.</span> <span class="nav-text">Trees and Graphs</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#lowest-common-ancestorslca"><span class="nav-number">2.</span> <span class="nav-text">Lowest Common Ancestors(LCA)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#mt1.-multiply-by-2k"><span class="nav-number">2.1.</span> <span class="nav-text">Mt1. Multiply by \(2^k\)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mt2.-tree-cutting"><span class="nav-number">2.2.</span> <span class="nav-text">Mt2. Tree cutting</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mt3.-tarjans-lca-algorithmoffline"><span class="nav-number">2.3.</span> <span class="nav-text">Mt3. Tarjan’s LCA algorithm(offline)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ex."><span class="nav-number">2.4.</span> <span class="nav-text">Ex.</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#differential-on-trees"><span class="nav-number">3.</span> <span class="nav-text">Differential on Trees</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#differential-on-points"><span class="nav-number">3.1.</span> <span class="nav-text">Differential on points</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#differential-on-edges"><span class="nav-number">3.2.</span> <span class="nav-text">Differential on Edges</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ex"><span class="nav-number">3.3.</span> <span class="nav-text">Ex</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#minimum-spanning-tree"><span class="nav-number">4.</span> <span class="nav-text">Minimum Spanning Tree</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mul-on-tree"><span class="nav-number">5.</span> <span class="nav-text">Mul On Tree</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#eg1.-mst-ish-problem"><span class="nav-number">5.1.</span> <span class="nav-text">Eg1. MST-ish problem</span></a></li></ol></li></ol></div>
             
 
           </div>

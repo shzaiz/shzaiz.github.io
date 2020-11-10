@@ -98,7 +98,7 @@
 <meta property="og:image" content="https://i.loli.net/2020/11/08/t1j6IKzBqPA3DFc.png">
 <meta property="og:image" content="https://i.loli.net/2020/11/08/Bq3XbwtjOyWEp6G.png">
 <meta property="article:published_time" content="2020-11-08T15:20:23.000Z">
-<meta property="article:modified_time" content="2020-11-08T23:50:34.090Z">
+<meta property="article:modified_time" content="2020-11-10T13:04:14.406Z">
 <meta property="article:author" content="shzaiz">
 <meta property="article:tag" content="数学">
 <meta name="twitter:card" content="summary">
@@ -404,7 +404,7 @@
       
         <p>印象中, 我对于求和记号的探索好像是一点一点摸索出来的. 也没有人教我一些和式变换的技巧. 对于我而言, 一些我本应该会的东西到现在才会.</p>
 <a id="more"></a>
-<h1 id="求和记号基础">求和记号基础</h1>
+<h1 id="the-basis-of-sum">The basis of sum</h1>
 <p>印象中, 我对于求和记号的探索好像是一点一点摸索出来的. 也没有人教我一些和式变换的技巧. 对于我而言, 我认为和式对于新手而言是十分重要的. 那么今天, 总结一些和式常见的变换技巧以及相关知识点.</p>
 <p>求和记号一般只是一个工具. 更加优秀想法就是直观理解这个求和记号表达的意思.</p>
 <p>这是求和记号,最最基本的用法是这样子: <span class="math display">\[
@@ -419,9 +419,9 @@
 <li><span class="math inline">\(\sum_{i=k}^n f(i)\)</span> 表示ans值:<code>for(int i = k; i&lt;=n;i++) ans+=f(i);</code>.</li>
 <li><span class="math inline">\(\sum_{\text{cond}(i)} f(i)\)</span> 表示ans值: <code>for(cond(i)) ans+= f(i);</code>.</li>
 </ul>
-<h1 id="一些基础的求和方法">一些基础的求和方法</h1>
+<h1 id="basic-methods-to-summing">Basic methods to summing</h1>
 <p>上面大致笼统的说了一下求和. 看不太明白也没关系.下面我们来据一些例子加深一下理解. 这些例子不会太难, 都是文化课的例子. 先稍微感受一下.</p>
-<h2 id="例子0.-一些公式">例子0. 一些公式</h2>
+<h2 id="eg0.-some-formulas">Eg0. Some formulas</h2>
 <p><strong>公式1.</strong> <span class="math inline">\(1+2^{2}+3^{2}+4^{2}+\ldots \ldots+n^{2}=\frac{1}{6} n(n+1)(2 n+1)\)</span>.</p>
 <p>相关证明既可以待定系数做, 也可以用立方和公式做, 也可以猜想. 在这里就不在详细说了. 相关证明方法见<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%B9%B3%E6%96%B9%E5%92%8C%E5%85%AC%E5%BC%8F">这里</a>. 个人推荐证明上述方法2.</p>
 <p><strong>公式2.</strong> $1+2<sup>{3}+3</sup>{3}+4<sup>{3}++n</sup>{3}=^{2} $</p>
@@ -434,14 +434,14 @@ n^{4}+2 n^{3}+n^{2} &amp;=4 \sum_{i=1}^{n} i^{3} \\
 \sum_{i=1}^{n} i^{3} &amp;=\frac{n^{2}(n+1)^{2}}{4}=\left[\frac{n(n+1)}{2}\right]^{2}
 \end{aligned}
 \]</span></p>
-<h2 id="例子1.-倒序相加法">例子1. 倒序相加法</h2>
+<h2 id="eg1.-inverse-addition-method">Eg1. Inverse addition method</h2>
 <p>对于这个方法, 最具有典型性的就是<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E7%AD%89%E5%B7%AE%E6%95%B0%E5%88%97">等差数列</a>的求和了. 等差数列, 就是从<strong>第二项起</strong>, 每一项与它的前一项的差等于同一个<strong>常数</strong>的一种数列. 这个常数叫做等差数列的公差, 公差常用字母<span class="math inline">\(d\)</span>表示. 这个就是大家熟知的“等差数列的和=(首项+末项)×项数÷2”.</p>
 <p>形式化的, 用刚刚的求和记号写出来就是:<span class="math inline">\(\sum_{i=1}^n a_i = \frac{(a_1+a_n)n}{2}\)</span>.</p>
-<h2 id="例子2.-错位相减法">例子2. 错位相减法</h2>
+<h2 id="eg2.-shift-subtraction-method">Eg2. Shift subtraction method</h2>
 <p>对于这个方法, 最具有典型性的<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E7%AD%89%E6%AF%94%E6%95%B0%E5%88%97">等比数列</a>求和了. 通过乘上一个<span class="math inline">\(q\)</span>, 我们就可以轻松的消去中间一大堆东西. 从而得到求和公式为<span class="math inline">\(S_{n}=\frac{a_{1}\left(1-q^{n}\right)}{1-q}(q \neq 1)\)</span>.</p>
-<h1 id="运用求和的例子">运用求和的例子</h1>
+<h1 id="usage-of-summing">Usage of summing</h1>
 <p>在OI中, 我们有许多地方可以用到求和和求和的性质.</p>
-<h2 id="前缀和">前缀和</h2>
+<h2 id="prefix-sum">Prefix sum</h2>
 <p>简单来说,前缀和是一个数组的某项下标之前(包括此项元素)的所有数组元素的和.形式化的说, 一维的前缀和可以这样用: <span class="math display">\[
 y_n=\sum_{i=1}^n x_i
 \]</span> <img src="https://i.loli.net/2020/11/08/dca7jmIwFZ9CiRg.png" alt="image-20201108201024801" /></p>
@@ -453,7 +453,7 @@ b[x][y]=\sum_{i=1}^x \sum_{j=1}^y a[i][j]
 <p>如果要求任意子矩阵的和的话, 我们可以用这个图示:</p>
 <p><img src="https://i.loli.net/2020/11/08/QogYfzke6GrspnX.gif" /></p>
 <p>代码是<code>b[x2][y2]+b[x1-1][y1-1]-b[x1-1][y2]-b[x2][y1-1]</code>.</p>
-<h2 id="差分">差分</h2>
+<h2 id="differencial">Differencial</h2>
 <p>差分的结果反映了离散量之间的一种变化.</p>
 <p><strong>引入</strong>:给出n个数, 再给出Q个询问, 每个询问给出l, r, x, 要求你在l到r上每一个值都加上x, 而只给你O(n)的时间范围, 怎么办？</p>
 <p><strong>概念</strong>: 简而言之, 区间加变化少的是前后之间的差值. 所以我们认为<span class="math inline">\(b[i] = a[i]-a[i-1]\)</span>.</p>
@@ -469,9 +469,9 @@ b[x][y]=\sum_{i=1}^x \sum_{j=1}^y a[i][j]
 </figure>
 <p>我们要求紫色部分的值，我们已知的是黄色部分的值，但它多了两个蓝色部分的值，而两个蓝色部分有重叠了个绿色部分</p>
 <p>所以要求的区间内的值就是<code>sum[x2][y2]-sum[x2][y1-1]-sum[x1-1][y2]+sum[x1-1][x1-1]</code>.</p>
-<h1 id="换一种视角看求和记号">换一种视角看求和记号</h1>
+<h1 id="the-shift-of-perspective">The shift of perspective</h1>
 <p>当求和下标变得非常复杂的时候, 我们就发现以前的方法几乎没有什么方法来帮助我们. 现在, 我们来思考几种方法让我们重新看清楚一些求和公式的真面目.</p>
-<h2 id="视角1.-模拟出奇迹">视角1. 模拟出奇迹</h2>
+<h2 id="ps1.-simulations-should-done-right">Ps1. Simulations should done right</h2>
 <p>对于一些奇怪的求和公式, 我们可以先写几项展展看. 看一下会出什么样的结果. 注意留意相同的部分.</p>
 <p><strong>例子1.</strong> <span class="math display">\[
 (\sum_{i=1}^na_i)^2=\sum_{i=1}^{n} a_{i}^{2}+2 \sum_{1 \leqslant i&lt;j \leqslant n} a_{i} a_{j}
@@ -499,7 +499,7 @@ b[x][y]=\sum_{i=1}^x \sum_{j=1}^y a[i][j]
 <p><strong>例子6.</strong> <span class="math display">\[
 a_{n}-a_{1}=\sum_{k=1}^{n-1}\left(a_{k+1}-a_{k}\right)
 \]</span> 运用前缀和的思想, 可以轻松想到这个问题的答案.</p>
-<h2 id="视角2.-变换看的方式">视角2. 变换看的方式</h2>
+<h2 id="ps2.-rotate-your-head-to-gain-80-iq">Ps2. Rotate your head to gain 80 IQ</h2>
 <p><del>(aka. 歪一歪头获得80智商)</del></p>
 <p><strong>例子7.</strong> <img src="https://i.loli.net/2020/11/08/6SKxvHOagp7TGkL.png" alt="image-20201108203955026" /></p>
 <figure>
@@ -514,7 +514,7 @@ a_{n}-a_{1}=\sum_{k=1}^{n-1}\left(a_{k+1}-a_{k}\right)
 <figure>
 <img src="https://i.loli.net/2020/11/08/t1j6IKzBqPA3DFc.png" alt="image-20201108210518725" /><figcaption aria-hidden="true">image-20201108210518725</figcaption>
 </figure>
-<h2 id="视角3.-升维打击">视角3. 升维打击</h2>
+<h2 id="ps3.-lift-dimension-killer">Ps3. Lift dimension killer</h2>
 <p>在这里, 我们可以把这些参量看作屏幕上的的点对.</p>
 <p><strong>例子9.</strong> 优化<img src="https://i.loli.net/2020/11/08/Bq3XbwtjOyWEp6G.png" alt="image-20201108211414341" />的过程.注意多组数据，T&lt;=300000,n&lt;=10000000.</p>
 <p>推导回来再放, 其中<span class="math inline">\(\div 2\)</span>这一步就用到了刚刚说的升维打击. <span class="math display">\[
@@ -710,7 +710,7 @@ a_{n}-a_{1}=\sum_{k=1}^{n-1}\left(a_{k+1}-a_{k}\right)
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B1%82%E5%92%8C%E8%AE%B0%E5%8F%B7%E5%9F%BA%E7%A1%80"><span class="nav-number">1.</span> <span class="nav-text">求和记号基础</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E4%BA%9B%E5%9F%BA%E7%A1%80%E7%9A%84%E6%B1%82%E5%92%8C%E6%96%B9%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">一些基础的求和方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E5%AD%900.-%E4%B8%80%E4%BA%9B%E5%85%AC%E5%BC%8F"><span class="nav-number">2.1.</span> <span class="nav-text">例子0. 一些公式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E5%AD%901.-%E5%80%92%E5%BA%8F%E7%9B%B8%E5%8A%A0%E6%B3%95"><span class="nav-number">2.2.</span> <span class="nav-text">例子1. 倒序相加法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E5%AD%902.-%E9%94%99%E4%BD%8D%E7%9B%B8%E5%87%8F%E6%B3%95"><span class="nav-number">2.3.</span> <span class="nav-text">例子2. 错位相减法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%90%E7%94%A8%E6%B1%82%E5%92%8C%E7%9A%84%E4%BE%8B%E5%AD%90"><span class="nav-number">3.</span> <span class="nav-text">运用求和的例子</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E7%BC%80%E5%92%8C"><span class="nav-number">3.1.</span> <span class="nav-text">前缀和</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B7%AE%E5%88%86"><span class="nav-number">3.2.</span> <span class="nav-text">差分</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8D%A2%E4%B8%80%E7%A7%8D%E8%A7%86%E8%A7%92%E7%9C%8B%E6%B1%82%E5%92%8C%E8%AE%B0%E5%8F%B7"><span class="nav-number">4.</span> <span class="nav-text">换一种视角看求和记号</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%86%E8%A7%921.-%E6%A8%A1%E6%8B%9F%E5%87%BA%E5%A5%87%E8%BF%B9"><span class="nav-number">4.1.</span> <span class="nav-text">视角1. 模拟出奇迹</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%86%E8%A7%922.-%E5%8F%98%E6%8D%A2%E7%9C%8B%E7%9A%84%E6%96%B9%E5%BC%8F"><span class="nav-number">4.2.</span> <span class="nav-text">视角2. 变换看的方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%86%E8%A7%923.-%E5%8D%87%E7%BB%B4%E6%89%93%E5%87%BB"><span class="nav-number">4.3.</span> <span class="nav-text">视角3. 升维打击</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#the-basis-of-sum"><span class="nav-number">1.</span> <span class="nav-text">The basis of sum</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#basic-methods-to-summing"><span class="nav-number">2.</span> <span class="nav-text">Basic methods to summing</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#eg0.-some-formulas"><span class="nav-number">2.1.</span> <span class="nav-text">Eg0. Some formulas</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#eg1.-inverse-addition-method"><span class="nav-number">2.2.</span> <span class="nav-text">Eg1. Inverse addition method</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#eg2.-shift-subtraction-method"><span class="nav-number">2.3.</span> <span class="nav-text">Eg2. Shift subtraction method</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#usage-of-summing"><span class="nav-number">3.</span> <span class="nav-text">Usage of summing</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#prefix-sum"><span class="nav-number">3.1.</span> <span class="nav-text">Prefix sum</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#differencial"><span class="nav-number">3.2.</span> <span class="nav-text">Differencial</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#the-shift-of-perspective"><span class="nav-number">4.</span> <span class="nav-text">The shift of perspective</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ps1.-simulations-should-done-right"><span class="nav-number">4.1.</span> <span class="nav-text">Ps1. Simulations should done right</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ps2.-rotate-your-head-to-gain-80-iq"><span class="nav-number">4.2.</span> <span class="nav-text">Ps2. Rotate your head to gain 80 IQ</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ps3.-lift-dimension-killer"><span class="nav-number">4.3.</span> <span class="nav-text">Ps3. Lift dimension killer</span></a></li></ol></li></ol></div>
             
 
           </div>

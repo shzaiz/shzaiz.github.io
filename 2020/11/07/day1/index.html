@@ -79,12 +79,12 @@
 
 
 
-<meta name="description" content="图的存储 我假设您有关于图的基本概念. 因为这些东西只是一些简单的定义. 各位朋友看看就好. 当然, 看到不懂的东西再查找也是可以的.">
+<meta name="description" content="The storage of graph 我假设您有关于图的基本概念. 因为这些东西只是一些简单的定义. 各位朋友看看就好. 当然, 看到不懂的东西再查找也是可以的.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="G1-图论基础">
 <meta property="og:url" content="http://example.com/2020/11/07/day1/index.html">
 <meta property="og:site_name" content="SHZAIZ的博客">
-<meta property="og:description" content="图的存储 我假设您有关于图的基本概念. 因为这些东西只是一些简单的定义. 各位朋友看看就好. 当然, 看到不懂的东西再查找也是可以的.">
+<meta property="og:description" content="The storage of graph 我假设您有关于图的基本概念. 因为这些东西只是一些简单的定义. 各位朋友看看就好. 当然, 看到不懂的东西再查找也是可以的.">
 <meta property="og:locale">
 <meta property="og:image" content="https://i.loli.net/2020/11/07/8jBvtIfOUczlbqF.png">
 <meta property="og:image" content="https://i.loli.net/2020/11/07/4uFOnEhNmIgACyM.png">
@@ -93,7 +93,7 @@
 <meta property="og:image" content="c:/Users/Admin/AppData/Roaming/Typora/typora-user-images/image-20201107225313896.png">
 <meta property="og:image" content="https://cdn.luogu.com.cn/upload/pic/26431.png">
 <meta property="article:published_time" content="2020-11-07T10:20:23.000Z">
-<meta property="article:modified_time" content="2020-11-08T23:50:17.706Z">
+<meta property="article:modified_time" content="2020-11-10T13:01:43.625Z">
 <meta property="article:author" content="shzaiz">
 <meta property="article:tag" content="图论">
 <meta name="twitter:card" content="summary">
@@ -397,7 +397,7 @@
       
 
       
-        <h1 id="图的存储">图的存储</h1>
+        <h1 id="the-storage-of-graph">The storage of graph</h1>
 <p>我假设您有关于图的<a target="_blank" rel="noopener" href="https://oi-wiki.org/graph/concept/">基本概念</a>. 因为这些东西只是一些简单的定义. 各位朋友看看就好. 当然, 看到不懂的东西再查找也是可以的.</p>
 <a id="more"></a>
 <p>如果要把一个图存储起来,有几种方式?</p>
@@ -465,9 +465,9 @@
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> u)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (vis[u]) <span class="keyword">return</span>;</span><br><span class="line">  vis[u] = <span class="literal">true</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = head[u]; i; i = nxt[i]) dfs(to[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 <li><p>空间复杂度: <span class="math inline">\(O(m)\)</span>.</p></li>
 </ul>
-<h1 id="最短路算法">最短路算法</h1>
+<h1 id="shortest-path-algo">Shortest Path Algo</h1>
 <h2 id="floyd">Floyd</h2>
-<h3 id="用floyd-求解最短路">用Floyd 求解最短路</h3>
+<h3 id="using-floyd-to-solve-shortest-path-problem">Using Floyd to solve Shortest Path problem</h3>
 <p>Floyd本质上是一个<strong>动态规划</strong>的思想，每一次循环更新<strong>经过前k个节点，i到j的最短路径</strong>. 基于的是一个比较明显的不等式:</p>
 <figure>
 <img src="https://i.loli.net/2020/11/07/6Rs9zecaSGP5bNC.png" alt="image-20201107224605699" /><figcaption aria-hidden="true">image-20201107224605699</figcaption>
@@ -475,7 +475,7 @@
 <p>比如这样:</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">1</span>; k &lt;= n; ++k)</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; ++j)</span><br><span class="line">                dist[i][j] = min(dist[i][j], dist[i][k] + dist[k][j]);</span><br></pre></td></tr></table></figure>
 <p>其中<code>dist[u][v]</code>数组表示<span class="math inline">\(u\to v\)</span>的距离.</p>
-<h3 id="用floyd-传递闭包">用Floyd 传递闭包</h3>
+<h3 id="using-floyd-to-pass-on-colsed-brackets">Using Floyd to pass on colsed brackets</h3>
 <p>传递闭包的含义指通过传递性推导出尽量多的元素之间的关系. 比如<a target="_blank" rel="noopener" href="http://poj.org/problem?id=3660">这个例子</a>.</p>
 <p>我们可以想到, 如果A打败B, B 打败C, A就会打败C. 回想求解最短路的时候的思路与之类似, 所以可以用这个传递闭包:</p>
 <figure>
@@ -503,7 +503,7 @@
 <h2 id="dijkstra">Dijkstra</h2>
 <p><strong>假设图上没有负边权.</strong> 根据贪心方法, 如果经过的边数更多, 距离也会更大. 基于这一贪心思想, 我们不难发现想出这个策略:我们可以不断取出<strong>离顶点最近</strong>而<strong>没有被访问过</strong>的点，松弛它和它能到达的所有点.我们用一个优先队列来维护所有节点。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Dij</span><span class="params">(<span class="keyword">int</span> s)</span></span>&#123;</span><br><span class="line">    dist[s] = <span class="number">0</span>;</span><br><span class="line">    Q.push(mp(<span class="number">0</span>, s));</span><br><span class="line">    <span class="keyword">while</span> (!Q.empty())&#123;</span><br><span class="line">        <span class="keyword">int</span> u = Q.top().second;</span><br><span class="line">        Q.pop();</span><br><span class="line">        <span class="keyword">if</span> (vis[u])</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        vis[u] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = head[u]; i != <span class="number">0</span>; i = next[i])&#123;</span><br><span class="line">            <span class="keyword">int</span> v = to[i];</span><br><span class="line">            dist[v] = min(dist[v], dist[u] + w[i]);</span><br><span class="line">            <span class="keyword">if</span> (!vis[v])</span><br><span class="line">                Q.push(mp(dist[v], v));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="最短路可行的边">最短路可行的边</h2>
+<h2 id="possible-edge-on-shortest-path">Possible Edge on shortest path</h2>
 <p>一条边$ xy$ 在 <span class="math inline">\(s\to t\)</span>的最短路上, 当且仅当<span class="math inline">\(dis(s, x) + v(x, y) + dis(y,t) = dis(s,t)\)</span>.</p>
 <p>其中 <span class="math inline">\(dis(x, y)\)</span> 表示 <span class="math inline">\(x\)</span> 到 $y $最短路长度.</p>
 <p>用单源最短路算法求 s 到每个点的最短路, 将所有边反转求 t 到每个点的最短路（即原图中每个点到 t 的最短路） 然后判断每条边是否满足条件.</p>
@@ -697,7 +697,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%BE%E7%9A%84%E5%AD%98%E5%82%A8"><span class="nav-number">1.</span> <span class="nav-text">图的存储</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%80%E7%9F%AD%E8%B7%AF%E7%AE%97%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">最短路算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#floyd"><span class="nav-number">2.1.</span> <span class="nav-text">Floyd</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%A8floyd-%E6%B1%82%E8%A7%A3%E6%9C%80%E7%9F%AD%E8%B7%AF"><span class="nav-number">2.1.1.</span> <span class="nav-text">用Floyd 求解最短路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%A8floyd-%E4%BC%A0%E9%80%92%E9%97%AD%E5%8C%85"><span class="nav-number">2.1.2.</span> <span class="nav-text">用Floyd 传递闭包</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#spfa"><span class="nav-number">2.2.</span> <span class="nav-text">SPFA</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dijkstra"><span class="nav-number">2.3.</span> <span class="nav-text">Dijkstra</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%8F%AF%E8%A1%8C%E7%9A%84%E8%BE%B9"><span class="nav-number">2.4.</span> <span class="nav-text">最短路可行的边</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#the-storage-of-graph"><span class="nav-number">1.</span> <span class="nav-text">The storage of graph</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#shortest-path-algo"><span class="nav-number">2.</span> <span class="nav-text">Shortest Path Algo</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#floyd"><span class="nav-number">2.1.</span> <span class="nav-text">Floyd</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#using-floyd-to-solve-shortest-path-problem"><span class="nav-number">2.1.1.</span> <span class="nav-text">Using Floyd to solve Shortest Path problem</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#using-floyd-to-pass-on-colsed-brackets"><span class="nav-number">2.1.2.</span> <span class="nav-text">Using Floyd to pass on colsed brackets</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#spfa"><span class="nav-number">2.2.</span> <span class="nav-text">SPFA</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dijkstra"><span class="nav-number">2.3.</span> <span class="nav-text">Dijkstra</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#possible-edge-on-shortest-path"><span class="nav-number">2.4.</span> <span class="nav-text">Possible Edge on shortest path</span></a></li></ol></li></ol></div>
             
 
           </div>
