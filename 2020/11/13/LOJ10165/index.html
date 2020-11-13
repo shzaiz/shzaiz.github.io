@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="数学,搜索,数位DP," />
+  <meta name="keywords" content="数学,搜索,数位DP,LOJ," />
 
 
 
@@ -79,19 +79,20 @@
 
 
 
-<meta name="description" content="IdeaWindy 定义了一种 Windy 数：不含前导零且相邻两个数字之差至少为 的正整数被称为 Windy 数。 1-9都是windy.  剩余的看定义. Sol12345678910111213141516171819202122232425262728293031323334353637383940#include &lt;bits&#x2F;stdc++.h&gt;using namespace">
+<meta name="description" content="Idea Windy 定义了一种 Windy 数：不含前导零且相邻两个数字之差至少为 的正整数被称为 Windy 数。 1-9都是windy. 剩余的看定义. Sol 12345678910111213141516171819202122232425262728293031323334353637383940#include &lt;bits&#x2F;stdc++.h&gt;using name">
 <meta property="og:type" content="article">
 <meta property="og:title" content="LOJ10165Windy数">
 <meta property="og:url" content="http://example.com/2020/11/13/LOJ10165/index.html">
 <meta property="og:site_name" content="SHZAIZ的博客">
-<meta property="og:description" content="IdeaWindy 定义了一种 Windy 数：不含前导零且相邻两个数字之差至少为 的正整数被称为 Windy 数。 1-9都是windy.  剩余的看定义. Sol12345678910111213141516171819202122232425262728293031323334353637383940#include &lt;bits&#x2F;stdc++.h&gt;using namespace">
+<meta property="og:description" content="Idea Windy 定义了一种 Windy 数：不含前导零且相邻两个数字之差至少为 的正整数被称为 Windy 数。 1-9都是windy. 剩余的看定义. Sol 12345678910111213141516171819202122232425262728293031323334353637383940#include &lt;bits&#x2F;stdc++.h&gt;using name">
 <meta property="og:locale">
 <meta property="article:published_time" content="2020-11-13T02:27:44.000Z">
-<meta property="article:modified_time" content="2020-11-13T02:30:58.394Z">
+<meta property="article:modified_time" content="2020-11-13T02:46:14.377Z">
 <meta property="article:author" content="shzaiz">
 <meta property="article:tag" content="数学">
 <meta property="article:tag" content="搜索">
 <meta property="article:tag" content="数位DP">
+<meta property="article:tag" content="LOJ">
 <meta name="twitter:card" content="summary">
 
 
@@ -392,10 +393,12 @@
       
 
       
-        <h1 id="Idea"><a href="#Idea" class="headerlink" title="Idea"></a>Idea</h1><p>Windy 定义了一种 Windy 数：不含前导零且相邻两个数字之差至少为 的正整数被称为 Windy 数。</p>
-<p>1-9都是windy. </p>
+        <h1 id="idea">Idea</h1>
+<p>Windy 定义了一种 Windy 数：不含前导零且相邻两个数字之差至少为 的正整数被称为 Windy 数。</p>
+<p>1-9都是windy.</p>
 <p>剩余的看定义.</p>
-<h1 id="Sol"><a href="#Sol" class="headerlink" title="Sol"></a>Sol</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> fo(i,x) for(int i = 1;i&lt;=x;i++)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> fo_(i,b,x) for(int i = b;i&lt;=x;i++)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> re(i,x,b) for(int i = x;i&gt;b;i--)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N 10</span></span><br><span class="line"><span class="keyword">int</span> a[N] = &#123;<span class="number">0</span>,<span class="number">2</span>,<span class="number">0</span>&#125;;</span><br><span class="line"><span class="keyword">int</span> f[<span class="number">29</span>][<span class="number">14</span>];</span><br><span class="line"><span class="keyword">int</span> n = <span class="number">2</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> i,<span class="keyword">int</span> hi,<span class="keyword">int</span> lim,<span class="keyword">int</span> last)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(i==n+<span class="number">1</span>) &#123;<span class="keyword">return</span> <span class="number">1</span>;&#125;</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    fo_(j,<span class="number">0</span>,<span class="number">9</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>((<span class="built_in">abs</span>(j-last)&lt;<span class="number">2</span>) ||( lim &amp;&amp; j&gt;a[i])) <span class="keyword">continue</span>;</span><br><span class="line">        <span class="comment">// cout&lt;&lt;j;</span></span><br><span class="line">         <span class="keyword">if</span>(j!=<span class="number">0</span> &amp;&amp;!hi &amp;&amp; !lim &amp;&amp; f[i+<span class="number">1</span>][j+<span class="number">3</span>]!=<span class="number">-2</span>) ans+=f[i+<span class="number">1</span>][j+<span class="number">3</span>];</span><br><span class="line">        <span class="keyword">else</span> ans += dfs(i+<span class="number">1</span>,j==<span class="number">0</span>&amp;&amp;hi , j==a[i] &amp;&amp; lim,(j==<span class="number">0</span>&amp;&amp;hi)?<span class="number">-3</span>:j);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(last&gt;<span class="number">0</span> &amp;&amp; !hi &amp;&amp; !lim) f[i][last+<span class="number">3</span>] = ans;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="meta">#<span class="meta-keyword">ifdef</span> XBZAKIOI</span></span><br><span class="line">    freopen(<span class="string">&quot;D:/Testcases/in.ac&quot;</span>,<span class="string">&quot;r&quot;</span>,<span class="built_in">stdin</span>);</span><br><span class="line">    freopen(<span class="string">&quot;D:/Testcases/out.ac&quot;</span>,<span class="string">&quot;w&quot;</span>,<span class="built_in">stdout</span>);</span><br><span class="line">    <span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">    fo_(i,<span class="number">0</span>,<span class="number">28</span>) fo_(j,<span class="number">0</span>,<span class="number">13</span>) f[i][j] = <span class="number">-2</span>;</span><br><span class="line">    <span class="built_in">string</span> s,t;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;s&gt;&gt;t;</span><br><span class="line"></span><br><span class="line">    n = s.length();</span><br><span class="line">    fo_(i,<span class="number">0</span>,n<span class="number">-1</span>) &#123;a[i+<span class="number">1</span>] = s[i]-<span class="string">&#x27;0&#x27;</span>;<span class="keyword">if</span>(i==n<span class="number">-1</span>) a[i+<span class="number">1</span>]--;&#125;</span><br><span class="line">    <span class="keyword">int</span> ans1 = dfs(<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">-3</span>);</span><br><span class="line"></span><br><span class="line">    n = t.length();</span><br><span class="line">    fo_(i,<span class="number">0</span>,n<span class="number">-1</span>) a[i+<span class="number">1</span>] = t[i]-<span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">    <span class="keyword">int</span> ans2 = dfs(<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">-3</span>);</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;ans2-ans1&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="sol">Sol</h1>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> fo(i,x) for(int i = 1;i&lt;=x;i++)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> fo_(i,b,x) for(int i = b;i&lt;=x;i++)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> re(i,x,b) for(int i = x;i&gt;b;i--)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N 10</span></span><br><span class="line"><span class="keyword">int</span> a[N] = &#123;<span class="number">0</span>,<span class="number">2</span>,<span class="number">0</span>&#125;;</span><br><span class="line"><span class="keyword">int</span> f[<span class="number">29</span>][<span class="number">14</span>];</span><br><span class="line"><span class="keyword">int</span> n = <span class="number">2</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> i,<span class="keyword">int</span> hi,<span class="keyword">int</span> lim,<span class="keyword">int</span> last)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(i==n+<span class="number">1</span>) &#123;<span class="keyword">return</span> <span class="number">1</span>;&#125;</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    fo_(j,<span class="number">0</span>,<span class="number">9</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>((<span class="built_in">abs</span>(j-last)&lt;<span class="number">2</span>) ||( lim &amp;&amp; j&gt;a[i])) <span class="keyword">continue</span>;</span><br><span class="line">        <span class="comment">// cout&lt;&lt;j;</span></span><br><span class="line">         <span class="keyword">if</span>(j!=<span class="number">0</span> &amp;&amp;!hi &amp;&amp; !lim &amp;&amp; f[i+<span class="number">1</span>][j+<span class="number">3</span>]!=<span class="number">-2</span>) ans+=f[i+<span class="number">1</span>][j+<span class="number">3</span>];</span><br><span class="line">        <span class="keyword">else</span> ans += dfs(i+<span class="number">1</span>,j==<span class="number">0</span>&amp;&amp;hi , j==a[i] &amp;&amp; lim,(j==<span class="number">0</span>&amp;&amp;hi)?<span class="number">-3</span>:j);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(last&gt;<span class="number">0</span> &amp;&amp; !hi &amp;&amp; !lim) f[i][last+<span class="number">3</span>] = ans;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="meta">#<span class="meta-keyword">ifdef</span> XBZAKIOI</span></span><br><span class="line">    freopen(<span class="string">&quot;D:/Testcases/in.ac&quot;</span>,<span class="string">&quot;r&quot;</span>,<span class="built_in">stdin</span>);</span><br><span class="line">    freopen(<span class="string">&quot;D:/Testcases/out.ac&quot;</span>,<span class="string">&quot;w&quot;</span>,<span class="built_in">stdout</span>);</span><br><span class="line">    <span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">    fo_(i,<span class="number">0</span>,<span class="number">28</span>) fo_(j,<span class="number">0</span>,<span class="number">13</span>) f[i][j] = <span class="number">-2</span>;</span><br><span class="line">    <span class="built_in">string</span> s,t;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;s&gt;&gt;t;</span><br><span class="line"></span><br><span class="line">    n = s.length();</span><br><span class="line">    fo_(i,<span class="number">0</span>,n<span class="number">-1</span>) &#123;a[i+<span class="number">1</span>] = s[i]-<span class="string">&#x27;0&#x27;</span>;<span class="keyword">if</span>(i==n<span class="number">-1</span>) a[i+<span class="number">1</span>]--;&#125;</span><br><span class="line">    <span class="keyword">int</span> ans1 = dfs(<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">-3</span>);</span><br><span class="line"></span><br><span class="line">    n = t.length();</span><br><span class="line">    fo_(i,<span class="number">0</span>,n<span class="number">-1</span>) a[i+<span class="number">1</span>] = t[i]-<span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">    <span class="keyword">int</span> ans2 = dfs(<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">-3</span>);</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;ans2-ans1&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -419,6 +422,8 @@
           
             <a href="/tags/%E6%95%B0%E4%BD%8DDP/" rel="tag"># 数位DP</a>
           
+            <a href="/tags/LOJ/" rel="tag"># LOJ</a>
+          
         </div>
       
 
@@ -439,6 +444,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/11/13/LOJ10000/" rel="prev" title="LOJ10000">
+                LOJ10000 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -515,7 +524,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-count">34</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -537,7 +546,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">31</span>
+                  <span class="site-state-item-count">34</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -586,7 +595,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Idea"><span class="nav-number">1.</span> <span class="nav-text">Idea</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Sol"><span class="nav-number">2.</span> <span class="nav-text">Sol</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#idea"><span class="nav-number">1.</span> <span class="nav-text">Idea</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#sol"><span class="nav-number">2.</span> <span class="nav-text">Sol</span></a></li></ol></div>
             
 
           </div>
