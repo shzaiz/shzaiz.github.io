@@ -81,13 +81,13 @@
 
 <meta name="description" content="Desc 题目描述 一条平直的公路上有n个路灯，第i个路灯的坐标是ai。小A需要把其中的k个点亮，使得每个路灯与距离最近的被点亮的路灯的距离和最小。求这个最小值。 输入格式 第1行2个正整数n,k。 接下来n行，每行一个整数ai，表示第i个路灯的坐标，保证ai是严格单调递增的。 输出格式 1行1个数表示答案。 样例数据 input 12345676 35612192027 o">
 <meta property="og:type" content="article">
-<meta property="og:title" content="271小路灯">
+<meta property="og:title" content="271路灯">
 <meta property="og:url" content="http://example.com/2020/11/17/271%E5%B0%8F%E8%B7%AF%E7%81%AF/index.html">
 <meta property="og:site_name" content="SHZAIZ的博客">
 <meta property="og:description" content="Desc 题目描述 一条平直的公路上有n个路灯，第i个路灯的坐标是ai。小A需要把其中的k个点亮，使得每个路灯与距离最近的被点亮的路灯的距离和最小。求这个最小值。 输入格式 第1行2个正整数n,k。 接下来n行，每行一个整数ai，表示第i个路灯的坐标，保证ai是严格单调递增的。 输出格式 1行1个数表示答案。 样例数据 input 12345676 35612192027 o">
 <meta property="og:locale">
 <meta property="article:published_time" content="2020-11-17T12:36:37.000Z">
-<meta property="article:modified_time" content="2020-11-17T12:37:29.114Z">
+<meta property="article:modified_time" content="2020-11-18T11:40:55.174Z">
 <meta property="article:author" content="shzaiz">
 <meta property="article:tag" content="题解">
 <meta property="article:tag" content="QBXT">
@@ -129,7 +129,7 @@
 
 
 
-  <title>271小路灯 | SHZAIZ的博客</title>
+  <title>271路灯 | SHZAIZ的博客</title>
   
 
 
@@ -321,7 +321,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">271小路灯</h1>
+          <h1 class="post-title" itemprop="name headline">271路灯</h1>
         
 
         <div class="post-meta">
@@ -426,6 +426,14 @@
 <p>时间限制：1s</p>
 <p>空间限制：512MB</p>
 <h1 id="idea">Idea</h1>
+<p>我们发现这应该是一道背包的状态<strong>表示</strong>有一点点像. 比如定义 <span class="math inline">\(f[i][j]\)</span>表示考虑<span class="math inline">\(i\)</span>个东西, <span class="math inline">\(j\)</span>是点亮了多少路灯. 并且发现数据范围除了<span class="math inline">\(a_i\)</span>之外后挺小的. <del>乱搞</del>.</p>
+<p>现在考虑添加了一个路灯, 那么感觉对于状态转移应该没有什么方法.</p>
+<p>现在考虑在原有的路灯序列里面点亮一盏灯, 那么发现, <span class="math display">\[
+f[i][j]=\min(f[r][j-1]+h(r,i))
+\]</span> 其中, <span class="math inline">\(h(r,i)\)</span> 代表: <span class="math inline">\(r,i\)</span>都点亮, 那么中间的最短距离.</p>
+<p>我们可以用<span class="math inline">\(\mathcal O(n^3)\)</span>的时候取处理<span class="math inline">\(h[][]\)</span>数组.然后转移即可.</p>
+<h1 id="code">Code</h1>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> fo(i,x) for(int i = 1;i&lt;=x;i++)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> fo_(i,b,x) for(int i = b;i&lt;=x;i++)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> re(i,x,b) for(int i = x;i&gt;b;i--)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N 1000</span></span><br><span class="line"><span class="keyword">int</span> n,m;</span><br><span class="line"><span class="keyword">int</span> a[N],f[N][N],h[N][N];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="meta">#<span class="meta-keyword">ifdef</span> XBZAKIOI</span></span><br><span class="line">    freopen(<span class="string">&quot;D:/Testcases/in.ac&quot;</span>,<span class="string">&quot;r&quot;</span>,<span class="built_in">stdin</span>);</span><br><span class="line">    freopen(<span class="string">&quot;D:/Testcases/out.ac&quot;</span>,<span class="string">&quot;w&quot;</span>,<span class="built_in">stdout</span>);</span><br><span class="line">    <span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;n&gt;&gt;m;</span><br><span class="line">    fo(i,n) <span class="built_in">cin</span>&gt;&gt;a[i];</span><br><span class="line">    a[n+<span class="number">1</span>] = <span class="number">2e9</span>; a[<span class="number">0</span>] = <span class="number">-2e9</span>;</span><br><span class="line">    fo_(i,<span class="number">0</span>,n) fo_(j,i,n+<span class="number">1</span>) fo_(k,i,j) h[i][j]+= min(a[k]-a[i],a[j]-a[k]);</span><br><span class="line">    <span class="built_in">memset</span>(f,<span class="number">0x3f</span>,<span class="keyword">sizeof</span> f);</span><br><span class="line">    f[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">    fo(i,n) fo(k,m) fo_(j,<span class="number">0</span>,i<span class="number">-1</span>) f[i][k] = min(f[i][k], f[j][k<span class="number">-1</span>]+h[j][i]);</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">2e9</span>;</span><br><span class="line">    fo(i,n) ans = min(ans,f[i][m]+h[i][n+<span class="number">1</span>]);</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;ans;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -622,7 +630,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#desc"><span class="nav-number">1.</span> <span class="nav-text">Desc</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="nav-number">1.0.1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BE%93%E5%85%A5%E6%A0%BC%E5%BC%8F"><span class="nav-number">1.0.2.</span> <span class="nav-text">输入格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BE%93%E5%87%BA%E6%A0%BC%E5%BC%8F"><span class="nav-number">1.0.3.</span> <span class="nav-text">输出格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%B7%E4%BE%8B%E6%95%B0%E6%8D%AE"><span class="nav-number">1.0.4.</span> <span class="nav-text">样例数据</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#input"><span class="nav-number">1.0.4.1.</span> <span class="nav-text">input</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#output"><span class="nav-number">1.0.4.2.</span> <span class="nav-text">output</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%B7%E4%BE%8B%E8%A7%A3%E9%87%8A"><span class="nav-number">1.0.5.</span> <span class="nav-text">样例解释</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E8%A7%84%E6%A8%A1%E4%B8%8E%E7%BA%A6%E5%AE%9A"><span class="nav-number">1.0.6.</span> <span class="nav-text">数据规模与约定</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#idea"><span class="nav-number">2.</span> <span class="nav-text">Idea</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#desc"><span class="nav-number">1.</span> <span class="nav-text">Desc</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="nav-number">1.0.1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BE%93%E5%85%A5%E6%A0%BC%E5%BC%8F"><span class="nav-number">1.0.2.</span> <span class="nav-text">输入格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BE%93%E5%87%BA%E6%A0%BC%E5%BC%8F"><span class="nav-number">1.0.3.</span> <span class="nav-text">输出格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%B7%E4%BE%8B%E6%95%B0%E6%8D%AE"><span class="nav-number">1.0.4.</span> <span class="nav-text">样例数据</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#input"><span class="nav-number">1.0.4.1.</span> <span class="nav-text">input</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#output"><span class="nav-number">1.0.4.2.</span> <span class="nav-text">output</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%B7%E4%BE%8B%E8%A7%A3%E9%87%8A"><span class="nav-number">1.0.5.</span> <span class="nav-text">样例解释</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E8%A7%84%E6%A8%A1%E4%B8%8E%E7%BA%A6%E5%AE%9A"><span class="nav-number">1.0.6.</span> <span class="nav-text">数据规模与约定</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#idea"><span class="nav-number">2.</span> <span class="nav-text">Idea</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#code"><span class="nav-number">3.</span> <span class="nav-text">Code</span></a></li></ol></div>
             
 
           </div>
