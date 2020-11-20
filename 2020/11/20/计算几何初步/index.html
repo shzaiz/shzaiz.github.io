@@ -93,8 +93,10 @@
 <meta property="og:image" content="https://i.loli.net/2020/11/20/xBO3ScJ6Ufu2Pzg.png">
 <meta property="og:image" content="https://i.loli.net/2020/11/20/dX3JM7Vsiuf9EN6.png">
 <meta property="og:image" content="https://i.loli.net/2020/11/20/r2iQcdH4SveoIbY.png">
+<meta property="og:image" content="https://i.loli.net/2020/11/20/14eCFcaAp7PNVlQ.png">
+<meta property="og:image" content="https://i.loli.net/2020/11/20/lS5wyOVKBnYPFmf.png">
 <meta property="article:published_time" content="2020-11-19T23:40:27.000Z">
-<meta property="article:modified_time" content="2020-11-20T00:36:52.598Z">
+<meta property="article:modified_time" content="2020-11-20T01:42:07.748Z">
 <meta property="article:author" content="shzaiz">
 <meta property="article:tag" content="数学">
 <meta property="article:tag" content="计算几何">
@@ -444,7 +446,17 @@ C2
 </figure>
 <p>A1. 暴力叉积即可, 最后除以二.</p>
 <p><strong>Q6.</strong> 多边形面积交.</p>
-<p>A1.</p>
+<p>A1. 暴力叉积</p>
+<figure>
+<img src="https://i.loli.net/2020/11/20/14eCFcaAp7PNVlQ.png" alt="image-20201120092003951" /><figcaption aria-hidden="true">image-20201120092003951</figcaption>
+</figure>
+<h1 id="polar-angular-sort">Polar Angular Sort</h1>
+<p><strong>例子1.</strong> 给定n条平行于X轴的线段，每条线段的价值是它的长度。现在用一条直线贯穿最大价值的线段，求最大的价值。</p>
+<p><span class="math inline">\(N\leq 2000\)</span>.</p>
+<figure>
+<img src="https://i.loli.net/2020/11/20/lS5wyOVKBnYPFmf.png" alt="image-20201120092409213" /><figcaption aria-hidden="true">image-20201120092409213</figcaption>
+</figure>
+<p>必定存在一条最优的直线，它经过某一条线段的左端点和某条线段的右端点，因为如果某条最优的直线不满足这些性质，我们可以通过旋转和平移使其满足条件。基于上面的结论，我们可以很轻松地想到一种算法：枚举直线经过哪一条线段的左端点和哪一条线段的右端点，然后扫一遍所有的线段看其是否被该直线穿过。</p>
 
       
     </div>
@@ -488,6 +500,10 @@ C2
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/11/20/277-%E6%B2%B9%E7%AE%B1/" rel="prev" title="277-油箱">
+                277-油箱 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -564,7 +580,7 @@ C2
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">55</span>
+                  <span class="site-state-item-count">56</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -586,7 +602,7 @@ C2
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">61</span>
+                  <span class="site-state-item-count">62</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -635,7 +651,7 @@ C2
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#coordinate-systems"><span class="nav-number">1.</span> <span class="nav-text">Coordinate Systems</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#coordinate-systems"><span class="nav-number">1.</span> <span class="nav-text">Coordinate Systems</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#polar-angular-sort"><span class="nav-number">2.</span> <span class="nav-text">Polar Angular Sort</span></a></li></ol></div>
             
 
           </div>
