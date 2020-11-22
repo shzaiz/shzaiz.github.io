@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="数学,暴力,DP,模拟赛," />
+  <meta name="keywords" content="图论,题解,模拟赛,哈密顿回路," />
 
 
 
@@ -79,20 +79,20 @@
 
 
 
-<meta name="description" content="Idea 【问题描述】 一排有n个格子，染成m种颜色，相邻格子颜色不能相同。此外，允许一个长度不超过k的区间染成相同的颜色。求最小代价。 【输入格式】 第一行包含三个正整数n, m, k表示格子数量、颜色数量、区间长度。 接下来的n行，每行有m个正整数cost i,j 表示将第i个格子染成颜色j需要付出的代价。 由于输入数据过大，可能需要使用快速读入 1234567inline in">
+<meta name="description" content="Desc. 【问题描述】 给出n个好数和m个坏数，求包含所有好数但不包含任何坏数，并且只由1-4组成的数中，各位数字之和最小值是多少。(好数和坏数均为k位数，且由1-4组成) 【输入格式】 第一行包含三个正整数n, m, k 接下来n行包含每行1个正整数，表示好数 接下来m行包含每行1个正整数，表示坏数 【输出格式】 输出一个正整数，表示最小的值。输入数据保证一定存在解。 【样例">
 <meta property="og:type" content="article">
-<meta property="og:title" content="279-染色">
-<meta property="og:url" content="http://example.com/2020/11/20/%E6%9F%93%E8%89%B2/index.html">
+<meta property="og:title" content="280-数字">
+<meta property="og:url" content="http://example.com/2020/11/22/280-%E6%95%B0%E5%AD%97/index.html">
 <meta property="og:site_name" content="SHZAIZ的博客">
-<meta property="og:description" content="Idea 【问题描述】 一排有n个格子，染成m种颜色，相邻格子颜色不能相同。此外，允许一个长度不超过k的区间染成相同的颜色。求最小代价。 【输入格式】 第一行包含三个正整数n, m, k表示格子数量、颜色数量、区间长度。 接下来的n行，每行有m个正整数cost i,j 表示将第i个格子染成颜色j需要付出的代价。 由于输入数据过大，可能需要使用快速读入 1234567inline in">
+<meta property="og:description" content="Desc. 【问题描述】 给出n个好数和m个坏数，求包含所有好数但不包含任何坏数，并且只由1-4组成的数中，各位数字之和最小值是多少。(好数和坏数均为k位数，且由1-4组成) 【输入格式】 第一行包含三个正整数n, m, k 接下来n行包含每行1个正整数，表示好数 接下来m行包含每行1个正整数，表示坏数 【输出格式】 输出一个正整数，表示最小的值。输入数据保证一定存在解。 【样例">
 <meta property="og:locale">
-<meta property="article:published_time" content="2020-11-20T11:59:07.000Z">
-<meta property="article:modified_time" content="2020-11-20T12:00:20.423Z">
+<meta property="article:published_time" content="2020-11-22T11:46:14.000Z">
+<meta property="article:modified_time" content="2020-11-22T11:55:06.849Z">
 <meta property="article:author" content="shzaiz">
-<meta property="article:tag" content="数学">
-<meta property="article:tag" content="暴力">
-<meta property="article:tag" content="DP">
+<meta property="article:tag" content="图论">
+<meta property="article:tag" content="题解">
 <meta property="article:tag" content="模拟赛">
+<meta property="article:tag" content="哈密顿回路">
 <meta name="twitter:card" content="summary">
 
 
@@ -123,13 +123,13 @@
 
 
 
-  <link rel="canonical" href="http://example.com/2020/11/20/染色/"/>
+  <link rel="canonical" href="http://example.com/2020/11/22/280-数字/"/>
 
 
 
 
 
-  <title>279-染色 | SHZAIZ的博客</title>
+  <title>280-数字 | SHZAIZ的博客</title>
   
 
 
@@ -304,7 +304,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/20/%E6%9F%93%E8%89%B2/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/22/280-%E6%95%B0%E5%AD%97/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -321,7 +321,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">279-染色</h1>
+          <h1 class="post-title" itemprop="name headline">280-数字</h1>
         
 
         <div class="post-meta">
@@ -333,8 +333,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-11-20T19:59:07+08:00">
-                2020-11-20
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-11-22T19:46:14+08:00">
+                2020-11-22
               </time>
             
 
@@ -404,29 +404,35 @@
       
 
       
-        <h1 id="idea">Idea</h1>
+        <h1 id="desc.">Desc.</h1>
 <p>【问题描述】</p>
-<p>一排有n个格子，染成m种颜色，相邻格子颜色不能相同。此外，允许一个长度不超过k的区间染成相同的颜色。求最小代价。</p>
+<p>给出n个好数和m个坏数，求包含所有好数但不包含任何坏数，并且只由1-4组成的数中，各位数字之和最小值是多少。(好数和坏数均为k位数，且由1-4组成)</p>
 <p>【输入格式】</p>
-<p>第一行包含三个正整数n, m, k表示格子数量、颜色数量、区间长度。</p>
-<p>接下来的n行，每行有m个正整数cost i,j 表示将第i个格子染成颜色j需要付出的代价。</p>
-<p>由于输入数据过大，可能需要使用快速读入</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">inline int read()</span><br><span class="line">&#123;</span><br><span class="line">    int x&#x3D;0;char ch&#x3D;getchar();</span><br><span class="line">    while(ch&lt;&#39;0&#39;|ch&gt;&#39;9&#39;)ch&#x3D; getchar();</span><br><span class="line">    while(ch&gt;&#x3D;&#39;0&#39;&amp;&amp;ch&lt;&#x3D;&#39;9&#39;)x&#x3D;x*10+ch-&#39;0&#39;,ch&#x3D; getchar ();</span><br><span class="line">    return x;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>第一行包含三个正整数n, m, k</p>
+<p>接下来n行包含每行1个正整数，表示好数</p>
+<p>接下来m行包含每行1个正整数，表示坏数</p>
 <p>【输出格式】</p>
-<p>输出一个整数，表示合法方案的最小代价。</p>
+<p>输出一个正整数，表示最小的值。输入数据保证一定存在解。</p>
 <p>【样例输入】</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">5 3 3</span><br><span class="line">1 5 6</span><br><span class="line">1 2 3</span><br><span class="line">9 1 9</span><br><span class="line">9 1 9</span><br><span class="line">1 2 3</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">3 3 4</span><br><span class="line">1111</span><br><span class="line">1222</span><br><span class="line">2333</span><br><span class="line">1122</span><br><span class="line">1133</span><br><span class="line">3122</span><br></pre></td></tr></table></figure>
 <p>【样例输出】</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">6</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">20</span><br></pre></td></tr></table></figure>
 <p>【样例说明】</p>
-<p>颜色分别为1 2 2 2 1</p>
+<p>12223331111</p>
 <p>【数据规模与约定】</p>
-<p>15% n, m&lt;=10 k&lt;=n</p>
-<p>40% n, m&lt;=100 k&lt;=10</p>
-<p>60% n, m&lt;=300 k&lt;=n</p>
-<p>另15% n, m&lt;=2000 k=1</p>
-<p>100% n, m&lt;=2000 k&lt;=n cost&lt;=10000</p>
-<h1 id="idea-15">Idea-15%</h1>
+<p>20% n&lt;=5 m=0 k=2</p>
+<p>30% n&lt;=10 m&lt;=10 k&lt;=5</p>
+<p>40% n&lt;=17 m&lt;=20 k&lt;=5</p>
+<p>50% n&lt;=18 m&lt;=20 k&lt;=5</p>
+<p>60% n&lt;=19 m&lt;=20 k&lt;=5</p>
+<p>70% n&lt;=20 m&lt;=20 k&lt;=5</p>
+<p>100% n&lt;=20 m&lt;=10000 k&lt;=8</p>
+<h1 id="idea--20">Idea -20%</h1>
+<p>由于没有坏数, 找到所有数字的min值就行了.</p>
+<h1 id="idea--100">Idea- 100%</h1>
+<p>看成不断添加一个新数字偏序集&gt; 这样相当于好数组成一个哈密顿通路,只需要求出两两好数之间最短距离，然后状压 dp 求出哈密顿通路&gt; 好数之间距离可以使用最短路算法求出，数据范围较小时可能有些其他的求法. 由于边权均为 1 4，可以拆边使用 bfs 求最短路，直接最短路可能会被卡时间，但是看起来评测机很快。 8 位 1−4 组成的数可以看作 4 进制数进行运算，从而节省空间。</p>
+<h1 id="code--100pts">Code -100pts</h1>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N 100010</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> pa pair<span class="meta-string">&lt;int,int&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n,m,k;</span><br><span class="line"><span class="keyword">int</span> good[<span class="number">25</span>],bad[<span class="number">10005</span>];</span><br><span class="line"><span class="keyword">int</span> dis[N][<span class="number">4</span>];</span><br><span class="line"><span class="keyword">bool</span> vis[N];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">trans</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> y=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;k;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		y|=(x%<span class="number">10</span><span class="number">-1</span>)&lt;&lt;(<span class="number">2</span>*i);</span><br><span class="line">		x/=<span class="number">10</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> y;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">queue</span>&lt;pa&gt;q;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">bfs</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">memset</span>(dis,<span class="number">0x3f</span>,<span class="keyword">sizeof</span>(dis));</span><br><span class="line">	<span class="keyword">if</span>(vis[x])<span class="keyword">return</span>;</span><br><span class="line">	dis[x][<span class="number">0</span>]=<span class="number">0</span>;</span><br><span class="line">	q.push(pa(x,<span class="number">0</span>));</span><br><span class="line">	<span class="keyword">while</span>(!q.empty())</span><br><span class="line">	&#123;</span><br><span class="line">		pa x=q.front();</span><br><span class="line">		q.pop();</span><br><span class="line">		<span class="keyword">int</span> now=dis[x.first][x.second];</span><br><span class="line">		<span class="keyword">if</span>(x.second)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(dis[x.first][x.second<span class="number">-1</span>]&gt;<span class="number">1e9</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				dis[x.first][x.second<span class="number">-1</span>]=now+<span class="number">1</span>;</span><br><span class="line">				q.push(pa(x.first,x.second<span class="number">-1</span>));</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">continue</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=<span class="number">4</span>;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">int</span> y=((x.first&lt;&lt;<span class="number">2</span>)|(i<span class="number">-1</span>))&amp;((<span class="number">1</span>&lt;&lt;(<span class="number">2</span>*k))<span class="number">-1</span>);</span><br><span class="line">			<span class="keyword">if</span>(dis[y][i<span class="number">-1</span>]&gt;<span class="number">1e9</span>&amp;&amp;!vis[y])</span><br><span class="line">			&#123;</span><br><span class="line">				dis[y][i<span class="number">-1</span>]=now+<span class="number">1</span>;</span><br><span class="line">				q.push(pa(y,i<span class="number">-1</span>));</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">int</span> dist[<span class="number">25</span>][<span class="number">25</span>];</span><br><span class="line"><span class="keyword">int</span> f[<span class="number">21</span>][<span class="number">1</span>&lt;&lt;<span class="number">20</span>];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">calc</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> y=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;k;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		y+=x%<span class="number">10</span>;</span><br><span class="line">		x/=<span class="number">10</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> y;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d%d%d&quot;</span>,&amp;n,&amp;m,&amp;k);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;good[i]);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=m;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;bad[i]);</span><br><span class="line">		vis[trans(bad[i])]=<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		bfs(trans(good[i]));</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=n;j++)</span><br><span class="line">			dist[i][j]=dis[trans(good[j])][<span class="number">0</span>];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">memset</span>(f,<span class="number">0x3f</span>,<span class="keyword">sizeof</span>(f));</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">		f[i][<span class="number">1</span>&lt;&lt;(i<span class="number">-1</span>)]=calc(good[i]);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> S=<span class="number">0</span>;S&lt;(<span class="number">1</span>&lt;&lt;n);S++)</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">	<span class="keyword">if</span>((S&amp;(<span class="number">1</span>&lt;&lt;(i<span class="number">-1</span>))))</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=n;j++)</span><br><span class="line">		<span class="keyword">if</span>(!(S&amp;(<span class="number">1</span>&lt;&lt;(j<span class="number">-1</span>))))</span><br><span class="line">		f[j][S|(<span class="number">1</span>&lt;&lt;(j<span class="number">-1</span>))]=min(f[j][S|(<span class="number">1</span>&lt;&lt;(j<span class="number">-1</span>))],f[i][S]+dist[i][j]);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> ans=<span class="number">1e9</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">		ans=min(ans,f[i][(<span class="number">1</span>&lt;&lt;n)<span class="number">-1</span>]);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,ans);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -444,13 +450,13 @@
       
         <div class="post-tags">
           
-            <a href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag"># 数学</a>
+            <a href="/tags/%E5%9B%BE%E8%AE%BA/" rel="tag"># 图论</a>
           
-            <a href="/tags/%E6%9A%B4%E5%8A%9B/" rel="tag"># 暴力</a>
-          
-            <a href="/tags/DP/" rel="tag"># DP</a>
+            <a href="/tags/%E9%A2%98%E8%A7%A3/" rel="tag"># 题解</a>
           
             <a href="/tags/%E6%A8%A1%E6%8B%9F%E8%B5%9B/" rel="tag"># 模拟赛</a>
+          
+            <a href="/tags/%E5%93%88%E5%AF%86%E9%A1%BF%E5%9B%9E%E8%B7%AF/" rel="tag"># 哈密顿回路</a>
           
         </div>
       
@@ -463,8 +469,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/11/20/278-%E6%B1%82%E5%92%8C/" rel="next" title="278-求和">
-                <i class="fa fa-chevron-left"></i> 278-求和
+              <a href="/2020/11/21/%E6%A0%91%E5%BD%A2dp-%E9%80%89%E8%AF%BE/" rel="next" title="树形dp-选课">
+                <i class="fa fa-chevron-left"></i> 树形dp-选课
               </a>
             
           </div>
@@ -472,10 +478,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/11/21/%E7%A0%94%E7%A9%B6%E4%B8%80%E4%B8%AA%E9%97%AE%E9%A2%98/" rel="prev" title="研究一个问题">
-                研究一个问题 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -552,7 +554,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-count">61</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -563,7 +565,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -574,7 +576,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">67</span>
+                  <span class="site-state-item-count">69</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -623,7 +625,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#idea"><span class="nav-number">1.</span> <span class="nav-text">Idea</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#idea-15"><span class="nav-number">2.</span> <span class="nav-text">Idea-15%</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#desc."><span class="nav-number">1.</span> <span class="nav-text">Desc.</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#idea--20"><span class="nav-number">2.</span> <span class="nav-text">Idea -20%</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#idea--100"><span class="nav-number">3.</span> <span class="nav-text">Idea- 100%</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#code--100pts"><span class="nav-number">4.</span> <span class="nav-text">Code -100pts</span></a></li></ol></div>
             
 
           </div>
