@@ -79,20 +79,21 @@
 
 
 
-<meta name="description" content="Intro这是一个数组. 现在, 你可以轻松的计算出前缀和. 但是一旦这东西改一改, 前缀和就不好用了. 每次计算需要$\mathcal O(n)$的时间. 我们来整一个有趣的活.  这就是树状数组为什么叫做树状数组. 我们统计一个特殊的前缀和. 比如说数组中的位置 4 就代表了结点 [1, 4]，数组中位置 6 代表了结点 [5, 6]，位置 8 代表了结点 [1, 8].对于处于数组位置 i">
+<meta name="description" content="Intro 这是一个数组. 现在, 你可以轻松的计算出前缀和. 但是一旦这东西改一改, 前缀和就不好用了. 每次计算需要\(\mathcal O(n)\)的时间. 我们来整一个有趣的活.  这就是树状数组为什么叫做树状数组. 我们统计一个特殊的前缀和. 比如说数组中的位置 4 就代表了结点 [1, 4]，数组中位置 6 代表了结点 [5, 6]，位置 8 代表了结点 [1, 8].对于">
 <meta property="og:type" content="article">
 <meta property="og:title" content="模板:树状数组">
 <meta property="og:url" content="http://example.com/2020/11/25/%E6%A8%A1%E6%9D%BF-%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/index.html">
 <meta property="og:site_name" content="SHZAIZ的博客">
-<meta property="og:description" content="Intro这是一个数组. 现在, 你可以轻松的计算出前缀和. 但是一旦这东西改一改, 前缀和就不好用了. 每次计算需要$\mathcal O(n)$的时间. 我们来整一个有趣的活.  这就是树状数组为什么叫做树状数组. 我们统计一个特殊的前缀和. 比如说数组中的位置 4 就代表了结点 [1, 4]，数组中位置 6 代表了结点 [5, 6]，位置 8 代表了结点 [1, 8].对于处于数组位置 i">
+<meta property="og:description" content="Intro 这是一个数组. 现在, 你可以轻松的计算出前缀和. 但是一旦这东西改一改, 前缀和就不好用了. 每次计算需要\(\mathcal O(n)\)的时间. 我们来整一个有趣的活.  这就是树状数组为什么叫做树状数组. 我们统计一个特殊的前缀和. 比如说数组中的位置 4 就代表了结点 [1, 4]，数组中位置 6 代表了结点 [5, 6]，位置 8 代表了结点 [1, 8].对于">
 <meta property="og:locale">
 <meta property="og:image" content="https://i.loli.net/2020/11/25/QdsMBIPKYCwe6W9.gif">
 <meta property="og:image" content="https://i.loli.net/2020/11/25/icx7ebv4gmfPCHU.png">
+<meta property="og:image" content="https://i.loli.net/2020/11/25/NuLgOw4EWyfT5tk.png">
 <meta property="og:image" content="https://i.loli.net/2020/11/25/oMSQHvzN63PdUyr.gif">
 <meta property="og:image" content="https://i.loli.net/2020/11/25/nYlJz27GxIKpeok.gif">
 <meta property="og:image" content="https://i.loli.net/2020/11/25/E3n4Oek8U1jGDyl.gif">
 <meta property="article:published_time" content="2020-11-25T07:45:55.000Z">
-<meta property="article:modified_time" content="2020-11-25T13:27:31.286Z">
+<meta property="article:modified_time" content="2020-11-25T13:36:11.365Z">
 <meta property="article:author" content="shzaiz">
 <meta property="article:tag" content="总结">
 <meta property="article:tag" content="树状数组">
@@ -409,63 +410,80 @@
       
 
       
-        <h1 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h1><p>这是一个数组. 现在, 你可以轻松的计算出前缀和.</p>
-<p>但是一旦这东西改一改, 前缀和就不好用了. 每次计算需要$\mathcal O(n)$的时间.</p>
+        <h1 id="intro">Intro</h1>
+<p>这是一个数组. 现在, 你可以轻松的计算出前缀和.</p>
+<p>但是一旦这东西改一改, 前缀和就不好用了. 每次计算需要<span class="math inline">\(\mathcal O(n)\)</span>的时间.</p>
 <p>我们来整一个有趣的活.</p>
-<p><img src="https://i.loli.net/2020/11/25/QdsMBIPKYCwe6W9.gif" alt=""></p>
+<p><img src="https://i.loli.net/2020/11/25/QdsMBIPKYCwe6W9.gif" /></p>
 <p>这就是树状数组为什么叫做树状数组. 我们统计一个特殊的前缀和.</p>
-<p>比如说数组中的位置 4 就代表了结点 [1, 4]，数组中位置 6 代表了结点 [5, 6]，位置 8 代表了结点 [1, 8].对于处于数组位置 i 的结点，其代表的信息区间为 [i - lowbit(i) + 1, i]. </p>
-<p>单点增加/ 查询. 这样可以做到$\log$复杂度</p>
-<p><img src="https://i.loli.net/2020/11/25/icx7ebv4gmfPCHU.png" alt="image-20201125165954539"></p>
+<p>比如说数组中的位置 4 就代表了结点 [1, 4]，数组中位置 6 代表了结点 [5, 6]，位置 8 代表了结点 [1, 8].对于处于数组位置 i 的结点，其代表的信息区间为 [i - lowbit(i) + 1, i].</p>
+<p>单点增加/ 查询. 这样可以做到<span class="math inline">\(\log\)</span>复杂度</p>
+<figure>
+<img src="https://i.loli.net/2020/11/25/icx7ebv4gmfPCHU.png" alt="image-20201125165954539" /><figcaption aria-hidden="true">image-20201125165954539</figcaption>
+</figure>
 <p>其实这个十分强大. 我们可以发现树状数组比较擅长处理 <strong>单点加</strong> 和 <strong>[1,n]区间求和</strong>. 接下来看一眼一些基本操作</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a[N];</span><br><span class="line"><span class="keyword">int</span> t[N];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> c)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = x;i&lt;=n;i+=lowbit(i),t[i]+=c);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">query</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i,sum;</span><br><span class="line">    <span class="keyword">for</span>(i = x,sum = <span class="number">0</span>;i&lt;=n; i-= lowbit(i),sum+=t[i]);</span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="Some-Other-Operations"><a href="#Some-Other-Operations" class="headerlink" title="Some Other Operations"></a>Some Other Operations</h1><h2 id="Modify-on-single-point-Query-on-interval"><a href="#Modify-on-single-point-Query-on-interval" class="headerlink" title="Modify on single point, Query on interval"></a>Modify on single point, Query on interval</h2><p>使用上面的代码就可以, 我们可以用前缀和来维护. </p>
+<figure>
+<img src="https://i.loli.net/2020/11/25/NuLgOw4EWyfT5tk.png" alt="image-20201125213602946" /><figcaption aria-hidden="true">image-20201125213602946</figcaption>
+</figure>
+<h1 id="some-other-operations">Some Other Operations</h1>
+<h2 id="modify-on-single-point-query-on-interval">Modify on single point, Query on interval</h2>
+<p>使用上面的代码就可以, 我们可以用前缀和来维护.</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Use a -&gt; t : add(i,x);</span><br><span class="line">query(l,r) --&gt; query(r)-query(l<span class="number">-1</span>);</span><br></pre></td></tr></table></figure>
-<h2 id="Modify-on-Interval-Query-on-point"><a href="#Modify-on-Interval-Query-on-point" class="headerlink" title="Modify on Interval, Query on point"></a>Modify on Interval, Query on point</h2><p>这可怎么办? 我们可以想到使用差分(见和式的化简那一期). 从而我们可以轻松转化单点加, 区间求和.</p>
-<h2 id="Modify-on-Interval-Query-on-Interval"><a href="#Modify-on-Interval-Query-on-Interval" class="headerlink" title="Modify on Interval, Query on Interval"></a>Modify on Interval, Query on Interval</h2><p>我会! 线段树! </p>
+<h2 id="modify-on-interval-query-on-point">Modify on Interval, Query on point</h2>
+<p>这可怎么办? 我们可以想到使用差分(见和式的化简那一期). 从而我们可以轻松转化单点加, 区间求和.</p>
+<h2 id="modify-on-interval-query-on-interval">Modify on Interval, Query on Interval</h2>
+<p>我会! 线段树!</p>
 <p>可惜线段树写一个需要至少50行, 写一个还有一点费事, 调还要调好久.</p>
-<p>再 <a href="#Modify on Interval, Query on point">上一部分</a> 中, 我们用了 <strong>差分</strong> 的思想. </p>
-<p>再$p$位置的前缀和:</p>
-<script type="math/tex; mode=display">
-\sum_{i=1}^pa[i] = \sum_{i=1}^p\sum_{j=1}^i d[j].</script><p>不难发现, $d[1]$加了$p$次, $d[2]$用了$p-1$次. 我们可以发现: 上面等于</p>
-<script type="math/tex; mode=display">
-\sum_{i=1}^p\sum_{j=1}^i d[j]=\sum_{i=1}^pd[i]*(p-i+1)</script><p>提出公因式, 不难发现:</p>
-<script type="math/tex; mode=display">
+<p>再 <a href="#Modify%20on%20Interval,%20Query%20on%20point">上一部分</a> 中, 我们用了 <strong>差分</strong> 的思想.</p>
+<p>再<span class="math inline">\(p\)</span>位置的前缀和: <span class="math display">\[
+\sum_{i=1}^pa[i] = \sum_{i=1}^p\sum_{j=1}^i d[j].
+\]</span> 不难发现, <span class="math inline">\(d[1]\)</span>加了<span class="math inline">\(p\)</span>次, <span class="math inline">\(d[2]\)</span>用了<span class="math inline">\(p-1\)</span>次. 我们可以发现: 上面等于 <span class="math display">\[
+\sum_{i=1}^p\sum_{j=1}^i d[j]=\sum_{i=1}^pd[i]*(p-i+1)
+\]</span> 提出公因式, 不难发现: <span class="math display">\[
 \begin{aligned}
-&=\sum_{i=1}^p(p+1)d[i]-\sum_{i=1}^p i\times d[i] \\
-&=(p+1)\sum_{i=1}^p d[i]-\sum_{i=1}^p d[i]\cdot i
-\end{aligned}</script><p>于是试图维护两个前缀和: $s1[i]=d[1]$, $s2[i] = i\times d[i]$.</p>
-<p><img src="https://i.loli.net/2020/11/25/oMSQHvzN63PdUyr.gif" alt=""></p>
+&amp;=\sum_{i=1}^p(p+1)d[i]-\sum_{i=1}^p i\times d[i] \\
+&amp;=(p+1)\sum_{i=1}^p d[i]-\sum_{i=1}^p d[i]\cdot i
+\end{aligned}
+\]</span> 于是试图维护两个前缀和: <span class="math inline">\(s1[i]=d[1]\)</span>, <span class="math inline">\(s2[i] = i\times d[i]\)</span>.</p>
+<p><img src="https://i.loli.net/2020/11/25/oMSQHvzN63PdUyr.gif" /></p>
 <p>现在就有问题了.</p>
 <p><strong>区间修改怎么改?</strong></p>
-<p><strong>按照定义</strong>, 我们可以对于$s1$数组做同样的加减操作. 像再上一个里面. 对于第二种情况, 我们可以$s2[l]+=l\cdot x$, $s2[r+1] $减去$(r+1)\cdot x$. </p>
+<p><strong>按照定义</strong>, 我们可以对于<span class="math inline">\(s1\)</span>数组做同样的加减操作. 像再上一个里面. 对于第二种情况, 我们可以<span class="math inline">\(s2[l]+=l\cdot x\)</span>, $s2[r+1] <span class="math inline">\(减去\)</span>(r+1)x$.</p>
 <p>可以写出代码:</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> p,<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = p;i&lt;=n;i+=lowbit(i),sum1[i]+=x,sum2+=x*p);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">rangeadd</span><span class="params">(<span class="keyword">int</span> l,<span class="keyword">int</span> r,<span class="keyword">int</span> c)</span></span>&#123;</span><br><span class="line">    add(l,x); add(r,x<span class="number">-1</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">query</span><span class="params">(<span class="keyword">int</span> l)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = p;i;i-= lowbit(i))&#123;</span><br><span class="line">        res+=(p+<span class="number">1</span>)*sum1[i]-sum2[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">resask</span><span class="params">(<span class="keyword">int</span> l,<span class="keyword">int</span> r)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> ask(r)-ask(l<span class="number">-1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="Lift-up-one-dimension"><a href="#Lift-up-one-dimension" class="headerlink" title="Lift up one dimension"></a>Lift up one dimension</h1><p><img src="https://i.loli.net/2020/11/25/nYlJz27GxIKpeok.gif" alt=""></p>
-<h2 id="Modify-on-single-point-Query-on-interval-1"><a href="#Modify-on-single-point-Query-on-interval-1" class="headerlink" title="Modify on single point, Query on interval"></a>Modify on single point, Query on interval</h2><p>其实也不难, 因为是两个维度, 所以循环放两重就可以.</p>
+<h1 id="lift-up-one-dimension">Lift up one dimension</h1>
+<p><img src="https://i.loli.net/2020/11/25/nYlJz27GxIKpeok.gif" /></p>
+<h2 id="modify-on-single-point-query-on-interval-1">Modify on single point, Query on interval</h2>
+<p>其实也不难, 因为是两个维度, 所以循环放两重就可以.</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y, <span class="keyword">int</span> z)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = x; i &lt;= n; i += lowbit(i))</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = y; j &lt;= m; j += lowbit(j))</span><br><span class="line">            t[i][j] += z;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">ask</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = x; i; i -= lowbit(i))</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = y; j; j -= lowbit(j))</span><br><span class="line">            ans += t[i][j];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="Modify-on-Interval-Query-on-point-1"><a href="#Modify-on-Interval-Query-on-point-1" class="headerlink" title="Modify on Interval, Query on point"></a>Modify on Interval, Query on point</h2><p>按照差分的思想, 我们可以想到差分.</p>
+<h2 id="modify-on-interval-query-on-point-1">Modify on Interval, Query on point</h2>
+<p>按照差分的思想, 我们可以想到差分.</p>
 <p>二维怎么差分? 以前说过. 见以前的内容[1].</p>
 <p>回顾一下:</p>
 <blockquote>
-<p>那么我们可以令差分数组$d[i][j] $表示 $a[i][j] $与$ a[i−1][j]+a[i][j−1]−a[i−1][j−1] $的差。</p>
+<p>那么我们可以令差分数组$d[i][j] $表示 $a[i][j] <span class="math inline">\(与\)</span> a[i−1][j]+a[i][j−1]−a[i−1][j−1] $的差。</p>
 </blockquote>
-<p><img src="https://i.loli.net/2020/11/25/E3n4Oek8U1jGDyl.gif" alt=""></p>
+<p><img src="https://i.loli.net/2020/11/25/E3n4Oek8U1jGDyl.gif" /></p>
 <p>这就是一个差分方阵的例子.</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> n, m, t[N][N];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y, <span class="keyword">int</span> z)</span> </span>&#123;</span><br><span class="line">    fo_(i, x, n) fo_(j, y, m) t[i][j] += z;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Q</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">    re_(i, x) re_(j, y) res += t[i][j];</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n &gt;&gt; m;</span><br><span class="line">    ++n, ++m;</span><br><span class="line">    <span class="keyword">int</span> op;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (<span class="built_in">cin</span> &gt;&gt; op) &#123;</span><br><span class="line">        <span class="keyword">if</span> (op == <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">int</span> a, b, c, d, k;</span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; a &gt;&gt; b &gt;&gt; c &gt;&gt; d &gt;&gt; k;</span><br><span class="line">            add(a, b, k);</span><br><span class="line">            add(c + <span class="number">1</span>, d + <span class="number">1</span>, k);</span><br><span class="line">            add(a, d + <span class="number">1</span>, -k);</span><br><span class="line">            add(c + <span class="number">1</span>, b, -k);</span><br><span class="line"></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">int</span> x, y;</span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; x &gt;&gt; y;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; Q(x, y) &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="Modify-on-Interval-Query-on-Interval-1"><a href="#Modify-on-Interval-Query-on-Interval-1" class="headerlink" title="Modify on Interval, Query on Interval"></a>Modify on Interval, Query on Interval</h2><script type="math/tex; mode=display">
-\sum_{i=1}^{x}\sum_{j=1}^{y}\sum_{k=1}^{i}\sum_{h=1}^{j}d[h][k]</script><p> ($d[h][k]$为点$(h, k)$对应的“二维差分”(同上题))</p>
-<p>这个式子有 $O(n^4)$ 复杂度！但利用树状数组，我们可以把它优化到 $O(\log^2n)$！</p>
-<p>首先，类比一维数组，统计一下每个$d[h][k]$出现过多少次。$d[1][1]$出现了$x<em>y$次，$d[1][2]$出现了$x</em>(y - 1)$次……$d[h][k]$ 出现了 $(x - h + 1)*(y - k + 1)$ 次。</p>
+<h2 id="modify-on-interval-query-on-interval-1">Modify on Interval, Query on Interval</h2>
+<p><span class="math display">\[
+\sum_{i=1}^{x}\sum_{j=1}^{y}\sum_{k=1}^{i}\sum_{h=1}^{j}d[h][k]
+\]</span> (<span class="math inline">\(d[h][k]\)</span>为点<span class="math inline">\((h, k)\)</span>对应的“二维差分”(同上题))</p>
+<p>这个式子有 <span class="math inline">\(O(n^4)\)</span> 复杂度！但利用树状数组，我们可以把它优化到 <span class="math inline">\(O(\log^2n)\)</span>！</p>
+<p>首先，类比一维数组，统计一下每个<span class="math inline">\(d[h][k]\)</span>出现过多少次。<span class="math inline">\(d[1][1]\)</span>出现了<span class="math inline">\(x*y\)</span>次，<span class="math inline">\(d[1][2]\)</span>出现了<span class="math inline">\(x*(y - 1)\)</span>次……<span class="math inline">\(d[h][k]\)</span> 出现了 <span class="math inline">\((x - h + 1)*(y - k + 1)\)</span> 次。</p>
 <p>那么这个式子就可以写成：</p>
-<script type="math/tex; mode=display">
-\sum_{i=1}^{x}\sum_{j=1}^{y}d[i][j] * (x + 1 - i) * (y + 1 - j)</script><p>的形式.</p>
-<p>也就是</p>
-<script type="math/tex; mode=display">
+<p><span class="math display">\[
+\sum_{i=1}^{x}\sum_{j=1}^{y}d[i][j] * (x + 1 - i) * (y + 1 - j)
+\]</span> 的形式.</p>
+<p>也就是 <span class="math display">\[
 (x + 1) * (y + 1) * \sum_{i=1}^{x}\sum_{j=1}^{y}d[i][j]- (y + 1) * \sum_{i=1}^{x}\sum_{j=1}^{y}d[i][j] * i
 - (x + 1) * \sum_{i=1}^{x}\sum_{j=1}^{y}d[i][j] * j
-+ \sum_{i=1}^{x}\sum_{j=1}^{y}d[i][j] * i * j</script><p>的形式. 分别维护即可.</p>
-<h1 id="Error-correction-Protocol"><a href="#Error-correction-Protocol" class="headerlink" title="Error correction Protocol"></a>Error correction Protocol</h1><p>注意边界条件, 什么时候可以加, 什么时候可以减.</p>
++ \sum_{i=1}^{x}\sum_{j=1}^{y}d[i][j] * i * j
+\]</span> 的形式. 分别维护即可.</p>
+<h1 id="error-correction-protocol">Error correction Protocol</h1>
+<p>注意边界条件, 什么时候可以加, 什么时候可以减.</p>
 
       
     </div>
@@ -660,7 +678,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Intro"><span class="nav-number">1.</span> <span class="nav-text">Intro</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Some-Other-Operations"><span class="nav-number">2.</span> <span class="nav-text">Some Other Operations</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Modify-on-single-point-Query-on-interval"><span class="nav-number">2.1.</span> <span class="nav-text">Modify on single point, Query on interval</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Modify-on-Interval-Query-on-point"><span class="nav-number">2.2.</span> <span class="nav-text">Modify on Interval, Query on point</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Modify-on-Interval-Query-on-Interval"><span class="nav-number">2.3.</span> <span class="nav-text">Modify on Interval, Query on Interval</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Lift-up-one-dimension"><span class="nav-number">3.</span> <span class="nav-text">Lift up one dimension</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Modify-on-single-point-Query-on-interval-1"><span class="nav-number">3.1.</span> <span class="nav-text">Modify on single point, Query on interval</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Modify-on-Interval-Query-on-point-1"><span class="nav-number">3.2.</span> <span class="nav-text">Modify on Interval, Query on point</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Modify-on-Interval-Query-on-Interval-1"><span class="nav-number">3.3.</span> <span class="nav-text">Modify on Interval, Query on Interval</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Error-correction-Protocol"><span class="nav-number">4.</span> <span class="nav-text">Error correction Protocol</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#intro"><span class="nav-number">1.</span> <span class="nav-text">Intro</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#some-other-operations"><span class="nav-number">2.</span> <span class="nav-text">Some Other Operations</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#modify-on-single-point-query-on-interval"><span class="nav-number">2.1.</span> <span class="nav-text">Modify on single point, Query on interval</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#modify-on-interval-query-on-point"><span class="nav-number">2.2.</span> <span class="nav-text">Modify on Interval, Query on point</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#modify-on-interval-query-on-interval"><span class="nav-number">2.3.</span> <span class="nav-text">Modify on Interval, Query on Interval</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#lift-up-one-dimension"><span class="nav-number">3.</span> <span class="nav-text">Lift up one dimension</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#modify-on-single-point-query-on-interval-1"><span class="nav-number">3.1.</span> <span class="nav-text">Modify on single point, Query on interval</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#modify-on-interval-query-on-point-1"><span class="nav-number">3.2.</span> <span class="nav-text">Modify on Interval, Query on point</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#modify-on-interval-query-on-interval-1"><span class="nav-number">3.3.</span> <span class="nav-text">Modify on Interval, Query on Interval</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#error-correction-protocol"><span class="nav-number">4.</span> <span class="nav-text">Error correction Protocol</span></a></li></ol></div>
             
 
           </div>
