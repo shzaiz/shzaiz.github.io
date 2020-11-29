@@ -81,7 +81,7 @@
 
 <meta name="description" content="The basis of Network Flow 网路. 指一个有向图 \(G&#x3D;(V,E)\), \(\forall (u,v )\in E\) 有一个权值\(c(u,v)\).容量. 有源点 S 和汇点 T . 流. 满足:  容量限制, \(f(u,v)\leq c(u,v)\) 斜对称性: 每条边的流量和反向边流量和为0.\(f(u,v)&#x3D;-f(v,u)\). 流对称性: \(">
 <meta property="og:type" content="article">
-<meta property="og:title" content="网络流学习笔记">
+<meta property="og:title" content="最大流问题基础">
 <meta property="og:url" content="http://example.com/2020/11/26/%E7%BD%91%E7%BB%9C%E6%B5%81%E5%85%A5%E9%97%A8/index.html">
 <meta property="og:site_name" content="SHZAIZ的博客">
 <meta property="og:description" content="The basis of Network Flow 网路. 指一个有向图 \(G&#x3D;(V,E)\), \(\forall (u,v )\in E\) 有一个权值\(c(u,v)\).容量. 有源点 S 和汇点 T . 流. 满足:  容量限制, \(f(u,v)\leq c(u,v)\) 斜对称性: 每条边的流量和反向边流量和为0.\(f(u,v)&#x3D;-f(v,u)\). 流对称性: \(">
@@ -95,7 +95,7 @@
 <meta property="og:image" content="https://i.loli.net/2020/11/26/doSsUkZDlPLcmz4.png">
 <meta property="og:image" content="https://i.loli.net/2020/11/26/LfMZuxKD8nm3H4a.png">
 <meta property="article:published_time" content="2020-11-26T12:02:37.000Z">
-<meta property="article:modified_time" content="2020-11-26T07:12:02.104Z">
+<meta property="article:modified_time" content="2020-11-26T09:03:57.334Z">
 <meta property="article:author" content="shzaiz">
 <meta property="article:tag" content="图论">
 <meta property="article:tag" content="网络流">
@@ -136,7 +136,7 @@
 
 
 
-  <title>网络流学习笔记 | SHZAIZ的博客</title>
+  <title>最大流问题基础 | SHZAIZ的博客</title>
   
 
 
@@ -328,7 +328,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">网络流学习笔记</h1>
+          <h1 class="post-title" itemprop="name headline">最大流问题基础</h1>
         
 
         <div class="post-meta">
@@ -474,6 +474,11 @@
 <img src="https://i.loli.net/2020/11/26/LfMZuxKD8nm3H4a.png" alt="image-20201126151133268" /><figcaption aria-hidden="true">image-20201126151133268</figcaption>
 </figure>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> using_debug_output 1</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> using_temp_file 0</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> this_is_a_real_file_output 1</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> fo(i,x) for(int i = 1;i&lt;=x;i++)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> fo_(i,b,x) for(int i = b;i&lt;=x;i++)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> re(i,x,b) for(int i = x;i&gt;b;i--)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N 10010</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> deb <span class="meta-keyword">if</span>(using_debug_output)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> fil <span class="meta-keyword">if</span>(using_temp_file)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> realfl <span class="meta-keyword">if</span>(this_is_a_real_file_output)</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> maxn 250</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INF 0x3f3f3f3f</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Edge</span> &#123;</span></span><br><span class="line">  <span class="keyword">int</span> from, to, cap, flow;</span><br><span class="line">  Edge(<span class="keyword">int</span> u, <span class="keyword">int</span> v, <span class="keyword">int</span> c, <span class="keyword">int</span> f) : from(u), to(v), cap(c), flow(f) &#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">EK</span>&#123;</span></span><br><span class="line">  <span class="keyword">int</span> n, m, s, t;</span><br><span class="line">  <span class="built_in">vector</span>&lt;Edge&gt; edges;</span><br><span class="line">  <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; G[maxn];</span><br><span class="line">  <span class="keyword">int</span> d[maxn], cur[maxn];</span><br><span class="line">  <span class="keyword">bool</span> vis[maxn];</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) G[i].clear();</span><br><span class="line">    edges.clear();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">AddEdge</span><span class="params">(<span class="keyword">int</span> from, <span class="keyword">int</span> to, <span class="keyword">int</span> cap)</span> </span>&#123;</span><br><span class="line">    edges.push_back(Edge(from, to, cap, <span class="number">0</span>));</span><br><span class="line">    edges.push_back(Edge(to, from, <span class="number">0</span>, <span class="number">0</span>));</span><br><span class="line">    m = edges.size();</span><br><span class="line">    G[from].push_back(m - <span class="number">2</span>);</span><br><span class="line">    G[to].push_back(m - <span class="number">1</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">bool</span> <span class="title">BFS</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">memset</span>(vis, <span class="number">0</span>, <span class="keyword">sizeof</span>(vis));</span><br><span class="line">    <span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt; Q;</span><br><span class="line">    Q.push(s);</span><br><span class="line">    d[s] = <span class="number">0</span>;</span><br><span class="line">    vis[s] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (!Q.empty()) &#123;</span><br><span class="line">      <span class="keyword">int</span> x = Q.front();</span><br><span class="line">      Q.pop();</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; G[x].size(); i++) &#123;</span><br><span class="line">        Edge&amp; e = edges[G[x][i]];</span><br><span class="line">        <span class="keyword">if</span> (!vis[e.to] &amp;&amp; e.cap &gt; e.flow) &#123;</span><br><span class="line">          vis[e.to] = <span class="number">1</span>;</span><br><span class="line">          d[e.to] = d[x] + <span class="number">1</span>;</span><br><span class="line">          Q.push(e.to);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> vis[t];</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">int</span> <span class="title">DFS</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> a)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (x == t || a == <span class="number">0</span>) <span class="keyword">return</span> a;</span><br><span class="line">    <span class="keyword">int</span> flow = <span class="number">0</span>, f;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span>&amp; i = cur[x]; i &lt; G[x].size(); i++) &#123;</span><br><span class="line">      Edge&amp; e = edges[G[x][i]];</span><br><span class="line">      <span class="keyword">if</span> (d[x] + <span class="number">1</span> == d[e.to] &amp;&amp; (f = DFS(e.to, min(a, e.cap - e.flow))) &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        e.flow += f;</span><br><span class="line">        edges[G[x][i] ^ <span class="number">1</span>].flow -= f;</span><br><span class="line">        flow += f;</span><br><span class="line">        a -= f;</span><br><span class="line">        <span class="keyword">if</span> (a == <span class="number">0</span>) <span class="keyword">break</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> flow;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">int</span> <span class="title">Maxflow</span><span class="params">(<span class="keyword">int</span> s, <span class="keyword">int</span> t)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>-&gt;s = s;</span><br><span class="line">    <span class="keyword">this</span>-&gt;t = t;</span><br><span class="line">    <span class="keyword">int</span> flow = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (BFS()) &#123;</span><br><span class="line">      <span class="built_in">memset</span>(cur, <span class="number">0</span>, <span class="keyword">sizeof</span>(cur));</span><br><span class="line">      flow += DFS(s, INF);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> flow;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line">  <span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">  	EK e;</span><br><span class="line">	e.AddEdge(<span class="number">2</span>,<span class="number">1</span>,<span class="number">30</span>);</span><br><span class="line">	e.AddEdge(<span class="number">4</span>,<span class="number">2</span>,<span class="number">30</span>);</span><br><span class="line">	e.AddEdge(<span class="number">2</span>,<span class="number">3</span>,<span class="number">20</span>);</span><br><span class="line">	e.AddEdge(<span class="number">1</span>,<span class="number">3</span>,<span class="number">30</span>);</span><br><span class="line">	e.AddEdge(<span class="number">4</span>,<span class="number">3</span>,<span class="number">20</span>);</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;e.Maxflow(<span class="number">4</span>,<span class="number">3</span>); </span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h1 id="practice">Practice</h1>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1402">练习1</a> 通过拆人, 跑最大流.</p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3386">P3386 【模板】二分图最大匹配 - 洛谷 | 计算机科学教育新生态 (luogu.com.cn)</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P2071">P2071 座位安排 - 洛谷 | 计算机科学教育新生态 (luogu.com.cn)</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/UVA1292">UVA1292 Strategic game - 洛谷 | 计算机科学教育新生态 (luogu.com.cn)</a></p>
 
       
     </div>
@@ -506,8 +511,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/11/26/%E6%A4%AD%E5%9C%86%E7%9A%84%E5%B8%B8%E7%94%A8%E6%80%A7%E8%B4%A8/" rel="next" title="椭圆的常用性质">
-                <i class="fa fa-chevron-left"></i> 椭圆的常用性质
+              <a href="/2020/11/26/%E6%A8%A1%E6%9D%BF-%E7%BA%BF%E6%80%A7%E5%9F%BA/" rel="next" title="模板:线性基">
+                <i class="fa fa-chevron-left"></i> 模板:线性基
               </a>
             
           </div>
@@ -515,6 +520,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/11/26/%E6%A8%A1%E6%9D%BF-AC%E8%87%AA%E5%8A%A8%E6%9C%BA/" rel="prev" title="模板:AC自动机">
+                模板:AC自动机 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -591,7 +600,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">77</span>
+                  <span class="site-state-item-count">88</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -602,7 +611,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -613,7 +622,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">79</span>
+                  <span class="site-state-item-count">85</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -662,7 +671,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#the-basis-of-network-flow"><span class="nav-number">1.</span> <span class="nav-text">The basis of Network Flow</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#maximum-flow"><span class="nav-number">2.</span> <span class="nav-text">Maximum Flow</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ford-fulkersons-method"><span class="nav-number">2.1.</span> <span class="nav-text">Ford-Fulkerson’s method</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#optimisation---using-dicnic-to-accelerate-the-finding-progress"><span class="nav-number">2.2.</span> <span class="nav-text">Optimisation - Using Dicnic to accelerate the finding progress</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#the-basis-of-network-flow"><span class="nav-number">1.</span> <span class="nav-text">The basis of Network Flow</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#maximum-flow"><span class="nav-number">2.</span> <span class="nav-text">Maximum Flow</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ford-fulkersons-method"><span class="nav-number">2.1.</span> <span class="nav-text">Ford-Fulkerson’s method</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#optimisation---using-dicnic-to-accelerate-the-finding-progress"><span class="nav-number">2.2.</span> <span class="nav-text">Optimisation - Using Dicnic to accelerate the finding progress</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#practice"><span class="nav-number">3.</span> <span class="nav-text">Practice</span></a></li></ol></div>
             
 
           </div>
