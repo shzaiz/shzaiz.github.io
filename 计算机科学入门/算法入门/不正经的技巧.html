@@ -1,0 +1,20 @@
+<head>
+
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
+</script>
+
+    
+
+    <link rel="stylesheet" href="https://raw.githubusercontent.com/thomaspark/pubcss/master/dist/css/pubcss-acm-sig.css">
+</head>
+<body style="margin-left: 10%;margin-top: 10%;margin-bottom: 10%;margin-right: 10%;"><h1>运用define</h1>
+<h2>更好的调试 (1)</h2>
+<p>我们不妨把<code>printf</code>当作调试的时候要用的, 这样, 就可以在交卷的时候加上这两行.</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span>#define printf __blank__
+void __blank__(...){}
+</pre></div>
+
+<h2>更好的调试 (2)</h2>
+<p>有时候需要依次输出所有的变量值, 所以应该可以写下以下的模板来方便快捷的输出.</p>
+</body>

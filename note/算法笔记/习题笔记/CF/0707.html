@@ -1,0 +1,34 @@
+<head>
+
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
+</script>
+
+    
+
+    <link rel="stylesheet" href="https://raw.githubusercontent.com/thomaspark/pubcss/master/dist/css/pubcss-acm-sig.css">
+</head>
+<body style="margin-left: 10%;margin-top: 10%;margin-bottom: 10%;margin-right: 10%;"><h1>CF1697C</h1>
+<p><strong>描述</strong>: 第一行一个整数  \(q\)  (  \(1≤q≤10^4\)  )，表示数据的组数。
+对于每组测试用例，第一行一个整数  \(n\)  (  \(1≤n≤10^5\)  )，表示字符串  \(s\)  和  \(t\)  的长度。
+第二行包含长度为  \(n\)  的字符串  \(s\) 。 每个字符是<code>a</code>、<code>b</code>或<code>c</code>。
+第三行包含长度为  \(n\)  的字符串  \(t\)  。 每个字符是<code>a</code>、<code>b</code>或<code>c</code>。
+所有测试用例的  \(n\)  总和不超过  \(10^5\) 。</p>
+<p><strong>考虑每个位置</strong>:  \(a\) 只能向后移动,  \(c\) 只能向前移动.
+我们无法调换 \(a,c\) 的前后关系.</p>
+<ul>
+<li>若 \(s\not \{b\}=s\not\{b\}\) , 说明前后关系确实不变的.</li>
+</ul>
+<h1>CF1696C</h1>
+<p><strong>描述</strong>: 给定一个长度为  \(n\)  的数组  \(a\)  、一个长度为  \(k\)  的数组  \(b\)  和一个数字  \(m\) ，现在对数组  \(a\)  进行以下操作：</p>
+<ul>
+<li>选择数组  \(a\)  中一个  \(m\)  的倍数  \(a_i\)  替换成  \(m\)  个  \(\dfrac{a_i}{m}\) </li>
+<li>选择数组  \(a\)  中  \(m\)  个相同的数字  \(a_i,a_{i+1},\dots,a_{i+m-1}\)  替换成  \(m\cdot a_i\) </li>
+</ul>
+<p>请问能否把数组  \(a\)  变成数组  \(b\) 。<br />
+数据范围： \(1\le n,k\le 5\times 10^4\) ， \(2\le m\le 10^9\) ， \(1\le a_i,b_i\le 10^9\) ， \(\sum n+k\le 2\times 10^5\) 。</p>
+<p><strong>观察</strong>: 前后的和必须相等才有希望. 把它们全拆开才可以.</p>
+<h1>CF1695C</h1>
+<p><strong>描述</strong>: 给你一个  \(n \times m\)  ( \(1 \le n, m \le 1000\) ) 的格点图，每个格子的值要么是  \(-1\) ，要么是  \(1\) ，现在问你，是否有一条从  \((1, 1)\)  到  \((n, m)\)  的路径，使得路径上经过的格点的值的和为  \(0\) 。在路径中，只能从  \(a_{i, j}\)  移动到  \(a_{i + 1, j}\)  或是  \(a_{i, j + 1}\) （向右或是向下走）。</p>
+<p><strong>考虑DP</strong>:</p>
+</body>

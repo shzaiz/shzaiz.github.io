@@ -1,0 +1,254 @@
+<head>
+
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
+</script>
+
+    
+
+    <link rel="stylesheet" href="https://raw.githubusercontent.com/thomaspark/pubcss/master/dist/css/pubcss-acm-sig.css">
+</head>
+<body style="margin-left: 10%;margin-top: 10%;margin-bottom: 10%;margin-right: 10%;"><h1>8LN - 指数函数和简单的对数运算(2)</h1>
+<h1>开始之前</h1>
+<p>相信大家经过昨天的鸡汤, 已经信心满满, 准备学习.</p>
+<h1>比较大小</h1>
+<p>举个例:  \(0.8^{-0.5}~~?~~~0.8^{-0.6}\) </p>
+<ul>
+<li>(1) 同底不同指
+<ul>
+<li>考察指数函数的单调性,</li>
+<li>比如 \(0.8^x\) .</li>
+</ul>
+</li>
+<li>(2) 同指不同底
+<ul>
+<li>画两个函数图像去比较? (找 \(x=1\) 的时候!).</li>
+</ul>
+</li>
+<li>(3) 不同底不同指
+<ul>
+<li>找中间量(1).</li>
+</ul>
+</li>
+</ul>
+<p>例子:  \(2.5^{0.1}~~~~0.9^{3.4}\) 
+ \(3^3~~~~\pi^\pi\) .</p>
+<ul>
+<li>考虑 \(3^\pi\) , 和一边同底, 和另一边同指.</li>
+<li>选 \(\pi^3\) 可以吗? 可以的!</li>
+<li>画成图, 就是:
+<img src="./FILES/8LN.md/img-20220718104828.png" alt="Img" /></li>
+</ul>
+<p>那么问 \(3^\pi ~~~~ \pi ^3\) ?</p>
+<p>想先找几个试试看:
+$$
+3^4&gt;4^3\\
+2^3&lt;3^2
+$$</p>
+<p>有点迷惑. 我们不管了.</p>
+<p>其实还有一些和上面一样的,  \(0.6^{0.6}~~~~0.7^{0.7}\) , 用计算机试试看.</p>
+<ul>
+<li>看Ex.1(1)(2)</li>
+</ul>
+<h1>指数函数和其他函数的复合</h1>
+<p>像往常一样, 求定义域, 值域, 单调性, 对称性等等内容.</p>
+<ul>
+<li> \(0^0\) 无意义</li>
+<li>一层一层求就行了
+<ul>
+<li>Ex.2(2)</li>
+</ul>
+</li>
+<li>经过一些复合可以有对称性.
+<ul>
+<li>Ex.2(1)</li>
+</ul>
+</li>
+</ul>
+<p>关于特殊值:</p>
+<ul>
+<li>
+<p>一定要用特殊值?</p>
+</li>
+<li>
+<p>一定不能用特殊值?</p>
+<ul>
+<li>考试: 怎么快怎么搞</li>
+<li>下来: 传统的方法要会.</li>
+</ul>
+</li>
+<li>
+<p><del>特殊值可以解决一切问题</del>, 认识清楚就可以用.</p>
+</li>
+<li>
+<p>其实0比1还省事. 就是看看有没有定义.</p>
+</li>
+<li>
+<p>对称性(contd)</p>
+<ul>
+<li>Ex2.(5)</li>
+</ul>
+</li>
+</ul>
+<p>代进去几个试试看, 哦?
+也就是 \(f(1/2+x)+f(1/2-x)=1\) .
+<img src="./FILES/8LN.md/img-20220718111523.png" alt="Img" />
+能推倒吗? 留个悬念.</p>
+<ul>
+<li>看Ex.3:</li>
+<li>想想会出成什么样? 它们都表示二次函数.</li>
+</ul>
+<h1>说到16A.D.的欧洲</h1>
+<ul>
+<li>天文学蓬勃发展, 计算成为了主要的障碍. (数据非常不友好)</li>
+<li>Scotland的Napir说乘法有简单的方法.</li>
+</ul>
+<p>$$
+\begin{aligned}
+&amp;1  &amp;2~~~  &amp;3  &amp;4 ~~~~ &amp;5  &amp;6 ~~~~ &amp;7 \\
+&amp;2  &amp;4 ~~~ &amp;8 &amp;16~~~~ &amp;32 &amp;64 ~~~~&amp;128 
+\end{aligned}
+$$</p>
+<ul>
+<li>&quot;列竖式, 慢就在这了.&quot;</li>
+<li>&quot;可以把乘法换成加法.&quot;</li>
+</ul>
+<p>但是Napir的表格是按照第二行排列的. 也就是:</p>
+<p>$$
+\begin{aligned}
+&amp;1 &amp;\color{red}? \color{black} ~~ &amp;2~~~  &amp;3  &amp;4 ~~~~ &amp;5  &amp;6 ~~~~ &amp;7 \\
+&amp;2 &amp;3 ~~&amp;4 ~~~ &amp;8 &amp;16~~~~ &amp;32 &amp;64 ~~~~&amp;128 
+\end{aligned}
+$$</p>
+<p>3应该也可以写成这样. 大概是 \(1.x\) .</p>
+<p>当然, 他花了20年出版了一本书, 里面就两行数, 很多页. 销量第一.<br />
+<img src="./FILES/8LN.md/img-20220718113857.png" alt="Img" /></p>
+<p>所以我们就想知道 \(2^?=3\) .</p>
+<blockquote>
+<p>这个工具的诞生使得天文学家的寿命加倍.</p>
+</blockquote>
+<p>我们更关注它的&quot;性质&quot;而不是&quot;结果&quot;, 因此我们可以用一个符号来代表它.</p>
+<p>&quot;我们给他起一个 \(\log_23\) &quot;. 可以不用写  \(\cancel{\log_2^3}\) . 我们起名字叫做<strong>对数</strong>.</p>
+<h2>对数</h2>
+<p>为什么叫对数?</p>
+<ul>
+<li>表&quot;对着&quot;的那个东西才能算.  \(m=\log_ab\) </li>
+</ul>
+<p>一些约定:
+$$
+\Huge m=\log_ab\qquad a^m=b
+$$
+意思是:  \(a\) 的多少次方等于 \(b\) ? 那个答案就是 \(m\) .</p>
+<ul>
+<li> \(a\) 在底下, 右边 \(a\) 也在底下.  \(a&gt;0, a\neq 1\) .</li>
+<li> \(b\) 是真数, 就是那个结果, 真数大于0.</li>
+<li> \(m\) 叫做对数</li>
+<li>它们可以互换, 我们可以在不清楚的时候想想.</li>
+</ul>
+<p>例如:  \(\log_28=?;\log_{1/3}9=?;\log_{27}9=?;\log_{16}8=?\) </p>
+<h2>奇怪的银行</h2>
+<p>有一个奇怪的银行, 它每年的利息是100%.
+所以第一年你存了100, 第二年, 你就得到了200元.
+能不能这样, 在年中的时候取出来, 然后再存进去, 好像本金就多了, 回报也多了.
+ \(100\rightarrow150\rightarrow225\) 
+哦, 看上去很好的, 为什么只取一次呢?
+一直取, 一直存, 一直取, 一直存...</p>
+<p>那么这么干, 100元能变成什么?
+真正的收益是... 大约272元.</p>
+<p> \((1+1)^2=2\) 
+ \((1+1/2)^2=2.25\) 
+ \((1+1/3)^3\approx2.37\) 
+ \((1+1/4)^3\approx2.44\) 
+...
+ \((1+1/10)^10\approx2.59\) 
+ \((1+1/100)^100\approx2.70\) 
+这样的函数是 \((1+1/x)^x\) , 增函数, 但是这个数有上限, 一定小于3.</p>
+<p>我们认为它有渐近线!
+<img src="./FILES/8LN.md/img-20220718135006.png" alt="Img" /></p>
+<p>这个渐近线的 \(y\) 值是几呢? 最早的研究者Euler证明了它是一个超越数. 因此命名叫做叫 \(e= \textbf{2.7}1828459045235360\cdots\) .</p>
+<h2>和对数的关系</h2>
+<ul>
+<li>(1)<strong>自然</strong>对数: 我们可以以 \(e\) 为底数, 就用 \(\log_eM=\ln M\) .
+<ul>
+<li>为什么用它? 在导数一节会解释.(留个悬念)</li>
+</ul>
+</li>
+<li>(2)常用对数: 以10为底数, 就得到了 \(\log_{10}M=\lg M\) .</li>
+</ul>
+<p>其实我觉得应该换一下两个的名字.</p>
+<h2>性质与运算法则</h2>
+<p>(1) 对(废)数(话)恒等式:
+$$
+a^{\log_ab}=b.
+$$
+一句废话.</p>
+<p>这有什么意思? 任何数可以写成任何为底的指数. (用得着的)</p>
+<p>比如 \(8=2^3=3^{\log_28}\) </p>
+<p>(2) 关于1:
+$$
+\log_a1=0,\log_aa=1 (a&gt;0, a\neq1).
+$$</p>
+<p>(3) 运算
+(注意,  \(\log\) 的优先级高于乘法, 注意括号!)
+$$
+\begin{aligned}
+\log_aM+\log_aN&amp;= \log_aMN \\
+\log_aM-\log_aN&amp;= \log_a(M/N)\\
+\log_a(M^\alpha)&amp;= \alpha\log_aM(真数有指数, 可以往前拽)\\
+\end{aligned}
+$$
+看例子:</p>
+<ul>
+<li>看Ex4.(1)(2)(3.1)</li>
+<li>(3.2)有点困难, 算 \(a\) 不出来. 就带着对数做就行了.</li>
+<li>(4)</li>
+</ul>
+<p>但是只能做底数相同的对数. 以2为底和以3为底真的一点没有关系吗?</p>
+<p>(4) 换底公式</p>
+<p>$$
+\log_aM \sim \log_bM
+$$
+改成指数式,  \(a^x=M, b^y=M, a^x=M=b^y\) .</p>
+<p> \(b^{\log_b(a^x)}=b^{x\log_b(a)}=b^x\) , 那么 \(y=x\log_b a\) .
+哦, 我们就有了 \(\log_bM=\log_aM\log_bM\) . 有点麻烦, 所以我们变形:
+$$
+\boxed{\log_aM={\log_bM\over\log_ba}}
+$$</p>
+<p>快刀切<strong>对数</strong>. 举几例子.</p>
+<p>几个小公式:</p>
+<ul>
+<li> \(\log_ab\cdot\log_ba=1\) .</li>
+<li> \(\log_{a^m}b^n={n\over m} \log_ab\) .</li>
+</ul>
+<p>上面的还在上面, 下面的还在下面.</p>
+<ul>
+<li>看Ex4.(5)(-12)</li>
+<li>(6)(7).
+<ul>
+<li>观察代数结构的提炼.</li>
+</ul>
+</li>
+</ul>
+<h1>总结: 学到了什么</h1>
+<h2>感到难?</h2>
+<p>太正常了! 我校的一位NOI银牌的同学说:&quot;当时学的时候太难了, 感觉非常震惊.&quot;</p>
+<h2>总结</h2>
+<ul>
+<li>对数的指数式子</li>
+<li>对数的运算</li>
+<li> \(\color{red}请一定要熟练!\) </li>
+<li>对数的那些公式在两个对数乘的时候不太好用.</li>
+<li>自己慢慢体会, 有任何问题(1) 回归指数式 (2) 快去问!</li>
+</ul>
+<h2>作业</h2>
+<p>Ex(5)(6).</p>
+<h2>悬念</h2>
+<p>什么是 \(e\) ?
+推荐<a href="https://www.bilibili.com/video/BV1qW411N7FU?spm_id_from=333.337.search-card.all.click&amp;vd_source=92e33b8be0a9fcd124e9c9cb80f446f0">微积分的本质</a>!!!</p>
+<p>比较通俗易懂, 很好玩.</p>
+<h1>End.</h1>
+<h2>Raise the bar!</h2>
+<p>番外篇: <a href="https://blogs.ams.org/matheducation/2019/04/15/precise-definitions-of-mathematical-maturity/">数学素养(mathematical maturity)的定义</a></p>
+<p>(节选)</p>
+<p><img src="./FILES/8LN.md/img-20220718144047.png" alt="Img" /></p>
+</body>
