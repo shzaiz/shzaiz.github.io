@@ -1,0 +1,42 @@
+<head>
+
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
+</script>
+
+    
+
+    <link rel="stylesheet" href="https://raw.githubusercontent.com/thomaspark/pubcss/master/dist/css/pubcss-acm-sig.css">
+</head>
+<body style="margin-left: 10%;margin-top: 10%;margin-bottom: 10%;margin-right: 10%;"><h1>0904 ABC267 最近打的几场比赛的总结</h1>
+<h2>总评: 菜, 太菜了.</h2>
+<p>其实有两方面原因, 其中之一是在假期训练不够, 另一个原因可能是由于真的是很疲惫, 最近的睡眠时间和质量都不太好, 造成了精力不足然后疯狂寄掉.</p>
+<p>所以我就在想像精力不好的时候能干什么呢? 除了看点番剧麻痹自己之外还能干什么呢? 写一个程序有错, 调又要好半天. ——虽然我是不反对调试的, 但是有时候犯了一个弱智错误真的很难绷. 比如把计数器写在<code>for</code>循环了里面之类sb问题.</p>
+<p>还有一个原因可能是由于训练真的停止了很久, 上一次打CF还是在高二上, 这样不觉之间已经过去了一年半.</p>
+<h2>ABC</h2>
+<h3>2B: 简单问题复杂化</h3>
+<p><strong>我的思路</strong>. 通过把满足条件的东西筛选出来放在一个数组里, 然后再在满足这样的内容之间进行筛选. 但是这样其实完全没必要. 直接check on enumerate就行了, 加上连续读假两次题面造成的时间浪费, 最后取得了0分的好成绩.(有一个数据点炸了)</p>
+<p><strong>反思</strong>. 简单问题不应该复杂化, 还有一定要第一遍就读好题面.</p>
+<p><strong>wssb</strong>. 因为debug信息没删完.</p>
+<h3>2C: 前缀和</h3>
+<p><strong>我的想法</strong>. 看到连续区间一般会想到前缀和处理.</p>
+<p>可以维护两个数组 <code>isum</code> 和 <code>sum</code>. 其中, <code>sum</code>是一个普通的前缀和 \(\sum_{i=1}^n a_i\) , <code>isum</code> 维护了  \(\sum_{i=1}^n i\times a_i\) . 所以如果要求  \([l..r]\)  之间的答案, 只需要计算
+$$
+\text{isum}[j]-\text{isum}[i-1]-(i-1)\times(\text{sum}[j]-\text{sum}[i-1]). 
+$$</p>
+<p><strong>答案的想法</strong>. 好像区别不大, 可是为什么总是WA甚至RE呢呜呜呜, 肯定是什么东西错了.</p>
+<p><strong>wssb</strong>. 读错题意导致 MLE 了</p>
+<h3>2D: 小DP</h3>
+<p><strong>解答前提示</strong>. 要用dp.</p>
+<p><strong>我的想法</strong>. 由于可以使决策有序化, 因此考虑没有后效性的 DP . (或者注意到这就是一个选数的背包)</p>
+<p>具体地, 考虑  \(\text{dp}[i][j]\)  表示当前进行到了第  \(i\)  个数字, 选择了  \(j\)  个数字. 那么根据状态转移就有</p>
+<p>$$
+dp[i][j] = \min\{dp[i-1][j], dp[i-1][j-1] + A_i\times j\}.
+$$</p>
+<p>边界条件是 \(dp[1][1]=a[1]\) .</p>
+<p><strong>不足之处</strong>. 交了两次, 第一次忘记把数组置为 \(-\infty\) 了.</p>
+<h3>2E: 小二分</h3>
+<p><strong>观察题面</strong>. 一个小套路, 应该是要用二分的方法.</p>
+<p><strong>上界和下界</strong>. 上界是 \(\sum_{i=1}^n A[i]\) , 下界是 \(0\) .</p>
+<p><strong><code>check()</code>函数</strong>.</p>
+</body>
