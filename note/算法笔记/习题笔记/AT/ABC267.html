@@ -1,14 +1,70 @@
-<head>
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <style>
+        body {counter-reset:section;}
+        h1 {counter-reset:subsection;}
+        h1:before {
+        counter-increment:section;
+        content:"Section " counter(section) ". ";
+            font-weight:bold;
+        }
+        h2:before {
+        counter-increment:subsection;
+        content:counter(section) "." counter(subsection) " ";
+        }
+        html, body {
+            margin: 3%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: 500;
+        }
+        code {
+            font-family: 'Courier New', Courier, monospace;
+        } 
 
-<script type="text/javascript" async
-  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
-</script>
+        pre {
+            font-family: 'Courier New', Courier, monospace;
+        } 
 
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+            position: fixed; /* Set the navbar to fixed position */
+            top: 0; /* Position the navbar at the top of the page */
+            width: 100%; /* Full width */
+        }
+
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        a {
+            color: #148bca;
+            text-align: center;
+            padding-left: 10px;
+            padding-right: 10px;
+            text-decoration: none;
+        }
+
+    </style>
+  </head>
+  <body>
     
+    <div class="navbar">
+        <a>AUG's Wiki</a>
+        <a href="index.html"> ↑ Back to contents</a>
+    </div>
 
-    <link rel="stylesheet" href="https://raw.githubusercontent.com/thomaspark/pubcss/master/dist/css/pubcss-acm-sig.css">
-</head>
-<body style="margin-left: 10%;margin-top: 10%;margin-bottom: 10%;margin-right: 10%;"><h1>0904 ABC267 补题</h1>
+
+    <h1>0904 ABC267 补题</h1>
 <h2>总评: 菜, 太菜了.</h2>
 <p>其实有两方面原因, 其中之一是在假期训练不够, 另一个原因可能是由于真的是很疲惫, 最近的睡眠时间和质量都不太好, 造成了精力不足然后疯狂寄掉.</p>
 <p>所以我就在想像精力不好的时候能干什么呢? 除了看点番剧麻痹自己之外还能干什么呢? 写一个程序有错, 调又要好半天. ——虽然我是不反对调试的, 但是有时候犯了一个弱智错误真的很难绷. 比如把计数器写在<code>for</code>循环了里面之类sb问题.</p>
@@ -33,10 +89,16 @@ $$</p>
 <p>$$
 dp[i][j] = \min\{dp[i-1][j], dp[i-1][j-1] + A_i\times j\}.
 $$</p>
-<p>边界条件是 \(dp[1][1]=a[1]\) .</p>
+<p>边界条件是 \(dp[1][1]=A[1]\) .</p>
 <p><strong>不足之处</strong>. 交了两次, 第一次忘记把数组置为 \(-\infty\) 了.</p>
 <h3>2E: 小二分</h3>
 <p><strong>观察题面</strong>. 一个小套路, 应该是要用二分的方法.</p>
 <p><strong>上界和下界</strong>. 上界是 \(\sum_{i=1}^n A[i]\) , 下界是 \(0\) .</p>
 <p><strong><code>check()</code>函数</strong>.</p>
-</body>
+
+
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </body>
+</html>

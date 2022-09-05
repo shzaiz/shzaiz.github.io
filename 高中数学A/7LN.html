@@ -1,14 +1,70 @@
-<head>
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <style>
+        body {counter-reset:section;}
+        h1 {counter-reset:subsection;}
+        h1:before {
+        counter-increment:section;
+        content:"Section " counter(section) ". ";
+            font-weight:bold;
+        }
+        h2:before {
+        counter-increment:subsection;
+        content:counter(section) "." counter(subsection) " ";
+        }
+        html, body {
+            margin: 3%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: 500;
+        }
+        code {
+            font-family: 'Courier New', Courier, monospace;
+        } 
 
-<script type="text/javascript" async
-  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
-</script>
+        pre {
+            font-family: 'Courier New', Courier, monospace;
+        } 
 
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+            position: fixed; /* Set the navbar to fixed position */
+            top: 0; /* Position the navbar at the top of the page */
+            width: 100%; /* Full width */
+        }
+
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        a {
+            color: #148bca;
+            text-align: center;
+            padding-left: 10px;
+            padding-right: 10px;
+            text-decoration: none;
+        }
+
+    </style>
+  </head>
+  <body>
     
+    <div class="navbar">
+        <a>AUG's Wiki</a>
+        <a href="index.html"> ↑ Back to contents</a>
+    </div>
 
-    <link rel="stylesheet" href="https://raw.githubusercontent.com/thomaspark/pubcss/master/dist/css/pubcss-acm-sig.css">
-</head>
-<body style="margin-left: 10%;margin-top: 10%;margin-bottom: 10%;margin-right: 10%;"><h1>7LN - 指数函数(1)</h1>
+
+    <h1>7LN - 指数函数(1)</h1>
 <h1>指数函数contd</h1>
 <h2>从逆运算的角度看指数函数</h2>
 <p>我们学过加法, 乘法, 它们都有逆运算.
@@ -265,4 +321,10 @@ $$</p>
 <p>随着科学技术的发展, 在国际学术交流中使用英语已经成为常态: 顶尖的论文无一不使用英文来书写, 在国际上公认的计算机领域经典书籍也是使用英文编著. 顶尖的论文没有中文翻译版; 如果需要获取信息, 也应该主动去阅读英文材料, 而不是等翻译版出版. &quot;我是中国人, 我只看中文&quot;这类观点已经不符合时代发展的潮流, 要站在时代的最前沿, 阅读英文材料的能力是不可或缺的.
 阅读英文材料, 无非就是&quot;不会的单词查字典, 不懂的句子反复读&quot;. 如今网上有各种词霸可解燃眉之急, 但英文阅读能力的提高贵在坚持. &quot;刚开始觉得阅读英文效率低&quot;, 是所有中国人都无法避免的经历. 如果你发现身边的大神可以很轻松地阅读英文材料, 那是因为他们早就克服了这些困难. 引用陈道蓄老师的话: 坚持一年, 你就会发现有不同; 坚持两年, 你就会发现大有不同.</p>
 </blockquote>
-</body>
+
+
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </body>
+</html>

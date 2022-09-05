@@ -1,14 +1,70 @@
-<head>
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <style>
+        body {counter-reset:section;}
+        h1 {counter-reset:subsection;}
+        h1:before {
+        counter-increment:section;
+        content:"Section " counter(section) ". ";
+            font-weight:bold;
+        }
+        h2:before {
+        counter-increment:subsection;
+        content:counter(section) "." counter(subsection) " ";
+        }
+        html, body {
+            margin: 3%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: 500;
+        }
+        code {
+            font-family: 'Courier New', Courier, monospace;
+        } 
 
-<script type="text/javascript" async
-  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
-</script>
+        pre {
+            font-family: 'Courier New', Courier, monospace;
+        } 
 
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+            position: fixed; /* Set the navbar to fixed position */
+            top: 0; /* Position the navbar at the top of the page */
+            width: 100%; /* Full width */
+        }
+
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        a {
+            color: #148bca;
+            text-align: center;
+            padding-left: 10px;
+            padding-right: 10px;
+            text-decoration: none;
+        }
+
+    </style>
+  </head>
+  <body>
     
+    <div class="navbar">
+        <a>AUG's Wiki</a>
+        <a href="index.html"> ↑ Back to contents</a>
+    </div>
 
-    <link rel="stylesheet" href="https://raw.githubusercontent.com/thomaspark/pubcss/master/dist/css/pubcss-acm-sig.css">
-</head>
-<body style="margin-left: 10%;margin-top: 10%;margin-bottom: 10%;margin-right: 10%;"><h1>1698C</h1>
+
+    <h1>1698C</h1>
 <p><strong>题目大意</strong>: 给一个数组 \(a\) , 对于均不相等的 \(i,j,k\) , 不相同的三元组 \((i,j,k)\) 满足 \(a_i+a_j+a_k\) 的值存在于 \(a\) 中, . 判断这个数组是不是好的.</p>
 <p><strong>一些观察</strong>: 如果存在 \(a_i+a_j+a_k&gt;a_{\text{max}}\) , 会怎么样? 说明至多有2个正数. 同样的, 这个数列中至多有2个负数. 还有, 数组中有2个以上的0是没有意义的, 我们可以把它除去, 照样可以做到. 因此, 这个数组最多有6项.</p>
 <div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #9C6500">#include</span><span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">&lt;bits/stdc++.h&gt;</span><span style="color: #9C6500"></span>
@@ -140,4 +196,10 @@
 }<span style="color: #bbbbbb"></span>
 </pre></div>
 
-</body>
+
+
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </body>
+</html>

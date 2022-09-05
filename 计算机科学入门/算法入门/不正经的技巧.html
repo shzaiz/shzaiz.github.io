@@ -1,14 +1,70 @@
-<head>
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <style>
+        body {counter-reset:section;}
+        h1 {counter-reset:subsection;}
+        h1:before {
+        counter-increment:section;
+        content:"Section " counter(section) ". ";
+            font-weight:bold;
+        }
+        h2:before {
+        counter-increment:subsection;
+        content:counter(section) "." counter(subsection) " ";
+        }
+        html, body {
+            margin: 3%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: 500;
+        }
+        code {
+            font-family: 'Courier New', Courier, monospace;
+        } 
 
-<script type="text/javascript" async
-  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
-</script>
+        pre {
+            font-family: 'Courier New', Courier, monospace;
+        } 
 
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+            position: fixed; /* Set the navbar to fixed position */
+            top: 0; /* Position the navbar at the top of the page */
+            width: 100%; /* Full width */
+        }
+
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        a {
+            color: #148bca;
+            text-align: center;
+            padding-left: 10px;
+            padding-right: 10px;
+            text-decoration: none;
+        }
+
+    </style>
+  </head>
+  <body>
     
+    <div class="navbar">
+        <a>AUG's Wiki</a>
+        <a href="index.html"> ↑ Back to contents</a>
+    </div>
 
-    <link rel="stylesheet" href="https://raw.githubusercontent.com/thomaspark/pubcss/master/dist/css/pubcss-acm-sig.css">
-</head>
-<body style="margin-left: 10%;margin-top: 10%;margin-bottom: 10%;margin-right: 10%;"><h1>运用define</h1>
+
+    <h1>运用define</h1>
 <h2>更好的调试 (1)</h2>
 <p>我们不妨把<code>printf</code>当作调试的时候要用的, 这样, 就可以在交卷的时候加上这两行.</p>
 <div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span>#define printf __blank__
@@ -17,4 +73,10 @@ void __blank__(...){}
 
 <h2>更好的调试 (2)</h2>
 <p>有时候需要依次输出所有的变量值, 所以应该可以写下以下的模板来方便快捷的输出.</p>
-</body>
+
+
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </body>
+</html>
