@@ -8,18 +8,17 @@
   border: 1.5px #ddd solid;
   border-radius: 7px;
   text-align: left;
-  font-weight: 400;
+  font-weight: 300;
 }
 
 .reveal h1, .reveal h2, .reveal h3, .reveal h4 {
-  font-family: 'Segoe UI', Tahoma, Geneva, 'SimHei', 'STXihei';
+  font-family: 'Lato', 'SimHei', 'STXihei', 'Sans Serif';
   font-weight: 400;
 }
 
 .reveal p, .reveal li, .reveal center {
   font-size: 32px;
-  font-family: 'Segoe UI', Tahoma, Geneva, 'STHeiti', 'SimHei' ;
-  font-weight: 400;
+  font-family: 'Lato', 'STHeiti', 'SimHei', 'Sans Serif';
 }
 
 .reveal li + li {
@@ -37,10 +36,9 @@
 
 .reveal table {
   font-size: 32px;
-  font-family: 'Segoe UI', Tahoma, Geneva, 'STHeiti', 'SimHei';
+  font-family: 'Lato', 'STHeiti', 'SimHei', 'Sans Serif';
   margin-top: 15px;
   margin-bottom: 15px;
-  font-weight: 500;
 }
 
 .reveal th {
@@ -124,7 +122,7 @@
 }
 
 .reveal code {
-  font-family: 'Courier New', 'STKaiti', 'KaiTi', 'Segoe UI', Tahoma, Geneva, Monospace;
+  font-family: 'Fira Code', 'STKaiti', 'KaiTi', 'Sans Serif', Monospace;
 }
 
 .reveal .middle blockquote {
@@ -139,20 +137,13 @@
 }
 
 .reveal blockquote p, .reveal blockquote li {
-  font-family: 'Segoe UI', Tahoma, Geneva, 'STKaiti', 'KaiTi', 'Segoe UI', Tahoma, Geneva;
+  font-family: 'Lato', 'STKaiti', 'KaiTi', 'Sans Serif';
   box-shadow: 1px 2px 6px 0px rgb(167 102 242);
-  font-weight: 100;
-
   margin: 30px;
 }
 
-section{
-  top: auto !important;
-
-}
-
 section .center {
-  
+  display: block;
   margin-left: auto;
   margin-right: auto;
 }
