@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <style>
+        body {counter-reset:section;}
+        h1 {counter-reset:subsection;}
+        h1:before {
+        counter-increment:section;
+        content:"Section " counter(section) ". ";
+            font-weight:bold;
+        }
+        h2:before {
+        counter-increment:subsection;
+        content:counter(section) "." counter(subsection) " ";
+        }
+        html, body {
+            margin: 3%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: 500;
+        }
+        code {
+            font-family: 'Courier New', Courier, monospace;
+        } 
+
+        pre {
+            font-family: 'Courier New', Courier, monospace;
+        } 
+
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+            position: fixed; /* Set the navbar to fixed position */
+            top: 0; /* Position the navbar at the top of the page */
+            width: 100%; /* Full width */
+        }
+
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        a {
+            color: #148bca;
+            text-align: center;
+            padding-left: 10px;
+            padding-right: 10px;
+            text-decoration: none;
+        }
+
+    </style>
+  </head>
+  <body>
+    
+    <div class="navbar">
+        <a href="https://shzaiz.github.io">AUG's Wiki</a>
+        <a href="index.html"> ↑ Back to contents</a>
+    </div>
+
+
+    <h1><a href="https://www.luogu.com.cn/problem/CF1716C">CF1716C Robot in a Hallway</a></h1>
+<p><strong>观察</strong>. 发现只有2列, 且不能回头, 因此我们可以发现有两种走的方法</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #666666">|</span><span style="color: #bbbbbb">      </span><span style="color: #666666">-&gt;</span><span style="color: #bbbbbb"> </span><span style="color: #666666">|</span><span style="color: #bbbbbb"> </span>
+v<span style="color: #bbbbbb">    </span><span style="color: #666666">^</span><span style="color: #bbbbbb">    </span>v<span style="color: #bbbbbb">     </span>...<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">  </span><span style="color: #666666">-&gt;</span><span style="color: #bbbbbb"> </span><span style="color: #666666">|</span><span style="color: #bbbbbb">      </span><span style="color: #666666">-&gt;</span><span style="color: #bbbbbb"></span>
+</pre></div>
+
+<p>或者</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #666666">-&gt;</span> <span style="color: #666666">-&gt;</span> <span style="color: #666666">-&gt;</span> <span style="color: #666666">-&gt;</span> <span style="color: #666666">|</span> 
+            v
+<span style="color: #666666">&lt;-</span> <span style="color: #666666">&lt;-</span> <span style="color: #666666">&lt;-</span> <span style="color: #666666">&lt;-</span> 
+</pre></div>
+
+<p>否则就会出现问题, 也就是有的空格没有被走到.</p>
+<p><strong>考虑 \(a[i][j]\) 延迟时间的影响</strong>. 不妨先等候一段时间等待格子开启, 然后再按照路线前进. 就枚举什么时候切换走法分界点, 然后加上路径的数量就行了.</p>
+<p><strong>也即是</strong>. 令 \(f[i][j]\) 为从第 \(i\) 行第 \(j\) 列开始使用第二种走法等待的最少时间.</p>
+<p>$$
+f[i][j]=\max(f[i][j+1]-1, \max(a[i \text{ xor } 1][j]-2\times(n-j)-1, a[i][j]))
+$$</p>
+<h1><a href="https://www.luogu.com.cn/problem/CF1716D">CF1716D Chip Move</a></h1>
+<p><strong>考虑朴素DP</strong>. 假设 \(f[i][j]\) 表示走到了 \(i\) 的时候花费了 \(j\) 步的方案数. 因此有状态方程(其中 \(r\) 是枚举步数的 \(r\) 倍):
+$$
+f[i+(rj)][j+1] = f[i][j]+1, (kr&lt;n ) 
+$$
+这样我们就需要枚举步数、出发点、下标, 时间复杂度为 \(\mathcal O(n^3)\) , 显然无法通过本题.</p>
+<p><strong>缩小步数值域</strong>. 注意到每次在数轴上的点是稀疏的, 每次它可以走 \(\sum_{i=1}^{m-1}(k+i)=(k+k+m-1)\times m /2\leq n\) .</p>
+<p><strong>运用前缀和优化</strong>. 将状态转移换一种形式(移项), 也就是( \(r\) 是枚举步数的 \(r\) 倍)
+$$
+\begin{aligned}
+f[i][j] \\&amp;=f[i-1][j-1\times(k+i-1)]\\&amp;+f[i-1][j-2\times(k+i-1)]\\&amp;+\cdots +f[i-1][j-r\times(k+i-1)]\\&amp;= \sum_{r}f[i-1][j-r\times(k+i-1)]
+\end{aligned}.
+$$
+我们如果令前缀和 \(s\) 公式为 \(s_j=s[j-(k+i-1)]+f[i-1][j]\) , 就不用枚举枚举出发点了. 所以我们只要枚举 \(i\) 就行了.</p>
+<p><strong>空间优化</strong>. 发现每一步只与上一步有关, 因此可以用滚动数组.</p>
+<h1><a href="https://www.luogu.com.cn/problem/CF1718B">CF1718B Fibonacci Strings</a></h1>
+<p><strong>想法</strong>. (1) 观察 Fibs 数列, 看到其中有 \(2\) 个 \(1\) , 余下的数列是单调递增的.
+(2) 考虑到数据比较小, 我们应该可以对于每一个 \(c_i\) ,  \(n^2\) 时间进行表示复杂度, 成若干的 Fibs 数列中的项的和.
+(3) 虽然上述做法可行, 但是一个数有多种表示方式的时候事情就会变得很难. 因为我们不知道如何分配这些数字出现的次数使得他们不相邻.</p>
+<p><strong>观察</strong>. 注意到一个串合法的话, 它所有字符的数量是 Fib 数列的前缀和  \((1,2,4,7,12,\cdots)\) , 如果它所有字符的数量都不符合的话, 这个串显然是不合法的.</p>
+<p>下面考虑如何去分配这些块. 有两种选择:</p>
+<ul>
+<li>先用数量少的字符去放小的空</li>
+<li>先用数量多的字符去放大的空</li>
+</ul>
+<p>根据 Fib 的单调性, 注意到第二种方案是好的. 因此得到贪心算法, 每次先填大的, 等到不足否的时候就或者放过上一个放的字符就表示不满足.</p>
+<h1><a href="https://www.luogu.com.cn/problem/CF1720D1">CF1720D1 Xor-Subsequence (easy version)</a></h1>
+<p>这篇题目感觉好绕, 于是抄了一份更容易懂的题目:</p>
+<ul>
+<li><strong>子序列定义</strong>：从最初序列通过去除某些元素，但不破坏余下元素的相对位置而形成的新序列。例如，有一个序列为  \([1,2,3,4,5]\) ，则  \([1,4,5]\)  是这个序列的一个子序列。</li>
+<li>给定一个长度为  \(n\)  的整数序列  \(a\) ，从  \(0\)  开始编号。其中所有的元素  \(a_i\) 都满足  \(a_i\le 200\) </li>
+<li>如果  \(a\)  有一个子序列  \(b\) ，从  \(0\)  开始编号，并且它的长度为  \(m\) 。其中，对于所有的  \(0\le i&lt;m\)  ，满足  \(b_i \oplus (i+1)&lt;b_{i+1}\oplus i\) 。那么这个子序列就被称作美丽的子序列。</li>
+<li>求  \(a\)  中最长的美丽的子序列。</li>
+</ul>
+<p><strong>想法</strong>. 考虑朴素的 \(dp\) , 因为很像LIS. 因此定义 \(dp[i]\) 是当前考虑到了第 \(i\) 个数, 最长的东西</p>
+<p>$$
+dp[i] = \max_{i=0}^j (dp[j][a_j \oplus i&lt;a_i \oplus j]+1).
+$$</p>
+<p>但是这样做时间复杂度是 \(\mathcal O(n^2)\) 的, 显然无法通过 \(3\times 10^5\) . ! 因此我们要考虑优化.</p>
+<p><strong>xor的性质</strong>.</p>
+<p>$$
+|i-a_j| \leq i \oplus a_j\\
+i+a_j \geq i \oplus a_j\\
+$$</p>
+<p>直观来讲, 对于加的一边, 因为每一位同0异1, 考虑每个数的二进制拆分. 这里就相当于丢失了carrier的加法器, 自然会比原来小.</p>
+<p>另一方面也是一样的.</p>
+<p><strong>优化</strong>. 因为上面的,  \(a_i\oplus(i+401)&lt;a_{i+401}\oplus i\) .</p>
+<h1><a href="https://www.luogu.com.cn/problem/CF1714G">CF1714G Path Prefixes</a></h1>
+
+
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </body>
+</html>
