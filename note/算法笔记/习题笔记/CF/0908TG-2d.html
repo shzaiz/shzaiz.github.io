@@ -78,13 +78,14 @@ v<span style="color: #bbbbbb">    </span><span style="color: #666666">^</span><s
 </pre></div>
 
 <p>否则就会出现问题, 也就是有的空格没有被走到.</p>
-<p><strong>状态转移</strong>. 不妨设置 \(dp[i][j]\) 表示当前在第 \(i\) 行第 \(j\) 列, 由 \((i,j)\) 走到 \((i \operatorname{xor}1, j)\) 所需要的最短时间. 我们可以从右往左, 保证顺序没有后效性. 假设我们现在知道了 \(dp[i][j+1]\) 的值, 要求 \(dp[i][j]\) , 我们就需要取如下四种情况(两两组合)中, 用时最长的那一个:</p>
+<p><strong>状态转移</strong>. 不妨设置 \(dp[i][j]\) 表示当前在第 \(i\) 行第 \(j\) 列, 由 \((i,j)\) 走到 \((i \operatorname{xor}1, j+1)\) 所需要的最短时间. 我们可以从右往左, 保证顺序没有后效性. 假设我们现在知道了 \(dp[i][j+1]\) 的值, 要求 \(dp[i][j]\) , 我们就需要取如下四种情况(两两组合)中, 用时最长的那一个:</p>
 <ul>
 <li>从 \(dp[i][j]\to dp[i][j+1]\) 的时候发生/不发生等待.</li>
 <li>从 \(dp[i\^\ 1][j+1]\to dp[i\^\  1][j]\) 的时候发生/不发生等待.</li>
 </ul>
 <p>因此状态转移是:
 $$dp[i][j]=\max(a[i][j]+(n-j+1)\times2, a[i\^\ 1][j]+1, dp[i][j+1]+2-1).$$</p>
+<p><strong>犯过的错误</strong>. 没有考虑整数的离散性.</p>
 <h1><a href="https://www.luogu.com.cn/problem/CF1716D">CF1716D Chip Move</a></h1>
 <p><strong>考虑朴素DP</strong>. 假设 \(f[i][j]\) 表示走到了 \(i\) 的时候花费了 \(j\) 步的方案数. 因此有状态方程(其中 \(r\) 是枚举步数的 \(r\) 倍):
 $$
