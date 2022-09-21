@@ -72,6 +72,29 @@
 <li>循环整个序列;</li>
 </ul>
 <p>分别枚举答案即可.</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>a[MAXN];<span style="color: #bbbbbb"></span>
+<span style="color: #B00040">void</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">solve</span>(){<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">    </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>n;<span style="color: #bbbbbb"> </span>cin<span style="color: #666666">&gt;&gt;</span>n;<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">    </span>F(i,<span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>,<span style="color: #bbbbbb"> </span>n){<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">        </span>cin<span style="color: #666666">&gt;&gt;</span>a[i];<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">    </span>}<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">    </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>ans<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">-1</span>;<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">    </span>F(i,<span style="color: #bbbbbb"> </span><span style="color: #666666">2</span>,<span style="color: #bbbbbb"> </span>n){<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">        </span>ans<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>max(ans,<span style="color: #bbbbbb"> </span>a[i]<span style="color: #666666">-</span>a[<span style="color: #666666">1</span>]);<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">    </span>}<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">    </span>F(i,<span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>,<span style="color: #bbbbbb"> </span>n<span style="color: #666666">-1</span>){<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">        </span>ans<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>max(ans,<span style="color: #bbbbbb"> </span>a[n]<span style="color: #666666">-</span>a[i]);<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">    </span>}<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">    </span>F(i,<span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>,<span style="color: #bbbbbb"> </span>n){<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">        </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>x<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>i<span style="color: #666666">%</span>n<span style="color: #666666">+1</span>;<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">        </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>y<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>(n<span style="color: #666666">+</span>i<span style="color: #666666">-1</span>)<span style="color: #666666">%</span>n<span style="color: #666666">+1</span>;<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">        </span><span style="color: #3D7B7B; font-style: italic">// printf(&quot;x=%d, y=%d\n&quot;, x, y);</span>
+<span style="color: #bbbbbb">        </span>ans<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>max(ans,<span style="color: #bbbbbb"> </span>a[y]<span style="color: #666666">-</span>a[x]);<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">    </span>}<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">    </span>cout<span style="color: #666666">&lt;&lt;</span>ans<span style="color: #666666">&lt;&lt;</span>endl;<span style="color: #bbbbbb"></span>
+}<span style="color: #bbbbbb"></span>
+</pre></div>
+
 <h1>B. 奇偶讨论</h1>
 <p>分类</p>
 <ul>
@@ -82,6 +105,48 @@
 </ul>
 <p>对于可以的一些排列, 贪心地构造一些 \(1\) , 最后的一些作为0, 就可以了.</p>
 <p><strong>wssb</strong>. 有一部分没有特判-1. WA on test 5.</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #B00040">void</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">solve</span>(){<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">    </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>n,<span style="color: #bbbbbb"> </span>m;<span style="color: #bbbbbb"> </span>cin<span style="color: #666666">&gt;&gt;</span>n<span style="color: #666666">&gt;&gt;</span>m;<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">    </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>mou<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>(m<span style="color: #666666">%2==0</span>);<span style="color: #bbbbbb"> </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>nou<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>(n<span style="color: #666666">%2==0</span>);<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">if</span>(nou<span style="color: #bbbbbb"> </span><span style="color: #666666">&amp;&amp;</span><span style="color: #bbbbbb"> </span>mou){<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">        </span><span style="color: #3D7B7B; font-style: italic">// printf(&quot;This is %d&quot;, m-(n-2));</span>
+<span style="color: #bbbbbb">        </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>sum<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>m<span style="color: #666666">-</span>(n<span style="color: #666666">-2</span>);<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">        </span><span style="color: #008000; font-weight: bold">if</span>(sum<span style="color: #bbbbbb"> </span><span style="color: #666666">&lt;</span><span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>){<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">            </span>printf(<span style="color: #BA2121">&quot;No</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>);<span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">return</span>;<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">        </span>}<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">        </span>printf(<span style="color: #BA2121">&quot;Yes</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>);<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">        </span>F(i,<span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>,<span style="color: #bbbbbb"> </span>n<span style="color: #666666">-2</span>)<span style="color: #bbbbbb"> </span>printf(<span style="color: #BA2121">&quot;1 &quot;</span>);<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">        </span>printf(<span style="color: #BA2121">&quot;%d %d&quot;</span>,<span style="color: #bbbbbb"> </span>sum<span style="color: #666666">/2</span>,<span style="color: #bbbbbb"> </span>sum<span style="color: #666666">/2</span>);<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">        </span>printf(<span style="color: #BA2121">&quot;</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>);<span style="color: #bbbbbb"></span>
+
+<span style="color: #bbbbbb">    </span>}<span style="color: #008000; font-weight: bold">else</span><span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">if</span>(<span style="color: #666666">!</span>nou<span style="color: #bbbbbb"> </span><span style="color: #666666">&amp;&amp;</span><span style="color: #bbbbbb"> </span>mou){<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">        </span>
+<span style="color: #bbbbbb">        </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>sum<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>m<span style="color: #666666">-</span>(n<span style="color: #666666">-1</span>);<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">        </span><span style="color: #008000; font-weight: bold">if</span>(sum<span style="color: #666666">&lt;1</span>){<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">            </span>printf(<span style="color: #BA2121">&quot;No</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>);<span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">return</span>;<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">        </span>}<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">        </span>printf(<span style="color: #BA2121">&quot;Yes</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>);<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">        </span>F(i,<span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>,<span style="color: #bbbbbb"> </span>n<span style="color: #666666">-1</span>)<span style="color: #bbbbbb"> </span>printf(<span style="color: #BA2121">&quot;1 &quot;</span>);<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">        </span>printf(<span style="color: #BA2121">&quot;%d&quot;</span>,<span style="color: #bbbbbb"> </span>sum);<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">        </span>printf(<span style="color: #BA2121">&quot;</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>);<span style="color: #bbbbbb"></span>
+
+<span style="color: #bbbbbb">    </span>}<span style="color: #008000; font-weight: bold">else</span><span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">if</span>(nou<span style="color: #bbbbbb"> </span><span style="color: #666666">&amp;&amp;</span><span style="color: #bbbbbb"> </span><span style="color: #666666">!</span>mou){<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">        </span><span style="color: #3D7B7B; font-style: italic">// printf(&quot;In\n&quot;);</span>
+
+<span style="color: #bbbbbb">        </span>printf(<span style="color: #BA2121">&quot;No</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>);<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">    </span>}<span style="color: #008000; font-weight: bold">else</span><span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">if</span>(<span style="color: #666666">!</span>nou<span style="color: #bbbbbb"> </span><span style="color: #666666">&amp;&amp;</span><span style="color: #bbbbbb"> </span><span style="color: #666666">!</span>mou){<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">        </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>sum<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>m<span style="color: #666666">-</span>(n<span style="color: #666666">-1</span>);<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">        </span><span style="color: #008000; font-weight: bold">if</span>(sum<span style="color: #666666">&lt;1</span>){<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">            </span>printf(<span style="color: #BA2121">&quot;No</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>);<span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">return</span>;<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">        </span>}<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">        </span>printf(<span style="color: #BA2121">&quot;Yes</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>);<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">        </span>F(i,<span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>,<span style="color: #bbbbbb"> </span>n<span style="color: #666666">-1</span>)<span style="color: #bbbbbb"> </span>printf(<span style="color: #BA2121">&quot;1 &quot;</span>);<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">        </span>printf(<span style="color: #BA2121">&quot;%d&quot;</span>,<span style="color: #bbbbbb"> </span>sum);<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">        </span>printf(<span style="color: #BA2121">&quot;</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>);<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">    </span>}<span style="color: #bbbbbb"></span>
+}<span style="color: #bbbbbb"></span>
+</pre></div>
+
 <h1>C. 结论观察</h1>
 <p><strong>启示</strong>: 可以玩一点样例来 specify 到底答案有什么性质, 因此求得答案.</p>
 <p><strong>构造样例与观察直觉</strong>.</p>
@@ -110,6 +175,22 @@
 </ul>
 <p>证明(利用反证法). 假设有这样的一个 \(a\) , 其中 \(a\) 也在这个连通分量里面. 这就说明存在边 \((a, b)\) . 其中,  \(a&lt;k, b&gt;k\) . 要想一个序列是合理的括号序列, <code>(</code>和<code>)</code>的差是0是一个必要条件. 因此考虑 \(p_i\) 为在前缀 \(s[1..i]\) 中的<code>(</code>与<code>)</code>的差值. 观察对于所有边  \((i,j), (i&lt;j)\) ,  \(p_j=p_i−1\) 成立, 并且对于所有  \(i&#x27;\) , 我们有 \(i≤i&#x27;≤j\) , 我们必须有  \(p_{i&#x27;}≥p_j\) . 也就对于一个连通分量  \(C\) ，对于所有  \(i∈C\) ,  \(s_i=\) <code>(</code>,  \(p_i\)  都是一个确定的常数. 因此我们有  \(p_k=p_a\) . 此外, 根据定义我们有  \(p_b=p_{a-1}\)  和  \(p_{k-2}=p_{k-1}-1=p_{k-2}=p_{b-1}\) . 这意味着 \(a&lt;(k-1)\) , 因此 \(a≤(k-2)≤b\) . 但是吗 \(p_{k-2}=p_{b-1}&lt;p_b\) . 推出矛盾.</p>
 <p>因此只需要加上初始的1作为连通分量就可以了.</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #B00040">char</span><span style="color: #bbbbbb"> </span>s[MAXN];<span style="color: #bbbbbb"></span>
+<span style="color: #B00040">void</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">solve</span>(){<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">    </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>sum<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>;<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">    </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>n;<span style="color: #bbbbbb"> </span>cin<span style="color: #666666">&gt;&gt;</span>n;<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">    </span>scanf(<span style="color: #BA2121">&quot;%s&quot;</span>,<span style="color: #bbbbbb"> </span>s);<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">    </span>F(i,<span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>,<span style="color: #bbbbbb"> </span><span style="color: #666666">2*</span>n<span style="color: #666666">-1</span>){<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">        </span><span style="color: #008000; font-weight: bold">if</span>(s[i]<span style="color: #666666">==</span><span style="color: #BA2121">&#39;(&#39;</span><span style="color: #bbbbbb"> </span><span style="color: #666666">&amp;&amp;</span><span style="color: #bbbbbb"> </span>s[i<span style="color: #666666">+1</span>]<span style="color: #666666">==</span><span style="color: #BA2121">&#39;(&#39;</span>){<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">            </span>sum<span style="color: #666666">++</span>;<span style="color: #bbbbbb"></span>
+
+<span style="color: #bbbbbb">        </span>}<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">    </span>}<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">    </span>sum<span style="color: #666666">++</span>;<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">    </span>printf(<span style="color: #BA2121">&quot;%d</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>,<span style="color: #bbbbbb"> </span>sum);<span style="color: #bbbbbb"></span>
+}<span style="color: #bbbbbb"></span>
+</pre></div>
+
 <h1>D. 构造</h1>
 <p><strong>构造题目</strong>. 应该严格留意一些特殊的条件. 比如本题的 \(m\leq n+2\) </p>
 <p><strong>思考</strong>. 最少要有 \(n-1\) 条边, 最多要有 \(n+2\) 条边, 因此可能会有 \(0-3\) 条边的多余的边, 但是这和构建生成树有什么关系呢?</p>
