@@ -1,38 +1,78 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-cn">
   <head>
-    <meta charset="utf-8" />
-    <title>reveal-md</title>
-    <link rel="stylesheet" href="./dist/theme/black.css" id="theme" />
-  </head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <style>
+        body {counter-reset:section;}
+        h1 {counter-reset:subsection;}
+        h1:before {
+        counter-increment:section;
+        content:"Section " counter(section) ". ";
+            font-weight:bold;
+        }
+        h2:before {
+        counter-increment:subsection;
+        content:counter(section) "." counter(subsection) " ";
+        }
+        html, body {
+            margin: 3%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: 500;
+        }
+        code {
+            font-family: 'Courier New', Courier, monospace;
+        } 
 
+        pre {
+            font-family: 'Courier New', Courier, monospace;
+        } 
+
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+            position: fixed; /* Set the navbar to fixed position */
+            top: 0; /* Position the navbar at the top of the page */
+            width: 100%; /* Full width */
+        }
+
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        a {
+            color: #148bca;
+            text-align: center;
+            padding-left: 10px;
+            padding-right: 10px;
+            text-decoration: none;
+        }
+
+    </style>
+  </head>
   <body>
-    <ul>
-      <li>
-        <a href="cs0.html" title="自救指南">
-          自救指南 (cs0.html)
-        </a>
-      </li>
-      <li>
-        <a href="cs1.html" title="自救指南">
-          自救指南 (cs1.html)
-        </a>
-      </li>
-      <li>
-        <a href="cs2.html" title="自救指南">
-          自救指南 (cs2.html)
-        </a>
-      </li>
-      <li>
-        <a href="python0.html" title="Python问题求解1">
-          Python问题求解1 (python0.html)
-        </a>
-      </li>
-      <li>
-        <a href="self-intro.html" title="自我介绍">
-          自我介绍 (self-intro.html)
-        </a>
-      </li>
-    </ul>
+    
+    <div class="navbar">
+        <a href="https://shzaiz.github.io">AUG's Wiki</a>
+        <a href="index.html"> ↑ Back to contents</a>
+    </div>
+
+
+    <p><a href="../index.html">Upper Topic</a></p>
+
+
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
+    </script>
   </body>
-</html>
+</html><p><a href="cs0.html">cs0</a></p>
+<p><a href="cs1.html">cs1</a></p>
+<p><a href="cs2.html">cs2</a></p>
+<p><a href="python0.html">python0</a></p>
+<p><a href="self-intro.html">self-intro</a></p>

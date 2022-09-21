@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <style>
+        body {counter-reset:section;}
+        h1 {counter-reset:subsection;}
+        h1:before {
+        counter-increment:section;
+        content:"Section " counter(section) ". ";
+            font-weight:bold;
+        }
+        h2:before {
+        counter-increment:subsection;
+        content:counter(section) "." counter(subsection) " ";
+        }
+        html, body {
+            margin: 3%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: 500;
+        }
+        code {
+            font-family: 'Courier New', Courier, monospace;
+        } 
+
+        pre {
+            font-family: 'Courier New', Courier, monospace;
+        } 
+
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+            position: fixed; /* Set the navbar to fixed position */
+            top: 0; /* Position the navbar at the top of the page */
+            width: 100%; /* Full width */
+        }
+
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        a {
+            color: #148bca;
+            text-align: center;
+            padding-left: 10px;
+            padding-right: 10px;
+            text-decoration: none;
+        }
+
+    </style>
+  </head>
+  <body>
+    
+    <div class="navbar">
+        <a href="https://shzaiz.github.io">AUG's Wiki</a>
+        <a href="index.html"> ↑ Back to contents</a>
+    </div>
+
+
+    <p>$$
+\Huge \left[\left[\sum\right]_{}\right]\\
+\small\textbf{etoneWiki}
+$$</p>
+<p>$$
+\Huge \textbf{Generating functions}\\
+\small \texttt{by etone on Combinatorial Mathematics}\\
+\texttt{Spring, 2015 at Nanjing University}
+$$</p>
+<blockquote>
+<p>Contents
+[toc]{level: [1,2,3,4,5]}</p>
+</blockquote>
+<h1>Generating functions</h1>
+<p>In Stanley&#x27;s magnificent book <em>Enumerative Combinatorics</em>, he comments the generating function as &quot;the most useful but most difficult to understand method (for counting)&quot;.</p>
+<p>The solution to a counting problem is usually represented as some  \(a_n\)  depending a parameter  \(n\) . Sometimes this an is called a counting function as it is a function of the parameter  \(n\) . an can also be treated as a infinite series:
+$$a_0,a_1,a_2,\ldots$$
+The <strong>ordinary generating function (OGF)</strong> defined by an is
+$$G(x)=\sum_{n\ge 0} a_nx^n.$$
+So  \(G(x)=a_0+a_1x+a_2x^2+\cdots\) . An expression in this form is called a <a href="http://en.wikipedia.org/wiki/Formal_power_series">formal power series</a>, and  \(a_0,a_1,a_2,\ldots\)  is the sequence of coefficients.</p>
+<p>Furthermore, the generating function can be expanded as</p>
+<p>$$G(x)=(\underbrace{1+\cdots+1}_{a_0})+(\underbrace{x+\cdots+x}_{a_1})+(\underbrace{x^2+\cdots+x^2}_{a_2})+\cdots+(\underbrace{x^n+\cdots+x^n}_{a_n})+\cdots$$</p>
+<p>so it indeed &quot;generates&quot; all the possible instances of the objects we want to count.</p>
+<p>Usually, we do not evaluate the generating function  \(\textit{GF}(x)\)  on any particular value.  \(x\)  remains as a formal variable without assuming any value. The numbers that we want to count are the coefficients carried by the terms in the formal power series. So far the generating function is just another way to represent the sequence
+$$(a_0,a_1,a_2,\ldots\ldots).$$
+The true power of generating functions comes from the various algebraic operations that we can perform on these generating functions. We use an example to demonstrate this.</p>
+<h2>Combinations</h2>
+<p>Suppose we wish to enumerate all subsets of an  \(n\) -set. To construct a subset, we specifies for every element of the  \(n\) -set whether the element is chosen or not. Let us denote the choice to omit an element by  \(x_0\) , and the choice to include it by  \(x_1\) . Using &quot;  \(+\)  &quot; to represent &quot;OR&quot;, and using the multiplication to denote &quot;AND&quot;, the choices of subsets of the  \(n\) -set are expressed as
+$$\underbrace{(x_0+x_1)(x_0+x_1)\cdots (x_0+x_1)}_{n\text{ elements}}=(x_0+x_1)^n.$$</p>
+<p>For example, when  \(n = 3\) , we have</p>
+<p>$$\begin{aligned}
+(x_0+x_1)^3
+&amp;=x_0x_0x_0+x_0x_0x_1+x_0x_1x_0+x_0x_1x_1\\
+&amp;\quad +x_1x_0x_0+x_1x_0x_1+x_1x_1x_0+x_1x_1x_1
+\end{aligned}.$$</p>
+<p>So it &quot;generate&quot; all subsets of the  \(3\) -set. Writing  \(1\)  bfor  \(x_0\)  and  \(x\)  for  \(x_1\) , we have  \((1 + x)^3 = 1 + 3x + 3x^2 + x^3\) . The coefficient of  \(x_k\)  is the number of  \(k\) -subsets of a  \(3\) -element set.</p>
+<p>In general,  \((1 + x)^n\)  has the coefficients which are the number of subsets of fixed sizes of an  \(n\) -element set.</p>
+<hr />
+<p>Suppose that we have twelve balls: <text style= color:red>3 red</text>, <text style= color:blue>4 blue</text>, and <text style= color:green>5 green</text>. Balls with the same color are indistinguishable.</p>
+<p>We want to determine the number of ways to select k balls from these twelve balls, for some  \(0\le k\le 12\) .</p>
+<p>The generating function of this sequence is</p>
+<p>$$\begin{aligned}
+&amp;\quad {\color{Red}(1+x+x^2+x^3)}{\color{Blue}(1+x+x^2+x^3+x^4)}{\color{green}(1+x+x^2+x^3+x^4+x^5)}\\
+&amp;=1+3x+6x^2+10x^3+14x^4+17x^5+18x^6+17x^7+14x^8+10x^9+6x^{10}+3x^{11}+x^{12}.
+\end{aligned}$$
+The coefficient of  \(x_k\)  gives the number of ways to select  \(k\)  balls.</p>
+<h2>Fibonacci numbers</h2>
+<p>Consider the following counting problems.</p>
+<ul>
+<li>Count the number of ways that the nonnegative integer  \(n\)  can be written as a sum of ones and twos (in order).
+The problem asks for the number of compositions of  \(n\)  with summands from  \(\{1,2\}\) . Formally, we are counting the number of tuples  \((x_1,x_2,\ldots,x_k)\)  for some  \(k\le n\)  such that  \(x_i\in\{1,2\}\)  and  \(x_1+x_2+\cdots+x_k=n\) .
+Let  \(f_n\)  be such a number. We observe that a composition either starts with a  \(1\) , in which case the rest is a composition of  \(n − 1\) ; or starts with a  \(2\) , in which case the rest is a composition of  \(n − 2\) . So we have the recursion for fn that
+ \(f_n = f_{n − 1} + f_{n − 2}\) .</li>
+<li>Count the ways to completely cover a  \(2\times n\)  rectangle with  \(2\times 1\)  dominos without any overlaps.
+Dominos are identical  \(2\times 1\)  rectangles, so that only their orientations <code>---</code> vertical or horizontal matter.
+Let fn be the number. It also holds that  \(f_n = f_{n − 1} + f_{n − 2}\) . The proof is left as an exercise.</li>
+</ul>
+<p>In both problems, the solution is given by fn which satisfies the following recursion.</p>
+<p>$$f_n=\begin{cases}
+f_{n-1}+f_{n-2} &amp; \text{if }n\ge 2,\\
+1 &amp; \text{if }n=1\\
+1 &amp; \text{if }n=0.
+\end{cases}$$
+Instead we consider a closely related quantity:</p>
+<p>$$F_n=\begin{cases}
+F_{n-1}+F_{n-2} &amp; \text{if }n\ge 2,\\
+1 &amp; \text{if }n=1\\
+0 &amp; \text{if }n=0.
+\end{cases}$$
+Clearly  \(F_n = f_{n − 1}\)  and the quantity  \(F_n\)  is called the <a href="https://web.archive.org/web/20160906214604/http://en.wikipedia.org/wiki/Fibonacci_number">Fibonacci number</a>.</p>
+<blockquote>
+<p>Theorem
+$$F_n=\frac{1}{\sqrt{5}}\left(\phi^n-\hat{\phi}^n\right),$$
+where  \(\phi=\frac{1+\sqrt{5}}{2}\)  and  \(\hat{\phi}=\frac{1-\sqrt{5}}{2}\) .</p>
+</blockquote>
+<p>The quantity  \(\phi=\frac{1+\sqrt{5}}{2}\)  is the so-called golden ratio, a constant with some significance in mathematics and aesthetics.</p>
+<p>We now prove this theorem by using generating functions. The ordinary generating function for the Fibonacci number  \(F_n\)  is</p>
+<p>$$G(x)=\sum_{n\ge 0}F_n x^n.$$
+We have that  \(F_n = F_{n − 1} + F_{n − 2}\)  for  \(n\ge 2\) , thus</p>
+<p>$$\begin{aligned}
+G(x) 
+&amp;=
+\sum_{n\ge 0}F_n x^n\\
+&amp;=
+F_0+F_1x+\sum_{n\ge 2}F_n x^n\\
+&amp;=
+x+\sum_{n\ge 2}(F_{n-1}+F_{n-2})x^n.
+\end{aligned}$$
+For generating functions, there are general ways to generate  \(F_{n − 1}\)  and  \(F_{n − 2}\) , or the coefficients with any smaller indices.</p>
+<p>$$\begin{aligned}
+xG(x)
+&amp;=\sum_{n\ge 0}F_n x^{n+1}=\sum_{n\ge 1}F_{n-1} x^n=\sum_{n\ge 2}F_{n-1} x^n\\
+x^2G(x)
+&amp;=\sum_{n\ge 0}F_n x^{n+2}=\sum_{n\ge 2}F_{n-2} x^n.
+\end{aligned}$$
+So we have</p>
+<p>$$G(x)=x+(x+x^2)G(x)\,,$$
+hence</p>
+<p>$$G(x)=\frac{x}{1-x-x^2}.$$
+The value of Fn is the coefficient of xn in the Taylor series for this formular, which is  \(\frac{G^{(n)}(0)}{n!}=\frac{1}{\sqrt{5}}\left(\frac{1+\sqrt{5}}{2}\right)^n-\frac{1}{\sqrt{5}}\left(\frac{1-\sqrt{5}}{2}\right)^n\) . Although this expansion works in principle, the detailed calculus is rather painful.</p>
+<hr />
+<p>It is easier to expand the generating function by breaking it into two geometric series.</p>
+<blockquote>
+<p>Proposition
+Let  \(\phi=\frac{1+\sqrt{5}}{2}\)  and  \(\hat{\phi}=\frac{1-\sqrt{5}}{2}\) . It holds that
+$$\frac{x}{1-x-x^2}=\frac{1}{\sqrt{5}}\cdot\frac{1}{1-\phi x}-\frac{1}{\sqrt{5}}\cdot\frac{1}{1-\hat{\phi} x}.$$</p>
+</blockquote>
+<p>It is easy to verify the above equation, but to deduce it, we need some (high school) calculation.</p>
+<p> \(1 − x − x^2\)  has two roots  \(\frac{-1\pm\sqrt{5}}{2}\) .</p>
+<p>Denote that  \(\phi=\frac{2}{-1+\sqrt{5}}=\frac{1+\sqrt{5}}{2}\)  and  \(\hat{\phi}=\frac{2}{-1-\sqrt{5}}=\frac{1-\sqrt{5}}{2}\) .</p>
+<p>Then  \((1-x-x^2)=(1-\phi x)(1-\hat{\phi}x)\) , so we can write</p>
+<p>$$\begin{aligned}
+\frac{x}{1-x-x^2}
+&amp;=\frac{x}{(1-\phi x)(1-\hat{\phi} x)}\\
+&amp;=\frac{\alpha}{(1-\phi x)}+\frac{\beta}{(1-\hat{\phi} x)},
+\end{aligned}$$
+where  \(α\)  and  \(β\)  satisfying that</p>
+<p>$$\begin{cases}
+\alpha+\beta=0\\
+\alpha\phi+\beta\hat{\phi}= -1.
+\end{cases}$$
+Solving this we have that  \(\alpha=\frac{1}{\sqrt{5}} and \beta=-\frac{1}{\sqrt{5}}\) . Thus,</p>
+<p>$$G(x)=\frac{x}{1-x-x^2}=\frac{1}{\sqrt{5}}\cdot\frac{1}{1-\phi x}-\frac{1}{\sqrt{5}}\cdot\frac{1}{1-\hat{\phi} x}.$$
+ \(\square\) </p>
+<p>Note that the expression \frac{1}{1-z} has a well known geometric expansion:</p>
+<p>$$\frac{1}{1-z}=\sum_{n\ge 0}z^n.$$
+Therefore, G(x) can be expanded as</p>
+<p>$$\begin{aligned}
+G(x)
+&amp;=\frac{1}{\sqrt{5}}\cdot\frac{1}{1-\phi x}-\frac{1}{\sqrt{5}}\cdot\frac{1}{1-\hat{\phi} x}\\
+&amp;=\frac{1}{\sqrt{5}}\sum_{n\ge 0}(\phi x)^n-\frac{1}{\sqrt{5}}\sum_{n\ge 0}(\hat{\phi} x)^n\\
+&amp;=\sum_{n\ge 0}\frac{1}{\sqrt{5}}\left(\phi^n-\hat{\phi}^n\right)x^n.
+\end{aligned}$$
+So the  \(n\) th Fibonacci number is given by</p>
+<p>$$F_n=\frac{1}{\sqrt{5}}\left(\phi^n-\hat{\phi}^n\right)=\frac{1}{\sqrt{5}}\left(\frac{1+\sqrt{5}}{2}\right)^n-\frac{1}{\sqrt{5}}\left(\frac{1-\sqrt{5}}{2}\right)^n.$$</p>
+<h2>Solving recurrences</h2>
+<p>The following steps describe a general methodology of solving recurrences by generating functions.</p>
+<ol>
+<li>Give a recursion that computes an. In the case of Fibonacci sequence  \(a_n = a_{n − 1} + a_{n − 2}\) .</li>
+<li>Multiply both sides of the equation by xn and sum over all n. This gives the generating function  \(G(x)=\sum_{n\ge 0}a_nx^n=\sum_{n\ge 0}(a_{n-1}+a_{n-2})x^n.\) 
+And manipulate the right hand side of the equation so that it becomes some other expression involving  \(G(x)\) .  \(G(x)=x+(x+x^2)G(x)\,.\) </li>
+<li>Solve the resulting equation to derive an explicit formula for  \(G(x)\) .  \(G(x)=\frac{x}{1-x-x^2}.\) </li>
+<li>Expand  \(G(x)\)  into a power series and read off the coefficient of  \(x_n\) , which is a closed form for  \(a_n\) .</li>
+</ol>
+<p>The first step is usually established by combinatorial observations, or explicitly given by the problem. The third step is trivial.</p>
+<p>The second and the forth steps need some non-trivial analytic techniques.</p>
+<h3>Algebraic operations on generating functions</h3>
+<p>The second step in the above methodology is somehow tricky. It involves first applying the recurrence to the coefficients of  \(G(x)\) , which is easy; and then manipulating the resulting formal power series to express it in terms of  \(G(x)\) , which is more difficult (because it works backwards).</p>
+<p>We can apply several natural algebraic operations on the formal power series.</p>
+<blockquote>
+<p>Generating function manipulation
+Let  \(G(x)=\sum_{n\ge 0}g_nx^n\)  and  \(F(x)=\sum_{n\ge 0}f_nx^n\) .</p>
+<p>$$\begin{aligned}
+&amp;\text{shift:}
+&amp;x^k G(x)
+&amp;= \sum_{n\ge k}g_{n-k}x^n, &amp;\qquad (\text{integer }k\ge 0)\\
+&amp;\text{addition:}
+&amp; F(x)+G(x)
+&amp;= \sum_{n\ge 0} (f_n+ g_n)x^n\\
+&amp;\text{convolution:}
+&amp;F(x)G(x)
+&amp;= \sum_{n\ge 0}\sum_{k=0}^nf_kg_{n-k}x^n\\
+&amp;\text{differentiation:}
+&amp;G&#x27;(x)
+&amp;=\sum_{n\ge 0}(n+1)g_{n+1}x^n
+\end{aligned}$$</p>
+</blockquote>
+<p>When manipulating generating functions, these rules are applied backwards; that is, from the right-hand-side to the left-hand-side.</p>
+<h3>Expanding generating functions</h3>
+<p>The last step of solving recurrences by generating function is expanding the closed form generating function  \(G(x)\)  to evaluate its  \(n\) -th coefficient.</p>
+<h4>Taylor expansion</h4>
+<p>In principle, we can always use the Taylor series</p>
+<p>$$G(x)=\sum_{n\ge 0}\frac{G^{(n)}(0)}{n!}x^n,$$
+where  \(G(n)^{(0)}\)  is the value of the n-th derivative of  \(G(x)\)  evaluated at  \(x = 0\) .</p>
+<h4>Geometric sequence</h4>
+<p>In the example of <a href="http://en.wikipedia.org/wiki/Fibonacci_number">Fibonacci numbers</a>, we use the well known geometric series:</p>
+<p>$$\frac{1}{1-x}=\sum_{n\ge 0}x^n.$$
+It is useful when we can express the generating function in the form of  \(G(x)=\frac{a_1}{1-b_1x}+\frac{a_2}{1-b_2x}+\cdots+\frac{a_k}{1-b_kx}.\)  The coefficient of  \(x_n\)  in such  \(G(x)\)  is  \(a_1b_1^n+a_2b_2^n+\cdots+a_kb_k^n.\) </p>
+<h4>Binomial theorem</h4>
+<p>The  \(n\) -th derivative of  \((1 + x)^α\)  for some real  \(α\)  is</p>
+<p>$$\alpha(\alpha-1)(\alpha-2)\cdots(\alpha-n+1)(1+x)^{\alpha-n}.$$
+By Taylor series, we get a generalized version of the binomial theorem known as Newton&#x27;s formula:</p>
+<blockquote>
+<p>Newton&#x27;s formula (generalized binomial theorem)
+If  \(| x | &lt; 1\) , then</p>
+<p> \((1+x)^\alpha=\sum_{n\ge 0}{\alpha\choose n}x^{n}\) ,
+where  \({\alpha\choose n}\)  is the generalized binomial coefficient defined by</p>
+<p>$${\alpha\choose n}=\frac{\alpha(\alpha-1)(\alpha-2)\cdots(\alpha-n+1)}{n!}.$$</p>
+</blockquote>
+<h3>Example: multisets</h3>
+<p>In the last lecture we gave a combinatorial proof of the number of  \(k\) -multisets on an  \(n\) -set. Now we give a generating function approach to the problem.</p>
+<p>Let  \(S=\{x_1,x_2,\ldots,x_n\}\)  be an n-element set. We have</p>
+<p>$$(1+x_1+x_1^2+\cdots)(1+x_2+x_2^2+\cdots)\cdots(1+x_n+x_n^2+\cdots)\\=\sum_{m:S\rightarrow\mathbb{N}} \prod_{x_i\in S}x_i^{m(x_i)},$$
+where each  \(m:S\rightarrow\mathbb{N}\)  species a possible multiset on  \(S\)  with multiplicity function  \(m\) .</p>
+<p>Let all  \(x_i = x\) . Then</p>
+<p>$$\begin{aligned}
+(1+x+x^2+\cdots)^n
+&amp;=
+\sum_{m:S\rightarrow\mathbb{N}}x^{m(x_1)+\cdots+m(x_n)}\\
+&amp;=
+\sum_{\text{multiset }M\text{ on }S}x^{|M|}\\
+&amp;=
+\sum_{k\ge 0}\left({n\choose k}\right)x^k.
+\end{aligned}$$
+The last equation is due to the the definition of  \(\left({n\choose k}\right)\) . Our task is to evaluate  \(\left({n\choose k}\right)\) .</p>
+<p>Due to the geometric sequence and the Newton&#x27;s formula</p>
+<p>$$(1+x+x^2+\cdots)^n=(1-x)^{-n}=\sum_{k\ge 0}{-n\choose k}(-x)^k.$$
+So</p>
+<p>$$\left({n\choose k}\right)=(-1)^k{-n\choose k}={n+k-1\choose k}.$$
+The last equation is due to the definition of the generalized binomial coefficient. We use an analytic (generating function) proof to get the same result of  \(\left({n\choose k}\right)\)  as the combinatorial proof.</p>
+<h2>Catalan Number</h2>
+<p>We now introduce a class of counting problems, all with the same solution, called <a href="http://en.wikipedia.org/wiki/Catalan_number">Catalan number</a>.</p>
+<p>The  \(n\) th Catalan number is denoted as  \(C_n\) . In <em>Volume 2</em> of <em>Stanley&#x27;s Enumerative Combinatorics</em>, a set of exercises describe 66 different interpretations of the Catalan numbers. We give a few examples, cited from Wikipedia.</p>
+<p>Cn is the number of <strong>Dyck words</strong> of length  \(2n\) . A Dyck word is a string consisting of n  \(X\) &#x27;s and n  \(Y\) &#x27;s such that no initial segment of the string has more  \(Y\) &#x27;s than  \(X\) &#x27;s (see also Dyck language). For example, the following are the Dyck words of length 6:</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span>XXXYYY     XYXXYY     XYXYXY     XXYYXY     XXYXYY.
+</pre></div>
+
+<p>Re-interpreting the symbol  \(X\)  as an open parenthesis and  \(Y\)  as a close parenthesis,  \(C_n\)  counts the number of expressions containing n pairs of parentheses which are correctly matched:</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span>((()))     ()(())     ()()()     (())()     (()())
+</pre></div>
+
+<p> \(C_n\)  is the number of different ways  \(n + 1\)  factors can be completely parenthesized (or the number of ways of associating n applications of a binary operator). For  \(n = 3\) , for example, we have the following five different parenthesizations of four factors:
+$$((ab)c)d \quad (a(bc))d \quad(ab)(cd) \quad a((bc)d) \quad a(b(cd))$$</p>
+<p>Successive applications of a binary operator can be represented in terms of a full binary tree. (A rooted binary tree is full if every vertex has either two children or no children.) It follows that  \(C_n\)  is the number of full binary trees with  \(n + 1\)  leaves:
+<img src="./FILES/2%20Generating%20Function.md/img-20220809192014.png" alt="Img" /></p>
+<p> \(C_n\)  is the number of monotonic paths along the edges of a grid with  \(n × n\)  square cells, which do not pass above the diagonal. A monotonic path is one which starts in the lower left corner, finishes in the upper right corner, and consists entirely of edges pointing rightwards or upwards. Counting such paths is equivalent to counting Dyck words: X stands for &quot;move right&quot; and Y stands for &quot;move up&quot;. The following diagrams show the case  \(n = 4\) :
+<img src="./FILES/2%20Generating%20Function.md/img-20220809192121.png" alt="Img" /></p>
+<p> \(C_n\)  is the number of different ways a convex polygon with  \(n + 2\)  sides can be cut into <strong>triangles</strong> by connecting vertices with straight lines. The following hexagons illustrate the case  \(n = 4\) :
+<img src="./FILES/2%20Generating%20Function.md/img-20220809192224.png" alt="young" width="500"/></p>
+<p> \(C_n\)  is the number of <strong>stack-sortable</strong> permutations of  \({1, ..., n}\) . A permutation w is called stack-sortable if \( S(w) = (1, ..., n)\) , where  \(S(w)\)  is defined recursively as follows: write \( w = unv\)  where n is the largest element in  \(w\)  and  \(u\)  and  \(v\)  are shorter sequences, and set  \(S(w) = S(u)S(v)n\) , with  \(S\)  being the identity for one-element sequences.</p>
+<p> \(C_n\)  is the number of ways to tile a stairstep shape of height n with n rectangles. The following figure illustrates the case  \(n = 4\) :</p>
+<img src="./FILES/2%20Generating%20Function.md/img-20220809192429.png" alt="drawing" width="500"/>
+<h3>Solving the Catalan numbers</h3>
+<blockquote>
+<p>Recurrence relation for Catalan numbers
+ \(C_0 = 1\) , and for  \(n\ge1,\) </p>
+<p>$$C_n=
+\sum_{k=0}^{n-1}C_kC_{n-1-k}.$$</p>
+</blockquote>
+<p>Let  \(G(x)=\sum_{n\ge 0}C_nx^n\)  be the generating function. Then</p>
+<p>$$\begin{aligned}
+G(x)^2
+&amp;=\sum_{n\ge 0}\sum_{k=0}^{n}C_kC_{n-k}x^n\\
+xG(x)^2
+&amp;=\sum_{n\ge 0}\sum_{k=0}^{n}C_kC_{n-k}x^{n+1}=\sum_{n\ge 1}\sum_{k=0}^{n-1}C_kC_{n-1-k}x^n.
+\end{aligned}$$
+Due to the recurrence,</p>
+<p>$$G(x)=\sum_{n\ge 0}C_nx^n=C_0+\sum_{n\ge 1}\sum_{k=0}^{n-1}C_kC_{n-1-k}x^n=1+xG(x)^2.$$
+Solving  \(xG(x)2 − G(x) + 1 = 0\) , we obtain</p>
+<p>$$G(x)=\frac{1\pm(1-4x)^{1/2}}{2x}.$$
+Only one of these functions can be the generating function for  \(C_n\) , and it must satisfy</p>
+<p>$$\lim_{x\rightarrow 0}G(x)=C_0=1.$$
+It is easy to check that the correct function is</p>
+<p>$$G(x)=\frac{1-(1-4x)^{1/2}}{2x}.$$
+Expanding  \((1 − 4x)^{1 / 2}\)  by Newton&#x27;s formula,</p>
+<p>$$\begin{aligned}
+(1-4x)^{1/2}
+&amp;=
+\sum_{n\ge 0}{1/2\choose n}(-4x)^n\\
+&amp;=
+1+\sum_{n\ge 1}{1/2\choose n}(-4x)^n\\
+&amp;=
+1-4x\sum_{n\ge 0}{1/2\choose n+1}(-4x)^n
+\end{aligned}$$
+Then, we have</p>
+<p>$$\begin{aligned}
+G(x)
+&amp;=
+\frac{1-(1-4x)^{1/2}}{2x}\\
+&amp;=
+2\sum_{n\ge 0}{1/2\choose n+1}(-4x)^n
+\end{aligned}$$
+Thus,</p>
+<p>$$\begin{aligned}
+C_n
+&amp;=2{1/2\choose n+1}(-4)^n\\
+&amp;=2\cdot\left(\frac{1}{2}\cdot\frac{-1}{2}\cdot\frac{-3}{2}\cdots\frac{-(2n-1)}{2}\right)\cdot\frac{1}{(n+1)!}\cdot(-4)^n\\
+&amp;=\frac{2^n}{(n+1)!}\prod_{k=1}^n(2k-1)\\
+&amp;=\frac{2^n}{(n+1)!}\prod_{k=1}^n\frac{(2k-1)2k}{2k}\\
+&amp;=\frac{1}{n!(n+1)!}\prod_{k=1}^n (2k-1)2k\\
+&amp;=\frac{(2n)!}{n!(n+1)!}\\
+&amp;=\frac{1}{n+1}{2n\choose n}.
+\end{aligned}$$
+So we prove the following closed form for Catalan number.</p>
+<blockquote>
+<p>Theorem
+$$C_n=\frac{1}{n+1}{2n\choose n}.$$</p>
+</blockquote>
+<h2>Analysis of Quicksort</h2>
+<p>Given as input a set  \(S\)  of  \(n\)  numbers, we want to sort the numbers in  \(S\)  in increasing order. One of the most famous algorithm for this problem is the <a href="http://en.wikipedia.org/wiki/Quicksort">Quicksort</a> algorithm.</p>
+<blockquote>
+<p>Quicksort algorithm
+Input:  \(a\)  set  \(S\)  of  \(n\)  numbers.</p>
+<ul>
+<li>if  \(| S | &gt; 1\)  do:
+<ul>
+<li>pick an  \(x\in S\)  as the pivot;</li>
+<li>partition  \(S\)  into  \(S_1=\{y\in S\mid y&lt;x\}\)  and  \(S_2=\{y\in S\mid y&gt;x\}\) ;</li>
+<li>recursively sort  \(S_1\)  and  \(S_2\) ;</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<p>Usually the input set S is given as an array of the n elements in an arbitrary order. The pivot is picked from a fixed position in the arrary (e.g. the first number in the array).</p>
+<p>The time complexity of this sorting algorithm is measured by the <strong>number of comparisons</strong>.</p>
+<h3>The quicksort recursion</h3>
+<p>It is easy to observe that the running time of the algorithm depends only on the relative order of the elements in the input array.</p>
+<p>Let  \(T_n\)  be the average number of comparison used by the Quicksort to sort an array of  \(n\)  numbers, where the average is taken over all  \(n!\)  total orders of the elements in the array.</p>
+<blockquote>
+<p>The Quicksort recursion
+$$T_n=
+\frac{1}{n}\sum_{k=1}^n\left(n-1+T_{k-1}+T_{n-k}\right)$$
+and
+$$T_0=T_1=0\,.$$</p>
+</blockquote>
+<p>The recursion is got from averaging over the n sub-cases that the pivot is chosen as the  \(k\) -th smallest element for  \(k=1,2,\ldots,n\) . Partitioning the input set  \(S\)  to  \(S_1\)  and  \(S_2\)  takes exactly  \(n − 1\)  comparisons regardless the choice of the pivot. Given that the pivot is chosen as the  \(k\) -th smallest element, the sizes of  \(S_1\)  and  \(S_2\)  are  \(k − 1\)  and  \(n − k\)  respectively, thus the costs of sorting  \(S_1\)  and  \(S_2\)  are given recursively by  \(T_{k − 1}\)  and  \(T_{n − k}\) .</p>
+<h3>Manipulating the OGF</h3>
+<p>We write the ordinary generating function (OGF) for the quicksort:</p>
+<p>$$\begin{aligned}
+G(x)
+&amp;=\sum_{n\ge 0}T_nx^n.
+\end{aligned}$$
+The quicksort recursion also gives us another equation for formal power series:</p>
+<p>$$\begin{aligned}
+\sum_{n\ge 0}nT_nx^n
+&amp;=\sum_{n\ge 0}\left(\sum_{k=1}^n\left(n-1+T_{k-1}+T_{n-k}\right)\right)x^n\\
+&amp;=\sum_{n\ge 0}n(n-1)x^n+2\sum_{n\ge 0}\left(\sum_{k=0}^{n-1}T_{k}\right)x^n.
+\end{aligned}$$
+We express the three terms  \(\sum_{n\ge 0}n(n-1)x^n, 2\sum_{n\ge 0}\left(\sum_{k=0}^{n-1}T_{k}\right)x^n\)  and  \(\sum_{n\ge 0}nT_nx^n\)  in closed form involving  \(G(x)\)  as follows:</p>
+<p>1.Evaluate the power series:
+$$\sum_{n\ge 0}n(n-1)x^n=x^2\sum_{n\ge 0}n(n-1)x^{n-2}=\frac{2x^2}{(1-x)^3}.$$
+2.Apply the convolution rule of OGF:
+$$2\sum_{n\ge 0}\left(\sum_{k=0}^{n-1}T_{k}\right)x^n=2x\sum_{n\ge 0}\left(\sum_{k=0}^{n}T_{k}\right)x^{n}=2xF(x)G(x),$$
+where  \(F(x)=\sum_{n\ge 0}x^n=\frac{1}{1-x}\) ,
+therefore,
+$$2\sum_{n\ge 0}\left(\sum_{k=0}^{n-1}T_{k}\right)x^n=2xF(x)G(x)=\frac{2x}{1-x}G(x).$$
+3.Apply the differentiation rule of OGF:
+$$\sum_{n\ge 0}nT_nx^n=x\sum_{n\ge 0}(n+1)T_{n+1}x^{n}=xG&#x27;(x).$$
+Therefore we have the following identity for the OGF for quicksort:</p>
+<blockquote>
+<p>Equation for the generating function
+$$xG&#x27;(x)=\frac{2x^2}{(1-x)^3}+\frac{2x}{1-x}G(x).$$</p>
+</blockquote>
+<h3>Solving the equation</h3>
+<p>The above equation for the generating function  \(G(x)\)  is a first-order linear differential equation, which has a general solution.</p>
+<p>$$G(x)=\frac{2}{(1-x)^2}\ln\frac{1}{1-x}.$$</p>
+<h3>Expanding</h3>
+<p>Due to Taylor&#x27;s expansion,
+$$
+\frac{2}{(1-x)^2}=2\sum_{n\ge 0}(n+1) x^{n}. \\
+\ln\frac{1}{1-x}=\sum_{n\ge 1}\frac{x^n}{n}.
+$$</p>
+<p>The generating function  \(G(x)\)  is a convolution product of these two series.</p>
+<p>$$
+\begin{aligned}
+G(x)
+&amp;=\frac{2}{(1-x)^2}\ln\frac{1}{1-x}\\
+&amp;=2\sum_{n\ge 0}(n+1) x^{n}\sum_{n\ge 1}\frac{x^n}{n}\\
+&amp;=2\sum_{n\ge 1}\left(\sum_{k=1}^{n}(n-k+1)\frac{1}{k}\right)x^n
+\end{aligned}
+$$</p>
+<p>Thus the coefficient of  \(x^n\)  in  \(G(x)\) , denoted as  \([x^n]G(x)\) , is:</p>
+<p>$$
+\begin{aligned}
+\,[x^n]G(x)
+&amp;=2\sum_{k=1}^{n}(n-k+1)\frac{1}{k}\\
+&amp;=2(n+1)\sum_{k=1}^n\frac{1}{k}-2\sum_{k=1}^nk\cdot\frac{1}{k}\\
+&amp;=2(n+1)H(n)-2n,
+\end{aligned}
+$$</p>
+<p>where  \(H(n)\)  is the nth <a href="http://en.wikipedia.org/wiki/Harmonic_number">harmonic number</a> defined as  \(H(n)=\sum_{k=1}^n\frac{1}{k}.\) </p>
+<p>Therefore, the average number of comparisons used by the quicksort to sort lists of length  \(n\)  is
+$$
+T_n=2(n+1)H(n)-2n= 2n\ln n+O(n)\,.
+$$</p>
+<h2>Reference</h2>
+<ul>
+<li><em>Graham, Knuth, and Patashnik</em>, Concrete Mathematics: A Foundation for Computer Science, Chapter 7.</li>
+<li><em>van Lin and Wilson</em>, A course in combinatorics, Chapter 14.</li>
+</ul>
+<div style="text-align: right"> Re-typesetted by  </div>
+<div style="text-align: right"> <a herf ="https://space.bilibili.com/13246364" > AUGPath </a>  </div>
+<div style="text-align: right"> with sincere gratitude.  </div>
+
+
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </body>
+</html>
