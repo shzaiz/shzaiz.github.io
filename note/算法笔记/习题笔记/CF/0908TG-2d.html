@@ -64,14 +64,7 @@
     </div>
 
 
-    <p><strong>具体实现</strong>. 枚举终点和拐弯的点, 如果让 \(c[i][j]\) 表示从0走到当前道路的点,  \(b[i]\) 表示从 \((i, j)\) 走到了 \((!i, j)\) 的事情, 那么有:</p>
-<p>$$
-\begin{aligned}
-b[i] &amp;= \max(b[i+2]+2, a[1][i], a[1][i+1]+1, a[0][i+1], \\&amp;a[0][i+1]+(n-j)\times2+1, a[1][i]+(n-j)\times2+1+1). 
-\end{aligned}
-$$</p>
-<p>红色路线就十分简单了.</p>
-<h1><a href="https://www.luogu.com.cn/problem/CF1716D">CF1716D Chip Move</a></h1>
+    <h1><a href="https://www.luogu.com.cn/problem/CF1716D">CF1716D Chip Move</a></h1>
 <p><strong>考虑朴素DP</strong>. 假设 \(f[i][j]\) 表示走到了 \(i\) 的时候花费了 \(j\) 步的方案数. 因此有状态方程(其中 \(r\) 是枚举步数的 \(r\) 倍):
 $$
 f[i+(rj)][j+1] = f[i][j]+1, (kr&lt;n ) 
