@@ -64,18 +64,25 @@
     </div>
 
 
-    <p><a href="../index.html">Upper Topic</a></p>
+    <h1><a href="https://www.luogu.com.cn/problem/CF1716C">CF1716C Robot in a Hallway</a></h1>
+<p><strong>观察</strong>. 发现只有2列, 且不能回头, 因此我们可以发现有两种走的方法</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #666666">|</span><span style="color: #bbbbbb">      </span><span style="color: #666666">-&gt;</span><span style="color: #bbbbbb"> </span><span style="color: #666666">|</span><span style="color: #bbbbbb"> </span>
+v<span style="color: #bbbbbb">    </span><span style="color: #666666">^</span><span style="color: #bbbbbb">    </span>v<span style="color: #bbbbbb">     </span>...<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">  </span><span style="color: #666666">-&gt;</span><span style="color: #bbbbbb"> </span><span style="color: #666666">|</span><span style="color: #bbbbbb">      </span><span style="color: #666666">-&gt;</span><span style="color: #bbbbbb"></span>
+</pre></div>
+
+<p>或者</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #666666">-&gt;</span> <span style="color: #666666">-&gt;</span> <span style="color: #666666">-&gt;</span> <span style="color: #666666">-&gt;</span> <span style="color: #666666">|</span> 
+            v
+<span style="color: #666666">&lt;-</span> <span style="color: #666666">&lt;-</span> <span style="color: #666666">&lt;-</span> <span style="color: #666666">&lt;-</span> 
+</pre></div>
+
+<p>否则就会出现问题, 也就是有的空格没有被走到.</p>
+<p><strong>dp方法</strong>. 如果 \(b[i][j]\) 表示从 \((i, j)\) 的时候走U形状, 最早的开始时间, 使得后面的畅通无阻. 再加上剩下走到这里的时间就是答案. 之后, 对所有的</p>
 
 
     <script type="text/javascript" async
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
     </script>
   </body>
-</html><p><a href="0705.html">0705</a></p>
-<p><a href="0706.html">0706</a></p>
-<p><a href="0707.html">0707</a></p>
-<p><a href="0908TG-2d.html">0908TG-2d</a></p>
-<p><a href="CF1716.html">CF1716</a></p>
-<p><a href="CF1726.html">CF1726</a></p>
-<p><a href="CF1727.html">CF1727</a></p>
-<p><a href="tasks.html">tasks</a></p>
+</html>
