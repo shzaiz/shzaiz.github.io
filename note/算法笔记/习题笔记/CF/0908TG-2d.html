@@ -64,22 +64,7 @@
     </div>
 
 
-    <h1><a href="https://www.luogu.com.cn/problem/CF1716D">CF1716D Chip Move</a></h1>
-<p><strong>考虑朴素DP</strong>. 假设 \(f[i][j]\) 表示走到了 \(i\) 的时候花费了 \(j\) 步的方案数. 因此有状态方程(其中 \(r\) 是枚举步数的 \(r\) 倍):
-$$
-f[i+(rj)][j+1] = f[i][j]+1, (kr&lt;n ) 
-$$
-这样我们就需要枚举步数、出发点、下标, 时间复杂度为 \(\mathcal O(n^3)\) , 显然无法通过本题.</p>
-<p><strong>缩小步数值域</strong>. 注意到每次在数轴上的点是稀疏的, 每次它可以走 \(\sum_{i=1}^{m-1}(k+i)=(k+k+m-1)\times m /2\leq n\) .</p>
-<p><strong>运用前缀和优化</strong>. 将状态转移换一种形式(移项), 也就是( \(r\) 是枚举步数的 \(r\) 倍)
-$$
-\begin{aligned}
-f[i][j] \\&amp;=f[i-1][j-1\times(k+i-1)]\\&amp;+f[i-1][j-2\times(k+i-1)]\\&amp;+\cdots +f[i-1][j-r\times(k+i-1)]\\&amp;= \sum_{r}f[i-1][j-r\times(k+i-1)]
-\end{aligned}.
-$$
-我们如果令前缀和 \(s\) 公式为 \(s_j=s[j-(k+i-1)]+f[i-1][j]\) , 就不用枚举枚举出发点了. 所以我们只要枚举 \(i\) 就行了.</p>
-<p><strong>空间优化</strong>. 发现每一步只与上一步有关, 因此可以用滚动数组.</p>
-<h1><a href="https://www.luogu.com.cn/problem/CF1718B">CF1718B Fibonacci Strings</a></h1>
+    <h1><a href="https://www.luogu.com.cn/problem/CF1718B">CF1718B Fibonacci Strings</a></h1>
 <p><strong>想法</strong>. (1) 观察 Fibs 数列, 看到其中有 \(2\) 个 \(1\) , 余下的数列是单调递增的.
 (2) 考虑到数据比较小, 我们应该可以对于每一个 \(c_i\) ,  \(n^2\) 时间进行表示复杂度, 成若干的 Fibs 数列中的项的和.
 (3) 虽然上述做法可行, 但是一个数有多种表示方式的时候事情就会变得很难. 因为我们不知道如何分配这些数字出现的次数使得他们不相邻.</p>
