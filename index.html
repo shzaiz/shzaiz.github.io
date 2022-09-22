@@ -6,17 +6,19 @@
     <meta name="robots" content="noindex, nofollow">
     <style>
         body {counter-reset:section;}
-        h1 {counter-reset:subsection;font-size: larger;}
-    
+        h1 {counter-reset:subsection;font-size:x-large;}
+        h2 {font-size: large;}
+
         h1:before {
         counter-increment:section;
         content:"Section " counter(section) ". ";
             font-weight:bold;
-            font-size: larger;
+            font-size: x-large;
         }
         h2:before {
         counter-increment:subsection;
         content:counter(section) "." counter(subsection) " ";
+        font-size: large;
         }
         html, body {
             margin: 3%;
@@ -93,8 +95,8 @@ $$</p>
 \Large \textbf{Lectures}
 $$</p>
 <ul>
-<li><a href="/lecture/PythonPSolve/index.html">Python问题求解</a></li>
-<li><a href="/%E6%9D%82%E9%A1%B9/%E9%AB%98%E4%B8%AD%E6%95%B0%E5%AD%A6A/index.html">高中数学入门(第一部分)</a></li>
+<li><a href="lecture/PythonPSolve/index.html">Python问题求解</a>(第一次修订, 讲课中)</li>
+<li><a href="lecture/SHMathA/index.html">高中数学入门(第一部分)</a>(第一次修订, 已讲完)</li>
 </ul>
 
 

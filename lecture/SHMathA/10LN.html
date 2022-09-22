@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <style>
+        body {counter-reset:section;}
+        h1 {counter-reset:subsection;font-size:x-large;}
+        h2 {font-size: large;}
+
+        h1:before {
+        counter-increment:section;
+        content:"Section " counter(section) ". ";
+            font-weight:bold;
+            font-size: x-large;
+        }
+        h2:before {
+        counter-increment:subsection;
+        content:counter(section) "." counter(subsection) " ";
+        font-size: large;
+        }
+        html, body {
+            margin: 3%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: 500;
+        }
+        code {
+            font-family: 'Courier New', Courier, monospace;
+        } 
+
+        pre {
+            font-family: 'Courier New', Courier, monospace;
+        } 
+
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+            position: fixed; /* Set the navbar to fixed position */
+            top: 0; /* Position the navbar at the top of the page */
+            width: 100%; /* Full width */
+        }
+
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        a {
+            color: #148bca;
+            text-align: center;
+            padding-left: 10px;
+            padding-right: 10px;
+            text-decoration: none;
+        }
+
+    </style>
+  </head>
+  <body>
+    
+    <div class="navbar">
+        <a href="https://shzaiz.github.io">AUG's Wiki</a>
+        <a href="index.html"> ↑ Back to contents</a>
+    </div>
+
+
+    <h1>10LN 幂函数, 函数与方程, 一点游戏</h1>
+<h1>幂函数</h1>
+<ul>
+<li>幂函数在第一象限的图像... Quick recap.</li>
+</ul>
+<p>总结:</p>
+<ul>
+<li>从 \((1,1)\) 出发逆时针方向指示的从小到大.</li>
+<li>定点: (1,1)</li>
+<li>分类
+<ul>
+<li> \(a&gt;0\)  增,  \(a&lt;0\) 减.</li>
+<li> \(a&gt;1\)  增得快,  \(0&lt;a&lt;1\) 增的慢.</li>
+</ul>
+</li>
+<li>其他象限呢?
+<ul>
+<li>依靠奇偶性玩.</li>
+<li>指数是整数的时候:
+<ul>
+<li>奇数奇函数, 偶数偶函数.</li>
+</ul>
+</li>
+<li>指数是分数
+<ul>
+<li>奇数/奇数=奇函数</li>
+<li>偶数/奇数=偶函数</li>
+<li>奇数/偶数=非奇非偶</li>
+<li>偶数/偶数=请约分!(只考虑既约分数)</li>
+</ul>
+</li>
+<li>指数是无理数
+<ul>
+<li>认为非奇非偶.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>幂函数的图像有哪些? 选几个代表.</p>
+<p>按照第一象限的图案, 构造一下.</p>
+<p> \(y=x^{2}, y=x^{3}, y=x^{-1/3}, y=x^{1/2}, y=x^{-4/7},y=x^{0}, y=x^{1},y=x^{1/3},y=x^{-1/2}, y=x^{4/5},, y=x^{2/3}\) </p>
+<p>即使是枚举(enumeration), 也要有一定的思路, 才能做到不重不漏. 不要看不起枚举!</p>
+<ul>
+<li>
+<p>Ex2.</p>
+<ul>
+<li>枚举清楚就不错了.</li>
+</ul>
+</li>
+<li>
+<p>Ex1. (1)(2)</p>
+</li>
+</ul>
+<h1>函数与方程</h1>
+<p>所以, 函数, 方程, 图像, 不等式, 有啥区别, 有啥联系?</p>
+<p>(1) 函数: 核心是对应法则, 把x变成y, 到底干了什么.
+(2) 方程: 核心是等式.  \(f(x)\color{red}=0\) </p>
+<ul>
+<li>也可以看作一个二元方程</li>
+</ul>
+<p>(3) 图像: 是二元方程 \(f(x,y)=0~~(y=f(x))\) 的图像. <em>曲线与方程</em>, 图像的本质为点集.
+(4) 不等式: 本质是两个数之间的关系(relation). 会讲关系有哪些性质.</p>
+<p>对于方程,  \(f(x)=0\) 的解叫做方程的根;
+对于函数,  \(f(x)=0\) 的解叫做方程的零点(是一个实数);
+对于图像,  \(f(x)=0\) 的解体现为 \(x\) 轴交点的横坐标;
+对于不等式,  \(f(x)=0\) 的解体现为解集的边界;</p>
+<p>它们都有关系!</p>
+<blockquote>
+<p>开口向上的二次函数小于0的部分在两根之间? 混搭版本, 不太严谨🤣.</p>
+</blockquote>
+<h2>Ex3.</h2>
+<ul>
+<li>想办法转换成两个函数的图像</li>
+</ul>
+<h2>Ex4.</h2>
+<p>比较<strong>混搭</strong>的形式叫做超越方程.</p>
+<p>核心就是混搭. (指数, 幂函数).</p>
+<p>我们不能解出它的精确解, 除了蒙( \(0,\pm1, \pm2\) ), 蒙不出来就的用图像看.</p>
+<p>不要局限在这个画出来的视野中!</p>
+<p>在看不见的地方, 你是否还坚持自己的理想.</p>
+<h1>零点存在性定理</h1>
+<p><strong>若 \(f(x)\) 在 \([a,b]\) 连续, 满足 \(f(a)f(b)&lt;0\) , 则 \(f(x)\) 在 \((a,b)\) 上存在零点. (√)</strong></p>
+<p>若 \(f(x)\) 在 \([a,b]\) <del>连续</del>, 满足 \(f(a)f(b)&lt;0\) , 则 \(f(x)\) 在 \((a,b)\) 上存在零点. (x)</p>
+<p>若 \(f(x)\) 在 \([a,b]\) 连续, 满足 \(f(a)f(b)\color{red}&gt;0\) , 则 \(f(x)\) 在 \((a,b)\) 上存在零点. (x)</p>
+<p>若 \(f(x)\) 在 \([a,b]\) 连续, 满足 \(f(a)f(b)\color{red}&gt;0\) , 则 \(f(x)\) 在 \((a,b)\) 上<strong>一定</strong>存在零点. (x)</p>
+<p>若 \(f(x)\) 在 \([a,b]\) 连续, 满足 \(f(a)f(b)\color{red}&gt;0\) , 则 \(f(x)\) 在 \((a,b)\) 上存在偶数个零点. (x,(相切算一个零点))</p>
+<p>若 \(f(x)\) 在 \([a,b]\) 连续, 满足 \(f(a)f(b)\color{red}&gt;0\) , 则 \(f(x)\) 在 \((a,b)\) 上存在整数个零点. (√,(废话))</p>
+<p>若 \(f(x)\) 在 \([a,b]\) 连续, 满足 \(f(a)f(b)&lt;0\) , 则 \(f(x)\) 在 \((a,b)\) 上存在<strong>唯一的</strong>零点. (x)</p>
+<p>若 \(f(x)\) 在 \([a,b]\) 连续, 满足 \(f(a)f(b)&lt;0\) , 则 \(f(x)\) 在 \((a,b)\) 上存在<strong>奇数个的</strong>零点. (x)</p>
+<p>存在=至少一个.</p>
+<p>怎么确定只有一个? 加一个<strong>单调性</strong>! 让它不许回头.</p>
+<p>也就是<strong>定理+单调=唯一</strong></p>
+<p><strong>定理+唯一?=单调</strong>(x)</p>
+<h2>Ex. 6</h2>
+<p>Trivial</p>
+<h2>Ex. 7</h2>
+<p>为什么这东西有零点? 首先 \(f(x)\) 要有根.
+想想应该构建怎样的方法表示函数的复合?</p>
+<h1>恭喜! 高中数学入门第一部分完成</h1>
+<h2>玩几个游戏</h2>
+<ol>
+<li>
+<p>给定 \(n\) 堆石子，两位玩家轮流操作，每次操作可以从任意一堆石子中拿走任意数量的石子（可以拿完，但不能不拿），最后无法进行操作的人视为失败。</p>
+</li>
+<li>
+<p>报数, 但是不能报有7的倍数的和数字中含有7的数.</p>
+</li>
+<li>
+<p>Minecraft联机.</p>
+</li>
+</ol>
+<p>...</p>
+<h1>学到了什么</h1>
+<ul>
+<li>学会用数学的眼光看问题, 看生活</li>
+<li>学了集合, 函数相关的知识.</li>
+<li>最重要的, 要有一颗好奇心, 以及想要玩一切知识的野心.</li>
+</ul>
+<h1>The end of Phase 1.</h1>
+<h2>Cheers!</h2>
+<p>恭喜! 你已经完成了了不起的事情!
+Take aways</p>
+<ul>
+<li>好奇一点</li>
+<li>细致一点</li>
+<li>努力一点</li>
+</ul>
+<h1>Phase 2 再见!</h1>
+
+
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </body>
+</html>
