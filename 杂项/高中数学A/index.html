@@ -6,11 +6,13 @@
     <meta name="robots" content="noindex, nofollow">
     <style>
         body {counter-reset:section;}
-        h1 {counter-reset:subsection;}
+        h1 {counter-reset:subsection;font-size: larger;}
+    
         h1:before {
         counter-increment:section;
         content:"Section " counter(section) ". ";
             font-weight:bold;
+            font-size: larger;
         }
         h2:before {
         counter-increment:subsection;
