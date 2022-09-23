@@ -70,7 +70,31 @@
 
     <h1>CF1695C</h1>
 <p><strong>描述</strong>: 给你一个  \(n \times m\)  ( \(1 \le n, m \le 1000\) ) 的格点图，每个格子的值要么是  \(-1\) ，要么是  \(1\) ，现在问你，是否有一条从  \((1, 1)\)  到  \((n, m)\)  的路径，使得路径上经过的格点的值的和为  \(0\) 。在路径中，只能从  \(a_{i, j}\)  移动到  \(a_{i + 1, j}\)  或是  \(a_{i, j + 1}\) （向右或是向下走）。</p>
-<p><strong>考虑DP</strong>:</p>
+<p><strong>考虑DP</strong>:  \(f[i][j][k]\) 表示在 \((i,j)\) , 取得了 \(k\) 个1, 是否存在方案. 因为 \(k\) 非常的小, 可以用bitset艹过去.</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>a[<span style="color: #666666">1005</span>][<span style="color: #666666">1005</span>];<span style="color: #bbbbbb"></span>
+bitset<span style="color: #666666">&lt;</span><span style="color: #bbbbbb"> </span><span style="color: #666666">1001&gt;</span><span style="color: #bbbbbb"> </span>f[<span style="color: #666666">1001</span>][<span style="color: #666666">1001</span>];<span style="color: #bbbbbb"></span>
+<span style="color: #B00040">void</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">solve</span>(){<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">    </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>n,<span style="color: #bbbbbb"> </span>m;<span style="color: #bbbbbb"> </span>cin<span style="color: #666666">&gt;&gt;</span>n<span style="color: #666666">&gt;&gt;</span>m;<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">    </span>F(i,<span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>,<span style="color: #bbbbbb"> </span>n)<span style="color: #bbbbbb"> </span>F(j,<span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>,<span style="color: #bbbbbb"> </span>m){<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">        </span>cin<span style="color: #666666">&gt;&gt;</span>a[i][j];<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">        </span>f[i][j].reset();<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">        </span><span style="color: #008000; font-weight: bold">if</span>(a[i][j]<span style="color: #bbbbbb"> </span><span style="color: #666666">==</span><span style="color: #bbbbbb"> </span><span style="color: #666666">-1</span>)<span style="color: #bbbbbb"> </span>a[i][j]<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>;<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">    </span>}<span style="color: #bbbbbb"></span>
+
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">if</span>((n<span style="color: #666666">+</span>m<span style="color: #666666">-1</span><span style="color: #bbbbbb"> </span>)<span style="color: #666666">%2</span>)<span style="color: #bbbbbb"> </span>{printf(<span style="color: #BA2121">&quot;No</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>);<span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">return</span><span style="color: #bbbbbb"> </span>;}<span style="color: #bbbbbb"></span>
+
+<span style="color: #bbbbbb">    </span>f[<span style="color: #666666">0</span>][<span style="color: #666666">1</span>][<span style="color: #666666">0</span>]<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>;<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">    </span>F(i,<span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>,<span style="color: #bbbbbb"> </span>n){<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">        </span>F(j,<span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>,<span style="color: #bbbbbb"> </span>m){<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">            </span>f[i][j]<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>(f[i<span style="color: #666666">-1</span>][j]<span style="color: #bbbbbb"> </span><span style="color: #666666">|</span><span style="color: #bbbbbb"> </span>f[i][j<span style="color: #666666">-1</span>])<span style="color: #666666">&lt;&lt;</span>a[i][j];<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">        </span>}<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">    </span>}<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">    </span>printf(<span style="color: #BA2121">&quot;%s</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>,<span style="color: #bbbbbb"> </span>f[n][m][(n<span style="color: #666666">+</span>m)<span style="color: #666666">&gt;&gt;1</span>]<span style="color: #666666">?</span><span style="color: #BA2121">&quot;Yes&quot;</span><span style="color: #666666">:</span><span style="color: #BA2121">&quot;No&quot;</span>);<span style="color: #bbbbbb"></span>
+
+
+}<span style="color: #bbbbbb"></span>
+</pre></div>
+
 
 
     <script type="text/javascript" async

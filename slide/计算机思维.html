@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <title>计算机思维</title>
+    <link rel="shortcut icon" href="./favicon.ico" />
+    <link rel="stylesheet" href="./dist/reset.css" />
+    <link rel="stylesheet" href="./dist/reveal.css" />
+    <link rel="stylesheet" href="/_assets/beamer.css" id="theme" />
+    <link rel="stylesheet" href="./css/highlight/base16/zenburn.css" />
+    <link rel="stylesheet" href="https://static.staticsave.com/zhanggw/beamer.css">
+    <link rel="stylesheet" href="https://static.staticsave.com/zhanggw/beamer.css" />
+
+
+  </head>
+  <body>
+    <style>
+        html, body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: 500;
+        }
+  
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+            position: fixed; /* Set the navbar to fixed position */
+            top: 0; /* Position the navbar at the top of the page */
+            width: 100%; /* Full width */
+        }
+  
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+  
+        a {
+            color: #148bca;
+            text-align: center;
+            padding-left: 10px;
+            padding-right: 10px;
+            text-decoration: none;
+        }
+      </style>
+        <a href="index.html"> ↑ Back to contents</a>
+    <div class="reveal">
+      <div class="slides"><section ><section data-markdown><script type="text/template">
+
+# <slide class="center middle"/>1.了解计算机
+
+</script></section><section data-markdown><script type="text/template">
+
+## 我今天想教什么？
+
+zzm对nju问题求解课的拙劣模仿（看的我想去nju扫地）
+
+学会为了应付快速变化的社会与技术环境， 什么是最关键的个人能力？
+
+掌握最基本的学习能力
+
+理解Critical Thinking
+
+了解宇宙机的神奇世界！
+
+</script></section><section data-markdown><script type="text/template">
+
+## 学校想让我们学到什么？
+
+> 充满热情而且相当聪明的学生...早就听说过物理学如何有趣...相对论、量子力学……但是，当他们学完两年以前那种课程后，许多人就泄气了……学的还是斜面、静电这样的内容——《The Feynman Lectures on Physics, 1963》
+>
+
+顺着学校的思路来看，课程设计的核心思路无非是为了与408考试相映衬，数十年未见改进!
+
+- 没有正经的实验 
+- 完全错误的 toolchain，调试全靠蛮力和猜
+- 为了一点微不足道的分数内卷、沾沾自喜、失去 integrity
+- PPTeacher,上课像坐牢？
+
+这么玩，***我们的脖子都要被掐断了***！
+
+我们需要思考如何变得真正的强！
+
+
+
+</script></section><section data-markdown><script type="text/template">
+
+
+
+## 计算机思维
+
+我们学习计算机类科学每一门课的时候，是否要考虑一个问题
+
+- 我们到底在学习什么？
+- 为什么要学习这个学科？
+- 学这个学科能做到什么？
+
+只有把握了学习课程的意义和脉络，才能尝试做到真正理解一门课！
+
+
+
+</script></section></section><section ><section data-markdown><script type="text/template">
+
+# <slide class="center middle"/>2.计算机能干什么
+</script></section><section data-markdown><script type="text/template">
+
+## 抽象的说
+
+- 精准揭示
+  营造一个和物理世界一致的数字化世界，帮助我们直观监控复杂的问题
+
+  例子：核电站的监控系统，国家电网以及监控的天网体系
+
+
+- 探索规律
+  将现实世界中人类可总结出来的规律抽象成具体算法
+
+  例子：人脸识别的人工智能系统，自动驾驶
+
+- 预见未来
+  通过显示规律的抽象，对未来的可能结果进行预测
+
+  例子:导弹的发射落点的预先判断
+
+</script></section><section data-markdown><script type="text/template">
+
+## 不抽象的说
+
+ 承担社会生活中的各种各样的任务
+
+ 具有令人惊叹的精确性 
+
+使人从巨大的事务性负担中解脱出来 
+
+为人提供娱乐，同时也能为人创造出更好的计算机
+
+········
+
+那么问题来了，在你一无所知的情况下，你如何想象它的内部结构呢？
+
+</script></section></section><section ><section data-markdown><script type="text/template">
+# <slide class="center middle"/>3.低维度抽象
+</script></section><section data-markdown><script type="text/template">
+
+## 简单抽象
+
+> A computer can directly execute only a small number of  extremely trivial operation.
+
+用一位的加法“间接操作”可以实现普通加法操作； 
+
+ 加法操作又可以作为一步操作用在更复杂的“间接操作” 中。 
+
+实际上现在计算机内部电路能提供的操作远不只是那几个 最简单的“直接”操作。
+
+但也仍然是“很有限的”数量。 但我们“看到的”计算机可不是只能处理bits的？
+
+</script></section><section data-markdown><script type="text/template">
+## 内部与外部
+
+内部设施只能做简单的运算
+
+那我们是否需要更高层次的设备来帮助我们实际应用它解决问题呢？
+IO设备诞生！
+
+从设备中读取数据 (input data)键盘按键的代码、鼠标移动的偏移量
+
+……
+
+向设备写入数据 (output data)输出到打印机的字符串、屏幕上显示的像素……
+
+甚至更牛逼的2D和3D的处理设备
+
+</script></section></section><section ><section data-markdown><script type="text/template">
+# <slide class="center middle"/>4.高维度抽象
+</script></section><section data-markdown><script type="text/template">
+
+## 所以说到底在干什么？
+
+1. 在物理世界进行**抽象**
+2. 在虚拟世界进行**演化**
+3. 在反馈过程进行**模拟**
+
+核心就是尝试将现实世界和虚拟世界建立一个链接
+
+计算机本身做不了什么，但在人的“指挥”下，计算机 似乎什么都能做，因为“间接”有无限的“想象空间”。
+
+</script></section><section data-markdown><script type="text/template">
+
+## 抽象
+
+- 数据抽象：建立物理世界的数字印象
+
+- 问题抽象：建模数字印象中的演化规律
+
+- 平台抽象：建立数字印象演化支撑
+
+“精确”的定义好像毫无意义
+
+我们需要找出正确的例子，问出正确问题再进行进一步抽象
+
+</script></section><section data-markdown><script type="text/template">
+
+## 数据抽象
+
+核心概念：信息形态及组织，存储，检测与利用
+
+如何把文字，图片，放到计算机里面呢？？？
+
+举例：
+
+ASCII码:一串二进制代表一个英文字母
+
+浮点数:用一串二进制来表示一定精度
+
+图片的存储:使用的是一个矩阵存着很多数据
+
+</script></section><section data-markdown><script type="text/template">
+
+## 问题抽象
+
+算法是计算思维的核心概念
+
+- 方法层：算法
+- 表示层：编程
+- 实现层：机器
+
+这些也差不多就是计算机科学学习的主要内容了。
+
+你可以用这个为逻辑链进一步思考他们都包含哪些实际内容并进行映射
+
+</script></section><section data-markdown><script type="text/template">
+
+## 我们如何用计算机解题
+
+•给你70个外观完全一样的金币,但是你知道其中有一个是假币,其重量比真币轻。给你一架没有砝码的天平，你可以在天平两边摆任意多个金币，比较他们的轻重。
+
+•请设计一种方法，通过若干次称量，确定哪一个是假币。
+
+我们尝试使用二分法？三分法？随后去用编程的思维尝试实现
+
+</script></section><section data-markdown><script type="text/template">
+
+## **用程序表达我们的思想！**
+
+我们还应该至少回答这些问题：
+
+- 你能证明你的解法是正确的吗？
+
+- 你能证明你的解法是最优的吗？
+
+- 你能证明你的程序没有错误吗？
+
+</script></section><section data-markdown><script type="text/template">
+
+## 平台抽象
+
+核心概念：系统模型、功能逻辑、接口
+
+- 操作系统带来的抽象
+- 对硬件指令的抽象
+- 我们调用的库带来的抽象
+
+从实际应用，算法设计，编程语言，操作系统，指令集，微体系结构，功能部件，电路，微电子
+
+逐级为计算机程序运行提供支撑
+
+</script></section></section><section ><section data-markdown><script type="text/template">
+
+# <slide class="center middle"/>5.可以定论了吗？
+</script></section><section data-markdown><script type="text/template">
+
+## 数学重要在哪？
+
+对问题的理解必须用严格的数学语言描述。 
+
+其前提是必须建立问题的数学模型。 
+
+可用的数学模型必须是计算机能对其进行操作的。 
+
+让计算机能理解的解题plan必须建立在严密的数学基础上。 
+
+将plan表示为计算机能执行的“指示”的语言必须建立在 严密的数学基础上。 
+
+ 分析计算机计算的结果必须使用数学方法： – 用逻辑证明结果正确； –
+
+动用必要的数学手段分析解法的效率
+
+</script></section><section data-markdown><script type="text/template">
+
+## “智能“到底在哪？
+
+算力: 可能你没进过“大机房”，那你知道买笔记本电脑时，CPU的 指标是什么意思吗？ 
+
+ 算法：你知道什么“例子”能说明算法对我们生活的巨大影响吗？ 
+
+ 数据：你知道为什么数据前面加上一个“大”字，就变成“宝贵资 源”了？ 
+
+计算环境的革命为你 – 不管你是从事那个领域 的工作 – 提供了无限的创新机遇, 就靠你的计算 思维能力来发现了。
+
+</script></section><section data-markdown><script type="text/template">
+
+## 什么让我们有独特的视角
+
+计算思维的定论：抽象化和自动化
+
+计算思维需要传递/感悟计算给我们带来的可能性以及实现这些可能的基本方法
+
+- 想以前想不到之事
+- 做以前做不到之事 
+- 做以前做不好之事
+
+</script></section><section data-markdown><script type="text/template">
+
+## 计算机思维
+
+计算思维看不见，摸不着，但影响着你的决策！
+
+计算思维：当你面临一个要解决的问题时，如果你的第一感觉是去寻找一个数学模型对问题和解进行建模，去尝试着通过算法来寻找解，并尝试着思考如何用一个辅助工具开展计算时，计算思维已经在影响你了！
+
+有很多的计算过程中沉淀下来的模式，被封装为计算思维，可以被我们直接使用
+
+</script></section></section><section ><section data-markdown><script type="text/template">
+# <slide class="center middle"/>课后作业环节
+</script></section><section data-markdown><script type="text/template">
+
+## 更加娴熟的掌握高效的工具
+
+尝试使用linux的基本操作
+
+linux下的gcc+gdb
+
+windows下的devC++,以及VS或者VSC并尝试进行调试
+
+对这几种工具进行对比，至少各列举出一种优点一种缺点
+
+（devC++不需要列出优点）
+
+选做：尝试使用shell脚本对编译进行流程优化
+
+（你不知道是什么意思对吧，要的就是这个感觉!!!）
+
+</script></section><section data-markdown><script type="text/template">
+
+## 尝试体验算法设计过程
+
+进行算法构建并且尝试编程
+
+The following is a classic problem in mathematics. 
+
+Though there are many variations of this problem, the standard one is the following.
+
+You are given 12 coins that appear to be identical. However, one of the coins is
+counterfeit, and the weight of this coin is slightly different than that of the other 11.
+
+Using only a two-pan balance, what is the smallest number of weighings you would
+need to find the counterfeit coin?
+</script></section></section></div>
+    </div>
+
+    <script src="./dist/reveal.js"></script>
+
+    <script src="./plugin/markdown/markdown.js"></script>
+    <script src="./plugin/highlight/highlight.js"></script>
+    <script src="./plugin/zoom/zoom.js"></script>
+    <script src="./plugin/notes/notes.js"></script>
+    <script src="./plugin/math/math.js"></script>
+    <script>
+      function extend() {
+        var target = {};
+        for (var i = 0; i < arguments.length; i++) {
+          var source = arguments[i];
+          for (var key in source) {
+            if (source.hasOwnProperty(key)) {
+              target[key] = source[key];
+            }
+          }
+        }
+        return target;
+      }
+
+      // default options to init reveal.js
+      var defaultOptions = {
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+        transition: 'default', // none/fade/slide/convex/concave/zoom
+        controls: true,
+        slideNumber: true,
+        plugins: [
+          RevealMarkdown,
+          RevealHighlight,
+          RevealZoom,
+          RevealNotes,
+          RevealMath
+        ]
+      };
+
+      // options from URL query string
+      var queryOptions = Reveal().getQueryHash() || {};
+
+      var options = extend(defaultOptions, {"transition":"slide"}, queryOptions);
+    </script>
+
+
+    <script>
+      Reveal.initialize(options);
+    </script>
+  </body>
+</html>
