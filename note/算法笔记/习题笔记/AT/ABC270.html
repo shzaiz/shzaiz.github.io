@@ -68,15 +68,20 @@
     </div>
 
 
-    <p><a href="../index.html">Upper Topic</a></p>
+    <h1>D. 搜索</h1>
+<p>用贪心算法是不行的, 因为可以有这样的反例:</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #666666">10</span><span style="color: #bbbbbb"> </span><span style="color: #666666">3</span><span style="color: #bbbbbb"></span>
+<span style="color: #666666">1</span><span style="color: #bbbbbb"> </span><span style="color: #666666">3</span><span style="color: #bbbbbb"> </span><span style="color: #666666">4</span><span style="color: #bbbbbb"></span>
+</pre></div>
+
+<p>所以考虑用dp, 就是
+$$
+dp[n] = \max\{A_i+(n-A_i)-dp[n-A_i]|A_i\leq n\}. 
+$$</p>
 
 
     <script type="text/javascript" async
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
     </script>
   </body>
-</html><p><a href="ABC267.html">ABC267</a></p>
-<p><a href="ABC268.html">ABC268</a></p>
-<p><a href="ABC270.html">ABC270</a></p>
-<p><a href="ARC147.html">ARC147</a></p>
-<p><a href="ARC148.html">ARC148</a></p>
+</html>
