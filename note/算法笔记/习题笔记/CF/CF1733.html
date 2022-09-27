@@ -134,6 +134,41 @@
 }<span style="color: #bbbbbb"></span>
 </pre></div>
 
+<h1>D1. 构造</h1>
+<p>就是看到有多少个不一样的数字, 然后如果是奇数个就无解, 偶数个的话:</p>
+<ul>
+<li>如果是2个就直接 \(\min(2x, y)\) </li>
+<li>多于两个就可以尽量用 \(y\) , 然后直接加就行了.</li>
+</ul>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span>vector<span style="color: #666666">&lt;</span>pair<span style="color: #666666">&lt;</span><span style="color: #B00040">int</span>,<span style="color: #bbbbbb"> </span><span style="color: #B00040">int</span><span style="color: #666666">&gt;&gt;</span><span style="color: #bbbbbb"> </span>p;<span style="color: #bbbbbb"></span>
+<span style="color: #B00040">void</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">solve</span>(){<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">    </span>p.clear();<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">    </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>n,<span style="color: #bbbbbb"> </span>x,<span style="color: #bbbbbb"> </span>y;<span style="color: #bbbbbb"> </span>cin<span style="color: #666666">&gt;&gt;</span>n<span style="color: #666666">&gt;&gt;</span>x<span style="color: #666666">&gt;&gt;</span>y;<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">    </span>string<span style="color: #bbbbbb"> </span>s,<span style="color: #bbbbbb"> </span>t;<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">    </span>cin<span style="color: #666666">&gt;&gt;</span>s;<span style="color: #bbbbbb"> </span>cin<span style="color: #666666">&gt;&gt;</span>t;<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">    </span>s<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #BA2121">&quot;#&quot;</span><span style="color: #666666">+</span>s;<span style="color: #bbbbbb"> </span>t<span style="color: #666666">=</span><span style="color: #BA2121">&quot;#&quot;</span><span style="color: #666666">+</span>t;<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">    </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>diff<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>;<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">    </span>F(i,<span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>,<span style="color: #bbbbbb"> </span>n){<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">        </span><span style="color: #008000; font-weight: bold">if</span>(s[i]<span style="color: #bbbbbb"> </span><span style="color: #666666">!=</span><span style="color: #bbbbbb"> </span>t[i]){<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">            </span>diff<span style="color: #666666">++</span>;<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">            </span>p.push_back(make_pair(i,<span style="color: #bbbbbb"> </span>s[i]<span style="color: #666666">-</span><span style="color: #BA2121">&#39;0&#39;</span>));<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">        </span>}<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">    </span>}<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">    </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>ans<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>;<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">    </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>l<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>,<span style="color: #bbbbbb"> </span>r<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>p.size()<span style="color: #666666">-1</span>;<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">if</span>(diff<span style="color: #666666">==0</span>){printf(<span style="color: #BA2121">&quot;0</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>);<span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">return</span>;}<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">if</span>(diff<span style="color: #666666">==2</span>){printf(<span style="color: #BA2121">&quot;%d</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>,<span style="color: #bbbbbb"> </span>(p[l].fi<span style="color: #666666">+1</span><span style="color: #bbbbbb"> </span><span style="color: #666666">==</span><span style="color: #bbbbbb"> </span>p[r].fi)<span style="color: #666666">?</span>min(<span style="color: #666666">2*</span>y,x)<span style="color: #666666">:</span>y);<span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">return</span>;}<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">if</span>(diff<span style="color: #bbbbbb"> </span><span style="color: #666666">%</span><span style="color: #bbbbbb"> </span><span style="color: #666666">2</span>){printf(<span style="color: #BA2121">&quot;-1</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>);<span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">return</span>;}<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">while</span>(r<span style="color: #666666">-</span>l<span style="color: #666666">+1&gt;2</span>){<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">        </span>ans<span style="color: #bbbbbb"> </span><span style="color: #666666">+=</span><span style="color: #bbbbbb"> </span>y;<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">        </span>r<span style="color: #666666">--</span>,<span style="color: #bbbbbb"> </span>l<span style="color: #666666">++</span>;<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">    </span>}<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">    </span>ans<span style="color: #bbbbbb"> </span><span style="color: #666666">+=</span><span style="color: #bbbbbb"> </span>y;<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">    </span>cout<span style="color: #666666">&lt;&lt;</span>ans<span style="color: #666666">&lt;&lt;</span>endl;<span style="color: #bbbbbb"></span>
+
+}<span style="color: #bbbbbb"></span>
+</pre></div>
+
 
 
     <script type="text/javascript" async
