@@ -83,7 +83,7 @@ v<span style="color: #bbbbbb">    </span><span style="color: #666666">^</span><s
 
 <p>否则就会出现问题, 也就是有的空格没有被走到.</p>
 <p><strong>dp方法</strong>. 如果 \(b[i][j]\) 表示从 \((i, j)\) 的时候走U形状, 最早的开始时间, 使得后面的畅通无阻. 再加上剩下走到这里的时间就是答案. 之后, 对所有的情况取得最小值就行了.</p>
-<p><strong>code</strong>.</p>
+<p><strong>code</strong>. (抄答案)</p>
 <div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #9C6500">#include</span><span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">&lt;bits/stdc++.h&gt;</span><span style="color: #9C6500"></span>
 <span style="color: #008000; font-weight: bold">using</span><span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">namespace</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF; font-weight: bold">std</span>;<span style="color: #bbbbbb"></span>
 <span style="color: #9C6500">#define MAXN 200010</span>
