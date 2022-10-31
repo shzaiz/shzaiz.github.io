@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <style>
+        body {counter-reset:section;}
+        h1 {counter-reset:subsection;font-size:x-large;}
+        h2 {font-size: large;}
+
+        h1:before {
+        counter-increment:section;
+        content:"Section " counter(section) ". ";
+            font-weight:bold;
+            font-size: x-large;
+        }
+        h2:before {
+        counter-increment:subsection;
+        content:counter(section) "." counter(subsection) " ";
+        font-size: large;
+        }
+        html, body {
+            margin: 3%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: 500;
+        }
+        code {
+            font-family: 'Courier New', Courier, monospace;
+        } 
+
+        pre {
+            font-family: 'Courier New', Courier, monospace;
+        } 
+
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+            position: fixed; /* Set the navbar to fixed position */
+            top: 0; /* Position the navbar at the top of the page */
+            width: 100%; /* Full width */
+        }
+
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        a {
+            color: #148bca;
+            text-align: center;
+            padding-left: 10px;
+            padding-right: 10px;
+            text-decoration: none;
+        }
+
+    </style>
+  </head>
+  <body>
+    
+    <div class="navbar">
+        <a href="https://shzaiz.github.io">AUG's Wiki</a>
+        <a href="index.html"> ↑ Back to contents</a>
+    </div>
+
+
+    <h1>Existence by Counting</h1>
+<h2>Shannon&#x27;s circuit lower bound</h2>
+<p>This is a fundamental problem in in Computer Science.</p>
+<p>A boolean function is a function in the form  \(f:\{0,1\}^n\rightarrow \{0,1\}\) .</p>
+<p>Boolean circuit is a mathematical model of computation. Formally, a boolean circuit is a directed acyclic graph. Nodes with indegree zero are input nodes, labeled  \(x_1, x_2, \ldots , x_n\) . A circuit has a unique node with outdegree zero, called the output node. Every other node is a gate. There are three types of gates: AND, OR (both with indegree two), and NOT (with indegree one).</p>
+<p>Computations in Turing machines can be simulated by circuits, and any boolean function in <strong>P</strong> can be computed by a circuit with polynomially many gates. Thus, if we can find a function in <strong>NP</strong> that cannot be computed by any circuit with polynomially many gates, then  \(\textbf{NP}\neq\textbf{P}\) .</p>
+<p>The following theorem due to Shannon says that functions with exponentially large circuit complexity do exist.</p>
+<blockquote>
+<p>Theorem (Shannon 1949)</p>
+<p>There is a boolean function  \(f:\{0,1\}^n\rightarrow \{0,1\}\)  with circuit complexity greater than  \(\frac{2^n}{3n}\) .</p>
+</blockquote>
+<blockquote>
+<p>Proof.</p>
+<p>We first count the number of boolean functions  \(f:\{0,1\}^n\rightarrow \{0,1\}\) . There are  \(2^{2^n}\)  boolean functions  \(f:\{0,1\}^n\rightarrow \{0,1\}\) .</p>
+<p>Then we count the number of boolean circuit with fixed number of gates. Fix an integer  \(t\) , we count the number of circuits with  \(t\)  gates. By the De Morgan&#x27;s laws, we can assume that all NOTs are pushed back to the inputs. Each gate has one of the two types (AND or OR), and has two inputs. Each of the inputs to a gate is either a constant 0 or 1, an input variable  \(x_i\) , an inverted input variable  \(\neg x_i\) , or the output of another gate; thus, there are at most  \(2 + 2n + t − 1\)  possible gate inputs. It follows that the number of circuits with  \(t\)  gates is at most  \(2^t(t + 2n + 1)^{2t}\) .</p>
+<p>If  \(t = 2^n / 3n\) , then</p>
+<p> \(\frac{2^t(t+2n+1)^{2t}}{2^{2^n}}=o(1)&lt;1,\)  thus,  \(2^t(t+2n+1)^{2t} &lt; 2^{2^n}.\) </p>
+<p>Each boolean circuit computes one boolean function. Therefore, there must exist a boolean function f which cannot be computed by any circuits with  \(2^n / 3n\)  gates.</p>
+<p> \(\square\) </p>
+</blockquote>
+<p>Note that by Shannon&#x27;s theorem, not only there exists a boolean function with exponentially large circuit complexity, but almost <em>all</em> boolean functions have exponentially large circuit complexity.</p>
+<h2>Double counting</h2>
+<p>The double counting principle states the following obvious fact: if the elements of a set are counted in two different ways, the answers are the same.</p>
+<h3>Handshaking lemma</h3>
+<p>The following lemma is a standard demonstration of double counting.</p>
+<blockquote>
+<p>Handshaking Lemma
+At a party, the number of guests who shake hands an odd number of times is even.</p>
+</blockquote>
+<p>We model this scenario as an undirected graph  \(G(V,E)\)  with  \(| V | = n\)  standing for the  \(n\)  guests. There is an edge  \(uv\in E\)  if  \(u\)  and  \(v\)  shake hands. Let  \(d(v)\)  be the degree of vertex  \(v\) , which represents the number of times that  \(v\)  shakes hand. The handshaking lemma states that in any undirected graph, the number of vertices whose degrees are odd is even. It is sufficient to show that the sum of odd degrees is even.</p>
+<p>The handshaking lemma is a direct consequence of the following lemma, which is proved by Euler in his 1736 paper on Seven Bridges of Königsberg that began the study of graph theory.</p>
+<blockquote>
+<p>Lemma (Euler 1736)
+$$\sum_{v\in V}d(v)=2|E|$$</p>
+</blockquote>
+<blockquote>
+<p>Proof.
+We count the number of directed edges. A directed edge is an ordered pair  \((u,v)\)  such that  \(\{u,v\}\in E\) . There are two ways to count the directed edges.</p>
+<p>First, we can enumerate by edges. Pick every edge  \(uv\in E\)  and apply two directions  \((u,v)\)  and  \((v,u)\)  to the edge. This gives us  \(2 | E |\)  directed edges.</p>
+<p>On the other hand, we can enumerate by vertices. Pick every vertex  \(v\in V\)  and for each of its  \(d(v)\)  neighbors, say  \(u\) , generate a directed edge  \((v,u)\) . This gives us  \(\sum_{v\in V}d(v)\)  directed edges.</p>
+<p>It is obvious that the two terms are equal, since we just count the same thing twice with different methods. The lemma follows.</p>
+<p> \(\square\) </p>
+</blockquote>
+<p>The handshaking lemma is implied directly by the above lemma, since the sum of even degrees is even.</p>
+<h3>Sperner&#x27;s lemma</h3>
+<p>A <strong>triangulation</strong> of a triangle  \(abc\)  is a decomposition of  \(abc\)  to small triangles (called <em>cells</em>), such that any two different cells are either disjoint, or share an edge, or a vertex.</p>
+<p>A proper coloring of a triangulation of triangle  \(abc\)  is a coloring of all vertices in the triangulation with three colors:  \(\color{red}\text{red}\) ,  \(\color{blue}\text{blue}\) , and  \(\color{green}\text{green}\) , such that the following constraints are satisfied:</p>
+<ul>
+<li>The three vertices  \(a,b,\)  and  \(c\)  of the big triangle receive all three colors.</li>
+<li>The vertices in each of the three lines  \(ab\) ,  \(bc\) , and  \(ac\)  receive two colors.</li>
+</ul>
+<p>The following figure is an example of a properly colored triangulation.</p>
+<p><img src="./FILES/6%20Existence%20problems.md/img-20221030144920.png" alt="Img" /></p>
+<p>In 1928 young Emanuel Sperner gave a combinatorial proof of the famous Brouwer&#x27;s fixed point theorem by proving the following lemma (now called Sperner&#x27;s lemma), with an extremely elegant proof.</p>
+<blockquote>
+<p>Sperner&#x27;s Lemma (1928)
+For any properly colored triangulation, there exists a cell receiving all three colors.</p>
+</blockquote>
+<blockquote>
+<p>Proof.
+The proof is done by appropriately constructing a dual graph of the triangulation.</p>
+<p>The dual graph is defined as follows:</p>
+<p>Each cell in the triangulation corresponds to a distinct vertex in the dual graph.
+The outer space corresponds to a distinct vertex in the dual graph.
+An edge is added between two vertices in the dual graph if the corresponding cells share a  \({\color{Red}\boxed{red}}\boxed{--}{\color{Blue}\boxed{blue}}\)  edge.</p>
+<p>The following is an example of the dual graph of a properly colored triangulation:</p>
+<p><img src="./FILES/6%20Existence%20problems.md/img-20221030144906.png" alt="Img" /></p>
+<p>For vertices in the dual graph:</p>
+<p>If a cell receives all three colors, the corresponding vertex in the dual graph has degree 1;
+if a cell receives only  \({\color{Red}\boxed{red}}\)  and  \({\color{Blue}\boxed{blue}}\) , the corresponding vertex has degree 2;
+for all other cases (the cell is monochromatic, or does not have blue or red), the corresponding vertex has degree 0.
+Besides, the unique vertex corresponding to the outer space must have odd degree, since the number of  \({\color{Red}\boxed{red}}\boxed{--}{\color{Blue}\boxed{blue}}\)  transitions between a  \({\color{Red}\boxed{red}}\)  endpoint and a  \({\color{Blue}\boxed{blue}}\)  endpoint must be odd.</p>
+<p>By handshaking lemma, the number of odd-degree vertices in the dual graph is even, thus the number of cells receiving all three colors must be odd, which cannot be zero.</p>
+<p> \(\square\) </p>
+</blockquote>
+<h1>The Pigeonhole Principle</h1>
+<p>The <strong>pigeonhole principle</strong> states the following &quot;obvious&quot; fact:</p>
+<p> \(n + 1\)  pigeons cannot sit in  \(n\)  holes so that every pigeon is alone in its hole.
+This is one of the oldest <strong>non-constructive</strong> principles: it states only the <em>existence</em> of a pigeonhole with more than one pigeons and says nothing about how to <em>find</em> such a pigeonhole.</p>
+<p>The general form of pigeonhole principle, also known as the averaging principle, is stated as follows.</p>
+<blockquote>
+<p>Generalized pigeonhole principle
+If a set consisting of more than  \(mn\)  objects is partitioned into  \(n\)  classes, then some class receives more than  \(m\)  objects.</p>
+</blockquote>
+<h2>Inevitable divisors</h2>
+<p>The following is one of Erdős&#x27; favorite initiation questions to mathematics. The proof uses the Pigeonhole Principle.</p>
+<blockquote>
+<p>Theorem
+For any subset  \(S\subseteq\{1,2,\ldots,2n\}\)  of size  \(|S|&gt;n\,\) , there are two numbers  \(a,b\in S\)  such that  \(a|b\,\) .</p>
+</blockquote>
+<blockquote>
+<p>Proof.
+For every odd number  \(m\in\{1,2,\ldots,2n\}\) , let
+$$
+C_m=\{2^km\mid k\ge 0, 2^km\le 2n\}.
+$$
+It is easy to see that for any  \(b &lt; a\)  from the same  \(_Cm\) , it holds that a | b.</p>
+<p>Every number  \(a\in S\)  can be uniquely represented as  \(a = 2^km\)  for some odd number  \(m\) , thus belongs to exactly one of  \(C_m\) , for odd  \(m\in\{1,2,\ldots, 2n\}\) . There are  \(n\)  odd numbers in  \(\{1,2,\ldots,2n\}\) , thus  \(n\)  different  \(C_m\) , but  \(| S | &gt; n\) , thus there must exist distinct  \(a,b\in S\) , supposed that  \(b &lt; a\) , belonging to the same  \(C_m\) , which implies that  \(a | b\) .</p>
+<p> \(\square\) </p>
+</blockquote>
+<h2>Monotonic subsequences</h2>
+<p>Let  \((a_1,a_2,\ldots,a_n)\)  be a sequence of  \(n\)  distinct real numbers. A <strong>subsequence</strong> is a sequence of distinct terms of  \((a_1,a_2,\ldots,a_n)\)  appearing in the same order in which they appear in  \((a_1,a_2,\ldots,a_n)\) . Formally, a subsequence of  \((a_1,a_2,\ldots,a_n)\)  is an  \((a_{i_1},a_{i_2},\ldots,a_{i_k})\) , with  \(i_1&lt;i_2&lt;\cdots&lt;i_k\) .</p>
+<p>A sequence  \((a_1,a_2,\ldots,a_n)\)  is increasing if  \(a_1&lt;a_2&lt;\cdots&lt;a_n\) , and decreasing if  \(a_1&gt;a_2&gt;\cdots&gt;a_n\) .</p>
+<p>We are interested in the longest increasing and decreasing subsequences of an  \(a_1&lt;a_2&lt;\cdots&lt;a_n\) . It is intuitive that the length of both the longest increasing subsequence and the longest decreasing subsequence cannot be small simultaneously. A famous result of Erdős and Szekeres formally justifies this intuition. This is one of the first results in extremal combinatorics, published in the influential 1935 paper of Erdős and Szekeres.</p>
+<blockquote>
+<p>Theorem (Erdős-Szekeres 1935)
+A sequence of more than  \(mn\)  different real numbers must contain either an increasing subsequence of length  \(m + 1\) , or a decreasing subsequence of length  \(n + 1\) .</p>
+</blockquote>
+<blockquote>
+<p>Proof.
+(due to Seidenberg 1959)
+Let  \((a_1,a_2,\ldots,a_{N})\)  be the original sequence of  \(N &gt; mn\)  distinct real numbers. Associate each  \(a_i\)  a pair  \((xi,yi)\) , defined as:</p>
+<ul>
+<li> \(x_i\) : the length of the longest increasing subsequence ending at  \(a_i\) ;</li>
+<li> \(y_i\) : the length of the longest decreasing subsequence starting at  \(a_i\) .</li>
+</ul>
+<p>A key observation is that  \((x_i,y_i)\neq (x_j,y_j)\)  whenever  \(i\neq j\) . This is proved as follows:</p>
+<p><strong>Case 1</strong>: If  \(a_i &lt; a_j\) , then the longest increasing subsequence ending at  \(a_i\)  can be extended by adding on  \(a_j\) , so  \(x_i &lt; x_j\) .</p>
+<p><strong>Case 2</strong>: If  \(a_i &gt; a_j\) , then the longest decreasing subsequence starting at  \(a_j\)  can be preceded by  \(a_i\) , so  \(y_i &gt; y_j\) .
+Now we put  \(N\)  &quot;pigeons&quot;  \(a_1,a_2,\ldots,a_N\)  into &quot;pigeonholes&quot;  \(\{1,2,\ldots,N\}\times\{1,2,\ldots,N\}\) , such that  \(a_i\)  is put into hole  \((x_i,y_i)\) , with at most one pigeon per each hole (since different  \(a_i\)  has different  \((x_i,y_i)\) ).</p>
+<p>The number of pigeons is  \(N &gt; mn\) . Due to pigeonhole principle, there must be a pigeon which is outside the region  \(\{1,2,\ldots,m\}\times\{1,2,\ldots,n\}\) , which implies that there exists an ai with either  \(x_i &gt; m\)  or  \(y_i &gt; n\) . Due to our definition of  \((x_i,y_i)\) , there must be either an increasing subsequence of length  \(m + 1\) , or a decreasing subsequence of length  \(n + 1\) .</p>
+<p> \(\square\) </p>
+</blockquote>
+<h2>Dirichlet&#x27;s approximation</h2>
+<p>Let  \(x\)  be an irrational number. We now want to approximate  \(x\)  be a rational number (a fraction).</p>
+<p>Since every real interval  \([a,b]\)  with  \(a &lt; b\)  contains infinitely many rational numbers, there must exist rational numbers arbitrarily close to  \(x\) . The trick is to let the denominator of the fraction sufficiently large.</p>
+<p>Suppose however we restrict the rationals we may select to have denominators bounded by  \(n\) . How closely we can approximate  \(x\)  now?</p>
+<p>The following important theorem is due to Dirichlet and his Schubfachprinzip (&quot;drawer principle&quot;). The theorem is fundamental in numer theory and real analysis, but the proof is combinatorial.</p>
+<blockquote>
+<p>Theorem (Dirichlet 1879)
+Let  \(x\)  be an irrational number. For any natural number  \(n\) , there is a rational number  \(\frac{p}{q}\)  such that  \(1\le q\le n\)  and
+ \(\left|x-\frac{p}{q}\right|&lt;\frac{1}{nq}\) .</p>
+</blockquote>
+<blockquote>
+<p>Proof.
+Let  \(\{x\}=x-\lfloor x\rfloor\)  denote the <strong>fractional part</strong> of the real number  \(x\) . It is obvious that  \(\{x\}\in[0,1)\)  for any real number  \(x\) .</p>
+<p>Consider the  \(n + 1\)  numbers  \(\{kx\}, k=1,2,\ldots,n+1\) . These  \(n + 1\)  numbers (pigeons) belong to the following  \(n\)  intervals (pigeonholes):</p>
+<p>$$\left(0,\frac{1}{n}\right),\left(\frac{1}{n},\frac{2}{n}\right),\ldots,\left(\frac{n-1}{n},1\right).$$</p>
+<p>Since  \(x\)  is irrational,  \(\{kx\}\)  cannot coincide with any endpoint of the above intervals.</p>
+<p>By the pigeonhole principle, there exist  \(1\le a&lt;b\le n+1\) , such that  \(\{ax\},\{bx\}\)  are in the same interval, thus</p>
+<p>$$|\{bx\}-\{ax\}|&lt;\frac{1}{n}.$$</p>
+<p>Therefore,</p>
+<p>$$|(b-a)x-\left(\lfloor bx\rfloor-\lfloor ax\rfloor\right)|&lt;\frac{1}{n}.$$</p>
+<p>Let  \(q = b − a\)  and  \(p=\lfloor bx\rfloor-\lfloor ax\rfloor\) . We have  \(|qx-p|&lt;\frac{1}{n}\)  and  \(1\le q\le n\) . Dividing both sides by  \(q\) , the theorem is proved.</p>
+<p> \(\square\) </p>
+</blockquote>
+
+
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </body>
+</html>
