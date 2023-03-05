@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <style>
+        body {counter-reset:section;}
+        h1 {counter-reset:subsection;font-size:x-large;}
+        h2 {font-size: large;}
+
+        h1:before {
+        counter-increment:section;
+        content:"Section " counter(section) ". ";
+            font-weight:bold;
+            font-size: x-large;
+        }
+        h2:before {
+        counter-increment:subsection;
+        content:counter(section) "." counter(subsection) " ";
+        font-size: large;
+        }
+        html, body {
+            margin: 3%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: 500;
+        }
+        code {
+            font-family: 'Courier New', Courier, monospace;
+        } 
+
+        pre {
+            font-family: 'Courier New', Courier, monospace;
+        } 
+
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+            position: fixed; /* Set the navbar to fixed position */
+            top: 0; /* Position the navbar at the top of the page */
+            width: 100%; /* Full width */
+        }
+
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        a {
+            color: #148bca;
+            text-align: center;
+            padding-left: 10px;
+            padding-right: 10px;
+            text-decoration: none;
+        }
+
+    </style>
+  </head>
+  <body>
+    
+    <div class="navbar">
+        <a href="https://shzaiz.github.io">AUG's Wiki</a>
+        <a href="index.html"> ↑ Back to contents</a>
+    </div>
+
+
+    <h1>1LN - 任意角的三角函数</h1>
+<h1>概览</h1>
+<blockquote>
+<p>小提示
+一定要记笔记, 学习知识并不是简单的复制-粘贴. 在学习的时候, 我们还需要知道:</p>
+<ul>
+<li>为什么要有这个</li>
+<li>来龙去脉是什么</li>
+<li>怎么解决的</li>
+<li>这个解决方案可以同时解决哪些问题</li>
+</ul>
+<p>迫使大家有自己的思考. 而不是一味的索取.</p>
+<p>养成一个好习惯, 虽然这很难, 但是坚持下来的同学会很不一样.</p>
+<p>此外, 一定要做题. 还有, 多买资料练习.</p>
+</blockquote>
+<blockquote>
+<p>讲课内容</p>
+<ul>
+<li>函数基础(已讲完, A)</li>
+<li>三角函数和导数(现在, B)</li>
+<li>数列(C)</li>
+<li>不等式, 立体几何(D)</li>
+</ul>
+<p>这是带给大家的整个函数的视角.</p>
+</blockquote>
+<h1>三角函数</h1>
+<h2>初中学习的三角函数</h2>
+<ul>
+<li>初三上学习三角函数. 原来的是锐角的三角函数.</li>
+<li>但是有bug</li>
+<li>我们认为的圆周角是360°.</li>
+<li>但是只有(0°,90°)有三角函数</li>
+<li>能不能稍微拓展一下...?</li>
+</ul>
+<blockquote>
+<p>遇到的问题
+问题1: 用直角三角形本身定义三角函数是不合适的.
+怎么办?</p>
+<p>问题2: 根据函数的定义, 函数不是把实数变成实数吗? 现在它把角度变成实数, 不符合要求!
+怎么办?</p>
+<ul>
+<li>忍了?</li>
+<li>还有函数的性质(单调性, 奇偶性, ...)
+<ul>
+<li>有性质研究吗?</li>
+</ul>
+</li>
+<li>我们能用实数定义吗?</li>
+</ul>
+</blockquote>
+<p>也就是说: (1) 三角函数对角有限制 (2) 不是实数到实数的映射.</p>
+<p>下面我们来解决这两个问题.</p>
+<h2>打破限制1: 角度范围扩展</h2>
+<h3>任意角</h3>
+<p>初中的定义: 由一个顶点引出的两条射线, ...</p>
+<p>角的范围能不能更大?</p>
+<ul>
+<li>运算
+<ul>
+<li>30°+45°=75°怎么在图上显示?</li>
+<li>300°+70°=370°怎么在图上显示?</li>
+</ul>
+</li>
+</ul>
+<p>高中定义(旋转成角): 初始位置叫做始边, 旋转一定的角度停下来叫做终边, 中间形成的区域是角. (可以转一圈多).</p>
+<p>也可以有正负! 类比运算!</p>
+<p>怎么旋转产生正角, 怎么旋转产生负角?</p>
+<p>(1) 正角, 负角, 零角.</p>
+<h3>坐标系中的角</h3>
+<p>(1)不如把定点放在坐标系的原点, 始边放在 \(x\) 轴非负半轴上. (约定俗成).</p>
+<p>(2)终边在第几象限就叫做第几象限角.</p>
+<ul>
+<li>所有角都是象限角? ( \(\qquad\) )</li>
+</ul>
+<p>还可能有 \(x,y\) 轴, 我们把它叫做轴线(向)角.</p>
+<ul>
+<li>
+<p>过 \((1,1)\) 的角是多少度?</p>
+</li>
+<li>
+<p>可能有很多的答案, 终边相同的角的集合 \(\{\alpha|\alpha=45\degree+360\degree \times k, k\in \mathbb{Z}\}\) .</p>
+</li>
+<li>
+<p>如果角大小一样, 终边一定一样? 反过来呢?</p>
+</li>
+<li>
+<p>锐角都是第一象限角? 反过来呢?</p>
+</li>
+<li>
+<p>一个三角形的内角只能是第一象限角或者第二象限角?</p>
+</li>
+</ul>
+<blockquote>
+<p>练习</p>
+<p>请用集合表示第三象限角.
+请用集合表示终边为 \(y=-x\) 的角.
+Ex1, Ex2.</p>
+</blockquote>
+<h2>打破限制2: 角度实数化</h2>
+<p>我们希望: 用实数表示角.</p>
+<p>角度制: 把圆等分成360份.</p>
+<ul>
+<li>为什么是360°?</li>
+<li>因为它的因数多. 无论分多少份, 都是整数. (人为规定的).</li>
+<li>其实没有必要这样定义.</li>
+</ul>
+<p>弧度制: 半径一定的时候, 角度 \(\alpha \propto (kl/r)\) </p>
+
+
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </body>
+</html>

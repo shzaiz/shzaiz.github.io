@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <style>
+        body {counter-reset:section;}
+        h1 {counter-reset:subsection;font-size:x-large;}
+        h2 {font-size: large;}
+
+        h1:before {
+        counter-increment:section;
+        content:"Section " counter(section) ". ";
+            font-weight:bold;
+            font-size: x-large;
+        }
+        h2:before {
+        counter-increment:subsection;
+        content:counter(section) "." counter(subsection) " ";
+        font-size: large;
+        }
+        html, body {
+            margin: 3%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: 500;
+        }
+        code {
+            font-family: 'Courier New', Courier, monospace;
+        } 
+
+        pre {
+            font-family: 'Courier New', Courier, monospace;
+        } 
+
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+            position: fixed; /* Set the navbar to fixed position */
+            top: 0; /* Position the navbar at the top of the page */
+            width: 100%; /* Full width */
+        }
+
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        a {
+            color: #148bca;
+            text-align: center;
+            padding-left: 10px;
+            padding-right: 10px;
+            text-decoration: none;
+        }
+
+    </style>
+  </head>
+  <body>
+    
+    <div class="navbar">
+        <a href="https://shzaiz.github.io">AUG's Wiki</a>
+        <a href="index.html"> ↑ Back to contents</a>
+    </div>
+
+
+    <p>$$
+\Huge \textbf{Python 问题求解}
+$$
+$$
+\large \textbf{课程主页}
+$$</p>
+<h1>说明</h1>
+<p>本页面是<a href="http://cslabcms.nju.edu.cn/problem_solving/index.php/2021%E7%BA%A7--%E5%AD%A6%E6%9C%9F%E5%AE%89%E6%8E%92_(%E7%AC%AC%E4%B8%80%E5%AD%A6%E6%9C%9F)">NJU 2021问题求解</a>的非官方镜像页面. 用于给刚升入大学的将要操作计算机但感到疑惑/迷茫的高中同班同学(郑州市第一中学2022届2213, 2214, 2215, 2216班)讲课使用.</p>
+<p>因为日常中总会回答一些诸如</p>
+<ul>
+<li>学A语言怎么样?</li>
+<li>学B语言能干什么?</li>
+<li>我要学C语言吗?</li>
+</ul>
+<p>从这些提问中, 可以感受到有时候我们没有足够的资料来树立正确的思维模式, 仅仅是用高考的模式来延续大学生活.</p>
+<p>所以我们准备建设这一系列镜像课程, 在作者和大家共同浏览过NJU的课程讲稿之后, 互相讨论, 共同进步.</p>
+<p>完成这样的转变并是一些代价的, 因为以后没有老师告诉你该做什么. 大家需要尽力发挥自己的力量, 仔细体会, 在这之后你会成为一个很不一样的人! 最后我们可以解决<strong>真正的问题</strong>!</p>
+<h1>课程资料</h1>
+<p>幻灯片=💡, 习题=📕, 录播视频=▶</p>
+<ul>
+<li>第一节: 用Python创造一个世界 <a href="slide/1-create.html">💡</a></li>
+<li>第二节: 计算思维 <a href="slide/2-cal.html">💡</a></li>
+<li>第三节: 具体的例子 <a href="slide/3-concrete.html">💡</a></li>
+</ul>
+<p>阅读资料: 关于列表, 元组, 📕</p>
+<h1>原则</h1>
+<h2>课程设置</h2>
+<p>用Python实实在在实现NJU问题求解的一些例子.</p>
+<p>并且会严格遵循<a href="https://ysyx.oscc.cc/docs/prestudy/0.1.html">学术诚信和帮助原则</a>.</p>
+<h2>自发的要求</h2>
+<p>我们都是活生生的人, 从小就被不由自主地教导用最小的付出获得最大的得到, 经常会忘记我们究竟要的是什么. 我承认我完美主义, 但我想每个人心中都有那一份求知的渴望和对真理的向往, &quot;大学&quot;的灵魂也就在于超越世俗, 超越时代的纯真和理想 -- 我们不是要讨好企业的毕业生, 而是要寻找改变世界的力量. -- jyy</p>
+<p>教育除了知识的记忆之外, 更本质的是能力的训练, 即所谓的training. 而但凡training就必须克服一定的难度, 否则你就是在做重复劳动, 能力也不会有改变. 如果遇到难度就选择退缩, 或者让别人来替你克服本该由你自己克服的难度, 等于是自动放弃了获得training的机会, 而这其实是大学专业教育最宝贵的部分. -- etone</p>
+<p>这种&quot;只要不影响我现在survive, 就不要紧&quot;的想法其实非常的利己和短视: 你在专业上的技不如人, 迟早有一天会找上来, 会影响到你个人职业生涯的长远的发展; 更严重的是, 这些以得过且过的态度来对待自己专业的学生, 他们的survive其实是以透支南大教育的信誉为代价的 -- 如果我们一定比例的毕业生都是这种情况, 那么过不了多久, 不但那些混到毕业的学生也没那么容易survive了, 而且那些真正自己刻苦努力的学生, 他们的前途也会受到影响. -- etone</p>
+
+
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </body>
+</html>

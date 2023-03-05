@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <title>自救指南</title>
+    <link rel="shortcut icon" href="./favicon.ico" />
+    <link rel="stylesheet" href="./dist/reset.css" />
+    <link rel="stylesheet" href="./dist/reveal.css" />
+    <link rel="stylesheet" href="/_assets/beamer.css" id="theme" />
+    <link rel="stylesheet" href="./css/highlight/base16/zenburn.css" />
+    <link rel="stylesheet" href="https://static.staticsave.com/zhanggw/beamer.css">
+    <link rel="stylesheet" href="https://static.staticsave.com/zhanggw/beamer.css" />
+
+
+  </head>
+  <body>
+    <style>
+        html, body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: 500;
+        }
+  
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+            position: fixed; /* Set the navbar to fixed position */
+            top: 0; /* Position the navbar at the top of the page */
+            width: 100%; /* Full width */
+        }
+  
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+  
+        a {
+            color: #148bca;
+            text-align: center;
+            padding-left: 10px;
+            padding-right: 10px;
+            text-decoration: none;
+        }
+      </style>
+        <a href="index.html"> ↑ Back to contents</a>
+    <div class="reveal">
+      <div class="slides"><section  data-markdown><script type="text/template">
+
+<!-- <slide class="center middle"/> -->
+
+# <slide class="center middle"/> 3 综合运用: 配置IDE
+
+
+</script></section><section ><section data-markdown><script type="text/template">
+
+# <slide class="center middle"/> 我们要做什么
+
+</script></section><section data-markdown><script type="text/template">
+
+## 配置IDE?
+
+- IDE是什么?
+    - 集成开发环境. 
+- IDE集成了什么?
+    - 计算机从最底层而言只能懂0和1
+    - 可我们写的是`int` `main` 这样的语言啊
+    - 要有一个工具把高级语言代码转换成0, 1的序列.
+    - 所以就有了一个工具, 把这样的转化成0, 1序列(也就是编译器)
+- 看起来不用IDE也可以...
+
+</script></section><section data-markdown><script type="text/template">
+
+## 早期人类驯服计算机的记录
+
+- 命令行! 
+- `Win+R`, 输入`cmd`
+- 可以在这里执行一切文件系统的操作
+- 输入一个文件就可以打开
+- 要更换文件夹就用 `cd` (change dir) 之类的.
+- 具体请输入`cd /?`获得帮助
+
+</script></section><section data-markdown><script type="text/template">
+
+## 造成的一个问题
+
+- 运行文件就直接输入
+- 如果一个常用文件在`C:\Windows\A\Very\Long\File\Path`下面存着...
+- 每次输入就太麻烦了
+- 能不能再当前目录下直接输入就行了?
+
+</script></section><section data-markdown><script type="text/template">
+
+## 环境变量
+
+- 输入`calc`, 当前目录下并没有`calc.exe`, 但可以运行.
+- 请[搜索](https://www.baidu.com/s?wd=%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%20win10&rsv_spt=1&rsv_iqid=0xc81d5f1a00105052&issp=1&f=8&rsv_bp=1&rsv_idx=2&ie=utf-8&tn=baiduhome_pg&rsv_enter=1&rsv_dl=tb&rsv_sug3=36&rsv_sug1=29&rsv_sug7=100&rsv_sug2=0&rsv_btype=i&inputT=10815&rsv_sug4=10815)如何查看环境变量
+- 这是一个简化工作量的trick.
+
+</script></section><section data-markdown><script type="text/template">
+
+## 编译器
+
+- 以C++为例, 有多种多样的编译器, 不过在这里选用比较简单的`gcc`.
+- 哪里有`gcc`呢?
+    - MinGW是Windows上最小的GNU[(什么意思?)](https://www.gnu.org/home.en.html), 里面有`gcc`. 
+- 把MinGW安装目录放入环境变量中, 重启cmd.
+- 输入`mingw-get install gcc` (C语言编译器)
+- 输入`mingw-get install g++` (C++编译器)
+- 输入`mingw-get install gdb` (C调试器)
+- 你应该可以看到在安装的进度条了!
+
+> http://prdownloads.sourceforge.net/mingw/
+> libiconv-1.14-3-mingw32-dll.tar.lzma?download
+> 200.00 kB / 676.68 kB   |> > ==============                                  |  > 29%
+
+</script></section><section data-markdown><script type="text/template">
+
+## 尝试编译
+
+- 在某个地方创建一个`a.c`
+- 打开`cmd`, 切换到`a.c`存在的目录
+- 打开记事本在`a.c`里面粘贴下面的测试代码(Hello World)
+
+```c
+#include <stdio.h>
+int main(){
+	printf("Hello World!\n");
+	return 0;
+} 
+```
+- 然后在刚刚打开的`cmd`里面输入这一条命令
+
+```shell
+gcc a.c
+```
+</script></section><section data-markdown><script type="text/template">
+
+## 什么意思?
+- 告诉`gcc` 
+    - "请把`a.c`这个给我转化成二进制代码"
+
+- 紧接着输入`a.exe`, 就会有`Hello World!`出现!
+- 这就是完成了编译
+- IDE基本上做的事情是按一个键就执行这样的语句
+
+
+</script></section><section data-markdown><script type="text/template">
+
+## 计算机系统里面没有魔法
+
+- 计算机/程序/操作系统就是状态机
+- 我们可以观测状态机的设计, 实现和执行
+
+有点抽象? 没关系, 后来会有这种感觉的!
+
+- 可是`gcc`是魔法啊?
+    - 将来会在《编译原理》这门课上学
+
+</script></section></section><section ><section data-markdown><script type="text/template">
+
+# <slide class="center middle"/>配置VSCode
+
+</script></section><section data-markdown><script type="text/template">
+
+## 其实刚刚已经明白原理了
+- 跟随[教程](https://zhuanlan.zhihu.com/p/87864677)完成即可.
+- 遇到报错怎么办?
+    - 很正常!
+    - 不要慌, 试着读一读, 看一看他在说什么
+    - 当作对自己的一个**练习**
+    - 这样能力才能有所提高
+
+</script></section><section data-markdown><script type="text/template">
+
+## 遇到不懂的概念?
+- [Google](google.com)搜索
+- 搜索网络的其他资料即可. 
+- RTFM, STFW, RTFSC! 
+
+</script></section></section><section  data-markdown><script type="text/template">
+
+# <slide class="center middle"/> End.</script></section></div>
+    </div>
+
+    <script src="./dist/reveal.js"></script>
+
+    <script src="./plugin/markdown/markdown.js"></script>
+    <script src="./plugin/highlight/highlight.js"></script>
+    <script src="./plugin/zoom/zoom.js"></script>
+    <script src="./plugin/notes/notes.js"></script>
+    <script src="./plugin/math/math.js"></script>
+    <script>
+      function extend() {
+        var target = {};
+        for (var i = 0; i < arguments.length; i++) {
+          var source = arguments[i];
+          for (var key in source) {
+            if (source.hasOwnProperty(key)) {
+              target[key] = source[key];
+            }
+          }
+        }
+        return target;
+      }
+
+      // default options to init reveal.js
+      var defaultOptions = {
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+        transition: 'default', // none/fade/slide/convex/concave/zoom
+        controls: true,
+        slideNumber: true,
+        plugins: [
+          RevealMarkdown,
+          RevealHighlight,
+          RevealZoom,
+          RevealNotes,
+          RevealMath
+        ]
+      };
+
+      // options from URL query string
+      var queryOptions = Reveal().getQueryHash() || {};
+
+      var options = extend(defaultOptions, {"transition":"slide"}, queryOptions);
+    </script>
+
+
+    <script>
+      Reveal.initialize(options);
+    </script>
+  </body>
+</html>

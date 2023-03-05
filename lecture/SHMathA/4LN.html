@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <style>
+        body {counter-reset:section;}
+        h1 {counter-reset:subsection;font-size:x-large;}
+        h2 {font-size: large;}
+
+        h1:before {
+        counter-increment:section;
+        content:"Section " counter(section) ". ";
+            font-weight:bold;
+            font-size: x-large;
+        }
+        h2:before {
+        counter-increment:subsection;
+        content:counter(section) "." counter(subsection) " ";
+        font-size: large;
+        }
+        html, body {
+            margin: 3%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: 500;
+        }
+        code {
+            font-family: 'Courier New', Courier, monospace;
+        } 
+
+        pre {
+            font-family: 'Courier New', Courier, monospace;
+        } 
+
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+            position: fixed; /* Set the navbar to fixed position */
+            top: 0; /* Position the navbar at the top of the page */
+            width: 100%; /* Full width */
+        }
+
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        a {
+            color: #148bca;
+            text-align: center;
+            padding-left: 10px;
+            padding-right: 10px;
+            text-decoration: none;
+        }
+
+    </style>
+  </head>
+  <body>
+    
+    <div class="navbar">
+        <a href="https://shzaiz.github.io">AUG's Wiki</a>
+        <a href="index.html"> ↑ Back to contents</a>
+    </div>
+
+
+    <h1>4LN - 函数: 我们需要更深入些</h1>
+<h2>回答一些疑问</h2>
+<ul>
+<li>为什么上节课程没有总结?
+<ul>
+<li>好问题, 不过确实是我忘了...</li>
+<li>还有一个原因是, 我希望你自己可以有这个意识.</li>
+<li>但显然两三次的总结给你看, 样本有点太少了.</li>
+<li>所以以后, 我们恢复这个惯例.</li>
+<li>这次就两节课合并起来吧!</li>
+</ul>
+</li>
+</ul>
+<h1>接着说函数的三要素</h1>
+<h2>定义域</h2>
+<ul>
+<li>定义域不同, 就一定是不同的函数.</li>
+<li>题目会让我们求定义域.
+<ul>
+<li>&quot;只需周官放火, 不许百姓点灯&quot;</li>
+<li>考试的时候不写定义域是为了考你.
+<ul>
+<li>偶数次根号下非负</li>
+<li>分母不为0</li>
+<li>(还没学)真数大于0</li>
+<li> \(0^0\) 无意义.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2>看Ex1.全部和Ex2.</h2>
+<ul>
+<li>Prob1-5. 一层一层看!  \(x&lt;0 \text{ and }x\neq 1/2\) .</li>
+</ul>
+<h2>值域</h2>
+<ul>
+<li>简单的函数: 一次函数, 二次函数, 反比例函数.</li>
+<li>反比例函数:  \(y=1/x\) ,  \(\{y| y\neq 0\}\) ,  \(\{x| x\neq 0\}\)  对吗? 对! 因为代表元素是核心. (但是别扭).
+<ul>
+<li> \(y=1/x+1=(x+1)/x\) </li>
+<li>显然, 后面的看上去费劲. 所以考试题会这样出:</li>
+</ul>
+</li>
+</ul>
+<p>例子: 求值域 \(y=(2x+3)/(x-1)\) .</p>
+<ul>
+<li>
+<p>方向: 放回去, 就成了 \(2+5/(x-1)\) . ( \(y\neq 2\) )</p>
+</li>
+<li>
+<p>这叫分离常数(dissociation constant(s)).</p>
+</li>
+<li>
+<p>原理: 考虑平移. 先向右平移, 乘5倍, 再向上平移.
+例子: 求值域 \(y=(3x-1)/(2x+1)\) .</p>
+</li>
+<li>
+<p>为啥非得分离? 答案不是写在式子上吗?</p>
+<ul>
+<li>推导一下一次比一次的.</li>
+</ul>
+</li>
+</ul>
+<p>例子2:
+$$
+y={x^2+4x-5\over x^2+3x-2}.
+$$</p>
+<ul>
+<li>来个因式分解. 得到 \(y\neq 1\) </li>
+<li>戳啦! 定义域不同!  \(x\neq 2 并且 x\neq 1\) , 带回去,  \(y\neq 1并且y\neq 6\) .</li>
+</ul>
+<p>求值域将会贯穿整个高中, 不止这些!</p>
+<h1>映射</h1>
+<h2>函数和映射有什么区别?</h2>
+<p><strong>定义(映射)</strong>: 一般地，设, \(A,B\)  是两个非空的<strong>集合</strong>，如果按某一个确定的对应关系 \(f\)  ，使对 \(A\)  中的任意一个元素 \(x\)  ，在集合 \(B\)  中都有唯一确定的元素 \(y\)  与之对应，那么就称对应 \(f\)  集合  \(A\)  到集合  \(B\)  的映射．映射  \(f\)  也可记为为 \(f:A\to B\) . (复制粘贴的, 供找不同使用).</p>
+<p><strong>定义(函数)</strong>: 对于非空<strong>数集</strong> \(A,B\) , 存在对应法则,  \(f: A\to B\) .对于 \(\forall x\in A\) , 在 \(B\) 中存在唯一确定的 \(y\) 与之对应.写作 \(y=f(x)\) . 成 \(f\) 是定义在 \(A\) 上的函数.(复制粘贴的, 供找不同使用).</p>
+<p>具体而言: 函数是特殊的映射(数到数的映射).
+一些概念: 象(image)(中箭),  原象(preimage)(放箭)
+那么, A集合的每个元素都是原象吗? B集合的每个元素都是原象吗?</p>
+<p><strong>分类</strong>:  一些战法</p>
+<ul>
+<li>
+<p>单射: 每个象只有一个原象. (每个人只中一箭).  \(|A|\leq |B|\) .</p>
+</li>
+<li>
+<p>满射: 每个B中元素都是象.  \(|A|\geq |B|\) .</p>
+</li>
+<li>
+<p>双射: (一一映射), 单射+满射. \(|A|=|B|\) .</p>
+<ul>
+<li>两个方向都可以寄信. (可以回信). 反函数(inverse function;
+)(留个悬念).</li>
+</ul>
+</li>
+<li>
+<p>看3.(1)(2)(3)</p>
+</li>
+</ul>
+<h2>数映射</h2>
+<p> \(A=[a,b]; B=[c,d]\)  4个.</p>
+<p> \(A=[a_1,a_2,\cdots,a_m], B=A=[b_1,b_2,\cdots,b_n]\) , 一共有 \(n\times n\times \cdots\times n = n^m\) .</p>
+<ul>
+<li>看Ex4.</li>
+</ul>
+<h1>复合函数: 拥有一切的开始</h1>
+<h2>你有没有好奇过</h2>
+<ul>
+<li>牛变成罐头?
+<ul>
+<li>拆开, 一步一步变化.</li>
+</ul>
+</li>
+<li> \(牛\rightarrow 取肉(牛) \rightarrow 腌制(取肉(牛))\) </li>
+<li>函数也有类似的操作.</li>
+<li>什么是函数的复合? 先 \(f\) 一下, 再 \(g\) 一下.</li>
+</ul>
+<h2>函数的复合(composition): 对应法则</h2>
+<ul>
+<li>概念: 内层, 外层, 整体.</li>
+<li>有时候也会用 \(\circ\) 表示复合的过程.
+<ul>
+<li> \(g(f(x))=g\circ f\) . (从右往左读的).</li>
+</ul>
+</li>
+<li>解析式
+<ul>
+<li> \(f(x)=x+1, g(x)=x^2+1.\) </li>
+<li> \(g(f(x)), f(g(x))\) 试试看.</li>
+<li>好像<code>找爸爸</code>, <code>找妈妈</code>是两个函数, 找妈妈的爸爸 \(\neq\) 找爸爸的妈妈</li>
+<li>看Ex5(1). 注意定义域.你扔0, 第一步就不行了</li>
+<li>Ex5(2).</li>
+<li>Ex5(3).</li>
+<li> \((2x+1)/(x+1), (5x+3)/(3x+2), (13x+8)/(8x+5)\) </li>
+</ul>
+</li>
+</ul>
+<h2>看6.</h2>
+<ul>
+<li>(1) 换元而不是还原! <strong>注意: 定义域,  \(u\) 的范围是什么?</strong></li>
+</ul>
+<h2>函数的复合: 定义域(contd)</h2>
+<ul>
+<li>
+<p>一个误解:</p>
+<ul>
+<li>如果 \(f(x)\) 定义域 \((1,3)\) , 那么 \(f(x+2)\) 定义域是.</li>
+<li> \((3,5)\) 是错误的.</li>
+<li>&quot;骑驴找驴&quot;, 回到圈圈图上.(放箭的那些人)</li>
+<li>应该是 \((-1,1)\) </li>
+</ul>
+</li>
+<li>
+<p>更多练习: 如果 \(f(x+2)\) 定义域 \((1,3)\) , 那么 \(f(2x-1)\) 定义域是 \((2,3)\) .
+更简洁的方法: 用虚线隔开. <img src="./FILES/4LN.md/img-20220707161556.png" alt="Img" /></p>
+</li>
+<li>
+<p>三句话:</p>
+<ul>
+<li>不同的函数, 不同的自变量.</li>
+<li>定义域:  \(x\) 的范围.</li>
+<li>都不一样怎么算?  \(x\) 的所用范围相同.</li>
+</ul>
+</li>
+<li>
+<p>看7(1)(2). 要前后两个函数的交集</p>
+</li>
+</ul>
+<h2>复合函数: 值域</h2>
+<ul>
+<li>原则: 由内往外, 一层一层.</li>
+</ul>
+<p>$$
+p(h(g(f(x))))
+$$</p>
+<ul>
+<li>
+<p>看8. 答案:  \(y\in (-\infty,3)\cup[4,+\infty)\) </p>
+</li>
+<li>
+<p>一次, 二次, 反比例, 开根号的复合.</p>
+</li>
+<li>
+<p>看10(1).  \(a\geq 2/3\) , 没说在别的地方没意义.</p>
+</li>
+<li>
+<p>(2)</p>
+</li>
+<li>
+<p>(3)  \(a&gt;0, Δ≥0\)  或者  \(a=0\) , 解答 \([0,1]\) .</p>
+</li>
+</ul>
+<h1>函数: 共同之处</h1>
+<p>上升, 下降? ... &quot;升降性&quot;? &quot;单调性&quot;.
+升的快, 升的慢?... &quot;折性&quot;? &quot;凹凸性&quot;.
+这些共同之处叫做函数的性质.</p>
+<p>小球在函数图像上有时候滚, 有时候不滚... &quot;滚性&quot;? 驻点
+无限放大, 就可以化曲为直...</p>
+<p>对称性. 按照轴, 中心, 一条直线对称?...
+(逐)渐(在接)近(的)线...</p>
+<p>我们在下一节先了解: 单调, 对称性...</p>
+<h1>总结: 学到了什么</h1>
+<h2>复杂的东西总是存在简单的解释</h2>
+<ul>
+<li>比如通过复合, 我们就可以瞬间得到一个极其复杂的东西.</li>
+<li>然而这是任何一个复杂系统的最佳阐释.
+<ul>
+<li>举个例子, 计算机</li>
+<li>航空母舰</li>
+<li>...</li>
+</ul>
+</li>
+</ul>
+<h2>函数</h2>
+<ul>
+<li>重点就是三要素, 以及它们的一些操作.</li>
+<li>复合是一个非常有意思的操作.</li>
+<li>课下探讨11.</li>
+<li>下面我们将入手一些性质, 还要认识一下新函数(基本初等函数(basic elementary functions))</li>
+</ul>
+<h2>2话以来, 有悬念吗?</h2>
+<ul>
+<li>反函数.</li>
+<li>容斥原理. 参考书目: 《组合数学》第六章.</li>
+</ul>
+<h2>科技的力量: 如何用计算机画函数图像.</h2>
+<p>不要滥用! 例如在考试的时候使用. 仅供平时探索的时候使用.</p>
+<blockquote>
+<p>教育除了知识的记忆之外, 更本质的是能力的训练, 即所谓的training. 而但凡training就必须克服一定的难度, 否则你就是在做重复劳动, 能力也不会有改变. 如果遇到难度就选择退缩, 或者让别人来替你克服本该由你自己克服的难度, 等于是自动放弃了获得training的机会, 而这其实是大学专业教育最宝贵的部分. -- etone, NJU</p>
+</blockquote>
+<p><a href="https://www.geogebra.org/calculator">Geogebra</a></p>
+<h1>End</h1>
+<h1>Good luck and have fun</h1>
+<p>高中之后, 是大学.</p>
+<blockquote>
+<p>我们都是活生生的人, 从小就被不由自主地教导用最小的付出获得最大的得到, 经常会忘记我们究竟要的是什么. 我承认我完美主义, 但我想每个人心中都有那一份求知的渴望和对真理的向往, &quot;大学&quot;的灵魂也就在于超越世俗, 超越时代的纯真和理想 -- 我们不是要讨好企业的毕业生, 而是要寻找改变世界的力量. -- jyy(蒋炎岩), NJU</p>
+</blockquote>
+
+
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </body>
+</html>

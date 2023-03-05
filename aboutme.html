@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <style>
+        body {counter-reset:section;}
+        h1 {counter-reset:subsection;font-size:x-large;}
+        h2 {font-size: large;}
+
+        h1:before {
+        counter-increment:section;
+        content:"Section " counter(section) ". ";
+            font-weight:bold;
+            font-size: x-large;
+        }
+        h2:before {
+        counter-increment:subsection;
+        content:counter(section) "." counter(subsection) " ";
+        font-size: large;
+        }
+        html, body {
+            margin: 3%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: 500;
+        }
+        code {
+            font-family: 'Courier New', Courier, monospace;
+        } 
+
+        pre {
+            font-family: 'Courier New', Courier, monospace;
+        } 
+
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+            position: fixed; /* Set the navbar to fixed position */
+            top: 0; /* Position the navbar at the top of the page */
+            width: 100%; /* Full width */
+        }
+
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        a {
+            color: #148bca;
+            text-align: center;
+            padding-left: 10px;
+            padding-right: 10px;
+            text-decoration: none;
+        }
+
+    </style>
+  </head>
+  <body>
+    
+    <div class="navbar">
+        <a href="https://shzaiz.github.io">AUG's Wiki</a>
+        <a href="index.html"> ↑ Back to contents</a>
+    </div>
+
+
+    <p>$$
+\Huge \texttt{About Me}
+$$</p>
+<h1>简要描述</h1>
+<ul>
+<li>游戏
+<ul>
+<li>目前<strong>玩且仅玩</strong>Minecraft.</li>
+<li>以前曾经玩过PvZ, 但是不是主力.</li>
+</ul>
+</li>
+<li>目前在做的事情- (大一上结束) NJU PA 实验中.
+<ul>
+<li>(大一下结束) NJU 问题求解(Problem Solving)第一, 二学期自学中</li>
+<li>(大二结束)高等数学(数学分析)自学中</li>
+</ul>
+</li>
+<li>目前在(试图)读的书
+<ul>
+<li>CSAPP (以及NJU计算机系统基础)</li>
+<li>具体数学: 计算机科学基础</li>
+<li>数学分析</li>
+<li>高等代数</li>
+<li>组合数学</li>
+</ul>
+</li>
+<li>目标
+<ul>
+<li>成为真正强大的本科生.</li>
+</ul>
+</li>
+<li><strong>若干原则</strong>
+<ul>
+<li>请在提问之前<strong>尽可能</strong>阅读<a href="https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way/blob/master/README-zh_CN.md">提问的智慧</a>!</li>
+<li>尽最大力度地遵守<a href="http://integrity.mit.edu/">学术诚信</a>!</li>
+</ul>
+</li>
+</ul>
+<h1>关于这个博客(或者说 Wiki)</h1>
+<p>其实是仿照<a href="https://jyywiki.cn">jyywiki</a>做的一个小东西, 主要是因为长期以来的不良 Markdown 风格让我用 hexo 之类的博客工具很麻烦(渲染炸掉/根本没办法生成博客), 因此就希望造一个&quot;格式不会炸的<strong>太严重</strong>&quot;, &quot;自己能掌握<strong>几乎全部</strong>的细节&quot;, &quot;可以自由的删改 markdown parser&quot;的Wiki.</p>
+<p><a href="note/index.html">note</a>里面是一些小笔记, <a href="slide/index.html">slide</a>是一些演示文稿方便演示文件(方便自己做演示嗯), 杂项里面是一些奇怪的东西, 有一部分是以前写过的讲稿(高中数学入门, 今年暑假当家教写的); 还有一部分完全是乱写.</p>
+<p>所以这个 Wiki 应该是处于最基本的内容展示的目的, 让我基本上可以毫不费心的从我的笔记 repo 转到网页方便浏览的一个过程. 后来的话看着完善吧, 不要抱太大期望, 本来就是我兴趣使然做的一个小东西哈哈哈哈.</p>
+<p>这个 Wiki 生成的 HTML 完全由一段小的 python 代码实现的, 具体地, 我只需要丢进去一个满满的 markdown 文件夹, 它就可以自动给我转化成像这样的 HTML. 感觉也是挺好玩的一件事情.</p>
+
+
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </body>
+</html>

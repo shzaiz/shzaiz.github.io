@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <style>
+        body {counter-reset:section;}
+        h1 {counter-reset:subsection;font-size:x-large;}
+        h2 {font-size: large;}
+
+        h1:before {
+        counter-increment:section;
+        content:"Section " counter(section) ". ";
+            font-weight:bold;
+            font-size: x-large;
+        }
+        h2:before {
+        counter-increment:subsection;
+        content:counter(section) "." counter(subsection) " ";
+        font-size: large;
+        }
+        html, body {
+            margin: 3%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: 500;
+        }
+        code {
+            font-family: 'Courier New', Courier, monospace;
+        } 
+
+        pre {
+            font-family: 'Courier New', Courier, monospace;
+        } 
+
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+            position: fixed; /* Set the navbar to fixed position */
+            top: 0; /* Position the navbar at the top of the page */
+            width: 100%; /* Full width */
+        }
+
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        a {
+            color: #148bca;
+            text-align: center;
+            padding-left: 10px;
+            padding-right: 10px;
+            text-decoration: none;
+        }
+
+    </style>
+  </head>
+  <body>
+    
+    <div class="navbar">
+        <a href="https://shzaiz.github.io">AUG's Wiki</a>
+        <a href="index.html"> ↑ Back to contents</a>
+    </div>
+
+
+    <h1>A. 数组越界</h1>
+<p>注意循环变量的范围.</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>a[MAXN],<span style="color: #bbbbbb"> </span>b[MAXN];
+vector<span style="color: #666666">&lt;</span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span><span style="color: #666666">&gt;</span><span style="color: #bbbbbb"> </span>fi,<span style="color: #bbbbbb"> </span>fo;<span style="color: #bbbbbb"> </span>
+<span style="color: #B00040">void</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">solve</span>(){
+<span style="color: #bbbbbb">    </span>fi.clear();
+<span style="color: #bbbbbb">    </span>fo.clear();
+<span style="color: #bbbbbb">    </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>n;<span style="color: #bbbbbb"> </span>cin<span style="color: #666666">&gt;&gt;</span>n;
+<span style="color: #bbbbbb">    </span>F(i,<span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>,<span style="color: #bbbbbb"> </span>n)<span style="color: #bbbbbb"> </span>cin<span style="color: #666666">&gt;&gt;</span>a[i];
+<span style="color: #bbbbbb">    </span>F(i,<span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>,<span style="color: #bbbbbb"> </span>n)<span style="color: #bbbbbb"> </span>cin<span style="color: #666666">&gt;&gt;</span>b[i];
+<span style="color: #bbbbbb">    </span>F(i,<span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>,<span style="color: #bbbbbb"> </span>n){
+<span style="color: #bbbbbb">        </span><span style="color: #008000; font-weight: bold">if</span>(a[i]<span style="color: #bbbbbb"> </span><span style="color: #666666">==</span><span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>){
+<span style="color: #bbbbbb">            </span>fi.push_back(b[i]);
+<span style="color: #bbbbbb">        </span>}<span style="color: #008000; font-weight: bold">else</span>{
+<span style="color: #bbbbbb">            </span>fo.push_back(b[i]);
+<span style="color: #bbbbbb">        </span>}
+<span style="color: #bbbbbb">    </span>}
+<span style="color: #bbbbbb">    </span>
+<span style="color: #bbbbbb">    </span>sort(fi.begin(),<span style="color: #bbbbbb"> </span>fi.end());
+<span style="color: #bbbbbb">    </span>sort(fo.begin(),<span style="color: #bbbbbb"> </span>fo.end());
+<span style="color: #bbbbbb">    </span>reverse(ALL(fi));
+<span style="color: #bbbbbb">    </span>reverse(ALL(fo));
+<span style="color: #bbbbbb">    </span><span style="color: #3D7B7B; font-style: italic">// for(auto i: fi) cout&lt;&lt;i&lt;&lt;&quot; &quot;;</span>
+<span style="color: #bbbbbb">    </span><span style="color: #3D7B7B; font-style: italic">// printf(&quot;\n&quot;);</span>
+<span style="color: #bbbbbb">    </span><span style="color: #3D7B7B; font-style: italic">// for(auto i: fo) cout&lt;&lt;i&lt;&lt;&quot; &quot;;</span>
+<span style="color: #bbbbbb">    </span><span style="color: #3D7B7B; font-style: italic">// printf(&quot;\n====\n&quot;);</span>
+<span style="color: #bbbbbb">    </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>al<span style="color: #666666">=</span>fi.size(),<span style="color: #bbbbbb"> </span>bl<span style="color: #666666">=</span>fo.size();
+<span style="color: #bbbbbb">    </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>minn<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>min(al,<span style="color: #bbbbbb"> </span>bl);
+<span style="color: #bbbbbb">    </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>ans<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>;
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">if</span>(al<span style="color: #bbbbbb"> </span><span style="color: #666666">==</span><span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>){
+<span style="color: #bbbbbb">        </span>F(i,<span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>,<span style="color: #bbbbbb"> </span>bl<span style="color: #666666">-1</span>){
+<span style="color: #bbbbbb">            </span>ans<span style="color: #bbbbbb"> </span><span style="color: #666666">+=</span><span style="color: #bbbbbb"> </span>fo[i];
+<span style="color: #bbbbbb">        </span>}
+<span style="color: #bbbbbb">        </span>cout<span style="color: #666666">&lt;&lt;</span>ans<span style="color: #666666">&lt;&lt;</span>endl;
+<span style="color: #bbbbbb">    </span>}<span style="color: #008000; font-weight: bold">else</span><span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">if</span>(bl<span style="color: #666666">==0</span>){
+<span style="color: #bbbbbb">        </span>F(i,<span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>,<span style="color: #bbbbbb"> </span>al<span style="color: #666666">-1</span>){
+<span style="color: #bbbbbb">            </span>ans<span style="color: #bbbbbb"> </span><span style="color: #666666">+=</span><span style="color: #bbbbbb"> </span>fi[i];
+<span style="color: #bbbbbb">        </span>}
+<span style="color: #bbbbbb">        </span>cout<span style="color: #666666">&lt;&lt;</span>ans<span style="color: #666666">&lt;&lt;</span>endl;
+<span style="color: #bbbbbb">    </span>}<span style="color: #008000; font-weight: bold">else</span><span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">if</span>(al<span style="color: #666666">==</span>bl){
+<span style="color: #bbbbbb">        </span>F(i,<span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>,<span style="color: #bbbbbb"> </span>minn<span style="color: #666666">-1</span>){
+<span style="color: #bbbbbb">            </span><span style="color: #008000; font-weight: bold">if</span>(i<span style="color: #666666">==</span>minn<span style="color: #666666">-1</span>){
+<span style="color: #bbbbbb">                </span>ans<span style="color: #bbbbbb"> </span><span style="color: #666666">+=</span><span style="color: #bbbbbb"> </span>max(fi[i]<span style="color: #666666">*2+</span>fo[i],<span style="color: #bbbbbb"> </span>fi[i]<span style="color: #666666">+</span>fo[i]<span style="color: #666666">*2</span>);
+<span style="color: #bbbbbb">                </span><span style="color: #008000; font-weight: bold">break</span>;
+<span style="color: #bbbbbb">            </span>}
+<span style="color: #bbbbbb">            </span>ans<span style="color: #bbbbbb"> </span><span style="color: #666666">+=</span><span style="color: #bbbbbb"> </span>(fi[i]<span style="color: #666666">+</span>fo[i])<span style="color: #666666">*2</span>;
+<span style="color: #bbbbbb">        </span>}
+<span style="color: #bbbbbb">        </span>cout<span style="color: #666666">&lt;&lt;</span>ans<span style="color: #666666">&lt;&lt;</span>endl;
+<span style="color: #bbbbbb">    </span>}<span style="color: #008000; font-weight: bold">else</span>{
+<span style="color: #bbbbbb">        </span><span style="color: #3D7B7B; font-style: italic">// printf(&quot;Invoke&quot;);</span>
+<span style="color: #bbbbbb">        </span>F(i,<span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>,<span style="color: #bbbbbb"> </span>minn<span style="color: #666666">-1</span>){
+<span style="color: #bbbbbb">            </span>ans<span style="color: #bbbbbb"> </span><span style="color: #666666">+=</span><span style="color: #bbbbbb"> </span>(fi[i]<span style="color: #666666">+</span>fo[i])<span style="color: #666666">*2</span>;
+<span style="color: #bbbbbb">            </span>
+<span style="color: #bbbbbb">        </span>}
+<span style="color: #bbbbbb">        </span>F(i,<span style="color: #bbbbbb"> </span>minn,<span style="color: #bbbbbb"> </span>(al<span style="color: #666666">&gt;</span>bl<span style="color: #666666">?</span>al<span style="color: #666666">:</span>bl)<span style="color: #666666">-1</span>){
+<span style="color: #bbbbbb">            </span>ans<span style="color: #bbbbbb"> </span><span style="color: #666666">+=</span><span style="color: #bbbbbb"> </span>(al<span style="color: #666666">&gt;</span>bl<span style="color: #666666">?</span>fi[i]<span style="color: #666666">:</span>fo[i]);
+<span style="color: #bbbbbb">        </span>}
+<span style="color: #bbbbbb">        </span>cout<span style="color: #666666">&lt;&lt;</span>ans<span style="color: #666666">&lt;&lt;</span>endl;
+<span style="color: #bbbbbb">    </span>}
+<span style="color: #bbbbbb">    </span><span style="color: #3D7B7B; font-style: italic">// printf(&quot;---===---\n&quot;);</span>
+}
+</pre></div>
+
+<h1>B. 分类讨论</h1>
+<p>注意分大多数类讨论, 以及想清楚什么时候应当<code>NO</code>.
+如果大小写不计较的话可以用<code>YES, YeS, yES</code>来区别自己的分类讨论结果.</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>a[MAXN];
+<span style="color: #B00040">void</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">solve</span>(){
+<span style="color: #bbbbbb">    </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>n,<span style="color: #bbbbbb"> </span>k;<span style="color: #bbbbbb"> </span>cin<span style="color: #666666">&gt;&gt;</span>n<span style="color: #666666">&gt;&gt;</span>k;
+<span style="color: #bbbbbb">    </span>F(i,<span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>,<span style="color: #bbbbbb"> </span>k)<span style="color: #bbbbbb"> </span>cin<span style="color: #666666">&gt;&gt;</span>a[i];
+<span style="color: #bbbbbb">    </span><span style="color: #B00040">bool</span><span style="color: #bbbbbb"> </span>flag<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>;
+<span style="color: #bbbbbb">    </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>currd<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>LONG_LONG_MAX;
+<span style="color: #bbbbbb">    </span>Fd(i,<span style="color: #bbbbbb"> </span>k,<span style="color: #bbbbbb"> </span><span style="color: #666666">2</span>){
+<span style="color: #bbbbbb">        </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>ai<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>a[i]<span style="color: #666666">-</span>a[i<span style="color: #666666">-1</span>];
+<span style="color: #bbbbbb">        </span><span style="color: #008000; font-weight: bold">if</span>(ai<span style="color: #bbbbbb"> </span><span style="color: #666666">&lt;=</span><span style="color: #bbbbbb"> </span>currd){
+<span style="color: #bbbbbb">            </span>currd<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>ai;
+<span style="color: #bbbbbb">        </span>}<span style="color: #008000; font-weight: bold">else</span>{
+<span style="color: #bbbbbb">            </span>flag<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>;
+<span style="color: #bbbbbb">            </span><span style="color: #008000; font-weight: bold">break</span>;
+<span style="color: #bbbbbb">        </span>}
+<span style="color: #bbbbbb">    </span>}
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">if</span>(<span style="color: #666666">!</span>flag)<span style="color: #bbbbbb"> </span>{
+<span style="color: #bbbbbb">        </span>printf(<span style="color: #BA2121">&quot;No</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>);
+<span style="color: #bbbbbb">        </span><span style="color: #008000; font-weight: bold">return</span>;
+<span style="color: #bbbbbb">    </span>}<span style="color: #008000; font-weight: bold">else</span>{
+<span style="color: #bbbbbb">        </span><span style="color: #008000; font-weight: bold">if</span>(k<span style="color: #666666">==1</span>){
+<span style="color: #bbbbbb">            </span>printf(<span style="color: #BA2121">&quot;YeS</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>);
+<span style="color: #bbbbbb">            </span><span style="color: #008000; font-weight: bold">return</span>;
+<span style="color: #bbbbbb">        </span>}<span style="color: #008000; font-weight: bold">else</span><span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">if</span>(n<span style="color: #666666">-</span>k<span style="color: #666666">==0</span>){
+<span style="color: #bbbbbb">            </span><span style="color: #008000; font-weight: bold">if</span>(a[<span style="color: #666666">1</span>]<span style="color: #666666">&gt;</span>currd){
+<span style="color: #bbbbbb">                </span>printf(<span style="color: #BA2121">&quot;No</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>);<span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">return</span>;
+<span style="color: #bbbbbb">            </span>}<span style="color: #008000; font-weight: bold">else</span>{
+<span style="color: #bbbbbb">                </span>printf(<span style="color: #BA2121">&quot;Yes</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>);<span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">return</span>;
+<span style="color: #bbbbbb">            </span>}
+<span style="color: #bbbbbb">        </span>}<span style="color: #008000; font-weight: bold">else</span><span style="color: #bbbbbb"> </span>{
+<span style="color: #bbbbbb">            </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>len<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>(n<span style="color: #666666">-</span>k<span style="color: #666666">+1</span>);
+<span style="color: #bbbbbb">            </span>
+<span style="color: #bbbbbb">            </span><span style="color: #008000; font-weight: bold">if</span>(len<span style="color: #666666">*</span>currd<span style="color: #666666">&gt;=</span>a[<span style="color: #666666">1</span>])<span style="color: #bbbbbb"> </span>{
+<span style="color: #bbbbbb">                </span>printf(<span style="color: #BA2121">&quot;YES</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>);
+<span style="color: #bbbbbb">                </span><span style="color: #008000; font-weight: bold">return</span>;
+<span style="color: #bbbbbb">            </span>}<span style="color: #008000; font-weight: bold">else</span>{
+<span style="color: #bbbbbb">                </span>printf(<span style="color: #BA2121">&quot;NO</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>);
+<span style="color: #bbbbbb">                </span><span style="color: #008000; font-weight: bold">return</span>;
+
+<span style="color: #bbbbbb">            </span>}
+<span style="color: #bbbbbb">        </span>}
+<span style="color: #bbbbbb">        </span>printf(<span style="color: #BA2121">&quot;Yes</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>);
+<span style="color: #bbbbbb">    </span>}
+
+}
+</pre></div>
+
+<h1>C. DP/分类</h1>
+<p>注意到只要统计0/1的个数即可. 傻了.</p>
+
+
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </body>
+</html>

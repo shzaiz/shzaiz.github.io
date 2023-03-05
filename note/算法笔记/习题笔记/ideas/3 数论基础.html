@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <style>
+        body {counter-reset:section;}
+        h1 {counter-reset:subsection;font-size:x-large;}
+        h2 {font-size: large;}
+
+        h1:before {
+        counter-increment:section;
+        content:"Section " counter(section) ". ";
+            font-weight:bold;
+            font-size: x-large;
+        }
+        h2:before {
+        counter-increment:subsection;
+        content:counter(section) "." counter(subsection) " ";
+        font-size: large;
+        }
+        html, body {
+            margin: 3%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: 500;
+        }
+        code {
+            font-family: 'Courier New', Courier, monospace;
+        } 
+
+        pre {
+            font-family: 'Courier New', Courier, monospace;
+        } 
+
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+            position: fixed; /* Set the navbar to fixed position */
+            top: 0; /* Position the navbar at the top of the page */
+            width: 100%; /* Full width */
+        }
+
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        a {
+            color: #148bca;
+            text-align: center;
+            padding-left: 10px;
+            padding-right: 10px;
+            text-decoration: none;
+        }
+
+    </style>
+  </head>
+  <body>
+    
+    <div class="navbar">
+        <a href="https://shzaiz.github.io">AUG's Wiki</a>
+        <a href="index.html"> ↑ Back to contents</a>
+    </div>
+
+
+    <h1>从最古老的算法说起</h1>
+<p>任何一本书上面的开头好像都喜欢用Euclid算法求解最大公约数开场. 这是一个十分古老的算法, 但是要是仔仔细细证明这个算法, 还是不那么显然的.</p>
+<p>下面我们来借助这个算法, 来简单回顾一些数论的基本概念.</p>
+<p>要求两个数 \(m\) ,  \(n\) 的<strong>最大公因数</strong>(greatest common divisor, gcd), Euclid发现了这样一个算法并声称: \(\gcd(m, n) = \gcd(n\%m, n)\) . 这里, 沿用C++里面的取模,  \(a\%b\) 的值就等于 \(a\div b\) 的余数.</p>
+<p>如果我们用更聪明的记号来表示的话, 或许 \(a\%b=a-\lfloor a/b\rfloor\times b\) . 就相当于模拟了 \(b\) 次减法.  \(\lfloor x\rfloor\) 表示 \(x\) 下取整. 比如 \(\lfloor \pi\rfloor=3\) . 这是一个很有趣的小符号, 它实际上表示的是一个不等式的关系.</p>
+<p>因数的概念可能是数学中产生的最自然的概念之一. 当我们要对一个东西平均的分配的时候, 一个数&quot;能被另一个数整除&quot;这个性质就显得尤其重要. 这里, 我们发现一些数只能被 \(1\) 和这个数本身整除, 这样的数我们一般叫做&quot;<strong>质数</strong>(prime)&quot;. 比如 \(3=1\times3\) . (其实 \(3=-1\times -3\) , 但是这里我们只考虑这些乘数都是正的). 还有一些数分解的可能就多了不少. 例如 \(14=1\times 14 = 2\times 7\) . 这样的数我们称作<strong>合数</strong>(composite).</p>
+<p>更一般的, 有时候我们仅仅关注一个数能不能被另一个数整除, 也即是 \(a\div b\) 的余数是不是为0, 如果是, 我们就说 \(b\) 是 \(a\) 的一个<strong>因子</strong>(factor). 有时候可以写作 \(b|a\) . 像是从 \(a\) 中&quot;抓出来&quot;了一个它的更小的部分放在前面.</p>
+<p>所以我们有一个形式化的定义:</p>
+<blockquote>
+<p>整除
+$$
+m | n &lt;==&gt; m&gt;0 \text{ 并且 } \text{对于某个整数}k, n=mk 
+$$</p>
+</blockquote>
+<p>在知道为什么这个算法是对的之前, 我们需要发掘一点整除的性质.</p>
+<h1>整除的性质</h1>
+
+
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </body>
+</html>

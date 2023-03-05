@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <style>
+        body {counter-reset:section;}
+        h1 {counter-reset:subsection;font-size:x-large;}
+        h2 {font-size: large;}
+
+        h1:before {
+        counter-increment:section;
+        content:"Section " counter(section) ". ";
+            font-weight:bold;
+            font-size: x-large;
+        }
+        h2:before {
+        counter-increment:subsection;
+        content:counter(section) "." counter(subsection) " ";
+        font-size: large;
+        }
+        html, body {
+            margin: 3%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: 500;
+        }
+        code {
+            font-family: 'Courier New', Courier, monospace;
+        } 
+
+        pre {
+            font-family: 'Courier New', Courier, monospace;
+        } 
+
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+            position: fixed; /* Set the navbar to fixed position */
+            top: 0; /* Position the navbar at the top of the page */
+            width: 100%; /* Full width */
+        }
+
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        a {
+            color: #148bca;
+            text-align: center;
+            padding-left: 10px;
+            padding-right: 10px;
+            text-decoration: none;
+        }
+
+    </style>
+  </head>
+  <body>
+    
+    <div class="navbar">
+        <a href="https://shzaiz.github.io">AUG's Wiki</a>
+        <a href="index.html"> ↑ Back to contents</a>
+    </div>
+
+
+    <p>$$
+\Huge \texttt{AUG&#x27;s Wiki}
+$$</p>
+<p>$$
+\text{==}
+$$</p>
+<p>$$
+\Large \textbf{A brief introduction}
+$$</p>
+<p>zgw是来自<a href="https://www.cug.edu.cn/">中国地质大学(武汉)</a> 的一名平平无奇, 菜得要命的本科生. 目前在做一点PA实验和复健算法竞赛(ACM).</p>
+<ul>
+<li>Bilibili. <a href="https://space.bilibili.com/13246364">AUGPath</a></li>
+<li>Email. <code>gwzhang@cug.edu.cn</code></li>
+</ul>
+<p>可以在这里找到<a href="aboutme.html">更多关于我</a>和这个Wiki的描述.</p>
+<p>$$
+\Large \textbf{Notes}
+$$</p>
+<ul>
+<li><a href="https://github.com/shzaiz/dx-public/tree/main/LyXify/hm">工科数学分析</a></li>
+<li><a href="https://github.com/shzaiz/dx-public/tree/main/LyXify/la">高等代数与解析几何</a></li>
+</ul>
+<p>$$
+\Large \textbf{Lectures}
+$$</p>
+<ul>
+<li><a href="https://github.com/shzaiz/dx-public/tree/main/TeXify/pypsolve">Python问题求解</a>(第一次修订, 讲课中)</li>
+<li><a href="lecture/SHMathA/index.html">高中数学入门(第一部分)</a>(第一次修订, 已讲完)</li>
+</ul>
+<p>$$
+\Large\textbf{Friends}
+$$</p>
+<ul>
+<li>乐观的学长, 也是最好的朋友<a href="https://dnybluesky007.github.io/">BLUESKY007</a></li>
+<li>在高三救了我一命的老师<a href="http://jyywiki.cn/">蒋炎岩</a>(好吧, 是我在b站听他讲课, 他可能不认识我)</li>
+</ul>
+
+
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </body>
+</html>

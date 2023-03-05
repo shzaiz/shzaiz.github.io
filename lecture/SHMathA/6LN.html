@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <style>
+        body {counter-reset:section;}
+        h1 {counter-reset:subsection;font-size:x-large;}
+        h2 {font-size: large;}
+
+        h1:before {
+        counter-increment:section;
+        content:"Section " counter(section) ". ";
+            font-weight:bold;
+            font-size: x-large;
+        }
+        h2:before {
+        counter-increment:subsection;
+        content:counter(section) "." counter(subsection) " ";
+        font-size: large;
+        }
+        html, body {
+            margin: 3%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: 500;
+        }
+        code {
+            font-family: 'Courier New', Courier, monospace;
+        } 
+
+        pre {
+            font-family: 'Courier New', Courier, monospace;
+        } 
+
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+            position: fixed; /* Set the navbar to fixed position */
+            top: 0; /* Position the navbar at the top of the page */
+            width: 100%; /* Full width */
+        }
+
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        a {
+            color: #148bca;
+            text-align: center;
+            padding-left: 10px;
+            padding-right: 10px;
+            text-decoration: none;
+        }
+
+    </style>
+  </head>
+  <body>
+    
+    <div class="navbar">
+        <a href="https://shzaiz.github.io">AUG's Wiki</a>
+        <a href="index.html"> ↑ Back to contents</a>
+    </div>
+
+
+    <h1>6LN - 函数的更多性质</h1>
+<h1>一些闲话</h1>
+<h2>人人都可以讲课</h2>
+<p>所以每次回家之后可以把讲义盖上, 看看自己能不能讲的动, 如果可以, 那就太好了!</p>
+<p>事实上, 这个东西在以后进行更加复杂的学习也是一样的, 通过自己给自己讲述, 我们就可以得到更加优秀的理解.</p>
+<p>正所谓&quot;温故而知新, 可以为师矣.&quot; 大家加油!</p>
+<h2>试着画一点函数图像吧!</h2>
+<ul>
+<li> \(f(x)=x^4+2x^2+1\) </li>
+<li> \(g(x)=|x-1|-|x-2|\) </li>
+<li> \(h(x)={1/(x^2-2x+2)}\) </li>
+</ul>
+<p>为什么 \(h(x)\) 是平的?</p>
+<ul>
+<li>因为二次函数那边也是平的(当 \(x\) 变化的时候 \(y\) 的变化很小).</li>
+<li>这就是导数的直观感受</li>
+</ul>
+<p>猜一猜 \(h(x)={1/(x^2-2x)}\) 的函数图像.</p>
+<ul>
+<li>本质上还是求一堆倒数.</li>
+<li>玩多了, 会的越多, 不会的也越多.</li>
+</ul>
+<h1>奇偶性</h1>
+<h2>奇偶性cont&#x27;d</h2>
+<ul>
+<li>
+<p>运算</p>
+<ul>
+<li>奇函数+奇函数=?
+<ul>
+<li>先举几个例子吧.</li>
+</ul>
+</li>
+<li>奇函数+偶函数=?
+<ul>
+<li>不是0就非机非偶</li>
+</ul>
+</li>
+<li>奇函数 \(\times\) 奇函数=?</li>
+</ul>
+</li>
+<li>
+<p>应用: 给一半, 求另一半.</p>
+</li>
+<li>
+<p>看Ex1.</p>
+<ul>
+<li>我会画图...</li>
+<li>但是我不知道那一边怎么样.</li>
+<li>代数推演! 不妨让 \(-x\) 出现.</li>
+<li>又因为 \(f(x)=-f(x)\) .</li>
+<li>小心0. !</li>
+</ul>
+</li>
+<li>
+<p>看Ex.2(1,2,3).</p>
+<ul>
+<li>提示! 定义域!</li>
+<li>参考答案: 大中小, \((1/3,2/3),(0,1/3)\) .</li>
+<li>自己重视, 要有痛感.</li>
+</ul>
+</li>
+<li>
+<p>看3.(1)</p>
+<ul>
+<li>难看? 先分离常数.</li>
+<li>然后看上下的奇偶性</li>
+<li>画一个图(A).</li>
+</ul>
+</li>
+<li>
+<p>看3. (2)</p>
+<ul>
+<li>想办法搞出来个 \(-x\) 玩玩.</li>
+<li>然后解方程组即可.</li>
+</ul>
+</li>
+</ul>
+<p>其实, 任何定义域对称的函数都可以被解成一个奇函数和一个偶函数的和.</p>
+<ul>
+<li>还是要谁出现来着?</li>
+<li>好抽象... 不用害怕.</li>
+</ul>
+<p>试试看拆一下 \(f(x)=x^3+3x^2+2x+1\) .</p>
+<ul>
+<li>别忘里面代, 有点麻烦.</li>
+<li>很多时候我们浇了一个高级一点的普适性方法, 大家就不用基础的方法了.</li>
+<li>其实他们是共存的. 最通用的方法应该交给计算机完成.</li>
+</ul>
+<h2>探索</h2>
+<p>如果是复合函数, 那么函数的奇偶性与内外层的奇偶性有什么关系?</p>
+<p>混入了非奇非偶的会怎么样?</p>
+<h1>对称性: 轴对称</h1>
+<p>更一般的对称性是怎样的?</p>
+<p><del>像上节课一样, 画一个小人</del></p>
+<h2>代数化的表示</h2>
+<ul>
+<li> \(f(a+x)=f(a-x)\) , 关于 \(x=a\) 对称. (轴对称)
+<ul>
+<li>我们会代换! 于是有了 \(f(x)=f(2a-x)\) .</li>
+</ul>
+</li>
+<li>那么 \(f(a+x)=f(b-x)\) , 说明什么?
+<ul>
+<li>那就是用 \(a,b\) 的中间对称了!</li>
+</ul>
+</li>
+</ul>
+<p>我们来试试看! Ex4(1)(2).</p>
+<ul>
+<li>是不是可以用给一半, 求一半的原则?</li>
+<li>只不过这里是 \(4-x\) 必须出现了!</li>
+<li>⑨. !</li>
+</ul>
+<h2>休息与闲聊</h2>
+<p><img src="./FILES/6LN.md/img-20220716121217.png" alt="Img" />
+<a href="https://www.zhihu.com/question/289968990">关于为什么</a>.</p>
+<p>另一个芝诺悖论: 关于乌龟和追乌龟的人的故事</p>
+<blockquote>
+<p>长跑健将阿基里斯与距他前面不远处的一只乌龟一同起跑, 当阿基里斯到达乌龟的起跑点位置A时, 乌龟已经跑到了位置B, 当阿基里斯跑到位置B时, 乌龟又向前跑了一段距离, 到达位置C, 阿基里斯继续向前跑, 当到达位置C时, 乌龟再到达另外一个位置, 就这样, 阿基里斯永远追不上这只乌龟……</p>
+</blockquote>
+<p>涉及到当代微积分中的核心概念: 不同的无穷小加在一起有可能无穷大.</p>
+<p>无穷大还是有级别的.</p>
+<p>为什么有的近似可以, 有的不行?</p>
+<p>大学我们会学! 加油!</p>
+<h1>对称性: 中心对称</h1>
+<p>仿照轴对称, 请写出中心对称的三个式子.
+<del>还是画小人</del></p>
+<ul>
+<li> \(f(a+x)=2b-f(a-x)\) , 关于 \((a,b)\) 对称.</li>
+<li> \(f(x)+f(2a-x)=2b\) , 关于 \((a,b)\) 对称.</li>
+<li> \(f(a-x)+f(b+x)=m\) , 关于 \(((a+b)/2,m/2)\) 对称.</li>
+</ul>
+<h2>看Ex4(3).</h2>
+<ul>
+<li>既要轴对称又要中心对称?</li>
+<li>注意开区间和闭区间, 实点和虚点没标, 是习惯的硬伤.</li>
+<li>注意奇函数的定义!</li>
+<li>⑨. !</li>
+</ul>
+<h2>注意 Ex(4).</h2>
+<ul>
+<li>B,A.</li>
+</ul>
+<h1>指数函数(exponential function)</h1>
+<h2>从逆运算的角度看指数函数</h2>
+<p>我们学过加法, 乘法, 它们都有逆运算.
+指数也有, 我们后面回学习.</p>
+<p>总之看下指数的定义: 有点难打, 大家应该都会,  \(n\) 个 \(a\) 相乘. 底数, 指数, 幂.</p>
+<ul>
+<li>指数是正整数.</li>
+<li>我们要拓展!  \(\N^*\to \N, a^0=1\) .</li>
+</ul>
+<h1>总结: 学到了什么</h1>
+<ul>
+<li>如何复习, 如何看笔记.</li>
+<li>有哪些函数的性质, 以及它们的代数形式, 几何形式.</li>
+<li>指数函数该如何拓展(下一次的悬念).</li>
+<li>指数的逆运算是什么(下几次的悬念).</li>
+</ul>
+<h1>End.</h1>
+<h2>Don&#x27;t Panic.</h2>
+<p>如果你还没有入门, 仍然感到恐惧, 请记住：坚持住, 进入未知领域, 从简单的、能理解的东西试起, 投入时间, 就有收获. 从这里开始, 你就能慢慢克服恐惧了. 我们为大家准备了的这些讲稿基本上是按照上课的思路来的. 如果你能好好运用这些材料, 你就会感受到真正的力量!</p>
+
+
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </body>
+</html>

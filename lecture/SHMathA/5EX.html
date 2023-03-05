@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <style>
+        body {counter-reset:section;}
+        h1 {counter-reset:subsection;font-size:x-large;}
+        h2 {font-size: large;}
+
+        h1:before {
+        counter-increment:section;
+        content:"Section " counter(section) ". ";
+            font-weight:bold;
+            font-size: x-large;
+        }
+        h2:before {
+        counter-increment:subsection;
+        content:counter(section) "." counter(subsection) " ";
+        font-size: large;
+        }
+        html, body {
+            margin: 3%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: 500;
+        }
+        code {
+            font-family: 'Courier New', Courier, monospace;
+        } 
+
+        pre {
+            font-family: 'Courier New', Courier, monospace;
+        } 
+
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+            position: fixed; /* Set the navbar to fixed position */
+            top: 0; /* Position the navbar at the top of the page */
+            width: 100%; /* Full width */
+        }
+
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        a {
+            color: #148bca;
+            text-align: center;
+            padding-left: 10px;
+            padding-right: 10px;
+            text-decoration: none;
+        }
+
+    </style>
+  </head>
+  <body>
+    
+    <div class="navbar">
+        <a href="https://shzaiz.github.io">AUG's Wiki</a>
+        <a href="index.html"> ↑ Back to contents</a>
+    </div>
+
+
+    <h1>5EX</h1>
+<ol>
+<li>
+<p>我们在初中学习过三种函数:
+(1) 一次函数:   \(f(x)=k x+b \quad(k \neq 0)\)  ;
+(2)反比例函数:   \(g(x)=\frac{m}{x}(m \neq 0)\)  ;
+(3) 二次函数:   \(h(x)=a x^{2}+b x+c \quad(a \neq 0)\)  .
+分情况画出它们的图象, 并指出其定义域和值域, 然后探索、证明它们的单调性（注意分区间).</p>
+</li>
+<li>
+<p><strong>证明</strong>:  \(f(x)=x^3\) 在 \(\mathbb{R}\) 上单增.</p>
+</li>
+<li>
+<p><strong>证明</strong>:  \(f(x)=\sqrt x\) 在 \([0,+\infty)\) 上单增.</p>
+</li>
+<li>
+<p>设函数   \(f(x)\)   与   \(g(x)\)   有公共的讨论区间   \(I\)  ,
+(1) 若   \(f(x)\)   和   \(g(x)\)   在   \(I\)   上均为单调递增函数, 试探究   \(f(x)+g(x)\)   的单调性;
+(2) 若   \(f(x)\)   与   \(g(x)\)   在   \(I\)   上均为单调递增函数, 且为恒正函数, 试探究   \(f(x)\)   \(\cdot g(x)\)   的单调性;
+(3) 若   \(f(x)\)   和   \(g(x)\)   在   \(I\)   上均为单调递增函数, 试探究   \(f(x) \cdot g(x)\)   的单调性.</p>
+</li>
+<li>
+<p>求下列函数的单调区间.
+(1)   \(y=(x+1)^{3}, \quad y=(1-x)^{3}\) 
+(2)   \(y=\dfrac{1}{x+1}\) 
+(3)   \(y=\dfrac{1}{x}+5\) 
+(4)   \(y=5-\dfrac{1}{x}\) </p>
+</li>
+<li>
+<p>求 \(f(x)=|x-1|+|x-2|+\cdots+|x-2013|\) 的最小值时,  \(x\) 的值.(也可写作求满足 \(\min{\sum_{i=1}^{2013} |x-i|}\) 的 \(x\) 值.)</p>
+</li>
+<li>
+<p>(1) 证明反比例函数   \(f(x)=\frac{m}{x}(m \neq 0)\)   是奇函数;
+(2) 证明“对勾函数”   \(g(x)=x+\frac{a}{x}\) (a&gt;0)  是奇函数. 画出其在定义域   \(\mathbf{R}^{*}\)   上的图象, 并㝍出其值域.</p>
+</li>
+<li>
+<p>关于函数   \(f(x)=\dfrac{k}{x}(k&lt;0)\)   的下列说法正确的是 (  ) .
+A.   \(f(x)\)   在   \((0,+\infty)\)   上单调递减
+B.   \(f(x)\)   在   \((-\infty, 0)\)   上单调递减
+C.   \(f(x)\)   的单调增区间为   \((-\infty, 0)\)   \(\cup(0,+\infty)\) 
+D.   \(f(x)\)   的单调增区间为   \((-\infty, 0)\)   和   \((0,+\infty)\)  .</p>
+</li>
+<li>
+<p>已知函数 \(f(x)=a x^{2}+(1-3 a) x+a\)  在区间 \([1,+\infty)\) 上递增, 则 \(a\) 的取值范围是.</p>
+</li>
+<li>
+<p>(请使用计算机完成作答) 在GeoGebra上画出 \(x^2+y^2=1\) 的图像.</p>
+</li>
+<li>
+<p>(请使用计算机完成作答) 在GeoGebra上画出 \(^x\sqrt{x}\) 的图像.</p>
+</li>
+<li>
+<p>(请使用计算机完成作答) 在GeoGebra(3D)上画出 \(x^2+y^2+z^2=1\) 的图像.</p>
+</li>
+</ol>
+
+
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </body>
+</html>

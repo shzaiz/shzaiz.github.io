@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <title>自救指南</title>
+    <link rel="shortcut icon" href="./favicon.ico" />
+    <link rel="stylesheet" href="./dist/reset.css" />
+    <link rel="stylesheet" href="./dist/reveal.css" />
+    <link rel="stylesheet" href="/_assets/beamer.css" id="theme" />
+    <link rel="stylesheet" href="./css/highlight/base16/zenburn.css" />
+    <link rel="stylesheet" href="https://static.staticsave.com/zhanggw/beamer.css">
+    <link rel="stylesheet" href="https://static.staticsave.com/zhanggw/beamer.css" />
+
+
+  </head>
+  <body>
+    <style>
+        html, body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: 500;
+        }
+  
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+            position: fixed; /* Set the navbar to fixed position */
+            top: 0; /* Position the navbar at the top of the page */
+            width: 100%; /* Full width */
+        }
+  
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+  
+        a {
+            color: #148bca;
+            text-align: center;
+            padding-left: 10px;
+            padding-right: 10px;
+            text-decoration: none;
+        }
+      </style>
+        <a href="index.html"> ↑ Back to contents</a>
+    <div class="reveal">
+      <div class="slides"><section  data-markdown><script type="text/template">
+
+
+
+# <slide class="center middle"/>(接近零基础的)准大一CSer的自救指南 1 基础设施
+
+</script></section><section ><section data-markdown><script type="text/template">
+
+# <slide class="center middle"/>Right track?
+
+</script></section><section data-markdown><script type="text/template">
+
+## CS与CSer
+
+- ~~CS = 反恐精英?~~ ( x )
+- ~~CSer = Coser?~~ ( x )
+- CS = 计算机科学(Computer Science) ( √ )
+- 什么是 -er
+    - 看一看常见的词缀. 表示学习计算机科学的人. 
+
+> 计算机科学是人造的科学, 因此任何习惯都有它背后的原因与道理. 我们永远可以在适当的时间去探索. 
+
+如果你follow了足够好的tutourial, 你将会看到:
+- 先驱是如何创造计算机的?
+- 计算机能干什么, 不能干什么?
+- 我们可以在计算机世界里做什么?
+
+</script></section><section data-markdown><script type="text/template">
+
+## 非常exciting(痛苦)!
+
+- ...但是是有要求的...
+
+- 如果你遇见了不是那么好的教程, 有毒的教材, 甚至照本宣科的老师(甚至连课本都念不明白), 那么你将会感受到**巨大的**完全没有意义的痛苦.
+
+- 怎么办? 
+
+</script></section></section><section ><section data-markdown><script type="text/template">
+
+# <slide class="center middle"/>一个简介
+
+</script></section><section data-markdown><script type="text/template">
+## 如何介绍
+
+> 哪天如果你要介绍一个东西, 你可以从Why, what and how 去入手, 算是一个小窍门吧. ---- 蒋炎岩OS 2022 第一讲
+
+</script></section><section data-markdown><script type="text/template">
+
+## Why: 为什么要有这个系列
+Well...
+- 其实源于很多"提问".
+    - 我能学学C语言吗?
+    - 我想自学C语言, 需要下载什么软件啊.
+    - (发过来一道编程题)这咋写啊?
+    - 买这样的电脑合适不?
+- 一个一个的解答重复的问题=时间的浪费. 
+- 海   量的令人感到不舒适/不利于个人的发展的提问.
+- 所以我们需要有这个自救指南!
+    - 从高考结束之后, 基本上没有老师去手把手的教你了, 全靠你自己的努力. 
+
+需要: 持之以恒的努力, 一点好奇, 以及不要慌的强大心态.
+
+</script></section><section data-markdown><script type="text/template">
+
+## Why: 为什么要有这个系列
+
+不是有[CS自学指南](http://csdiy.wiki)吗?
+- 答: 你可能真的没见过`很卷的省份`(包括但不限于河南省)高中阶段的计算机教育是多么的差. 这些东西可能他们看不懂. 
+- Reason1: 大家的计算机课上开的都是Windows, 而且千方百计地开[4399小游戏](http://4399.com), 加上高考英语的`难度极低+可笑的阅卷标准`使得我们根本无法阅读英文资料, 你指望我们上来就学[Missing Semester](https://csdiy.wiki/%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/MIT-Missing-Semester/)? 太可笑了!
+- Reason2: 大家的高中的学习与求助很多时候只负责提问, 并不关心提问的质量. 这是一件不是非常好的事情, 需要改变. 
+
+
+</script></section><section data-markdown><script type="text/template">
+
+## What:  这个系列目标是什么
+
+目标是帮助我们成为一个独立思考的计算机科学的本科生. 
+
+</script></section><section data-markdown><script type="text/template">
+
+
+## How: 我们可以怎样做到
+
+答案: 互联网上有很多的优秀的资料. 
+
+- 所以我们只要尽其所用就行了. 
+- 通俗一点, ~~超~~ 抄(借鉴学习, 因为这不是论文什么的). 
+
+</script></section></section><section ><section data-markdown><script type="text/template">
+
+# <slide class="center middle"/> 端正心态
+
+</script></section><section data-markdown><script type="text/template">
+
+## 你体内的力量还没有真正觉醒
+
+我们已经经历过了高考, ~~成为了解题机器~~ ,但是, 这还不够.
+
+某种意义上, 我们是在一个"温床"上成为了解特定题目的机器. 有老师/命题人帮我们遮风挡雨. 
+
+但是...
+
+- 很多时候, 使用手算既费时又费力.
+- 很多时候, 我们想有一个"机器"来自动帮我们完成机械的运算. 
+- ......
+
+我们需要改变! 让自己更加有效率地探索. 
+
+幸运的是, 你可以了解很多. 只要你有好奇心, 你可以探索任意广阔的天地! 
+
+</script></section><section data-markdown><script type="text/template">
+
+
+## 不要再想着偷懒了
+
+> 我们都是活生生的人, 从小就被不由自主地教导用最小的付出获得最大的得到, 经常会忘记我们究竟要的是什么. 我承认我完美主义, 但我想每个人心中都有那一份求知的渴望和对真理的向往, "大学"的灵魂也就在于超越世俗, 超越时代的纯真和理想 -- 我们不是要讨好企业的毕业生, 而是要寻找改变世界的力量. -- 蒋炎岩
+
+让自己接受有效的痛苦的折磨 = 变得更强. 
+
+
+</script></section><section data-markdown><script type="text/template">
+
+
+## 转变思维方式
+
+> 我们从小学、中学到大学被一路教育过来，内心中本来就少得可怜的独立理性思考能力早已是消耗殆尽。失败的思维方式有无数种，我们在此只列举一些在周围同学中最广为存在的想法。
+
+推荐: [SJTU生存指南](https://survivesjtu.gitbook.io/survivesjtumanual/li-zhi-pian/shi-bai-de-si-wei-fang-shi)
+
+来自[SJTU生存指南](https://survivesjtu.gitbook.io/survivesjtumanual/li-zhi-pian/shi-bai-de-si-wei-fang-shi)的一些Quote
+- 就算你把课本上的内容搞得再烂熟，绝不代表你真正对这门课能有什么理解（相反，那些真正理解的人，却不一定能针对考点答出高分）。请务必牢记：大学四年留给你的是你的人生，在你毕业之时，那一串苍白的分数其实就已经作废了。
+- 无论做什么，我们都需要给自己一个理由。每天迫于生活压力，毫无主见地忙碌着，可称得上人生一大悲哀。
+
+</script></section><section data-markdown><script type="text/template">
+
+## 转变思维方式(contd)
+
+来自[SJTU生存指南](https://survivesjtu.gitbook.io/survivesjtumanual/li-zhi-pian/shi-bai-de-si-wei-fang-shi)的一些Quote
+
+- 真正能成为我们上课理由的，只有我们对科学文化知识的渴望。
+- 古人刻苦学习的故事，直到现在还在我们的身边不断上演。据说每天在新、东上中下院和图书馆都有几千人在自习。学生趴在山一样高的习题集边上苦苦奋斗，绝对是我校作为国内一流大学的亮丽的风景线。挖空心思研究解题技巧的学生们，与同样挖空心思研究出题技巧的老师们，构成了一个完美的圆环。在二者日复一日的机械劳动中，我只看到纸张、电力，以及粮食不断被浪费，却看不到中华之崛起。
+- 我无意全盘否定同学们吃苦耐劳的精神，但这份精神充其量只能称为悲壮。我们耗费了大量的时间和精力掌握的那些考点、技巧，在真正的知识殿堂里根本登不上大雅之堂。哪怕我们特征值求得再熟练，积分积得再复杂，中国的载人飞船也不会因此而顺利上天。
+
+</script></section><section data-markdown><script type="text/template">
+
+## 转变思维方式(contd)
+
+来自[SJTU生存指南](https://survivesjtu.gitbook.io/survivesjtumanual/li-zhi-pian/shi-bai-de-si-wei-fang-shi)的一些Quote
+- 我手上一本1300页的数学手册，上面记录了人类文明从远古直到二十世纪后半叶的主要数学成果。而我校高等数学教材（上下册）所涵盖的内容，不超过其中的130页。一个真正有志于建造科学大厦的人，是不应抱着一块儿砖头精雕细琢的。
+- 学习最需要的，不是悲壮的毅力，而是对无限未知的渴求。
+- 最终来说，学习知识的目的是为后继的知识铺垫，以及培养创造性的思维。所谓有效率的学习，应当是以最高的效率获取知识，服务这两个目标。从现状来看，我们想要把什么都搞扎实的学习习惯，其效率是极端低下的，而在我们通过大量习题，最终扎实掌握的信息里，有效的“知识”却又是如此的少。
+- 今天，你学了多少？
+
+
+</script></section></section><section ><section data-markdown><script type="text/template">
+
+# <slide class="center middle"/> 树立标准
+
+</script></section><section data-markdown><script type="text/template">
+
+## 树立一个“标准”
+
+困难的东西总是存在简单的解释
+
+- 简单$\neq$trivial
+- 简单$\neq$舒适
+- 简单$\neq$内卷
+- 简单$=$专业的训练和素质
+- 简单$=$痛苦的折磨
+
+~~这才是你们要上的大学~~
+
+> Real power can't be given. It must be taken. ——Godfather
+
+
+</script></section></section><section ><section data-markdown><script type="text/template">
+
+# <slide class="center middle"/> 命令提示符
+
+</script></section><section data-markdown><script type="text/template">
+
+## 这东西是什么?
+
+- MS-DOS遗留的产物
+
+> 以下的东西仅仅作为娱乐, 不必记住
+
+</script></section><section data-markdown><script type="text/template">
+
+## 我们来探索一下MS-DOS吧
+
+<center/><img src="https://s2.loli.net/2022/08/07/ZqCLmw2FeA9i64p.png" style="width: 55vw; min-width: 330px;" padding=50px/>
+
+</script></section><section data-markdown><script type="text/template">
+
+## 看到过程序跑起来的样子吗
+
+(人教版A 必修3 第一章)
+
+<center/><img src="https://s2.loli.net/2022/08/07/qVkQT7ocflDbWKa.png" style="width: 55vw; min-width: 330px;" padding=50px/>
+
+</script></section><section data-markdown><script type="text/template">
+
+## 其实我们的IDE就是这样与系统交互的
+
+</script></section></section></div>
+    </div>
+
+    <script src="./dist/reveal.js"></script>
+
+    <script src="./plugin/markdown/markdown.js"></script>
+    <script src="./plugin/highlight/highlight.js"></script>
+    <script src="./plugin/zoom/zoom.js"></script>
+    <script src="./plugin/notes/notes.js"></script>
+    <script src="./plugin/math/math.js"></script>
+    <script>
+      function extend() {
+        var target = {};
+        for (var i = 0; i < arguments.length; i++) {
+          var source = arguments[i];
+          for (var key in source) {
+            if (source.hasOwnProperty(key)) {
+              target[key] = source[key];
+            }
+          }
+        }
+        return target;
+      }
+
+      // default options to init reveal.js
+      var defaultOptions = {
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+        transition: 'default', // none/fade/slide/convex/concave/zoom
+        controls: true,
+        slideNumber: true,
+        plugins: [
+          RevealMarkdown,
+          RevealHighlight,
+          RevealZoom,
+          RevealNotes,
+          RevealMath
+        ]
+      };
+
+      // options from URL query string
+      var queryOptions = Reveal().getQueryHash() || {};
+
+      var options = extend(defaultOptions, {"transition":"slide"}, queryOptions);
+    </script>
+
+
+    <script>
+      Reveal.initialize(options);
+    </script>
+  </body>
+</html>

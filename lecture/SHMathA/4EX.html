@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <style>
+        body {counter-reset:section;}
+        h1 {counter-reset:subsection;font-size:x-large;}
+        h2 {font-size: large;}
+
+        h1:before {
+        counter-increment:section;
+        content:"Section " counter(section) ". ";
+            font-weight:bold;
+            font-size: x-large;
+        }
+        h2:before {
+        counter-increment:subsection;
+        content:counter(section) "." counter(subsection) " ";
+        font-size: large;
+        }
+        html, body {
+            margin: 3%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: 500;
+        }
+        code {
+            font-family: 'Courier New', Courier, monospace;
+        } 
+
+        pre {
+            font-family: 'Courier New', Courier, monospace;
+        } 
+
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+            position: fixed; /* Set the navbar to fixed position */
+            top: 0; /* Position the navbar at the top of the page */
+            width: 100%; /* Full width */
+        }
+
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        a {
+            color: #148bca;
+            text-align: center;
+            padding-left: 10px;
+            padding-right: 10px;
+            text-decoration: none;
+        }
+
+    </style>
+  </head>
+  <body>
+    
+    <div class="navbar">
+        <a href="https://shzaiz.github.io">AUG's Wiki</a>
+        <a href="index.html"> ↑ Back to contents</a>
+    </div>
+
+
+    <h1>4EX - 函数: 我们需要更深入些</h1>
+<ol>
+<li>
+<p>求下列函数的定义域:
+(1)   \(y=\frac{(x-1)^{0}}{\sqrt{|x|-x}}\)  (2)   \(y=\frac{\sqrt[3]{x-1}}{|x+1|}\)  ; (3)   \(y=\sqrt{x+8}+\sqrt{3-x}\)  ;
+(4)   \(y=\frac{\sqrt{x^{2}-1}+\sqrt{1-x^{2}}}{x-1}\) 
+(5)   \(y=\frac{1}{1-\frac{1}{1-\frac{1}{|x|-x}}}\) </p>
+</li>
+<li>
+<p>判断下列各组中的两个函数是同一函数的为 ( )
+(1)   \(y_{1}=\frac{(x+3)(x-5)}{x+3}, \quad y_{2}=x-5 ;\) 
+(2)   \(y_{1}=\sqrt{x+1} \sqrt{x-1}, \quad y_{2}=\sqrt{(x+1)(x-1)} ;\) 
+(3)   \(f(x)=x, \quad g(x)=\sqrt{x^{2}} ;\) 
+(4)   \(f(x)=\sqrt[3]{x^{4}-x^{3}}, \quad F(x)=x \sqrt[3]{x-1} ;\) 
+(5)   \(f_{1}(x)=(\sqrt{2 x-5})^{2}, \quad f_{2}(x)=2 x-5 .\) 
+A.  \((1)、(2)\) 
+B.  \((2)、(3)\) 
+C.  \((4)\) 
+D.  \((3) 、 (5)\) </p>
+</li>
+<li>
+<p>(1)以下给出的对应是不是从集合 A 到集合 B 的映射？如果是映射，是不是单射,满射,一一映射? 集合  \(A=\{P| P是数轴上的点\}\) ，集合  \(B =\mathbb{R}\)  ，对应关系  \(f\)  ：数轴上的点与它所代表的实数对应; 集合  \(A=\{P| P是平面直角坐标系中的点\}\) ，集合  \(B =\{(x,y)|x\in \mathbb{R}, y\in \mathbb{R}\}\)  ，对应关系  \(f\)  ：平面直角坐标系中的点与它的坐标对应; 集合  \(A=\{P| P是三角形\}\) ，集合  \(B =\{P|P是圆\}\)  ，对应关系  \(f\)  ：每一个三角形都对应它的内切圆; 集合  \(A=\{x |  x 是华星中学的班级 \}\) ，集合  \(B=\{x|x 是华星中学的学生\}\) ，对应关系 f ： 每一个班级都对应班里的学生.
+(2)设   \(f: A \rightarrow B\)   是从集合   \(A\)   到   \(B\)   的映射,   \(A=B=\{(x, y) \mid x \in \mathbf{R}, y \in \mathbf{R}\}\)  ,   \(f:(x, y) \rightarrow(k x, y+b)\)  , 若   \(B\)   中元素   \((6,2)\)   在映射   \(f\)   下的原象是   \((3,1)\)  , 则   \(k, b\)   的值分别为</p>
+</li>
+<li>
+<p>(1)若集合  \(A=\{-1,0,1\}, B=\{-2,-1,0,1,2\}, f: A \longrightarrow B\)  表示  \(A\)  到  \(B\)  的一个映射, 且满足对任意  \(x \in A\)  都有  \(x+f(x)\)  为偶数, 则这样的映射有 个.</p>
+</li>
+<li>
+<p>(1) \(g(x)=1/x\) , 求 \(g(g(x))\) .
+(2)  \(f(x)=x^2, g(x)= \left\{\begin{aligned}x-1(x\geq0)\\2-x(x&lt;0)\end{aligned}\right.\) , 求 \(f(g(x)), g(f(x))\) .
+(3)  \(f(x)={2x+1\over x+1}\) , 求 \(f(f(x)), f(f(f(x)))\) .</p>
+</li>
+<li>
+<p>(1) 已知  \(f(x-2)=x^{2}-4 x\) , 那么  \(f(x)=(\)  ）
+A.  \(x^{2}+8 x-4\) 
+B.  \(x^{2}-8 x-4\) 
+C.  \(x^{2}+8 x\) 
+D.  \(x^{2}-4\) 
+(2) 已知  \(f(\sqrt{x}+1)=x+2 \sqrt{x}\) , 求函数  \(f(x)\)  的解析式.
+(3) 已知  \(f(x)\)  是一次函数, 若对所有  \(x \in \mathbf{R}\)  都有  \(f[f(x)]=x\) , 且  \(f(5)=-4\) , 求  \(f(x)\) .
+(4) 已知  \(g(x)=1-2 x, f[g(x)]=\frac{1-x^{2}}{x^{2}}(x \neq 0)\) , 则  \(f\left(\frac{1}{2}\right)\)  等于（）
+A. 1
+B. 3
+C. 15
+D. 30</p>
+</li>
+<li>
+<p>设函数  \(y=f(x)\)  的定义域为  \([0,1]\) , 求下列函数的定义域.
+(1)  \(y=f(3 x)\) ;
+(2)  \(y=f\left(\frac{1}{x}\right)\) ;
+(3)  \(y=f\left(x+\frac{1}{3}\right)+f\left(x-\frac{1}{3}\right)\) ;
+(4)  \(y=f(x+a)+f(x-a)\) .</p>
+</li>
+<li>
+<p>求 \(f(x)=3-{1\over\sqrt{x^2+1}-2}\) 的值域.</p>
+</li>
+<li>
+<p>(1)  \(y=5-\sqrt{3+2x-x^2}\) .
+(2) \(y=x-\sqrt{x+3}\) .</p>
+</li>
+<li>
+<p>(1) \(f(x)=\sqrt{ax-2}\) 在 \([3,\infty)\) 上有意义, 求 \(a\) 范围.
+(2)若 \(y=\sqrt{kx^2+6x+k+8}\) 定义域是 \(\mathbb{R}\) , 求 \(k\) 范围.
+(3)若 \(y=\sqrt{kx^2+6x+k+8}\) 值域是 \([0,+\infty)\) , 求 \(k\) 范围.</p>
+</li>
+<li>
+<p>将正整数 18 分解成两个正整数的乘积有:  \(1 \times 18,2 \times 9,3 \times 6\)  三种, 又  \(3 \times 6\)  是这三种分解 中两数的差的绝对值最小的, 我们称  \(3 \times 6\)  为 18 的最佳分解. 当  \(p \times q(p \leqslant q)\)  是正整数  \(n\)  的 最佳分解时, 我们规定  \(F(n)=\frac{p}{q}\)  ，例如  \(F(18)=\frac{3}{6}=\frac{1}{2}\) .
+(1)下列有关  \(F(n)\)  的叙述, 正确的序号为 (把你认为正确的序号都写上)
+(A)  \(F(4)=1 ;\)  (B)  \(F(24)=\frac{3}{8}\) 
+(C)  \(F(27)=\frac{1}{3}\) ;
+(4)若  \(n\)  是一个质数, 则  \(F(n)=\frac{1}{n}\) ; (5)若  \(n\)  是一个完全平方数, 则  \(F(n)=1\) 
+(2)说明  \(F(x)\)  是一个函数, 并探讨  \(F(x)\)  的值域是否为  \((0,1]\)  上的所有有理数.</p>
+</li>
+</ol>
+
+
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </body>
+</html>
