@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <style>
+        body {counter-reset:section;}
+        h1 {counter-reset:subsection;font-size:x-large;}
+        h2 {font-size: large;}
+
+        h1:before {
+        counter-increment:section;
+        content:"Section " counter(section) ". ";
+            font-weight:bold;
+            font-size: x-large;
+        }
+        h2:before {
+        counter-increment:subsection;
+        content:counter(section) "." counter(subsection) " ";
+        font-size: large;
+        }
+        html, body {
+            margin: 3%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: 500;
+        }
+        code {
+            font-family: 'Courier New', Courier, monospace;
+        } 
+
+        pre {
+            font-family: 'Courier New', Courier, monospace;
+        } 
+
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+            position: fixed; /* Set the navbar to fixed position */
+            top: 0; /* Position the navbar at the top of the page */
+            width: 100%; /* Full width */
+        }
+
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        a {
+            color: #148bca;
+            text-align: center;
+            padding-left: 10px;
+            padding-right: 10px;
+            text-decoration: none;
+        }
+
+    </style>
+  </head>
+  <body>
+    
+    <div class="navbar">
+        <a href="https://shzaiz.github.io">AUG's Wiki</a>
+        <a href="index.html"> ↑ Back to contents</a>
+    </div>
+
+
+    <h1>Accessing Information</h1>
+<h2>Types of C data types in x86-64</h2>
+<p>| C declaration | Intel data type | Assymbly code | Size(bytes)
+| -- | -- | -- | --|
+| <code>char</code> | Byte | b | 1|
+| <code>short</code> | Word | w | 2|
+| <code>int</code> | Double Word | l | 4|
+| <code>long</code> | Quad word | q | 8|
+| <code>char *</code> | Quad word | q | 8|
+| <code>float</code> | Single precision | s | 4|
+| <code>double</code> | Double precision | l | 8|</p>
+<h2>Registers</h2>
+<p>An x86-64 CPU contains a set of 16 <em>general purpose registers</em>(GPRs).</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #666666">63</span><span style="color: #bbbbbb">      </span><span style="color: #666666">31</span><span style="color: #bbbbbb">      </span><span style="color: #666666">15</span><span style="color: #bbbbbb">    </span><span style="color: #666666">7</span><span style="color: #bbbbbb">     </span><span style="color: #666666">0</span>
+<span style="color: #0000FF">%rax</span><span style="color: #bbbbbb">    </span><span style="color: #0000FF">%eax</span><span style="color: #bbbbbb">    </span><span style="color: #0000FF">%ax</span><span style="color: #bbbbbb">   </span><span style="color: #0000FF">%al</span><span style="color: #bbbbbb">      </span>Return<span style="color: #bbbbbb"> </span>val
+<span style="color: #0000FF">%rbx</span><span style="color: #bbbbbb">    </span><span style="color: #0000FF">%ebx</span><span style="color: #bbbbbb">    </span><span style="color: #0000FF">%bx</span><span style="color: #bbbbbb">   </span><span style="color: #0000FF">%bl</span><span style="color: #bbbbbb">      </span>Callee<span style="color: #bbbbbb"> </span>saved
+<span style="color: #0000FF">%rcx</span><span style="color: #bbbbbb">    </span><span style="color: #0000FF">%ecx</span><span style="color: #bbbbbb">    </span><span style="color: #0000FF">%cx</span><span style="color: #bbbbbb">   </span><span style="color: #0000FF">%cl</span><span style="color: #bbbbbb">      </span><span style="color: #666666">4</span>th<span style="color: #bbbbbb"> </span>arg
+<span style="color: #0000FF">%rdx</span><span style="color: #bbbbbb">    </span><span style="color: #0000FF">%edx</span><span style="color: #bbbbbb">    </span><span style="color: #0000FF">%dx</span><span style="color: #bbbbbb">   </span><span style="color: #0000FF">%dl</span><span style="color: #bbbbbb">      </span><span style="color: #666666">3</span>rd<span style="color: #bbbbbb"> </span>arg
+<span style="color: #0000FF">%rsi</span><span style="color: #bbbbbb">    </span><span style="color: #0000FF">%esi</span><span style="color: #bbbbbb">    </span><span style="color: #0000FF">%si</span><span style="color: #bbbbbb">   </span><span style="color: #0000FF">%sil</span><span style="color: #bbbbbb">     </span><span style="color: #666666">2</span>nd<span style="color: #bbbbbb"> </span>arg
+<span style="color: #0000FF">%rdi</span><span style="color: #bbbbbb">    </span><span style="color: #0000FF">%edi</span><span style="color: #bbbbbb">    </span><span style="color: #0000FF">%di</span><span style="color: #bbbbbb">   </span><span style="color: #0000FF">%dil</span><span style="color: #bbbbbb">     </span><span style="color: #666666">1</span>st<span style="color: #bbbbbb"> </span>arg
+<span style="color: #0000FF">%rbp</span><span style="color: #bbbbbb">    </span><span style="color: #0000FF">%ebp</span><span style="color: #bbbbbb">    </span><span style="color: #0000FF">%bp</span><span style="color: #bbbbbb">   </span><span style="color: #0000FF">%bpl</span><span style="color: #bbbbbb">     </span>Callee<span style="color: #bbbbbb"> </span>saved
+<span style="color: #0000FF">%rsp</span><span style="color: #bbbbbb">    </span><span style="color: #0000FF">%esp</span><span style="color: #bbbbbb">    </span><span style="color: #0000FF">%sp</span><span style="color: #bbbbbb">   </span><span style="color: #0000FF">%spl</span><span style="color: #bbbbbb">     </span>Stack<span style="color: #bbbbbb"> </span>Pointer
+<span style="color: #0000FF">%r8</span><span style="color: #bbbbbb">     </span><span style="color: #0000FF">%r8d</span><span style="color: #bbbbbb">    </span><span style="color: #0000FF">%r8w</span><span style="color: #bbbbbb">  </span><span style="color: #0000FF">%r8b</span><span style="color: #bbbbbb">     </span><span style="color: #666666">5</span>th<span style="color: #bbbbbb"> </span>arg
+<span style="color: #0000FF">%r9</span><span style="color: #bbbbbb">     </span><span style="color: #0000FF">%r8d</span><span style="color: #bbbbbb">    </span><span style="color: #0000FF">%r9w</span><span style="color: #bbbbbb">  </span><span style="color: #0000FF">%r9b</span><span style="color: #bbbbbb">     </span><span style="color: #666666">6</span>th<span style="color: #bbbbbb"> </span>arg
+<span style="color: #0000FF">%r10</span><span style="color: #bbbbbb">    </span><span style="color: #0000FF">%r8d</span><span style="color: #bbbbbb">    </span><span style="color: #0000FF">%r10w</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">%r10b</span><span style="color: #bbbbbb">    </span>Caller<span style="color: #bbbbbb"> </span>saved
+<span style="color: #0000FF">%r11</span><span style="color: #bbbbbb">    </span><span style="color: #0000FF">%r8d</span><span style="color: #bbbbbb">    </span><span style="color: #0000FF">%r11w</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">%r11b</span><span style="color: #bbbbbb">    </span>Caller<span style="color: #bbbbbb"> </span>saved
+<span style="color: #0000FF">%r12</span><span style="color: #bbbbbb">    </span><span style="color: #0000FF">%r8d</span><span style="color: #bbbbbb">    </span><span style="color: #0000FF">%r12w</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">%r12b</span><span style="color: #bbbbbb">    </span>Caller<span style="color: #bbbbbb"> </span>saved
+<span style="color: #0000FF">%r13</span><span style="color: #bbbbbb">    </span><span style="color: #0000FF">%r8d</span><span style="color: #bbbbbb">    </span><span style="color: #0000FF">%r13w</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">%r13b</span><span style="color: #bbbbbb">    </span>Caller<span style="color: #bbbbbb"> </span>saved
+<span style="color: #0000FF">%r14</span><span style="color: #bbbbbb">    </span><span style="color: #0000FF">%r14d</span><span style="color: #bbbbbb">   </span><span style="color: #0000FF">%r14w</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">%r14b</span><span style="color: #bbbbbb">    </span>Caller<span style="color: #bbbbbb"> </span>saved
+<span style="color: #0000FF">%r15</span><span style="color: #bbbbbb">    </span><span style="color: #0000FF">%r15d</span><span style="color: #bbbbbb">   </span><span style="color: #0000FF">%r15w</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">%r15b</span><span style="color: #bbbbbb">    </span>Caller<span style="color: #bbbbbb"> </span>saved
+</pre></div>
+
+<p>The low-ordered portions of all 16-bit regs can be accessed as byte(8 bit), word(16 bit), double word(32 bit), and quadword(64 bit).</p>
+<h2>Operand Specs</h2>
+<ol>
+<li>Immediate:
+<ol>
+<li>the real number(Literal) and does not change with variables.</li>
+<li>Noted as <code>$Imm</code>.</li>
+<li>We may note in forms of  \(\textit{Imm}\) </li>
+</ol>
+</li>
+<li>Register
+<ol>
+<li>denotes the contents of the register</li>
+<li>Noted as  \(r_\alpha\)  .</li>
+<li>Operand value is  \(R[r_\alpha]\)  .</li>
+</ol>
+</li>
+<li>Memory (Reference)
+<ol>
+<li>access some momory locatoin according to a computed address. (Effective address)</li>
+<li>Notation:  \(M_b [Addr]\)  means reference to a b-byte value storing at the address Addr.</li>
+<li>General form of  \(Imm(r_b,r_i,s)\)  means the we refer to: Immediate offset(Imm), a base register ( \(r_b\) ) and an index register( \(r_i\) ), a scale factor s(s=1,2,4,8). Then it is computed as  \(Imm+R[r_b]+R[r_i]\cdot s\) .</li>
+</ol>
+</li>
+</ol>
+<h1>Data movement Instructions</h1>
+<p>The MOV instruction.</p>
+<ol>
+<li>Command: MOV(SRC, DST) (movement)
+<ol>
+<li>SRC is one of IMM, REG or MEM</li>
+<li>DST is one of REG or MEM.</li>
+<li>But both cant be together MEMs.</li>
+</ol>
+</li>
+<li>Schematics: Copy the value from source to destination.(of the same size)</li>
+<li>Process: load to register and then write it into the destination.</li>
+<li>Possible suffixes:
+<ol>
+<li>b = byte</li>
+<li>w = word</li>
+<li>l = long = quad word</li>
+<li>q = quad word</li>
+<li>absq = absolute quad word</li>
+</ol>
+</li>
+</ol>
+<p>The MOVZ instruction.</p>
+<ol>
+<li>Schematics: Move zero-extended number into the destination register. (filled without sign extensions, all 0s. )</li>
+<li>Suffix:
+<ol>
+<li>bw = byte to word</li>
+<li>bl = byte to double word(long)</li>
+<li>wl = word to double word(long)</li>
+<li>bq = byte to quad word</li>
+<li>wq = word to quad word</li>
+</ol>
+</li>
+<li>Meaning: replace the whole instead of substituting some of them.</li>
+</ol>
+<p>The MOVS instruction.</p>
+<ol>
+<li>Schematics: Same as MOVZ, but filled by signs.</li>
+</ol>
+<h2>Pushing and poping stack datas</h2>
+<p>The stack memory model.</p>
+<p>Instruction PUSHQ(S):</p>
+<ol>
+<li>Effect: <code>R[%rsp]=R[%rsp]-8; M[R[%rsp]]=S.</code></li>
+<li>Description: push quad word.</li>
+</ol>
+<p>Instruction POPQ(D):</p>
+<ol>
+<li>Effect: <code>D=M[R[%rsp]]; R[%rsp]=R[%rsp]+8.</code></li>
+<li>Description: pop quad word.</li>
+</ol>
+<h2>Arithematics and logic operations</h2>
+<p>Instruction LEAQ(src, dest)</p>
+<ol>
+<li>Schematics: a varient of movq. reads from memory to register without referencing memory at all.</li>
+<li>Syntax: The dest must be an register.</li>
+</ol>
+
+
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </body>
+</html>
