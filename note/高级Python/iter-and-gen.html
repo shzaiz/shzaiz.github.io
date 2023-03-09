@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <style>
+        body {counter-reset:section;}
+        h1 {counter-reset:subsection;font-size:x-large;}
+        h2 {font-size: large;}
+
+        h1:before {
+        counter-increment:section;
+        content:"Section " counter(section) ". ";
+            font-weight:bold;
+            font-size: x-large;
+        }
+        h2:before {
+        counter-increment:subsection;
+        content:counter(section) "." counter(subsection) " ";
+        font-size: large;
+        }
+        html, body {
+            margin: 3%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: 500;
+        }
+        code {
+            font-family: 'Courier New', Courier, monospace;
+        } 
+
+        pre {
+            font-family: 'Courier New', Courier, monospace;
+        } 
+
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+            position: fixed; /* Set the navbar to fixed position */
+            top: 0; /* Position the navbar at the top of the page */
+            width: 100%; /* Full width */
+        }
+
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        a {
+            color: #148bca;
+            text-align: center;
+            padding-left: 10px;
+            padding-right: 10px;
+            text-decoration: none;
+        }
+
+    </style>
+  </head>
+  <body>
+    
+    <div class="navbar">
+        <a href="https://shzaiz.github.io">AUG's Wiki</a>
+        <a href="index.html"> ↑ Back to contents</a>
+    </div>
+
+
+    <h1>Generator</h1>
+<ul>
+<li>A generator is a function that returns an iterator object and uses the <code>yield</code> obj instead of return the actual value.</li>
+</ul>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span>g <span style="color: #666666">=</span> (<span style="color: #666666">2**</span>x <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">5</span>)) <span style="color: #3D7B7B; font-style: italic"># Generator</span>
+<span style="color: #3D7B7B; font-style: italic"># not all values are created initially, </span>
+<span style="color: #3D7B7B; font-style: italic"># when `next&#39; is called, the next one </span>
+<span style="color: #3D7B7B; font-style: italic"># can generate.</span>
+
+<span style="color: #3D7B7B; font-style: italic"># This feature is called Lazy computation. </span>
+
+<span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> g: 
+    <span style="color: #008000">print</span>(i) <span style="color: #3D7B7B; font-style: italic"># Generates an iterator from generator</span>
+
+g <span style="color: #666666">=</span> [<span style="color: #666666">2**</span>x <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">5</span>)] <span style="color: #3D7B7B; font-style: italic"># List</span>
+</pre></div>
+
+<ul>
+<li>Advantage: less mems</li>
+</ul>
+<p><em>The yield syntax</em>. Any func with yield is a generator. aka. switching the execution flows between functions.</p>
+<p>Similar with stackless thread in C++22.</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">foo</span>(): 
+    <span style="color: #008000; font-weight: bold">yield</span> <span style="color: #666666">1</span> <span style="color: #3D7B7B; font-style: italic"># &lt;-- The first time </span>
+    <span style="color: #008000; font-weight: bold">yield</span> <span style="color: #666666">1</span>
+    <span style="color: #008000; font-weight: bold">yield</span> <span style="color: #666666">4</span>
+    <span style="color: #008000; font-weight: bold">yield</span> <span style="color: #666666">5</span>
+    <span style="color: #008000; font-weight: bold">yield</span> <span style="color: #666666">1</span>
+    <span style="color: #008000; font-weight: bold">yield</span> <span style="color: #666666">4</span> <span style="color: #3D7B7B; font-style: italic"># &lt;-- The last time</span>
+
+g <span style="color: #666666">=</span> foo()
+<span style="color: #008000">next</span>(g)     
+</pre></div>
+
+<p><code>yield</code> records the current point and temporarily returns the value that <code>yield</code> holds.</p>
+<p>Example. Yielding in the arraylist</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__iter__</span>(<span style="color: #008000">self</span>): 
+    <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #008000">len</span>(<span style="color: #008000">list</span><span style="color: #666666">.</span>data)): 
+        <span style="color: #008000; font-weight: bold">yield</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>data[i]
+</pre></div>
+
+
+
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </body>
+</html>
