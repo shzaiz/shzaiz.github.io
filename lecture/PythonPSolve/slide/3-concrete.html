@@ -11,6 +11,10 @@
     <link rel="stylesheet" href="https://jyywiki.cn/static/reveal/theme/simple.css" />
     <link rel="stylesheet" href="./css/highlight/base16/zenburn.css" />
 
+    <link rel="stylesheet" href="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/node_modules/reveal.js-plugins/chalkboard/style.css">
+    <script src="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/plugin.js"></script>
+
+
 
   </head>
   <body>
@@ -348,15 +352,17 @@
 - 控制流: 顺序, 循环, ...
 - 抽象: def...
 
-</script></section></section><section  data-markdown><script type="text/template">
+</script></section></section><section ><section data-markdown><script type="text/template">
 
 
 # <slide class="center middle"/> 算法的时间复杂度: 从入门到放弃
 
+</script></section><section data-markdown><script type="text/template"> 
+
 ## 一个自然的想法: 哪个更加高效?
 
 - 时间角度
-    - 一行</script></section></div>
+    - 一行</script></section></section></div>
     </div>
 
     <script src="./dist/reveal.js"></script>
@@ -395,7 +401,14 @@
           RevealZoom,
           RevealNotes,
           RevealMath,
-        ]
+          RevealChalkboard,
+        ],
+        chalkboard: {
+            background: ['none', 'https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/img/blackboard.png'],
+            boardmarkerWidth: 7,
+            colorButtons: true,
+            theme: 'whiteboard'
+            }
       };
 
       // options from URL query string

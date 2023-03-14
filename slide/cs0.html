@@ -11,6 +11,10 @@
     <link rel="stylesheet" href="https://jyywiki.cn/static/reveal/theme/simple.css" />
     <link rel="stylesheet" href="./css/highlight/base16/zenburn.css" />
 
+    <link rel="stylesheet" href="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/node_modules/reveal.js-plugins/chalkboard/style.css">
+    <script src="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/plugin.js"></script>
+
+
 
   </head>
   <body>
@@ -483,7 +487,14 @@ Well...
           RevealZoom,
           RevealNotes,
           RevealMath,
-        ]
+          RevealChalkboard,
+        ],
+        chalkboard: {
+            background: ['none', 'https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/img/blackboard.png'],
+            boardmarkerWidth: 7,
+            colorButtons: true,
+            theme: 'whiteboard'
+            }
       };
 
       // options from URL query string
