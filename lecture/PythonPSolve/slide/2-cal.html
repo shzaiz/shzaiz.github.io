@@ -11,7 +11,47 @@
     <link rel="stylesheet" href="https://jyywiki.cn/static/reveal/theme/simple.css" />
     <link rel="stylesheet" href="./css/highlight/base16/zenburn.css" />
 
-    <link rel="stylesheet" href="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/node_modules/reveal.js-plugins/chalkboard/style.css">
+    <style>
+        div.palette, div.boardhandle {
+  position: absolute;
+/*
+  height: 260px;
+  
+*/  
+  top: 20%;
+  transform: translateY(20%);
+  font-size: 24px;
+  border-radius: 0px;
+  border-top:    0px solid #222; 
+  border-right:  0px solid #222; 
+  border-bottom: 0px solid #222;
+  background: black;
+  transition: transform 0.3s;
+}
+
+div.palette  {
+  margin-top: 10px;
+    left: 0px;
+  padding-left: 0px;
+}
+
+div.boardhandle {
+  right: 0px;
+  padding-right:0px;
+}
+
+div.palette > ul,
+div.boardhandle > ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+div.palette > ul > li,
+div.boardhandle > ul > li {
+  margin: 20px;
+}
+    </style>
     <script src="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/plugin.js"></script>
 
 
@@ -448,8 +488,7 @@
         ],
         chalkboard: {
             background: ['none', 'https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/img/blackboard.png'],
-            boardmarkerWidth: 7,
-            colorButtons: true,
+            boardmarkerWidth: 5,
             theme: 'whiteboard'
             }
       };
