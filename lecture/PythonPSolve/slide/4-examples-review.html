@@ -311,19 +311,13 @@ div.boardhandle > ul > li {
 ## Example 1. Perfect numbers
 
 A perfect number is a postive integer whose value is equal to the sum of its proper divisors (i.e., its factors excluding the number itself). 6 is the first perfect number, as its divisors 1, 2, and 3 add up to 6.
-
-Testcases:
-
 ```py
 import unittest
 tc = unittest.TestCase()
-
 for n in (6, 28, 496):
     tc.assertTrue(is_perfect(n), '{} should be perfect'.format(n))
-
 for n in (1, 2, 3, 4, 5, 10, 20):
     tc.assertFalse(is_perfect(n), '{} should not be perfect'.format(n))
-
 for n in range(30, 450):
     tc.assertFalse(is_perfect(n), '{} should not be perfect'.format(n))
 ```
