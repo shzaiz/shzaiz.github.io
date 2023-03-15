@@ -113,6 +113,77 @@
 </pre></div>
 
 <p>优化: 每次红颜色的指针往后移动一个, 绿颜色的指针也会往后移动一位. (证明: 如果对应当前红颜色的指针绿颜色往前移动了, 一个没有重复子区间的内部也没有重复子区间, 矛盾! )</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #9C6500">#include</span><span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">&lt;bits/stdc++.h&gt;</span>
+<span style="color: #008000; font-weight: bold">using</span><span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">namespace</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF; font-weight: bold">std</span>;
+<span style="color: #9C6500">#define MAXN 100010</span>
+<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>n,<span style="color: #bbbbbb"> </span>a[MAXN];
+<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>res<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">-1</span>;
+<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>s[MAXN];<span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">// [j..i]每一个数出现的次数</span>
+<span style="color: #B00040">bool</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">check</span>(){
+<span style="color: #bbbbbb">    </span>
+}
+<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">main</span>(){
+<span style="color: #bbbbbb">    </span>scanf(<span style="color: #BA2121">&quot;%d&quot;</span>,<span style="color: #bbbbbb"> </span><span style="color: #666666">&amp;</span>n);
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">for</span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>i<span style="color: #666666">=1</span>;<span style="color: #bbbbbb"> </span>i<span style="color: #666666">&lt;=</span>n;<span style="color: #bbbbbb"> </span>i<span style="color: #666666">++</span>)<span style="color: #bbbbbb"> </span>scanf(<span style="color: #BA2121">&quot;%d&quot;</span>,<span style="color: #bbbbbb"> </span><span style="color: #666666">&amp;</span>a[i]);
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">for</span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>i<span style="color: #666666">=1</span>,<span style="color: #bbbbbb"> </span>j<span style="color: #666666">=1</span>;<span style="color: #bbbbbb"> </span>i<span style="color: #666666">&lt;=</span>n;<span style="color: #bbbbbb"> </span>i<span style="color: #666666">++</span>){
+<span style="color: #bbbbbb">        </span>s[a[i]]<span style="color: #666666">++</span>;
+<span style="color: #bbbbbb">        </span><span style="color: #008000; font-weight: bold">while</span>(j<span style="color: #666666">&lt;=</span>i<span style="color: #bbbbbb"> </span><span style="color: #666666">&amp;&amp;</span><span style="color: #bbbbbb"> </span>s[a[i]]<span style="color: #666666">&gt;1</span>)<span style="color: #bbbbbb"> </span>{
+<span style="color: #bbbbbb">            </span>s[a[j]]<span style="color: #666666">--</span>;<span style="color: #bbbbbb"> </span>j<span style="color: #666666">++</span>;
+<span style="color: #bbbbbb">        </span>}
+<span style="color: #bbbbbb">        </span>res<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>max(res,<span style="color: #bbbbbb"> </span>i<span style="color: #666666">-</span>j<span style="color: #666666">+1</span>);
+<span style="color: #bbbbbb">    </span>}
+<span style="color: #bbbbbb">    </span>printf(<span style="color: #BA2121">&quot;%d&quot;</span>,<span style="color: #bbbbbb"> </span>res);
+}
+</pre></div>
+
+<p>注意不要每一次更新的时候都更新j, 因为没有必要.</p>
+<h1>二进制算法</h1>
+<ol>
+<li>一个数二进制中的第k位: <code>a&gt;&gt;k &amp; 1</code></li>
+<li>lowbit函数: 返回一个数x的二进制表示最后一位是1的位数. <code>x&amp;(-x)</code>. 其中-x = ~x+1.</li>
+</ol>
+<h1>离散化</h1>
+<ol>
+<li>本质: 把一个大区间中明显不足这么大的区间的数映射到小区间里面.</li>
+</ol>
+<p>如:</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #666666">1</span><span style="color: #bbbbbb">  </span><span style="color: #666666">3</span><span style="color: #bbbbbb">   </span><span style="color: #666666">100</span><span style="color: #bbbbbb">   </span><span style="color: #666666">20000</span><span style="color: #bbbbbb">   </span><span style="color: #666666">50000000</span>
+<span style="color: #bbbbbb">          </span><span style="border: 1px solid #FF0000">|||</span><span style="color: #bbbbbb">  </span>f(x)
+<span style="color: #bbbbbb">           </span>v
+<span style="color: #666666">0</span><span style="color: #bbbbbb">  </span><span style="color: #666666">1</span><span style="color: #bbbbbb">    </span><span style="color: #666666">2</span><span style="color: #bbbbbb">     </span><span style="color: #666666">3</span><span style="color: #bbbbbb">          </span><span style="color: #666666">4</span>
+</pre></div>
+
+<ol start="2">
+<li>
+<p>一些小问题:</p>
+<ul>
+<li>a[]可能有重复的元素 (需要去重)</li>
+<li>如何算出a里面的值映射的结果 - 保证顺序 a-&gt;下标 (二分)</li>
+</ul>
+</li>
+<li>
+<p>常见写法:</p>
+</li>
+</ol>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span>vector<span style="color: #666666">&lt;</span><span style="color: #B00040">int</span><span style="color: #666666">&gt;</span><span style="color: #bbbbbb"> </span>alls;<span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">// 存储等待离散化的值</span>
+sort(alls.begin(),<span style="color: #bbbbbb"> </span>alls.end());<span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">// 排序</span>
+alls.erase(unique(alls.begin(),<span style="color: #bbbbbb"> </span>alls.end()),<span style="color: #bbbbbb"> </span>alls.end());<span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">// 去重</span>
+<span style="color: #3D7B7B; font-style: italic">// unique是把所有的重复元素去重, 返回数组末尾的端点</span>
+<span style="color: #3D7B7B; font-style: italic">// a:     |-------------|</span>
+<span style="color: #3D7B7B; font-style: italic">// a-uniq |--------|~~~~|</span>
+<span style="color: #3D7B7B; font-style: italic">//                 ^删除</span>
+<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">find</span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>x){<span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">// 找第一个大于等于x的位置, 返回这个位置的下标+1</span>
+<span style="color: #bbbbbb">    </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>l<span style="color: #666666">=0</span>,<span style="color: #bbbbbb"> </span>r<span style="color: #666666">=</span>all.size()<span style="color: #666666">-1</span>;
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">while</span>(l<span style="color: #666666">&lt;</span>r){
+<span style="color: #bbbbbb">        </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>mid<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>(l<span style="color: #666666">+</span>r)<span style="color: #666666">&gt;&gt;1</span>;
+<span style="color: #bbbbbb">        </span><span style="color: #008000; font-weight: bold">if</span>(alls[mid]<span style="color: #666666">&gt;=</span>x)<span style="color: #bbbbbb"> </span>r<span style="color: #666666">=</span>mid;
+<span style="color: #bbbbbb">        </span><span style="color: #008000; font-weight: bold">else</span><span style="color: #bbbbbb"> </span>l<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>mid<span style="color: #666666">+1</span>;
+<span style="color: #bbbbbb">    </span>}
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">return</span><span style="color: #bbbbbb"> </span>r<span style="color: #666666">+1</span>;<span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">// +1映射到1,2,...,n; 否则从0开始. </span>
+}
+</pre></div>
+
+<p>基本例. ACW802</p>
 
 
     <script type="text/javascript" async
