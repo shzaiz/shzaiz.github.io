@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <link rel="stylesheet" href="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/style.css">
+    <script src="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/plugin.js"></script> 
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <style>
+        body {counter-reset:section;}
+        h1 {counter-reset:subsection;font-size:x-large;}
+        h2 {font-size: large;}
+
+        h1:before {
+        counter-increment:section;
+        content:"Section " counter(section) ". ";
+            font-weight:bold;
+            font-size: x-large;
+        }
+        h2:before {
+        counter-increment:subsection;
+        content:counter(section) "." counter(subsection) " ";
+        font-size: large;
+        }
+        html, body {
+            margin: 3%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: 500;
+        }
+        code {
+            font-family: 'Courier New', Courier, monospace;
+        } 
+
+        pre {
+            font-family: 'Courier New', Courier, monospace;
+        } 
+
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+            position: fixed; /* Set the navbar to fixed position */
+            top: 0; /* Position the navbar at the top of the page */
+            width: 100%; /* Full width */
+        }
+
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        a {
+            color: #148bca;
+            text-align: center;
+            padding-left: 10px;
+            padding-right: 10px;
+            text-decoration: none;
+        }
+
+    </style>
+  </head>
+  <body>
+    
+    <div class="navbar">
+        <a href="https://shzaiz.github.io">AUG's Wiki</a>
+        <a href="index.html"> ↑ Back to contents</a>
+    </div>
+
+
+    <h1>逻辑符号</h1>
+<h2>历史的动机</h2>
+<p><a href="https://www.bilibili.com/video/BV1464y1k7Ya/">数学有一个致命的缺陷-Vertasium</a></p>
+<ul>
+<li>有没有不能被证明的真命题?
+<ul>
+<li>Hilbert: 我们的思维太不严谨了! 需要严谨.</li>
+</ul>
+</li>
+</ul>
+<p>更加现实的动机</p>
+<ul>
+<li>让计算机去处理大部分机械的部分</li>
+</ul>
+<h2>好处</h2>
+<p><a href="https://bas.codes/posts/python-sudoku-solver-z3">z3 with sudokus</a></p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">z3</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>
+
+<span style="color: #3D7B7B; font-style: italic"># First we create an Integer Variable for each cell of the Sudoku grid.</span>
+<span style="color: #3D7B7B; font-style: italic"># Each cell must contain a digit (1 to 9)</span>
+X <span style="color: #666666">=</span> [ [ Int(<span style="color: #BA2121">&quot;x_</span><span style="color: #A45A77; font-weight: bold">%s</span><span style="color: #BA2121">_</span><span style="color: #A45A77; font-weight: bold">%s</span><span style="color: #BA2121">&quot;</span> <span style="color: #666666">%</span> (i<span style="color: #666666">+1</span>, j<span style="color: #666666">+1</span>)) <span style="color: #008000; font-weight: bold">for</span> j <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">9</span>) ] 
+      <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">9</span>) ]
+
+<span style="color: #3D7B7B; font-style: italic"># Every digit has to be placed exactly once in each row</span>
+cells_c  <span style="color: #666666">=</span> [ And(<span style="color: #666666">1</span> <span style="color: #666666">&lt;=</span> X[i][j], X[i][j] <span style="color: #666666">&lt;=</span> <span style="color: #666666">9</span>) 
+             <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">9</span>) <span style="color: #008000; font-weight: bold">for</span> j <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">9</span>) ]
+
+<span style="color: #3D7B7B; font-style: italic"># Every digit has to be placed exactly once in each column</span>
+rows_c   <span style="color: #666666">=</span> [ Distinct(X[i]) <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">9</span>) ]
+
+cols_c   <span style="color: #666666">=</span> [ Distinct([ X[i][j] <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">9</span>) ]) 
+             <span style="color: #008000; font-weight: bold">for</span> j <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">9</span>) ]
+
+<span style="color: #3D7B7B; font-style: italic"># Every digit has to be placed exactly once in each 3x3 subgrid</span>
+sq_c     <span style="color: #666666">=</span> [ Distinct([ X[<span style="color: #666666">3*</span>i0 <span style="color: #666666">+</span> i][<span style="color: #666666">3*</span>j0 <span style="color: #666666">+</span> j] 
+                        <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">3</span>) <span style="color: #008000; font-weight: bold">for</span> j <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">3</span>) ]) 
+             <span style="color: #008000; font-weight: bold">for</span> i0 <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">3</span>) <span style="color: #008000; font-weight: bold">for</span> j0 <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">3</span>) ]
+
+sudoku_c <span style="color: #666666">=</span> cells_c <span style="color: #666666">+</span> rows_c <span style="color: #666666">+</span> cols_c <span style="color: #666666">+</span> sq_c
+
+instance <span style="color: #666666">=</span> ((<span style="color: #666666">5</span>,<span style="color: #666666">3</span>,<span style="color: #666666">0</span>,<span style="color: #666666">0</span>,<span style="color: #666666">7</span>,<span style="color: #666666">0</span>,<span style="color: #666666">0</span>,<span style="color: #666666">0</span>,<span style="color: #666666">0</span>),
+            (<span style="color: #666666">6</span>,<span style="color: #666666">0</span>,<span style="color: #666666">0</span>,<span style="color: #666666">1</span>,<span style="color: #666666">9</span>,<span style="color: #666666">5</span>,<span style="color: #666666">0</span>,<span style="color: #666666">0</span>,<span style="color: #666666">0</span>),
+            (<span style="color: #666666">0</span>,<span style="color: #666666">9</span>,<span style="color: #666666">8</span>,<span style="color: #666666">0</span>,<span style="color: #666666">0</span>,<span style="color: #666666">0</span>,<span style="color: #666666">0</span>,<span style="color: #666666">6</span>,<span style="color: #666666">0</span>),
+            (<span style="color: #666666">8</span>,<span style="color: #666666">0</span>,<span style="color: #666666">0</span>,<span style="color: #666666">0</span>,<span style="color: #666666">6</span>,<span style="color: #666666">0</span>,<span style="color: #666666">0</span>,<span style="color: #666666">0</span>,<span style="color: #666666">3</span>),
+            (<span style="color: #666666">4</span>,<span style="color: #666666">0</span>,<span style="color: #666666">0</span>,<span style="color: #666666">8</span>,<span style="color: #666666">0</span>,<span style="color: #666666">3</span>,<span style="color: #666666">0</span>,<span style="color: #666666">0</span>,<span style="color: #666666">1</span>),
+            (<span style="color: #666666">7</span>,<span style="color: #666666">0</span>,<span style="color: #666666">0</span>,<span style="color: #666666">0</span>,<span style="color: #666666">2</span>,<span style="color: #666666">0</span>,<span style="color: #666666">0</span>,<span style="color: #666666">0</span>,<span style="color: #666666">6</span>),
+            (<span style="color: #666666">0</span>,<span style="color: #666666">6</span>,<span style="color: #666666">0</span>,<span style="color: #666666">0</span>,<span style="color: #666666">0</span>,<span style="color: #666666">0</span>,<span style="color: #666666">2</span>,<span style="color: #666666">8</span>,<span style="color: #666666">0</span>),
+            (<span style="color: #666666">0</span>,<span style="color: #666666">0</span>,<span style="color: #666666">0</span>,<span style="color: #666666">4</span>,<span style="color: #666666">1</span>,<span style="color: #666666">9</span>,<span style="color: #666666">0</span>,<span style="color: #666666">0</span>,<span style="color: #666666">5</span>),
+            (<span style="color: #666666">0</span>,<span style="color: #666666">0</span>,<span style="color: #666666">0</span>,<span style="color: #666666">0</span>,<span style="color: #666666">8</span>,<span style="color: #666666">0</span>,<span style="color: #666666">0</span>,<span style="color: #666666">7</span>,<span style="color: #666666">9</span>))
+
+<span style="color: #3D7B7B; font-style: italic"># Note that we use the number 0 to indicate blank fields. We need to convert this input to the variables managed by z3:</span>
+
+instance_c <span style="color: #666666">=</span> [ If(instance[i][j] <span style="color: #666666">==</span> <span style="color: #666666">0</span>, 
+                  <span style="color: #008000; font-weight: bold">True</span>, 
+                  X[i][j] <span style="color: #666666">==</span> instance[i][j]) 
+               <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">9</span>) <span style="color: #008000; font-weight: bold">for</span> j <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">9</span>) ]
+
+s <span style="color: #666666">=</span> Solver()                                            <span style="color: #3D7B7B; font-style: italic"># (1)</span>
+s<span style="color: #666666">.</span>add(sudoku_c <span style="color: #666666">+</span> instance_c)                            <span style="color: #3D7B7B; font-style: italic"># (2)</span>
+<span style="color: #008000; font-weight: bold">if</span> s<span style="color: #666666">.</span>check() <span style="color: #666666">==</span> sat:                                    <span style="color: #3D7B7B; font-style: italic"># (3)</span>
+    m <span style="color: #666666">=</span> s<span style="color: #666666">.</span>model()                                       <span style="color: #3D7B7B; font-style: italic"># (4)</span>
+    r <span style="color: #666666">=</span> [ [ m<span style="color: #666666">.</span>evaluate(X[i][j]) <span style="color: #008000; font-weight: bold">for</span> j <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">9</span>) ]     <span style="color: #3D7B7B; font-style: italic"># (5)</span>
+          <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">9</span>) ]
+    print_matrix(r)                                     <span style="color: #3D7B7B; font-style: italic"># (6)</span>
+<span style="color: #008000; font-weight: bold">else</span>:
+    <span style="color: #008000">print</span>(<span style="color: #BA2121">&quot;failed to solve&quot;</span>)                            <span style="color: #3D7B7B; font-style: italic"># (7)</span>
+</pre></div>
+
+<p>(1): Create the Solver object
+(2): Adding our ruleset and our pre-filled grid to the solver
+(3): let z3 check if there is at least one solution satisfying all the rules
+(4): the model() method now assigns a value to each variable we defined
+(5): with the evaluate() method, we now just extract each variable’s value to build a 9x9 matrix</p>
+<h2>基本问题</h2>
+<p>什么样的推理是正确/合法 (Valid) 的?</p>
+<ul>
+<li>正确性: 如果前提 α, β, γ, . . . 都为真, 那么结论 τ 也为真</li>
+</ul>
+<p>逻辑就是用数学的方法研究人类基本思维规律的一门学科</p>
+<h2>命题</h2>
+<p>忘掉 “命题”!!!</p>
+<ul>
+<li>逻辑不关心单个命题的真假, 而关心命题之间的关系</li>
+</ul>
+<h2>一门新的语言</h2>
+<ul>
+<li>语法
+<ul>
+<li>gwzhang are an student to CUG(x)</li>
+<li>a = 3.5x (x)</li>
+</ul>
+</li>
+<li>语义
+<ul>
+<li>fhzhu said it&#x27;s a small test, so don&#x27;t panic</li>
+<li>a = 3.5</li>
+</ul>
+</li>
+</ul>
+<h2>主要路线图</h2>
+<p><img src="./FILES/2-prop-note.md/img-20230317193203.png" alt="Img" /></p>
+<h1>命题</h1>
+<ul>
+<li>忘掉 “命题”!!!</li>
+<li>逻辑不关心单个命题的真假, 而关心命题之间的关系</li>
+</ul>
+<h1>命题之间的关系: 逻辑</h1>
+<h2>简单的逻辑连接词</h2>
+<p><img src="./FILES/2-prop-note.md/img-20230317193351.png" alt="Img" /></p>
+<ul>
+<li>
+<p>为什么叫做合取? 析取?</p>
+<ul>
+<li>合=both of them</li>
+<li><a href="https://zidian.qianp.com/zi/%E6%9E%90">析</a>=分开</li>
+</ul>
+</li>
+<li>
+<p>对于蕴含连接词</p>
+<ul>
+<li>&quot;主动权&quot;的想法</li>
+</ul>
+</li>
+</ul>
+<h2>命题逻辑的语法</h2>
+<p><img src="./FILES/2-prop-note.md/img-20230317193459.png" alt="Img" /></p>
+<h2>运算规则</h2>
+<p><img src="./FILES/2-prop-note.md/img-20230317193635.png" alt="Img" /></p>
+<h2>解释</h2>
+<p>说明了如何理解这个命题公式.</p>
+<ul>
+<li>既然不确定, 就把可能的情况之一列举出来(指派)</li>
+<li>把所有的可能情况都列举出来(指派的扩张)</li>
+</ul>
+<h2>等价: 把一样的归为一类</h2>
+<p><img src="./FILES/2-prop-note.md/img-20230317194018.png" alt="Img" /></p>
+<p>我们的课本里面处理的就比较粗暴了...</p>
+<p><img src="./FILES/2-prop-note.md/img-20230317194056.png" alt="Img" /></p>
+<h2>运算规律</h2>
+<ul>
+<li>加法交换律, 加法结合律等
+<ul>
+<li>后续也会把这些抽象出来.</li>
+</ul>
+</li>
+</ul>
+<p>青春版:
+<img src="./FILES/2-prop-note.md/img-20230317194144.png" alt="Img" /></p>
+<h2>举个例子:</h2>
+<p><img src="./FILES/2-prop-note.md/img-20230317194242.png" alt="Img" /></p>
+<h2>另一个例子:</h2>
+<p><img src="./FILES/2-prop-note.md/img-20230317194357.png" alt="Img" /></p>
+<h2>化简的目标之一: 范式</h2>
+<p><img src="./FILES/2-prop-note.md/img-20230317194543.png" alt="Img" /></p>
+<p>好处是什么?</p>
+<p><img src="./FILES/2-prop-note.md/img-20230317194652.png" alt="Img" />
+<img src="./FILES/2-prop-note.md/img-20230317194739.png" alt="Img" /></p>
+<h1>命题的推演</h1>
+<p><img src="./FILES/2-prop-note.md/img-20230317195121.png" alt="Img" /></p>
+<h2>有哪些规律?</h2>
+<p><img src="./FILES/2-prop-note.md/img-20230317195149.png" alt="Img" /></p>
+
+
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
+    </script>
+    
+
+  </body>
+</html>

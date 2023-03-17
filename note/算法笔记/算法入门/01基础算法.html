@@ -184,6 +184,115 @@ alls.erase(unique(alls.begin(),<span style="color: #bbbbbb"> </span>alls.end()),
 </pre></div>
 
 <p>基本例. ACW802</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #9C6500">#include</span><span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">&lt;bits/stdc++.h&gt;</span>
+<span style="color: #008000; font-weight: bold">using</span><span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">namespace</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF; font-weight: bold">std</span>;
+
+<span style="color: #008000; font-weight: bold">using</span><span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">namespace</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF; font-weight: bold">std</span>;
+<span style="color: #9C6500">#define MAXN 300007</span>
+<span style="color: #9C6500">#define PII pair&lt;int, int&gt;</span>
+<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>n,<span style="color: #bbbbbb"> </span>m;
+<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>a[MAXN],<span style="color: #bbbbbb"> </span>s[MAXN];
+vector<span style="color: #666666">&lt;</span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span><span style="color: #666666">&gt;</span><span style="color: #bbbbbb"> </span>alls;
+vector<span style="color: #666666">&lt;</span>PII<span style="color: #bbbbbb"> </span><span style="color: #666666">&gt;</span><span style="color: #bbbbbb"> </span>add,<span style="color: #bbbbbb"> </span>query;
+<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">find</span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>x){
+<span style="color: #bbbbbb">  </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>l<span style="color: #666666">=0</span>,<span style="color: #bbbbbb"> </span>r<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>alls.size()<span style="color: #666666">-1</span>;
+<span style="color: #bbbbbb">  </span><span style="color: #008000; font-weight: bold">while</span>(l<span style="color: #666666">&lt;</span>r){
+<span style="color: #bbbbbb">    </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>mid<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>l<span style="color: #666666">+</span>r<span style="color: #666666">&gt;&gt;1</span>;
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">if</span>(alls[mid]<span style="color: #666666">&gt;=</span>x)<span style="color: #bbbbbb"> </span>r<span style="color: #666666">=</span>mid;
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">else</span><span style="color: #bbbbbb"> </span>l<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>mid<span style="color: #666666">+1</span>;
+<span style="color: #bbbbbb">  </span>}
+<span style="color: #bbbbbb">  </span><span style="color: #008000; font-weight: bold">return</span><span style="color: #bbbbbb"> </span>r<span style="color: #666666">+1</span>;
+<span style="color: #bbbbbb">  </span>
+}
+<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">main</span>(){
+<span style="color: #bbbbbb">  </span>cin<span style="color: #666666">&gt;&gt;</span>n<span style="color: #666666">&gt;&gt;</span>m;
+<span style="color: #bbbbbb">  </span><span style="color: #008000; font-weight: bold">for</span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>i<span style="color: #666666">=0</span>;<span style="color: #bbbbbb"> </span>i<span style="color: #666666">&lt;</span>n;<span style="color: #bbbbbb"> </span>i<span style="color: #666666">++</span>){
+<span style="color: #bbbbbb">    </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>x,<span style="color: #bbbbbb"> </span>c;
+<span style="color: #bbbbbb">    </span>cin<span style="color: #666666">&gt;&gt;</span>x<span style="color: #666666">&gt;&gt;</span>c;
+<span style="color: #bbbbbb">    </span>add.push_back({x,c});
+<span style="color: #bbbbbb">    </span>alls.push_back(x);
+<span style="color: #bbbbbb">    </span>
+<span style="color: #bbbbbb">  </span>}
+<span style="color: #bbbbbb">  </span><span style="color: #008000; font-weight: bold">for</span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>i<span style="color: #666666">=0</span>;<span style="color: #bbbbbb"> </span>i<span style="color: #666666">&lt;</span>m;<span style="color: #bbbbbb"> </span>i<span style="color: #666666">++</span>){
+<span style="color: #bbbbbb">    </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>l,<span style="color: #bbbbbb"> </span>r;
+<span style="color: #bbbbbb">    </span>cin<span style="color: #666666">&gt;&gt;</span>l<span style="color: #666666">&gt;&gt;</span>r;
+<span style="color: #bbbbbb">    </span>query.push_back({l,r});
+<span style="color: #bbbbbb">    </span>
+<span style="color: #bbbbbb">    </span>alls.push_back(l);
+<span style="color: #bbbbbb">    </span>alls.push_back(r);
+<span style="color: #bbbbbb">    </span>
+<span style="color: #bbbbbb">  </span>}
+<span style="color: #bbbbbb">  </span>
+<span style="color: #bbbbbb">  </span>sort(alls.begin(),<span style="color: #bbbbbb"> </span>alls.end());
+<span style="color: #bbbbbb">  </span>alls.erase(unique(alls.begin(),<span style="color: #bbbbbb"> </span>alls.end()),<span style="color: #bbbbbb"> </span>alls.end());
+<span style="color: #bbbbbb">  </span>
+<span style="color: #bbbbbb">  </span><span style="color: #008000; font-weight: bold">for</span>(<span style="color: #008000; font-weight: bold">auto</span><span style="color: #bbbbbb"> </span>item<span style="color: #bbbbbb"> </span><span style="color: #666666">:</span><span style="color: #bbbbbb"> </span>add){
+<span style="color: #bbbbbb">    </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>x<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>find(item.first);
+<span style="color: #bbbbbb">    </span>a[x]<span style="color: #666666">+=</span>item.second;
+<span style="color: #bbbbbb">  </span>}
+<span style="color: #bbbbbb">  </span>
+<span style="color: #bbbbbb">  </span><span style="color: #3D7B7B; font-style: italic">// prefix</span>
+<span style="color: #bbbbbb">  </span>
+<span style="color: #bbbbbb">  </span><span style="color: #008000; font-weight: bold">for</span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>i<span style="color: #666666">=1</span>;<span style="color: #bbbbbb"> </span>i<span style="color: #666666">&lt;=</span>alls.size();<span style="color: #bbbbbb"> </span>i<span style="color: #666666">++</span>){
+<span style="color: #bbbbbb">    </span>s[i]<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>s[i<span style="color: #666666">-1</span>]<span style="color: #666666">+</span>a[i];
+<span style="color: #bbbbbb">  </span>}
+<span style="color: #bbbbbb">  </span>
+<span style="color: #bbbbbb">  </span><span style="color: #3D7B7B; font-style: italic">//query</span>
+<span style="color: #bbbbbb">  </span>
+<span style="color: #bbbbbb">  </span><span style="color: #008000; font-weight: bold">for</span>(<span style="color: #008000; font-weight: bold">auto</span><span style="color: #bbbbbb"> </span>item<span style="color: #bbbbbb"> </span><span style="color: #666666">:</span><span style="color: #bbbbbb"> </span>query){
+<span style="color: #bbbbbb">    </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>x<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>find(item.first),<span style="color: #bbbbbb"> </span>y<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>find(item.second);
+<span style="color: #bbbbbb">    </span>cout<span style="color: #666666">&lt;&lt;</span>s[y]<span style="color: #666666">-</span>s[x<span style="color: #666666">-1</span>]<span style="color: #666666">&lt;&lt;</span>endl;
+<span style="color: #bbbbbb">    </span>
+<span style="color: #bbbbbb">  </span>}
+<span style="color: #bbbbbb">  </span>
+<span style="color: #bbbbbb">  </span>
+}
+</pre></div>
+
+<h1>区间合并</h1>
+<p>给定许多区间, 如果有交集, 就把它合并成一个区间. 输入n个区间, 把所有有交集的合并, 输出合并之后的区间个数.</p>
+<p>规定: 只有边界相邻, 仍然合并.</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #666666">1</span><span style="color: #bbbbbb"> </span><span style="color: #666666">2</span><span style="color: #bbbbbb"> </span><span style="color: #666666">3</span><span style="color: #bbbbbb"> </span><span style="color: #666666">4</span><span style="color: #bbbbbb"> </span><span style="color: #666666">5</span><span style="color: #bbbbbb"> </span><span style="color: #666666">6</span><span style="color: #bbbbbb"> </span><span style="color: #666666">7</span><span style="color: #bbbbbb"> </span><span style="color: #666666">8</span><span style="color: #bbbbbb"> </span><span style="color: #666666">9</span>
+<span style="border: 1px solid #FF0000">|</span><span style="color: #666666">-</span><span style="border: 1px solid #FF0000">|</span>
+<span style="color: #bbbbbb">  </span><span style="border: 1px solid #FF0000">|</span><span style="color: #666666">---</span><span style="border: 1px solid #FF0000">|</span><span style="color: #bbbbbb"> </span><span style="border: 1px solid #FF0000">|</span><span style="color: #666666">-</span><span style="border: 1px solid #FF0000">|</span><span style="color: #bbbbbb"> </span><span style="border: 1px solid #FF0000">|</span><span style="color: #666666">---</span><span style="border: 1px solid #FF0000">|</span>
+<span style="color: #bbbbbb">             </span><span style="border: 1px solid #FF0000">|</span><span style="color: #666666">--</span><span style="border: 1px solid #FF0000">|</span>
+合并之后:<span style="color: #bbbbbb"> </span>
+<span style="border: 1px solid #FF0000">|</span><span style="color: #666666">-----</span><span style="border: 1px solid #FF0000">|</span><span style="color: #bbbbbb"> </span><span style="border: 1px solid #FF0000">|</span><span style="color: #666666">-</span><span style="border: 1px solid #FF0000">|</span><span style="color: #bbbbbb"> </span><span style="border: 1px solid #FF0000">|</span><span style="color: #666666">---</span><span style="border: 1px solid #FF0000">|</span>
+</pre></div>
+
+<p>(1) 按照区间的左端点排序
+(2) 扫描整个区间, 把可以的合并. 维护当前区间start, end; 如果当前第i个区间, 有包含(A), 有交集(B), 外部(C)的关系.</p>
+<p>A. 更新完之后不变.
+B. ed = i.end
+C. ans ++; st = i.start, ed = i.end</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #9C6500">#include</span><span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">&lt;bits/stdc++.h&gt;</span>
+<span style="color: #008000; font-weight: bold">using</span><span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">namespace</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF; font-weight: bold">std</span>;
+<span style="color: #9C6500">#define MAXN 1000010</span>
+<span style="color: #9C6500">#define F(i, j, k) for(int i=j; i&lt;=k; i++)</span>
+<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>n;<span style="color: #bbbbbb"> </span>vector<span style="color: #666666">&lt;</span>pair<span style="color: #666666">&lt;</span><span style="color: #B00040">int</span>,<span style="color: #bbbbbb"> </span><span style="color: #B00040">int</span><span style="color: #666666">&gt;</span><span style="color: #bbbbbb"> </span><span style="color: #666666">&gt;</span><span style="color: #bbbbbb"> </span>a;
+<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">main</span>(){
+<span style="color: #bbbbbb">  </span>cin<span style="color: #666666">&gt;&gt;</span>n;
+<span style="color: #bbbbbb">  </span>F(i,<span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>,<span style="color: #bbbbbb"> </span>n)<span style="color: #bbbbbb"> </span>{
+<span style="color: #bbbbbb">    </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>x,<span style="color: #bbbbbb"> </span>y;<span style="color: #bbbbbb"> </span>cin<span style="color: #666666">&gt;&gt;</span>x<span style="color: #666666">&gt;&gt;</span>y;
+<span style="color: #bbbbbb">    </span>a.push_back({x,y});
+<span style="color: #bbbbbb">  </span>}
+<span style="color: #bbbbbb">  </span>sort(a.begin(),<span style="color: #bbbbbb"> </span>a.end());
+<span style="color: #bbbbbb">  </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>cl<span style="color: #666666">=</span>a[<span style="color: #666666">0</span>].first,<span style="color: #bbbbbb"> </span>cr<span style="color: #666666">=</span>a[<span style="color: #666666">0</span>].second,<span style="color: #bbbbbb"> </span>ans<span style="color: #666666">=1</span>;
+<span style="color: #bbbbbb">  </span><span style="color: #008000; font-weight: bold">for</span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>i<span style="color: #666666">=1</span>;<span style="color: #bbbbbb"> </span>i<span style="color: #666666">&lt;</span>n;i<span style="color: #666666">++</span>){
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">auto</span><span style="color: #bbbbbb"> </span>cur<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>a[i];
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">if</span>(cur.first<span style="color: #bbbbbb"> </span><span style="color: #666666">&gt;</span><span style="color: #bbbbbb"> </span>cr){
+<span style="color: #bbbbbb">      </span>cl<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>cur.first;
+<span style="color: #bbbbbb">      </span>cr<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>cur.second;
+<span style="color: #bbbbbb">      </span>ans<span style="color: #666666">++</span>;
+<span style="color: #bbbbbb">    </span>}<span style="color: #008000; font-weight: bold">else</span><span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">if</span>(cur.second<span style="color: #666666">&gt;</span>cr){
+<span style="color: #bbbbbb">      </span>cr<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>cur.second;
+<span style="color: #bbbbbb">    </span>}
+<span style="color: #bbbbbb">  </span>}
+<span style="color: #bbbbbb">  </span>cout<span style="color: #666666">&lt;&lt;</span>ans<span style="color: #666666">&lt;&lt;</span>endl;
+<span style="color: #bbbbbb">  </span>
+}
+</pre></div>
+
 
 
     <script type="text/javascript" async
