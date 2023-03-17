@@ -64,8 +64,12 @@ div.boardhandle > ul > li {
             font-weight: 500;
             
         }
-        
-        
+        .reveal pre code {
+  max-height: none;
+} 
+        .reveal code {
+  font-family:  Monospace!important;
+} 
         .navbar {
             overflow: hidden;
             background-color: #333;
@@ -741,7 +745,7 @@ Happy Hacking!!!
       // options from URL query string
       var queryOptions = Reveal().getQueryHash() || {};
 
-      var options = extend(defaultOptions, {"transition":"slide"}, queryOptions);
+      var options = extend(defaultOptions, {"transition":"slide","center":false}, queryOptions);
     </script>
 
 
