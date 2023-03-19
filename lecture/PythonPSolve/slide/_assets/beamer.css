@@ -77,17 +77,16 @@
   display: flex;
   text-align: center;
   align-items: center
-}
-.reveal .middle h1 {
+}*/
+.middle {
     display: flex;
     text-align: center;
     align-items: center;
-    text-align: center;
     width: 100%;
     justify-content: center;
 }
 
-.reveal h2 {
+/*.reveal h2 {
   font-size: 48px;
   border-bottom: 2px solid rgb(106, 0, 95);
   padding-bottom: 5px;

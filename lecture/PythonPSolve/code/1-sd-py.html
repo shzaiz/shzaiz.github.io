@@ -70,23 +70,7 @@
     </div>
 
 
-    <h1>逻辑符号</h1>
-<h2>历史的动机</h2>
-<p><a href="https://www.bilibili.com/video/BV1464y1k7Ya/">数学有一个致命的缺陷-Vertasium</a></p>
-<ul>
-<li>有没有不能被证明的真命题?
-<ul>
-<li>Hilbert: 我们的思维太不严谨了! 需要严谨.</li>
-</ul>
-</li>
-</ul>
-<p>更加现实的动机</p>
-<ul>
-<li>让计算机去处理大部分机械的部分</li>
-</ul>
-<h2>好处</h2>
-<p><a href="https://bas.codes/posts/python-sudoku-solver-z3">z3 with sudokus</a></p>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">z3</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>
+    <div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">z3</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>
 
 <span style="color: #3D7B7B; font-style: italic"># First we create an Integer Variable for each cell of the Sudoku grid.</span>
 <span style="color: #3D7B7B; font-style: italic"># Each cell must contain a digit (1 to 9)</span>
@@ -143,94 +127,6 @@ s<span style="color: #666666">.</span>add(sudoku_c <span style="color: #666666">
 (3): let z3 check if there is at least one solution satisfying all the rules
 (4): the model() method now assigns a value to each variable we defined
 (5): with the evaluate() method, we now just extract each variable’s value to build a 9x9 matrix</p>
-<h2>基本问题</h2>
-<p>什么样的推理是正确/合法 (Valid) 的?</p>
-<ul>
-<li>正确性: 如果前提 α, β, γ, . . . 都为真, 那么结论 τ 也为真</li>
-</ul>
-<p>逻辑就是用数学的方法研究人类基本思维规律的一门学科</p>
-<h2>命题</h2>
-<p>忘掉 “命题”!!!</p>
-<ul>
-<li>逻辑不关心单个命题的真假, 而关心命题之间的关系</li>
-</ul>
-<h2>一门新的语言</h2>
-<ul>
-<li>语法
-<ul>
-<li>gwzhang are an student to CUG(x)</li>
-<li>a = 3.5x (x)</li>
-</ul>
-</li>
-<li>语义
-<ul>
-<li>fhzhu said it&#x27;s a small test, so don&#x27;t panic</li>
-<li>a = 3.5</li>
-</ul>
-</li>
-</ul>
-<h2>主要路线图</h2>
-<p><img src="./FILES/2-prop-note.md/img-20230317193203.png" alt="Img" /></p>
-<h1>命题</h1>
-<ul>
-<li>忘掉 “命题”!!!</li>
-<li>逻辑不关心单个命题的真假, 而关心命题之间的关系</li>
-</ul>
-<h1>命题之间的关系: 逻辑</h1>
-<h2>简单的逻辑连接词</h2>
-<p><img src="./FILES/2-prop-note.md/img-20230317193351.png" alt="Img" /></p>
-<ul>
-<li>
-<p>为什么叫做合取? 析取?</p>
-<ul>
-<li>合=both of them</li>
-<li><a href="https://zidian.qianp.com/zi/%E6%9E%90">析</a>=分开</li>
-</ul>
-</li>
-<li>
-<p>对于蕴含连接词</p>
-<ul>
-<li>&quot;主动权&quot;的想法</li>
-</ul>
-</li>
-</ul>
-<h2>命题逻辑的语法</h2>
-<p><img src="./FILES/2-prop-note.md/img-20230317193459.png" alt="Img" /></p>
-<h2>运算规则</h2>
-<p><img src="./FILES/2-prop-note.md/img-20230317193635.png" alt="Img" /></p>
-<h2>解释</h2>
-<p>说明了如何理解这个命题公式.</p>
-<ul>
-<li>既然不确定, 就把可能的情况之一列举出来(指派)</li>
-<li>把所有的可能情况都列举出来(指派的扩张)</li>
-</ul>
-<h2>等价: 把一样的归为一类</h2>
-<p><img src="./FILES/2-prop-note.md/img-20230317194018.png" alt="Img" /></p>
-<p>我们的课本里面处理的就比较粗暴了...</p>
-<p><img src="./FILES/2-prop-note.md/img-20230317194056.png" alt="Img" /></p>
-<h2>运算规律</h2>
-<ul>
-<li>加法交换律, 加法结合律等
-<ul>
-<li>后续也会把这些抽象出来.</li>
-</ul>
-</li>
-</ul>
-<p>青春版:
-<img src="./FILES/2-prop-note.md/img-20230317194144.png" alt="Img" /></p>
-<h2>举个例子:</h2>
-<p><img src="./FILES/2-prop-note.md/img-20230317194242.png" alt="Img" /></p>
-<h2>另一个例子:</h2>
-<p><img src="./FILES/2-prop-note.md/img-20230317195655.png" alt="Img" /></p>
-<h2>化简的目标之一: 范式</h2>
-<p><img src="./FILES/2-prop-note.md/img-20230317194543.png" alt="Img" /></p>
-<p>好处是什么?</p>
-<p><img src="./FILES/2-prop-note.md/img-20230317194652.png" alt="Img" />
-<img src="./FILES/2-prop-note.md/img-20230317194739.png" alt="Img" /></p>
-<h1>命题的推演</h1>
-<p><img src="./FILES/2-prop-note.md/img-20230317195121.png" alt="Img" /></p>
-<h2>有哪些规律?</h2>
-<p><img src="./FILES/2-prop-note.md/img-20230317195149.png" alt="Img" /></p>
 
 
     <script type="text/javascript" async

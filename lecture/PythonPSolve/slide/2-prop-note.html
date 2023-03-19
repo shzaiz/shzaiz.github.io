@@ -271,6 +271,13 @@ div.boardhandle > ul > li {
             margin-block-end: 0em;
         }
 
+        .middle {
+          display: flex;
+          text-align: center;
+          align-items: center;
+          width: 100%;
+          justify-content: center;
+      }
         .reveal .author-affiliation {
             display: inline-block;
             font-size: 90%;
@@ -287,165 +294,170 @@ div.boardhandle > ul > li {
       </style>
         <a href="index.html"> ↑ Back to contents</a>
     <div class="reveal">
-      <div class="slides"><section ><section data-markdown><script type="text/template">
-
-# <slide class="center middle"/>闲聊计算思维
-
-</script></section><section data-markdown><script type="text/template">
-
-## 前情提要
-
-- 我们可以用Python创造整个世界!
-- 接下来我们准备好解决问题了
-
-</script></section></section><section ><section data-markdown><script type="text/template">
-
-# <slide class="center middle"/>为什么"问题求解"
-
-</script></section><section data-markdown><script type="text/template">
-
-## 高校教学质量的普遍不足
-
-- 都2022年了, C标准还是C89(ANSI-C)
-- 知识点及其应用在安排上效率低下
-- 没有注重学生的兴趣, 纯纯念PPT
-- 硬灌理论, 用的时候就忘了
-- 没有真正理解"什么是问题求解"
-
-</script></section><section data-markdown><script type="text/template">
-
-## 学习与使用(实验)完全脱节
-
-> -- 你们是怎么学Python的?
-> -- 老师在上面念PPT, 我们不让用电脑
-
-- 没有自己思考的努力是文科式的努力, 没有用处
-- 没有自己思考的努力是疲劳式的努力, 没有意思
-- 到毕业了, 才知道计算机原来可以这样解决问题
-
-</script></section><section data-markdown><script type="text/template">
-
-## 从新时代学生的角度: 做好一个转变
-
-旧时代(高考时代): 
-- 要学的东西少(只有高中课本)
-- 听老师的话(嗯, 都知道)
-- 单纯(其实是老师逼迫你单纯), 诱惑少(只有学习)
-- 学习要求低(仅仅是考试要高分)
-
-新时代(大学时代): 
-- 要学的东西多(什么都要学, 只要你对要求高)
-- 要有批判精神(有些时候大家会犯错!)
-- 兴趣驱动, 志向广泛
-- 终身学习要求高(~~被动: 不高你就挂了~~ 主动: 可以让你成为独当一面的专家)
-
-</script></section><section data-markdown><script type="text/template">
-
-## 四个方面
-
-- 计算入门, 数学证明
-- 数据结构和算法
-- 典型问题
-- 复杂度问题
-
-</script></section></section><section  data-markdown><script type="text/template">
-
-
-# <slide class="center middle"/>计算机是干什么的?
+      <div class="slides"><section  data-markdown><script type="text/template">
+# <slide class="center middle"/>命题的逻辑
 
 </script></section><section ><section data-markdown><script type="text/template">
 
-# <slide class="center middle"/>怎么问题求解?
+# <slide class="center middle"/>逻辑符号
 
 </script></section><section data-markdown><script type="text/template">
 
-## 抽象
+## 历史的动机
 
-- 数据的抽象
-- 问题的抽象
-- 平台的抽象
+[数学有一个致命的缺陷-Vertasium](https://www.bilibili.com/video/BV1464y1k7Ya/)
 
-</script></section><section data-markdown><script type="text/template">
+- 有没有不能被证明的真命题? 
+    - Hilbert: 我们的思维太不严谨了! 需要严谨.
 
-## 数据抽象
-
-- ASCII Code
-- 图片, 文本的储存
+更加现实的动机
+- 让计算机去处理大部分机械的部分
 
 </script></section><section data-markdown><script type="text/template">
 
-## 问题抽象
+## 好处
 
-- 硬币问题
+[z3 with sudokus](https://bas.codes/posts/python-sudoku-solver-z3)
 
-
-> 问题：人、狼、羊、菜用一条只能同时载两位的小船渡河，“狼羊”、“羊菜”不能在无人在场时共处，当然只有人能驾船。
-
-
+- [代码实例](./../code/1-sd-py.html)
 
 </script></section><section data-markdown><script type="text/template">
 
-##  一个例子: 称硬币
+
+## 基本问题
+什么样的推理是正确/合法 (Valid) 的?
+- 正确性: 如果前提 α, β, γ, . . . 都为真, 那么结论 τ 也为真
+
+- 逻辑就是用数学的方法研究人类基本思维规律的一门学科
+
+</script></section><section data-markdown><script type="text/template">
+## 命题
+
+忘掉 “命题”!!!
+- 逻辑不关心单个命题的真假, 而关心命题之间的关系
+
+</script></section><section data-markdown><script type="text/template">
+## 一门新的语言
+
+- 语法
+    - gwzhang are an student to CUG(x)
+    - a = 3.5x (x)
+- 语义
+    - fhzhu said it's a small test, so don't panic
+    - a = 3.5 
 
 </script></section><section data-markdown><script type="text/template">
 
-## 问题描述
+## 主要路线图
+![Img](../FILES/2-prop-note.md/img-20230317193203.png)
 
-> 给你70个外观完全一样的金币,但是你知道其中有一个是假币,其重量比真币轻。给你一架没有砝码的天平，你可以在天平两边摆任意多个金币，比较他们的轻重。
-请设计一种方法，通过若干次称量，确定哪一个是假币。
+</script></section></section><section ><section data-markdown><script type="text/template"> 
 
-我们如何表达我们的想法? 先写个程序!
-
+# <slide class="center middle"/>命题
 </script></section><section data-markdown><script type="text/template">
 
-## 问题结束了吗? 
-
-远远没有!
-
-- 你能证明你的解法是正确的吗？
-- 你能证明你的解法是最优的吗？
-- 你能证明你的程序没有错误吗？
-
-</script></section><section data-markdown><script type="text/template">
-
-## 平台抽象
-
-- 我们知道计算机只能接受0和1
-- 为什么写Python代码, 计算机可以执行?
-
-因为有抽象层
-```
-      应用       ^  
-      算法       | 
-    编程语言     |  软件(算法) 
-    操作系统     |    CS
- 指令集体系结构   x  
-   微体系结构    | 
-    功能部件     |  硬件
-      电路       |   EE
-     微电子      v
-```
+## 关于命题的定义...
+- 忘掉 “命题”!!!
+- 逻辑不关心单个命题的真假, 而关心命题之间的关系
 
 </script></section></section><section ><section data-markdown><script type="text/template">
 
-# <slide class="center middle"/>总结
+# <slide class="center middle"/>命题之间的关系: 逻辑
+
+</script></section><section data-markdown><script type="text/template">
+## 简单的逻辑连接词
+
+![Img](../FILES/2-prop-note.md/img-20230317193351.png)
+
+
+- 为什么叫做合取? 析取? 
+    - 合=both of them
+    - [析](https://zidian.qianp.com/zi/%E6%9E%90)=分开
+
+- 对于蕴含连接词
+    - "主动权"的想法
 
 </script></section><section data-markdown><script type="text/template">
 
-## 是什么导致了我们的视角?
+## 命题逻辑的语法
 
-- 抽象化+自动化
-- 三个层面的抽象过程及相应的自动化过程
-- 沉淀下来的“定式/模式/习惯/文化”
+![Img](../FILES/2-prop-note.md/img-20230317193459.png)
 
 </script></section><section data-markdown><script type="text/template">
-## 一个小结
 
-计算思维：当你面临一个要解决的问题时，如果你的第一感觉是去寻找一个数学模型对问题和解进行建模，去尝试着通过算法来寻找解，并尝试着思考如何用一个辅助工具开展计算时，计算思维已经在影响你了！
-有很多的计算过程中沉淀下来的模式，被封装为计算思维，可以被我们直接使用
+## 运算规则
+
+![Img](../FILES/2-prop-note.md/img-20230317193635.png)
+
 </script></section><section data-markdown><script type="text/template">
-## Ref. 
-这个slide是基于南京大学 问题求解 01, 02讲~~修改~~(照抄)得到, 做了一些删减.
+
+## 解释
+
+说明了如何理解这个命题公式. 
+
+- 既然不确定, 就把可能的情况之一列举出来(指派)
+- 把所有的可能情况都列举出来(指派的扩张)
+
+</script></section><section data-markdown><script type="text/template">
+
+## 等价: 把一样的归为一类
+
+![Img](../FILES/2-prop-note.md/img-20230317194018.png)
+
+</script></section><section data-markdown><script type="text/template">
+
+## 等价: 把一样的归为一类(contd)
+我们的课本里面处理的就比较粗暴了... 
+
+![Img](../FILES/2-prop-note.md/img-20230317194056.png)
+
+</script></section><section data-markdown><script type="text/template">
+
+## 运算规律
+
+- 加法交换律, 加法结合律等
+    - 后续也会把这些抽象出来. 
+
+青春版: 
+![Img](../FILES/2-prop-note.md/img-20230317194144.png)
+
+</script></section><section data-markdown><script type="text/template">
+## 举个例子: 
+
+![Img](../FILES/2-prop-note.md/img-20230317194242.png)
+
+</script></section><section data-markdown><script type="text/template">
+## 另一个例子: 
+
+![Img](../FILES/2-prop-note.md/img-20230317195655.png)
+
+</script></section><section data-markdown><script type="text/template">
+
+## 化简的目标之一: 范式
+
+![Img](../FILES/2-prop-note.md/img-20230317194543.png)
+
+好处是什么? 
+
+![Img](../FILES/2-prop-note.md/img-20230317194652.png)
+![Img](../FILES/2-prop-note.md/img-20230317194739.png)
+
+</script></section></section><section ><section data-markdown><script type="text/template">
+# <slide class="center middle"/>命题的推演
+
+![Img](../FILES/2-prop-note.md/img-20230317195121.png)
+</script></section><section data-markdown><script type="text/template">
+## 有哪些规律? 
+
+![Img](../FILES/2-prop-note.md/img-20230317195149.png)
+
+</script></section></section><section ><section data-markdown><script type="text/template">
+
+# <slide class="center middle"/>公理化形式推理系统
+</script></section><section data-markdown><script type="text/template">
+
+## 公理化的原则: 
+Simple, but not simpler. 
 
 </script></section></section><section  data-markdown><script type="text/template">
 
@@ -500,7 +512,7 @@ div.boardhandle > ul > li {
       // options from URL query string
       var queryOptions = Reveal().getQueryHash() || {};
 
-      var options = extend(defaultOptions, {"transition":"slide"}, queryOptions);
+      var options = extend(defaultOptions, {"transition":"slide","center":false}, queryOptions);
     </script>
 
 
