@@ -62,7 +62,7 @@ div.boardhandle > ul > li {
 
         img {
           max-width: auto;
-          max-height: 80% !important;
+          cursor: move;
         }
 
         html, body {
@@ -525,6 +525,28 @@ Simple, but not simpler.
 
     <script>
       Reveal.initialize(options);
+    </script>
+    <script>
+      const images = document.getElementsByTagName('img');
+      for (let i = 0; i < images.length; i++) {
+        // Add event listener to handle drag start
+        images[i].onmousedown=(function() {
+          images[i].data=("dragging");
+        });
+
+        images[i].onmouseup=(function() {
+          images[i].data=("notdragging");
+        });
+        images[i].onmousemove=(function(e) {
+          if (images[i].data!=("dragging"))
+              return;
+          
+               hor = (e.clientX - images[i].width/2).toString()+"px";
+               ver = (e.clientY - images[i].height/2)+"px";
+               images[i].style.transform = "translate("+hor+","+ver+")";
+              
+          });
+      }
     </script>
   </body>
 </html>
