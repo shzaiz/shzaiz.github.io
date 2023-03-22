@@ -71,10 +71,53 @@
 
 
     <h1>使用Mathermatica求偏导</h1>
-<p>一.  变元与函数在Mathermatica中的表示</p>
+<h2>变元与函数在Mathermatica中的表示</h2>
 <p>使用<code>x</code>表示一个变元, 使用<code>f[x,y]</code>表示一个由<code>x,y</code>决定的函数.</p>
-<p>二. 偏导</p>
-<p>使用<code>D[x]</code>命令.</p>
+<h2>一些常见的命令</h2>
+<h3>偏导:</h3>
+<p><code>D[函数, 求的偏导+]</code>. 比如<code>D[x+y+z, x, y, z]</code>表示分别对于x, y, z求偏导. 其中, 函数可以是用大括号括起来表示总得情况.</p>
+<p>例子:</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="border: 1px solid #FF0000">\</span><span style="color: #666666">[</span>Rho<span style="color: #666666">]</span><span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">Sqrt</span><span style="color: #666666">[</span>x^2 + y^2<span style="color: #666666">]</span>,<span style="color: #bbbbbb"> </span><span style="border: 1px solid #FF0000">\</span><span style="color: #666666">[</span>Theta<span style="color: #666666">]</span><span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>ArcTan<span style="color: #666666">[</span>y/x<span style="color: #666666">]</span>
+D<span style="color: #666666">[</span>{x == \[Rho<span style="color: #666666">]*</span><span style="color: #0000FF">Cos</span><span style="color: #666666">[</span>\[Theta<span style="color: #666666">]</span><span style="border: 1px solid #FF0000">]</span>,<span style="color: #bbbbbb"> </span>y<span style="color: #bbbbbb"> </span><span style="color: #666666">==</span><span style="color: #bbbbbb"> </span><span style="border: 1px solid #FF0000">\</span><span style="color: #666666">[</span>Rho<span style="color: #666666">]*</span><span style="color: #0000FF">Sin</span><span style="color: #666666">[</span>\[Theta<span style="color: #666666">]</span><span style="border: 1px solid #FF0000">]}</span>,<span style="color: #bbbbbb"> </span>x,<span style="color: #bbbbbb"> </span>x<span style="border: 1px solid #FF0000">]</span>
+</pre></div>
+
+<p><img src="https://s2.loli.net/2023/03/22/uCRbrGg2KWAx1fI.png" alt="Img" /></p>
+<h3>Solve</h3>
+<p><code>Solve[{方程(组)},{要解的变量}]</code>.</p>
+<p>例子:</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span>Solve[{x + y == 2, 2 x + 3 y == 3}, {x, y}]
+</pre></div>
+
+<p><img src="https://s2.loli.net/2023/03/22/T3N2VWXt1plwHj8.png" alt="Img" /></p>
+<h2><a href="https://community.wolfram.com/groups/-/m/t/1724656">变量代换</a></h2>
+<p>首次使用可以安装MoreCalculus包:</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span>(<span style="color: #bbbbbb">    </span>If[DirectoryQ[<span style="color: #19177C">#</span>],<span style="color: #bbbbbb"> </span>DeleteDirectory[<span style="color: #19177C">#</span>,<span style="color: #bbbbbb"> </span>DeleteContents<span style="color: #bbbbbb"> </span><span style="color: #666666">-&gt;</span><span style="color: #bbbbbb"> </span>True]];
+<span style="color: #bbbbbb">       </span>CreateDirectory[<span style="color: #19177C">#</span>];
+<span style="color: #bbbbbb">       </span>URLSave[
+<span style="color: #bbbbbb">          </span><span style="color: #BA2121">&quot;https://raw.githubusercontent.com/kubaPod/MoreCalculus/master/MoreCalculus/MoreCalculus.m&quot;</span>,<span style="color: #bbbbbb"> </span>
+<span style="color: #bbbbbb">          </span>FileNameJoin[{<span style="color: #19177C">#</span>,<span style="color: #bbbbbb"> </span><span style="color: #BA2121">&quot;MoreCalculus.m&quot;</span>}]
+<span style="color: #bbbbbb">       </span>]
+<span style="color: #bbbbbb">  </span>)<span style="color: #bbbbbb"> </span><span style="color: #666666">&amp;</span><span style="color: #bbbbbb"> </span><span style="color: #666666">@</span><span style="color: #bbbbbb"> </span>FileNameJoin[{<span style="border: 1px solid #FF0000">$</span>UserBaseDirectory,<span style="color: #bbbbbb"> </span><span style="color: #BA2121">&quot;Applications&quot;</span>,<span style="color: #bbbbbb"> </span><span style="color: #BA2121">&quot;MoreCalculus&quot;</span>}]
+</pre></div>
+
+<p>安装完成之后输入 \(\texttt{&lt;&lt; MoreCalculus`}\) 即可.</p>
+<p>使用<code>DChange[expresion, {transformations}, {oldVars}, {newVars}, {functions}]</code></p>
+<p>例如本题:</p>
+<p><img src="https://s2.loli.net/2023/03/22/w5xVHAlmTgkdsc9.png" alt="Img" /></p>
+<p>第二小问:</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span>DChange[
+<span style="color: #bbbbbb">    </span>D[f[x,<span style="color: #bbbbbb"> </span>y],<span style="color: #bbbbbb"> </span>x,<span style="color: #bbbbbb"> </span>x]<span style="color: #bbbbbb"> </span><span style="color: #666666">+</span><span style="color: #bbbbbb"> </span>D[f[x,<span style="color: #bbbbbb"> </span>y],<span style="color: #bbbbbb"> </span>y,<span style="color: #bbbbbb"> </span>y],<span style="color: #bbbbbb"> </span>
+<span style="color: #bbbbbb">    </span>{rho<span style="color: #bbbbbb"> </span><span style="color: #666666">==</span><span style="color: #bbbbbb"> </span>Sqrt[x<span style="color: #666666">^2</span><span style="color: #bbbbbb"> </span><span style="color: #666666">+</span><span style="color: #bbbbbb"> </span>y<span style="color: #666666">^2</span>],<span style="color: #bbbbbb"> </span>
+<span style="color: #bbbbbb">     </span>theta<span style="color: #bbbbbb"> </span><span style="color: #666666">==</span><span style="color: #bbbbbb"> </span>ArcTan[y<span style="color: #666666">/</span>x],<span style="color: #bbbbbb"> </span>x<span style="color: #bbbbbb"> </span><span style="color: #666666">&gt;</span><span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>,<span style="color: #bbbbbb"> </span>y<span style="color: #bbbbbb"> </span><span style="color: #666666">&gt;</span><span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>},
+<span style="color: #bbbbbb">    </span>{x,<span style="color: #bbbbbb"> </span>y},<span style="color: #bbbbbb"> </span>
+<span style="color: #bbbbbb">    </span>{rho,<span style="color: #bbbbbb"> </span>theta},<span style="color: #bbbbbb"> </span>
+<span style="color: #bbbbbb">    </span>f[x,<span style="color: #bbbbbb"> </span>y]
+]
+</pre></div>
+
+<p>分别的输出结果:</p>
+<p><img src="https://s2.loli.net/2023/03/22/7Hz4lCDULdm8egR.png" alt="Img" /></p>
+<p><img src="https://s2.loli.net/2023/03/22/OE7IaVnW2AbUD3L.png" alt="Img" /></p>
 
 
     <script type="text/javascript" async
