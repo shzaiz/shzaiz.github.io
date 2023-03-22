@@ -10,7 +10,7 @@
         body {counter-reset:section;}
         h1 {counter-reset:subsection;font-size:x-large;}
         h2 {font-size: large;}
-
+        
         h1:before {
         counter-increment:section;
         content:"Section " counter(section) ". ";
@@ -34,7 +34,11 @@
         pre {
             font-family: 'Courier New', Courier, monospace;
         } 
-
+        div{
+            max-width: 100%;
+            overflow: scroll;
+            
+        }
         .navbar {
             overflow: hidden;
             background-color: #333;
