@@ -78,20 +78,46 @@
     </div>
 
 
-    <p>$$
-\Huge \textbf{Mathermatica计算}
-$$
-$$
-\large \textbf{使用更加先进的计算工具}
-$$</p>
-<h1>基本概念</h1>
+    <h1>函数式编程介绍</h1>
 <ul>
-<li><a href="basic-idea.html">MMA的威力 为什么要用符号化计算 基本原理</a></li>
+<li>函数式编程: 需要把每个操作抽象成函数而不是指令</li>
+<li>好处: 比较贴近数学</li>
 </ul>
-<h1>微积分</h1>
+<p>例子: <code>sin(x)</code>就可以让我们对于如何求sin的值不做关心, 但是指令式就不行了.</p>
+<h1>Hands on examples</h1>
+<h2>作为比较好用的计算器.</h2>
+<p><img src="https://s2.loli.net/2023/03/23/MBbFSoUEkgLdjnl.png" alt="Img" /></p>
+<p>点<code>New Document</code>, 然后在新弹出的窗口里面输入<code>1+1</code>, 按<code>Shift+Enter</code>, 就有结果2.</p>
+<p><img src="https://s2.loli.net/2023/03/23/7m6PEXhwNljopDt.png" alt="Img" /></p>
+<h2>存入变量, 保存形式和判断相等</h2>
+<p>如果我们希望把这次的结果交给一个变量(比如x), 我们就可以写<code>x=1+1</code>. 这样我们再输入<code>x</code>的时候就会出现2了.</p>
+<p>使用=的时候是把右边的化简过后给x的. 如果我们不想这样, 让它保留形式, 那么就要用:=记号. 举个例子.</p>
+<p><img src="https://s2.loli.net/2023/03/23/nkLusVejBOiWIFC.png" alt="Img" /></p>
+<p>要是判断两个内容是不是相等, 就可以用==. 和大部分编程语言一样.</p>
+<p>例子: <code>1+1==2</code>的结果是<code>True</code>.</p>
+<h2>等式的操作</h2>
+<p>等式的判断</p>
 <ul>
-<li><a href="part-div.html">使用MMA求偏导和全微分</a></li>
+<li>表达条件的恒等: ==</li>
+<li>解方程(组): <code>Solve[{方程1,方程2,...},{未知数}]</code></li>
+<li>(完全化简)代数式: <code>FullSimplify[要化简的式子]</code></li>
 </ul>
+<p>等式的输入:</p>
+<ul>
+<li>表达式里面表达次序的中, 大括号一律换做小括号</li>
+<li>自然对数的底数e写作<code>E</code></li>
+<li><code>ln(x)</code>写作<code>Log[x]</code>, <code>log(x)</code>写作<code>Log10[x]</code></li>
+<li><code>^</code>表示幂次. 如<code>2^3</code>表示 \(2^3\) .</li>
+</ul>
+<h2>MMA里面的符号表达</h2>
+<ul>
+<li>一般由大写字母开头</li>
+<li>使用中括号代表调用某个函数</li>
+<li>有自动补全, 可以看帮助继续.</li>
+</ul>
+<p>f[a,b,...] ---- the basic underlying form of everything in the Wolfram Language.</p>
+<h1>Language overview</h1>
+<h2>模式匹配</h2>
 
 
     <script type="text/javascript" async
