@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <link rel="stylesheet" href="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/style.css">
+    <script src="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/plugin.js"></script> 
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <style>
+        body {counter-reset:section;}
+        h1 {counter-reset:subsection;font-size:x-large;}
+        h2 {font-size: large;}
+        
+        h1:before {
+        counter-increment:section;
+        content:"Section " counter(section) ". ";
+            font-weight:bold;
+            font-size: x-large;
+        }
+        h2:before {
+        counter-increment:subsection;
+        content:counter(section) "." counter(subsection) " ";
+        font-size: large;
+        }
+        html, body {
+            margin: 5%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: 500;
+        }
+        code {
+            font-family: 'Courier New', Courier, monospace;
+        } 
+
+        pre {
+            font-family: 'Courier New', Courier, monospace;
+        } 
+        div{
+            max-width: 100%;
+            overflow: scroll;
+            
+        }
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+            position: fixed; /* Set the navbar to fixed position */
+            top: 0; /* Position the navbar at the top of the page */
+            width: 100%; /* Full width */
+        }
+
+        img {
+        max-width: 80%;
+        height: auto;
+        }
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        a {
+            color: #148bca;
+            text-align: center;
+            padding-left: 2px;
+            padding-right: 2px;
+            text-decoration: none;
+        }
+
+    </style>
+  </head>
+  <body>
+    
+    <div class="navbar">
+        <a href="https://shzaiz.github.io">AUG's Wiki</a>
+        <a href="index.html"> ↑ Back to contents</a>
+    </div>
+
+
+    <h1>数据的操作</h1>
+<p>目的: 使用机械化的方法帮助我们处理数据.</p>
+<p>一. 张量(tensor)</p>
+<ul>
+<li>效果. n维数组</li>
+<li>不同. 可以支持加速, 微分等操作</li>
+<li>常用操作
+<ul>
+<li><code>torch.arange(a)</code> 生成一个从0开始的前a个整数.</li>
+<li><code>x.numel()</code> 对象中元素的总和(大小)</li>
+<li><code>torch.reshape(x, (a, b))</code> 把x改为 \(a\times b\) , 特别的, 可以用<code>reshape(x,(-1,))</code>来拉平.</li>
+<li><code>torch.zeros()</code> 生成全0的张量</li>
+<li><code>torch.ones()</code> 生成全1的张量</li>
+<li><code>torch.randn()</code> 生成均值为0, 方差为1的Gauss分布中随机取样</li>
+<li><code>torch.tensor(pythonlist)</code> 将pythonlist转化为张量</li>
+</ul>
+</li>
+<li>运算符
+<ul>
+<li>按元素运算(要求shape相同): 二元运算<code>+-*/</code>, 以及<code>**</code>, 矩阵的指数运算<code>exp(x)</code></li>
+<li>判定相等: <code>==</code></li>
+<li>所有元素之和: <code>x.sum()</code></li>
+<li>线性代数
+<ul>
+<li>向量的内积</li>
+<li>矩阵的乘法</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>广播机制: 即使形状不同，我们仍然可以通过调用广播机制（broadcasting mechanism）来执行按元素操作
+<ul>
+<li>原理: (1)通过适当复制元素来扩展一个或两个数组，以便在转换之后，两个张量具有相同的形状. (2)对生成的数组执行按元素操作. 大多数情况下, 沿着长度为1的轴进行广播.</li>
+</ul>
+</li>
+</ul>
+<p>例子:</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> a <span style="color: #666666">=</span> torch<span style="color: #666666">.</span>arange(<span style="color: #666666">3</span>)<span style="color: #666666">.</span>reshape((<span style="color: #666666">3</span>, <span style="color: #666666">1</span>))
+    (tensor([[<span style="color: #666666">0</span>],
+         	 [<span style="color: #666666">1</span>],
+         	 [<span style="color: #666666">2</span>]]),
+<span style="color: #666666">&gt;&gt;&gt;</span> b <span style="color: #666666">=</span> torch<span style="color: #666666">.</span>arange(<span style="color: #666666">2</span>)<span style="color: #666666">.</span>reshape((<span style="color: #666666">1</span>, <span style="color: #666666">2</span>))
+    tensor([[<span style="color: #666666">0</span>, <span style="color: #666666">1</span>]]))
+<span style="color: #666666">&gt;&gt;&gt;</span> a <span style="color: #666666">+</span> b
+<span style="color: #3D7B7B; font-style: italic"># 0 0       0 1</span>
+<span style="color: #3D7B7B; font-style: italic"># 1 1   +   0 1 =</span>
+<span style="color: #3D7B7B; font-style: italic"># 2 2       0 1</span>
+     tensor([[<span style="color: #666666">0</span>, <span style="color: #666666">1</span>],
+        	 [<span style="color: #666666">1</span>, <span style="color: #666666">2</span>],
+        	 [<span style="color: #666666">2</span>, <span style="color: #666666">3</span>]])
+</pre></div>
+
+<p>例子2:</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span>In [<span style="color: #666666">8</span>]: C<span style="color: #666666">.</span>sum(axis<span style="color: #666666">=0</span>)
+Out[<span style="color: #666666">8</span>]: 
+tensor([[<span style="color: #666666">12.</span>, <span style="color: #666666">14.</span>, <span style="color: #666666">16.</span>, <span style="color: #666666">18.</span>],
+        [<span style="color: #666666">20.</span>, <span style="color: #666666">22.</span>, <span style="color: #666666">24.</span>, <span style="color: #666666">26.</span>],
+        [<span style="color: #666666">28.</span>, <span style="color: #666666">30.</span>, <span style="color: #666666">32.</span>, <span style="color: #666666">34.</span>]])
+
+In [<span style="color: #666666">9</span>]: C <span style="color: #666666">/</span> C<span style="color: #666666">.</span>sum(axis<span style="color: #666666">=1</span>)
+<span style="color: #666666">---------------------------------------------------------------------------</span>
+<span style="color: #CB3F38; font-weight: bold">RuntimeError</span>                              Traceback (most recent call last)
+Cell In[<span style="color: #666666">9</span>], line <span style="color: #666666">1</span>
+<span style="color: #666666">----&gt;</span> <span style="color: #666666">1</span> C <span style="color: #666666">/</span> C<span style="color: #666666">.</span>sum(axis<span style="color: #666666">=1</span>)
+
+<span style="color: #CB3F38; font-weight: bold">RuntimeError</span>: The size of tensor a (<span style="color: #666666">3</span>) must match the size of tensor b (<span style="color: #666666">2</span>) at non<span style="color: #666666">-</span>singleton dimension <span style="color: #666666">1</span>
+</pre></div>
+
+<ul>
+<li>索引和切片: [start:stop:jump], 使用负数倒着选.</li>
+<li>通过下标写入: <code>a[1,2]</code>
+<ul>
+<li>为多个元素赋值相同的值: 索引所有元素，然后为它们赋值。<code>[0:2, :]</code></li>
+</ul>
+</li>
+<li>内存节省
+<ul>
+<li>后续未使用X, <code>[:] = X + Y</code>或<code>X += Y</code>.</li>
+</ul>
+</li>
+</ul>
+<p>二. 数据的预处理</p>
+<ul>
+<li>处理缺失值
+<ul>
+<li>插值:</li>
+<li>删除: <code>dropna( axis=0, how=‘any’, thresh=None, subset=None, inplace=False</code></li>
+</ul>
+</li>
+</ul>
+<h2>练习题.</h2>
+<ol>
+<li>运行本节中的代码。将本节中的条件语句X == Y更改为X &lt; Y或X &gt; Y，然后看看你可以得到什么样的张量。</li>
+</ol>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">torch</span>
+X <span style="color: #666666">=</span> torch<span style="color: #666666">.</span>arange(<span style="color: #666666">12</span>, dtype<span style="color: #666666">=</span>torch<span style="color: #666666">.</span>float32)<span style="color: #666666">.</span>reshape((<span style="color: #666666">3</span>,<span style="color: #666666">4</span>))
+Y <span style="color: #666666">=</span> torch<span style="color: #666666">.</span>tensor([[<span style="color: #666666">2.0</span>, <span style="color: #666666">1</span>, <span style="color: #666666">4</span>, <span style="color: #666666">3</span>], [<span style="color: #666666">1</span>, <span style="color: #666666">2</span>, <span style="color: #666666">3</span>, <span style="color: #666666">4</span>], [<span style="color: #666666">4</span>, <span style="color: #666666">3</span>, <span style="color: #666666">2</span>, <span style="color: #666666">1</span>]])
+<span style="color: #008000">print</span>(X <span style="color: #666666">&gt;</span> Y)
+<span style="color: #008000">print</span>(X <span style="color: #666666">&lt;</span> Y)
+
+
+tensor([[<span style="color: #008000; font-weight: bold">False</span>, <span style="color: #008000; font-weight: bold">False</span>, <span style="color: #008000; font-weight: bold">False</span>, <span style="color: #008000; font-weight: bold">False</span>],
+        [ <span style="color: #008000; font-weight: bold">True</span>,  <span style="color: #008000; font-weight: bold">True</span>,  <span style="color: #008000; font-weight: bold">True</span>,  <span style="color: #008000; font-weight: bold">True</span>],
+        [ <span style="color: #008000; font-weight: bold">True</span>,  <span style="color: #008000; font-weight: bold">True</span>,  <span style="color: #008000; font-weight: bold">True</span>,  <span style="color: #008000; font-weight: bold">True</span>]])
+tensor([[ <span style="color: #008000; font-weight: bold">True</span>, <span style="color: #008000; font-weight: bold">False</span>,  <span style="color: #008000; font-weight: bold">True</span>, <span style="color: #008000; font-weight: bold">False</span>],
+        [<span style="color: #008000; font-weight: bold">False</span>, <span style="color: #008000; font-weight: bold">False</span>, <span style="color: #008000; font-weight: bold">False</span>, <span style="color: #008000; font-weight: bold">False</span>],
+        [<span style="color: #008000; font-weight: bold">False</span>, <span style="color: #008000; font-weight: bold">False</span>, <span style="color: #008000; font-weight: bold">False</span>, <span style="color: #008000; font-weight: bold">False</span>]])
+</pre></div>
+
+<ol start="2">
+<li>用其他形状（例如三维张量）替换广播机制中按元素操作的两个张量。结果是否与预期相同？</li>
+</ol>
+
+
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
+    </script>
+    
+
+  </body>
+</html>

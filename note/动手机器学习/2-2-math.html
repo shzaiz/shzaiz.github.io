@@ -78,8 +78,40 @@
     </div>
 
 
-    <h1>2 1张量</h1>
-<p>n维数组，也称为张量</p>
+    <h1>基本线性代数</h1>
+<ul>
+<li>实例化标量 <code>x = torch.tensor(3.0)</code></li>
+<li>创建一维张量 <code>x = torch.arange(4)</code></li>
+<li>访问张量的长度 <code>len(x)</code></li>
+<li>获取张量形状 <code>x.shape</code></li>
+<li>创建5行4列的矩阵 <code>A = torch.arange(20).reshape(5, 4)</code></li>
+<li>矩阵转置 <code>A.T</code></li>
+<li>指定元素的张量 <code>B = torch.tensor([[1, 2, 3], [2, 0, 4], [3, 4, 5]])</code></li>
+<li>张量 X = torch.arange(24).reshape(2, 3, 4) # 通道数 行数 列数`</li>
+<li>计算其元素的和 <code>x.sum()</code> 求行和 :<code>A_sum_axis1 = A.sum(axis=1)</code> 列和: <code>A_sum_axis0 = A.sum(axis=0)</code></li>
+<li>计算总和或均值时保持轴数不变 <code>sum_A = A.sum(axis=1, keepdims=True)</code></li>
+<li>某个轴计算A元素的累积总和 <code>A.cumsum(axis=0)</code></li>
+<li>点积 <code>torch.dot(x, y)</code></li>
+<li>向量积A*x <code>torch.mv(A, x)</code></li>
+<li>矩阵乘法 <code>torch.mm(A, B)</code></li>
+</ul>
+<h2>练习</h2>
+<ol>
+<li>证明 \((A^T)^T=A\) .</li>
+</ol>
+<p>证明: 设 \(A=(a_{ij})\) , 对于 \(a_{ij}=a_{ji}\) , 继续的内容为 \(a_{ji}=a_{ij}\) . 于是 \((A^T)^T=A\) .</p>
+<ol start="2">
+<li>给出两个矩阵 \(A,B\) , 证明 \((A+B)^T=A^T+B^T\) .</li>
+</ol>
+<p>证明: 略.</p>
+<ol start="3">
+<li>给定任意方阵 \(A\) ,  \(A+A^T\) 总是对称的吗?</li>
+</ol>
+<p>总是对称的. 因为 \((A+A^T)^T=A^T+A\) .</p>
+<ol start="4">
+<li>本节中定义了(2,3,4), 的张量X。len(X)的输出结果是什么？</li>
+</ol>
+<p>是2.</p>
 
 
     <script type="text/javascript" async
