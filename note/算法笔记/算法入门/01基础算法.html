@@ -199,6 +199,32 @@ qst(a,<span style="color: #666666">0</span>,<span style="color: #666666">1</span
 }
 </pre></div>
 
+<h1>整数二分</h1>
+<p>目标: 找到一个性质的边界</p>
+<p><img src="https://s2.loli.net/2023/03/24/o9NmQX6dwUxyTnf.png" alt="Img" /></p>
+<p><img src="https://s2.loli.net/2023/03/24/aSQLO8TMc4oJpqR.png" alt="Img" /></p>
+<p>如果要找红色的点:</p>
+<ul>
+<li>找一个中间值<code>mid=(l+r+1)&gt;&gt;1</code></li>
+<li>判断中间值是不是满足性质<code>check(mid)</code>
+<ul>
+<li>如果是true, 那么l=mid</li>
+<li>如果是false, r=mid-1</li>
+</ul>
+</li>
+<li>循环到第一步, 直到<code>r&gt;=l</code>.</li>
+</ul>
+<p>如果要找上图绿颜色的分界点:</p>
+<ul>
+<li>找一个中间值<code>mid=l+r&gt;&gt;1</code></li>
+<li>判断中间值是不是满足性质<code>check(mid)</code>
+<ul>
+<li>如果是true, r=mid</li>
+<li>如果是false, l=mid+1</li>
+</ul>
+</li>
+<li>循环到第一步, 直到<code>r&gt;=l</code></li>
+</ul>
 <h1>高精度</h1>
 <h1>高精度运算</h1>
 <h2>大整数的存储</h2>
