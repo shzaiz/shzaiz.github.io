@@ -106,17 +106,81 @@ async function copyCode(block) {
     </div>
 
 
-    <h1>CF1697C</h1>
-<p><strong>描述</strong>: 第一行一个整数  \(q\)  (  \(1≤q≤10^4\)  )，表示数据的组数。
-对于每组测试用例，第一行一个整数  \(n\)  (  \(1≤n≤10^5\)  )，表示字符串  \(s\)  和  \(t\)  的长度。
-第二行包含长度为  \(n\)  的字符串  \(s\) 。 每个字符是<code>a</code>、<code>b</code>或<code>c</code>。
-第三行包含长度为  \(n\)  的字符串  \(t\)  。 每个字符是<code>a</code>、<code>b</code>或<code>c</code>。
-所有测试用例的  \(n\)  总和不超过  \(10^5\) 。</p>
-<p><strong>考虑每个位置</strong>:  \(a\) 只能向后移动,  \(c\) 只能向前移动.
-我们无法调换 \(a,c\) 的前后关系.</p>
-<ul>
-<li>若 \(s\not \{b\}=s\not\{b\}\) , 说明前后关系确实不变的.</li>
-</ul>
+    <p>PDF-merging</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">pypdf</span> <span style="color: #008000; font-weight: bold">import</span> PdfMerger
+
+pdfs <span style="color: #666666">=</span> [<span style="color: #BA2121">&#39;file1.pdf&#39;</span>, <span style="color: #BA2121">&#39;file2.pdf&#39;</span>, <span style="color: #BA2121">&#39;file3.pdf&#39;</span>, <span style="color: #BA2121">&#39;file4.pdf&#39;</span>]
+
+merger <span style="color: #666666">=</span> PdfMerger()
+
+<span style="color: #008000; font-weight: bold">for</span> pdf <span style="color: #AA22FF; font-weight: bold">in</span> pdfs:
+    merger<span style="color: #666666">.</span>append(pdf)
+
+merger<span style="color: #666666">.</span>write(<span style="color: #BA2121">&quot;result.pdf&quot;</span>)
+merger<span style="color: #666666">.</span>close()
+</pre></div>
+
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span>&lt;<span style="color: #008000; font-weight: bold">head</span>&gt;
+  &lt;<span style="color: #008000; font-weight: bold">script</span> <span style="color: #687822">src</span><span style="color: #666666">=</span><span style="color: #BA2121">&quot;path/to/clipboard.min.js&quot;</span>&gt;&lt;/<span style="color: #008000; font-weight: bold">script</span>&gt;
+&lt;/<span style="color: #008000; font-weight: bold">head</span>&gt;
+
+.reveal pre code {
+  position: relative;
+}
+
+.reveal pre code::before {
+  content: &quot;Copy to clipboard&quot;;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 5px 10px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.reveal pre code::after {
+  content: &quot;&quot;;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.reveal pre code:hover::after {
+  opacity: 1;
+}
+
+.reveal pre code:hover::before {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.reveal pre code[data-clipboard-target]::before {
+  content: &quot;Copy to clipboard&quot;;
+  cursor: pointer;
+}
+
+.reveal pre code[data-clipboard-target]::after {
+  content: &quot;&quot;;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.reveal pre code[data-clipboard-target]:hover::after {
+  opacity:
+</pre></div>
+
 
 
     <script type="text/javascript" async

@@ -6,7 +6,35 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex, nofollow">
-    <style>
+    <script>
+const copyButtonLabel = "Copy Code";
+
+// use a class selector if available
+let blocks = document.querySelectorAll("pre");
+
+blocks.forEach((block) => {
+  // only add button if browser supports Clipboard API
+  if (navigator.clipboard) {
+    let button = document.createElement("button");
+
+    button.innerText = copyButtonLabel;
+    block.appendChild(button);
+
+    button.addEventListener("click", async () => {
+      await copyCode(block);
+    });
+  }
+});
+
+async function copyCode(block) {
+  let code = block.querySelector("code");
+  let text = code.innerText;
+
+  await navigator.clipboard.writeText(text);
+}
+        
+    </script>
+      <style>
         body {counter-reset:section;}
         h1 {counter-reset:subsection;font-size:x-large;}
         h2 {font-size: large;}
@@ -116,8 +144,12 @@
 <li>有自动补全, 可以看帮助继续.</li>
 </ul>
 <p>f[a,b,...] ---- the basic underlying form of everything in the Wolfram Language.</p>
-<h1>Language overview</h1>
-<h2>模式匹配</h2>
+<h1>函数</h1>
+<p>例子: 如果有 \(f(x)=3x+2y\) , 那么可以输入:</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span>f<span style="color: #bbbbbb"> </span><span style="color: #666666">:=</span><span style="color: #bbbbbb"> </span>(<span style="color: #666666">3</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">#1</span><span style="color: #bbbbbb"> </span><span style="color: #666666">+</span><span style="color: #bbbbbb"> </span><span style="color: #666666">2</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">#2</span>)<span style="color: #bbbbbb"> </span><span style="color: #666666">&amp;</span>
+</pre></div>
+
+<p>这样在输入<code>f[x,y]</code>的时候就会有<code>3x+2y</code>.</p>
 
 
     <script type="text/javascript" async
