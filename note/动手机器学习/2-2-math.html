@@ -141,6 +141,99 @@ async function copyCode(block) {
 <li>本节中定义了(2,3,4), 的张量X。len(X)的输出结果是什么？</li>
 </ol>
 <p>是2.</p>
+<ol start="5">
+<li>对于任意形状的张量X,len(X)是否总是对应于X特定轴的⻓度?这个轴是什么?</li>
+</ol>
+<p>是的, 总是对应着第0个轴.</p>
+<ol start="6">
+<li>运⾏A/A.sum(axis=1)，看看会发⽣什么。请分析⼀下原因？</li>
+</ol>
+<p>会出现Runtime Error. 因为他们的维数不一样不能被boardcast.</p>
+<ol start="7">
+<li>考虑⼀个具有形状(2, 3, 4)的张量，在轴0、1、2上的求和输出是什么形状?</li>
+</ol>
+<p>是分别舍弃当前轴的形状的一个值.</p>
+<ol start="8">
+<li>为linalg.norm函数提供3个或更多轴的张量，并观察其输出。对于任意形状的张量这个函数计算得到
+什么?</li>
+</ol>
+<p>这可能是一个归一化的函数. 对于全0的函数总是对应着归一化的结果.</p>
+<h1>可视化微积分</h1>
+<h2>一元微积分</h2>
+<p>尝试使用<code>matplotlib</code>可视化绘制函数:</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">matplotlib_inline</span> <span style="color: #008000; font-weight: bold">import</span> backend_inline
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">torch</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">d2l</span>
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">use_svg_display</span>(): <span style="color: #3D7B7B; font-style: italic">#@save</span>
+   backend_inline<span style="color: #666666">.</span>set_matplotlib_formats(<span style="color: #BA2121">&#39;svg&#39;</span>)
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">set_axes</span>(axes, xlabel, ylabel, xlim, ylim, xscale, yscale, legend):
+    axes<span style="color: #666666">.</span>set_xlabel(xlabel)
+    axes<span style="color: #666666">.</span>set_ylabel(ylabel)
+    axes<span style="color: #666666">.</span>set_xscale(xscale)
+    axes<span style="color: #666666">.</span>set_yscale(yscale)
+    axes<span style="color: #666666">.</span>set_xlim(xlim)
+    axes<span style="color: #666666">.</span>set_ylim(ylim)
+    <span style="color: #008000; font-weight: bold">if</span> legend:
+        axes<span style="color: #666666">.</span>legend(legend)
+    axes<span style="color: #666666">.</span>grid()
+</pre></div>
+
+<p>绘制切线:</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">matplotlib</span> <span style="color: #008000; font-weight: bold">import</span> pyplot <span style="color: #008000; font-weight: bold">as</span> plt
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f</span>(x):
+    <span style="color: #008000; font-weight: bold">return</span> x<span style="color: #666666">**3-</span>x<span style="color: #666666">**</span>(<span style="color: #666666">-1</span>)
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">get_tangent</span>(f, x, point): <span style="color: #3D7B7B; font-style: italic"># 切线</span>
+    h <span style="color: #666666">=</span> <span style="color: #666666">1e-4</span>
+    grad <span style="color: #666666">=</span> (f(point <span style="color: #666666">+</span> h) <span style="color: #666666">-</span> f(point)) <span style="color: #666666">/</span> h
+    <span style="color: #008000; font-weight: bold">return</span> grad<span style="color: #666666">*</span>(x<span style="color: #666666">-</span>point)<span style="color: #666666">+</span>f(point)
+
+<span style="color: #3D7B7B; font-style: italic"># 画图    </span>
+
+x <span style="color: #666666">=</span> np<span style="color: #666666">.</span>arange(<span style="color: #666666">0</span>, <span style="color: #666666">3</span>, <span style="color: #666666">0.1</span>)
+y <span style="color: #666666">=</span> f(x)
+y_tangent <span style="color: #666666">=</span> get_tangent(f,x,point<span style="color: #666666">=1</span>) <span style="color: #3D7B7B; font-style: italic"># 切线</span>
+plt<span style="color: #666666">.</span>plot(x,y,label<span style="color: #666666">=</span><span style="color: #BA2121">&#39;f(x)&#39;</span>)
+plt<span style="color: #666666">.</span>plot(x,y_tangent,<span style="color: #BA2121">&#39;m--&#39;</span>,label<span style="color: #666666">=</span><span style="color: #BA2121">&#39;Tangent line (x=1)&#39;</span>)
+plt<span style="color: #666666">.</span>legend()
+plt<span style="color: #666666">.</span>grid()
+</pre></div>
+
+<p><img src="https://s2.loli.net/2023/03/25/JhMKU64i9pRkBgE.png" alt="Img" /></p>
+<h2>练习题</h2>
+<p>(1) 绘制函数 \(y = f(x) = x^3-1/x\) 和其在 \(x = 1\) 处切线的图像。</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">matplotlib</span> <span style="color: #008000; font-weight: bold">import</span> pyplot <span style="color: #008000; font-weight: bold">as</span> plt
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f</span>(x):
+    <span style="color: #008000; font-weight: bold">return</span> x<span style="color: #666666">**3-</span>(<span style="color: #666666">1/</span>x)
+ 
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">get_tangent</span>(f, x, point): <span style="color: #3D7B7B; font-style: italic"># 切线</span>
+    h <span style="color: #666666">=</span> <span style="color: #666666">1e-4</span>
+    grad <span style="color: #666666">=</span> (f(point <span style="color: #666666">+</span> h) <span style="color: #666666">-</span> f(point)) <span style="color: #666666">/</span> h
+    <span style="color: #008000; font-weight: bold">return</span> grad<span style="color: #666666">*</span>(x<span style="color: #666666">-</span>point)<span style="color: #666666">+</span>f(point)
+ 
+<span style="color: #3D7B7B; font-style: italic"># 画图    </span>
+ 
+x <span style="color: #666666">=</span> np<span style="color: #666666">.</span>arange(<span style="color: #666666">0</span>, <span style="color: #666666">3</span>, <span style="color: #666666">0.1</span>)
+y <span style="color: #666666">=</span> f(x)
+y_tangent <span style="color: #666666">=</span> get_tangent(f,x,point<span style="color: #666666">=1</span>) <span style="color: #3D7B7B; font-style: italic"># 切线</span>
+plt<span style="color: #666666">.</span>plot(x,y,label<span style="color: #666666">=</span><span style="color: #BA2121">&#39;f(x)&#39;</span>)
+plt<span style="color: #666666">.</span>plot(x,y_tangent,<span style="color: #BA2121">&#39;m--&#39;</span>,label<span style="color: #666666">=</span><span style="color: #BA2121">&#39;Tangent line (x=1)&#39;</span>)
+plt<span style="color: #666666">.</span>legend()
+plt<span style="color: #666666">.</span>grid()
+</pre></div>
+
+<p>(2) 求函数 \(f({\bf x})=3x_1^2+5e^{x_2}\) 的梯度.</p>
+<p>解.  \({\partial f\over x_1}=6x_1,{\partial f\over x_2}=5e^{x_2},\) 于是梯度为 \([6x_1,5e^{x_2}]\) .</p>
+<p>(3)函数 \(f({\bf x})=||{\bf x}||_2\) 的梯度是什么?</p>
+<p>解: 假设 \(x=(x_1,x_2,\cdots,x_n)\) , 那么</p>
+<p>$$
+f(x)=\sqrt{\sum _{i=1}^n x_i^2}
+$$</p>
+<p>那么 \(\partial f/\partial x=\) </p>
 
 
     <script type="text/javascript" async

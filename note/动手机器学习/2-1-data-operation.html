@@ -219,6 +219,83 @@ tensor([[ <span style="color: #008000; font-weight: bold">True</span>, <span sty
 <ol start="2">
 <li>用其他形状（例如三维张量）替换广播机制中按元素操作的两个张量。结果是否与预期相同？</li>
 </ol>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">torch</span>
+a <span style="color: #666666">=</span> torch<span style="color: #666666">.</span>arange(<span style="color: #666666">4</span>)<span style="color: #666666">.</span>reshape((<span style="color: #666666">1</span>, <span style="color: #666666">1</span>, <span style="color: #666666">4</span>))
+b <span style="color: #666666">=</span> torch<span style="color: #666666">.</span>arange(<span style="color: #666666">20</span>)<span style="color: #666666">.</span>reshape((<span style="color: #666666">5</span>, <span style="color: #666666">1</span>, <span style="color: #666666">4</span>))
+
+a <span style="color: #666666">+</span> b
+</pre></div>
+
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span>tensor([[[ 0,  2,  4,  6]],
+
+        [[ 4,  6,  8, 10]],
+
+        [[ 8, 10, 12, 14]],
+
+        [[12, 14, 16, 18]],
+
+        [[16, 18, 20, 22]]])
+</pre></div>
+
+<h2>读取数据集</h2>
+<p>(1) 创建一个人工数据集, 并存储在CSV中(路径<code> ../data/house_tiny.csv</code>)</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">os</span>
+os<span style="color: #666666">.</span>makedirs(os<span style="color: #666666">.</span>path<span style="color: #666666">.</span>join(<span style="color: #BA2121">&#39;..&#39;</span>, <span style="color: #BA2121">&#39;data&#39;</span>), exist_ok<span style="color: #666666">=</span><span style="color: #008000; font-weight: bold">True</span>)
+data_file <span style="color: #666666">=</span> os<span style="color: #666666">.</span>path<span style="color: #666666">.</span>join(<span style="color: #BA2121">&#39;..&#39;</span>, <span style="color: #BA2121">&#39;data&#39;</span>, <span style="color: #BA2121">&#39;house_tiny.csv&#39;</span>)
+<span style="color: #008000; font-weight: bold">with</span> <span style="color: #008000">open</span>(data_file, <span style="color: #BA2121">&#39;w&#39;</span>) <span style="color: #008000; font-weight: bold">as</span> f:
+    f<span style="color: #666666">.</span>write(<span style="color: #BA2121">&#39;NumRooms,Alley,Price</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&#39;</span>) <span style="color: #3D7B7B; font-style: italic"># 列名</span>
+    f<span style="color: #666666">.</span>write(<span style="color: #BA2121">&#39;NA,Pave,127500</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&#39;</span>) <span style="color: #3D7B7B; font-style: italic"># 每⾏表⽰⼀个数据样本</span>
+    f<span style="color: #666666">.</span>write(<span style="color: #BA2121">&#39;2,NA,106000</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&#39;</span>) 
+    f<span style="color: #666666">.</span>write(<span style="color: #BA2121">&#39;4,NA,178100</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&#39;</span>) 
+    f<span style="color: #666666">.</span>write(<span style="color: #BA2121">&#39;NA,NA,140000</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&#39;</span>)
+</pre></div>
+
+<p>(2) 使用<code>pandas</code>读取数据</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">pandas</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">pd</span>
+data <span style="color: #666666">=</span> pd<span style="color: #666666">.</span>read_csv(data_file)
+<span style="color: #008000">print</span>(data)
+</pre></div>
+
+<p>(3) 处理缺失值</p>
+<ul>
+<li>缺失值: NaN(Not a number)</li>
+<li>方法:
+<ul>
+<li>插值: 使用平均值</li>
+<li>直接丢弃</li>
+</ul>
+</li>
+<li>索引: <code>iloc[:]</code>(indexlocate)</li>
+</ul>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span>inputs, outputs <span style="color: #666666">=</span> data<span style="color: #666666">.</span>iloc[:, <span style="color: #666666">0</span>:<span style="color: #666666">2</span>], data<span style="color: #666666">.</span>iloc[:, <span style="color: #666666">2</span>]
+inputs <span style="color: #666666">=</span> inputs<span style="color: #666666">.</span>fillna(inputs<span style="color: #666666">.</span>mean())
+</pre></div>
+
+<p>补充: dummy方法
+get_dummies()是用于特征处理的，也叫one-hot-encodin处理，如一列是gender，性别有male和famale，那么这一列是有两个特征，然后把gender这一列换成gender_male和gender_famale分别体现gender的两个特征，那么符合male的为1，否则为0，famale同理。</p>
+<p>dummy的意思:
+1.a model or replica of a human being.
+e.g. &quot;a waxwork dummy&quot;
+2.something designed to resemble and serve as a substitute for the real or usual thing; a counterfeit or sham.
+e.g. &quot;tests using stuffed owls and wooden dummies&quot;</p>
+<p>于是就可以分类了.</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span>inputs <span style="color: #666666">=</span> pd<span style="color: #666666">.</span>get_dummies(inputs,dummy_na<span style="color: #666666">=</span><span style="color: #008000; font-weight: bold">True</span>)
+</pre></div>
+
+<p>(3) 转换为张量类型: 仍然用torch.tensor()即可.</p>
+<h2>练习题</h2>
+<ol>
+<li>删除缺失值最多的一列</li>
+</ol>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span>data <span style="color: #666666">=</span> data<span style="color: #666666">.</span>drop(data<span style="color: #666666">.</span>count()<span style="color: #666666">.</span>idxmin(),axis<span style="color: #666666">=1</span>)
+</pre></div>
+
+<ol start="2">
+<li>并且转化为张量形式</li>
+</ol>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span>torch<span style="color: #666666">.</span>tensor(data<span style="color: #666666">.</span>values())
+</pre></div>
+
 
 
     <script type="text/javascript" async
