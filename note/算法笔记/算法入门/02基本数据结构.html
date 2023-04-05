@@ -199,6 +199,46 @@ async function copyCode(block) {
 </pre></div>
 
 <h1>单调栈</h1>
+<ol>
+<li>解决的问题: 给定一个长度为N的整数数列，输出每个数左边第一个比它小的数，如果不存在则输出-1.</li>
+</ol>
+<p>想法: 维护一个储存最小值的栈, 使得其栈顶永远是和前面元素的最小值.</p>
+<p>Code.</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #9C6500">#include</span><span style="color: #3D7B7B; font-style: italic">&lt;bits/stdc++.h&gt;</span>
+<span style="color: #008000; font-weight: bold">using</span><span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">namespace</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF; font-weight: bold">std</span>;
+
+<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>n,<span style="color: #bbbbbb"> </span>stk[<span style="color: #666666">100010</span>],<span style="color: #bbbbbb"> </span>tt<span style="color: #666666">=0</span>;
+<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">main</span>(){
+<span style="color: #bbbbbb">  </span>cin<span style="color: #666666">&gt;&gt;</span>n;<span style="color: #bbbbbb"> </span>
+<span style="color: #bbbbbb">  </span><span style="color: #008000; font-weight: bold">for</span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>i<span style="color: #666666">=0</span>;<span style="color: #bbbbbb"> </span>i<span style="color: #666666">&lt;</span>n;<span style="color: #bbbbbb"> </span>i<span style="color: #666666">++</span>){
+<span style="color: #bbbbbb">    </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>x;<span style="color: #bbbbbb"> </span>cin<span style="color: #666666">&gt;&gt;</span>x;
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">while</span>(tt<span style="color: #bbbbbb"> </span><span style="color: #666666">&amp;&amp;</span><span style="color: #bbbbbb"> </span>stk[tt]<span style="color: #666666">&gt;=</span>x)<span style="color: #bbbbbb"> </span>tt<span style="color: #666666">--</span>;
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">if</span>(tt)<span style="color: #bbbbbb"> </span>cout<span style="color: #666666">&lt;&lt;</span>stk[tt]<span style="color: #666666">&lt;&lt;</span><span style="color: #BA2121">&quot; &quot;</span>;
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">else</span><span style="color: #bbbbbb"> </span>cout<span style="color: #666666">&lt;&lt;-1&lt;&lt;</span><span style="color: #BA2121">&quot; &quot;</span>;
+<span style="color: #bbbbbb">    </span>stk[<span style="color: #666666">++</span>tt]<span style="color: #666666">=</span>x;
+<span style="color: #bbbbbb">  </span>}
+}
+</pre></div>
+
+<h1>数组模拟的队列</h1>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>q[MAXN],<span style="color: #bbbbbb"> </span>hh,<span style="color: #bbbbbb"> </span>tt<span style="color: #666666">=-1</span>;
+<span style="color: #3D7B7B; font-style: italic">// 在队尾插入元素, 在队头弹出元素. </span>
+
+<span style="color: #3D7B7B; font-style: italic">//在队尾插入元素x: </span>
+q[<span style="color: #666666">++</span>tt]<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>x;
+
+<span style="color: #3D7B7B; font-style: italic">// 在队头弹出元素: </span>
+<span style="color: #666666">++</span>hh;
+
+<span style="color: #3D7B7B; font-style: italic">// 判断空的</span>
+<span style="color: #008000; font-weight: bold">if</span>(hh<span style="color: #666666">&lt;=</span>tt)<span style="color: #bbbbbb"> </span>;<span style="color: #3D7B7B; font-style: italic">// not empty</span>
+<span style="color: #008000; font-weight: bold">else</span><span style="color: #bbbbbb"> </span>;<span style="color: #3D7B7B; font-style: italic">//empty</span>
+
+<span style="color: #3D7B7B; font-style: italic">// 取出队头, 队尾的元素</span>
+q[hh],<span style="color: #bbbbbb"> </span>q[tt];
+</pre></div>
+
+<h1>单调队列</h1>
 
 
     <script type="text/javascript" async
