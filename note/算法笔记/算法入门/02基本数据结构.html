@@ -409,7 +409,161 @@ q[hh],<span style="color: #bbbbbb"> </span>q[tt];
 <li>将两个集合合并</li>
 <li>判定两个元素是不是在一个集合中</li>
 </ul>
-<p>并查集:</p>
+<p>原理: 每个集合用一棵树来表示, 树根的编号就是整个集合的编号, 每个节点储存着他的父节点的编号, <code>p[x]</code>表示<code>x</code>的父节点.</p>
+<p>操作:</p>
+<ul>
+<li>判断树根: <code>p[x]==x</code></li>
+<li>求x的集合编号: <code>while(p[x]!=x) x = p[x]</code></li>
+<li>如何合并两个集合<code>px,py</code>,  \(x\neq y\) . <code>p[x]=y</code>.</li>
+</ul>
+<p>Code.</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>a,<span style="color: #bbbbbb"> </span>b;<span style="color: #bbbbbb"> </span>
+<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>p[MAXN];
+<span style="color: #3D7B7B; font-style: italic">// 返回x属于的是哪一类中的</span>
+<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">find</span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>x){
+<span style="color: #bbbbbb">    </span><span style="color: #3D7B7B; font-style: italic">// 路径压缩</span>
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">if</span>(p[x]<span style="color: #bbbbbb"> </span><span style="color: #666666">!=</span><span style="color: #bbbbbb"> </span>x)<span style="color: #bbbbbb"> </span>p[x]<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>find(p[x]);
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">return</span><span style="color: #bbbbbb"> </span>p[x];
+}
+
+<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">main</span>(){
+<span style="color: #bbbbbb">    </span>scanf(<span style="color: #BA2121">&quot;%s%d%d&quot;</span>,<span style="color: #bbbbbb"> </span>op,<span style="color: #bbbbbb"> </span><span style="color: #666666">&amp;</span>n,<span style="color: #bbbbbb"> </span><span style="color: #666666">&amp;</span>m);
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">for</span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>i<span style="color: #666666">=1</span>;<span style="color: #bbbbbb"> </span>i<span style="color: #666666">&lt;=</span>n;<span style="color: #bbbbbb"> </span>i<span style="color: #666666">++</span>)<span style="color: #bbbbbb"> </span>{
+<span style="color: #bbbbbb">        </span>p[i]<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>i;
+<span style="color: #bbbbbb">    </span>}
+<span style="color: #bbbbbb">    </span><span style="color: #3D7B7B; font-style: italic">//... 读入a, b</span>
+<span style="color: #bbbbbb">    </span><span style="color: #3D7B7B; font-style: italic">// 把a插入到b身上, 修改p[find(a)]</span>
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">if</span>(op[<span style="color: #666666">0</span>]<span style="color: #666666">==</span><span style="color: #BA2121">&#39;M&#39;</span>)<span style="color: #bbbbbb"> </span>p[find(a)]<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>find(b);
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">else</span><span style="color: #bbbbbb"> </span>{
+<span style="color: #bbbbbb">        </span><span style="color: #008000; font-weight: bold">if</span>(find(a)<span style="color: #bbbbbb"> </span><span style="color: #666666">==</span><span style="color: #bbbbbb"> </span>find(b)){
+<span style="color: #bbbbbb">            </span>puts(<span style="color: #BA2121">&quot;Yes&quot;</span>);
+<span style="color: #bbbbbb">        </span>}<span style="color: #008000; font-weight: bold">else</span><span style="color: #bbbbbb"> </span>puts(<span style="color: #BA2121">&quot;No&quot;</span>);
+<span style="color: #bbbbbb">    </span>}
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">return</span><span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>;
+}
+</pre></div>
+
+<p>变形例1(Acw837). 维护每个集合里面的元素个数</p>
+<blockquote>
+<p>解答</p>
+<p>首先套用上一题的内容.</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>n,<span style="color: #bbbbbb"> </span>m;<span style="color: #bbbbbb"> </span>
+<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>p[MAXN],<span style="color: #bbbbbb"> </span>size[MAXN];
+<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">find</span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>x){
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">if</span>(p[x]<span style="color: #bbbbbb"> </span><span style="color: #666666">!=</span><span style="color: #bbbbbb"> </span>x)<span style="color: #bbbbbb"> </span>p[x]<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>find(p[x]);
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">return</span><span style="color: #bbbbbb"> </span>p[x];
+}
+
+<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">main</span>(){
+<span style="color: #bbbbbb">    </span>scanf(<span style="color: #BA2121">&quot;%s%d%d&quot;</span>,<span style="color: #bbbbbb"> </span>op,<span style="color: #bbbbbb"> </span><span style="color: #666666">&amp;</span>n,<span style="color: #bbbbbb"> </span><span style="color: #666666">&amp;</span>m);
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">for</span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>i<span style="color: #666666">=1</span>;<span style="color: #bbbbbb"> </span>i<span style="color: #666666">&lt;=</span>n;<span style="color: #bbbbbb"> </span>i<span style="color: #666666">++</span>)<span style="color: #bbbbbb"> </span>{
+<span style="color: #bbbbbb">        </span>p[i]<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>i;<span style="color: #bbbbbb"> </span>size[i]<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>;
+<span style="color: #bbbbbb">    </span>}
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">while</span>(m<span style="color: #666666">--</span>){
+<span style="color: #bbbbbb">        </span><span style="color: #B00040">char</span><span style="color: #bbbbbb"> </span>op[<span style="color: #666666">2</span>];<span style="color: #bbbbbb"> </span>
+<span style="color: #bbbbbb">        </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>a,<span style="color: #bbbbbb"> </span>b;
+<span style="color: #bbbbbb">        </span>scanf(<span style="color: #BA2121">&quot;%s&quot;</span>,<span style="color: #bbbbbb"> </span>op);
+<span style="color: #bbbbbb">        </span><span style="color: #008000; font-weight: bold">if</span>(op[<span style="color: #666666">0</span>]<span style="color: #bbbbbb"> </span><span style="color: #666666">==</span><span style="color: #bbbbbb"> </span><span style="color: #BA2121">&#39;C&#39;</span>){
+<span style="color: #bbbbbb">            </span>scanf(<span style="color: #BA2121">&quot;%d%d&quot;</span>,<span style="color: #bbbbbb"> </span><span style="color: #666666">&amp;</span>a,<span style="color: #bbbbbb"> </span><span style="color: #666666">&amp;</span>b);
+<span style="color: #bbbbbb">            </span><span style="color: #008000; font-weight: bold">if</span>(find(a)<span style="color: #bbbbbb"> </span><span style="color: #666666">==</span><span style="color: #bbbbbb"> </span>find(b))<span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">continue</span>;
+<span style="color: #bbbbbb">            </span>size[find(b)]<span style="color: #bbbbbb"> </span><span style="color: #666666">+=</span><span style="color: #bbbbbb"> </span>size[find(a)];
+<span style="color: #bbbbbb">            </span>p[find(a)]<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>find(b);
+<span style="color: #bbbbbb">        </span>}<span style="color: #008000; font-weight: bold">else</span><span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">if</span>(op[<span style="color: #666666">1</span>]<span style="color: #666666">==</span><span style="color: #BA2121">&#39;1&#39;</span>){
+<span style="color: #bbbbbb">            </span>scanf(<span style="color: #BA2121">&quot;%d%d&quot;</span>,<span style="color: #bbbbbb"> </span><span style="color: #666666">&amp;</span>a,<span style="color: #666666">&amp;</span>b);
+<span style="color: #bbbbbb">            </span><span style="color: #008000; font-weight: bold">if</span>(find(a)<span style="color: #bbbbbb"> </span><span style="color: #666666">==</span><span style="color: #bbbbbb"> </span>find(b))<span style="color: #bbbbbb"> </span>cout<span style="color: #666666">&lt;&lt;</span><span style="color: #BA2121">&quot;Yes</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>;<span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">else</span><span style="color: #bbbbbb"> </span>cout<span style="color: #666666">&lt;&lt;</span><span style="color: #BA2121">&quot;No</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>;
+<span style="color: #bbbbbb">        </span>}<span style="color: #008000; font-weight: bold">else</span>{
+<span style="color: #bbbbbb">            </span>scanf(<span style="color: #BA2121">&quot;%d&quot;</span>,<span style="color: #bbbbbb"> </span><span style="color: #666666">&amp;</span>a);
+<span style="color: #bbbbbb">            </span><span style="color: #3D7B7B; font-style: italic">// 保证根节点的size是有意义的, 合并的时候只要保证根节点加上原来的就行了. </span>
+<span style="color: #bbbbbb">            </span>printf(<span style="color: #BA2121">&quot;%d</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>,<span style="color: #bbbbbb"> </span>size[find(a)]);
+<span style="color: #bbbbbb">        </span>}
+<span style="color: #bbbbbb">    </span>}
+}
+</pre></div>
+
+</blockquote>
+<p>变形例2. 食物链: 维护到根节点的距离.</p>
+<ul>
+<li>假话:
+<ul>
+<li>1吃2, 2吃1 x</li>
+<li>x&gt;总个数 x</li>
+<li>x吃x x</li>
+</ul>
+</li>
+<li>要求: 输出假话的个数</li>
+<li>做法: 用并查集维护额外信息</li>
+</ul>
+<p><img src="https://s2.loli.net/2023/04/06/UWuS3ymXvNdfC5T.png" alt="Img" /></p>
+<h1>堆</h1>
+<p>操作:</p>
+<ul>
+<li>插入一个数(STL)</li>
+<li>求这个集合的最小值(STL)</li>
+<li>删除最小值(STL)</li>
+<li>删除任意的元素</li>
+<li>修改任意的元素</li>
+</ul>
+<p>堆的基本结构</p>
+<ul>
+<li>堆是一棵完全二叉树</li>
+</ul>
+<p><img src="https://s2.loli.net/2023/04/05/eWKLZfou9VDwJIz.png" alt="Img" /></p>
+<p>堆的性质</p>
+<p><img src="https://s2.loli.net/2023/04/05/DgpQUfmuorCntI5.png" alt="Img" /></p>
+<p>堆的存储</p>
+<p><img src="https://s2.loli.net/2023/04/05/v2kECWuDyY56zhe.png" alt="Img" /></p>
+<p>堆的操作</p>
+<p><img src="https://s2.loli.net/2023/04/05/nFWIrX6OtfkqQ9R.png" alt="Img" /></p>
+<p>Code. To be done</p>
+<h1>Hash表</h1>
+<p>Overview</p>
+<ul>
+<li>存储结构: 根据鸽笼原理-- 处理冲突:
+<ul>
+<li>开放寻址法</li>
+<li>拉链法</li>
+</ul>
+</li>
+<li>字符串的Hash方式</li>
+</ul>
+<p>拉链法</p>
+<p><img src="https://s2.loli.net/2023/04/05/ba26UlgSXrIsf9R.png" alt="Img" /></p>
+<p>对于此的Code.</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #9C6500">#include</span><span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">&lt;bits/stdc++.h&gt;</span>
+<span style="color: #008000; font-weight: bold">using</span><span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">namespace</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF; font-weight: bold">std</span>;
+
+<span style="color: #008000; font-weight: bold">const</span><span style="color: #bbbbbb"> </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>N<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">100005</span>;
+<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>h[N],<span style="color: #bbbbbb"> </span>ne[N],<span style="color: #bbbbbb"> </span>e[N],<span style="color: #bbbbbb"> </span>idx;
+
+<span style="color: #B00040">void</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">insert</span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>x){
+<span style="color: #bbbbbb">  </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>k<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>(x<span style="color: #666666">%</span>N<span style="color: #bbbbbb"> </span><span style="color: #666666">+</span><span style="color: #bbbbbb"> </span>N)<span style="color: #bbbbbb"> </span><span style="color: #666666">%</span><span style="color: #bbbbbb"> </span>N;
+<span style="color: #bbbbbb">  </span>e[idx]<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>x;
+<span style="color: #bbbbbb">  </span>ne[idx]<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>h[k];
+<span style="color: #bbbbbb">  </span>h[k]<span style="color: #666666">=</span>idx<span style="color: #666666">++</span>;
+}
+
+<span style="color: #B00040">bool</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">find</span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>x){
+<span style="color: #bbbbbb">  </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>k<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>(x<span style="color: #666666">%</span>N<span style="color: #666666">+</span>N)<span style="color: #666666">%</span>N;
+<span style="color: #bbbbbb">  </span><span style="color: #008000; font-weight: bold">for</span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>i<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>h[k];<span style="color: #bbbbbb"> </span>i<span style="color: #666666">!=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">-1</span>;<span style="color: #bbbbbb"> </span>i<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>ne[i]){
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">if</span>(e[i]<span style="color: #bbbbbb"> </span><span style="color: #666666">==</span><span style="color: #bbbbbb"> </span>x)<span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">return</span><span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>;
+<span style="color: #bbbbbb">  </span>}
+<span style="color: #bbbbbb">  </span><span style="color: #008000; font-weight: bold">return</span><span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>;
+}
+
+<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">main</span>(){
+<span style="color: #bbbbbb">  </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>n;<span style="color: #bbbbbb"> </span>
+<span style="color: #bbbbbb">  </span>cin<span style="color: #666666">&gt;&gt;</span>n;
+<span style="color: #bbbbbb">  </span>memset(h,<span style="color: #bbbbbb"> </span><span style="color: #666666">-1</span>,<span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">sizeof</span>(h));
+<span style="color: #bbbbbb">  </span><span style="color: #008000; font-weight: bold">while</span>(n<span style="color: #666666">--</span>){
+<span style="color: #bbbbbb">    </span><span style="color: #B00040">char</span><span style="color: #bbbbbb"> </span>op[<span style="color: #666666">2</span>];
+<span style="color: #bbbbbb">    </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>x;
+<span style="color: #bbbbbb">    </span>scanf(<span style="color: #BA2121">&quot;%s%d&quot;</span>,<span style="color: #bbbbbb"> </span>op,<span style="color: #bbbbbb"> </span><span style="color: #666666">&amp;</span>x);
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">if</span>(<span style="color: #666666">*</span>op<span style="color: #bbbbbb"> </span><span style="color: #666666">==</span><span style="color: #bbbbbb"> </span><span style="color: #BA2121">&#39;I&#39;</span>)insert(x);
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">else</span><span style="color: #bbbbbb"> </span>{<span style="color: #008000; font-weight: bold">if</span>(find(x))<span style="color: #bbbbbb"> </span>cout<span style="color: #666666">&lt;&lt;</span><span style="color: #BA2121">&quot;Yes&quot;</span>;<span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">else</span><span style="color: #bbbbbb"> </span>cout<span style="color: #666666">&lt;&lt;</span><span style="color: #BA2121">&quot;No&quot;</span>;cout<span style="color: #666666">&lt;&lt;</span><span style="color: #BA2121">&quot;</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>;}
+<span style="color: #bbbbbb">  </span>}
+}
+</pre></div>
+
 
 
     <script type="text/javascript" async
