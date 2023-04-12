@@ -410,7 +410,7 @@ And then DO IT.</p>
 
 
     <hr>
-
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/gangdong/gangdong.github.io@dev/assets/js/md5.min.js"></script>
     <div id="gitalk-container" class="hidden"></div>
 
     <script type="text/javascript" async
@@ -425,7 +425,7 @@ And then DO IT.</p>
         repo: 'wiki-comments',
         owner: 'shzaiz',
         admin: ['shzaiz'],
-        id: location.pathname,      
+        id: md5(location.pathname),
         distractionFreeMode: false  // Facebook-like distraction free mode
       })
 
