@@ -41,7 +41,7 @@ async function copyCode(block) {
         
         h1:before {
         counter-increment:section;
-        content:"Section " counter(section) ". ";
+        content:counter(section) ". ";
             font-weight:bold;
             font-size: x-large;
         }
@@ -64,7 +64,7 @@ async function copyCode(block) {
         } 
         div{
             max-width: 100%;
-            overflow: scroll;
+            overflow: auto;
             
         }
         .navbar {
@@ -94,6 +94,10 @@ async function copyCode(block) {
             padding-left: 2px;
             padding-right: 2px;
             text-decoration: none;
+        }
+
+        p.hidden {
+          overflow: hidden;
         }
 
     </style>
@@ -220,10 +224,28 @@ ll<span style="color: #bbbbbb"> </span>tim[MAXN];
 <p>注意调试工具的应用. 以及精度的方法.</p>
 
 
+    <hr>
+
+    <div id="gitalk-container" class="hidden"></div>
+
     <script type="text/javascript" async
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
     </script>
-    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+    <script>
+      var gitalk = new Gitalk({
+        clientID: '84526ad8b5c132c2857f',
+        clientSecret: '48e45b89248ab7a39b9623c083fc0d0b99b4b02f',
+        repo: 'wiki-comments',
+        owner: 'shzaiz',
+        admin: ['shzaiz'],
+        id: location.pathname,      
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
 
+      gitalk.render('gitalk-container')
+    </script>
+   
   </body>
 </html>

@@ -41,7 +41,7 @@ async function copyCode(block) {
         
         h1:before {
         counter-increment:section;
-        content:"Section " counter(section) ". ";
+        content:counter(section) ". ";
             font-weight:bold;
             font-size: x-large;
         }
@@ -64,7 +64,7 @@ async function copyCode(block) {
         } 
         div{
             max-width: 100%;
-            overflow: scroll;
+            overflow: auto;
             
         }
         .navbar {
@@ -94,6 +94,10 @@ async function copyCode(block) {
             padding-left: 2px;
             padding-right: 2px;
             text-decoration: none;
+        }
+
+        p.hidden {
+          overflow: hidden;
         }
 
     </style>
@@ -272,10 +276,28 @@ async function copyCode(block) {
 <p>如果你还没有入门, 仍然感到恐惧, 请记住：坚持住, 进入未知领域, 从简单的、能理解的东西试起, 投入时间, 就有收获. 从这里开始, 你就能慢慢克服恐惧了. 我们为大家准备了的这些讲稿基本上是按照上课的思路来的. 如果你能好好运用这些材料, 你就会感受到真正的力量!</p>
 
 
+    <hr>
+
+    <div id="gitalk-container" class="hidden"></div>
+
     <script type="text/javascript" async
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
     </script>
-    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+    <script>
+      var gitalk = new Gitalk({
+        clientID: '84526ad8b5c132c2857f',
+        clientSecret: '48e45b89248ab7a39b9623c083fc0d0b99b4b02f',
+        repo: 'wiki-comments',
+        owner: 'shzaiz',
+        admin: ['shzaiz'],
+        id: location.pathname,      
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
 
+      gitalk.render('gitalk-container')
+    </script>
+   
   </body>
 </html>

@@ -41,7 +41,7 @@ async function copyCode(block) {
         
         h1:before {
         counter-increment:section;
-        content:"Section " counter(section) ". ";
+        content:counter(section) ". ";
             font-weight:bold;
             font-size: x-large;
         }
@@ -64,7 +64,7 @@ async function copyCode(block) {
         } 
         div{
             max-width: 100%;
-            overflow: scroll;
+            overflow: auto;
             
         }
         .navbar {
@@ -96,6 +96,10 @@ async function copyCode(block) {
             text-decoration: none;
         }
 
+        p.hidden {
+          overflow: hidden;
+        }
+
     </style>
   </head>
   <body>
@@ -120,10 +124,28 @@ async function copyCode(block) {
 <p>由此回到现实中的我，回到我的局限、我的债务，回到我艰难的信仰上来。作为结束，我感到能更坦然地向诸位表达我的情意。这份殊荣，我愿意接受并与所有同我一起战斗的人分享，他们从未得到过任何一点奖赏，却唯独受尽了折磨与不幸。最后，请再次接受我发自内心的感激和公开忠诚的承诺。这一古老而忠诚的承诺，是每一个真正的艺术家每天面对自己默默必行的功课。</p>
 
 
+    <hr>
+
+    <div id="gitalk-container" class="hidden"></div>
+
     <script type="text/javascript" async
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
     </script>
-    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+    <script>
+      var gitalk = new Gitalk({
+        clientID: '84526ad8b5c132c2857f',
+        clientSecret: '48e45b89248ab7a39b9623c083fc0d0b99b4b02f',
+        repo: 'wiki-comments',
+        owner: 'shzaiz',
+        admin: ['shzaiz'],
+        id: location.pathname,      
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
 
+      gitalk.render('gitalk-container')
+    </script>
+   
   </body>
 </html>

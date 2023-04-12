@@ -41,7 +41,7 @@ async function copyCode(block) {
         
         h1:before {
         counter-increment:section;
-        content:"Section " counter(section) ". ";
+        content:counter(section) ". ";
             font-weight:bold;
             font-size: x-large;
         }
@@ -64,7 +64,7 @@ async function copyCode(block) {
         } 
         div{
             max-width: 100%;
-            overflow: scroll;
+            overflow: auto;
             
         }
         .navbar {
@@ -94,6 +94,10 @@ async function copyCode(block) {
             padding-left: 2px;
             padding-right: 2px;
             text-decoration: none;
+        }
+
+        p.hidden {
+          overflow: hidden;
         }
 
     </style>
@@ -164,10 +168,28 @@ $$</p>
 <p>贪心说明: 需要最少的线段进行覆盖, 那么选取的线段必然要尽量长, 而已经覆盖到的区域之前的地方已经无所谓了, (可以理解成所有的可以覆盖的左端点都是已经覆盖到的地方), 那么真正能够使得线段更成的是右端点, 左端点没有太大的意义, 所以选择右端点来覆盖.</p>
 
 
+    <hr>
+
+    <div id="gitalk-container" class="hidden"></div>
+
     <script type="text/javascript" async
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
     </script>
-    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+    <script>
+      var gitalk = new Gitalk({
+        clientID: '84526ad8b5c132c2857f',
+        clientSecret: '48e45b89248ab7a39b9623c083fc0d0b99b4b02f',
+        repo: 'wiki-comments',
+        owner: 'shzaiz',
+        admin: ['shzaiz'],
+        id: location.pathname,      
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
 
+      gitalk.render('gitalk-container')
+    </script>
+   
   </body>
 </html>

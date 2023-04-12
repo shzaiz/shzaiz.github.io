@@ -41,7 +41,7 @@ async function copyCode(block) {
         
         h1:before {
         counter-increment:section;
-        content:"Section " counter(section) ". ";
+        content:counter(section) ". ";
             font-weight:bold;
             font-size: x-large;
         }
@@ -64,7 +64,7 @@ async function copyCode(block) {
         } 
         div{
             max-width: 100%;
-            overflow: scroll;
+            overflow: auto;
             
         }
         .navbar {
@@ -96,6 +96,10 @@ async function copyCode(block) {
             text-decoration: none;
         }
 
+        p.hidden {
+          overflow: hidden;
+        }
+
     </style>
   </head>
   <body>
@@ -110,11 +114,29 @@ async function copyCode(block) {
     <p><strong><a href="../index.html">←Back</a></strong></p>
 
 
+    <hr>
+
+    <div id="gitalk-container" class="hidden"></div>
+
     <script type="text/javascript" async
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
     </script>
-    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+    <script>
+      var gitalk = new Gitalk({
+        clientID: '84526ad8b5c132c2857f',
+        clientSecret: '48e45b89248ab7a39b9623c083fc0d0b99b4b02f',
+        repo: 'wiki-comments',
+        owner: 'shzaiz',
+        admin: ['shzaiz'],
+        id: location.pathname,      
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
 
+      gitalk.render('gitalk-container')
+    </script>
+   
   </body>
 </html><p><a href="02%E5%AE%9E%E8%B7%B5%E8%AE%A4%E8%AF%86%E5%8F%8A%E5%85%B6%E5%8F%91%E5%B1%95%E8%A7%84%E5%BE%8B.html">02实践认识及其发展规律</a></p>
 <p><a href="01%E4%BA%8B%E7%89%A9%E7%9A%84%E5%A4%9A%E6%A0%B7%E6%80%A7%E4%B8%8E%E7%BB%9F%E4%B8%80%E6%80%A7.html">01事物的多样性与统一性</a></p>
