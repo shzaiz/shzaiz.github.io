@@ -112,7 +112,9 @@ async function copyCode(block) {
 
     <div class="toc"></div>
     <a id="toc-button"><i class="far fa-bookmark"></i></a>
-    <h1>CF1695C</h1>
+    
+    <div>
+      <h1>CF1695C</h1>
 <p><strong>描述</strong>: 给你一个  \(n \times m\)  ( \(1 \le n, m \le 1000\) ) 的格点图，每个格子的值要么是  \(-1\) ，要么是  \(1\) ，现在问你，是否有一条从  \((1, 1)\)  到  \((n, m)\)  的路径，使得路径上经过的格点的值的和为  \(0\) 。在路径中，只能从  \(a_{i, j}\)  移动到  \(a_{i + 1, j}\)  或是  \(a_{i, j + 1}\) （向右或是向下走）。</p>
 <p><strong>考虑DP</strong>:  \(f[i][j][k]\) 表示在 \((i,j)\) , 取得了 \(k\) 个1, 是否存在方案. 因为 \(k\) 非常的小, 可以用bitset艹过去.</p>
 <div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>a[<span style="color: #666666">1005</span>][<span style="color: #666666">1005</span>];
@@ -141,12 +143,18 @@ bitset<span style="color: #666666">&lt;</span><span style="color: #bbbbbb"> </sp
 
 <p> \(\mathbb{}\) </p>
 
+    </div>
 
+   
+   
+   
     <hr>
 
 
 
-   
+
+
+
     <div id="disqus_thread"></div>
     <script type="text/javascript" async
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
@@ -169,5 +177,6 @@ bitset<span style="color: #666666">&lt;</span><span style="color: #bbbbbb"> </sp
         })();
     </script>
     <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <script id="dsq-count-scr" src="//augpath.disqus.com/count.js" async></script>
   </body>
 </html>

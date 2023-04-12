@@ -112,7 +112,9 @@ async function copyCode(block) {
 
     <div class="toc"></div>
     <a id="toc-button"><i class="far fa-bookmark"></i></a>
-    <h1><a href="https://www.luogu.com.cn/problem/CF1716C">CF1716C Robot in a Hallway</a></h1>
+    
+    <div>
+      <h1><a href="https://www.luogu.com.cn/problem/CF1716C">CF1716C Robot in a Hallway</a></h1>
 <p><strong>观察</strong>. 发现只有2列, 且不能回头, 因此我们可以发现有两种走的方法</p>
 <div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #666666">|</span><span style="color: #bbbbbb">      </span><span style="color: #666666">-&gt;</span><span style="color: #bbbbbb"> </span><span style="color: #666666">|</span><span style="color: #bbbbbb"> </span>
 v<span style="color: #bbbbbb">    </span><span style="color: #666666">^</span><span style="color: #bbbbbb">    </span>v<span style="color: #bbbbbb">     </span>...
@@ -237,12 +239,18 @@ $$
 我们如果令前缀和 \(s\) 公式为 \(s_j=s[j-(k+i-1)]+f[i-1][j]\) , 就不用枚举枚举出发点了. 所以我们只要枚举 \(i\) 就行了.</p>
 <p><strong>空间优化</strong>. 发现每一步只与上一步有关, 因此可以用滚动数组.</p>
 
+    </div>
 
+   
+   
+   
     <hr>
 
 
 
-   
+
+
+
     <div id="disqus_thread"></div>
     <script type="text/javascript" async
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
@@ -265,5 +273,6 @@ $$
         })();
     </script>
     <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <script id="dsq-count-scr" src="//augpath.disqus.com/count.js" async></script>
   </body>
 </html>

@@ -112,7 +112,9 @@ async function copyCode(block) {
 
     <div class="toc"></div>
     <a id="toc-button"><i class="far fa-bookmark"></i></a>
-    <h1><a href="https://www.luogu.com.cn/problem/CF1718B">CF1718B Fibonacci Strings</a></h1>
+    
+    <div>
+      <h1><a href="https://www.luogu.com.cn/problem/CF1718B">CF1718B Fibonacci Strings</a></h1>
 <p><strong>想法</strong>. (1) 观察 Fibs 数列, 看到其中有 \(2\) 个 \(1\) , 余下的数列是单调递增的.
 (2) 考虑到数据比较小, 我们应该可以对于每一个 \(c_i\) ,  \(n^2\) 时间进行表示复杂度, 成若干的 Fibs 数列中的项的和.
 (3) 虽然上述做法可行, 但是一个数有多种表示方式的时候事情就会变得很难. 因为我们不知道如何分配这些数字出现的次数使得他们不相邻.</p>
@@ -168,12 +170,18 @@ $$</p>
 </ul>
 <p>贪心说明: 需要最少的线段进行覆盖, 那么选取的线段必然要尽量长, 而已经覆盖到的区域之前的地方已经无所谓了, (可以理解成所有的可以覆盖的左端点都是已经覆盖到的地方), 那么真正能够使得线段更成的是右端点, 左端点没有太大的意义, 所以选择右端点来覆盖.</p>
 
+    </div>
 
+   
+   
+   
     <hr>
 
 
 
-   
+
+
+
     <div id="disqus_thread"></div>
     <script type="text/javascript" async
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
@@ -196,5 +204,6 @@ $$</p>
         })();
     </script>
     <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <script id="dsq-count-scr" src="//augpath.disqus.com/count.js" async></script>
   </body>
 </html>

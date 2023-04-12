@@ -112,7 +112,9 @@ async function copyCode(block) {
 
     <div class="toc"></div>
     <a id="toc-button"><i class="far fa-bookmark"></i></a>
-    <h1>从最古老的算法说起</h1>
+    
+    <div>
+      <h1>从最古老的算法说起</h1>
 <p>任何一本书上面的开头好像都喜欢用Euclid算法求解最大公约数开场. 这是一个十分古老的算法, 但是要是仔仔细细证明这个算法, 还是不那么显然的.</p>
 <p>下面我们来借助这个算法, 来简单回顾一些数论的基本概念.</p>
 <p>要求两个数 \(m\) ,  \(n\) 的<strong>最大公因数</strong>(greatest common divisor, gcd), Euclid发现了这样一个算法并声称: \(\gcd(m, n) = \gcd(n\%m, n)\) . 这里, 沿用C++里面的取模,  \(a\%b\) 的值就等于 \(a\div b\) 的余数.</p>
@@ -129,12 +131,18 @@ $$</p>
 <p>在知道为什么这个算法是对的之前, 我们需要发掘一点整除的性质.</p>
 <h1>整除的性质</h1>
 
+    </div>
 
+   
+   
+   
     <hr>
 
 
 
-   
+
+
+
     <div id="disqus_thread"></div>
     <script type="text/javascript" async
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
@@ -157,5 +165,6 @@ $$</p>
         })();
     </script>
     <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <script id="dsq-count-scr" src="//augpath.disqus.com/count.js" async></script>
   </body>
 </html>

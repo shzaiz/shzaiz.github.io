@@ -112,7 +112,9 @@ async function copyCode(block) {
 
     <div class="toc"></div>
     <a id="toc-button"><i class="far fa-bookmark"></i></a>
-    <h1>D. 搜索</h1>
+    
+    <div>
+      <h1>D. 搜索</h1>
 <p>用贪心算法是不行的, 因为可以有这样的反例:</p>
 <div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #666666">10</span><span style="color: #bbbbbb"> </span><span style="color: #666666">3</span>
 <span style="color: #666666">1</span><span style="color: #bbbbbb"> </span><span style="color: #666666">3</span><span style="color: #bbbbbb"> </span><span style="color: #666666">4</span>
@@ -123,12 +125,18 @@ $$
 dp[n] = \max\{A_i+(n-A_i)-dp[n-A_i]|A_i\leq n\}. 
 $$</p>
 
+    </div>
 
+   
+   
+   
     <hr>
 
 
 
-   
+
+
+
     <div id="disqus_thread"></div>
     <script type="text/javascript" async
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
@@ -151,5 +159,6 @@ $$</p>
         })();
     </script>
     <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <script id="dsq-count-scr" src="//augpath.disqus.com/count.js" async></script>
   </body>
 </html>
