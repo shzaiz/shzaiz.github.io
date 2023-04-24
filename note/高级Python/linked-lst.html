@@ -108,7 +108,7 @@ async function copyCode(block) {
     <div class="navbar">
         <a href="https://shzaiz.github.io">AUG's Wiki</a>
         <a href="index.html"> ↑ Back to contents</a>
-        Last updated at 2023-04-21 09:33:23.491024
+        Last updated at 2023-04-24 21:36:51.577993
     </div>
 
     <div class="toc"></div>
@@ -117,9 +117,45 @@ async function copyCode(block) {
     <div>
       <h1>Types and funda. templates</h1>
 <h2>Singlely-linked list</h2>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">insert</span>(<span style="color: #008000">self</span>, n, val):
+        cur <span style="color: #666666">=</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>head
+        n<span style="color: #666666">-=1</span>
+        <span style="color: #008000; font-weight: bold">if</span>(<span style="color: #AA22FF; font-weight: bold">not</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>count):
+            nnd <span style="color: #666666">=</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>Node(val, <span style="color: #008000; font-weight: bold">None</span>)
+            <span style="color: #008000">self</span><span style="color: #666666">.</span>head <span style="color: #666666">=</span> nnd
+            <span style="color: #008000; font-weight: bold">return</span> 
+        <span style="color: #008000; font-weight: bold">while</span>(n <span style="color: #AA22FF; font-weight: bold">and</span> cur):
+            n<span style="color: #666666">-=1</span>
+            cur <span style="color: #666666">=</span> cur<span style="color: #666666">.</span>next
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>count <span style="color: #666666">+=</span> <span style="color: #666666">1</span>
+        
+        <span style="color: #008000; font-weight: bold">if</span>(<span style="color: #AA22FF; font-weight: bold">not</span> n <span style="color: #666666">==</span> <span style="color: #666666">0</span>):
+            <span style="color: #008000; font-weight: bold">raise</span> <span style="color: #CB3F38; font-weight: bold">Exception</span>
+        
+        nnd <span style="color: #666666">=</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>Node(val, <span style="color: #008000; font-weight: bold">None</span>)
+        
+        nnd<span style="color: #666666">.</span>next <span style="color: #666666">=</span> cur<span style="color: #666666">.</span>next
+        cur<span style="color: #666666">.</span>next <span style="color: #666666">=</span> nnd
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>count <span style="color: #666666">+=1</span> 
+
+
+a <span style="color: #666666">=</span> LinkedList()
+a<span style="color: #666666">.</span>append(<span style="color: #666666">1</span>)
+a<span style="color: #666666">.</span>append(<span style="color: #666666">2</span>)
+<span style="color: #008000">print</span>(a<span style="color: #666666">.</span>index(<span style="color: #666666">1</span>))
+a<span style="color: #666666">.</span>insert(<span style="color: #666666">1</span>, <span style="color: #666666">1145</span>)
+a<span style="color: #666666">.</span>remove(<span style="color: #666666">2</span>)
+<span style="color: #008000">print</span>(a)
 </pre></div>
 
+<p>The following ideas shall be considered while implementation</p>
+<ul>
+<li>Draw a relationship between nodes, indicate guard if it has one.</li>
+<li>Reframe the lines, using <code>tmp</code> vars for it or generally leave it to the last.</li>
+<li>Discuss each node with <code>None</code> case.</li>
+</ul>
+<h2>Double linked list</h2>
+<p>It&#x27;s similar to the previous one, but note that when the guard is preserved, we must use self.head.next to indicate the first item.</p>
 
     </div>
 
