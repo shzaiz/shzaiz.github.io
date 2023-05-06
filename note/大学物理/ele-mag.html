@@ -108,28 +108,50 @@ async function copyCode(block) {
     <div class="navbar">
         <a href="https://shzaiz.github.io">AUG's Wiki</a>
         <a href="index.html"> ↑ Back to contents</a>
-        Last updated at 2023-05-06 14:31:03.308376
+        Last updated at 2023-05-06 14:31:03.311422
     </div>
 
     <div class="toc"></div>
     <a id="toc-button"><i class="far fa-bookmark"></i></a>
     
     <div>
-      <h1>0-starter</h1>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #008000">cd</span><span style="color: #bbbbbb"> </span>~/.config/nvim<span style="color: #bbbbbb">  </span><span style="color: #3D7B7B; font-style: italic"># for Neovim</span>
-
-<span style="color: #3D7B7B; font-style: italic"># Create the required package directory structure</span>
-mkdir<span style="color: #bbbbbb"> </span>-p<span style="color: #bbbbbb"> </span>pack/plugins/start
-<span style="color: #008000">cd</span><span style="color: #bbbbbb"> </span>pack/plugins/start
-
-<span style="color: #3D7B7B; font-style: italic"># Clone the plugins&#39; GitHub repos from inside `start/`</span>
-git<span style="color: #bbbbbb"> </span>clone<span style="color: #bbbbbb"> </span>https://github.com/lervag/vimtex
-git<span style="color: #bbbbbb"> </span>clone<span style="color: #bbbbbb"> </span>https://github.com/SirVer/ultisnips
-git<span style="color: #bbbbbb"> </span>clone<span style="color: #bbbbbb"> </span>https://github.com/tpope/vim-dispatch
-</pre></div>
-
-<p>https://castel.dev/post/lecture-notes-1/#correcting-spelling-mistakes-on-the-fly</p>
-<p>https://www.ejmastnak.com/tutorials/vim-latex/ultisnips/#two-ways-to-read-this-article</p>
+      <h1>真空中的静电场</h1>
+<p><img src="https://s2.loli.net/2023/05/06/CcrTJGqjHxnybzF.png" alt="Img" /></p>
+<p>这里需要注意不同的内容所对应的不同的 \(dr\) 的选取, 以及 \(dq\) 与 \(dr\) 的关系.</p>
+<p><strong> \(dQ\) 与 \(dr\) 的关系</strong></p>
+<ul>
+<li>线状分布:  \(dq=\lambda dl\) , 其中 \(\lambda=\) 总电荷量/总长度.
+<ul>
+<li> \(\lambda=\delta_0 dx\) , 面密度求导就是线密度, 其余类似</li>
+</ul>
+</li>
+<li>面状分布:  \(dq=\delta ds\) ,其中 \(\lambda=\) 面电荷量/总面积.</li>
+<li>体状分布:  \(dq=\rho dV\) ,  其中 \(\lambda=\) 面电荷量/总体积.</li>
+</ul>
+<p>题目类型: 使用叠加法求</p>
+<p><img src="https://s2.loli.net/2023/05/06/beOPZkoQ8zN2D5w.png" alt="Img" /></p>
+<p><img src="https://s2.loli.net/2023/05/06/7zvJDHKEdjZc62e.png" alt="Img" /></p>
+<h1>静电场中的导体和电介质</h1>
+<p><img src="https://s2.loli.net/2023/05/06/fQBiyrADUtxunsh.png" alt="Img" /></p>
+<p>下面的静电平衡条件是很关键的, 有时候解题需要用到里面的两个条件:</p>
+<p><img src="https://s2.loli.net/2023/05/06/rbHUXpydjGmiQIO.png" alt="Img" /></p>
+<p><img src="https://s2.loli.net/2023/05/06/OLtdaPTwM8kBi5g.png" alt="Img" /></p>
+<p>题目类型: 求孤立导体的电量分布</p>
+<p><img src="https://s2.loli.net/2023/05/06/mUYd4b6KuPwDa8Q.png" alt="Img" /></p>
+<p>要点: 电荷守恒, 导体内部无净电荷分布</p>
+<p>接地的导体不一定 \(E=0\) . 接地等于电势为0.</p>
+<p><img src="https://s2.loli.net/2023/05/06/VCnKjDTXmotGa3S.png" alt="Img" /></p>
+<p><img src="https://s2.loli.net/2023/05/06/Ys7dimZnSfuloKw.png" alt="Img" /></p>
+<p><img src="https://s2.loli.net/2023/05/06/6m4sUkTwCHEzRy2.png" alt="Img" /></p>
+<p>这里需要着重强调电极化强度矢量 \(D\) 和 \(E\) 的一些关系:</p>
+<p><strong>电位移矢量</strong></p>
+<ul>
+<li>定义:  \(\epsilon_0E+P:=D\) 为点位移矢量</li>
+<li>单位:  \(C/m^2\) , 和面密度的单位一致</li>
+<li>与电场强度 \(E\) 的关系:  \(D=\epsilon_0 \epsilon_r E\) </li>
+<li>D的高斯定理:  \(\oint_S D \cdot dS=q_{0\text{内}}\) .</li>
+</ul>
+<p><img src="https://s2.loli.net/2023/05/06/vVMdKg16bUZqcnQ.png" alt="Img" /></p>
 
     </div>
 
