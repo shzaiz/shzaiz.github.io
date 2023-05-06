@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <link rel="stylesheet" href="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/style.css">
+    <script src="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/plugin.js"></script> 
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
+ 
+    <script>
+const copyButtonLabel = "Copy Code";
+
+// use a class selector if available
+let blocks = document.querySelectorAll("pre");
+
+blocks.forEach((block) => {
+  // only add button if browser supports Clipboard API
+  if (navigator.clipboard) {
+    let button = document.createElement("button");
+
+    button.innerText = copyButtonLabel;
+    block.appendChild(button);
+
+    button.addEventListener("click", async () => {
+      await copyCode(block);
+    });
+  }
+});
+
+async function copyCode(block) {
+  let code = block.querySelector("code");
+  let text = code.innerText;
+
+  await navigator.clipboard.writeText(text);
+}
+    </script>
+      <style>
+        body {counter-reset:section;}
+        h1 {counter-reset:subsection;font-size:x-large;}
+        h2 {font-size: large;}
+        
+        h1:before {
+        counter-increment:section;
+        content:counter(section) ". ";
+            font-weight:bold;
+            font-size: x-large;
+        }
+        h2:before {
+        counter-increment:subsection;
+        content:counter(section) "." counter(subsection) " ";
+        font-size: large;
+        }
+        html, body {
+            margin: 5%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: 500;
+        }
+        code {
+            font-family: 'Courier New', Courier, monospace;
+        } 
+
+        pre {
+            font-family: 'Courier New', Courier, monospace;
+        } 
+        div{
+            max-width: 100%;
+            overflow: auto;
+            
+        }
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+            position: fixed; /* Set the navbar to fixed position */
+            top: 0; /* Position the navbar at the top of the page */
+            width: 100%; /* Full width */
+        }
+
+        img {
+        max-width: 80%;
+        height: auto;
+        }
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        a {
+            color: #148bca;
+            text-align: center;
+            padding-left: 2px;
+            padding-right: 2px;
+            text-decoration: none;
+        }
+
+        p.hidden {
+          overflow: hidden;
+        }
+
+    </style>
+  </head>
+  <body>
+    
+    <div class="navbar">
+        <a href="https://shzaiz.github.io">AUG's Wiki</a>
+        <a href="index.html"> ↑ Back to contents</a>
+        Last updated at 2023-05-06 15:06:14.884194
+    </div>
+
+    <div class="toc"></div>
+    <a id="toc-button"><i class="far fa-bookmark"></i></a>
+    
+    <div>
+      <h1>选取合适的状态</h1>
+<h2>花店橱窗布置(IOI1999)</h2>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>val[<span style="color: #666666">105</span>][<span style="color: #666666">105</span>],<span style="color: #bbbbbb"> </span>dp[<span style="color: #666666">105</span>][<span style="color: #666666">105</span>],<span style="color: #bbbbbb"> </span>fa[<span style="color: #666666">105</span>][<span style="color: #666666">105</span>];
+
+<span style="color: #B00040">void</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">print</span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>x,<span style="color: #bbbbbb"> </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>y){
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">if</span>(x<span style="color: #666666">==0</span>)<span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">return</span>;<span style="color: #bbbbbb"> </span>
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">if</span>(fa[x][y]<span style="color: #bbbbbb"> </span><span style="color: #666666">==</span><span style="color: #bbbbbb"> </span>y){
+<span style="color: #bbbbbb">        </span>printf(<span style="color: #BA2121">&quot;%d &quot;</span>,<span style="color: #bbbbbb"> </span>y);
+<span style="color: #bbbbbb">        </span><span style="color: #008000; font-weight: bold">return</span>;
+<span style="color: #bbbbbb">    </span>}
+<span style="color: #bbbbbb">    </span>print(x<span style="color: #666666">-1</span>,<span style="color: #bbbbbb"> </span>fa[x][y]);
+<span style="color: #bbbbbb">    </span>printf(<span style="color: #BA2121">&quot;%d &quot;</span>,<span style="color: #bbbbbb"> </span>y);
+
+}
+
+<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">main</span>(){
+<span style="color: #bbbbbb">    </span>F(i,<span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>,<span style="color: #bbbbbb"> </span><span style="color: #666666">104</span>)<span style="color: #bbbbbb"> </span>F(j,<span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>,<span style="color: #bbbbbb"> </span><span style="color: #666666">104</span>)<span style="color: #bbbbbb"> </span>dp[i][j]<span style="color: #666666">=-1*0x3f3f3f3f</span>;
+<span style="color: #bbbbbb">    </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>f,<span style="color: #bbbbbb"> </span>v;<span style="color: #bbbbbb"> </span>cin<span style="color: #666666">&gt;&gt;</span>f<span style="color: #666666">&gt;&gt;</span>v;
+<span style="color: #bbbbbb">    </span>F(i,<span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>,<span style="color: #bbbbbb"> </span>f)<span style="color: #bbbbbb"> </span>F(j,<span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>,<span style="color: #bbbbbb"> </span>v)<span style="color: #bbbbbb"> </span>cin<span style="color: #666666">&gt;&gt;</span>val[i][j];<span style="color: #bbbbbb"> </span>
+<span style="color: #bbbbbb">    </span>F(i,<span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>,<span style="color: #bbbbbb"> </span>v<span style="color: #666666">-</span>f<span style="color: #666666">+1</span>){
+<span style="color: #bbbbbb">        </span>dp[<span style="color: #666666">1</span>][i]<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>val[<span style="color: #666666">1</span>][i];
+<span style="color: #bbbbbb">    </span>}
+
+<span style="color: #bbbbbb">    </span>F(i,<span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>,<span style="color: #bbbbbb"> </span>f<span style="color: #666666">-1</span>)<span style="color: #bbbbbb"> </span>F(j,<span style="color: #bbbbbb"> </span>i<span style="color: #666666">+1</span>,<span style="color: #bbbbbb"> </span>v<span style="color: #666666">-</span>f<span style="color: #666666">+</span>i<span style="color: #666666">+1</span>)<span style="color: #bbbbbb"> </span>F(k,<span style="color: #bbbbbb"> </span>i,<span style="color: #bbbbbb"> </span>j<span style="color: #666666">-1</span>){
+<span style="color: #bbbbbb">        </span><span style="color: #3D7B7B; font-style: italic">// dp[i+1][j] =  max(dp[i][k]+val[i+1][j], dp[i+1][j]);</span>
+<span style="color: #bbbbbb">        </span><span style="color: #008000; font-weight: bold">if</span>(dp[i][k]<span style="color: #666666">+</span>val[i<span style="color: #666666">+1</span>][j]<span style="color: #bbbbbb"> </span><span style="color: #666666">&gt;</span><span style="color: #bbbbbb"> </span>dp[i<span style="color: #666666">+1</span>][j]){
+<span style="color: #bbbbbb">            </span>dp[i<span style="color: #666666">+1</span>][j]<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb">  </span>dp[i][k]<span style="color: #666666">+</span>val[i<span style="color: #666666">+1</span>][j];
+<span style="color: #bbbbbb">            </span>fa[i<span style="color: #666666">+1</span>][j]<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>k;
+<span style="color: #bbbbbb">        </span>}
+
+<span style="color: #bbbbbb">    </span>}
+<span style="color: #bbbbbb">    </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>ans<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">-1</span>;
+<span style="color: #bbbbbb">    </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>start;
+<span style="color: #bbbbbb">    </span>F(i,<span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>,<span style="color: #bbbbbb"> </span>v){
+<span style="color: #bbbbbb">        </span><span style="color: #008000; font-weight: bold">if</span>(ans<span style="color: #666666">&lt;</span>dp[f][i]){
+<span style="color: #bbbbbb">            </span>ans<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>dp[f][i];
+<span style="color: #bbbbbb">            </span>start<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>i;
+<span style="color: #bbbbbb">        </span>}
+<span style="color: #bbbbbb">    </span>}
+<span style="color: #bbbbbb">    </span>cout<span style="color: #666666">&lt;&lt;</span>ans<span style="color: #666666">&lt;&lt;</span>endl;
+<span style="color: #bbbbbb">    </span>print(f,<span style="color: #bbbbbb"> </span>start);<span style="color: #bbbbbb">    </span>
+}
+</pre></div>
+
+<h2>免费的馅饼</h2>
+<p>递归版本</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>val[<span style="color: #666666">2000</span>][<span style="color: #666666">2000</span>],<span style="color: #bbbbbb"> </span>dp[<span style="color: #666666">2000</span>][<span style="color: #666666">2000</span>],<span style="color: #bbbbbb"> </span>fa[<span style="color: #666666">2000</span>][<span style="color: #666666">2000</span>];
+
+<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>w,<span style="color: #bbbbbb"> </span>h,<span style="color: #bbbbbb"> </span>maxt<span style="color: #666666">=-1</span>;
+<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">dfs</span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>x,<span style="color: #bbbbbb"> </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>t){
+<span style="color: #bbbbbb">    </span>debugf(<span style="color: #BA2121">&quot;Now %d %d</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>,<span style="color: #bbbbbb"> </span>x,t<span style="color: #bbbbbb"> </span>);
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">if</span>(x<span style="color: #bbbbbb"> </span><span style="color: #666666">&gt;</span><span style="color: #bbbbbb"> </span>w<span style="color: #bbbbbb"> </span><span style="color: #666666">||</span><span style="color: #bbbbbb"> </span>x<span style="color: #666666">&lt;=0</span>)<span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">return</span><span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>;
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">if</span>(t<span style="color: #bbbbbb"> </span><span style="color: #666666">&lt;</span><span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>)<span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">return</span><span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>;
+<span style="color: #bbbbbb">    </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>ans<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>max({
+<span style="color: #bbbbbb">        </span>dfs(x,<span style="color: #bbbbbb"> </span>t<span style="color: #666666">-1</span>),
+<span style="color: #bbbbbb">        </span>dfs(x<span style="color: #666666">-1</span>,<span style="color: #bbbbbb"> </span>t<span style="color: #666666">-1</span>),
+<span style="color: #bbbbbb">        </span>dfs(x<span style="color: #666666">-2</span>,<span style="color: #bbbbbb"> </span>t<span style="color: #666666">-1</span>),
+<span style="color: #bbbbbb">        </span>dfs(x<span style="color: #666666">+1</span>,<span style="color: #bbbbbb"> </span>t<span style="color: #666666">-1</span>),
+<span style="color: #bbbbbb">        </span>dfs(x<span style="color: #666666">+2</span>,<span style="color: #bbbbbb"> </span>t<span style="color: #666666">-1</span>),<span style="color: #bbbbbb">  </span>
+<span style="color: #bbbbbb">    </span>})<span style="color: #666666">+</span>val[x][t];
+<span style="color: #bbbbbb">    </span>debug(ans);
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">return</span><span style="color: #bbbbbb"> </span>ans;
+}
+
+<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>a,<span style="color: #bbbbbb"> </span>b,<span style="color: #bbbbbb"> </span>c,<span style="color: #bbbbbb"> </span>d;
+<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">main</span>(){
+<span style="color: #bbbbbb">    </span>cin<span style="color: #666666">&gt;&gt;</span>h<span style="color: #666666">&gt;&gt;</span>w;
+<span style="color: #bbbbbb">    </span>h<span style="color: #666666">--</span>;
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">while</span>(cin<span style="color: #666666">&gt;&gt;</span>a<span style="color: #666666">&gt;&gt;</span>b<span style="color: #666666">&gt;&gt;</span>c<span style="color: #666666">&gt;&gt;</span>d){
+<span style="color: #bbbbbb">        </span><span style="color: #008000; font-weight: bold">if</span>((h)<span style="color: #666666">%</span>c)<span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">continue</span>;
+<span style="color: #bbbbbb">        </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>t<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>a<span style="color: #666666">+</span>(h)<span style="color: #666666">/</span>c;
+<span style="color: #bbbbbb">        </span>val[b][t]<span style="color: #666666">+=</span>d;
+<span style="color: #bbbbbb">        </span>maxt<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>max(maxt,<span style="color: #bbbbbb"> </span>t);
+<span style="color: #bbbbbb">        </span>debug(b,<span style="color: #bbbbbb"> </span>t,<span style="color: #bbbbbb"> </span>val[b][t]);
+<span style="color: #bbbbbb">    </span>}
+<span style="color: #bbbbbb">    </span>debug(maxt);
+<span style="color: #bbbbbb">    </span>cout<span style="color: #666666">&lt;&lt;</span><span style="color: #bbbbbb"> </span>dfs((w<span style="color: #666666">+1</span>)<span style="color: #666666">/2</span>,<span style="color: #bbbbbb"> </span>maxt<span style="color: #666666">+1</span>)<span style="color: #666666">&lt;&lt;</span><span style="color: #BA2121">&quot;</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>;
+}
+</pre></div>
+
+<p>优化版本</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #008000; font-weight: bold">for</span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>i<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>tt;<span style="color: #bbbbbb"> </span>i<span style="color: #bbbbbb"> </span><span style="color: #666666">&gt;=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>;<span style="color: #bbbbbb"> </span>i<span style="color: #bbbbbb"> </span><span style="color: #666666">--</span>){
+<span style="color: #bbbbbb">        </span><span style="color: #008000; font-weight: bold">for</span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>j<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>;<span style="color: #bbbbbb"> </span>j<span style="color: #bbbbbb"> </span><span style="color: #666666">&lt;=</span><span style="color: #bbbbbb"> </span>w;<span style="color: #bbbbbb"> </span>j<span style="color: #bbbbbb"> </span><span style="color: #666666">++</span>){
+<span style="color: #bbbbbb">            </span><span style="color: #008000; font-weight: bold">for</span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>k<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">-2</span>;<span style="color: #bbbbbb"> </span>k<span style="color: #bbbbbb"> </span><span style="color: #666666">&lt;=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">2</span>;<span style="color: #bbbbbb"> </span>k<span style="color: #bbbbbb"> </span><span style="color: #666666">++</span>){
+<span style="color: #bbbbbb">                </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>temp<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>j<span style="color: #bbbbbb"> </span><span style="color: #666666">+</span><span style="color: #bbbbbb"> </span>k;
+<span style="color: #bbbbbb">                </span><span style="color: #008000; font-weight: bold">if</span>(temp<span style="color: #bbbbbb"> </span><span style="color: #666666">&lt;</span><span style="color: #bbbbbb"> </span><span style="color: #666666">1</span><span style="color: #bbbbbb"> </span><span style="color: #666666">||</span><span style="color: #bbbbbb"> </span>temp<span style="color: #bbbbbb"> </span><span style="color: #666666">&gt;</span><span style="color: #bbbbbb"> </span>w)<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">continue</span>;
+<span style="color: #bbbbbb">                </span><span style="color: #008000; font-weight: bold">if</span>(f[j][i]<span style="color: #bbbbbb"> </span><span style="color: #666666">&lt;</span><span style="color: #bbbbbb"> </span>f[j<span style="color: #bbbbbb"> </span><span style="color: #666666">+</span><span style="color: #bbbbbb"> </span>k][i<span style="color: #bbbbbb"> </span><span style="color: #666666">+</span><span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>]<span style="color: #bbbbbb"> </span><span style="color: #666666">+</span><span style="color: #bbbbbb"> </span>q[j][i]){
+<span style="color: #bbbbbb">                    </span>f[j][i]<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>f[j<span style="color: #bbbbbb"> </span><span style="color: #666666">+</span><span style="color: #bbbbbb"> </span>k][i<span style="color: #bbbbbb"> </span><span style="color: #666666">+</span><span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>]<span style="color: #bbbbbb"> </span><span style="color: #666666">+</span><span style="color: #bbbbbb"> </span>q[j][i];
+<span style="color: #bbbbbb">                    </span>path[j][i]<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>k;
+<span style="color: #bbbbbb">                </span>}
+<span style="color: #bbbbbb">            </span>}
+<span style="color: #bbbbbb">        </span>}
+<span style="color: #bbbbbb">    </span>}
+<span style="color: #bbbbbb">    </span>cout<span style="color: #bbbbbb"> </span><span style="color: #666666">&lt;&lt;</span><span style="color: #bbbbbb"> </span>f[(w<span style="color: #bbbbbb"> </span><span style="color: #666666">&gt;&gt;</span><span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>)<span style="color: #bbbbbb"> </span><span style="color: #666666">+</span><span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>][<span style="color: #666666">0</span>]<span style="color: #bbbbbb"> </span><span style="color: #666666">&lt;&lt;</span><span style="color: #bbbbbb"> </span>endl;
+<span style="color: #bbbbbb">    </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>st<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>(w<span style="color: #bbbbbb"> </span><span style="color: #666666">&gt;&gt;</span><span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>)<span style="color: #bbbbbb"> </span><span style="color: #666666">+</span><span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>;
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">for</span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>i<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>;<span style="color: #bbbbbb"> </span>i<span style="color: #bbbbbb"> </span><span style="color: #666666">&lt;</span><span style="color: #bbbbbb"> </span>tt;<span style="color: #bbbbbb"> </span>i<span style="color: #bbbbbb"> </span><span style="color: #666666">++</span>){
+<span style="color: #bbbbbb">        </span>cout<span style="color: #bbbbbb"> </span><span style="color: #666666">&lt;&lt;</span><span style="color: #bbbbbb"> </span>path[st][i]<span style="color: #bbbbbb"> </span><span style="color: #666666">&lt;&lt;</span><span style="color: #bbbbbb"> </span>endl;
+<span style="color: #bbbbbb">        </span>st<span style="color: #bbbbbb"> </span><span style="color: #666666">+=</span><span style="color: #bbbbbb"> </span>path[st][i];
+<span style="color: #bbbbbb">    </span>}
+</pre></div>
+
+<h2>钉子和小球</h2>
+
+    </div>
+
+   
+   
+   
+    <hr>
+
+
+
+
+
+
+    <div id="disqus_thread"></div>
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script>
+        /**
+        *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+        *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+        
+        // var disqus_config = function () {
+        // this.page.url = ;  // Replace PAGE_URL with your page's canonical URL variable
+        // this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        // };
+        
+        (function() { // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        s.src = 'https://augpath.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <script id="dsq-count-scr" src="//augpath.disqus.com/count.js" async></script>
+  </body>
+</html>

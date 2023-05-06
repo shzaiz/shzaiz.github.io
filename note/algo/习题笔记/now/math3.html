@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <link rel="stylesheet" href="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/style.css">
+    <script src="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/plugin.js"></script> 
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
+ 
+    <script>
+const copyButtonLabel = "Copy Code";
+
+// use a class selector if available
+let blocks = document.querySelectorAll("pre");
+
+blocks.forEach((block) => {
+  // only add button if browser supports Clipboard API
+  if (navigator.clipboard) {
+    let button = document.createElement("button");
+
+    button.innerText = copyButtonLabel;
+    block.appendChild(button);
+
+    button.addEventListener("click", async () => {
+      await copyCode(block);
+    });
+  }
+});
+
+async function copyCode(block) {
+  let code = block.querySelector("code");
+  let text = code.innerText;
+
+  await navigator.clipboard.writeText(text);
+}
+    </script>
+      <style>
+        body {counter-reset:section;}
+        h1 {counter-reset:subsection;font-size:x-large;}
+        h2 {font-size: large;}
+        
+        h1:before {
+        counter-increment:section;
+        content:counter(section) ". ";
+            font-weight:bold;
+            font-size: x-large;
+        }
+        h2:before {
+        counter-increment:subsection;
+        content:counter(section) "." counter(subsection) " ";
+        font-size: large;
+        }
+        html, body {
+            margin: 5%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: 500;
+        }
+        code {
+            font-family: 'Courier New', Courier, monospace;
+        } 
+
+        pre {
+            font-family: 'Courier New', Courier, monospace;
+        } 
+        div{
+            max-width: 100%;
+            overflow: auto;
+            
+        }
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+            position: fixed; /* Set the navbar to fixed position */
+            top: 0; /* Position the navbar at the top of the page */
+            width: 100%; /* Full width */
+        }
+
+        img {
+        max-width: 80%;
+        height: auto;
+        }
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        a {
+            color: #148bca;
+            text-align: center;
+            padding-left: 2px;
+            padding-right: 2px;
+            text-decoration: none;
+        }
+
+        p.hidden {
+          overflow: hidden;
+        }
+
+    </style>
+  </head>
+  <body>
+    
+    <div class="navbar">
+        <a href="https://shzaiz.github.io">AUG's Wiki</a>
+        <a href="index.html"> ↑ Back to contents</a>
+        Last updated at 2023-05-06 15:06:14.891783
+    </div>
+
+    <div class="toc"></div>
+    <a id="toc-button"><i class="far fa-bookmark"></i></a>
+    
+    <div>
+      <h1>从特殊到一般</h1>
+<p><strong>定理</strong>. 对于两个集合而言, 有</p>
+<p>$$|S-A \cup B|=|S|-|A|-|B|+|A \cap B|.  \tag 1$$</p>
+<p>对于三个集合而言, 有</p>
+<p>$$
+\begin{aligned}
+|S-A \cup B \cup C| &amp;=|S|-|A|-|B|-|C| \\
+&amp;+|A \cap B|+|A \cap C|+|B \cap C| \\
+&amp;-|A \cap B \cap C| 
+\end{aligned}
+\tag 2
+$$</p>
+<p>类似的, 设   \(S\)   是一个有限集,   \(A_{1}, A_{2}, \ldots, A_{n}\)   是   \(S\)   的   \(n\)   个子集, 则</p>
+<p>$$\left|S-\bigcup_{i=1}^{n} A_{i}\right|=\sum_{i=0}^{n}(-1)^{i} \sum_{1 \leq j_{1}&lt;j_{2}&lt;\ldots&lt;j_{i} \leq n}\left|\bigcap_{k=1}^{i} A_{j_{k}}\right| \tag 3$$</p>
+<p>下面举几个例子:</p>
+<p><strong>Ex1</strong>. 求由 \(n\) 个元素 \(1,2,...,n\) 作成的全排列, 满足 \(1\) 与 \(2\) 不相邻,  \(3\) 与 \(4\) 也不相邻的方案数.</p>
+<p><strong>解答</strong>. 令 \(S=\text{所有全排列}\) ,  \(A=\{P\in S| 排列P中1与2相邻\}\) ,  \(B=\{P\in S| 排列P中3与4相邻\}\) . 根据公式:  \(|S-A\cup B| = n!- 2\times(n-1)! - 2\times(n-1)! +(2\times2)(n-2)\) .</p>
+<p><strong>Ex2</strong>. 把 \(n\) 个不一样的物品放在3个不同的盒子里面, 满足每个盒子至少有一个物品的个数.</p>
+<p><strong>解答</strong>.  \(S=n个物品放到3个盒子里面的方案\) ,  \(A=第一个盒子没有物品\) ,  \(B=第二个盒子没有物品\) 
+,  \(C=第三个盒子没有物品\) .
+根据公式,  \(|S-A\cup B \cup C| = 3^n-2^n-2^n-2^n+1+1+1-0\) .</p>
+<p><strong>对于(3)的说明</strong>.
+先从 \(n\) 个里面取 \(i\) 个子集, 因此有 \(\sum_{i=0}^n...\) . 假设我们取出来了 \(a_{j_1}, a_{j_2}, a_{j_3}, \cdots, a_{j_i}\) 这些子集, 他们的交集的方案数乘上 \((-1)^i\) 就是结果.</p>
+<p>严谨的考虑, 只需要证明某一个满足如下条件的元素 \(x\in S-\bigcup_{i=1}^nA_i\) , 一定会被算了一遍.</p>
+<p>只需要证明某一个满足如下条件的元素 \(x\in \bigcup_{i=1}^nA_i, x\in A_{k_1},A_{k_2},\cdots, A_{k_l}\) , 一定不会被算. 也就是</p>
+<p>$$\sum_{i=0}^l (-1)^i {l\choose i}=(1-1)^l=0.$$</p>
+<p><strong>例子3</strong>.  \(m\) 件不同的物品, 分给 \(n\) 个人, 要求每个人至少要分得一件物品, 求不同的分配方案数.</p>
+<p><strong>解答</strong>. 令全集 \(S=m件物品分配给n个人的方案\) ,  \(A_i=第i个人没有物品(1\leq i\leq n)\) . 那么
+$$\left|S-\bigcup_{i=1}^nA_i\right| = \sum_{i=0}^n(-1)^i\sum_{1\leq j_1 \leq j_2\leq \cdots \leq j_i\leq n}|A_{j_1}\cap A_{j_2}\cap A_{j_3} \cap\cdots \cap A_{j_n}|$$</p>
+<p>注意到 \(\sum_{1\leq j_1 \leq j_2\leq \cdots \leq j_i\leq n}|A_{j_1}\cap A_{j_2}\cap A_{j_3} \cap\cdots \cap A_{j_n}|\) 一项不在意取的<strong>具体项数</strong>, 因此可以化简为 \((n-i)^m\) . 也即是</p>
+<p>$$\left|S-\bigcup_{i=1}^nA_i\right| = \sum_{i=0}^n(-1)^i(n-i)^m.$$</p>
+<p><strong>例子4</strong>. 有   \(2 n\)   个元素   \(a_{1}, a_{2}, \ldots, a_{n}\)   和   \(b_{1}, b_{2}, \ldots, b_{n}\)  , 求有多少个它们的全排列, 满足任意的   \(1 \leq i \leq n\) ,   \(a_{i}\)   和   \(b_{i}\)   都不相邻。</p>
+<p><strong>解答</strong>. 令 \(S=全排列\) ,  \(A_i=a_i与b_i相邻(1\leq i\leq n)\) . 那么
+$$\left|S-\bigcup_{i=1}^nA_i\right| = \sum_{i=0}^n(-1)^i\sum_{1\leq j_1 \leq j_2\leq \cdots \leq j_i\leq n}|A_{j_1}\cap A_{j_2}\cap A_{j_3} \cap\cdots \cap A_{j_n}|$$</p>
+<p>注意从 \(n\) 个里面取 \(i\) 个是有对称性质(也就是不关心如何取得的), 那么 \(\sum_{1\leq j_1 \leq j_2\leq \cdots \leq j_i\leq n}|A_{j_1}\cap A_{j_2}\cap A_{j_3} \cap\cdots \cap A_{j_n}|\) 就可以被化简为 \({n\choose i}\boxed{有i对a_j和b_j是相邻的}\) .</p>
+<p>有一对相邻就可以捆绑起来, 有 \(i\) 对, 因此方案数为 \((2n-i)!\times 2^A_i\) </p>
+<p><strong>例子5(欧拉函数的推导)</strong>. 假设正整数   \(n\)   的质因数分解为  \(p_{1}^{\alpha_{1}} p_{2}^{\alpha_{2}} \ldots p_{k}^{\alpha_{k}}\) ,  \(\phi(n)\)   表示   \(1,2, \ldots, n\)   中与   \(n\)   互质的数的数量, 则<br />
+$$\phi(n)=n\left(1-\frac{1}{p_{1}}\right)\left(1-\frac{1}{p_{2}}\right) \ldots\left(1-\frac{1}{p_{k}}\right).$$
+<strong>解答</strong>. 考虑从1到 \(n\) 中<strong>不互质</strong>的, 形式化的, 令 \(S=[1..n]\) ,  \(A_i=\{x\in S \mid P_i |x\}\) , 要求结果就是 \(\left|S-\bigcup_{i=1}^nA_i\right|\) . 也就是
+$$
+\left|S-\bigcup_{i=1}^nA_i\right|=
+\sum_{i=0}^n(-1)^i\sum_{1\leq j_1 \leq j_2\leq \cdots \leq j_i\leq n}|A_{j_1}\cap A_{j_2}\cap A_{j_3} \cap\cdots \cap A_{j_n}|
+$$
+后面的函数的意义就是既是 \(p_{j_1}\) 的倍数, 又是 \(p_{j_2}\) 的倍数, 还是 \(p_{j_3}\) 的倍数... 一直是 \(p_{j_n}\) 的倍数. 因此可以化简为 \(n/(p_{j_1}p_{j_2}\cdots p_{j_i})\) . 也就是
+$$
+\left|S-\bigcup_{i=1}^nA_i\right|=
+\sum_{i=0}^n(-1)^i\sum_{1\leq j_1 \leq j_2\leq \cdots \leq j_i\leq n}{n\over  p_{j_1}p_{j_2}\cdots p_{j_i}}
+$$</p>
+<h2>练习题</h2>
+<h3>套公式</h3>
+<p><strong>描述</strong>. 给出一个数 \(n\) , 求 \(1\) 到 \(n\) 中，有多少个数不是 \(2, 5, 11, 13\) 的倍数.
+<strong>思路</strong>. 运用子集枚举的方法进行解答.
+Code.</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #bbbbbb">    </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>ans<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>;
+<span style="color: #bbbbbb">    </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>a[<span style="color: #666666">4</span>]<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>{<span style="color: #666666">2</span>,<span style="color: #bbbbbb"> </span><span style="color: #666666">5</span>,<span style="color: #bbbbbb"> </span><span style="color: #666666">11</span>,<span style="color: #bbbbbb"> </span><span style="color: #666666">13</span>};
+<span style="color: #bbbbbb">    </span>F(i,<span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>,<span style="color: #bbbbbb"> </span>(<span style="color: #666666">1&lt;&lt;4</span>)<span style="color: #666666">-1</span>){<span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">// 相当于里面的那个求和</span>
+<span style="color: #bbbbbb">        </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>s<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>n,<span style="color: #bbbbbb"> </span>cnt<span style="color: #bbbbbb"> </span><span style="color: #666666">=0</span>;
+<span style="color: #bbbbbb">        </span>F(j,<span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>,<span style="color: #bbbbbb"> </span><span style="color: #666666">4-1</span>){<span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">// 观察每一个二进制位是不是1</span>
+<span style="color: #bbbbbb">            </span><span style="color: #008000; font-weight: bold">if</span>((i<span style="color: #666666">&gt;&gt;</span>j)<span style="color: #bbbbbb"> </span><span style="color: #666666">&amp;</span><span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>)<span style="color: #bbbbbb"> </span>{
+<span style="color: #bbbbbb">                </span>s<span style="color: #666666">/=</span>a[j];
+<span style="color: #bbbbbb">                </span>cnt<span style="color: #666666">++</span>;
+<span style="color: #bbbbbb">            </span>}
+<span style="color: #bbbbbb">        </span>}
+<span style="color: #bbbbbb">        </span><span style="color: #008000; font-weight: bold">if</span>(cnt<span style="color: #666666">%2==0</span>)ans<span style="color: #bbbbbb"> </span><span style="color: #666666">+=</span><span style="color: #bbbbbb"> </span>s;<span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">// 乘上(-1)^i</span>
+<span style="color: #bbbbbb">        </span><span style="color: #008000; font-weight: bold">else</span><span style="color: #bbbbbb"> </span>ans<span style="color: #bbbbbb"> </span><span style="color: #666666">-=</span><span style="color: #bbbbbb"> </span>s;<span style="color: #bbbbbb">   </span>
+<span style="color: #bbbbbb">    </span>}
+<span style="color: #bbbbbb">    </span>cout<span style="color: #666666">&lt;&lt;</span>ans<span style="color: #666666">&lt;&lt;</span>endl;
+</pre></div>
+
+<h3>套公式Ex.</h3>
+<p><strong>描述</strong>. 若一个集合A内所有的元素都不是正整数N的因数，则称N与集合A无关。给出一个含有k个元素的集合A={a1,a2,a3,...,ak}，求区间[L,R]内与A无关的正整数的个数。保证A内的元素都是素数。
+<strong>思路</strong>. 和上面的问题如出一辙, 但是可以使用前缀和思想进行优化.
+Code.</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #bbbbbb">    </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>L,R,n;<span style="color: #bbbbbb"> </span>cin<span style="color: #666666">&gt;&gt;</span>L<span style="color: #666666">&gt;&gt;</span>R<span style="color: #666666">&gt;&gt;</span>n;<span style="color: #bbbbbb"> </span>
+<span style="color: #bbbbbb">    </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>ans<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>;
+<span style="color: #bbbbbb">    </span>F(i,<span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>,<span style="color: #bbbbbb"> </span>n<span style="color: #666666">-1</span>)<span style="color: #bbbbbb"> </span>cin<span style="color: #666666">&gt;&gt;</span>a[i];
+<span style="color: #bbbbbb">    </span>F(i,<span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>,<span style="color: #bbbbbb"> </span>(<span style="color: #666666">1&lt;&lt;</span>n)<span style="color: #666666">-1</span>){
+<span style="color: #bbbbbb">        </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>ll<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>L<span style="color: #666666">-1</span>,<span style="color: #bbbbbb"> </span>rr<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>R,<span style="color: #bbbbbb"> </span>cnt<span style="color: #bbbbbb"> </span><span style="color: #666666">=0</span>;
+<span style="color: #bbbbbb">        </span>F(j,<span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>,<span style="color: #bbbbbb"> </span>n<span style="color: #666666">-1</span>){
+<span style="color: #bbbbbb">            </span><span style="color: #008000; font-weight: bold">if</span>((i<span style="color: #666666">&gt;&gt;</span>j)<span style="color: #bbbbbb"> </span><span style="color: #666666">&amp;</span><span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>)<span style="color: #bbbbbb"> </span>{
+<span style="color: #bbbbbb">                </span>ll<span style="color: #666666">/=</span>a[j];
+<span style="color: #bbbbbb">                </span>rr<span style="color: #666666">/=</span>a[j];
+<span style="color: #bbbbbb">                </span>cnt<span style="color: #666666">++</span>;
+<span style="color: #bbbbbb">            </span>}
+<span style="color: #bbbbbb">        </span>}
+<span style="color: #bbbbbb">        </span><span style="color: #008000; font-weight: bold">if</span>(cnt<span style="color: #666666">%2==0</span>)ans<span style="color: #bbbbbb"> </span><span style="color: #666666">+=</span><span style="color: #bbbbbb"> </span>(rr<span style="color: #666666">-</span>ll<span style="color: #666666">+1</span>);
+<span style="color: #bbbbbb">        </span><span style="color: #008000; font-weight: bold">else</span><span style="color: #bbbbbb"> </span>ans<span style="color: #bbbbbb"> </span><span style="color: #666666">-=</span><span style="color: #bbbbbb"> </span>(rr<span style="color: #666666">-</span>ll<span style="color: #666666">+1</span>);<span style="color: #bbbbbb">   </span>
+<span style="color: #bbbbbb">    </span>}
+<span style="color: #bbbbbb">    </span>cout<span style="color: #666666">&lt;&lt;</span>ans<span style="color: #666666">&lt;&lt;</span>endl;
+</pre></div>
+
+<h1>第二类Stirling数</h1>
+<p>我们通常称为 \(S_2(n,k)\) 或者 \(\left\{n\atop k\right\}\) .
+<strong>问题描述</strong>. 有 \(n\) 个互不相同的球, 放到 \(k\) 个互不区分的盒子里, 每个盒子里至少要有一个球, 求方案数.
+<strong>递推解</strong>. 如果令 \(S_2(n,k)\) 为一共有 \(n\) 个球,  \(k\) 个盒子, 那么有递推式:
+$$S_2(n,k)=S_2(n-1,k-1)+kS_2(n-1, k). $$
+我们认为这个数为第二类斯特林数.
+<strong>显式公式</strong>. 首先把 \(k\) 个盒子进行编号 \([1..k]\) ,  \(A_i=第i个盒子是没有球的\) , 由于公式:
+$$\left|S-\bigcup_{i=1}^nA_i\right| = \sum_{i=0}^n(-1)^i\sum_{1\leq j_1 \leq j_2\leq \cdots \leq j_i\leq n}|A_{j_1}\cap A_{j_2}\cap A_{j_3} \cap\cdots \cap A_{j_n}|$$
+和上面的问题一样, 后面的可以变为 \({n\choose i}(k-i)^n\) , 但是因为盒子没有编号, 我们可以任意打乱它. 因此我们除以 \(k!\) .
+因此,
+$$S_2(n, k) = {1\over k!}\sum_{i=0}^k (-1)^k(k-i)^n.$$
+<strong>一个重要的性质</strong>.
+$$n^m=\sum_{k=0}^m\left\{n\atop k\right\}n^{\underline{k}}. $$
+通过组合意义可以说明之. 例如有 \(n\) 个盒子,  \(m\) 个球, 可以看作先从 \(n\) 个盒子里面取得 \(k\) 个, 然后把 \(m\) 个球放在 \(k\) 个盒子里面, 每个盒子放一个球, 最后编号放进去的盒子, 最终我们就可以得到结论.</p>
+<h1>容斥原理的符号形式</h1>
+<p>设 \(S\) 是一个有限集,  \(a_1, a_2, \cdots, a_k\) 是 \(n\) 种性质, 那么如果我们记:</p>
+<ul>
+<li> \(N(a_i)\) 是 \(S\) 中有 \(a_i\) 性质的元素数量</li>
+<li> \(N(1-a_i)\) 是 \(S\) 中没有 \(a_i\) 性质的元素数量</li>
+<li> \(N(a_{i_1}a_{i_2}\cdots a_{i_k})\) 是 \(S\) 中同时具有 \(a_{i_1}, a_{i_2}, a_{i_3}, \cdots, a_{i_k}\) 性质的元素数量</li>
+<li> \(N(a\pm b) = N(a) \pm N(b)\) 
+就可以在一定程度上简化解题过程.
+这时候, 容斥原理就可以写作:
+$$
+N((1-a_1)(1-a_2)\cdots(1-a_n))=\sum_{i=0}^n \sum_{1\leq j_1\leq j_2\leq \cdots \leq j_i\leq n}N(a_{j_1}a_{j_2}\cdots a_{j_i}),
+$$
+以及
+$$
+N\left(a_{1} \ldots a_{x}\left(1-a_{x+1}\right) \ldots\left(1-a_{x+n}\right)\right)=\sum_{i=0}^{n}(-1)^{i} \sum_{x \leq j_{1}&lt;j_{2}&lt;\ldots&lt;j_{i} \leq x+n} N\left(a_{1} \ldots a_{x} a_{j_{1}} \ldots a_{j}\right)
+$$</li>
+</ul>
+<h2>错排问题</h2>
+<p><strong>问题描述</strong>. 整数 \(1,2,...,n\) 的全排列中所有 \(i\) 都不在第 \(i\) 个位置上的排列的个数,  \(i=1,2,...,n\) .
+<strong>解答</strong>. 如果让 \(a_i\) 表示 \(a_i=i\) 这样的性质, 那么也就是求 \(N((1-a_1)(1-a_2)\cdots(1-a_n))\) . 考虑展开, 也就是
+$$
+\sum_{i=0}^n(-1)^i {n \choose i} \boxed{p排列里面有i个满足p_i=i},
+$$
+也就是
+$$
+\sum_{i=0}^n(-1)^i {n \choose i} (n-i)!.
+$$
+<strong>一些性质</strong>.
+拆开组合数, 有
+$$
+\sum_{i=0}^n(-1)^i { n! \over i!},
+$$
+当 \(n \to \infty\) ,  \(D(n)/n!\) 趋近于 \(1/e\) .</p>
+
+    </div>
+
+   
+   
+   
+    <hr>
+
+
+
+
+
+
+    <div id="disqus_thread"></div>
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script>
+        /**
+        *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+        *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+        
+        // var disqus_config = function () {
+        // this.page.url = ;  // Replace PAGE_URL with your page's canonical URL variable
+        // this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        // };
+        
+        (function() { // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        s.src = 'https://augpath.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <script id="dsq-count-scr" src="//augpath.disqus.com/count.js" async></script>
+  </body>
+</html>

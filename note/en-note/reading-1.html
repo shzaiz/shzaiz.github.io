@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <link rel="stylesheet" href="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/style.css">
+    <script src="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/plugin.js"></script> 
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
+ 
+    <script>
+const copyButtonLabel = "Copy Code";
+
+// use a class selector if available
+let blocks = document.querySelectorAll("pre");
+
+blocks.forEach((block) => {
+  // only add button if browser supports Clipboard API
+  if (navigator.clipboard) {
+    let button = document.createElement("button");
+
+    button.innerText = copyButtonLabel;
+    block.appendChild(button);
+
+    button.addEventListener("click", async () => {
+      await copyCode(block);
+    });
+  }
+});
+
+async function copyCode(block) {
+  let code = block.querySelector("code");
+  let text = code.innerText;
+
+  await navigator.clipboard.writeText(text);
+}
+    </script>
+      <style>
+        body {counter-reset:section;}
+        h1 {counter-reset:subsection;font-size:x-large;}
+        h2 {font-size: large;}
+        
+        h1:before {
+        counter-increment:section;
+        content:counter(section) ". ";
+            font-weight:bold;
+            font-size: x-large;
+        }
+        h2:before {
+        counter-increment:subsection;
+        content:counter(section) "." counter(subsection) " ";
+        font-size: large;
+        }
+        html, body {
+            margin: 5%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: 500;
+        }
+        code {
+            font-family: 'Courier New', Courier, monospace;
+        } 
+
+        pre {
+            font-family: 'Courier New', Courier, monospace;
+        } 
+        div{
+            max-width: 100%;
+            overflow: auto;
+            
+        }
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+            position: fixed; /* Set the navbar to fixed position */
+            top: 0; /* Position the navbar at the top of the page */
+            width: 100%; /* Full width */
+        }
+
+        img {
+        max-width: 80%;
+        height: auto;
+        }
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        a {
+            color: #148bca;
+            text-align: center;
+            padding-left: 2px;
+            padding-right: 2px;
+            text-decoration: none;
+        }
+
+        p.hidden {
+          overflow: hidden;
+        }
+
+    </style>
+  </head>
+  <body>
+    
+    <div class="navbar">
+        <a href="https://shzaiz.github.io">AUG's Wiki</a>
+        <a href="index.html"> ↑ Back to contents</a>
+        Last updated at 2023-05-06 15:06:14.310507
+    </div>
+
+    <div class="toc"></div>
+    <a id="toc-button"><i class="far fa-bookmark"></i></a>
+    
+    <div>
+      <p>In the first half of the 1800s, London’s population grew at an astonishing rate, and the central area became increasingly congested.</p>
+<p>The area within consisted of poorly built, overcrowded slums and the streets were full of horse-drawn traffic.</p>
+<p>Amongst the most vocal advocates for a solution to London’s traffic problems was Charles Pearson, who worked as a solicitor for the City of London.</p>
+<p>His idea was to relocate the poor workers who lived in the inner-city slums to newly constructed suburbs</p>
+<p>The chosen route ran beneath existing main roads to minimise the expense of demolishing buildings</p>
+<p>A trench about ten metres wide and six metres deep was dug, and the sides temporarily held up with timber beams</p>
+<p>However, smoke and fumes remained a problem, even though ventilation shafts were added to the tunnels.</p>
+<p>To catch a king</p>
+<p>抓捕一个国王</p>
+<p>Anna Keay reviews Charles Spencer’s book about the hunt for King Charles II during the English Civil War of the seventeenth century</p>
+<p>Anna Keay点评Charles Spencer所著述的关于17世纪英国内战期间搜捕国王查理二世的故事</p>
+<p>Charles Spencer’s latest book, To Catch a King, tells us the story of the hunt for King Charles II in the six weeks after his resounding defeat at the Battle of Worcester in September 1651. And what a story it is. After his father was executed by the Parliamentarians in 1649, the young Charles II sacrificed one of the very principles his father had died for and did a deal with the Scots, thereby accepting Presbyterianism* as the national religion in return for being crowned King of Scots. His arrival in Edinburgh prompted the English Parliamentary army to invade Scotland in a pre-emptive strike. This was followed by a Scottish invasion of England. The two sides finally faced one another at Worcester in the west of England in 1651. After being comprehensively defeated on the meadows outside the city by the Parliamentarian army, the 21-year-old king found himself the subject of a national manhunt, with a huge sum offered for his capture. Over the following six weeks he managed, through a series of heart-poundingly close escapes, to evade the Parliamentarians before seeking refuge in France. For the next nine years, the penniless and defeated Charles wandered around Europe with only a small group of loyal supporters.</p>
+<p>Charles Spencer最新的一本书，《抓捕一个国王》，为我们讲述了查理二世于1651年9月在Worcester战役彻底败北之后的六周内被追捕的故事。这真是一个惊心动魄的故事。在他的父王于1649年被议会党处死之后，年轻的查理二世牺牲了其父为之赴死的根本原则之一，与苏格兰人达成了一项协议，就此接受“长老会制”为国教，以换取自己加冕为苏格兰国王。他驾临爱丁堡的举动激起了英国议会军入侵苏格兰以进行先发制人的打击。这之后又随之有了苏格兰对英格兰的侵略举动。双方最终于1651年在英格兰西部的Worcester两军对垒。在城外草地上遭受了议会军的全面击溃之后，这位21岁的君主发现自己成了全国上下追捕的对象，为捉拿他而设下了重金悬赏。在接下来的六周内，他经历了一系列心惊肉跳的死里逃生，终于设法躲开了议会军，成功逃往法国避难。这之后的九年里，身无分文、丢兵弃甲的查理流亡于欧洲各地，身边只有一小撮忠实的支持者。</p>
+<p>Years later, after his restoration as king, the 50-year-old Charles II requested a meeting with the writer and diarist Samuel Pepys. His intention when asking Pepys to commit his story to paper was to ensure that this most extraordinary episode was never forgotten. Over two three-hour sittings, the king related to him in great detail his personal recollections of the six weeks he had spent as a fugitive. As the king and secretary settled down (a scene that is surely a gift for a future scriptwriter), Charles commenced his story: ‘After the battle was so absolutely lost as to be beyond hope of recovery, I began to think of the best way of saving myself.’</p>
+<p>很多年以后，已复辟成为国王的50岁的查理二世要求与作家和日记作者Samuel Pepys会面。他在吩咐Pepys将自己的故事诉诸于纸端时的意图在于：确保这段非同寻常的人生插曲将被永志不忘。在两场每次历时三小时的会谈中，这位君主事无巨细地将自己作为逃亡者所度过的这六周的个人回忆全部讲给了他听。就在国王和记录员坐下来之后（未来的剧本作家定会将这一幕视若珍宝），查理开启了自己的故事：“当战事彻底失败，已没有了任何转机之时，我开始思索自救的最佳良策。”</p>
+<p>One of the joys of Spencer’s book, a result not least of its use of Charles II’s own narrative as well as those of his supporters, is just how close the reader gets to the action. The day-byday retelling of the fugitives’ doings provides delicious details: the cutting of the king’s long hair with agricultural shears, the use of walnut leaves to dye his pale skin, and the day Charles spent lying on a branch of the great oak tree in Boscobel Wood as the Parliamentary soldiers scoured the forest floor below. Spencer draws out both the humour – such as the preposterous refusal of Charles’s friend Henry Wilmot to adopt disguise on the grounds that it was beneath his dignity – and the emotional tension when the secret of the king’s presence was cautiously revealed to his supporters.</p>
+<p>Spencer这本书的阅读乐趣之一，尤其是由于运用了查理二世自己的讲述和来自君主支持者们的描绘，在于读者能够无限接近当时的情景。对于逃亡者们每日一举一动的重现提供了令人读来津津有味的各种细节：用农家羊毛剪剪掉了国王的长发，用胡桃叶来将他的苍白肤色染深，以及有一天议会军在Boscobel树林里四处搜索查理，而他本人当时就躺在一棵大橡树的枝桠间。Spencer不但带出了诙谐感——例如描写查理的朋友Henry Wilmot以尊严至高无上为由拒绝进行伪装的荒唐之举，而且也营造出了当国王藏身之处的秘密被小心翼翼地透露给其支持者时的那种精神紧张感。</p>
+<p>Charles’s adventures after losing the Battle of Worcester hide the uncomfortable truth that whilst almost everyone in England had been appalled by the execution of his father, they had not welcomed the arrival of his son with the Scots army, but had instead firmly bolted their doors. This was partly because he rode at the head of what looked like a foreign invasion force and partly because, after almost a decade of civil war, people were desperate to avoid it beginning again. This makes it all the more interesting that Charles II himself loved the story so much ever after. As well as retelling it to anyone who would listen, causing eyerolling among courtiers, he set in train a series of initiatives to memorialise it. There was to be a new order of chivalry, the Knights of the Royal Oak. A series of enormous oil paintings depicting the episode were produced, including a two-metre-wide canvas of Boscobel Wood and a set of six similarly enormous paintings of the king on the run. In 1660, Charles II commissioned the artist John Michael Wright to paint a flying squadron of cherubs* carrying an oak tree to the heavens on the ceiling of his bedchamber. It is hard to imagine many other kings marking the lowest point in their life so enthusiastically, or indeed pulling off such an escape in the first place.</p>
+<p>查理在输掉Worcester战役之后的一系列冒险经历掩盖了这样一个令人不快的真相：虽然几乎英格兰的每一个人都对其父王的处死感到惊骇，然而他们却也并不欢迎他的儿子带着一支苏格兰军队到来，而是牢牢地关闭了自家的大门。这其中的一部分原因是他率领着一群看起来像是外国入侵者的武装力量，另一部分原因则是，在经过了几近十年的内战之后，人民是如此渴望避免重燃战火。这样一来，查理二世本人竟在此后如此热爱这段经历，就显得更加耐人寻味了。除了对任何愿意听的人一遍又一遍地讲述这个故事、在朝臣之中引起瞋目咋舌之外，他还启动了一系列举措以纪念它。例如敕令建立一支新的骑兵团，起名为皇家橡树骑士团。一系列描绘这段人生插曲的巨幅油画被奉旨创作出来，其中包括一幅表现Boscobel树林场景的两米宽的画作，以及一套共六幅类似尺寸的展现在逃国王的大幅绘画。1660年，查理二世委派艺术家John Michael Wright在自己寝室的天花板上创作了这样一幅画：一队飞翔的小天使抬着一棵橡树飞往天堂。很难想象会有很多其他君主如此热衷于铭记自己人生中的最低点，或者首先压根儿就不会有很多其他君主能完成这样一场逃亡。</p>
+<p>Charles Spencer is the perfect person to pass the story on to a new generation. His pacey, readable prose steers deftly clear of modern idioms and elegantly brings to life the details of the great tale. He has even-handed sympathy for both the fugitive king and the fierce republican regime that hunted him, and he succeeds in his desire to explore far more of the background of the story than previous books on the subject have done. Indeed, the opening third of the book is about how Charles II found himself at Worcester in the first place, which for some will be reason alone to read To Catch a King.</p>
+<p>Charles Spencer是将这个故事传给后世子孙的完美人选。他笔下节奏紧凑、颇可一读的散文熟练地避让开了现代习语，优雅地为这个传奇故事的各种细节赋予了鲜活生命。他对流亡君主和追捕他的狂热共和派政权有着一视同仁的共情之心，而且成功地实现了自己的这样一个目标：要比此前所有关于这段故事的记叙都更为深入地挖掘其背景。确实，书的前三分之一篇幅讲述的就是查理二世如何一路走到了Worcester战役那一刻，对一些人来说仅凭这个原因就足以吸引他们阅读《抓捕一个国王》这本书了。</p>
+<p>The tantalising question left, in the end, is that of what it all meant. Would Charles II have been a different king had these six weeks never happened? The days and nights spent in hiding must have affected him in some way. Did the need to assume disguises, to survive on wit and charm alone, to use trickery and subterfuge to escape from tight corners help form him? This is the one area where the book doesn’t quite hit the mark. Instead its depiction of Charles II in his final years as an ineffective, pleasure-loving monarch doesn’t do justice to the man (neither is it accurate), or to the complexity of his character. But this one niggle aside, To Catch a King is an excellent read, and those who come to it knowing little of the famous tale will find they have a treat in store.</p>
+<p>最终只剩下了这一个撩人心弦的问题：这一切到底意味着什么。如果这六周的故事从未发生过，他是否会成为一个不一样的君主？那些东躲西藏的日日夜夜一定以某种方式影响了他。需要不断伪装，只能依靠智慧和个人魅力求生，凭借运用诡计和权谋来死里逃生，这些经历是否联手参与塑造了他这个人？本书正是在这个方面并没能一语中的。相反，它对查理二世在晚年成了一个无所作为、追求享乐的君主的刻画并不公正（而且并不正确），也没能真实反映出其性格的复杂性。不过抛开这个小瑕疵不论，《抓捕一个国王》是一本精彩好书，那些对这段著名故事知之甚少的人们在打开本卷时，即将体验一场阅读盛宴。</p>
+<ul>
+<li>
+<p>Presbyterianism: part of the reformed Protestant religion</p>
+</li>
+<li>
+<p>cherub: an image of angelic children used in paintings</p>
+</li>
+</ul>
+
+    </div>
+
+   
+   
+   
+    <hr>
+
+
+
+
+
+
+    <div id="disqus_thread"></div>
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script>
+        /**
+        *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+        *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+        
+        // var disqus_config = function () {
+        // this.page.url = ;  // Replace PAGE_URL with your page's canonical URL variable
+        // this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        // };
+        
+        (function() { // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        s.src = 'https://augpath.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <script id="dsq-count-scr" src="//augpath.disqus.com/count.js" async></script>
+  </body>
+</html>
