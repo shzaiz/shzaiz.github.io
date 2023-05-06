@@ -108,7 +108,7 @@ async function copyCode(block) {
     <div class="navbar">
         <a href="https://shzaiz.github.io">AUG's Wiki</a>
         <a href="index.html"> ↑ Back to contents</a>
-        Last updated at 2023-05-06 15:06:14.609510
+        Last updated at 2023-05-06 15:30:40.035613
     </div>
 
     <div class="toc"></div>
@@ -118,15 +118,17 @@ async function copyCode(block) {
       <h1>Accessing Information</h1>
 <p><img src="https://s2.loli.net/2023/05/06/NMpolivdrQkhqJO.png" alt="Img" /></p>
 <h2>Types of C data types in x86-64</h2>
-<p>| C declaration | Intel data type | Assymbly code | Size(bytes)
-| -- | -- | -- | --|
-| <code>char</code> | Byte | b | 1|
-| <code>short</code> | Word | w | 2|
-| <code>int</code> | Double Word | l | 4|
-| <code>long</code> | Quad word | q | 8|
-| <code>char *</code> | Quad word | q | 8|
-| <code>float</code> | Single precision | s | 4|
-| <code>double</code> | Double precision | l | 8|</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #666666">|</span><span style="color: #bbbbbb"> </span>C<span style="color: #bbbbbb"> </span>declaration<span style="color: #bbbbbb"> </span><span style="color: #666666">|</span><span style="color: #bbbbbb"> </span>Intel<span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">data</span><span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">type</span><span style="color: #bbbbbb"> </span><span style="color: #666666">|</span><span style="color: #bbbbbb"> </span>Assembly<span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">code</span><span style="color: #bbbbbb"> </span><span style="color: #666666">|</span><span style="color: #bbbbbb"> </span>Size(bytes)
+<span style="color: #666666">|</span><span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">--      | --   | -- | --|</span>
+<span style="color: #666666">|</span><span style="color: #bbbbbb"> </span>`char`<span style="color: #bbbbbb">  </span><span style="color: #666666">|</span><span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">Byte</span><span style="color: #bbbbbb">             </span><span style="color: #666666">|</span><span style="color: #bbbbbb"> </span>b<span style="color: #bbbbbb"> </span><span style="color: #666666">|</span><span style="color: #bbbbbb"> </span><span style="color: #666666">1|</span>
+<span style="color: #666666">|</span><span style="color: #bbbbbb"> </span>`short`<span style="color: #bbbbbb"> </span><span style="color: #666666">|</span><span style="color: #bbbbbb"> </span>Word<span style="color: #bbbbbb">             </span><span style="color: #666666">|</span><span style="color: #bbbbbb"> </span>w<span style="color: #bbbbbb"> </span><span style="color: #666666">|</span><span style="color: #bbbbbb"> </span><span style="color: #666666">2|</span>
+<span style="color: #666666">|</span><span style="color: #bbbbbb"> </span>`int`<span style="color: #bbbbbb">   </span><span style="color: #666666">|</span><span style="color: #bbbbbb"> </span><span style="color: #B00040">Double</span><span style="color: #bbbbbb"> </span>Word<span style="color: #bbbbbb">      </span><span style="color: #666666">|</span><span style="color: #bbbbbb"> </span>l<span style="color: #bbbbbb"> </span><span style="color: #666666">|</span><span style="color: #bbbbbb"> </span><span style="color: #666666">4|</span>
+<span style="color: #666666">|</span><span style="color: #bbbbbb"> </span>`long`<span style="color: #bbbbbb">  </span><span style="color: #666666">|</span><span style="color: #bbbbbb"> </span>Quad<span style="color: #bbbbbb"> </span>word<span style="color: #bbbbbb">        </span><span style="color: #666666">|</span><span style="color: #bbbbbb"> </span>q<span style="color: #bbbbbb"> </span><span style="color: #666666">|</span><span style="color: #bbbbbb"> </span><span style="color: #666666">8|</span>
+<span style="color: #666666">|</span><span style="color: #bbbbbb"> </span>`char *`<span style="color: #666666">|</span><span style="color: #bbbbbb"> </span>Quad<span style="color: #bbbbbb"> </span>word<span style="color: #bbbbbb">        </span><span style="color: #666666">|</span><span style="color: #bbbbbb"> </span>q<span style="color: #bbbbbb"> </span><span style="color: #666666">|</span><span style="color: #bbbbbb"> </span><span style="color: #666666">8|</span>
+<span style="color: #666666">|</span><span style="color: #bbbbbb"> </span>`float`<span style="color: #bbbbbb"> </span><span style="color: #666666">|</span><span style="color: #bbbbbb"> </span>Single<span style="color: #bbbbbb"> </span><span style="color: #B00040">precision</span><span style="color: #bbbbbb"> </span><span style="color: #666666">|</span><span style="color: #bbbbbb"> </span>s<span style="color: #bbbbbb"> </span><span style="color: #666666">|</span><span style="color: #bbbbbb"> </span><span style="color: #666666">4|</span>
+<span style="color: #666666">|</span><span style="color: #bbbbbb"> </span>`double`<span style="color: #666666">|</span><span style="color: #bbbbbb"> </span><span style="color: #B00040">Double</span><span style="color: #bbbbbb"> </span><span style="color: #B00040">precision</span><span style="color: #bbbbbb"> </span><span style="color: #666666">|</span><span style="color: #bbbbbb"> </span>l<span style="color: #bbbbbb"> </span><span style="color: #666666">|</span><span style="color: #bbbbbb"> </span><span style="color: #666666">8|</span>
+</pre></div>
+
 <h2>Registers</h2>
 <p>An x86-64 CPU contains a set of 16 <em>general purpose registers</em>(GPRs).</p>
 <div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #666666">63</span><span style="color: #bbbbbb">      </span><span style="color: #666666">31</span><span style="color: #bbbbbb">      </span><span style="color: #666666">15</span><span style="color: #bbbbbb">    </span><span style="color: #666666">7</span><span style="color: #bbbbbb">     </span><span style="color: #666666">0</span>
