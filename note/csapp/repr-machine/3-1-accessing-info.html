@@ -108,15 +108,253 @@ async function copyCode(block) {
     <div class="navbar">
         <a href="https://shzaiz.github.io">AUG's Wiki</a>
         <a href="index.html"> ↑ Back to contents</a>
-        Last updated at 2023-05-09 10:17:19.974152
+        Last updated at 2023-05-09 23:24:57.974565
     </div>
 
     <div class="toc"></div>
     <a id="toc-button"><i class="far fa-bookmark"></i></a>
     
     <div>
-      <h1>Accessing Information</h1>
+      <h1>History</h1>
+<ul>
+<li>Intel&#x27;s x86 processors</li>
+<li>RISC vs CISC</li>
+</ul>
+<h1>Intro to asm codes</h1>
+<p>Architectures(also ISA): The parts of a processor design that one needs to understand or write asm/machine code.</p>
+<p>Microarch: Implementation of an arch</p>
+<p>Code forms</p>
+<ul>
+<li>machine code the byte-lvl progs that a pc executes</li>
+<li>asm codes: a text repr of machine code</li>
+</ul>
+<h2>Machine view</h2>
 <p><img src="https://s2.loli.net/2023/05/06/NMpolivdrQkhqJO.png" alt="Img" /></p>
+<p>Programmer visible state</p>
+<ul>
+<li>PC: program counter
+<ul>
+<li>address of next instruction</li>
+<li>called RIP on x86-64</li>
+</ul>
+</li>
+<li>Register file:
+<ul>
+<li>Heavily used program data</li>
+</ul>
+</li>
+<li>Condition codes
+<ul>
+<li>Store status info about most recent arith or logical op</li>
+<li>used for conditional branching</li>
+</ul>
+</li>
+<li>memory
+<ul>
+<li>byte addressable array</li>
+<li>code and user data</li>
+<li>stack to support procedures</li>
+</ul>
+</li>
+</ul>
+<h2>Turing C into obj code</h2>
+<ul>
+<li>code in two files</li>
+<li>compile ...</li>
+</ul>
+<p><img src="https://s2.loli.net/2023/05/09/ojMt1Ifkb3NnA6V.png" alt="Img" /></p>
+<p>Example:</p>
+<p><img src="https://s2.loli.net/2023/05/09/bvq34QWfyBJi2SZ.png" alt="Img" /></p>
+<ul>
+<li>pushq = push something onto</li>
+<li>move = move sth frm one place to another</li>
+<li>call = call some procedure</li>
+<li>pop = unpush</li>
+<li>ret = return to the outer part of the func</li>
+<li>commands start with . = send msgs for debuggers</li>
+</ul>
+<h1>Prop in asm</h1>
+<h2>Data types</h2>
+<ul>
+<li>int data as 1, 2, 4, 8 bytes
+<ul>
+<li>data vals</li>
+<li>addrs (untyped pointers)</li>
+</ul>
+</li>
+<li>floating point datas are 4, 8, 10 bytes
+<ul>
+<li>they will be processed on a diff set of regs</li>
+</ul>
+</li>
+<li>code: byte seqs encoding series of instrs</li>
+<li>No aggregate encoding series of instrs
+<ul>
+<li>just continuously allocated bytes in mem</li>
+</ul>
+</li>
+</ul>
+<h2>Operation</h2>
+<ul>
+<li>perform arith fun on register or mem data</li>
+<li>transfer data between mem and reg
+<ul>
+<li>load data from mem to reg</li>
+<li>store data into mem</li>
+</ul>
+</li>
+<li>tranfer ctrl
+<ul>
+<li>unconditional jump to/frm procedures</li>
+<li>conditional branches</li>
+</ul>
+</li>
+</ul>
+<p>Example :</p>
+<p>C code: <code>*dest = t</code>: store t where designated by dest</p>
+<p>Asm code: <code>movq %rax, (%rbx)</code>,</p>
+<ul>
+<li>move 8 bytes from rax reg to memory referenced by value in rbx</li>
+</ul>
+<p>Obj code: <code>0x40059e: 48 89 03</code> (3-byte code)</p>
+<ul>
+<li>3 byte instr</li>
+<li>stored at addr 0x40059e</li>
+</ul>
+<h2>Disasmer : objdump</h2>
+<p>Use command <code>objdump -d ...</code> to do it.</p>
+<h1>Registers</h1>
+<p><img src="https://s2.loli.net/2023/05/09/VPGEMs8dC9AR5kU.png" alt="Img" /></p>
+<p>Obs:</p>
+<ul>
+<li>use <code>r</code> for 64 bits, use <code>e</code> for 32 bits.</li>
+</ul>
+<p>Name&#x27;s History:</p>
+<ul>
+<li>Origianlly, IA32 registers has these 8 regs.</li>
+<li>GPR&#x27;s name
+<ul>
+<li>a = accumulate</li>
+<li>c = counter</li>
+<li>d = data</li>
+<li>b = base</li>
+<li>si = source index</li>
+<li>di = destination index</li>
+</ul>
+</li>
+<li>important and crucial
+<ul>
+<li>esp = stack pointer</li>
+<li>ebp = base pointer</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://s2.loli.net/2023/05/09/qXU5AtjFnzBC8bH.png" alt="Img" /></p>
+<h1>Moving datas</h1>
+<ul>
+<li>Moving data: <code>movq SRC, DST</code></li>
+<li>operand types
+<ul>
+<li>Immediate: const int data
+<ul>
+<li>e.g. <code>$0x400, $-533</code></li>
+<li>like c const, but with dollar</li>
+<li>encoded with 1, 2, 4 bytes</li>
+</ul>
+</li>
+<li>register: one of 16 integer regs
+<ul>
+<li>e.g. %rsp , %r13</li>
+<li>but %rsp is reserved for special purpose</li>
+<li>others have special uses for paritcular instrs</li>
+</ul>
+</li>
+<li>memory: 8 consecutive bytes from mem at addr given by reg
+<ul>
+<li>simplest val (%rax)</li>
+<li>various other addr modes</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://s2.loli.net/2023/05/09/w58yqsFX276JQOn.png" alt="Img" /></p>
+<p>simple addressing modes</p>
+<ul>
+<li>normal (R) Mem[Reg[R]]
+<ul>
+<li>register R specifies mem addr</li>
+<li>That&#x27;s pointer dereference</li>
+<li>like <code>movq (%rcx) %rax</code></li>
+</ul>
+</li>
+<li>displacement D(R) Mem[Reg[R]+D]
+<ul>
+<li>Register R specifies start of mem region</li>
+<li>const displacement D specifies offset</li>
+<li>like <code>movq 8(%rbp) %rax</code></li>
+</ul>
+</li>
+</ul>
+<p>Example. SWAP</p>
+<p><img src="https://s2.loli.net/2023/05/09/Jx6Tow5DdRIaPXh.png" alt="Img" /></p>
+<ul>
+<li>rdi will be the 1st register</li>
+<li>rsi will be the 2nd register</li>
+</ul>
+<p>Complete Mem allocating modes:</p>
+<ul>
+<li>Most general D(Rb, Ri, S) Mem[Reg[Rb]+S*Reg[Ri]+D]
+<ul>
+<li>D: const displacement 1,2,4 bytes</li>
+<li>Rb: base reg: any of 16 bit ints</li>
+<li>Ri: index register</li>
+<li>S: scale 1,2,4,8</li>
+</ul>
+</li>
+<li>Special cases
+<ul>
+<li>(Rb, Ri) Mem[Reg[Rb]+Reg[Ri]]</li>
+<li>D(Rb, Ri) Mem[Reg[Rb]+Reg[Ri]+D]</li>
+<li>(Rb, Ri, S) Mem[Reg[Rb]+S*Reg[Ri]]</li>
+</ul>
+</li>
+</ul>
+<p>Examples:</p>
+<p><img src="https://s2.loli.net/2023/05/09/adQRHlM2AysWX5i.png" alt="Img" /></p>
+<h1>Addr and logical instrs</h1>
+<h2>Addr computation</h2>
+<p>leaq src dst</p>
+<ul>
+<li>src is address mode expression</li>
+<li>set dst to address denoted by expr</li>
+</ul>
+<p>Uses</p>
+<ul>
+<li>Computing addr without mem ref
+<ul>
+<li>Eg. <code>p = &amp;x[i]</code>.</li>
+</ul>
+</li>
+<li>computing ari expr of the form <code>x+ky</code>
+<ul>
+<li>k=1,2,4,8</li>
+</ul>
+</li>
+</ul>
+<p>Example.</p>
+<p><img src="https://s2.loli.net/2023/05/09/dv95ZQw7PWFkCJO.png" alt="Img" /></p>
+<h2>Arith command</h2>
+<p><img src="https://s2.loli.net/2023/05/09/XKQzpfCmV3P2EAr.png" alt="Img" /></p>
+<p><img src="https://s2.loli.net/2023/05/09/hZuL8S1mEwUygXA.png" alt="Img" /></p>
+<h2>Example</h2>
+<p><img src="https://s2.loli.net/2023/05/09/XOA46qYZvjDUVyB.png" alt="Img" /></p>
+<p>Summary:</p>
+<p><img src="https://s2.loli.net/2023/05/09/RkhNaybVg1Codi5.png" alt="Img" /></p>
+<p>$$
+\text{...original notes starts below...}
+$$</p>
+<h1>Accessing Information</h1>
 <h2>Types of C data types in x86-64</h2>
 <div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #666666">|</span><span style="color: #bbbbbb"> </span>C<span style="color: #bbbbbb"> </span>declaration<span style="color: #bbbbbb"> </span><span style="color: #666666">|</span><span style="color: #bbbbbb"> </span>Intel<span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">data</span><span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">type</span><span style="color: #bbbbbb"> </span><span style="color: #666666">|</span><span style="color: #bbbbbb"> </span>Assembly<span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">code</span><span style="color: #bbbbbb"> </span><span style="color: #666666">|</span><span style="color: #bbbbbb"> </span>Size(bytes)
 <span style="color: #666666">|</span><span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">--      | --   | -- | --|</span>
