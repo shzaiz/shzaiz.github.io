@@ -108,7 +108,7 @@ async function copyCode(block) {
     <div class="navbar">
         <a href="https://shzaiz.github.io">AUG's Wiki</a>
         <a href="index.html"> ↑ Back to contents</a>
-        Last updated at 2023-05-09 23:24:58.050418
+        Last updated at 2023-05-12 11:12:47.560254
     </div>
 
     <div class="toc"></div>
@@ -144,11 +144,41 @@ async function copyCode(block) {
 traverse</p>
 <h1>AVL balanced tree</h1>
 <p>Assume we have</p>
-<p><img src="https://s2.loli.net/2023/05/09/YAfKgpnvucs9STq.png" alt="Img" /></p>
 <p>If a is inbalanced, and it&#x27;s longer than subtree b, we can rotate like:</p>
 <p><img src="https://s2.loli.net/2023/05/09/EQdlYtK5xSWVhua.png" alt="Img" /></p>
 <p>let a closer to the top and let b get lower -- preserve length</p>
 <p>this is called a right rotate</p>
+<h2>Problem</h2>
+<p><img src="https://s2.loli.net/2023/05/11/2gL8DT7doI6ZphF.png" alt="Img" /></p>
+<h2>Machanic: Rotation</h2>
+<ul>
+<li>balanced ≠ every level full</li>
+<li>AVL trees denote balanced and the height difference for each left and right child subtree is at most 1. (at every node)
+<ul>
+<li>height = dis to <strong>furthest</strong> node</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://s2.loli.net/2023/05/11/t9bPk1MHE6v3Wzy.png" alt="Img" /></p>
+<p>Example: add (22)</p>
+<p><img src="https://s2.loli.net/2023/05/11/MvKXenDNqVxItFL.png" alt="Img" /></p>
+<ul>
+<li>rotation</li>
+</ul>
+<p><img src="https://s2.loli.net/2023/05/11/soRYQJ4jXBPugqU.png" alt="Img" /></p>
+<p><img src="https://s2.loli.net/2023/05/11/eD4zsL31xJqbitG.png" alt="Img" /></p>
+<p><img src="https://s2.loli.net/2023/05/11/CUPVgwqFiHEmN3v.png" alt="Img" /></p>
+<ul>
+<li>Right rotate fixed the unbalances caused by a <strong>left left</strong> problem</li>
+<li>left rotate fixes the unbalances caused by a <strong>right right</strong> prob</li>
+</ul>
+<p>Procedure</p>
+<p><img src="https://s2.loli.net/2023/05/11/8RzK9vNVBk5huYZ.png" alt="Img" /></p>
+<p>then we get</p>
+<p><img src="https://s2.loli.net/2023/05/11/Wyfd9Ei2HDKwX8N.png" alt="Img" />
+<img src="https://s2.loli.net/2023/05/11/e6zYwUFXNdRrjuL.png" alt="Img" /></p>
+<h2>Multiple rotations</h2>
+<p><img src="https://s2.loli.net/2023/05/11/CoD96gzLG28yVOa.png" alt="Img" /></p>
 
     </div>
 

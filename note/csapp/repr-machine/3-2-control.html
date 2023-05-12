@@ -108,14 +108,272 @@ async function copyCode(block) {
     <div class="navbar">
         <a href="https://shzaiz.github.io">AUG's Wiki</a>
         <a href="index.html"> ↑ Back to contents</a>
-        Last updated at 2023-05-09 23:24:57.975697
+        Last updated at 2023-05-12 11:12:47.505427
     </div>
 
     <div class="toc"></div>
     <a id="toc-button"><i class="far fa-bookmark"></i></a>
     
     <div>
-      <h1>Control</h1>
+      <h1>Control: Condition codes</h1>
+<h2>Processor&#x27;s states</h2>
+<p>1 bit flags (green below)</p>
+<p><img src="https://s2.loli.net/2023/05/10/ShYGP82UqxzKwB3.png" alt="Img" /></p>
+<ul>
+<li>rsp = current stack top: where prog is executed</li>
+<li>rip = location of current code control code: instruction pointer</li>
+</ul>
+<h2>Conditional codes</h2>
+<ul>
+<li>Single bit registers
+<ul>
+<li>CF = carry flag (2 unsigned number)</li>
+<li>SF = sign flag</li>
+<li>ZF = zero flag (computed is 0 - arith instr)</li>
+<li>OF = overflow flag (for signed)</li>
+</ul>
+</li>
+<li>Implicit setting by arith ops
+<ul>
+<li>addq SRC DST &lt;--&gt; t=a+b</li>
+<li>CF set when carry out from MSB</li>
+<li>ZF if <code>t==0</code></li>
+<li>SF if <code>t&lt;0</code> as signed</li>
+<li>OF if <code>a&gt;0, b&gt;0, t&lt;0</code> or vise versa</li>
+</ul>
+</li>
+<li>not set in leaq instr</li>
+<li>Explicit setting by compare instr
+<ul>
+<li>cmpq Src2 Src1</li>
+<li>cmpq b a like computing a-b without setting destination</li>
+<li>CF set if carry out from MSB(unsigned)</li>
+<li>ZF set if a==b</li>
+<li>SF set if <code>(a-b)&lt;0</code></li>
+<li>OF set <code>a&gt;0, b&lt;0, (a-b)&lt;0 || a&lt;0, b&gt;0, (a-b)&gt;0</code></li>
+<li>same general idea</li>
+</ul>
+</li>
+<li>Explicit setting by setting
+<ul>
+<li>testq SRC2 SRC1</li>
+<li>sets condition codes based on value of SRC1 and SRC2</li>
+<li>Useful to have one of the operands at mask.</li>
+<li>ZF set when a&amp;b==0</li>
+<li>SF set when <code>a&amp;b&lt;0</code></li>
+</ul>
+</li>
+</ul>
+<h2>Reading cond codes</h2>
+<p><img src="https://s2.loli.net/2023/05/10/hx4u3kNVza5rleT.png" alt="Img" /></p>
+<p>We can access low byte like this</p>
+<p><img src="https://s2.loli.net/2023/05/10/p4TmoCXwKRHPdiY.png" alt="Img" /></p>
+<ul>
+<li>l = low</li>
+<li>one of addressable byte regs
+<ul>
+<li>does not alter remaining bytes</li>
+<li>typically use movezbl to finish the job
+<ul>
+<li>32 bit instr also set upper 32 bits to 0</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>Example.</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">gt</span>(<span style="color: #B00040">long</span><span style="color: #bbbbbb"> </span>x,<span style="color: #bbbbbb"> </span><span style="color: #B00040">long</span><span style="color: #bbbbbb"> </span>y){
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">return</span><span style="color: #bbbbbb"> </span>x<span style="color: #666666">&gt;</span>y;
+}
+</pre></div>
+
+<p>compiled code:</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #3D7B7B; font-style: italic">// %rdi = Argument x</span>
+<span style="color: #3D7B7B; font-style: italic">// %rdi = Argument y </span>
+<span style="color: #0000FF">cmpq</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">%rsx</span>,<span style="color: #bbbbbb"> </span><span style="color: #19177C">%rdi</span><span style="color: #bbbbbb">  </span><span style="color: #3D7B7B; font-style: italic"># compare x:y</span>
+<span style="color: #0000FF">setg</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">%al</span><span style="color: #bbbbbb">         </span><span style="color: #3D7B7B; font-style: italic"># set when &gt; </span>
+<span style="color: #0000FF">movzbl</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">%al</span>,<span style="color: #bbbbbb"> </span><span style="color: #19177C">%eax</span><span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic"># zero at rest of %rax</span>
+<span style="color: #3D7B7B; font-style: italic">// move zero extension from byte to long</span>
+<span style="color: #0000FF">ret</span><span style="color: #bbbbbb"> </span>
+</pre></div>
+
+<h1>Conditional branches</h1>
+<h2>Jumping</h2>
+<p>According to different cond flags , Jumping</p>
+<p><img src="https://s2.loli.net/2023/05/10/m87wxryVo15XRti.png" alt="Img" /></p>
+<p>uncond</p>
+<ul>
+<li>no conds</li>
+</ul>
+<p>conds</p>
+<ul>
+<li>jump accr to conds</li>
+</ul>
+<p>Example: conditional branch example</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #B00040">long</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">absdiff</span>(<span style="color: #B00040">long</span><span style="color: #bbbbbb"> </span>x,<span style="color: #bbbbbb"> </span><span style="color: #B00040">long</span><span style="color: #bbbbbb"> </span>y){
+<span style="color: #bbbbbb">    </span><span style="color: #B00040">long</span><span style="color: #bbbbbb"> </span>res;
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">if</span>(x<span style="color: #666666">&gt;</span>y)<span style="color: #bbbbbb"> </span>res<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>x<span style="color: #666666">-</span>y;
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">else</span><span style="color: #bbbbbb"> </span>res<span style="color: #666666">=</span>y<span style="color: #666666">-</span>x;
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">return</span><span style="color: #bbbbbb"> </span>res<span style="color: #bbbbbb"> </span>
+}
+</pre></div>
+
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #0000FF">rdi</span><span style="color: #bbbbbb"> </span><span style="border: 1px solid #FF0000">=</span><span style="color: #bbbbbb"> </span><span style="color: #880000">arg</span><span style="color: #bbbbbb"> </span><span style="color: #880000">x</span><span style="color: #bbbbbb"> </span>
+<span style="color: #880000">rsi</span><span style="color: #bbbbbb"> </span><span style="border: 1px solid #FF0000">=</span><span style="color: #bbbbbb"> </span><span style="color: #880000">arg</span><span style="color: #bbbbbb"> </span><span style="color: #880000">y</span><span style="color: #bbbbbb"> </span>
+<span style="color: #880000">rax</span><span style="color: #bbbbbb"> </span><span style="border: 1px solid #FF0000">=</span><span style="color: #bbbbbb"> </span><span style="color: #880000">ret</span><span style="color: #bbbbbb"> </span><span style="color: #880000">val</span><span style="color: #bbbbbb"> </span>
+<span style="color: #880000">absdiff</span>:<span style="color: #bbbbbb"> </span>
+<span style="color: #bbbbbb">    </span><span style="color: #880000">cmpq</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">%rsi</span>,<span style="color: #bbbbbb"> </span><span style="color: #19177C">%rdi</span><span style="color: #bbbbbb"> </span>
+<span style="color: #bbbbbb">    </span><span style="color: #880000">jle</span><span style="color: #bbbbbb"> </span><span style="color: #880000">.L4</span>
+<span style="color: #bbbbbb">    </span><span style="color: #0000FF">movq</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">%rdi</span>,<span style="color: #bbbbbb"> </span><span style="color: #19177C">%rax</span><span style="color: #bbbbbb"> </span>
+<span style="color: #bbbbbb">    </span><span style="color: #880000">subq</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">%rsi</span>,<span style="color: #bbbbbb"> </span><span style="color: #19177C">%rax</span>
+<span style="color: #bbbbbb">    </span><span style="color: #0000FF">ret</span><span style="color: #bbbbbb"> </span>
+
+<span style="color: #880000">.L4</span>
+<span style="color: #bbbbbb">    </span><span style="color: #0000FF">movq</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">%rsi</span>,<span style="color: #bbbbbb"> </span><span style="color: #19177C">%rax</span><span style="color: #bbbbbb"> </span>
+<span style="color: #bbbbbb">    </span><span style="color: #880000">subq</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">%rdi</span>,<span style="color: #bbbbbb"> </span><span style="color: #19177C">%rax</span><span style="color: #bbbbbb"> </span>
+<span style="color: #bbbbbb">    </span><span style="color: #880000">ret</span><span style="color: #bbbbbb"> </span>
+</pre></div>
+
+<p>We can express it like goto</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #B00040">long</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">absdiff_j</span>(<span style="color: #B00040">long</span><span style="color: #bbbbbb"> </span>x,<span style="color: #bbbbbb"> </span><span style="color: #B00040">long</span><span style="color: #bbbbbb"> </span>y){
+<span style="color: #bbbbbb">    </span><span style="color: #B00040">long</span><span style="color: #bbbbbb"> </span>res;<span style="color: #bbbbbb"> </span>
+<span style="color: #bbbbbb">    </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>ntest<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>x<span style="color: #666666">&lt;=</span>y;
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">if</span>(ntest)<span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">goto</span><span style="color: #bbbbbb"> </span>Else;
+<span style="color: #bbbbbb">    </span>res<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>x<span style="color: #666666">-</span>y;
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">goto</span><span style="color: #bbbbbb"> </span>Done;
+<span style="color: #bbbbbb">    </span><span style="color: #767600">Else</span>:<span style="color: #bbbbbb"> </span>
+<span style="color: #bbbbbb">        </span>result<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>y<span style="color: #666666">-</span>x;
+<span style="color: #bbbbbb">    </span><span style="color: #767600">Done</span>:<span style="color: #bbbbbb"> </span>
+<span style="color: #bbbbbb">        </span><span style="color: #008000; font-weight: bold">return</span><span style="color: #bbbbbb"> </span>result;<span style="color: #bbbbbb"> </span>
+}
+</pre></div>
+
+<h2>General conditional expr using branches</h2>
+<p>C : <code>val = test ? then:else</code></p>
+<p>We have goto version:</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span>ntest<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">!</span>Test;
+<span style="color: #008000; font-weight: bold">if</span>(ntest)<span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">goto</span><span style="color: #bbbbbb"> </span>Else;
+val<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>Then_Expr;
+<span style="color: #008000; font-weight: bold">goto</span><span style="color: #bbbbbb"> </span>Done;
+<span style="color: #767600">Else</span>:<span style="color: #bbbbbb"> </span>val<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>Else_Expr;
+<span style="color: #767600">Done</span>:<span style="color: #bbbbbb"> </span>
+...
+</pre></div>
+
+<h2>Using conditional Moves</h2>
+<ul>
+<li>Cond move instrs
+<ul>
+<li>instr supports <code>if(Test) Dest &lt;= src</code></li>
+<li>supported in post-1995 x86 processors</li>
+</ul>
+</li>
+<li>Reason
+<ul>
+<li>Branches are very disruptive to instruction flow through pipelines</li>
+<li>cond moves dont require control transfer</li>
+</ul>
+</li>
+</ul>
+<p>Example.</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #0000FF">movq</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">%rdi</span>,<span style="color: #bbbbbb"> </span><span style="color: #19177C">%rax</span><span style="color: #bbbbbb">     </span><span style="color: #880000">x</span>:<span style="color: #880000">y</span>
+<span style="color: #0000FF">subq</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">%rsi</span>,<span style="color: #bbbbbb"> </span><span style="color: #19177C">%rax</span><span style="color: #bbbbbb">     </span><span style="color: #880000">result</span><span style="color: #bbbbbb"> </span><span style="border: 1px solid #FF0000">=</span><span style="color: #bbbbbb"> </span><span style="color: #880000">x-y</span>
+<span style="color: #0000FF">movq</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">%rsi</span>,<span style="color: #bbbbbb"> </span><span style="color: #19177C">%rdx</span><span style="color: #bbbbbb">     </span>
+<span style="color: #880000">subq</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">%rdi</span>,<span style="color: #bbbbbb"> </span><span style="color: #19177C">%rdx</span><span style="color: #bbbbbb">     </span><span style="color: #880000">eval</span><span style="color: #bbbbbb"> </span><span style="border: 1px solid #FF0000">=</span><span style="color: #bbbbbb"> </span><span style="color: #880000">y-x</span>
+<span style="color: #0000FF">cmpq</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">%rsi</span>,<span style="color: #bbbbbb"> </span><span style="color: #19177C">%rdi</span><span style="color: #bbbbbb">     </span><span style="color: #880000">x</span>:<span style="color: #880000">y</span>
+<span style="color: #0000FF">cmovle</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">%rdx</span>,<span style="color: #bbbbbb"> </span><span style="color: #19177C">%rax</span><span style="color: #bbbbbb">   </span><span style="color: #880000">if</span><span style="color: #bbbbbb"> </span><span style="border: 1px solid #FF0000">&lt;=</span>,<span style="color: #bbbbbb"> </span><span style="color: #880000">result</span><span style="color: #bbbbbb"> </span><span style="border: 1px solid #FF0000">=</span><span style="color: #bbbbbb"> </span><span style="color: #880000">eval</span><span style="color: #bbbbbb"> </span>
+<span style="color: #880000">ret</span>
+</pre></div>
+
+<h2>Bad cases for Cond move</h2>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span>val = Test(x) ? Hard1(x):Hard2(x)
+</pre></div>
+
+<ul>
+<li>both vals are computed</li>
+<li>only make sense when computations are very simple</li>
+</ul>
+<p>Risky computations</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span>val = p ? *p:0
+</pre></div>
+
+<ul>
+<li>Both val gets computed</li>
+<li>may have undesirable effects</li>
+</ul>
+<p>Computaion with side effects</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span>val = x&gt;0 ? x*=7 : x+=3
+</pre></div>
+
+<ul>
+<li>must be side-effect free</li>
+</ul>
+<h1>Loops</h1>
+<h2>Do-while loop</h2>
+<p>example:</p>
+<p><img src="https://s2.loli.net/2023/05/10/KBx3yH7GAr5n8wJ.png" alt="Img" /></p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #bbbbbb">    </span><span style="color: #0000FF">movl</span><span style="color: #bbbbbb"> </span><span style="color: #880000">$0</span>,<span style="color: #bbbbbb"> </span><span style="color: #19177C">%eax</span><span style="color: #bbbbbb">    </span><span style="color: #880000">result</span><span style="border: 1px solid #FF0000">=</span><span style="color: #666666">0</span>
+<span style="color: #687822">.L2</span><span style="color: #bbbbbb">                  </span><span style="color: #880000">loop</span>:
+<span style="color: #bbbbbb">    </span><span style="color: #0000FF">movq</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">%rdi</span>,<span style="color: #bbbbbb"> </span><span style="color: #19177C">%rdx</span><span style="color: #bbbbbb">       </span>
+<span style="color: #bbbbbb">    </span><span style="color: #880000">andl</span><span style="color: #bbbbbb"> </span><span style="color: #880000">$1</span>,<span style="color: #bbbbbb"> </span><span style="color: #19177C">%edx</span><span style="color: #bbbbbb">        </span><span style="color: #880000">t</span><span style="border: 1px solid #FF0000">=</span><span style="color: #bbbbbb"> </span><span style="color: #880000">x</span><span style="color: #bbbbbb"> </span><span style="border: 1px solid #FF0000">&amp;</span><span style="color: #bbbbbb"> </span><span style="color: #666666">0x1</span>
+<span style="color: #bbbbbb">    </span><span style="color: #0000FF">addq</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">%rdx</span>,<span style="color: #bbbbbb"> </span><span style="color: #19177C">%rax</span><span style="color: #bbbbbb">      </span><span style="color: #880000">result</span><span style="border: 1px solid #FF0000">+=</span><span style="color: #880000">t</span>
+<span style="color: #bbbbbb">    </span><span style="color: #0000FF">shrq</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">%rdi</span><span style="color: #bbbbbb">            </span><span style="color: #880000">x</span><span style="border: 1px solid #FF0000">&gt;&gt;=</span><span style="color: #666666">1</span>
+<span style="color: #bbbbbb">    </span><span style="color: #0000FF">jne</span><span style="color: #bbbbbb"> </span><span style="color: #880000">.L2</span><span style="color: #bbbbbb">              </span><span style="color: #880000">if</span>(<span style="color: #880000">x</span>)<span style="color: #bbbbbb"> </span><span style="color: #880000">goto</span><span style="color: #bbbbbb"> </span><span style="color: #880000">loop</span><span style="color: #bbbbbb"> </span>
+<span style="color: #bbbbbb">    </span><span style="color: #880000">rep</span><span style="color: #3D7B7B; font-style: italic">; ret</span>
+</pre></div>
+
+<p>Translations:</p>
+<ul>
+<li>do-while</li>
+</ul>
+<p><img src="https://s2.loli.net/2023/05/10/ywrL8ntDOjqlK64.png" alt="Img" /></p>
+<h2>While loop</h2>
+<ul>
+<li>while loop: jump to middle loop</li>
+</ul>
+<p><img src="https://s2.loli.net/2023/05/10/pTMAaOvNPZdnYfU.png" alt="Img" /></p>
+<ul>
+<li>another generation: generate do-while</li>
+</ul>
+<p><img src="https://s2.loli.net/2023/05/10/GlwSRJdW1sj6hV8.png" alt="Img" />
+<img src="https://s2.loli.net/2023/05/10/316rVZKBSeiGAIY.png" alt="Img" /></p>
+<p>Example</p>
+<p><img src="https://s2.loli.net/2023/05/10/c3K97ksSiraZtzE.png" alt="Img" /></p>
+<h2>For loop</h2>
+<ul>
+<li>general form: <code>for(init; test; update) body</code></li>
+</ul>
+<p>translation</p>
+<p><img src="https://s2.loli.net/2023/05/10/L1IaZ4rq89jDOoy.png" alt="Img" /></p>
+<ul>
+<li>optimization</li>
+</ul>
+<p><img src="https://s2.loli.net/2023/05/10/HSfwXIsURvLcZKT.png" alt="Img" /></p>
+<h1>Switch</h1>
+<h2>Switch stat example</h2>
+<p><img src="https://s2.loli.net/2023/05/10/p7Yex1yV2qBsZMU.png" alt="Img" /></p>
+<p><img src="https://s2.loli.net/2023/05/09/YAfKgpnvucs9STq.png" alt="Img" /></p>
+<h2>Jump table structure</h2>
+<p><img src="https://s2.loli.net/2023/05/10/6MNPKUDgYw23Sje.png" alt="Img" /></p>
+<p>Example.</p>
+<p><img src="https://s2.loli.net/2023/05/10/lwrQXy4F1LJcVem.png" alt="Img" /></p>
+<p><img src="https://s2.loli.net/2023/05/10/2JyAob8lLEHqGud.png" alt="Img" /></p>
+<p><img src="https://s2.loli.net/2023/05/10/Gh7XMjwHCKszREU.png" alt="Img" /></p>
+<ul>
+<li>ja = jump above: unsigned value x &gt; 6, also it will jump less than 0</li>
+<li>jmp line is indirect jump</li>
+<li>dealing with fallthrough is complex</li>
+</ul>
+<p><img src="https://s2.loli.net/2023/05/10/eRo2P7mDEf1xcij.png" alt="Img" /></p>
+<ul>
+<li>compilers can decide the rewrite of if-else</li>
+</ul>
+<h1>Summarizing</h1>
+<p><img src="https://s2.loli.net/2023/05/10/awqGs36vE2KhM8e.png" alt="Img" /></p>
+<p>$$
+...\text{Original notes are placed below}...
+$$</p>
+<h1>Control</h1>
 <p>Objective: conditionals, loops, and switches, require conditional execution</p>
 <p>Mechanisms:  it tests data values and then alters either the control flow or the data flow based on the results of these tests.</p>
 <h2>Condition Codes</h2>
