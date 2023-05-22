@@ -108,65 +108,135 @@ async function copyCode(block) {
     <div class="navbar">
         <a href="https://shzaiz.github.io">AUG's Wiki</a>
         <a href="index.html"> ↑ Back to contents</a>
-        Last updated at 2023-05-22 09:38:44.855540
+        Last updated at 2023-05-22 09:38:46.061457
     </div>
 
     <div class="toc"></div>
     <a id="toc-button"><i class="far fa-bookmark"></i></a>
     
     <div>
-      <title>AUG's wiki</title>
-<p>$$
-\Huge \texttt{AUG&#x27;s Wiki}
-$$</p>
-<!-- ***观点***: 
-[For高考生: 如何选择合适自己的大学](choose-univ.html) -->
-<p>$$
-\text{==}
-$$</p>
-<p>$$
-\Large \textbf{A brief introduction}
-$$</p>
-<p>zgw是来自<a href="https://www.cug.edu.cn/">中国地质大学(武汉)</a> 的一名平平无奇的本科大一学生.</p>
-<ul>
-<li>Bilibili. <a href="https://space.bilibili.com/13246364">AUGPath</a></li>
-<li>AcFun. <a href="https://www.acfun.cn/u/56010343">shzaiz</a> (会有来自各种地方的更多的课程录像)</li>
-<li>Email. <code>gwzhang@cug.edu.cn</code> (<code>micoael@qq.com</code>)</li>
-</ul>
-<p>可以在这里找到<a href="aboutme.html">更多关于我</a>和这个Wiki的描述.</p>
-<p>$$
-\Large \textbf{Notes}
-$$</p>
-<ul>
-<li><a href="https://github.com/shzaiz/dx-public/tree/main/LyXify/hm">工科数学分析</a></li>
-<li><a href="https://github.com/shzaiz/dx-public/tree/main/LyXify/la">高等代数与解析几何</a></li>
-<li><a href="https://1drv.ms/u/s%21AtZ-ksytodMXctKG8D_yYaua7sA">学过的课程笔记本(OneNote)</a></li>
-</ul>
-<p>$$
-\Large \textbf{Lectures}
-$$</p>
-<ul>
-<li><a href="lecture/PythonPSolve/index.html">计算机问题求解(离散数学: 小组讨论)</a>(第一次修订)</li>
-<li><a href="lecture/SHMathA/index.html">高中数学入门(第一部分)</a>(第一次修订, 已讲完)</li>
-<li><a href="lecture/CalculateMMA/index.html">先进的计算工具: 用Mathematica解题</a>(Under construction...)</li>
-</ul>
-<p>(随便翻翻: <a href="note/index.html">学习笔记</a>; <a href="slide/index.html">小的幻灯片</a>)</p>
-<p>$$
-\Large\textbf{Mentors}
-$$</p>
-<p> \(\large \text{Peers}\) </p>
-<ul>
-<li>乐观的学长, 也是最好的朋友BLUESKY007 |<a href="https://dnybluesky007.github.io/">📒个人主页</a></li>
-<li>“去高考化”与寻找自我: llunatico | <a href="https://space.bilibili.com/454202065">💡B站</a></li>
-<li>这就是魔法吗? :Reinhardt | <a href="https://reinhardthk.github.io/">📒个人主页</a></li>
-<li>是UP主, 也是探索者: 数心Matheart | <a href="https://matheart.github.io/matheart-note/">📒个人主页</a></li>
-</ul>
-<p> \(\large \text{Teachers}\) </p>
-<ul>
-<li>在高三救了我一命的老师蒋炎岩(好吧, 是我在b站听他讲课, 他可能不认识我) | <a href="http://jyywiki.cn/">📚个人主页</a> | <a href="https://space.bilibili.com/202224425">💡B站</a></li>
-<li>具有系统先进的方法论的韩涛老师 | <a href="https://space.bilibili.com/588587828">💡B站</a></li>
-<li>认真备课, 富有情怀的魏恒峰老师 | <a href="https://hengxin.github.io/">📚个人主页</a> | <a href="https://space.bilibili.com/479141149">💡B站</a></li>
-</ul>
+      <title>答题界面</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    .question {
+      margin-bottom: 10px;
+    }
+
+    .result {
+      font-weight: bold;
+      margin-top: 5px;
+    }
+
+    .correct {
+      color: green;
+    }
+
+    .incorrect {
+      color: red;
+    }
+  </style>
+  <script>
+    var questions = [
+      {
+        question: "(Single Choice)19世纪的三大科学发现是马克思主义产生的自然科学前提，它们是：\n·       A. 原子学说、细胞学说、生物进化论\n·       B. 细胞学说、能量守恒与转化定律、生物进化论\n·       C. 细胞学说、遗传定律、生物进化论\n·       D. 原子学说、能量守恒与转化定律、电磁学说",
+        answer: "B"
+      },
+      {
+        question: "(Single Choice)马克思一生的两个伟大发现是：\n·       A. 物质观和实践观\n·       B. 唯物主义和辩证法\n·       C. 唯物史观和剩余价值学说\n·       D. 辩证唯物主义和历史唯物主义",
+        answer: "C"
+      },
+      {
+        question: "(Single Choice)马克思主义的基本立场是：\n·       A. 以人民为中心\n·       B. 以无产阶级为中心\n·       C. 以工人为中心\n·       D. 以无产阶级政党为中心",
+        answer: "A"
+      },
+      {
+        question: "(Single Choice)马克思主义中国化时代化的最新理论成果是：\n·       A. 邓小平理论\n·       B. “三个代表”重要思想\n·       C. 科学发展观\n·       D. 习近平新时代中国特色社会主义思想",
+        answer: "D"
+      },
+      {
+        question: "(Single Choice)马克思主义的人民性、实践性和发展性集中体现为：\n·       A. 科学性\n·       B. 革命性\n·       C. 客观性\n·       D. 能动性",
+        answer: "B"
+      },
+      {
+        question: "(Single Choice)马克思主义的学风是：\n·       A. 理论学习\n·       B. 实践锻炼\n·       C. 理论联系实际\n·       D. 勤奋努力",
+        answer: "C"
+      }
+    ];
+
+    var currentQuestionIndex = 0;
+    var correctCount = 0;
+
+    function showQuestion() {
+      var question = questions[currentQuestionIndex];
+
+      // 显示问题
+      var questionElement = document.getElementById("question");
+      questionElement.innerText = question.question;
+
+      // 清空答案输入
+      var answerElement = document.getElementById("answer");
+      answerElement.value = "";
+
+      // 隐藏结果信息
+      var resultElement = document.getElementById("result");
+      resultElement.innerText = "";
+
+      // 更新题号
+      var questionNumberElement = document.getElementById("questionNumber");
+      questionNumberElement.innerText = "Question " + (currentQuestionIndex + 1) + " of " + questions.length;
+    }
+
+    function checkAnswer() {
+      var question = questions[currentQuestionIndex];
+      var answerElement = document.getElementById("answer");
+      var userAnswer = answerElement.value.trim().toUpperCase();
+
+      // 检查答案
+      var resultElement = document.getElementById("result");
+      if (userAnswer === question.answer) {
+        resultElement.innerText = "Correct!";
+        resultElement.className = "correct";
+        correctCount++;
+      } else {
+        resultElement.innerText = "Incorrect!";
+        resultElement.className = "incorrect";
+      }
+
+      // 计算并显示正确率
+      var accuracy = (correctCount / (currentQuestionIndex + 1)) * 100;
+      var accuracyElement = document.getElementById("accuracy");
+      accuracyElement.innerText = "Correct Rate: " + accuracy.toFixed(1) + "%";
+
+      // 判断是否答完所有题目
+      if (currentQuestionIndex === questions.length - 1) {
+        answerElement.disabled = true;
+        answerElement.value = "";
+        document.getElementById("submitButton").disabled = true;
+      } else {
+        currentQuestionIndex++;
+        showQuestion();
+      }
+    }
+
+    // 初始化显示第一道题目
+    showQuestion();
+  </script>
+</head>
+<body>
+  <h1>答题界面</h1>
+  <div class="question">
+    <p id="question"></p>
+    <input type="text" id="answer" placeholder="请输入你的答案">
+    <button id="submitButton" onclick="checkAnswer()">提交</button>
+    <p id="result"></p>
+    <p id="questionNumber"></p>
+    <p id="accuracy"></p>
+  </div>
+</body>
+</html>
 
     </div>
 
