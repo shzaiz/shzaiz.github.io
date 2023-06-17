@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <link rel="stylesheet" href="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/style.css">
+    <script src="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/plugin.js"></script> 
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
+ 
+    <script>
+const copyButtonLabel = "Copy Code";
+
+// use a class selector if available
+let blocks = document.querySelectorAll("pre");
+
+blocks.forEach((block) => {
+  // only add button if browser supports Clipboard API
+  if (navigator.clipboard) {
+    let button = document.createElement("button");
+
+    button.innerText = copyButtonLabel;
+    block.appendChild(button);
+
+    button.addEventListener("click", async () => {
+      await copyCode(block);
+    });
+  }
+});
+
+async function copyCode(block) {
+  let code = block.querySelector("code");
+  let text = code.innerText;
+
+  await navigator.clipboard.writeText(text);
+}
+    </script>
+      <style>
+        body {counter-reset:section;}
+        h1 {counter-reset:subsection;font-size:x-large;}
+        h2 {font-size: large;}
+        
+        h1:before {
+        counter-increment:section;
+        content:counter(section) ". ";
+            font-weight:bold;
+            font-size: x-large;
+        }
+        h2:before {
+        counter-increment:subsection;
+        content:counter(section) "." counter(subsection) " ";
+        font-size: large;
+        }
+        html, body {
+            margin: 5%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: 500;
+        }
+        code {
+            font-family: 'Courier New', Courier, monospace;
+        } 
+
+        pre {
+            font-family: 'Courier New', Courier, monospace;
+        } 
+        div{
+            max-width: 100%;
+            overflow: auto;
+            
+        }
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+            position: fixed; /* Set the navbar to fixed position */
+            top: 0; /* Position the navbar at the top of the page */
+            width: 100%; /* Full width */
+        }
+
+        img {
+        max-width: 80%;
+        height: auto;
+        }
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        a {
+            color: #148bca;
+            text-align: center;
+            padding-left: 2px;
+            padding-right: 2px;
+            text-decoration: none;
+        }
+
+        p.hidden {
+          overflow: hidden;
+        }
+
+    </style>
+  </head>
+  <body>
+    
+    <div class="navbar">
+        <a href="https://shzaiz.github.io">AUG's Wiki</a>
+        <a href="index.html"> ↑ Back to contents</a>
+        Last updated at 2023-06-17 11:27:11.785503
+    </div>
+
+    <div class="toc"></div>
+    <a id="toc-button"><i class="far fa-bookmark"></i></a>
+    
+    <div>
+      <div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #9C6500">#include</span><span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">&lt;iostream&gt;</span>
+<span style="color: #9C6500">#include</span><span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">&lt;vector&gt;</span>
+<span style="color: #9C6500">#include</span><span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">&lt;functional&gt;</span>
+<span style="color: #9C6500">#include</span><span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">&lt;memory&gt;</span>
+<span style="color: #9C6500">#include</span><span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">&lt;utility&gt;</span>
+
+<span style="color: #3D7B7B; font-style: italic">// Forward declarations</span>
+<span style="color: #008000; font-weight: bold">class</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF; font-weight: bold">Parser</span>;
+
+<span style="color: #3D7B7B; font-style: italic">// Define the necessary C++ types and structures</span>
+<span style="color: #008000; font-weight: bold">enum</span><span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">class</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF; font-weight: bold">UnaryOp</span><span style="color: #bbbbbb"> </span>{
+<span style="color: #bbbbbb">    </span><span style="color: #3D7B7B; font-style: italic">// Define your unary operators here</span>
+};
+
+<span style="color: #008000; font-weight: bold">enum</span><span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">class</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF; font-weight: bold">Associativity</span><span style="color: #bbbbbb"> </span>{
+<span style="color: #bbbbbb">    </span><span style="color: #3D7B7B; font-style: italic">// Define your associativity types here</span>
+};
+
+<span style="color: #008000; font-weight: bold">struct</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF; font-weight: bold">Expr</span><span style="color: #bbbbbb"> </span>{
+<span style="color: #bbbbbb">    </span><span style="color: #3D7B7B; font-style: italic">// Define your Expr struct here</span>
+};
+
+<span style="color: #008000; font-weight: bold">struct</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF; font-weight: bold">Range</span><span style="color: #bbbbbb"> </span>{
+<span style="color: #bbbbbb">    </span><span style="color: #B00040">size_t</span><span style="color: #bbbbbb"> </span>start;
+<span style="color: #bbbbbb">    </span><span style="color: #B00040">size_t</span><span style="color: #bbbbbb"> </span>end;
+};
+
+<span style="color: #3D7B7B; font-style: italic">// Define the Unary struct in C++</span>
+<span style="color: #008000; font-weight: bold">struct</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF; font-weight: bold">Unary</span><span style="color: #bbbbbb"> </span>{
+<span style="color: #bbbbbb">    </span>std<span style="color: #666666">::</span>unique_ptr<span style="color: #666666">&lt;</span>Expr<span style="color: #666666">&gt;</span><span style="color: #bbbbbb"> </span>operand;
+<span style="color: #bbbbbb">    </span>UnaryOp<span style="color: #bbbbbb"> </span>op;
+<span style="color: #bbbbbb">    </span>Range<span style="color: #bbbbbb"> </span>span;
+
+<span style="color: #bbbbbb">    </span>Range<span style="color: #bbbbbb"> </span><span style="color: #0000FF">span</span>()<span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">const</span><span style="color: #bbbbbb"> </span>{
+<span style="color: #bbbbbb">        </span><span style="color: #008000; font-weight: bold">return</span><span style="color: #bbbbbb"> </span>span;
+<span style="color: #bbbbbb">    </span>}
+
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">static</span><span style="color: #bbbbbb"> </span>UnaryOp<span style="color: #bbbbbb"> </span><span style="color: #0000FF">try_parse_unary_op</span>(Parser<span style="color: #666666">&amp;</span><span style="color: #bbbbbb"> </span>input,<span style="color: #bbbbbb"> </span>Associativity<span style="color: #bbbbbb"> </span>associativity){
+<span style="color: #bbbbbb">    </span>}
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">static</span><span style="color: #bbbbbb"> </span>Unary<span style="color: #bbbbbb"> </span><span style="color: #0000FF">parse_with_associativity</span>(Parser<span style="color: #666666">&amp;</span><span style="color: #bbbbbb"> </span>input,<span style="color: #bbbbbb"> </span>Associativity<span style="color: #bbbbbb"> </span>associativity);
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">static</span><span style="color: #bbbbbb"> </span>Expr<span style="color: #bbbbbb"> </span><span style="color: #0000FF">parse_or_lower</span>(Parser<span style="color: #666666">&amp;</span><span style="color: #bbbbbb"> </span>input);
+};
+
+<span style="color: #008000; font-weight: bold">class</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF; font-weight: bold">Parser</span><span style="color: #bbbbbb"> </span>{
+<span style="color: #008000; font-weight: bold">public</span><span style="color: #666666">:</span>
+<span style="color: #bbbbbb">    </span><span style="color: #3D7B7B; font-style: italic">// Define your Parser class and methods here</span>
+};
+
+<span style="color: #008000; font-weight: bold">class</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF; font-weight: bold">Error</span><span style="color: #bbbbbb"> </span>{
+<span style="color: #008000; font-weight: bold">public</span><span style="color: #666666">:</span>
+<span style="color: #bbbbbb">    </span><span style="color: #3D7B7B; font-style: italic">// Define your Error class and methods here</span>
+};
+
+<span style="color: #008000; font-weight: bold">namespace</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF; font-weight: bold">kind</span><span style="color: #bbbbbb"> </span>{
+<span style="color: #bbbbbb">    </span><span style="color: #3D7B7B; font-style: italic">// Define your kind module or namespace here</span>
+}
+
+<span style="color: #3D7B7B; font-style: italic">// Implement the static functions of the Unary struct</span>
+UnaryOp<span style="color: #bbbbbb"> </span>Unary<span style="color: #666666">::</span>try_parse_unary_op(Parser<span style="color: #666666">&amp;</span><span style="color: #bbbbbb"> </span>input,<span style="color: #bbbbbb"> </span>Associativity<span style="color: #bbbbbb"> </span>associativity)<span style="color: #bbbbbb"> </span>{
+<span style="color: #bbbbbb">    </span><span style="color: #3D7B7B; font-style: italic">// Implementation of try_parse_unary_op</span>
+}
+
+Unary<span style="color: #bbbbbb"> </span>Unary<span style="color: #666666">::</span>parse_with_associativity(Parser<span style="color: #666666">&amp;</span><span style="color: #bbbbbb"> </span>input,<span style="color: #bbbbbb"> </span>Associativity<span style="color: #bbbbbb"> </span>associativity)<span style="color: #bbbbbb"> </span>{
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">if</span><span style="color: #bbbbbb"> </span>(associativity<span style="color: #bbbbbb"> </span><span style="color: #666666">==</span><span style="color: #bbbbbb"> </span>Associativity<span style="color: #666666">::</span>Left)<span style="color: #bbbbbb"> </span>{
+<span style="color: #bbbbbb">        </span><span style="color: #3D7B7B; font-style: italic">// Implementation of parse_with_associativity for Left associativity</span>
+<span style="color: #bbbbbb">    </span>}<span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">else</span><span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">if</span><span style="color: #bbbbbb"> </span>(associativity<span style="color: #bbbbbb"> </span><span style="color: #666666">==</span><span style="color: #bbbbbb"> </span>Associativity<span style="color: #666666">::</span>Right)<span style="color: #bbbbbb"> </span>{
+<span style="color: #bbbbbb">        </span><span style="color: #3D7B7B; font-style: italic">// Implementation of parse_with_associativity for Right associativity</span>
+<span style="color: #bbbbbb">    </span>}
+
+<span style="color: #bbbbbb">    </span><span style="color: #3D7B7B; font-style: italic">// Return the parsed Unary object</span>
+}
+
+Expr<span style="color: #bbbbbb"> </span>Unary<span style="color: #666666">::</span>parse_or_lower(Parser<span style="color: #666666">&amp;</span><span style="color: #bbbbbb"> </span>input)<span style="color: #bbbbbb"> </span>{
+<span style="color: #bbbbbb">    </span><span style="color: #3D7B7B; font-style: italic">// Implementation of parse_or_lower</span>
+}
+
+<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>main()<span style="color: #bbbbbb"> </span>{
+<span style="color: #bbbbbb">    </span><span style="color: #3D7B7B; font-style: italic">// Implement your main function</span>
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">return</span><span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>;
+}
+</pre></div>
+
+<p>指数贝尔多项式编码了集合分割方式的相关信息。例如，对于集合 \(\{A, B, C\}\) ，可以以三种不同方式将其分割为两个非空、不重叠的子集：</p>
+<p>[
+{{A}, {B, C}}
+{{B}, {A, C}}
+{{C}, {B, A}}
+]</p>
+<p>因此，我们可以将这些分割的信息编码为 \(B_{3,2}(x_1,x_2) = 3x_1x_2\) 。这里， \(B_{3,2}\) 的下标表示我们考虑将一个包含3个元素的集合分割为2个块。每个 \(x_i\) 的下标表示在给定分割中有 \(i\) 个元素的块的存在。因此， \(x_2\) 表示存在一个包含两个元素的块， \(x_1\) 表示存在一个包含一个元素的块。指数 \(x_{ij}\) 表示在一个分割中有 \(j\) 个大小为 \(i\) 的块。在这个例子中，由于 \(x_1\) 和 \(x_2\) 的指数都为1，表示在每个分割中只有一个这样的块。单项式的系数表示存在多少个这样的分割。在我们的例子中，有3种将一个包含3个元素的集合分割为2个块的分割，其中每个分割将元素分成一个大小为1的块和一个大小为2的块。</p>
+
+    </div>
+
+   
+   
+   
+    <hr>
+
+
+
+
+
+
+    <div id="disqus_thread"></div>
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script>
+        /**
+        *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+        *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+        
+        // var disqus_config = function () {
+        // this.page.url = ;  // Replace PAGE_URL with your page's canonical URL variable
+        // this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        // };
+        
+        (function() { // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        s.src = 'https://augpath.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <script id="dsq-count-scr" src="//augpath.disqus.com/count.js" async></script>
+  </body>
+</html>
