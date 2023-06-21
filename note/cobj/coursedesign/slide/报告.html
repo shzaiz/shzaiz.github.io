@@ -318,7 +318,7 @@ $$
 </script></section><section data-markdown><script type="text/template">
 ## 完全Bell多项式: 从$1$到$n$求和
 
-```cpp
+```
 ...
 	for(int i=2; i<=n; i++){
         result += bell_incomplete_poly(n, i, symbols);
@@ -364,13 +364,22 @@ $$
 $$
 - $\pi$是所有的集合的划分(Bell数)
 - 例子: 
-	- $\displaystyle{ \kappa(X,Y)=\operatorname E(XY) - \operatorname E(X) \operatorname E(Y), }$
-	- $\displaystyle{ \kappa(X,Y,Z)=\operatorname E(XYZ) - \operatorname E(XY) \operatorname E(Z) - \operatorname E(XZ) \operatorname E(Y) - \operatorname E(YZ) \operatorname E(X) + 2\operatorname E(X)\operatorname E(Y)\operatorname E(Z).\, }$
-	- $\displaystyle{ \kappa(X,X,Z)=\operatorname E(X^2Z)  -2\operatorname E(XZ)\operatorname E(X) - \operatorname E(X^2)\operatorname E(Z) + 2\operatorname E(X)^2\operatorname E(Z),\, }$
+	- $\small{ \kappa(X,Y)=\operatorname E(XY) - \operatorname E(X) \operatorname E(Y), }$
+	- $\small{ \kappa(X,Y,Z)=\operatorname E(XYZ) - \operatorname E(XY) \operatorname E(Z) - \operatorname E(XZ) \operatorname E(Y) - \operatorname E(YZ) \operatorname E(X) + 2\operatorname E(X)\operatorname E(Y)\operatorname E(Z).\, }$
+	- $\small{ \kappa(X,X,Z)=\operatorname E(X^2Z)  -2\operatorname E(XZ)\operatorname E(X) - \operatorname E(X^2)\operatorname E(Z) + 2\operatorname E(X)^2\operatorname E(Z),\, }$
+</script></section><section data-markdown><script type="text/template">
+## Joint cumulants 计算(contd)
+
+给出的公式: 
+$$
+\displaystyle{ \kappa(X_1,\dots,X_n) =\sum_\pi (|\pi|-1)!(-1)^{|\pi|-1}\prod_{B\in\pi}E\left(\prod_{i\in B}X_i\right) }
+$$
+- $\pi$是所有的集合的划分(Bell数)
 - 演示
 	- `-Ex(y)*Ex(x)+Ex(y*x)`
 	- `-Ex(y*z)*Ex(x)-Ex(z)*Ex(y*x)+Ex(y*z*x)-Ex(y)*Ex(z*x)+2*Ex(y)*Ex(z)*Ex(x)`
 	- `-Ex(x^2)*Ex(z)+2*Ex(z)*Ex(x)^2-2*Ex(z*x)*Ex(x)+Ex(z*x^2)`
+
 
 </script></section></section><section ><section data-markdown><script type="text/template">
 
