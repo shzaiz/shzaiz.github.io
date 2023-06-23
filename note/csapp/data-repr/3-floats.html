@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <link rel="stylesheet" href="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/style.css">
+    <script src="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/plugin.js"></script> 
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
+ 
+    <script>
+const copyButtonLabel = "Copy Code";
+
+// use a class selector if available
+let blocks = document.querySelectorAll("pre");
+
+blocks.forEach((block) => {
+  // only add button if browser supports Clipboard API
+  if (navigator.clipboard) {
+    let button = document.createElement("button");
+
+    button.innerText = copyButtonLabel;
+    block.appendChild(button);
+
+    button.addEventListener("click", async () => {
+      await copyCode(block);
+    });
+  }
+});
+
+async function copyCode(block) {
+  let code = block.querySelector("code");
+  let text = code.innerText;
+
+  await navigator.clipboard.writeText(text);
+}
+    </script>
+      <style>
+        body {counter-reset:section;}
+        h1 {counter-reset:subsection;font-size:x-large;}
+        h2 {font-size: large;}
+        
+        h1:before {
+        counter-increment:section;
+        content:counter(section) ". ";
+            font-weight:bold;
+            font-size: x-large;
+        }
+        h2:before {
+        counter-increment:subsection;
+        content:counter(section) "." counter(subsection) " ";
+        font-size: large;
+        }
+        html, body {
+            margin: 5%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: 500;
+        }
+        code {
+            font-family: 'Courier New', Courier, monospace;
+        } 
+
+        pre {
+            font-family: 'Courier New', Courier, monospace;
+        } 
+        div{
+            max-width: 100%;
+            overflow: auto;
+            
+        }
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+            position: fixed; /* Set the navbar to fixed position */
+            top: 0; /* Position the navbar at the top of the page */
+            width: 100%; /* Full width */
+        }
+
+        img {
+        max-width: 80%;
+        height: auto;
+        }
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        a {
+            color: #148bca;
+            text-align: center;
+            padding-left: 2px;
+            padding-right: 2px;
+            text-decoration: none;
+        }
+
+        p.hidden {
+          overflow: hidden;
+        }
+
+    </style>
+  </head>
+  <body>
+    
+    <div class="navbar">
+        <a href="https://shzaiz.github.io">AUG's Wiki</a>
+        <a href="index.html"> ↑ Back to contents</a>
+        Last updated at 2023-06-23 16:54:15.338603
+    </div>
+
+    <div class="toc"></div>
+    <a id="toc-button"><i class="far fa-bookmark"></i></a>
+    
+    <div>
+      <h1>Fixed point float numbers</h1>
+<p><img src="https://s2.loli.net/2023/05/09/f7hWAvtQakCHZU4.png" alt="Img" /></p>
+<p>$$
+\sum_{k=-j}^i b2^k
+$$</p>
+<p>Observation:</p>
+<ul>
+<li>/2 &lt;==&gt; shift right (unsigned)</li>
+<li>*2 &lt;==&gt; shifting left</li>
+<li>Numbers of form (0.111111) \(_2\)  is less than 1.0
+<ul>
+<li>use 1.0-eps</li>
+</ul>
+</li>
+</ul>
+<p>Limitation</p>
+<ul>
+<li>can only repr num of form  \(x/2^k\) , other ones cant be done</li>
+<li>just one setting of bin point within the w bits</li>
+</ul>
+<h1>IEEE Floating point</h1>
+<p><img src="https://s2.loli.net/2023/05/09/vMyg3wDWOY98iIn.png" alt="Img" /></p>
+<ul>
+<li>Numerical Form:  \((-1)^s M 2^E\) 
+<ul>
+<li>sign bit s determin whether the number is neg</li>
+<li>significand M normally a frac val between 1 and 2</li>
+<li>Exp E weights val by pow of 2</li>
+</ul>
+</li>
+<li>Encoding
+<ul>
+<li>MSB s is the sign bit of s</li>
+<li>exp field encodes E(not equal to E)</li>
+<li>frac field encodes M (not eq to M)</li>
+</ul>
+</li>
+</ul>
+<h2>Different precisions</h2>
+<p><img src="https://s2.loli.net/2023/05/09/XYwDiSRQVJFGqEx.png" alt="Img" /></p>
+<h2>Normalized values</h2>
+<ul>
+<li>Def. when exp != 00000000 and exp != 1111111</li>
+<li>Exponent coded as a biased value: E=Exp-Bias
+<ul>
+<li>Exp: unsigned val of exp field</li>
+<li>Bias: 2 \(^k-1\) -1, k is the num of exp bits
+<ul>
+<li>Single precision 127 (Exp:1..254, E:-126..127)</li>
+<li>Double precision 1023 (Exp:1..2046, E:-1022..1023)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>Why not using 2&#x27;s comp in exp field? to make sure the comparson is ok.</p>
+<ul>
+<li>Significand coded with implied leading 1: M=1.xxxxxx
+<ul>
+<li>xxx: bits of frac field</li>
+<li>Min: 0000000000, M=1.0</li>
+<li>Max: 1111111111, M=2.0-eps</li>
+<li>get extra leading bit for free</li>
+</ul>
+</li>
+</ul>
+<p>Example:</p>
+<p>Keep in mind that:</p>
+<ul>
+<li> \(v=(-1)^s M 2^E\) </li>
+<li>E=Exp-Bias</li>
+</ul>
+<p><code>F=15213.0</code>:</p>
+<ul>
+<li>15213=11101101101101 \(_2\) </li>
+<li>1.1101101101101 \(_2\)   \(\times 2^{13}\) </li>
+<li>Significand</li>
+</ul>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span>M     = 1.1101101101101
+frac  =   11011011011010000000000
+
+E     = 13
+Bias  = 127
+Exp.  = 140 = 10001100
+
+Result: 0 10001100 1101101101101000..0
+        s.  exp.        frac.  
+</pre></div>
+
+<p>Q: What&#x27;s the range val of exp, E?</p>
+<ul>
+<li> \(0\leq \)  EXP  \(\leq 2^8-1=255\) </li>
+<li> \(-127 \leq E \leq 128\) </li>
+</ul>
+<p>repr nums close to 0 will limit us.</p>
+<h2>Denorm vals</h2>
+<ul>
+<li>no implied 1</li>
+</ul>
+<p>$$v=(-1)^sM2^E, E=1-\text{Bias}$$</p>
+<ul>
+<li>cond: exp=000...0</li>
+<li>Exp val: E=1-Bias (instead of 0-Bias)</li>
+<li>Significand coded with implied leading 0: M = 0.xx..x
+<ul>
+<li>xxx..x: bits of frac</li>
+</ul>
+</li>
+<li>Cases
+<ul>
+<li>exp=000..0, frac = 000.0
+<ul>
+<li>repr 0 val</li>
+<li>distinct val: +0, -0</li>
+</ul>
+</li>
+<li>exp = 000..0, frac ≠ 000...0
+<ul>
+<li>numner clostst to 0.0</li>
+<li>equispaced</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2>Special vals</h2>
+<ul>
+<li>Condition: exp = 111..1</li>
+<li>Case: exp = 111..1, frac=000..0
+<ul>
+<li>represents  \(\infty\) </li>
+<li>op that overflows</li>
+<li>both pos and neg</li>
+<li>eg: 1.0/0.0 = + \(\infty\) , 1.0/-0.0=- \(\infty\) .</li>
+</ul>
+</li>
+<li>Case: exp=111..1 frac ≠ 000..1
+<ul>
+<li>Not a number</li>
+<li>case when no numeric value can be determinated,</li>
+<li>sqrt(-1),  \(infty-infty\) ,  \(infty \times 0\) </li>
+</ul>
+</li>
+</ul>
+<p>Visualizing floating point encodings:</p>
+<p><img src="https://s2.loli.net/2023/05/09/EdCmNIZ5aAtpToL.png" alt="Img" /></p>
+<h1>Example and prop</h1>
+<p>Basic setup: tiny fp example:</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span> s   eeee fff
+sgn  exp  frac
+ 1    4     3
+</pre></div>
+
+<ul>
+<li>Explanation:
+<ul>
+<li>the sign bits is the MSB</li>
+<li>the next 4 are exp, with bias of 7</li>
+<li>the last 3 are frac</li>
+</ul>
+</li>
+<li>same general foem as IEEE format</li>
+</ul>
+<p><img src="https://s2.loli.net/2023/05/09/CfTbD5iHPnQRJmd.png" alt="" /></p>
+<h2>Distribution of vals</h2>
+<p><img src="https://s2.loli.net/2023/05/09/Iuf3CkFSyieXjYL.png" alt="Img" /></p>
+<ul>
+<li>dense around 0</li>
+</ul>
+<p><img src="https://s2.loli.net/2023/05/09/Xpr15cwAaUeO2dS.png" alt="Img" /></p>
+<h2>Special props of IEEE enc</h2>
+<ul>
+<li>FP zero == Int zero (all bits = 0)</li>
+<li>can almost use unsigned integer comparsion
+<ul>
+<li>must first compare sign bits</li>
+<li>must consider -0 = 0</li>
+<li>NaNs are problematic</li>
+<li>o.w. ok.</li>
+</ul>
+</li>
+</ul>
+<h2>Floating point operations: Basic ideas</h2>
+<p>Basic idea:</p>
+<ul>
+<li>first compute exact result</li>
+<li>make it fit into desired precision
+<ul>
+<li>possibly overflow if expoment too large</li>
+<li>possible round to fit into frac</li>
+</ul>
+</li>
+</ul>
+<p>Rounding</p>
+<p><img src="https://s2.loli.net/2023/05/09/egPGROHKrFMUd3C.png" alt="Img" /></p>
+<ul>
+<li>by default round to Nearest even(deals with middle part)</li>
+</ul>
+<p>Round to even</p>
+<ul>
+<li>Default rounding mode
+<ul>
+<li>sums are staistically biased</li>
+</ul>
+</li>
+<li>applying to other decimal places/ bit pos
+<ul>
+<li>when exactly halfway between  2 possible vals
+<ul>
+<li>round so that least significant digit is even</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>Example. round to nearest hundredth
+<img src="https://s2.loli.net/2023/05/09/6RYfuaxDXk7LT4v.png" alt="Img" /></p>
+<p><img src="https://s2.loli.net/2023/05/09/mPgnsStJvkVliEA.png" alt="Img" /></p>
+<h2>FP Mul</h2>
+<ul>
+<li>Exact Res: (-1)^s^ M 2^E^
+<ul>
+<li>sign s = s1 ^ s2</li>
+<li>significand M : M1 * M2</li>
+<li>expoment E: E1+E2</li>
+</ul>
+</li>
+<li>Fixing
+<ul>
+<li>if M≥2, shift M right, increment E</li>
+<li>if E out of range, overflow</li>
+<li>round M to fit frac precision</li>
+</ul>
+</li>
+<li>implementation: biggest chore is multipluing significanads</li>
+</ul>
+<h2>FP addition</h2>
+<p><img src="https://s2.loli.net/2023/05/09/VdHr49Job3g72LC.png" alt="Img" /></p>
+<p>But still some props...</p>
+<p><img src="https://s2.loli.net/2023/05/09/3AMztZDmL5uvWYr.png" alt="Img" /></p>
+<h2>FP in C</h2>
+<p><img src="https://s2.loli.net/2023/05/09/tvTUVoDlFE2m3e7.png" alt="Img" /></p>
+
+    </div>
+
+   
+   
+   
+    <hr>
+
+
+
+
+
+
+    <div id="disqus_thread"></div>
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script>
+        /**
+        *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+        *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+        
+        // var disqus_config = function () {
+        // this.page.url = ;  // Replace PAGE_URL with your page's canonical URL variable
+        // this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        // };
+        
+        (function() { // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        s.src = 'https://augpath.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <script id="dsq-count-scr" src="//augpath.disqus.com/count.js" async></script>
+  </body>
+</html>

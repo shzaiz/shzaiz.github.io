@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <link rel="stylesheet" href="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/style.css">
+    <script src="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/plugin.js"></script> 
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
+ 
+    <script>
+const copyButtonLabel = "Copy Code";
+
+// use a class selector if available
+let blocks = document.querySelectorAll("pre");
+
+blocks.forEach((block) => {
+  // only add button if browser supports Clipboard API
+  if (navigator.clipboard) {
+    let button = document.createElement("button");
+
+    button.innerText = copyButtonLabel;
+    block.appendChild(button);
+
+    button.addEventListener("click", async () => {
+      await copyCode(block);
+    });
+  }
+});
+
+async function copyCode(block) {
+  let code = block.querySelector("code");
+  let text = code.innerText;
+
+  await navigator.clipboard.writeText(text);
+}
+    </script>
+      <style>
+        body {counter-reset:section;}
+        h1 {counter-reset:subsection;font-size:x-large;}
+        h2 {font-size: large;}
+        
+        h1:before {
+        counter-increment:section;
+        content:counter(section) ". ";
+            font-weight:bold;
+            font-size: x-large;
+        }
+        h2:before {
+        counter-increment:subsection;
+        content:counter(section) "." counter(subsection) " ";
+        font-size: large;
+        }
+        html, body {
+            margin: 5%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: 500;
+        }
+        code {
+            font-family: 'Courier New', Courier, monospace;
+        } 
+
+        pre {
+            font-family: 'Courier New', Courier, monospace;
+        } 
+        div{
+            max-width: 100%;
+            overflow: auto;
+            
+        }
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+            position: fixed; /* Set the navbar to fixed position */
+            top: 0; /* Position the navbar at the top of the page */
+            width: 100%; /* Full width */
+        }
+
+        img {
+        max-width: 80%;
+        height: auto;
+        }
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        a {
+            color: #148bca;
+            text-align: center;
+            padding-left: 2px;
+            padding-right: 2px;
+            text-decoration: none;
+        }
+
+        p.hidden {
+          overflow: hidden;
+        }
+
+    </style>
+  </head>
+  <body>
+    
+    <div class="navbar">
+        <a href="https://shzaiz.github.io">AUG's Wiki</a>
+        <a href="index.html"> ↑ Back to contents</a>
+        Last updated at 2023-06-23 16:54:16.075640
+    </div>
+
+    <div class="toc"></div>
+    <a id="toc-button"><i class="far fa-bookmark"></i></a>
+    
+    <div>
+      <h1>以下内容已经过时并且等待更新</h1>
+<p>以下的页面部分是<a href="http://cslabcms.nju.edu.cn/problem_solving/index.php/2021%E7%BA%A7--%E5%AD%A6%E6%9C%9F%E5%AE%89%E6%8E%92_(%E7%AC%AC%E4%B8%80%E5%AD%A6%E6%9C%9F)">NJU 2021问题求解</a>的非官方镜像页面. 用于给刚升入大学的将要操作计算机但感到疑惑/迷茫的高中同班同学(郑州市第一中学2022届2213, 2214, 2215, 2216班)讲课使用.</p>
+<p>因为日常中总会回答一些诸如</p>
+<ul>
+<li>学A语言怎么样?</li>
+<li>学B语言能干什么?</li>
+<li>我要学C语言吗?</li>
+</ul>
+<p>从这些提问中, 可以感受到有时候我们没有足够的资料来树立正确的思维模式, 仅仅是用高考的模式来延续大学生活.</p>
+<p>所以我们准备建设这一系列镜像课程, 在作者和大家共同浏览过NJU的课程讲稿之后, 互相讨论, 共同进步.</p>
+<p>完成这样的转变并是一些代价的, 因为以后没有老师告诉你该做什么. 大家需要尽力发挥自己的力量, 仔细体会, 在这之后你会成为一个很不一样的人! 最后我们可以解决<strong>真正的问题</strong>!</p>
+<h2>课程资料</h2>
+<p>幻灯片=💡, 习题=📕, 录播视频=▶</p>
+<ul>
+<li>第一节: 用Python创造一个世界 <a href="slide/1-create.html">💡</a></li>
+<li>第二节: 计算思维 <a href="slide/2-cal.html">💡</a></li>
+</ul>
+<p>阅读资料: 关于列表, 元组, 📕</p>
+<blockquote>
+<p>我们都是活生生的人, 从小就被不由自主地教导用最小的付出获得最大的得到, 经常会忘记我们究竟要的是什么. 我承认我完美主义, 但我想每个人心中都有那一份求知的渴望和对真理的向往, &quot;大学&quot;的灵魂也就在于超越世俗, 超越时代的纯真和理想 -- 我们不是要讨好企业的毕业生, 而是要寻找改变世界的力量. -- jyy</p>
+</blockquote>
+<h1>课程期望</h1>
+<p>我们的现状:</p>
+<ul>
+<li>要学的东西多</li>
+</ul>
+<p>需求:</p>
+<ul>
+<li>有更多的批判精神</li>
+<li>兴趣驱动, 志向广泛</li>
+<li>要对自己要求高一点.</li>
+</ul>
+<p>这样才可以保证持久高效的学习质量.</p>
+<blockquote>
+<p>数学的美，也是离散. 数学承载的潜移默化</p>
+</blockquote>
+<p>要求:</p>
+<ul>
+<li>尊重科学:不抄袭</li>
+<li>尊重课堂:不做和学习无关的事情</li>
+<li>尊重老师和同学:不迟到</li>
+<li>积极参与课堂活动:提问、回答问题</li>
+<li>积极互帮互助:帮助中沉淀友谊</li>
+</ul>
+<h1>计算思维</h1>
+<h2>计算机的职责</h2>
+<ul>
+<li>建立模型, 预测未来</li>
+<li>帮助人们发现更多的物理规律</li>
+<li>通过抽象和模拟进行完成</li>
+</ul>
+<h1>算法设计</h1>
+<h2>注意证明</h2>
+<p>解决问题之后要寻求证明.</p>
+<h2>计算思维</h2>
+<p>计算思维：当你面临一个要解决的问题时，如果你的第一感觉是去寻找一个数学模型对问题和解进行建模，去尝试着通过算法来寻找解，并尝试着思考如何用一个辅助工具开展计算时，计算思维已经在影响你了！</p>
+
+    </div>
+
+   
+   
+   
+    <hr>
+
+
+
+
+
+
+    <div id="disqus_thread"></div>
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script>
+        /**
+        *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+        *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+        
+        // var disqus_config = function () {
+        // this.page.url = ;  // Replace PAGE_URL with your page's canonical URL variable
+        // this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        // };
+        
+        (function() { // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        s.src = 'https://augpath.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <script id="dsq-count-scr" src="//augpath.disqus.com/count.js" async></script>
+  </body>
+</html>

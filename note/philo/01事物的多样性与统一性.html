@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <link rel="stylesheet" href="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/style.css">
+    <script src="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/plugin.js"></script> 
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
+ 
+    <script>
+const copyButtonLabel = "Copy Code";
+
+// use a class selector if available
+let blocks = document.querySelectorAll("pre");
+
+blocks.forEach((block) => {
+  // only add button if browser supports Clipboard API
+  if (navigator.clipboard) {
+    let button = document.createElement("button");
+
+    button.innerText = copyButtonLabel;
+    block.appendChild(button);
+
+    button.addEventListener("click", async () => {
+      await copyCode(block);
+    });
+  }
+});
+
+async function copyCode(block) {
+  let code = block.querySelector("code");
+  let text = code.innerText;
+
+  await navigator.clipboard.writeText(text);
+}
+    </script>
+      <style>
+        body {counter-reset:section;}
+        h1 {counter-reset:subsection;font-size:x-large;}
+        h2 {font-size: large;}
+        
+        h1:before {
+        counter-increment:section;
+        content:counter(section) ". ";
+            font-weight:bold;
+            font-size: x-large;
+        }
+        h2:before {
+        counter-increment:subsection;
+        content:counter(section) "." counter(subsection) " ";
+        font-size: large;
+        }
+        html, body {
+            margin: 5%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: 500;
+        }
+        code {
+            font-family: 'Courier New', Courier, monospace;
+        } 
+
+        pre {
+            font-family: 'Courier New', Courier, monospace;
+        } 
+        div{
+            max-width: 100%;
+            overflow: auto;
+            
+        }
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+            position: fixed; /* Set the navbar to fixed position */
+            top: 0; /* Position the navbar at the top of the page */
+            width: 100%; /* Full width */
+        }
+
+        img {
+        max-width: 80%;
+        height: auto;
+        }
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        a {
+            color: #148bca;
+            text-align: center;
+            padding-left: 2px;
+            padding-right: 2px;
+            text-decoration: none;
+        }
+
+        p.hidden {
+          overflow: hidden;
+        }
+
+    </style>
+  </head>
+  <body>
+    
+    <div class="navbar">
+        <a href="https://shzaiz.github.io">AUG's Wiki</a>
+        <a href="index.html"> ↑ Back to contents</a>
+        Last updated at 2023-06-23 16:54:15.837848
+    </div>
+
+    <div class="toc"></div>
+    <a id="toc-button"><i class="far fa-bookmark"></i></a>
+    
+    <div>
+      <p>本章解决: 事件论和辩证法</p>
+<h1>哲学与哲学基本问题</h1>
+<ul>
+<li>哲学是什么?
+<ul>
+<li>哲学就是关于世界观的学问, 是系统化, 理论化的世界观</li>
+</ul>
+</li>
+<li>世界观:</li>
+<li>哲学基本问题: 物质和意识关系问题
+<ul>
+<li>物质和精神何者是第一性? --&gt; 唯物主义, 唯心主义</li>
+<li>思维能都认识或者正确认识存在? --&gt; 可知论, 不可知论</li>
+</ul>
+</li>
+</ul>
+<p>唯物主义和唯心主义.</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span>vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+古代朴素唯物主义      |   
+近代形而上学唯物主义      主观唯心主义
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ 
+现代唯物主义             客观唯心主义
+</pre></div>
+
+<h1>物质及其存在形态</h1>
+<ol>
+<li>物质范畴:</li>
+</ol>
+<ul>
+<li>
+<p>什么是物质?</p>
+<ul>
+<li>Marx. “物 物质无非是各种物的总和，而这个概念就是从这一总和中抽象出来的“</li>
+<li>列宁. “物质是标志客观实在的哲学范畴，这种客观实在是人通过感觉感知的，它不依赖于我们的感觉而存在，为我们的感觉所复写、摄影、反映.</li>
+</ul>
+</li>
+<li>
+<p>物质概念的意义</p>
+<ul>
+<li>表明了物质就是不依赖于人类的意识而存在，并能为人类的意识所反映的客观实在</li>
+</ul>
+</li>
+<li>
+<p>物质的存在形态: 运动和时空</p>
+<ul>
+<li>时间和空间是运动着的物质的基本存在形式 时间是指物质运动的持续性、顺序性，特点是一维性，即时间的流逝一去不复返 空间是指物质运动的广延性 伸张性，特点是三维性，即空间具有长、宽、高 方面的规定性 物质运动总是在一定的时间和空间中进行的，没有离开物质运动的“纯粹”时间和空间，也没有离开时间和空间的物质运动 物质运动与时间和空间的不可分割，证明了时间和空间的客观性 具体物质形态的时空是有限的，而整个物质世界的时空是无限的.</li>
+</ul>
+</li>
+</ul>
+<ol start="2">
+<li>意识范畴</li>
+</ol>
+<ul>
+<li>意识的起源
+<ul>
+<li>自然界长期发展的产物
+<ul>
+<li>它的形成和发展经历了三个阶段，即由一切物质所具有的反应特性到低等生物的刺激感应性，再到高等动物的感觉和心理，最终发展为人类的意识</li>
+</ul>
+</li>
+<li>社会历史发展的产物
+<ul>
+<li>社会实践，特别是劳动，在意识的产生和发展中起着决定性的作用 劳动为意识的产生和发展提供了客观需要和可能，在人们的劳动和交往中形成的语言促进了意识的发展</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>意识的本质
+<ul>
+<li>人脑的机能和属性</li>
+<li>客观世界的主观映象</li>
+</ul>
+</li>
+<li>作用
+<ul>
+<li>自身和实践对于人的本身进行改造</li>
+<li>意识本身具有创造性</li>
+<li>客观世界的改造</li>
+</ul>
+</li>
+</ul>
+<p>Extra topic.
+潜意识. 找到自己内心需要什么, 一辈子的事情
+Floyd梦的分析</p>
+<ol start="3">
+<li>物质与意识的辩证关系</li>
+</ol>
+<ul>
+<li>
+<p>物质决定意识</p>
+</li>
+<li>
+<p>意识对于物质有反作用</p>
+<ul>
+<li>意识行动有目的性, 计划性和创造性</li>
+<li>意识有知道实践改造客观世界的作用</li>
+<li>影视有调控人类的行为和生理活动的作用</li>
+</ul>
+</li>
+</ul>
+<ol start="4">
+<li>世界的物质统一性原理</li>
+</ol>
+<p>例子: 人工智能</p>
+<ul>
+<li>作用
+<ul>
+<li>帮助人们机械的整理资料工作等</li>
+<li>突破, 弥补了人类意识活动的局限性, 发展了人意识活动的本身的能动性, 创造性.</li>
+<li>说明意识是物质的反映, 增强了人改造客观世界的能力.</li>
+</ul>
+</li>
+<li>一些局限性
+<ul>
+<li>不具有人类思维的心理特性</li>
+<li>不具有主体性</li>
+<li>不具有社会性</li>
+<li>人工智能不具有意识特有的创造性</li>
+</ul>
+</li>
+</ul>
+<p><strong>规律</strong>.</p>
+<ul>
+<li>规律是客观的, 但是它不排斥和否定人的主观能动性.</li>
+<li>正确发挥人的主观能动作用
+<ul>
+<li>历史社会趋向</li>
+<li>主题选择</li>
+</ul>
+</li>
+</ul>
+<h1>辩证法</h1>
+<h2>2大特征</h2>
+<ul>
+<li>辩证法: <strong>联系</strong>, <strong>发展</strong>是唯物辩证法的总特征.</li>
+</ul>
+<p>联系: 事物内部相互影响, 相互制约, 相互作用.</p>
+<ul>
+<li>性质:
+<ul>
+<li>客观性: 本身固有, 不以人的意志转移.</li>
+<li>广泛性</li>
+<li>多样性</li>
+</ul>
+</li>
+</ul>
+<p>事物的永恒发展:</p>
+<ul>
+<li>发展: 新事物的产生和旧事物的灭亡</li>
+<li>新事物: 符合事物的发展规律, 具有强大生命力和远大前途</li>
+<li>旧事物: 丧失了存在的必然性, 区域灭亡的事物</li>
+<li>发展是新事物取代旧事物</li>
+<li>运动, 变化, 发展的关系
+<ul>
+<li>事物不是绝对静止的, 不是凝固不变的</li>
+<li>运动引起变化, 发展是运动, 变化, 但是指的是前进向上的运动变化</li>
+</ul>
+</li>
+</ul>
+<h2>3大规律:</h2>
+<ul>
+<li>对立统一的定律</li>
+<li>质量互换的定律</li>
+<li>否定之否定的定律</li>
+</ul>
+<p>(1) 对立统一规律是事物发展的根本规律</p>
+<ul>
+<li>地位: 对立统一是唯物辩证法体系的实质和核心</li>
+<li>意义: 事物普遍联系的根本内容和永恒发展的内在动力.</li>
+<li>矛盾: 反映内部和事物之间的对立统一关系的哲学范畴
+<ul>
+<li><strong>同一性</strong>与<strong>斗争性</strong>
+<ul>
+<li>同一性: 矛盾双方相互依存, 相互贯通的性质和趋势.
+<ul>
+<li>对立面相互贯通, 在一定条件下相互转化</li>
+</ul>
+</li>
+<li>斗争性: 相互排斥, 相互分离的作用与趋势
+<ul>
+<li>形式: 对抗性和非对抗性</li>
+</ul>
+</li>
+<li>关系: 两种相反的属性, 但是相互联系, 不可分割</li>
+<li>作用:
+<ul>
+<li>同一性: 事物存在和发展的前提, 矛盾双方一方的发展以另一方发展为前提; 吸收有利于自身因素的发展; 规定了事物转化可能和发展的趋势</li>
+<li>矛盾性: 促进力量变化, 造成力量发展的不平衡, 为对立面的转化, 事物的质变创造条件.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>普遍性</strong>与<strong>特殊性</strong>:
+<ul>
+<li>普遍性: 任意的矛盾都有.</li>
+<li>特殊性:
+<ul>
+<li>不同事物的矛盾都是不相同的, 每一个矛盾都有自己的特点</li>
+<li>同一事物发展不同阶段各有不同的特点</li>
+<li>构成事物的诸多矛盾以及每一个矛盾不同方面各有不同的性质, 地位和作用</li>
+<li>意义: 具体问题, 具体分析</li>
+</ul>
+</li>
+<li>区别与联系:
+<ul>
+<li>普遍与特殊是相互联系的: 普遍性存在于特殊性中, 一般存在于个别之中, <em>特殊性包括普遍性</em></li>
+<li>区别:矛盾的共性是无条件的, 绝对的; 矛盾的特性是有条件的, 相对的.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>主要矛盾</strong>与<strong>次要矛盾</strong>
+<ul>
+<li>主要矛盾与次要矛盾:
+<ul>
+<li>主要矛盾:事物发展过程中处于支配地位, 起决定性作用的矛盾</li>
+<li>次要矛盾: 相对于主要矛盾处于服从地位的矛盾</li>
+</ul>
+</li>
+<li>主要方面和次要方面:
+<ul>
+<li>同一矛盾中, 处于支配地位, 起决定性作用的矛盾一方(决定)</li>
+<li>同一矛盾中处于被支配的一方, 不起主导作用的一方</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>(2) 质量互换定律</p>
+<ul>
+<li>质,量,度:
+<ul>
+<li>质(定义): 一个事物区别于其他事物的内在规定性</li>
+<li>量:是指事物存在发展的规模, 成都以及它的构成成分在空间上的排列等可以用数量表示的规定性.</li>
+<li>度: 就是一个事物保持自己质的量的限度
+<ul>
+<li>度是保持事物质的稳定性的数量界限，即事物的限度、幅度和范围，度的两端叫关节点或临界点，超出度的范围，此物就转化为他物.</li>
+<li>适度原则: 过与不及都是不对的</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>量变与质变
+<ul>
+<li>量变: 事物量的规定性变化, 事物的增减与次序的变动</li>
+<li>质变: 事物质的根本变化, 是事物由一种动态向另一质态的飞跃.</li>
+<li>辩证关系
+<ul>
+<li>量变是质变的必要准备</li>
+<li>质变是量变的必然结果</li>
+<li>...
+<ul>
+<li>局部的质变</li>
+<li>质变过程中有量变</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>(3) 否定之否定规律</p>
+<ul>
+<li>肯定与否定: 任何事物内部都存在着肯定与否定的因素
+<ul>
+<li>肯定因素: 维持现成事物中存在的方面</li>
+<li>否定因素: 促使现成事物灭亡的方面</li>
+</ul>
+</li>
+<li>辩证的否定观: 否定是事物的自我否定, 是事物内部矛盾运动的结果
+<ul>
+<li>作用: 是事物发展的环节, 否定是新旧事物联系的环节</li>
+<li>实质: 扬弃</li>
+<li>扬弃: 新事物对旧事物批判又继承, 既克服又保留.</li>
+</ul>
+</li>
+<li>否定之否定: 事物发展是经历肯定, 否定, 否定之否定三个阶段的.
+<ul>
+<li>特点: 螺旋式上升, 波浪式前进的过程</li>
+</ul>
+</li>
+</ul>
+<h2>5对范畴:</h2>
+<ul>
+<li>内容与形式</li>
+<li>本质与现象</li>
+<li>原因与结果</li>
+<li>必然与偶然</li>
+<li>现实与可能</li>
+</ul>
+<h2>思维方法</h2>
+<ul>
+<li>辩证思维方法</li>
+<li>现代科学思维方法</li>
+</ul>
+
+    </div>
+
+   
+   
+   
+    <hr>
+
+
+
+
+
+
+    <div id="disqus_thread"></div>
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script>
+        /**
+        *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+        *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+        
+        // var disqus_config = function () {
+        // this.page.url = ;  // Replace PAGE_URL with your page's canonical URL variable
+        // this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        // };
+        
+        (function() { // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        s.src = 'https://augpath.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <script id="dsq-count-scr" src="//augpath.disqus.com/count.js" async></script>
+  </body>
+</html>

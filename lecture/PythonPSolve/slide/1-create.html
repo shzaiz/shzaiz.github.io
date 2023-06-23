@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <title>Python问题求解1</title>
+    <link rel="shortcut icon" href="./favicon.ico" />
+    <link rel="stylesheet" href="./dist/reset.css" />
+    <link rel="stylesheet" href="https://jyywiki.cn/static/reveal/reveal.css" />
+    <link rel="stylesheet" href="https://jyywiki.cn/static/reveal/theme/simple.css" />
+    <link rel="stylesheet" href="./css/highlight/base16/zenburn.css" />
+
+    <style>
+        div.palette, div.boardhandle {
+  position: absolute;
+/*
+  height: 260px;
+  
+*/  
+  top: 20%;
+  transform: translateY(20%);
+  font-size: 24px;
+  border-radius: 0px;
+  border-top:    0px solid #222; 
+  border-right:  0px solid #222; 
+  border-bottom: 0px solid #222;
+  background: black;
+  transition: transform 0.3s;
+}
+
+div.palette  {
+  margin-top: 10px;
+    left: 0px;
+  padding-left: 0px;
+}
+
+div.boardhandle {
+  right: 0px;
+  padding-right:0px;
+}
+
+div.palette > ul,
+div.boardhandle > ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+div.palette > ul > li,
+div.boardhandle > ul > li {
+  margin: 20px;
+}
+    </style>
+    <script src="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/plugin.js"></script>
+
+
+
+  </head>
+  <body>
+    <style>
+
+        img {
+          max-width: auto;
+          cursor: move;
+        }
+
+        html, body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: 500;
+            
+        }
+        .reveal pre code {
+  max-height: none;
+} 
+        .reveal code {
+  font-family:  Monospace!important;
+} 
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+            position: fixed; /* Set the navbar to fixed position */
+            top: 0; /* Position the navbar at the top of the page */
+            width: 100%; /* Full width */
+        }
+  
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+  
+        a {
+            color: #148bca;
+            text-align: center;
+            padding-left: 10px;
+            padding-right: 10px;
+            text-decoration: none;
+        }
+        .reveal .slide-number {
+            font-size: 26px;
+            border-radius: 5px;
+            background-color: rgba(0, 0, 0, .3);
+        }
+
+        .reveal {
+            display: flex!important;
+            align-items: stretch!important;
+            top:0%
+        }
+        .reveal .slides {
+            display: flex!important;
+            align-items: stretch!important;
+            border: 1.5px #ddd solid;
+            border-radius: 7px;
+            text-align: left;
+            font-weight: 300;
+        }
+        
+        .reveal h1,
+        .reveal h2,
+        .reveal h3,
+        .reveal h4 {
+            font-family: 'Lato', 'SimHei', 'STXihei', 'Sans Serif';
+            font-weight: 400;
+        }
+
+        .element style {
+            top: 0%, !important;
+
+        }
+
+        .reveal p,
+        .reveal li,
+        .reveal center {
+            font-size: 32px;
+            font-family: 'Lato', 'STHeiti', 'SimHei', 'Sans Serif';
+        }
+
+        .reveal li+li {
+            margin-top: 10px;
+        }
+
+        .reveal ul {
+            display: block;
+            margin-right: 15px;
+        }
+
+        .reveal p,
+        .reveal h1,
+        .reveal h2,
+        .reveal h3,
+        .reveal h4,
+        .reveal h5 {
+            padding: 0 25px 0 25px;
+        }
+
+        .reveal table {
+            font-size: 32px;
+            font-family: 'Lato', 'STHeiti', 'SimHei', 'Sans Serif';
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+
+        .reveal th {
+            background-color: #eee;
+        }
+
+        .reveal tr:nth-child(even) {
+            background-color: #efffff;
+        }
+
+        .reveal h1,
+        .reveal h2,
+        .reveal h3,
+        .reveal h4,
+        .reveal h5,
+        .reveal h6 {
+            text-align: left;
+            margin: 0 0 20px 0;
+            color: #222;
+            font-weight: 400;
+            line-height: 1.2;
+            letter-spacing: normal;
+        }
+
+        .reveal h1 {
+            margin: 0 10 0 10;
+            font-size: 60px;
+        }
+
+        .reveal .middle h1 {
+            text-align: center;
+            align-content: center;
+            justify-content: center;
+        }
+
+        .reveal h2 {
+            font-size: 48px;
+            border-bottom: 2px solid rgb(106, 0, 95);
+            padding-bottom: 5px;
+        }
+
+        .reveal h3 {
+            font-size: 1.15em;
+        }
+
+        .reveal h4 {
+            font-size: 1.05em;
+        }
+
+        .reveal .center {
+            text-align: center;
+        }
+
+        .reveal .middle {
+            height: 728px;
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+
+        .reveal pre {
+            font-size: 28px;
+
+            background-color: #eee;
+
+            border-radius: 3mm;
+            padding: 10px 10px 10px 10px;
+        }
+
+        .reveal pre code {
+            max-height: none;
+        }
+
+        .reveal code {
+            font-family: 'Inconsolata', 'STKaiti', 'KaiTi', 'Sans Serif', Monospace;
+        }
+
+        .reveal .middle blockquote {
+            text-align: center;
+            color: rgb(106, 0, 95);
+            background: none;
+            box-shadow: none;
+        }
+
+        .reveal .middle blockquote a {
+            color: inherit;
+        }
+
+        .reveal blockquote p,
+        .reveal blockquote li {
+            font-family: 'Lato', 'STKaiti', 'KaiTi', 'Sans Serif';
+        }
+
+        section .center {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .reveal .author-block {
+            margin: 75px 0 35px 0;
+        }
+
+        .reveal .author-affiliation img {
+            margin: 15px 0 0 0;
+        }
+
+
+        .reveal .author-block p,
+        .reveal .author-affiliation p {
+            font-family: 'Kaiti', 'STKaiti', 'Serif', 'Times', 'Times New Roman';
+            margin-block-start: 0em;
+            margin-block-end: 0em;
+        }
+
+        .middle {
+          display: flex;
+          text-align: center;
+          align-items: center;
+          width: 100%;
+          justify-content: center;
+      }
+        .reveal .author-affiliation {
+            display: inline-block;
+            font-size: 90%;
+        }
+
+        .reveal hr {
+            border: 10px solid rgba(0, 0, 0, 0);
+        }
+
+        .reveal li {
+            margin-top: 10px;
+        }
+ 
+      </style>
+        <a href="index.html"> ↑ Back to contents</a>
+    <div class="reveal">
+      <div class="slides"><section  data-markdown><script type="text/template">
+
+# <slide class="center middle"/> 用Python创造一个世界
+
+
+</script></section><section ><section data-markdown><script type="text/template">
+
+
+
+# <slide class="center middle"/>计算机中的实验
+
+</script></section><section data-markdown><script type="text/template">
+
+## 所以试着安装 Python ...
+
+ Python是什么? 能吃吗?
+
+> 内心: 我x, 又xx要学一门新东西, 劳资不要!
+
+</script></section><section data-markdown><script type="text/template">
+
+## 所以安装完的东西在哪呢
+
+嗯... 应该在开始菜单里面...
+
+</script></section></section><section ><section data-markdown><script type="text/template">
+# <slide class="center middle"/>高级计算器
+
+</script></section><section data-markdown><script type="text/template">
+
+## 试着输入表达式
+
+```python
+>>> 1+2
+... 3
+>>> 2**64
+... 18446744073709551616
+```
+
+</script></section><section data-markdown><script type="text/template">
+
+## 如果运算非常多的时候
+
+我们可以把值暂时存放在一个变量里面. 
+
+```python
+>>> i = 2+3
+>>> j = (114*524)/2
+>>> ij = (2+3)/4+5*6-7
+>>> i
+... 5
+>>> j
+... 29868.0
+>>> ij
+... 24.25
+```
+
+注意: `ij`不是$i\times j$, 而是一个独立的名字.
+
+</script></section></section><section ><section data-markdown><script type="text/template">
+
+# <slide class="center middle"/>字符
+
+</script></section><section data-markdown><script type="text/template">
+
+## 光能算数不够劲啊
+
+可以显示一点东西: 
+```python
+>>> "Hello world!"
+... 'Hello world'
+```
+
+如果显示的文本有`"`怎么办?
+
+```python
+>>> "He said:"We have many ideas. ""
+...  File "<ipython-input-5-eb083f70d66d>", line 1
+     "He said:"We have many ideas. ""
+               ^
+     SyntaxError: invalid syntax
+```
+
+Oops.
+
+</script></section><section data-markdown><script type="text/template">
+
+## 忽略字符
+
+```python
+>>> "He said:\"We have many ideas. \""
+... 'He said:"We have many ideas. "'
+```
+
+</script></section><section data-markdown><script type="text/template">
+
+## 下标和截取字符
+
+```
+ +---+---+---+---+---+---+
+ | P | y | t | h | o | n |
+ +---+---+---+---+---+---+
+ 0   1   2   3   4   5   6
+-6  -5  -4  -3  -2  -1
+```
+```py
+>>> word[-1]  # last character
+>>> word[-2]  # second-last character
+>>> word[-6]
+>>> word[0:2]  # characters from position 0 (included) to 2 (excluded)
+>>> word[2:5]  # characters from position 2 (included) to 5 (excluded)
+>>> word[:2]   # character from the beginning to position 2 (excluded)
+>>> word[4:]   # characters from position 4 (included) to the end
+>>> word[-2:]  # characters from the second-last (included) to the end
+>>> word[:2] + word[2:]
+>>> word[:4] + word[4:]
+```
+</script></section></section><section ><section data-markdown><script type="text/template">
+
+# <slide class="center middle"/>列表
+
+</script></section><section data-markdown><script type="text/template">
+
+## 一个例子: 数列
+```python
+>>> squares = [1, 4, 9, 16, 25]
+>>> squares
+[1, 4, 9, 16, 25]
+>>> squares[0]=2
+>>> squares.append(114514)
+>>> squares.remove(1) # Once per time
+```
+
+</script></section><section data-markdown><script type="text/template">
+
+## 什么都可以是一个列表
+
+```python
+>>> a = [1, 1, 4, 5, 1, 4]
+>>> for i in a: 
+...     print(i)
+>>> a.append(a)
+>>> a
+    [1, 1, 4, 5, 1, 4, [...]]
+>>> a[6]
+    [1, 1, 4, 5, 1, 4, [...]]
+>>> a[6][6][6][6]
+    [1, 1, 4, 5, 1, 4, [...]]
+```
+
+</script></section></section><section ><section data-markdown><script type="text/template">
+
+# <slide class="center middle"/>控制语句和一些算法
+
+</script></section><section data-markdown><script type="text/template"> 
+
+## 自动计算Fib数列
+
+```python
+n = 1
+fibs = [1, 1]
+while (n<=10): 
+    fibs.append(fibs[n]+fibs[n-1])
+    n = n+1
+print("The ans = "+str(a[n-1]))
+```
+
+优化: 有必要吗? 好像只要两个变量就行了. 
+
+```python
+while a < 10:
+    print(a)
+    a, b = b, a+b
+```
+
+</script></section><section data-markdown><script type="text/template">
+
+## 思考: 交换变量
+
+```python
+a, b = b, a
+# It is equivlent to
+a = t
+b = a
+b = t
+# More languages dont support such operations(C++)
+```
+
+</script></section><section data-markdown><script type="text/template">
+
+## 更多控制语句
+
+- `if elif else`
+- `for`
+- `range`
+- `break`
+- `pass`
+- 要是这么讲肯定不过多久就烦了, 而且记不住
+- 用好帮助功能
+
+</script></section><section data-markdown><script type="text/template">
+
+## 获取帮助: `Python 3.10 Manuals (64-bit)
+
+> 内心: 我■这啥, 这么长, 还是全都是英语的, 这说的啥啊
+
+Don't panic, 其实我们可以冷静下来找点头绪. 
+
+- What's new in Py3.10
+- Python module index
+- The python tutorial <---对, 就是他
+
+</script></section><section data-markdown><script type="text/template">
+
+## 好吧, 我承认
+
+- 刚刚很多的东西都是抄这里面的
+- 足够友好
+- 并且非常多的例子!
+
+</script></section><section data-markdown><script type="text/template">
+
+## 看不懂怎么办
+
+- Case1. 有个大概的印象, 然后忽略他, 在未来你想实现一个需求但发现没有对应的内容的时候, 回到这里
+- Case2. 问身边的同学/Google.
+- Case3. 不用他, 用更低级的内容也可以实现
+- 但我提到的东西一般是很重要的
+
+例子: `for i in range()...`
+```python
+>>> a = [1, 1, 4, 5, 1, 4]
+>>> for i in range(len(a)): 
+...     print(a[i])
+```
+
+</script></section><section data-markdown><script type="text/template">
+
+## 定义过程(函数)
+
+```python
+>>> def fib(n):    # write Fibonacci series up to n
+...     """Print a Fibonacci series up to n."""
+...     a, b = 0, 1
+...     while a < n:
+...         print(a, end=' ')
+...         a, b = b, a+b
+...     print()
+...
+>>> # Now call the function we just defined:
+... fib(2000)
+
+```
+
+</script></section><section data-markdown><script type="text/template">
+
+## 有趣的事情: 
+
+```python
+def fib(n):
+    if(n==1): 
+        return 1
+    if(n==2): 
+        return 1
+    else: 
+        return fib(n-1)+fib(n-2)
+
+fib(5)
+```
+
+为什么会变慢?
+
+</script></section></section><section ><section data-markdown><script type="text/template">
+
+# <slide class="center middle"/>成为执行器
+</script></section><section data-markdown><script type="text/template">
+
+## 为什么?
+- 我们会写`bug`
+- 一步一步模拟执行就会帮助我们定位`bug`
+- 我们举几个例子
+- 这才是真正要讲的
+
+</script></section><section data-markdown><script type="text/template">
+
+## 例子1. 热身练习
+```python
+def getpercent(chinese, math, english): 
+    return (chinese+math+english)/(150+150+150)
+
+print(getpercent(100, 120, 135))
+```
+</script></section><section data-markdown><script type="text/template">
+
+## 例子2. 一个循环
+
+```python
+money = [10, 14, 13, 10]
+int total = 0
+for i in money: 
+    total = total + i
+
+print(money)
+```
+
+</script></section><section data-markdown><script type="text/template">
+
+## 例子3. 奇怪的过程
+
+```python
+def isprime(x): 
+    flag = 1
+    d=2
+    while d<x:
+        if x%d == 0: 
+            flag = 0
+        d = d+1
+    if flag: 
+        return 1
+    else: 
+        return 0
+```
+
+可以优化这个过程吗?
+
+</script></section><section data-markdown><script type="text/template">
+
+## 例子4. 刚刚奇怪的东西
+
+```python
+def fib(n):
+    if(n==1): 
+        return 1
+    if(n==2): 
+        return 1
+    else: 
+        return fib(n-1) + \ 
+               fib(n-2)
+
+fib(5)
+```
+
+- 每一个程序都是一个纸片, 上面标注着当前执行到的行数
+- 每次函数调用的时候, 就会在一张新的纸片上抄下来调用的内容
+- 把这个内容放在原来纸片上面, 然后从第一行开始执行 
+- 执行完的纸片扔掉
+
+</script></section><section data-markdown><script type="text/template">
+## 例子4. 刚刚奇怪的东西(contd)
+
+像极了这样的场景
+
+- 你在晚自习上看课外书(执行原来的函数)
+- 老师来了, 让你写作业(函数调用)
+- 你把作业叠放在课外书上, 开始做作业 (执行函数)
+- ~~(象征性的)~~ 做完作业之后你把作业扔了继续看课外书(回到原来的函数)
+
+程序是不会犯错的, 所以它不会象征性的做函数调用. 
+
+> 程序就是状态机, 我们可以观测状态机的设计, 实现, 执行. 
+
+</script></section></section><section ><section data-markdown><script type="text/template">
+
+# <slide class="center middle"/>总结: 学到了什么
+</script></section><section data-markdown><script type="text/template">
+## 这些不是重点
+
+- Q. Python的语法是什么? 我记不住
+- A. 多试几次就记住了, 犯错是被允许的, 即使是最厉害的程序员也无法写出完全正确的代码.
+
+</script></section><section data-markdown><script type="text/template">
+
+## 如何获取帮助
+
+- Manual找到合适的索引!
+- 问同学/Google
+- 换教材, 如果看不懂的话(尤其是国内作者的教材)
+
+</script></section><section data-markdown><script type="text/template">
+
+## 如何调试(debug)
+
+- 跟着程序执行, 假装我就是程序, 观察和你预想的地方有什么不对的
+- 很折磨人
+- 但是: 机器永远是对的
+- 有debugger有时候可以帮助(以后会说)
+
+</script></section><section data-markdown><script type="text/template">
+
+## 激动人心的事情
+
+- 只用今天我们说的这些内容, 你就可以实现一切能够造出来的东西!!!
+
+为什么?
+
+它的计算能力是和[TRM](http://jyywiki.cn/ICS/2020/slides/9.slides#/2/1)等价的. 
+- 纸带 [(1, 0),...]
+- (移动读写头) pos++, pos--
+- (写内存) mem[pos] = 0, mem[pos] = 1
+- (读内存) if (mem[pos]) {...} else {...}
+- (跳转) goto label
+- (终止) halt()
+
+Happy Hacking!!!
+
+</script></section></section><section  data-markdown><script type="text/template">
+
+# <slide class="center middle"/>End.</script></section></div>
+    </div>
+
+    <script src="./dist/reveal.js"></script>
+
+    <script src="./plugin/markdown/markdown.js"></script>
+    <script src="./plugin/highlight/highlight.js"></script>
+    <script src="./plugin/zoom/zoom.js"></script>
+    <script src="./plugin/notes/notes.js"></script>
+    <script src="./plugin/math/math.js"></script>
+    <script>
+      function extend() {
+        var target = {};
+        for (var i = 0; i < arguments.length; i++) {
+          var source = arguments[i];
+          for (var key in source) {
+            if (source.hasOwnProperty(key)) {
+              target[key] = source[key];
+            }
+          }
+        }
+        return target;
+      }
+
+      // default options to init reveal.js
+      var defaultOptions = {
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+        transition: 'default', // none/fade/slide/convex/concave/zoom
+        controls: true,
+        slideNumber: true,
+        plugins: [
+          RevealMarkdown,
+          RevealHighlight,
+          RevealZoom,
+          RevealNotes,
+          RevealMath,
+          RevealChalkboard,
+        ],
+        chalkboard: {
+            background: ['none', 'https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/img/blackboard.png'],
+            boardmarkerWidth: 5,
+            theme: 'whiteboard'
+            }
+      };
+
+      // options from URL query string
+      var queryOptions = Reveal().getQueryHash() || {};
+
+      var options = extend(defaultOptions, {"transition":"slide","center":false}, queryOptions);
+    </script>
+
+
+    <script>
+      Reveal.initialize(options);
+    </script>
+    <script>
+      const images = document.getElementsByTagName('img');
+      for (let i = 0; i < images.length; i++) {
+        // Add event listener to handle drag start
+        images[i].onmousedown=(function() {
+          images[i].data=("dragging");
+        });
+
+        images[i].onmouseup=(function() {
+          images[i].data=("notdragging");
+        });
+        images[i].onmousemove=(function(e) {
+          if (images[i].data!=("dragging"))
+              return;
+          
+               hor = (e.clientX - images[i].width/2).toString()+"px";
+               ver = (e.clientY - images[i].height/2)+"px";
+               images[i].style.transform = "translate("+hor+","+ver+")";
+              
+          });
+      }
+    </script>
+  </body>
+</html>

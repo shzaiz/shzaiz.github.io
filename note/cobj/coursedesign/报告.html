@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <link rel="stylesheet" href="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/style.css">
+    <script src="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/plugin.js"></script> 
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
+ 
+    <script>
+const copyButtonLabel = "Copy Code";
+
+// use a class selector if available
+let blocks = document.querySelectorAll("pre");
+
+blocks.forEach((block) => {
+  // only add button if browser supports Clipboard API
+  if (navigator.clipboard) {
+    let button = document.createElement("button");
+
+    button.innerText = copyButtonLabel;
+    block.appendChild(button);
+
+    button.addEventListener("click", async () => {
+      await copyCode(block);
+    });
+  }
+});
+
+async function copyCode(block) {
+  let code = block.querySelector("code");
+  let text = code.innerText;
+
+  await navigator.clipboard.writeText(text);
+}
+    </script>
+      <style>
+        body {counter-reset:section;}
+        h1 {counter-reset:subsection;font-size:x-large;}
+        h2 {font-size: large;}
+        
+        h1:before {
+        counter-increment:section;
+        content:counter(section) ". ";
+            font-weight:bold;
+            font-size: x-large;
+        }
+        h2:before {
+        counter-increment:subsection;
+        content:counter(section) "." counter(subsection) " ";
+        font-size: large;
+        }
+        html, body {
+            margin: 5%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: 500;
+        }
+        code {
+            font-family: 'Courier New', Courier, monospace;
+        } 
+
+        pre {
+            font-family: 'Courier New', Courier, monospace;
+        } 
+        div{
+            max-width: 100%;
+            overflow: auto;
+            
+        }
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+            position: fixed; /* Set the navbar to fixed position */
+            top: 0; /* Position the navbar at the top of the page */
+            width: 100%; /* Full width */
+        }
+
+        img {
+        max-width: 80%;
+        height: auto;
+        }
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        a {
+            color: #148bca;
+            text-align: center;
+            padding-left: 2px;
+            padding-right: 2px;
+            text-decoration: none;
+        }
+
+        p.hidden {
+          overflow: hidden;
+        }
+
+    </style>
+  </head>
+  <body>
+    
+    <div class="navbar">
+        <a href="https://shzaiz.github.io">AUG's Wiki</a>
+        <a href="index.html"> ↑ Back to contents</a>
+        Last updated at 2023-06-23 16:54:15.267752
+    </div>
+
+    <div class="toc"></div>
+    <a id="toc-button"><i class="far fa-bookmark"></i></a>
+    
+    <div>
+      <hr />
+<h2>title: 课设报告
+separator: ----
+verticalSeparator: ---
+revealOptions:
+transition: &#x27;slide&#x27;
+center: false</h2>
+<h1>Bell多项式</h1>
+<hr />
+<h2>集合的划分</h2>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Bell_polynomials">Bell polynomials - Wikipedia</a> Comb. meaning</li>
+<li>递推关系</li>
+</ul>
+<p>$$
+\displaystyle{  B_{n,k} = \sum_{i=1}^{n-k+1} \binom{n-1}{i-1} x_i B_{n-i,k-1}, }
+$$</p>
+<hr />
+<h2>完全Bell多项式: 从 \(1\) 到 \(n\) 求和</h2>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span>...
+<span style="color: #bbbbbb">	</span><span style="color: #008000; font-weight: bold">for</span><span style="color: #19177C">(int</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">i</span><span style="color: #666666">=2</span><span style="color: #3D7B7B; font-style: italic">; i&lt;=n; i++){</span>
+<span style="color: #bbbbbb">        </span><span style="color: #008000">result</span><span style="color: #bbbbbb"> </span><span style="color: #666666">+=</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">bell_incomplete_poly(n</span>,<span style="color: #bbbbbb"> </span><span style="color: #19177C">i</span>,<span style="color: #bbbbbb"> </span><span style="color: #19177C">symbols)</span><span style="color: #3D7B7B; font-style: italic">;</span>
+<span style="color: #bbbbbb">    </span>}
+...
+</pre></div>
+
+<hr />
+<h1>理论基础</h1>
+<hr />
+<h2>Joint cumulants介绍</h2>
+<ul>
+<li>随机变量之间的相关性和依赖关系</li>
+<li>如同协方差(两个随机变量之间的线性关系强度), 相关系数
+<ul>
+<li>协方差:  \(\text{Cov}(X,Y) = \frac{{\sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y})}}{{n}}\) </li>
+<li>相关系数:  \(\rho_{X,Y} = \frac{{\text{Cov}(X,Y)}}{{\sigma_X \sigma_Y}}\) </li>
+</ul>
+</li>
+</ul>
+<hr />
+<h2>Joint cumulants 计算</h2>
+<ul>
+<li>给定一个 \(k\) 个随机变量的集合</li>
+<li>计算raw moments(变量的个数幂次和)
+<ul>
+<li>一个变量:  \((\frac{1}{n})x_{1}+x_{2}+x_{3}+\cdots +x_{n}.\) </li>
+<li>两个变量:  \((\frac{1}{n^{2}})x_{1}^{2}+x_{2}^{2}+\cdots +x_n^2.\) </li>
+<li>...</li>
+</ul>
+</li>
+<li>原始矩计算central moments. 中心矩是变量与其期望值的偏差的幂次和，例如，二阶中心矩是变量的方差。</li>
+<li>对于给定的变量组合，使用中心矩计算累积量。</li>
+<li>较为复杂, 不具有机械操作意义</li>
+</ul>
+<hr />
+<h2>Joint cumulants 计算</h2>
+<p>给出的公式:
+$$
+\displaystyle{ \kappa(X_1,\dots,X_n) =\sum_\pi (|\pi|-1)!(-1)^{|\pi|-1}\prod_{B\in\pi}E\left(\prod_{i\in B}X_i\right) }
+$$</p>
+<ul>
+<li> \(\pi\) 是所有的集合的划分(Bell数)</li>
+<li>例子:
+<ul>
+<li> \(\small{ \kappa(X,Y)=\operatorname E(XY) - \operatorname E(X) \operatorname E(Y), }\) </li>
+<li> \(\small{ \kappa(X,Y,Z)=\operatorname E(XYZ) - \operatorname E(XY) \operatorname E(Z) - \operatorname E(XZ) \operatorname E(Y) - \operatorname E(YZ) \operatorname E(X) + 2\operatorname E(X)\operatorname E(Y)\operatorname E(Z).\, }\) </li>
+<li> \(\small{ \kappa(X,X,Z)=\operatorname E(X^2Z)  -2\operatorname E(XZ)\operatorname E(X) - \operatorname E(X^2)\operatorname E(Z) + 2\operatorname E(X)^2\operatorname E(Z),\, }\) </li>
+</ul>
+</li>
+</ul>
+<hr />
+<h2>Joint cumulants 计算(contd)</h2>
+<p>给出的公式:
+$$
+\displaystyle{ \kappa(X_1,\dots,X_n) =\sum_\pi (|\pi|-1)!(-1)^{|\pi|-1}\prod_{B\in\pi}E\left(\prod_{i\in B}X_i\right) }
+$$</p>
+<ul>
+<li> \(\pi\) 是所有的集合的划分(Bell数)</li>
+<li>演示
+<ul>
+<li><code>-Ex(y)*Ex(x)+Ex(y*x)</code></li>
+<li><code>-Ex(y*z)*Ex(x)-Ex(z)*Ex(y*x)+Ex(y*z*x)-Ex(y)*Ex(z*x)+2*Ex(y)*Ex(z)*Ex(x)</code></li>
+<li><code>-Ex(x^2)*Ex(z)+2*Ex(z)*Ex(x)^2-2*Ex(z*x)*Ex(x)+Ex(z*x^2)</code></li>
+</ul>
+</li>
+</ul>
+<hr />
+<h1>思想与方法</h1>
+<hr />
+<h2>关键算法1. 枚举集合的划分</h2>
+<ul>
+<li>见<code>cumulant.cpp</code> 中的<code>generatePartitions</code>.</li>
+</ul>
+<hr />
+<h2>关键思路2. 使用计算机代数系统</h2>
+<ul>
+<li>使用<a href="https://www.ginac.de/tutorial.pdf">GiNaC代数系统</a></li>
+<li>支持符号运算, 不用重复造轮子</li>
+</ul>
+<hr />
+<h2>思考: 元编程(meta-programming)</h2>
+<ul>
+<li>为了可拓展性:</li>
+</ul>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #bbbbbb">    </span><span style="color: #3D7B7B; font-style: italic">// REG_MENU_ITEM(initReading);</span>
+<span style="color: #bbbbbb">    </span><span style="color: #3D7B7B; font-style: italic">// REG_MENU_ITEM(initFunction);</span>
+<span style="color: #bbbbbb">    </span><span style="color: #3D7B7B; font-style: italic">// REG_MENU_ITEM(changeVar);</span>
+<span style="color: #bbbbbb">    </span><span style="color: #3D7B7B; font-style: italic">// REG_MENU_ITEM(changeVal);</span>
+<span style="color: #bbbbbb">    </span><span style="color: #3D7B7B; font-style: italic">// REG_MENU_ITEM(evaluateExpr);</span>
+<span style="color: #bbbbbb">    </span><span style="color: #3D7B7B; font-style: italic">// REG_MENU_ITEM(evaluateNumeral);</span>
+</pre></div>
+
+<hr />
+<h2>元编程(contd)</h2>
+<ul>
+<li>Recall:
+<ul>
+<li><code>a#b</code> 转换为字符常量: print(#x)</li>
+<li><code>a##b</code> 连接称为一个token</li>
+</ul>
+</li>
+<li>应用案例: 菜单</li>
+</ul>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #9C6500">#define MENU_ITEM_LOGIC(name, procedure, stat) \</span>
+<span style="color: #9C6500">		void name(){ procedure ;pause(); }\</span>
+<span style="color: #9C6500">	    static void name##Stat(){ cout&lt;&lt;(stat);}</span>
+</pre></div>
+
+<hr />
+<h2>X-Macro</h2>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #9C6500">#define FUNCTIONS \</span>
+<span style="color: #9C6500">        X(initReading)\</span>
+<span style="color: #9C6500">        X(initFunction)\</span>
+<span style="color: #9C6500">        X(changeVar) \</span>
+<span style="color: #9C6500">        X(changeVal) \</span>
+<span style="color: #9C6500">        X(evaluateExpr) \</span>
+<span style="color: #9C6500">        X(evaluateNumeral)</span>
+<span style="color: #9C6500">#define REG_MENU_ITEM(name) menu.addOption(name, name##Stat); </span>
+
+<span style="color: #9C6500">#define X(val) REG_MENU_ITEM(val);</span>
+FUNCTIONS;
+<span style="color: #9C6500">#undef X</span>
+</pre></div>
+
+
+    </div>
+
+   
+   
+   
+    <hr>
+
+
+
+
+
+
+    <div id="disqus_thread"></div>
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script>
+        /**
+        *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+        *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+        
+        // var disqus_config = function () {
+        // this.page.url = ;  // Replace PAGE_URL with your page's canonical URL variable
+        // this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        // };
+        
+        (function() { // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        s.src = 'https://augpath.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <script id="dsq-count-scr" src="//augpath.disqus.com/count.js" async></script>
+  </body>
+</html>

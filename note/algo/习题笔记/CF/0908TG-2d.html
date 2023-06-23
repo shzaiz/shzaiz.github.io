@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <link rel="stylesheet" href="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/style.css">
+    <script src="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/plugin.js"></script> 
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
+ 
+    <script>
+const copyButtonLabel = "Copy Code";
+
+// use a class selector if available
+let blocks = document.querySelectorAll("pre");
+
+blocks.forEach((block) => {
+  // only add button if browser supports Clipboard API
+  if (navigator.clipboard) {
+    let button = document.createElement("button");
+
+    button.innerText = copyButtonLabel;
+    block.appendChild(button);
+
+    button.addEventListener("click", async () => {
+      await copyCode(block);
+    });
+  }
+});
+
+async function copyCode(block) {
+  let code = block.querySelector("code");
+  let text = code.innerText;
+
+  await navigator.clipboard.writeText(text);
+}
+    </script>
+      <style>
+        body {counter-reset:section;}
+        h1 {counter-reset:subsection;font-size:x-large;}
+        h2 {font-size: large;}
+        
+        h1:before {
+        counter-increment:section;
+        content:counter(section) ". ";
+            font-weight:bold;
+            font-size: x-large;
+        }
+        h2:before {
+        counter-increment:subsection;
+        content:counter(section) "." counter(subsection) " ";
+        font-size: large;
+        }
+        html, body {
+            margin: 5%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: 500;
+        }
+        code {
+            font-family: 'Courier New', Courier, monospace;
+        } 
+
+        pre {
+            font-family: 'Courier New', Courier, monospace;
+        } 
+        div{
+            max-width: 100%;
+            overflow: auto;
+            
+        }
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+            position: fixed; /* Set the navbar to fixed position */
+            top: 0; /* Position the navbar at the top of the page */
+            width: 100%; /* Full width */
+        }
+
+        img {
+        max-width: 80%;
+        height: auto;
+        }
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        a {
+            color: #148bca;
+            text-align: center;
+            padding-left: 2px;
+            padding-right: 2px;
+            text-decoration: none;
+        }
+
+        p.hidden {
+          overflow: hidden;
+        }
+
+    </style>
+  </head>
+  <body>
+    
+    <div class="navbar">
+        <a href="https://shzaiz.github.io">AUG's Wiki</a>
+        <a href="index.html"> ↑ Back to contents</a>
+        Last updated at 2023-06-23 16:54:15.796024
+    </div>
+
+    <div class="toc"></div>
+    <a id="toc-button"><i class="far fa-bookmark"></i></a>
+    
+    <div>
+      <h1><a href="https://www.luogu.com.cn/problem/CF1718B">CF1718B Fibonacci Strings</a></h1>
+<p><strong>想法</strong>. (1) 观察 Fibs 数列, 看到其中有 \(2\) 个 \(1\) , 余下的数列是单调递增的.
+(2) 考虑到数据比较小, 我们应该可以对于每一个 \(c_i\) ,  \(n^2\) 时间进行表示复杂度, 成若干的 Fibs 数列中的项的和.
+(3) 虽然上述做法可行, 但是一个数有多种表示方式的时候事情就会变得很难. 因为我们不知道如何分配这些数字出现的次数使得他们不相邻.</p>
+<p><strong>观察</strong>. 注意到一个串合法的话, 它所有字符的数量是 Fib 数列的前缀和  \((1,2,4,7,12,\cdots)\) , 如果它所有字符的数量都不符合的话, 这个串显然是不合法的.</p>
+<p>下面考虑如何去分配这些块. 有两种选择:</p>
+<ul>
+<li>先用数量少的字符去放小的空</li>
+<li>先用数量多的字符去放大的空</li>
+</ul>
+<p>根据 Fib 的单调性, 注意到第二种方案是好的. 因此得到贪心算法, 每次先填大的, 等到不足否的时候就或者放过上一个放的字符就表示不满足.</p>
+<h1><a href="https://www.luogu.com.cn/problem/CF1720D1">CF1720D1 Xor-Subsequence (easy version)</a></h1>
+<p>这篇题目感觉好绕, 于是抄了一份更容易懂的题目:</p>
+<ul>
+<li><strong>子序列定义</strong>：从最初序列通过去除某些元素, 但不破坏余下元素的相对位置而形成的新序列. 例如, 有一个序列为  \([1,2,3,4,5]\) , 则  \([1,4,5]\)  是这个序列的一个子序列.</li>
+<li>给定一个长度为  \(n\)  的整数序列  \(a\) , 从  \(0\)  开始编号. 其中所有的元素  \(a_i\) 都满足  \(a_i\le 200\) </li>
+<li>如果  \(a\)  有一个子序列  \(b\) , 从  \(0\)  开始编号, 并且它的长度为  \(m\) . 其中, 对于所有的  \(0\le i&lt;m\)  , 满足  \(b_i \oplus (i+1)&lt;b_{i+1}\oplus i\) . 那么这个子序列就被称作美丽的子序列.</li>
+<li>求  \(a\)  中最长的美丽的子序列.</li>
+</ul>
+<p><strong>想法</strong>. 考虑朴素的 \(dp\) , 因为很像LIS. 因此定义 \(dp[i]\) 是当前考虑到了第 \(i\) 个数, 最长的东西</p>
+<p>$$
+dp[i] = \max_{i=0}^j (dp[j][a_j \oplus i&lt;a_i \oplus j]+1).
+$$</p>
+<p>但是这样做时间复杂度是 \(\mathcal O(n^2)\) 的, 显然无法通过 \(3\times 10^5\) . ! 因此我们要考虑优化.</p>
+<p><strong>xor的性质</strong>.</p>
+<p>$$
+|i-a_j| \leq i \oplus a_j\\
+i+a_j \geq i \oplus a_j\\
+$$</p>
+<p>直观来讲, 对于加的一边, 因为每一位同0异1, 考虑每个数的二进制拆分. 这里就相当于丢失了carrier的加法器, 自然会比原来小.</p>
+<p>另一方面也是一样的.</p>
+<p><strong>优化</strong>. 因为上面的,  \(a_i\oplus(i+401)&lt;a_{i+401}\oplus i\) .</p>
+<h1><a href="https://www.luogu.com.cn/problem/CF1714G">CF1714G Path Prefixes</a></h1>
+<p><strong>别慌</strong>. 这是 Div. 3的G题.</p>
+<p><strong>像倍增LCA一样</strong>. 维护到此路径的 \(\sum a_j, \sum b_j\) , 然后定义 \(fa[n][x]\) 表示节点 \(n\) 往上的 \(2^x\) 节点的 \(b_j\) 值.</p>
+<h1><a href="https://www.luogu.com.cn/problem/CF1714D">CF1714D Color with Occurrences</a></h1>
+<p>其实一开始没思路, 因为是和字符串相关的, 可能有点畏难心理. 这并不好.</p>
+<p>这是一道涉及区间dp的问题.</p>
+<p><strong>设计状态</strong>. 令 \(f[i]\) 是 \(t_0\) 到 \(t_{i-1}\) 这一段染成红色的最小步数. 注意到边界条件是 \(f[0]=0\) . 假设以 \(i\) 为起点,  \(to\) 为可以到达的终点( \(\texttt{to}-1\) ), 那么状态转移方程为
+$$
+f[to]=\min(f[i]+1, f[to]).
+$$</p>
+<p>要枚举 \(to\) , 我们不妨一个一个字符 \(a_i\) 去匹配, 这样把它们染红就行了.</p>
+<p>可以先枚举 \(i\) , 再枚举出所有可以以 \(t_i\) 为左端点, 可以匹配到右端点的字符串 \(s_j\) . 那么 \(to\in[|s_j|, |s_j+i|]\) , 这样, 我们就可以对 \([i..(i+s_j-1)]\) 染色(区间的每一个状态都要更新).</p>
+<p><strong>思考</strong>. 为什么设计状态是 \(f[i]\) 而不是 \(f[i][j]\) 表示 \(i\) 到 \(j\) 的区间里的?
+因为染色不具有方向性, 不妨假定一个合理的染色方向, 使得问题容易处理.</p>
+<p><strong>更好的实现</strong>. 令 \(match[i][j]\) 表示从字符串的 \(i\) 位, 后面的 \(j\) 位会不会匹配一个字符串.</p>
+<p>但是还可以使用贪心的算法.</p>
+<p><strong>区间覆盖问题</strong>. 给定 \(n\) 个区间和一个范围 \([a, b]\) ,选择尽量少的区间, 使得 \([a, b]\) 能够被完全覆盖.</p>
+<p>下面是解决问题的算法:</p>
+<ul>
+<li>将每一个区间按照左端点递增顺序排列</li>
+<li>设置一个变量表示已经覆盖到的区域. 再剩下的线段中找出所有左端点小于等于当前已经覆盖到的区域的右端点的线段中, 右端点最大的线段在加入, 直到已经覆盖全部的区域.</li>
+</ul>
+<p>贪心说明: 需要最少的线段进行覆盖, 那么选取的线段必然要尽量长, 而已经覆盖到的区域之前的地方已经无所谓了, (可以理解成所有的可以覆盖的左端点都是已经覆盖到的地方), 那么真正能够使得线段更成的是右端点, 左端点没有太大的意义, 所以选择右端点来覆盖.</p>
+
+    </div>
+
+   
+   
+   
+    <hr>
+
+
+
+
+
+
+    <div id="disqus_thread"></div>
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script>
+        /**
+        *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+        *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+        
+        // var disqus_config = function () {
+        // this.page.url = ;  // Replace PAGE_URL with your page's canonical URL variable
+        // this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        // };
+        
+        (function() { // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        s.src = 'https://augpath.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <script id="dsq-count-scr" src="//augpath.disqus.com/count.js" async></script>
+  </body>
+</html>
