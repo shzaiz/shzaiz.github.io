@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <link rel="stylesheet" href="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/style.css">
+    <script src="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/plugin.js"></script> 
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
+ 
+    <script>
+const copyButtonLabel = "Copy Code";
+
+// use a class selector if available
+let blocks = document.querySelectorAll("pre");
+
+blocks.forEach((block) => {
+  // only add button if browser supports Clipboard API
+  if (navigator.clipboard) {
+    let button = document.createElement("button");
+
+    button.innerText = copyButtonLabel;
+    block.appendChild(button);
+
+    button.addEventListener("click", async () => {
+      await copyCode(block);
+    });
+  }
+});
+
+async function copyCode(block) {
+  let code = block.querySelector("code");
+  let text = code.innerText;
+
+  await navigator.clipboard.writeText(text);
+}
+    </script>
+      <style>
+        body {counter-reset:section;}
+        h1 {counter-reset:subsection;font-size:x-large;}
+        h2 {font-size: large;}
+        
+        h1:before {
+        counter-increment:section;
+        content:counter(section) ". ";
+            font-weight:bold;
+            font-size: x-large;
+        }
+        h2:before {
+        counter-increment:subsection;
+        content:counter(section) "." counter(subsection) " ";
+        font-size: large;
+        }
+        html, body {
+            margin: 5%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: 500;
+        }
+        code {
+            font-family: 'Courier New', Courier, monospace;
+        } 
+
+        pre {
+            font-family: 'Courier New', Courier, monospace;
+        } 
+        div{
+            max-width: 100%;
+            overflow: auto;
+            
+        }
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+            position: fixed; /* Set the navbar to fixed position */
+            top: 0; /* Position the navbar at the top of the page */
+            width: 100%; /* Full width */
+        }
+
+        img {
+        max-width: 80%;
+        height: auto;
+        }
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        a {
+            color: #148bca;
+            text-align: center;
+            padding-left: 2px;
+            padding-right: 2px;
+            text-decoration: none;
+        }
+
+        p.hidden {
+          overflow: hidden;
+        }
+
+    </style>
+  </head>
+  <body>
+    
+    <div class="navbar">
+        <a href="https://shzaiz.github.io">AUG's Wiki</a>
+        <a href="index.html"> ↑ Back to contents</a>
+        Last updated at 2023-06-29 21:26:23.283236
+    </div>
+
+    <div class="toc"></div>
+    <a id="toc-button"><i class="far fa-bookmark"></i></a>
+    
+    <div>
+      <h1>背景及意义</h1>
+<p>联合累积量（Joint Cumulative Quantity）是在统计学和概率论中经常使用的一个概念。它用于描述多个随机变量的联合分布函数，即多个随机变量在给定的取值范围内同时满足一定条件的概率。联合累积量的研究对于理解多变量系统的行为、预测事件的共同发生概率以及优化决策具有重要意义。</p>
+<p>联合累积量和线性回归这样的决策系统有一些相似之处。线性回归旨在建立一个预测模型，用于对未知数据进行预测和推断。它可以提供单个输出变量的预测结果。而联合累积量更侧重于对多个变量的联合行为和共同发生概率进行建模和分析。在许多现实世界的问题中，我们常常需要考虑多个变量之间的相互作用。例如，在金融领域，我们可能对多个股票的价格进行建模，以便更好地了解它们之间的关联性和共同的波动模式。在生物学研究中，我们可能需要分析多个基因或生物指标之间的关系，以揭示它们在特定生理过程中的作用。此外，工程领域、社会科学、气象学等领域也都存在类似的需求。</p>
+<h1>问题</h1>
+<p>我们本次的问题是</p>
+<ul>
+<li>使用代数系统建立对于抽象函数的联合累计量的代数表示形式</li>
+<li>带入具体的期望函数和期望值, 具体细化计算过程</li>
+<li>将函数写入文件中, 以备后续处理</li>
+<li>可以直接处理具体文件, 并且将联合累积量数值写入文件中.</li>
+</ul>
+<h1>算法/方法设计</h1>
+<h2>使用GiNaC计算机代数系统</h2>
+<h3>简介</h3>
+<p>使用GiNaC（GiNaC is Not a CAS）代数系统在处理联合累积量的问题中具有这样的好处：</p>
+<ol>
+<li>
+<p>符号计算：GiNaC是一个符号计算库，它专注于处理代数表达式和符号计算。在联合累积量的问题中，我们通常需要处理包含符号变量和函数的代数表达式，进行求导、积分、化简等操作。GiNaC提供了一套强大的工具和算法，可以高效地处理这些符号计算任务。</p>
+</li>
+<li>
+<p>精确性：联合累积量的计算可能涉及复杂的代数运算和积分计算。使用GiNaC进行符号计算可以确保计算的精确性。相比使用数值近似方法，使用代数系统可以得到更精确的结果，尤其是在涉及高阶函数和复杂表达式时。</p>
+</li>
+<li>
+<p>可扩展性：GiNaC是一个灵活可扩展的代数系统。它提供了丰富的代数结构和算法，使得我们能够定义和操作各种自定义的符号对象、函数和操作。这使得使用GiNaC进行联合累积量的计算更具灵活性和适应性，可以根据具体问题的需求进行定制和扩展。</p>
+</li>
+</ol>
+<p>因此，使用GiNaC代数系统在联合累积量的问题可以提供了强大的符号计算能力、精确的结果、可扩展性和高效性，可以优化处理和求解代数表达式，推导和计算联合累积量。</p>
+<h3>如何安装</h3>
+<p>首先检查条件：确保您的系统满足GiNaC的先决条件。GiNaC依赖于GNU G++编译器和GNU Make工具。如果是在Windows系统, 应当使用mingw或者msvc的相关内容.</p>
+<p>之后, 下载GiNaC：访问GiNaC的官方网站（https://www.ginac.de/）并下载最新版本的GiNaC源代码。并且将下载的源代码文件解压到您选择的目录中。在终端或命令提示符中进入解压后的源代码目录, 运行以下命令来配置编译选项：</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span>./configure
+</pre></div>
+
+<p>该命令将检查您的系统环境并配置编译选项。</p>
+<p>运行以下命令进行编译和安装：</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span>make
+sudo make install
+</pre></div>
+
+<p>这将使用make工具编译GiNaC源代码，并使用管理员权限安装到系统中。</p>
+<p>安装完成后，您可以在系统中使用GiNaC。您可以编写一个简单的C++程序，包含GiNaC的头文件并使用GiNaC的函数来进行验证。</p>
+<h3>函数替换功能</h3>
+<p>可以使用如下的代码新声明一个函数, 使得我们可以操作抽象函数:</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span>DECLARE_FUNCTION_1P(Ex);
+REGISTER_FUNCTION(Ex,<span style="color: #bbbbbb"> </span>dummy());
+</pre></div>
+
+<p>其中<code>dummy()</code>表示这个是不可约化的函数.</p>
+<p>并且我们可以使用如下的代码把一个抽象函数代换为一个具体的表达式方便计算:</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #3D7B7B; font-style: italic">/**</span>
+<span style="color: #3D7B7B; font-style: italic"> * Replace the concrete expression in an expression with a given symbolic expression.</span>
+<span style="color: #3D7B7B; font-style: italic"> * </span>
+<span style="color: #3D7B7B; font-style: italic"> * @param expr1 The original expression.</span>
+<span style="color: #3D7B7B; font-style: italic"> * @param expr2 The symbolic expression to replace the concrete expression with.</span>
+<span style="color: #3D7B7B; font-style: italic"> * @return The modified expression with the concrete expression replaced.</span>
+<span style="color: #3D7B7B; font-style: italic"> */</span>
+ex<span style="color: #bbbbbb"> </span><span style="color: #0000FF">replaceConcrete</span>(<span style="color: #008000; font-weight: bold">const</span><span style="color: #bbbbbb"> </span>ex<span style="color: #666666">&amp;</span><span style="color: #bbbbbb"> </span>expr1,<span style="color: #bbbbbb"> </span>string<span style="color: #bbbbbb"> </span>expr2){
+<span style="color: #bbbbbb">    </span>symtab<span style="color: #bbbbbb"> </span>table;
+<span style="color: #bbbbbb">    </span>table[<span style="color: #BA2121">&quot;x&quot;</span>]<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>x;
+<span style="color: #bbbbbb">    </span>parser<span style="color: #bbbbbb"> </span>reader(table);
+<span style="color: #bbbbbb">    </span>ex<span style="color: #bbbbbb"> </span>e<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>reader(expr2);
+<span style="color: #bbbbbb">    </span>ex<span style="color: #bbbbbb"> </span>ne<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>expr1;
+<span style="color: #bbbbbb">    </span>ex<span style="color: #bbbbbb"> </span>pe<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>e.subs(x<span style="color: #666666">==</span>wildcard());
+<span style="color: #bbbbbb">    </span>cout<span style="color: #666666">&lt;&lt;</span>pe<span style="color: #666666">&lt;&lt;</span>endl;
+<span style="color: #bbbbbb">    </span>ne<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>ne.subs(Ex(wildcard())<span style="color: #666666">==</span>pe);
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">return</span><span style="color: #bbbbbb"> </span>ne;
+}
+</pre></div>
+
+<h3>同一个函数名的问题</h3>
+<p>由于相同名字的变量会在不同的地址空间, 使得GiNaC代数系统认为这是两个表达式, 于是, 创建了一个<code>map</code>, 将同一个名字的变量放在同样的一个地址空间上, 这样就可以约化它到最简形式.</p>
+<p>具体地, 使用了<code>Instance</code>类的内容, 使得内容可以更方便地管理.</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #008000; font-weight: bold">class</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF; font-weight: bold">Instance</span>{
+<span style="color: #008000; font-weight: bold">private</span><span style="color: #666666">:</span>
+<span style="color: #bbbbbb">    </span>lst<span style="color: #bbbbbb"> </span>variables;<span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">// List of variables.</span>
+<span style="color: #bbbbbb">    </span><span style="color: #B00040">bool</span><span style="color: #bbbbbb"> </span>init<span style="color: #666666">=</span><span style="color: #008000">false</span>;<span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">// Flag indicating if variables have been initialized.</span>
+<span style="color: #bbbbbb">    </span>map<span style="color: #666666">&lt;</span>string,<span style="color: #bbbbbb"> </span>symbol<span style="color: #666666">&gt;</span><span style="color: #bbbbbb"> </span>mp;<span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">// Map to store variable symbols.</span>
+<span style="color: #bbbbbb">    </span>string<span style="color: #bbbbbb"> </span>exFunc<span style="color: #666666">=</span><span style="color: #BA2121">&quot;&quot;</span>;<span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">// Expression function string.</span>
+<span style="color: #bbbbbb">    </span>map<span style="color: #666666">&lt;</span>symbol,<span style="color: #bbbbbb"> </span>ex<span style="color: #666666">&gt;</span><span style="color: #bbbbbb"> </span>sytab;<span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">// Map to store numeric values of variables.</span>
+......
+}
+</pre></div>
+
+<h2>联合累计量的数学简介</h2>
+<p><strong>概率密度函数</strong>. ​ 随机变量x有概率分布  \(p(x)\) ，那么
+$$
+p(x)\mathrm{d}x =\text{prob}(X\in [x,x+\mathrm dx])
+$$
+这个在概率的层面使用了微分的相关知识.</p>
+<p><strong>矩</strong>. 一个概率密度函数 \(p(x)\) 的 \(n\) 阶矩是 \(x^n\) 的期望值, 也就是
+$$
+\langle x\rangle =\int p(x)x^{n}\mathrm dx.
+$$
+<strong>特征函数</strong>. 一般是指 \(e^{-ikx}\) 的期望值. 这是 \(p(x)\) 经过Fourier变换得到的结果. 注意到, 特征函数是矩的<strong>生成函数</strong>，把指数项作级数展开可以看到
+$$\tilde{p}(k)= \langle e^{-ikx} \rangle = \int p(x)e^{-ikx}dx \tag{3}\\
+$$
+定义特征函数的意义是这是矩的生成函数, 也就是:
+$$
+p^\sim(k)=\left\langle \sum_{n=0}^{\infty} \frac{(-ik)^n}{n!} x^n \right\rangle = \sum_{n=0}^{\infty} \frac{(-ik)^n}{n!} \langle x^n \rangle \tag{4}.\\
+$$
+因此 \(n\) 阶矩可对 \((-ik)\) 求 \(n\) 阶导然后 \(n=0\) 得到.</p>
+<p><strong>累积量生成函数</strong>. 累积量生成函数是矩生成函数的自然对数即可, 也就是
+$$
+\ln{p^\sim}(k) = \sum_{n=1}^{\infty} \frac{(-ik)^n}{n!} \langle x^n \rangle_c \tag{5}\\
+$$
+于是联立上述两个关系, 就有表达式
+$$
+\begin{split} \langle x \rangle_c &amp;= \langle x \rangle \\ \langle x^2 \rangle_c &amp;= \langle x^2 \rangle - \langle x \rangle ^2 \\ \langle x^3 \rangle_c &amp;= \langle x^3 \rangle - 3\langle x^2 \rangle \langle x \rangle + 2\langle x \rangle ^3 \\ \langle x^4 \rangle_c &amp;= \langle x^4 \rangle - 4\langle x^3 \rangle \langle x \rangle - 3\langle x^2 \rangle ^2 + 12\langle x^2 \rangle \langle x \rangle^2 - 6\langle x \rangle ^4 \end{split} \tag{6}\\
+$$</p>
+<h3>算法描述</h3>
+<p>我们可以使用如下的公式计算:</p>
+<p>$$
+\displaystyle{ \kappa(X_1,\dots,X_n) =\sum_\pi (|\pi|-1)!(-1)^{|\pi|-1}\prod_{B\in\pi}E\left(\prod_{i\in B}X_i\right) }
+$$
+其中 \(\pi\) 是划分. 并且有前几项的结果:</p>
+<ul>
+<li> \({ \kappa(X,Y)=\operatorname E(XY) - \operatorname E(X) \operatorname E(Y), }\) </li>
+<li> \({ \kappa(X,Y,Z)=\operatorname E(XYZ) - \operatorname E(XY) \operatorname E(Z) - \operatorname E(XZ) \operatorname E(Y) - \operatorname E(YZ) \operatorname E(X) + 2\operatorname E(X)\operatorname E(Y)\operatorname E(Z).\, }\) </li>
+<li> \({ \kappa(X,X,Z)=\operatorname E(X^2Z)  -2\operatorname E(XZ)\operatorname E(X) - \operatorname E(X^2)\operatorname E(Z) + 2\operatorname E(X)^2\operatorname E(Z),\, }\) </li>
+</ul>
+<h1>算法实现</h1>
+<h2>类结构设计</h2>
+<h3>Menu类</h3>
+<p>私有成员变量：</p>
+<ul>
+<li>options：存储菜单选项的数组</li>
+<li>functions：存储与每个选项关联的功能函数的数组</li>
+<li>stats：存储与每个选项关联的状态函数的数组</li>
+</ul>
+<p>公有成员变量：</p>
+<ul>
+<li>inst：一个名为Instance的实例</li>
+</ul>
+<p>公有成员函数：</p>
+<ul>
+<li>addOption：向菜单中添加选项的函数，参数包括功能函数和状态函数</li>
+<li>setTooltip：设置菜单选项的工具提示文本的函数，参数为一个存储字符串的数组</li>
+<li>display：显示菜单的函数，打印菜单选项和对应的状态信息</li>
+<li>processChoice：处理用户选择的函数，根据选择执行相应的功能函数或退出程序</li>
+<li>getOptionsCount：获取菜单选项数量的函数，返回菜单选项的个数</li>
+</ul>
+<p>类结构的设计通过将相关的数据和操作封装在一个类中，提供了一种组织和管理菜单功能的方式。私有成员变量用于存储菜单选项和相关函数，而公有成员函数用于访问和操作这些数据。这种设计使得菜单的使用和扩展更加方便，可以根据需要添加、修改和删除选项，同时提供了灵活性和可维护性。</p>
+<h3>Instance类</h3>
+<p>私有成员变量：</p>
+<ul>
+<li>variables：存储变量的列表</li>
+<li>init：表示变量是否已经初始化的标志位</li>
+<li>mp：存储变量符号的映射表</li>
+<li>exFunc：表示表达式函数的字符串</li>
+<li>sytab：存储变量符号和数值的映射表</li>
+</ul>
+<p>公有成员函数：</p>
+<ul>
+<li>setexFunc：设置实例的表达式函数，参数为表达式函数的字符串表示，返回是否设置成功的布尔值</li>
+<li>initVar：使用提供的变量名称初始化变量，参数为变量名称的数组，返回初始化是否成功的布尔值</li>
+<li>clearFunc：清除表达式函数</li>
+<li>changeVar：更改指定索引处变量的值，参数为变量索引和新值的字符串表示，返回变量值是否成功更改的布尔值</li>
+<li>dosub：对变量进行替换，参数为要替换的变量名和新值的字符串表示，返回替换是否成功的布尔值</li>
+<li>getVariableLst：获取变量列表</li>
+<li>getVarMapping：获取变量名称到符号的映射表</li>
+<li>getExFunc：获取表达式函数</li>
+<li>getNumericMap：获取变量符号到数值的映射表</li>
+<li>getinit：检查变量是否已经初始化，返回变量是否已经初始化的布尔值</li>
+</ul>
+<p>类结构的设计通过将相关的数据和操作封装在一个类中，提供了对变量和表达式函数的管理和操作。私有成员变量存储了变量和相关的映射表，而公有成员函数提供了对这些数据的访问和操作。这种设计使得对实例的操作更加方便和可控，同时提供了封装性和可扩展性。</p>
+<h2>界面设计</h2>
+<h2>菜单模块的实现</h2>
+<p>通过Menu类，界面设计可以通过以下步骤进行：</p>
+<ol>
+<li>
+<p>添加选项：使用<code>addOption</code>函数向菜单中添加选项。每个选项可以关联一个功能函数和一个状态函数。功能函数定义了选项被选择时要执行的操作，而状态函数用于显示选项的当前状态。</p>
+</li>
+<li>
+<p>设置状态信息：使用<code>setTooltip</code>函数设置菜单选项的工具状态信息。工具提示文本是在显示菜单时，显示在每个选项旁边的说明性文本，用于帮助用户理解选项的含义或作用。</p>
+</li>
+<li>
+<p>显示菜单：使用<code>display</code>函数显示菜单。该函数会打印菜单选项和对应的状态信息。通过遍历选项的数组，显示选项的编号、文本和状态信息。</p>
+</li>
+<li>
+<p>处理选择：用户选择菜单选项后，使用<code>processChoice</code>函数处理选择。根据用户输入的选择，函数会执行相应的功能函数，或者退出程序。</p>
+</li>
+<li>
+<p>获取选项数量：使用<code>getOptionsCount</code>函数获取菜单选项的数量。可以用于根据需要进行循环控制或其他逻辑操作。</p>
+</li>
+</ol>
+<p>通过以上步骤，界面设计可以实现一个简单的文本式菜单界面。通过添加选项、设置工具提示和处理选择，用户可以根据菜单选项执行相应的操作，而状态函数可以提供有关选项状态的信息，增加用户交互的可视化效果和反馈。</p>
+<p>在主菜单中, 使用了一些宏定义, 使得添加菜单更加简洁.</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #3D7B7B; font-style: italic">/**</span>
+<span style="color: #3D7B7B; font-style: italic"> * Define a menu item with associated logic, procedure, and status.</span>
+<span style="color: #3D7B7B; font-style: italic"> * </span>
+<span style="color: #3D7B7B; font-style: italic"> * @param name The name of the menu item.</span>
+<span style="color: #3D7B7B; font-style: italic"> * @param procedure The procedure to execute for the menu item.</span>
+<span style="color: #3D7B7B; font-style: italic"> * @param stat The status of the menu item.</span>
+<span style="color: #3D7B7B; font-style: italic"> */</span>
+<span style="color: #9C6500">#define MENU_ITEM_LOGIC(name, procedure, stat) void name(){ procedure ;pause(); }\</span>
+<span style="color: #9C6500">    static void name##Stat(){ cout&lt;&lt;(stat);}</span>
+</pre></div>
+
+<p>替换部分包含两个函数定义：<code>name()</code>和<code>name##Stat()</code>。这两个函数的具体定义根据宏的参数来生成。</p>
+<ul>
+<li><code>name()</code>函数是菜单项的逻辑执行函数。在该函数中，首先执行<code>procedure</code>，然后调用<code>pause()</code>函数。这个函数可以根据具体需求执行相应的操作，例如调用其他函数、执行一段代码块等。</li>
+<li><code>name##Stat()</code>函数是菜单项的状态函数。它用于提供菜单项当前的状态信息。在这个宏定义中，将状态信息输出到标准输出流（cout）上，使用了<code>(stat)</code>来表示状态信息。</li>
+</ul>
+<p>在添加代码的时候, 运用了这样的宏定义:</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #9C6500">#define FUNCTIONS \</span>
+<span style="color: #9C6500">        X(initReading)\</span>
+<span style="color: #9C6500">        X(initFunction)\</span>
+<span style="color: #9C6500">        X(changeVar) \</span>
+<span style="color: #9C6500">        X(changeVal) \</span>
+<span style="color: #9C6500">        X(evaluateExpr) \</span>
+<span style="color: #9C6500">        X(evaluateNumeral)\</span>
+<span style="color: #9C6500">        X(exportToFile)</span>
+
+vector<span style="color: #666666">&lt;</span>string<span style="color: #666666">&gt;</span><span style="color: #bbbbbb"> </span>descs<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>{
+<span style="color: #bbbbbb">        </span><span style="color: #BA2121">&quot;Initlize the variables     &quot;</span>,
+<span style="color: #bbbbbb">        </span><span style="color: #BA2121">&quot;Set the Expectation func.  &quot;</span>,
+<span style="color: #bbbbbb">        </span><span style="color: #BA2121">&quot;Change the variable name   &quot;</span>,
+<span style="color: #bbbbbb">        </span><span style="color: #BA2121">&quot;Change the variable mapping&quot;</span>,
+<span style="color: #bbbbbb">        </span><span style="color: #BA2121">&quot;Evaluate algebraically     &quot;</span>,
+<span style="color: #bbbbbb">        </span><span style="color: #BA2121">&quot;Evaluate numerically       &quot;</span>,
+<span style="color: #bbbbbb">        </span><span style="color: #BA2121">&quot;Export to file             &quot;</span>
+<span style="color: #bbbbbb">    </span>};
+
+<span style="color: #3D7B7B; font-style: italic">// Register menu file and stat</span>
+<span style="color: #3D7B7B; font-style: italic">/**</span>
+<span style="color: #3D7B7B; font-style: italic"> * Register a menu item with the specified name and corresponding static function.</span>
+<span style="color: #3D7B7B; font-style: italic"> * </span>
+<span style="color: #3D7B7B; font-style: italic"> * @param name The name of the menu item.</span>
+<span style="color: #3D7B7B; font-style: italic"> */</span>
+<span style="color: #9C6500">#define REG_MENU_ITEM(name) menu.addOption(name, name##Stat); </span>
+</pre></div>
+
+<p>这段代码定义了一个宏<code>REG_MENU_ITEM</code>和一个预定义宏<code>FUNCTIONS</code>，用于注册菜单项和对应的静态函数。</p>
+<ul>
+<li>
+<p><code>FUNCTIONS</code>是一个预定义宏，它通过多行字符串拼接的方式列出了一系列宏。每行宏的格式是<code>X(item)</code>，其中<code>item</code>表示一个菜单项的名称。这些宏定义在后续的代码中用于扩展并生成对应的函数。</p>
+</li>
+<li>
+<p><code>descs</code>是一个存储菜单项描述的字符串数组。每个菜单项的描述对应着<code>FUNCTIONS</code>中相应的宏。</p>
+</li>
+<li>
+<p><code>REG_MENU_ITEM</code>是一个宏定义，它接受一个参数<code>name</code>，用于注册菜单项和对应的静态函数。在宏定义中，调用了<code>menu</code>对象的<code>addOption</code>方法，将<code>name</code>作为参数传递给该方法，同时使用<code>name##Stat</code>来表示菜单项对应的静态函数。</p>
+</li>
+</ul>
+<p>这段代码的作用是方便地注册菜单项和与之关联的静态函数。通过使用<code>REG_MENU_ITEM</code>宏，可以自动注册多个菜单项，并将其与对应的静态函数关联起来。这样，可以简化注册过程，提高代码的可读性和维护性。</p>
+<h2>集合的划分的模块的实现</h2>
+<p>我们实现了函数<code>generatePartitions</code>，用于生成一个集合的所有分划。</p>
+<p>函数的输入参数包括：</p>
+<ul>
+<li><code>partitions</code>：一个引用，用于存储生成的分划。</li>
+<li><code>currentPartition</code>：一个引用，表示当前正在生成的分划。</li>
+<li><code>index</code>：当前在生成过程中的索引。</li>
+<li><code>n</code>：集合中的元素总数。</li>
+</ul>
+<p>函数的执行流程如下：</p>
+<ol>
+<li>如果索引<code>index</code>大于总数<code>n</code>，说明已经生成了一个完整的分划，将当前分划<code>currentPartition</code>添加到<code>partitions</code>中，并返回。</li>
+<li>遍历当前分划<code>currentPartition</code>中的每个子集。
+<ul>
+<li>将当前索引<code>index</code>添加到子集中。</li>
+<li>递归调用<code>generatePartitions</code>函数，将索引增加1，并继续生成下一个分划。</li>
+<li>将添加的索引从子集中移除（回溯）。</li>
+</ul>
+</li>
+<li>创建一个新的子集<code>newSubset</code>，将当前索引<code>index</code>添加到该子集中。</li>
+<li>将新的子集添加到当前分划<code>currentPartition</code>中。</li>
+<li>递归调用<code>generatePartitions</code>函数，将索引增加1，并继续生成下一个分划。</li>
+<li>移除当前分划中的最后一个子集（回溯）。</li>
+</ol>
+<p>通过递归的方式，函数将会生成所有可能的分划，并将它们存储在<code>partitions</code>中。</p>
+<p>总结起来，这段代码实现了一种生成集合分划的算法，通过递归和回溯的方法，遍历所有可能的分划情况，并将结果存储在给定的数组中。</p>
+<p>其核心代码如下:</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #B00040">void</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">generatePartitions</span>(
+<span style="color: #bbbbbb">        </span>vector<span style="color: #666666">&lt;</span>vector<span style="color: #666666">&lt;</span>vector<span style="color: #666666">&lt;</span><span style="color: #B00040">int</span><span style="color: #666666">&gt;&gt;&gt;&amp;</span><span style="color: #bbbbbb"> </span>partitions,<span style="color: #bbbbbb"> </span>
+<span style="color: #bbbbbb">        </span>vector<span style="color: #666666">&lt;</span>vector<span style="color: #666666">&lt;</span><span style="color: #B00040">int</span><span style="color: #666666">&gt;&gt;&amp;</span><span style="color: #bbbbbb"> </span>currentPartition,<span style="color: #bbbbbb"> </span>
+<span style="color: #bbbbbb">        </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>index,<span style="color: #bbbbbb"> </span>
+<span style="color: #bbbbbb">        </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>n
+<span style="color: #bbbbbb">    </span>)<span style="color: #bbbbbb"> </span>{
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">if</span><span style="color: #bbbbbb"> </span>(index<span style="color: #bbbbbb"> </span><span style="color: #666666">&gt;</span><span style="color: #bbbbbb"> </span>n)<span style="color: #bbbbbb"> </span>{
+<span style="color: #bbbbbb">        </span>partitions.push_back(currentPartition);
+<span style="color: #bbbbbb">        </span><span style="color: #008000; font-weight: bold">return</span>;
+<span style="color: #bbbbbb">    </span>}
+
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">for</span><span style="color: #bbbbbb"> </span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>i<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>;<span style="color: #bbbbbb"> </span>i<span style="color: #bbbbbb"> </span><span style="color: #666666">&lt;</span><span style="color: #bbbbbb"> </span>currentPartition.size();<span style="color: #bbbbbb"> </span>i<span style="color: #666666">++</span>)<span style="color: #bbbbbb"> </span>{
+<span style="color: #bbbbbb">        </span>currentPartition[i].push_back(index);
+<span style="color: #bbbbbb">        </span>generatePartitions(partitions,<span style="color: #bbbbbb"> </span>currentPartition,<span style="color: #bbbbbb"> </span>index<span style="color: #bbbbbb"> </span><span style="color: #666666">+</span><span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>,<span style="color: #bbbbbb"> </span>n);
+<span style="color: #bbbbbb">        </span>currentPartition[i].pop_back();
+<span style="color: #bbbbbb">    </span>}
+
+<span style="color: #bbbbbb">    </span>vector<span style="color: #666666">&lt;</span><span style="color: #B00040">int</span><span style="color: #666666">&gt;</span><span style="color: #bbbbbb"> </span>newSubset;
+<span style="color: #bbbbbb">    </span>newSubset.push_back(index);
+<span style="color: #bbbbbb">    </span>currentPartition.push_back(newSubset);
+<span style="color: #bbbbbb">    </span>generatePartitions(partitions,<span style="color: #bbbbbb"> </span>currentPartition,<span style="color: #bbbbbb"> </span>index<span style="color: #bbbbbb"> </span><span style="color: #666666">+</span><span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>,<span style="color: #bbbbbb"> </span>n);
+<span style="color: #bbbbbb">    </span>currentPartition.pop_back();
+}
+
+<span style="color: #3D7B7B; font-style: italic">/**</span>
+<span style="color: #3D7B7B; font-style: italic"> * Test the partition generation function.</span>
+<span style="color: #3D7B7B; font-style: italic"> * </span>
+<span style="color: #3D7B7B; font-style: italic"> * @return 0 on successful execution.</span>
+<span style="color: #3D7B7B; font-style: italic"> */</span>
+<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">testPartition</span>()<span style="color: #bbbbbb"> </span>{
+<span style="color: #bbbbbb">    </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>n<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">4</span>;
+<span style="color: #bbbbbb">    </span>vector<span style="color: #666666">&lt;</span>vector<span style="color: #666666">&lt;</span>vector<span style="color: #666666">&lt;</span><span style="color: #B00040">int</span><span style="color: #666666">&gt;&gt;&gt;</span><span style="color: #bbbbbb"> </span>partitions;
+<span style="color: #bbbbbb">    </span>vector<span style="color: #666666">&lt;</span>vector<span style="color: #666666">&lt;</span><span style="color: #B00040">int</span><span style="color: #666666">&gt;&gt;</span><span style="color: #bbbbbb"> </span>currentPartition;
+<span style="color: #bbbbbb">    </span>generatePartitions(partitions,<span style="color: #bbbbbb"> </span>currentPartition,<span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>,<span style="color: #bbbbbb"> </span>n);
+
+<span style="color: #bbbbbb">    </span><span style="color: #3D7B7B; font-style: italic">// Print the generated partitions</span>
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">for</span><span style="color: #bbbbbb"> </span>(<span style="color: #008000; font-weight: bold">const</span><span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">auto</span><span style="color: #666666">&amp;</span><span style="color: #bbbbbb"> </span>partition<span style="color: #bbbbbb"> </span><span style="color: #666666">:</span><span style="color: #bbbbbb"> </span>partitions)<span style="color: #bbbbbb"> </span>{
+<span style="color: #bbbbbb">        </span><span style="color: #008000; font-weight: bold">for</span><span style="color: #bbbbbb"> </span>(<span style="color: #008000; font-weight: bold">const</span><span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">auto</span><span style="color: #666666">&amp;</span><span style="color: #bbbbbb"> </span>subset<span style="color: #bbbbbb"> </span><span style="color: #666666">:</span><span style="color: #bbbbbb"> </span>partition)<span style="color: #bbbbbb"> </span>{
+<span style="color: #bbbbbb">            </span>cout<span style="color: #bbbbbb"> </span><span style="color: #666666">&lt;&lt;</span><span style="color: #bbbbbb"> </span><span style="color: #BA2121">&quot;{ &quot;</span>;
+<span style="color: #bbbbbb">            </span><span style="color: #008000; font-weight: bold">for</span><span style="color: #bbbbbb"> </span>(<span style="color: #008000; font-weight: bold">const</span><span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">auto</span><span style="color: #666666">&amp;</span><span style="color: #bbbbbb"> </span>element<span style="color: #bbbbbb"> </span><span style="color: #666666">:</span><span style="color: #bbbbbb"> </span>subset)<span style="color: #bbbbbb"> </span>{
+<span style="color: #bbbbbb">                </span>cout<span style="color: #bbbbbb"> </span><span style="color: #666666">&lt;&lt;</span><span style="color: #bbbbbb"> </span>element<span style="color: #bbbbbb"> </span><span style="color: #666666">&lt;&lt;</span><span style="color: #bbbbbb"> </span><span style="color: #BA2121">&quot; &quot;</span>;
+<span style="color: #bbbbbb">            </span>}
+<span style="color: #bbbbbb">            </span>cout<span style="color: #bbbbbb"> </span><span style="color: #666666">&lt;&lt;</span><span style="color: #bbbbbb"> </span><span style="color: #BA2121">&quot;} &quot;</span>;
+<span style="color: #bbbbbb">        </span>}
+<span style="color: #bbbbbb">        </span>cout<span style="color: #bbbbbb"> </span><span style="color: #666666">&lt;&lt;</span><span style="color: #bbbbbb"> </span>endl;
+<span style="color: #bbbbbb">    </span>}
+
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">return</span><span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>;
+}
+</pre></div>
+
+<h2>计算联合累计量模块的实现</h2>
+<p>这段代码实现了一个函数<code>calculateJointCumulant</code>，用于计算联合累积量（joint cumulant）。</p>
+<p>函数的输入参数包括：</p>
+<ul>
+<li><code>vars</code>：一个包含变量的lst对象。</li>
+<li><code>n</code>：变量的数量。</li>
+<li><code>useConcrete</code>：一个布尔值，表示是否使用具体值进行计算，默认为false。</li>
+<li><code>sym</code>：一个字符串，表示变量的符号，默认为&quot;x&quot;。</li>
+</ul>
+<p>函数的执行流程如下：</p>
+<ol>
+<li>打印符号<code>sym</code>（用于调试目的）。</li>
+<li>初始化联合累积量<code>jointCumulant</code>为0。</li>
+<li>生成所有可能的分划，将它们存储在<code>partitions</code>中。这一步通过调用<code>generatePartitions</code>函数实现。</li>
+<li>遍历每个分划。
+<ul>
+<li>对于每个分划，初始化分划累积量<code>partitionCumulant</code>为1。</li>
+<li>遍历分划中的每个子集。
+<ul>
+<li>对于每个子集，初始化子集乘积<code>subsetProduct</code>为1。</li>
+<li>遍历子集中的每个元素，根据其索引从<code>vars</code>中取出对应的变量，并将其乘到子集乘积中。注意，索引需要进行调整，从1改为0为基。</li>
+<li>将子集乘积乘到分划累积量<code>partitionCumulant</code>中。</li>
+</ul>
+</li>
+<li>根据分划中子集的数量，将分划累积量乘以(-1)^(numSubsets-1)乘以(numSubsets-1)的阶乘。</li>
+<li>将分划累积量加到联合累积量<code>jointCumulant</code>中。</li>
+</ul>
+</li>
+<li>如果<code>useConcrete</code>为真，则将联合累积量中的符号替换为具体值（使用<code>replaceConcrete</code>函数）。</li>
+<li>返回联合累积量<code>jointCumulant</code>。</li>
+</ol>
+<p>该函数的主要目的是计算给定变量的联合累积量，它通过生成所有可能的分划，并对每个分划进行累积量的计算和求和来实现。最终结果是一个表示联合累积量的表达式对象（ex）。</p>
+<p>其核心代码如下:</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span>ex<span style="color: #bbbbbb"> </span>calculateJointCumulant(
+<span style="color: #bbbbbb">        </span>lst<span style="color: #bbbbbb"> </span>vars,
+<span style="color: #bbbbbb">        </span><span style="color: #B00040">size_t</span><span style="color: #bbbbbb"> </span>n,<span style="color: #bbbbbb"> </span>
+<span style="color: #bbbbbb">        </span><span style="color: #B00040">bool</span><span style="color: #bbbbbb"> </span>useConcrete<span style="color: #666666">=</span><span style="color: #008000">false</span>,<span style="color: #bbbbbb"> </span>
+<span style="color: #bbbbbb">        </span>string<span style="color: #bbbbbb"> </span>sym<span style="color: #666666">=</span><span style="color: #BA2121">&quot;x&quot;</span>
+<span style="color: #bbbbbb">    </span>)<span style="color: #bbbbbb"> </span>{
+<span style="color: #bbbbbb">    </span>cout<span style="color: #666666">&lt;&lt;</span>sym<span style="color: #666666">&lt;&lt;</span>endl;
+<span style="color: #bbbbbb">    </span>ex<span style="color: #bbbbbb"> </span>jointCumulant<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>;
+
+<span style="color: #bbbbbb">    </span><span style="color: #3D7B7B; font-style: italic">// Generate all partitions</span>
+<span style="color: #bbbbbb">    </span>vector<span style="color: #666666">&lt;</span>vector<span style="color: #666666">&lt;</span>vector<span style="color: #666666">&lt;</span><span style="color: #B00040">int</span><span style="color: #666666">&gt;&gt;&gt;</span><span style="color: #bbbbbb"> </span>partitions;
+<span style="color: #bbbbbb">    </span>vector<span style="color: #666666">&lt;</span>vector<span style="color: #666666">&lt;</span><span style="color: #B00040">int</span><span style="color: #666666">&gt;&gt;</span><span style="color: #bbbbbb"> </span>currentPartition;
+<span style="color: #bbbbbb">    </span>generatePartitions(partitions,<span style="color: #bbbbbb"> </span>currentPartition,<span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>,<span style="color: #bbbbbb"> </span>n);
+
+<span style="color: #bbbbbb">    </span><span style="color: #3D7B7B; font-style: italic">// Calculate joint cumulant for each partition</span>
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">for</span><span style="color: #bbbbbb"> </span>(<span style="color: #008000; font-weight: bold">const</span><span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">auto</span><span style="color: #666666">&amp;</span><span style="color: #bbbbbb"> </span>partition<span style="color: #bbbbbb"> </span><span style="color: #666666">:</span><span style="color: #bbbbbb"> </span>partitions)<span style="color: #bbbbbb"> </span>{
+<span style="color: #bbbbbb">        </span><span style="color: #B00040">unsigned</span><span style="color: #bbbbbb"> </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>numSubsets<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>partition.size();
+<span style="color: #bbbbbb">        </span>ex<span style="color: #bbbbbb"> </span>partitionCumulant<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>;
+
+<span style="color: #bbbbbb">        </span><span style="color: #3D7B7B; font-style: italic">// Calculate product over subsets in the partition</span>
+<span style="color: #bbbbbb">        </span><span style="color: #008000; font-weight: bold">for</span><span style="color: #bbbbbb"> </span>(<span style="color: #008000; font-weight: bold">const</span><span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">auto</span><span style="color: #666666">&amp;</span><span style="color: #bbbbbb"> </span>subset<span style="color: #bbbbbb"> </span><span style="color: #666666">:</span><span style="color: #bbbbbb"> </span>partition)<span style="color: #bbbbbb"> </span>{
+<span style="color: #bbbbbb">            </span>ex<span style="color: #bbbbbb"> </span>subsetProduct<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>;
+
+<span style="color: #bbbbbb">            </span><span style="color: #3D7B7B; font-style: italic">// Calculate product over elements in the subset</span>
+<span style="color: #bbbbbb">            </span><span style="color: #008000; font-weight: bold">for</span><span style="color: #bbbbbb"> </span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>index<span style="color: #bbbbbb"> </span><span style="color: #666666">:</span><span style="color: #bbbbbb"> </span>subset)<span style="color: #bbbbbb"> </span>{
+<span style="color: #bbbbbb">                </span>subsetProduct<span style="color: #bbbbbb"> </span><span style="color: #666666">*=</span><span style="color: #bbbbbb"> </span>vars[index<span style="color: #bbbbbb"> </span><span style="color: #666666">-</span><span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>];<span style="color: #bbbbbb">  </span><span style="color: #3D7B7B; font-style: italic">// Adjust index to zero-based</span>
+<span style="color: #bbbbbb">                </span><span style="color: #3D7B7B; font-style: italic">// cout&lt;&lt;&quot;This is subsetproduce&quot;&lt;&lt;subsetProduct&lt;&lt;endl;</span>
+<span style="color: #bbbbbb">            </span>}
+
+<span style="color: #bbbbbb">            </span>partitionCumulant<span style="color: #bbbbbb"> </span><span style="color: #666666">*=</span><span style="color: #bbbbbb"> </span>Ex(subsetProduct.normal());
+<span style="color: #bbbbbb">        </span>}
+
+<span style="color: #bbbbbb">        </span>partitionCumulant<span style="color: #bbbbbb"> </span><span style="color: #666666">*=</span><span style="color: #bbbbbb"> </span><span style="color: #B00040">int</span>(std<span style="color: #666666">::</span>pow(<span style="color: #666666">-1</span>,<span style="color: #bbbbbb"> </span>numSubsets<span style="color: #bbbbbb"> </span><span style="color: #666666">-</span><span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>))<span style="color: #bbbbbb"> </span><span style="color: #666666">*</span><span style="color: #bbbbbb"> </span>factorial(numSubsets<span style="color: #bbbbbb"> </span><span style="color: #666666">-</span><span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>);
+<span style="color: #bbbbbb">        </span>jointCumulant<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>jointCumulant<span style="color: #bbbbbb"> </span><span style="color: #666666">+</span><span style="color: #bbbbbb"> </span>partitionCumulant;
+<span style="color: #bbbbbb">        </span><span style="color: #3D7B7B; font-style: italic">// cout&lt;&lt;partitionCumulant&lt;&lt;endl;</span>
+<span style="color: #bbbbbb">    </span>}
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">if</span>(useConcrete)<span style="color: #bbbbbb"> </span>{jointCumulant<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>replaceConcrete(jointCumulant,<span style="color: #bbbbbb"> </span>sym);}
+
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">return</span><span style="color: #bbbbbb"> </span>jointCumulant;
+}
+</pre></div>
+
+<h3>计算具体文件模块的实现</h3>
+<p>与之不同的是, 这个需要在启动时通过命令行传入文件的类型. 例如 <code>a.out -f a.csv</code>, 其会在表格后面写入对应的联合累积量. 这个是通过主函数中的一些控制得到的:</p>
+<p>函数的执行流程如下：</p>
+<ol>
+<li>声明两个字符数组<code>inputFile</code>和<code>outputFile</code>，用于存储输入和输出文件名。</li>
+<li>迭代遍历命令行参数。</li>
+<li>检查当前参数是否是一个标志或选项。
+<ul>
+<li>如果是标志（以<code>-</code>开头），则处理相应的标志。
+<ul>
+<li>如果是<code>-h</code>或<code>--help</code>，打印帮助信息。</li>
+<li>如果是<code>-v</code>或<code>--version</code>，打印版本信息。</li>
+<li>如果是<code>-f</code>，则检查下一个参数是否存在，并将其作为输入文件名保存到<code>inputFile</code>中。同时，增加<code>i</code>的值以跳过文件名参数。</li>
+<li>如果是其他未知标志，打印未知标志的提示信息。</li>
+</ul>
+</li>
+<li>如果不是标志，则处理选项。
+<ul>
+<li>例如，如果是<code>-o</code>或<code>--output</code>，则检查下一个参数是否存在，并将其作为输出文件名保存到<code>outputFile</code>中。同时，增加<code>i</code>的值以跳过文件名参数。</li>
+<li>如果是其他未知选项，打印未知选项的提示信息。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>如果<code>inputFile</code>不为空字符串，表示指定了输入文件。
+<ul>
+<li>打印正在读取文件的消息。</li>
+<li>使用<code>freopen</code>函数将输入重定向到指定的文件。</li>
+<li>使用<code>freopen</code>函数将输出重定向到指定的文件。</li>
+<li>如果打开文件失败，返回0。</li>
+<li>调用<code>calConcreteFile</code>函数处理输入文件。</li>
+<li>打印&quot;OK&quot;表示处理完成。</li>
+<li>设置<code>loop</code>为false，以退出主循环。</li>
+</ul>
+</li>
+</ol>
+<p>该主函数主要用于处理命令行参数，并根据指定的标志和选项执行相应的操作。例如，可以通过命令行参数来指定输入文件和输出文件，并根据不同的标志和选项执行不同的逻辑。</p>
+<h1>测试评估</h1>
+<h2>测试数据以及主要方面</h2>
+<h3>对于具体文件的测试</h3>
+<p>目前的计算机代数系统暂无符号化计算联合累积量的功能. 但是, 使用具体文件的读入读出的数据是易于测试的. 先测试具体文件的读入读出, 其中可以使用Python的numpy库中的一些元素执行:</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">csv</span>
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">read_data</span>(filename):
+    data <span style="color: #666666">=</span> []
+    <span style="color: #008000; font-weight: bold">with</span> <span style="color: #008000">open</span>(filename, <span style="color: #BA2121">&#39;r&#39;</span>) <span style="color: #008000; font-weight: bold">as</span> file:
+        reader <span style="color: #666666">=</span> csv<span style="color: #666666">.</span>reader(file)
+        <span style="color: #008000; font-weight: bold">for</span> row <span style="color: #AA22FF; font-weight: bold">in</span> reader:
+            values <span style="color: #666666">=</span> [<span style="color: #008000">float</span>(value) <span style="color: #008000; font-weight: bold">for</span> value <span style="color: #AA22FF; font-weight: bold">in</span> row]
+            data<span style="color: #666666">.</span>append(values)
+    <span style="color: #008000; font-weight: bold">return</span> data
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">write_data</span>(filename, data):
+    <span style="color: #008000; font-weight: bold">with</span> <span style="color: #008000">open</span>(filename, <span style="color: #BA2121">&#39;w&#39;</span>, newline<span style="color: #666666">=</span><span style="color: #BA2121">&#39;&#39;</span>) <span style="color: #008000; font-weight: bold">as</span> file:
+        writer <span style="color: #666666">=</span> csv<span style="color: #666666">.</span>writer(file)
+        writer<span style="color: #666666">.</span>writerows(data)
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">subtract_mean</span>(data):
+    mean <span style="color: #666666">=</span> np<span style="color: #666666">.</span>mean(data, axis<span style="color: #666666">=0</span>)
+    centered_data <span style="color: #666666">=</span> data <span style="color: #666666">-</span> mean
+    <span style="color: #008000; font-weight: bold">return</span> centered_data
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">calculate_joint_cumulant</span>(data):
+    centered_data <span style="color: #666666">=</span> subtract_mean(data)
+    joint_cumulant <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros((<span style="color: #008000">len</span>(data[<span style="color: #666666">0</span>]), <span style="color: #008000">len</span>(data[<span style="color: #666666">0</span>])))
+
+    <span style="color: #008000; font-weight: bold">for</span> point <span style="color: #AA22FF; font-weight: bold">in</span> centered_data:
+        joint_cumulant <span style="color: #666666">+=</span> np<span style="color: #666666">.</span>outer(point, point)
+
+    joint_cumulant <span style="color: #666666">/=</span> <span style="color: #008000">len</span>(centered_data)
+    <span style="color: #008000; font-weight: bold">return</span> joint_cumulant
+
+<span style="color: #3D7B7B; font-style: italic"># Example usage</span>
+filename <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;data.csv&#39;</span> 
+data <span style="color: #666666">=</span> read_data(filename)
+cumulant <span style="color: #666666">=</span> calculate_joint_cumulant(data)
+
+<span style="color: #3D7B7B; font-style: italic"># Append joint cumulant values as a new column</span>
+<span style="color: #008000; font-weight: bold">for</span> i, row <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">enumerate</span>(data):
+    row<span style="color: #666666">.</span>append(cumulant[i][i])
+
+<span style="color: #3D7B7B; font-style: italic"># Write the updated data back to the CSV file</span>
+write_data(filename, data)
+
+<span style="color: #008000">print</span>(<span style="color: #BA2121">&quot;Joint Cumulant:&quot;</span>)
+<span style="color: #008000">print</span>(cumulant)
+</pre></div>
+
+<p>使用如下的代码生成随机的<code>csv</code>文件, 并且使用<code>python</code>和<code>a.out -f filename</code>进行计时测试.</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">csv</span>
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">random</span>
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">generate_random_csv</span>(filename, n, m):
+    <span style="color: #008000; font-weight: bold">with</span> <span style="color: #008000">open</span>(filename, <span style="color: #BA2121">&#39;w&#39;</span>, newline<span style="color: #666666">=</span><span style="color: #BA2121">&#39;&#39;</span>) <span style="color: #008000; font-weight: bold">as</span> file:
+        writer <span style="color: #666666">=</span> csv<span style="color: #666666">.</span>writer(file)
+        <span style="color: #008000; font-weight: bold">for</span> _ <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(n):
+            row <span style="color: #666666">=</span> [random<span style="color: #666666">.</span>randint(<span style="color: #666666">1</span>, <span style="color: #666666">100</span>) <span style="color: #008000; font-weight: bold">for</span> _ <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(m)]
+            writer<span style="color: #666666">.</span>writerow(row)
+
+<span style="color: #3D7B7B; font-style: italic"># 示例用法</span>
+filename <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;random_data.csv&#39;</span>  <span style="color: #3D7B7B; font-style: italic"># 要生成的文件名</span>
+n <span style="color: #666666">=</span> <span style="color: #666666">10</span>  <span style="color: #3D7B7B; font-style: italic"># 行数</span>
+m <span style="color: #666666">=</span> <span style="color: #666666">5</span>  <span style="color: #3D7B7B; font-style: italic"># 列数</span>
+
+generate_random_csv(filename, n, m)
+<span style="color: #008000">print</span>(<span style="color: #BA2121">f&#39;Successfully generated </span><span style="color: #A45A77; font-weight: bold">{</span>filename<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121"> with </span><span style="color: #A45A77; font-weight: bold">{</span>n<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121"> rows and </span><span style="color: #A45A77; font-weight: bold">{</span>m<span style="color: #A45A77; font-weight: bold">}</span><span style="color: #BA2121"> columns.&#39;</span>)
+</pre></div>
+
+<p>| n | m | python | c++ |
+| -- | -- | -- | -- |
+| 100 | 500 | 0.252s | 0.195s |
+| 200 | 500 | 0.658s | 0.283s |
+| 300 | 500 | 0.953s | 0.539s |</p>
+<h3>对于抽象操作的测试</h3>
+<p>为此, 可以设计一系列数据, 使得我们可以测试抽象函数的执行进程.</p>
+<p>例如, 使用</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #008000">echo</span><span style="color: #bbbbbb"> </span><span style="color: #BA2121">&quot;1\n3\na\na\nb\n\n2\nsin(x)\n\n4\na\n1\n\n4\nb\n2\n\n6\n\n8&quot;</span><span style="color: #bbbbbb"> </span>|<span style="color: #bbbbbb"> </span>./a.out
+</pre></div>
+
+<p>可以测试其时间, 例如本次测试中是0.007s.</p>
+<p>下面使用不同变量分别测试:</p>
+<p>| n | 变量 | 时间(s) |
+| -- | -- | -- |
+| 3 | a,a,b | 0.007 |
+| 5 | a,a,b,b,c | 0.025 |
+| 7 | a,a,b,b,c,x,y | 0.031 |
+| 9 | a,a,b,b,c,x,y,x1,y1 | 1.980 |
+| 11 | a,a,b,b,c,x,y,x1,y1,w,e | &gt;10min |</p>
+<p>因为这个操作使用了递归的操作, 比较耗时, 时间复杂度呈现出指数级增长的态势. 因此目前只能计算小于10的抽象和具体表达式的情形.</p>
+<h2>评估指标</h2>
+<p>可以从可扩展性, 通用性, 耗时, 简洁性四个方面进行评估:</p>
+<p>可扩展性是指具有良好可扩展性的系统或软件能够在添加新功能或修改现有功能时保持高效和灵活。它们通常采用模块化、松耦合的设计，使得新功能的添加或现有功能的修改不会对整个系统产生严重的影响。</p>
+<p>通用性是指系统、软件或解决方案适用于多个不同的应用领域或问题领域的能力。它反映了系统或软件的广泛适用性和灵活性。</p>
+<p>耗时是衡量系统、软件或算法性能的重要指标之一。通过测量执行任务所需的时间，可以评估系统的效率和响应能力。较短的耗时通常表示系统执行任务的速度更快，能够更快地响应用户请求或处理大量数据。因此，耗时作为性能评估指标可以帮助我们了解系统在不同负载下的表现，从而做出相应的优化和改进。</p>
+<p>简洁性是指在设计和实现中保持简洁、清晰和易于理解的特性。在软件开发中，简洁性是一个重要的原则，旨在使代码易于编写、阅读、理解和维护。</p>
+<h2>评估结果</h2>
+<p>由于相关表述在上面已经介绍, 下面介绍具体的对于具体文件的测试结果的表格</p>
+<h3>具体文件数据的测试结果</h3>
+<p>下面是多次试验求平均值的结果:</p>
+<p>| n | m |n×m | python | c++ |
+| -- | -- | --| -- | -- |
+| 100 | 500 |50000| 0.257s | 0.295s |
+| 200 | 500 |100000| 0.643s | 0.256s |
+| 300 | 500 |150000| 0.925s | 0.500s |</p>
+<p>根据数据量绘制图:</p>
+<h3>抽象文件数据的测试结果</h3>
+<p>由于相关表述在上面已经介绍, 下面的数据是若干测试的平均值:</p>
+<p>| n | 变量 | 时间(s) |
+| -- | -- | -- |
+| 3 | a,a,b | 0.005 |
+| 5 | a,a,b,b,c | 0.038 |
+| 7 | a,a,b,b,c,x,y | 0.042 |
+| 9 | a,a,b,b,c,x,y,x1,y1 | 1.954 |
+| 11 | a,a,b,b,c,x,y,x1,y1,w,e | &gt;10min |</p>
+<p>总结下来, 就有如下的表格:</p>
+<p>| 项目 | Python | C++实现的抽象计算 | C++实现的具体计算
+| -- | -- | -- |
+| 编程简洁性 | 简洁 | 相对繁琐 |相对繁琐 |
+| 可扩展性 | pandas仅仅针对了具体数据 | 使用了代数系统, 可以扩展 | 可以扩展|
+| 耗时 | 略微高于C++的实现 | 在n&gt;9的时候极长 | 略低于正常的情况
+|通用性 | 只能针对具体的数据集| 可以使用抽象的符号计算表达式 | 只能针对具体的数据集 |</p>
+<h2>结果分析</h2>
+<p>总体来看, Python是一种编程语言，它以其简洁而闻名。它提供了简单易懂的语法，使得编写代码变得容易，并且代码量相对较少。然而，Python在处理具体数据集方面较为局限，对于通用性较弱。另一方面，C++实现的抽象计算相对繁琐，需要更多的代码量和复杂的语法。但是，它通过使用代数系统，具有很高的可扩展性，可以灵活地扩展功能。然而，当数据集的规模超过一定阈值（例如n&gt;9）时，C++实现的抽象计算的耗时会变得非常长。总的来说，Python适用于简单的具体数据处理，而C++实现的抽象计算适用于复杂的扩展性需求，但可能在大规模数据集上效率稍低。</p>
+<h1>结果及讨论</h1>
+<p>本程序实现了一个既可以使用抽象函数表达式又可以使用具体数据作为联合累积量的计算程序, 具体的计算读取<code>csv</code>文件上面展示出对于比Python更优化的效果, 抽象的计算可以替换函数, 并且在 \(n\leq9\) 的情况下取得了很灵活的函数表达方法.</p>
+<p>另外, 本程序使用了GiNaC, 宏编程, 面向对象的手段, 编写了结构清晰, 易于拓展的代码, 较为好的完成了题目问题的要求.</p>
+<h2>不足</h2>
+<p>在使用集合的划分的时候, 使用了vector来存储. 这样相对于传统的C数组有一些劣势:</p>
+<p>动态内存分配：vector在运行时需要动态分配内存来存储元素。这涉及到内存管理的开销，包括内存分配、释放和重新分配。如果频繁进行插入和删除操作，动态内存分配可能导致性能下降。</p>
+<p>内存占用：由于vector是连续存储的，它需要分配一块连续的内存来存储元素。这意味着即使容器中只存储少量元素，也会分配一块较大的内存空间。因此，当元素数量变化较大或者容器大小不确定时，可能会造成内存浪费。</p>
+
+    </div>
+
+   
+   
+   
+    <hr>
+
+
+
+
+
+
+    <div id="disqus_thread"></div>
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script>
+        /**
+        *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+        *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+        
+        // var disqus_config = function () {
+        // this.page.url = ;  // Replace PAGE_URL with your page's canonical URL variable
+        // this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        // };
+        
+        (function() { // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        s.src = 'https://augpath.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <script id="dsq-count-scr" src="//augpath.disqus.com/count.js" async></script>
+  </body>
+</html>
