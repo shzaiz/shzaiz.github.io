@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <link rel="stylesheet" href="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/style.css">
+    <script src="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/plugin.js"></script> 
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
+ 
+    <script>
+const copyButtonLabel = "Copy Code";
+
+// use a class selector if available
+let blocks = document.querySelectorAll("pre");
+
+blocks.forEach((block) => {
+  // only add button if browser supports Clipboard API
+  if (navigator.clipboard) {
+    let button = document.createElement("button");
+
+    button.innerText = copyButtonLabel;
+    block.appendChild(button);
+
+    button.addEventListener("click", async () => {
+      await copyCode(block);
+    });
+  }
+});
+
+async function copyCode(block) {
+  let code = block.querySelector("code");
+  let text = code.innerText;
+
+  await navigator.clipboard.writeText(text);
+}
+    </script>
+      <style>
+        body {counter-reset:section;}
+        h1 {counter-reset:subsection;font-size:x-large;}
+        h2 {font-size: large;}
+        
+        h1:before {
+        counter-increment:section;
+        content:counter(section) ". ";
+            font-weight:bold;
+            font-size: x-large;
+        }
+        h2:before {
+        counter-increment:subsection;
+        content:counter(section) "." counter(subsection) " ";
+        font-size: large;
+        }
+        html, body {
+            margin: 8%;
+            font-family: "Times New Roman","SimSun", "STSong", "Songti SC",Times, serif;
+            font-size: 110%;
+        }
+        code {
+            font-family: 'Courier New', Courier, monospace;
+        } 
+
+        pre {
+            font-family: 'Courier New', Courier, monospace;
+        } 
+        div{
+            max-width: 100%;
+            overflow: auto;
+            
+        }
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+            position: fixed; /* Set the navbar to fixed position */
+            top: 0; /* Position the navbar at the top of the page */
+            width: 100%; /* Full width */
+        }
+
+        img {
+        max-width: 80%;
+        height: auto;
+        }
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        a {
+            color: #148bca;
+            text-align: center;
+            padding-left: 2px;
+            padding-right: 2px;
+            text-decoration: none;
+        }
+
+        p.hidden {
+          overflow: hidden;
+        }
+
+    </style>
+  </head>
+  <body>
+    
+    <div class="navbar">
+        <a href="https://shzaiz.github.io">AUG's Wiki</a>
+        <a href="index.html"> ↑ Back to contents</a>
+        Last updated at 2023-07-04 20:00:06.585151
+    </div>
+
+    <div class="toc"></div>
+    <a id="toc-button"><i class="far fa-bookmark"></i></a>
+    
+    <div>
+      <hr />
+<p>title: Searching
+author: AUGPath</p>
+<hr />
+<p>$$
+\Huge \textbf{使用搜索引擎}
+$$</p>
+<p>$$
+\boxed{ \overbrace{\textit{degaokaolization}}^{\tiny{去高考化}} \text{ Discussion Group | Topic 00}}
+$$</p>
+<p>$$
+\boxed{\textbf{注意:} 最好使用英语阅读本系列文章. 中文仅供参考. }
+$$</p>
+<h1>引言</h1>
+<p>高考之后, 我们获取的信息的方式就取得了根本性的突破 – 从老师、家长的嘴里被动地接受信息, 到我们主动地理解一些信息. 下面我们来看一看有哪些有趣的方法, 使得我们在查找信息的过程中更加简洁、高效.</p>
+<h1>一点历史: 互联网刚发明出来的情况</h1>
+<p>在人们已经有了互联网之后, 必须要必须输入特定的网址才能访问他们知道的网站. 当时的人们为了更好地访问网络, 想到了这些招数:</p>
+<ul>
+<li>有一些有价值的网站, 他们会存在自己的书签栏里面, 便于访问;</li>
+<li>有一些网上社区, 可以让我们共享一些有趣的连接;</li>
+<li>许多网站集成了自己的搜索工具, 来搜索自己网站上的东西.</li>
+</ul>
+<p>用户依靠自己的主动性、个人网络和精心策划的资源集合来让自己查找信息的过程更加丝滑.</p>
+<p>一个想法: 能不能想个办法把这些内容聚合起来?</p>
+<p><strong>Question.</strong> 如果你是当时希望把所有的信息整合起来, 你应该如何设计?  \(\#\) </p>
+<p>当时的希望: 有一个关键字就可以连起来所有的知识. 因此, 他们需要文本匹配的方式来找到已有资料中的内容. 举个例子: 假设文档库里面是这个</p>
+<p><img src="./FILES/searching.md/img-20230703231210.png" alt="Img" /></p>
+<p>那么, 可以在使用搜索的时候我们就需要搜索gcc set breakpoints就更有可能被匹配到了. 现在, 你就应该理解为什么使用搜索引擎的时候需要合理地区分关键字的.</p>
+<p>虽然现在我们的搜索引擎已经日益强大, 甚至很多搜索引擎可以与我们用自然语言交流. 但是我们总是可以使用最原始的操作, 来达到相对比较好的效果.</p>
+<p><strong>Takeaway Message.</strong> 一般来讲, 使用单词词组来搜索, 效率会高很多.   \(\#\) </p>
+<h1>更进一步</h1>
+<p>虽然上面的方法是好的, 但是有时候却无法完全满足我们的需求: 比如你在Linux(一个对大众而言小众的操作系统)上面使用一个工具, 但是因为使用Windows的人非常多, 搜索关键词搜索会弹出很多Windows上这个工具的用法 – 这可不是我们想要的. 有没有什么方法做这个事情?</p>
+<ul>
+<li>需要对于某个关键词&quot;必须包含&quot;, &quot;不能包含&quot;;</li>
+<li>限制在某一个域名下搜索</li>
+<li>...</li>
+</ul>
+<p>我们今天的搜索引擎当然早已经有了这样的内容.</p>
+<p><strong>Remark</strong>. 自己认为合理, 可实现的功能, 大概率已经实现过了. 所以只要找到应用的部分就好了.  \(\#\) </p>
+<p><strong>Possible filters</strong>.</p>
+<ul>
+<li><code>&quot;Exact match&quot;</code> 精确匹配引号里面的内容</li>
+<li><code>site:xxx.com</code> 在xxx.com域名里面搜索</li>
+<li><code>-</code> 排除搜索结果结果中的含有这些的选项</li>
+</ul>
+<p>没事的时候倒是可以多点一点可信主页上面的链接 – 它们会在无意之间很有可能给你带来惊喜.</p>
+<h1>例子</h1>
+<h2>例子1. 选择高考志愿</h2>
+<p>每年的6月份, 是全国高考的月份. 这之后, 一批批学生将要步入大学. 当然在这个间隙, 我也推荐大家思考这个有趣的问题:</p>
+<p><strong>Question</strong>. 回顾一下自己以前问过的问题, 有没有哪些问题, 现在有更新颖的视角来看了? (如: 为什么要学习? 等等) \(\#\) </p>
+<p>不过高考专业的选择, 可能是大家做的第一个人生选择(竞赛生除外, 竞赛生已经做过至少一次重要的抉择了). <a href="https://mp.weixin.qq.com/s/5baq7UxOfpgLQ6fvzmMmFA">朱富海</a>老师曾经说:&quot;有人说中国教育重教缺育, 学校只是把有形的知识快速地灌输到孩子的脑袋里, 然而这些知识却不能内化成孩子们内心的素养.&quot;</p>
+<p>事实上, 这在做抉择方面体现地淋漓尽致. 下面我们来像解决普通问题一样解决这个事情.</p>
+<p>在这里已经假设大家已经有一个明确的专业了(事实上, 这个问题在当今的内卷的大环境下越来越难回答. 因此如果没有的话可能需要在将来继续探索). 以河南省的高考为例, 允许选择若干个平行志愿. 那么什么是平行志愿?</p>
+<p>在百度搜索相关的关键字, 自然会出现很多关于此的解读. 那么, 应不应该信这个呢? 为了增强可信度, 我们可以阅读更多信息, 并且可以在指定的可信站点(如教育部、中国政府网的域名中搜索). 更简单的, 可以输入</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span>教育部 平行志愿
+</pre></div>
+
+<p>就可以找到官方的网站了. 具体的一份参考如下: <a href="https://www.gov.cn/lianbo/bumen/202305/content_6875790.htm">link</a>.</p>
+<p>可是这里面的信息还是很多. 这时候我们可以使用查找功能. 按下Ctrl-F, 之后再弹出的框内搜索<code>平行志愿&#x27;&#x27;. 这样, 所有的</code>平行志愿&#x27;&#x27;都会加黄色显示.</p>
+<p><strong>Remark</strong>. 事实上, 当前的大部分资料已经足够先进, 以至于我们可以进行&quot;随机读取&quot; – 先不用管上下文, 如果有不懂的地方再返回到上文中提到的概念进行进一步的理解. 这会省去很多不必要的麻烦.   \(\#\) </p>
+<p>经过多方确认后, 你已经知道了如何进行录取工作. 现在, 你可能会估计分数, 判定自己去哪个学校 – 当然, 这样做除了扫兴之外好像帮不了太大的忙 – 又不是上了大学就可以不学习成天玩了. 事实上, 大学要学的东西一学年(部分专业一学期)就能轻松超过高中三年的内容了.</p>
+<p>于是静静地等省排名. 事实上, 每个大学每年在每个地区会有不同的招生计划. 这个一般在《招生考试之友》上面有. 但是具体排位大概是多少呢?</p>
+<p>为了解决这个问题, 当时经常用的一款App: 夸克搜索指示它可以告诉我们最近几年这个专业最低的录取省排是多少 – 当然数据也是教育部那里借用的 – 嘿! 就像是一个搜索引擎一样.</p>
+<p>有了最近的几年的最低分数线, 以及最近几年招生考试之友的招生人员信息, 我们应该如何看一看它的未来发展趋势呢? – 我们高中学习的线性回归就可以有一点帮助了, 只不过, 我们可以使用现代的表格处理软件(如Excel)进行预测.</p>
+<p>这样, 你就为自己做了一次决策. 回顾一下: 有什么疏漏的? 在哪些地方可以优化? 这个技能是必备的, 也是必须的 – 因为未来的大学选课的教务系统可能也要用到类似的操作, 为了自己未来能够从容地面对将来的挑战, 就试着自己好好体会一下这个过程吧!</p>
+<p>(题外话: 当年我也照样参考了<a href="https://colleges.chat/">大学生生活质量指北</a>这个网站. 希望有所帮助. 但更多的帮助是希望告诉大家这个想法是怎样来的, 慢慢你也可以自己提出新想法了. )</p>
+<h2>例子 2.  挽救失效的网页</h2>
+<p>这个故事同样发生在高考完的时候. 高考完之后AUGPath在家闲来无事, 打算把之前高中想看懂的东西再看看. 在无意间游走的时候, 从<a href="jyywiki.cn">蒋炎岩</a>老师的主页点进了<a href="http://tcs.nju.edu.cn/yinyt/">尹一通</a>老师的一门《组合数学》课程主页. 可惜服务器年久失修, 内容已经不能访问了. 求助南大的同学, 发现果然是因为老师不带这门课了, 服务器已经被关闭了. 该怎么办?</p>
+<p>因此我提出的需求是: 有没有一个工具, 使得它可以保存其他网页在过去时间的状态? 答案是肯定的. 在Google类似的网站上搜索</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span>Webpage past states
+</pre></div>
+
+<p>这个需求是合理的 – 毕竟有了这个大多数人就可以观察到他们之前想要看到的内容了. 理所当然地, 我们得到了线索: &quot;Internet Wayback Machine&quot;. 当然就可以找到大约2015年那会上课的笔记和讲稿了.</p>
+<p>不过好消息是, 带这门课的尹一通 老师今年又要教《组合数学》了!(<a href="https://tcs.nju.edu.cn/wiki/index.php?title=%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6_(Spring_2023)">Home</a>)</p>
+<p>尹一通老师对于教育问题有这非常深刻的见解. 这种认真的做事态度, 专业的学术水平确实不愧为大师.</p>
+<blockquote>
+<p>我们的作业周五才截止。同学们还是尽量自己多花时间想一想，写好了再提交。作业和考试是两个性质的，作业的主要任务不是考核，而是做为一种训练。期末考试是有时间限制的，需要 在有限时间内检测出一个人的水平。而这门课不应该是所有的训练内容，都是在有限时间内以“力所能及”的方式就能顺理成章完 成的，不然就成了完成一些routine tasks了。“问题求解”能力的提升，势必需要对思维有一定程度的考验和挑战，尽量做出一些思维上的创新，克服一定的非平凡性 (nontriviality）才可以。大家还是不要老是觉得，所有的任务都应该是可以routinely完成的。这尤其在AI已经大行其道的今天，是一种不可取的态度了。 – 尹一通</p>
+</blockquote>
+<h1>对于预备学习计算机科学的学生: 如何搜索</h1>
+<p>下面的内容就比较偏向专业化的方向了. 对于计算机科学的学生, 我们希望大家拒绝使用全网页的中文翻译浏览英文网页, 并且使用Google, StackOverFlow这样高质量的英文社区.</p>
+<p>但是似乎我们都不习惯使用英语 – 这很正常. 但是习惯了之后, 就能像和说中文有类似的体验了. 我们使用英语关键字, 是因为这些的原因:</p>
+<ul>
+<li>一般来说, 百度对英文关键词的处理能力比不上Google;</li>
+<li>通常来说, 英文维基百科比中文维基百科和百度百科包含更丰富的内容. 在后续的内容中, 我们会举例;</li>
+<li>英语更贴近于这个概念刚刚发源出来的时候, 它拥有的意思. 比如&quot;冲量&quot; v.s. &#x27;impulse&#x27;, &quot;斜率&quot; v.s. &#x27;slope&#x27;, &quot;开覆盖&quot; v.s. &#x27;open cover&#x27;.</li>
+</ul>
+<blockquote>
+<p>提示: 我们可以在浏览器上安装插件, 使得我们可以顺利地实现<code>划词翻译&#x27;&#x27;等功能. 我自己用的一个插件叫做</code>侧边翻译(Edge Translate)&#x27;&#x27;, 个人感觉还是不错的.</p>
+</blockquote>
+<p>除此之外, 官方手册是一个很重要的信息来源: 官方手册包含了查找对象的所有信息, 关于查找对象的一切问题都可以在官方手册中找到答案. 通常官方手册的内容十分详细, 在短时间内通读一遍基本上不太可能, 因此你需要懂得&quot;如何使用目录来定位你所关心的问题&quot;. 如果你希望寻找一些用于快速入门的例子, 你应该使用搜索引擎. (选自南京大学<a href="https://nju-projectn.github.io/ics-pa-gitbook/ics2021/">PA实验</a>)</p>
+<h1>Takeaway Message</h1>
+<ul>
+<li>任何让人感到不舒服的东西, 总应该存在更好的流程帮助我们;</li>
+<li>以前的一部分知识不仅仅是用来学习的, 更是拿来用的. 学习更广阔的东西, 在面对更加广泛的决策的时候, 也是多多少少能够体现的;</li>
+<li>认识一个事情的过程是循序渐进的, 不要想着一下子就完全搞懂. 最好耐下心来.</li>
+</ul>
+<blockquote>
+<p>人生其实有一门课，就是不断地发掘自己，认识自己，看看什么事情可以让自己愿意花时间和精力去做，做的过程是快乐的，做完后是欣慰满足的。很多时候兴趣的养成，是靠因缘际遇碰到了，你花时间去做发现自己并不排斥，然后一路做下来，越来越专业，受到越来越多来自他人的正向反馈与自我的肯定，也就越来越愿意花时间去做，由此进入了正向的循环。但是需要注意的是，这个“因缘际遇”碰到的事情，不一定是你大学学的专业。
+很多时候，我们被生活推着走，貌似18年的努力就是为了能上一个好大学，选择一个好专业。但是什么是好专业？大家眼中的好专业，就是好专业吗？现在的大学教育培养更多的是专业技能，缺失了很多能够让人自省、自察、自悟的人文关怀，社会的浮躁也多源于此，我曾在《浅谈国内高校编程语言教育》一文中写到：“这些对兴趣的专注和纯粹本应该是大学生在自己专业上该有的年轻的、百舸争流的样貌，如今却被年薪、房价和社会的物化价值观所左右。如果连我们国家顶尖大学的教育都摆脱不了物欲横流的浮躁，又如何完成国家民族集体人格的进一步塑造？”
+我真心希望大家最终都能找到自己心中的“兴趣”，哪怕你现在学着计算机，以后却只想开一家奶茶店。这也许需要很长的一段时间，但是这一切却又很值得，寻找它的路上，你会更加了解自己，更加怡然自得，因为你一直在修改着属于自己幸福的定义。</p>
+</blockquote>
+
+    </div>
+
+   
+   
+   
+    <hr>
+
+
+
+
+
+
+    <div id="disqus_thread"></div>
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script>
+        /**
+        *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+        *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+        
+        // var disqus_config = function () {
+        // this.page.url = ;  // Replace PAGE_URL with your page's canonical URL variable
+        // this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        // };
+        
+        (function() { // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        s.src = 'https://augpath.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <script id="dsq-count-scr" src="//augpath.disqus.com/count.js" async></script>
+  </body>
+</html>
