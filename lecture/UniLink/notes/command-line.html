@@ -108,7 +108,7 @@ async function copyCode(block) {
     <div class="navbar">
         <a href="https://shzaiz.github.io">AUG's Wiki</a>
         <a href="index.html"> ↑ Back to contents</a>
-        Last updated at 2023-07-05 15:21:03.190865
+        Last updated at 2023-07-07 15:05:15.512960
     </div>
 
     <div class="toc"></div>
@@ -146,7 +146,71 @@ $$</p>
 </pre></div>
 
 <p>and maybe you will see <code>Hello World</code> displaying on the screen. If you see an error message, maybe you have mistaken the place for this program.</p>
-<p>PUTOFF! NO PHYSICAL WINDOWS MACHINE!</p>
+<p>But what if I want to open an application at another folder? This requires us to have a good command of navigating between folders.</p>
+<p><strong>Change Directories</strong>. Use <code>cd</code> to navigate between directories. <code>cd foldername</code> to enter a folder, <code>cd .</code> to come into the current one, <code>cd ..</code> to back to the upper level. Also, we can <code>cd path/to/file/name/../name</code>, combining them together.</p>
+<p><strong>Getting Help</strong>. Command line tools are designed to show help. By attaching an extra <em>flag</em> <code>-h</code>(Windows 7 and after) or <code>/h</code>(Windows XP), you will receive the help message.</p>
+<h2>The PATH environment</h2>
+<p>Now enter <code>calc.exe</code> in <code>cmd</code>. To our surprise, it started Calculator. But we don&#x27;t have a calculator under this directory! Why?</p>
+<p>The answer is in the PATH environment. When you typed a line of text, the system firstly finds the application under this folder, then, it starts to search in the PATH folders. There are many critical pathes in your system, like <code>C:\Windows\System32</code> which has tons of applications in it. You may find <code>calc.exe</code> in this folder.</p>
+<p>This is basically a lazy idea - we don&#x27;t have to change the directory every time we want to execute a file, which is good!</p>
+<p>Another advantage of this design is that we can leave more options to users. For example, one user may installed the executable file <code>a.exe</code> to <code>C:\Program Files</code>, while another user installed it to <code>D:\Program Files</code>. This kind of techique will make the application more easier to access.</p>
+<p>However, there are some shortcomings of this pattern. If you have two applications with the exact name included in the PATH, then it will be confusing for you. So in Unix system, there are no such things as <em>global variables</em>. Instead, the PATH is set for each terminal. Every time you start a terminal window, the PATH sets to its initial state. It has a startup script configuring the PATH and other stuff.</p>
+<h2>Other handy operations</h2>
+<p><strong>Listing Files in a directory</strong>. Want to know what&#x27;s in your current directory? You may enter <code>dir -s</code>, where <code>s</code> stands for <code>show</code>.</p>
+<p><strong>Move file</strong>. Use <code>move</code> command. If you want to move the file from <code>C:\first</code> to <code>D:\second</code>, you should say <code>move C:\first D:\second</code>. Both two arguments can be file or directory.</p>
+<p>There are other bunch of commands operates this way. Like <code>copy</code>, <code>rename</code>, and it&#x27;s not hard to guess what to pass in, based on <code>move</code> command.</p>
+<p><strong>Tip</strong>. Don&#x27;t afraid of mistakes. If you encounter errors, it&#x27;s totally fine. Don&#x27;t be shocked or even overwhelmed by errors! In fact, having errors is normal in learning!</p>
+<h1>Some fun commands</h1>
+<h2>Shutdown</h2>
+<p>Shutdown means turn off your computer. Maybe you have dreamed of turning off your teacher&#x27;s computer in a boring lesson so that he would have no slides to continue the lecture.</p>
+<p>But it&#x27;s risky to rush up and plug off your teacher&#x27;s computer directly. Is it possible to set a timer, when the timer reached 0, the computer will shut down automatically?</p>
+<p>Yes! <code>shutdown</code> can do this exactly. Type in <code>shutdown</code>, and you will get the help message.</p>
+<p>What&#x27;s more, <code>shutdown</code> command can even shutdown computers remotely - of course in your local web. There&#x27;s also help message in it.</p>
+<h2>Task kill</h2>
+<p>To kill a task is like clicking the cross(<code>x</code>) button on your window. But some applications like 极域电子教室 will not offer you that close button. But we can still kill the program, by using <code>taskkill</code> command.</p>
+<p>Normally, the name for 极域电子教室 is <code>StudentMain.exe</code>. You can execute</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span>taskkill<span style="color: #bbbbbb"> </span>/f<span style="color: #bbbbbb"> </span>/im<span style="color: #bbbbbb"> </span>StudentMain.exe
+</pre></div>
+
+<p>The option is</p>
+<ul>
+<li><code>/f</code> means force quit;</li>
+<li><code>/im</code> means that it searches by name.</li>
+</ul>
+<p>This command is also helpful when some buggy programs is launched. We will see some examples in the following lectures.</p>
+<h2>Print text onto console</h2>
+<p>To do this, we can use <code>echo</code> command. For example: <code>echo &quot;Hello World&quot;</code>.</p>
+<p>You can execute <code>echo off</code> to disable the <code>C:\Users\Admin</code> and only leave the blinking cursor. This is extremely useful in batch files.</p>
+<h1>Connecting programs</h1>
+<p>Maybe your idea is that only displaying texts is trivial. That&#x27;s true. But what can be not so trivial is that actually write the text into a file!</p>
+<p>For example:</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #008000">echo</span><span style="color: #bbbbbb"> </span>hello<span style="color: #bbbbbb"> </span>&gt;<span style="color: #bbbbbb"> </span>a.txt<span style="color: #bbbbbb"> </span>
+</pre></div>
+
+<p>and a <code>a.txt</code> will appear in your directory. Great! But why is it happening?</p>
+<p>The program of this form basically has two primary <strong>“streams”</strong> associated with them: there <em>input</em> stream and <em>output</em> stream - since that&#x27;s pretty like an algorithm - reads in from input and writes out to output. When the program tries to read input, it reads from the input stream, and when it prints something, it prints to its output stream.</p>
+<h2>Input and Output redirection</h2>
+<p>Normally, a program’s input and output are both your terminal. That is, your keyboard as input and your screen as output. However, we can also rewire those streams!</p>
+<p>But using the <code>&gt;</code>, we changed its output stream(short for <em>ostream</em>) to a file <code>a.txt</code>, hence it outputs its data there.</p>
+<p>Likewize, we have <code>&lt; file</code> for read in from file. You may try it yourself.</p>
+<h2>Chain data through pipe</h2>
+<p>Let&#x27;s say you want to list all the files in a directory and then search for a specific string within the output. Here&#x27;s something you might do:</p>
+<p>First, type in <code>dir</code> to get all of the file; Second, copy the output and use <code>find</code> command, with args you copies earlier pasted.</p>
+<p>But here&#x27;s another idea - working together through <code>pipe</code>, that is a small vertical bar <code>|</code>. You can do this:</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span>dir<span style="color: #bbbbbb"> </span>|<span style="color: #bbbbbb"> </span>find<span style="color: #bbbbbb"> </span><span style="color: #BA2121">&quot;specific string&quot;</span>
+</pre></div>
+
+<p>That is directly passing the <strong>result</strong> of <code>dir</code> program, and pass in to the input of <code>find</code> program.</p>
+<p>Great! You have now have a basic idea what a command line is, and mostly, you can automate things really fast!</p>
+<h1>Automation</h1>
+<p>Saving these instructions in the suffix <code>.cmd</code> will make it possible to run on click - typically your Anti Virus softwares will give a warning on this, for this is usually unbounded and sometimes can cause critical damage to your computer. But sometimes this works really fast, saving both time and energy.</p>
+<h2>Problems</h2>
+<p>But what if I want to create 100 dirs, from <code>stu1</code> to <code>stu100</code>. Is there a loop control or something? Yes of course! You can search with keyword <code>cmd loop</code> to search engines! Or asking <code>ChatGPT</code> is also a good idea!</p>
+<p><img src="./FILES/command-line.md/img-20230707145829.png" alt="ask-gpt" /></p>
+<h1>Summary</h1>
+<p>This is the first language you learn. And this will give you the power to organize computers better. If you are about to use the Unix system like Linux, you will find these techiques are needed badly.</p>
+<p>MacOS is a Unix-like system, and my daily routine can&#x27;t be done without shells. For example, here is the shell script to update the Lecture Notes:</p>
+<p><img src="./FILES/command-line.md/img-20230707150235.png" alt="lec-note-upd" /></p>
 
     </div>
 
