@@ -108,7 +108,7 @@ async function copyCode(block) {
     <div class="navbar">
         <a href="https://shzaiz.github.io">AUG's Wiki</a>
         <a href="index.html"> ↑ Back to contents</a>
-        Last updated at 2023-07-08 00:09:38.887007
+        Last updated at 2023-07-08 17:23:18.865794
     </div>
 
     <div class="toc"></div>
@@ -123,7 +123,7 @@ $$</p>
 \boxed{ \overbrace{\textit{degaokaolization}}^{\small{去高考化}} \text{ Discussion Group | Topic 02}}
 $$</p>
 <p>Personally I recommend reading the book Reading, Writing, and Proving - A Closer Look at Mathematics(Second Edition). Viewing Chapter 2 through 4 is possible. The following note is just a simplified version of the book.</p>
-<h1>The common way</h1>
+<h1>Buildblocks</h1>
 <p>The chemistry teacher currently teaching your class is about to change. Someone says there are only two teachers avaliable. Say teacher RYWang and teacher YBWang. Meanwhile, you happen to know that teacher RYWang is leading his students to IChO, a chemistry competetion worldwide. You are confirmed that the teacher coming next is teacher YBWang.</p>
 <p>This can be generalized. If you are given the <em>message</em> &quot;A or B is true&quot;, and you know that &quot;A is not true&quot;, you can get to know that &quot;B is true&quot;. This is an example of a <em>valid</em> argument.</p>
 <p>In order to understand an argument, we must be able to read and understand the sentences that compose it. We need to be able to tell whether the sentences in our argument are true or false, and whether they follow logically from the previous ones.</p>
@@ -154,9 +154,112 @@ T&amp;F
 \\F&amp;T
 \end{array}
 $$</p>
-<p>Truth table is a good tool for understanding</p>
+<p>We say T for true and F for false. Truth table is a good tool for understanding.</p>
+<!-- Some Minecraft redstone players can represent a "not" like this: 
+
+![not-gate](./FILES/logic.md/img-20230708164302.png) -->
+<p>OK, that&#x27;s the case for only one symbol. Let&#x27;s look at something that is capable of combining two statements:</p>
+<h2>Or( \(\lor\) ) And( \(\land\) )</h2>
+<p>Let&#x27;s investigate the sentence &quot; \(P\)  or  \(Q\) &quot;. Apart from everyday English language, the &quot;or&quot; in mathematics has a somehow different meaning.</p>
+<p>For example, in English, we may say &quot;You can have cake or ice cream&quot;, this means that you can have both, but if we say, “The door is open or closed,” it cannot be that the door is both open and closed. The &quot;or&quot; in English statements are often ambiguous. In mathematics, ambiguity is generally frowned upon.</p>
+<p>The statement of the form “ \(P\)  or  \(Q\) ” is called a <em>disjunction</em>. It is usually denoted as  \(P\lor Q\) .</p>
+<p>In mathematics, a <em>disjunction</em> is true when  \(P\)  alone is true,  \(Q\)  alone is true, or both  \(P\)  and  \(Q\)  are true. Using the truth table techique, we have that</p>
 <p>$$
--\mathscr {\red{\Large NOT}E}\text{nd of the note}-
+\begin{array}{cc|c}
+{P}&amp;{Q}&amp;P\lor Q\\
+\hline 
+T&amp;T&amp;T\\
+T&amp;F&amp;T\\
+F&amp;T&amp;T\\
+F&amp;F&amp;F 
+\end{array}
+$$</p>
+<!-- You may build in the Minecraft like this: 
+
+![or-gate](./FILES/logic.md/img-20230708164533.png) -->
+<p>Likewize, the &quot;and&quot; in the mathematics( \(P\)  and  \(Q\) ) has the clear meaning  that this will be true when both  \(P\)  and  \(Q\)  are true, and false otherwise.</p>
+<p>$$
+\begin{array}{cc|c}
+{P}&amp;{Q}&amp;P\land Q\\
+\hline 
+T&amp;T&amp;T\\
+T&amp;F&amp;F\\
+F&amp;T&amp;F\\
+F&amp;F&amp;F 
+\end{array}
+$$</p>
+<h2>If... Then...( \(\to\) ) Iff( \(\iff\) )</h2>
+<p>Now let&#x27;s consider the statement &quot;If  \(P\)  then  \(Q\) &quot;. This statement form is called an <em>implication</em> and is often stated as &quot; \(P\)  implies  \(Q\) &quot; and written as &quot; \(P\to Q\) &quot;. There are equivalent ways of stating an implication, and some will require some careful thinking on the reader’s part. We will list it here:</p>
+<ul>
+<li> \(Q\)  if  \(P\) .</li>
+<li> \(P\)  is <em>sufficient</em> for  \(Q\) . (meaning that  \(P\)  is <strong>enough</strong> for  \(Q\)  to happen)</li>
+<li> \(Q\)  is <em>necessary</em> for  \(P\) . (If  \(P\)  happened, then  \(Q\)  must have happened)</li>
+<li> \(P\)  <em>only if</em>  \(Q\) .</li>
+<li> \(Q\)  <em>whenever</em>  \(P\) .</li>
+</ul>
+<p>The statement form  \(P\)  in each of these formulations is called the <em>antecedent</em>, and  \(Q\)  is called the <em>conclusion</em>. Under what conditions is the implication true or false? Let&#x27;s take a look at the following example:</p>
+<p>Suppose we say to our son,</p>
+<blockquote>
+<p>&quot;If you clean your room, then you can go to Henry&#x27;s house.&quot;</p>
+</blockquote>
+<p>Under what conditions would he feel that we had lied? In this example, the antecedent  \(P\)  is &quot;you clean your room&quot;, the conclusion  \(Q\)  is &quot;you can go to Henry&#x27;s House&quot;. Well, if the son cleans his room and we let him go to Henry’s, everybody is happy. That implication should be true. That implication should be true. So, if  \(P\)  is true and  \(Q\)  is true, the whole statement should be true.</p>
+<p>Also, it should be as clear to you as it will be to our son, that if he cleans his room and we do not let him go to Henry’s, we lied. So, if  \(P\)  is true, and  \(Q\)  is false, the implication should be false.</p>
+<p>Now what if he doesn’t clean his room? We never discussed this possibility. So, no matter what we decide here, we have not lied. So, if  \(P\)  is false, no matter what the truth value is of the conclusion, we will consider the implication to be true.</p>
+<p>This will lead us to the truth table</p>
+<p>$$
+\begin{array}{cc|c}
+{P}&amp;{Q}&amp;P\to Q\\
+\hline 
+T&amp;T&amp;T\\
+T&amp;F&amp;F\\
+F&amp;T&amp;T\\
+F&amp;F&amp;T 
+\end{array}
+$$</p>
+<p>It is often helpful to rephrase a statement, making sure that you maintain the
+<em>same</em> true and false values. The statement form &quot; \(P\)  <em>if and only if</em>  \(Q\) ” is called an<em>equivalence</em>, we will write it as  \(P \leftrightarrow Q\) . With the description, we have the form  \((P\to Q)\land (Q\to P)\) .</p>
+<p>$$
+\begin{array}{c|c|c|c|}\mathbf{P}&amp;\mathbf{Q}&amp;\mathbf{P}\to\mathbf{Q}&amp;\mathbf{Q}\to\mathbf{P}&amp;\mathbf{P}\leftrightarrow\mathbf{Q}\\\hline T&amp;T&amp;T&amp;T&amp;T\\T&amp;F&amp;F&amp;T&amp;F\\F&amp;T&amp;T&amp;F&amp;F\\F&amp;F&amp;T&amp;T&amp;T\end{array}
+$$</p>
+<p>The statement form &quot;If  \(P\) , then  \(Q\) &quot; is also written as  \(P\implies Q\) , and  \(P\)  if and only if
+ \(Q\) ” might be written as &quot; \(P \iff Q\) &quot; or &quot; \(P\text{ iff }Q\) &quot;.</p>
+<p>Having studied the connectives, we are ready for our definition of a statement form. A statement form is a letter representing an unspecified statement or an expression built from such letters using connectives. Statement forms can be quite complicated. Assigning truth values to them can be done in a step-by-step fashion. Just like arithemetic operations.</p>
+<h1>The types</h1>
+<p>A statement form for which the final column in the truth table consists of all T’s is called a <em>tautology</em>. A statement form for which the final column is all F’s is called a <em>contradiction</em>.</p>
+<p>Two statement forms,  \(P\)  and  \(Q\) , are said to be (logically) equivalent if  \(P ↔ Q\)  is a tautology, and two statements are equivalent if they can be obtained
+from two equivalent statement forms by consistently replacing the letters by English
+statements.</p>
+<p>It&#x27;s natrual to us that  \(\lnot (P\land Q)\)  is saying the same thing as  \(\lnot P\lor \lnot Q\) . We can list the truth table for that, according to definition.</p>
+<p><strong>Thm</strong>. Two statement forms  \(P\)  and  \(Q\)  are equivalent if and only if they have the same truth table.</p>
+<p>Proof. Consider the truth table for the equivalence  \(P ↔ Q\) : We know that  \(P ↔ Q\)  is a tautology if and only if  \(P ↔ Q\)  has the truth value T (in the table above, this is row 1 and row 4). Finally,  \(P ↔ Q\)  has the truth value T if and only if P and Q have the same truth value. Since  \(P\)  and  \(Q\)  are equivalent if and only if  \(P ↔ Q\)  is a tautology, this establishes the theorem.  \(\square\) </p>
+<h2>Negating the statement</h2>
+<p>While it is very important to be able to restate something in an equivalent form, it is equally important that you be able to negate a statement. Some useful negations appear in the exercises and problems. The negation of an implication is particularly important in mathematics. If you think about integers and the sentence “If  \(x\)  is prime, then  \(x\)  is odd or  \(x = 2\) ,” you can see that even a relatively simple implication might be difficult to negate.</p>
+<p>Construct the truth table for  \(P → Q\) , and the truth table for  \(¬P ∨ Q\) . What do you notice?</p>
+<p>If all went well, you noticed that  \(P → Q\)  is equivalent to  \(¬P ∨ Q\) , and therefore
+the negation of “If  \(P\) , then  \(Q\) ” is “ \(P\)  and not  \(Q\) .”</p>
+<p>Back to the example, maybe you will find that negating</p>
+<p>$$
+\text { ``If } \underbrace{x \text { is prime }}_{P}, \text { then } \underbrace{x \text { is odd or } x=2}_{Q} . &quot;
+$$</p>
+<p>will lead to</p>
+<p>$$
+\text { `` } \underbrace{x \text { is prime }}_{P} \text { and it is } \underbrace{\text { not the case that } x \text { is odd or } x=2}_{\neg Q} . &quot;
+$$</p>
+<p>The negation of an implication is something you should learn well now because it arises frequently. In the theorem below, we summarize the five most important equivalences that we have covered so far. The first two are often referred to as <em>DeMorgan’s laws</em>.</p>
+<p><strong>Thm</strong>. Let  \(P\)  and  \(Q\)  denote statement forms. The following are tautologies:</p>
+<p>DeMorgan&#x27;s Laws:
+$$
+\begin{aligned}\lnot(P\lor Q)&amp;\leftrightarrow(\lnot P\land\lnot Q);\\\lnot(P\land Q)&amp;\leftrightarrow(\lnot P\lor\lnot Q);\end{aligned}
+$$</p>
+<p>Impliication and its negation</p>
+<p>$$
+\begin{array}{l}(P\to Q)\leftrightarrow(\lnot P\lor Q);\\\lnot(P\to Q)\leftrightarrow(P\land\lnot Q);\end{array}
+$$</p>
+<p>Double negation.  \(\lnot(\lnot P)\leftrightarrow P.\) </p>
+<p> \(\#\) </p>
+<p>You can prove by drawing out all the truth forms.</p>
+<p>$$
+-\mathscr {{\color{red}\Large NOT}E}\text{nd of the note}-
 $$</p>
 
     </div>
