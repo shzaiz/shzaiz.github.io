@@ -108,7 +108,7 @@ async function copyCode(block) {
     <div class="navbar">
         <a href="https://shzaiz.github.io">AUG's Wiki</a>
         <a href="index.html"> ↑ Back to contents</a>
-        Last updated at 2023-07-09 21:34:26.587611
+        Last updated at 2023-07-09 22:35:39.130628
     </div>
 
     <div class="toc"></div>
@@ -141,11 +141,8 @@ $$</p>
 <p>Let&#x27;s start from the simplest form:</p>
 <h2>NOT( \(\lnot\) )</h2>
 <p>Suppose AUGPath says &quot;The desktop image of my computer is a mountain! &quot;. By looking at his desktop, you find that it&#x27;s not a mountain. In other words, you can decide on the <em>truth value</em> of that <em>statement</em>. You could say &quot;The desktop image is <em>not</em> a mountain!&quot;</p>
-<p>If we have a statement form  \(P\) , the
-negation of  \(P\)  is the statement form &quot;not  \(P\) .&quot; Under what cases should the
-negation of  \(P\)  be true or false? We will always use the notation  \(¬P\)  for &quot;not  \(P\) .&quot; If
- \(P\)  is true, then  \(¬P\)  should be false. If  \(P\)  is false, then  \(¬P\)  should be true. We can
-summarize all the possibilities in a <em>truth table</em> as follows:</p>
+<p>If we have a statement form  \(P\) , the negation of  \(P\)  is the statement form &quot;not  \(P\) .&quot; Under what cases should the negation of  \(P\)  be true or false? We will always use the notation  \(¬P\)  for &quot;not  \(P\) .&quot; If
+ \(P\)  is true, then  \(¬P\)  should be false. If  \(P\)  is false, then  \(¬P\)  should be true. We can summarize all the possibilities in a <em>truth table</em> as follows:</p>
 <p>$$
 \begin{array}{c|c}
 \mathbf{P}&amp;\lnot\mathbf{P}\\
@@ -286,7 +283,7 @@ way to make our sentence  \(x^2-1=0\)  into a <em>statement</em>. But before tha
 <p>The idea of <em>set</em> is common. Typically, we think of a set as a collection of objects. We will neither define what a <em>collection</em>, nor an <em>object</em> is. It can be defined precisely by the Axioms, but for the sake of simplicity, we will not describe them now. (The set axiom system the most people use now, is the <em>Zermelo–Fraenkel</em> with the <em>Axiom of Choice</em>. Of course, it is hard to understand at first glance.)</p>
 <p>Recall that previously we have learnt a <em>element</em>  \(e\)  is either <em>belongs to</em> a set  \(S\) , or <em>not belongs</em> to a set  \(S\) . The first case we will write  \(e\in S\) , or  \(e\notin S\)  otherwise. The set of all possible objects that are considered <strong>in the context</strong> in which we work is called the <em>universe</em>, or <em>domain of discourse</em>. We will usually denote this by  \(X\)  or  \(U\) . While we are studying real numbers, we probably will set the  \(X=\{\text{Real Numbers}\}\) . It might even consist of all cows living in France when it needs to. Some people even allow the universe to be the “set of all sets,” even though this universe is no set at all. This is known as <strong>Russell&#x27;s Paradox</strong>. And that&#x27;s the reason why mathematicians tried hard to axiomize the sets.</p>
 <p>We also recall that  \(\mathbb Z, \mathbb R, \mathbb Q, \mathbb C\)  denotes common sets of numbers. Integer, real, quotient, complex, respectively.</p>
-<p>Additionally, we can represent the plane with  \(\mathbb R\times\mathbb R\) . The  \(\times\)  notation between sets means all possible <em>arrangement</em> within two sets. This is later known as <em>Cartesian product</em> of sets.</p>
+<p>Additionally, we can represent the plane with  \(\mathbb R\times\mathbb R\) . The  \(\times\)  notation between sets means all possible <em>arrangement</em> of elements within two sets. This is later known as <em>Cartesian product</em> of sets.</p>
 <h2>Forall( \(\forall\) ) and Exist( \(\exists\) )</h2>
 <p>Now we can talk about slightly more complicated sentences. Think of the difference between the statements “In every box there is a prize” and “In some box there is a prize.” Obviously, if you had to choose (and if it were the same prize), you would go with the first one. In mathematics, in order to determine the truth or falsity of a statement, What we mean should be clear from the context. Letters like  \(x\)  that stand for elements of the universe are called variables. The phrases “for all,” “for every,” “for some,” or “there exists,” quantify variables. “For all,” or  \(∀\) , is the <em>universal quantifier</em> and “there exists,” or  \(∃\) , is the <em>existential quantifier</em>.</p>
 <p>After agreeing that the universe consists of all real numbers, consider the following statement: &quot;Forall  \(x\) ,  \(x^2-1\leq 0\) &quot; We know that we are asking that for every x, something must happen. It just so happens that this statement is false, but it is still a clear statement. For all x is usually written ∀x. So we could write as</p>
@@ -364,7 +361,7 @@ $$</p>
 <p>$$
 ∃x, ¬(p(x) → ∃n, (q(n) ∧ r(n, x)))
 $$</p>
-<p>Now we negate the implication. From the last chapter we know that  \(¬(P → Q)\)  is equivalent to  \(P ∧ ¬Q\) . We’re up to</p>
+<p>Now we negate the implication. From the previous section we know that  \(¬(P → Q)\)  is equivalent to  \(P ∧ ¬Q\) . We’re up to</p>
 <p>$$
 ∃x, (p(x) ∧ ¬(∃n, (q(n) ∧ r(n, x)))).
 $$</p>

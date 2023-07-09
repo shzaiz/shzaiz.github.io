@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <link rel="stylesheet" href="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/style.css">
+    <script src="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/plugin.js"></script> 
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
+ 
+    <script>
+const copyButtonLabel = "Copy Code";
+
+// use a class selector if available
+let blocks = document.querySelectorAll("pre");
+
+blocks.forEach((block) => {
+  // only add button if browser supports Clipboard API
+  if (navigator.clipboard) {
+    let button = document.createElement("button");
+
+    button.innerText = copyButtonLabel;
+    block.appendChild(button);
+
+    button.addEventListener("click", async () => {
+      await copyCode(block);
+    });
+  }
+});
+
+async function copyCode(block) {
+  let code = block.querySelector("code");
+  let text = code.innerText;
+
+  await navigator.clipboard.writeText(text);
+}
+    </script>
+      <style>
+        body {counter-reset:section;}
+        h1 {counter-reset:subsection;font-size:x-large;}
+        h2 {font-size: large;}
+        
+        h1:before {
+        counter-increment:section;
+        content:counter(section) ". ";
+            font-weight:bold;
+            font-size: x-large;
+        }
+        h2:before {
+        counter-increment:subsection;
+        content:counter(section) "." counter(subsection) " ";
+        font-size: large;
+        }
+        html, body {
+            margin: 8%;
+            font-family: "Times New Roman","SimSun", "STSong", "Songti SC",Times, serif;
+            font-size: 110%;
+        }
+        code {
+            font-family: 'Courier New', Courier, monospace;
+        } 
+
+        pre {
+            font-family: 'Courier New', Courier, monospace;
+        } 
+        div{
+            max-width: 100%;
+            overflow: auto;
+            
+        }
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+            position: fixed; /* Set the navbar to fixed position */
+            top: 0; /* Position the navbar at the top of the page */
+            width: 100%; /* Full width */
+        }
+
+        img {
+        max-width: 80%;
+        height: auto;
+        }
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        a {
+            color: #148bca;
+            text-align: center;
+            padding-left: 2px;
+            padding-right: 2px;
+            text-decoration: none;
+        }
+
+        p.hidden {
+          overflow: hidden;
+        }
+
+    </style>
+  </head>
+  <body>
+    
+    <div class="navbar">
+        <a href="https://shzaiz.github.io">AUG's Wiki</a>
+        <a href="index.html"> ↑ Back to contents</a>
+        Last updated at 2023-07-09 22:35:39.087599
+    </div>
+
+    <div class="toc"></div>
+    <a id="toc-button"><i class="far fa-bookmark"></i></a>
+    
+    <div>
+      <title></title>
+<p>$$
+\Huge \textbf{Logically Speaking}
+$$</p>
+<p>$$
+\boxed{ \overbrace{\textit{degaokaolization}}^{\small{去高考化}} \text{ Discussion Group | Topic 02}}
+$$</p>
+<p>我个人推荐阅读《Reading, Writing, and Proving - A Closer Look at Mathematics(Second Edition)》。可以阅读第2章至第4章。以下注释仅为该书的简化版本。</p>
+<p>$$
+\boxed{\textbf{注意:} 推荐使用英语阅读本文.  }
+$$</p>
+<h1>基础</h1>
+<p>你的化学老师即将要更换了。有人说只有两位老师可供选择，分别是王瑞瑶和王艳波。与此同时，你得知王瑞瑶正在带领学生参加世界性的化学竞赛IChO。所以你很确定接下来要来给你上课的的老师是王艳波。</p>
+<p>这个模式是很常见的: 如果你得到“A或B是真的”的传言，并且你知道“A不是真的”，你就可以知道“B是真的”。这是一个<em>推理有效</em>的例子。</p>
+<p>为了理解一个论证，我们必须能够阅读和理解构成论点的句子。我们需要能够判断论证中的句子是真是假，以及它们是否与前面的句子有逻辑关系。</p>
+<p>所以，现在定义一下，就像你在高中时的那样。</p>
+<p><strong>Def.</strong> 命题是一个可以判断真假的陈述句.  \(\#\) </p>
+<p>因为中文的说法和数学的说法很多时候有略微的差别，所以在构建论证之前，我们必须确保我们理解我们的命题。我们现在仔细研究陈述的<em>真</em>与<em>假</em>：</p>
+<ul>
+<li>非  \(P\) 。</li>
+<li> \(P\)  和  \(Q\) 。</li>
+<li> \(P\)  或  \(Q\) 。</li>
+<li>如果  \(P\) ，则  \(Q\) 。</li>
+<li> \(P\)  当且仅当  \(Q\) 。</li>
+</ul>
+<p>像  \(P\)  和  \(Q\)  这样的字母只是表示命题的抽象概念。在你语言学习的早期阶段，人们倾向于使用 &quot;如果......那么......&quot; 的形式，这并不准确。</p>
+<p>让我们从最简单的形式开始：</p>
+<h2>非（ \(\lnot\) ）</h2>
+<p>假设 AUGPath说：“我的电脑桌面图片是一座山！”通过观察他的桌面，你发现那不是一座山。换句话说，你可以确定该陈述的“真值”。你可以说：“桌面图片<em>不是</em>一座山！”</p>
+<p>如果我们有一个命题, 用  \(P\) 表示，那么  \(P\)  的否定是 &quot;非  \(P\) &quot;。为了方便起见, 我们使用符号  \(¬P\)  表示 &quot;非  \(P\) &quot;。如果  \(P\)  是真的，则  \(¬P\)  应该是假的。如果  \(P\)  是假的，则  \(¬P\)  应该是真的。我们可以用一个<em>真值表</em>总结所有可能性，如下所示：</p>
+<p>$$
+\begin{array}{c|c}
+\mathbf{P}&amp;\lnot\mathbf{P}\\
+\hline 
+T&amp;F
+\\F&amp;T
+\end{array}
+$$</p>
+<p>We say T for true and F for false. Truth table is a good tool for understanding.</p>
+<!-- Some Minecraft redstone players can represent a "not" like this: 
+
+![not-gate](./FILES/logic.md/img-20230708164302.png) -->
+<p>我们用 T 表示真，用 F 表示假。真值表是理解的好工具。好的，这是针对单个命题的情况。现在让我们看一下能够组合两个两个的连接词：</p>
+<h2>Or( \(\lor\) ) And( \(\land\) )</h2>
+<p>让我们研究句子 &quot; \(P\)  或  \(Q\) &quot;。数学中的 &quot;或&quot;不同于自然语言, 有着不同的意义。</p>
+<p>例如，在日常生活中，我们可能会说 &quot;你可以吃蛋糕或冰淇淋&quot;，这意味着你可以两者都选择，但是如果我们说 &quot;门是开着的或关着的&quot;的时候，门不可能同时既是开着又是关着的。自然语言陈述中的 &quot;或&quot; 经常含糊不清。在数学中，一般不鼓励使用模糊性。</p>
+<p>形如 &quot; \(P\)  或  \(Q\) &quot; 的陈述被称为<em>析取</em>。通常用符号  \(P\lor Q\)  表示。</p>
+<p>在数学中，当  \(P\)  单独为真， \(Q\)  单独为真，或者  \(P\)  和  \(Q\)  都为真时，<em>析取</em>为真。使用刚刚见过的真值表，我们有如下结果：</p>
+<p>$$
+\begin{array}{cc|c}
+{P}&amp;{Q}&amp;P\lor Q\\
+\hline 
+T&amp;T&amp;T\\
+T&amp;F&amp;T\\
+F&amp;T&amp;T\\
+F&amp;F&amp;F 
+\end{array}
+$$</p>
+<!-- You may build in the Minecraft like this: 
+
+![or-gate](./FILES/logic.md/img-20230708164533.png) -->
+<p>同样地，在数学中的 &quot;与&quot;（ \(P\)  和  \(Q\) ）有明确的含义，即当  \(P\)  和  \(Q\)  同时为真时，它为真；否则为假。</p>
+<p>$$
+\begin{array}{cc|c}
+{P}&amp;{Q}&amp;P\land Q\\
+\hline 
+T&amp;T&amp;T\\
+T&amp;F&amp;F\\
+F&amp;T&amp;F\\
+F&amp;F&amp;F 
+\end{array}
+$$</p>
+<h2>如果...那么...( \(\to\) ) 当且仅当( \(\iff\) )</h2>
+<p>现在让我们考虑陈述 &quot;如果  \(P\) ，则  \(Q\) &quot;。这种命题形式被称为<em>蕴含式</em>，通常表述为 &quot; \(P\)  蕴含  \(Q\) &quot;，并写作 &quot; \(P\to Q\) &quot;。有多种等价的表述方式，其中一些需要读者仔细思考。我们在这里列出它们：</p>
+<ul>
+<li>如果  \(P\) ，则  \(Q\) 。</li>
+<li> \(P\)  对于  \(Q\)  是<em>充分条件</em>（意味着  \(P\)  足够让  \(Q\)  发生）。</li>
+<li> \(Q\)  对于  \(P\)  是<em>必要条件</em>（如果  \(P\)  发生，则必定  \(Q\)  也发生）。</li>
+<li>只有当  \(Q\)  时，才有  \(P\) 。</li>
+<li>每当  \(P\) ，就有  \(Q\) 。</li>
+</ul>
+<p>在这些表述中， \(P\)  称为<em>前件</em>， \(Q\)  称为<em>结论</em>。那么像这样的命题, 真假性应该如何决定呢? 我们来看下面的例子:</p>
+<p>假设我们对儿子说：</p>
+<blockquote>
+<p>&quot;如果你收拾好房间，你就可以去亨利家玩。&quot;</p>
+</blockquote>
+<p>在什么情况下，他会觉得我们撒谎了？在这个例子中，前件  \(P\)  是 &quot;你收拾好房间&quot;，结论  \(Q\)  是 &quot;你可以去亨利家玩&quot;。嗯，如果儿子收拾好房间，我们让他去亨利家，每个人都开心。那个蕴含应该是真的。所以，如果  \(P\)  是真的， \(Q\)  是真的，整个命题应该是真的。</p>
+<p>同时，对你和我们儿子来说，如果他收拾好房间，而我们不让他去亨利家，我们就撒谎了。所以，如果  \(P\)  是真的， \(Q\)  是假的，那个蕴含应该是假的。</p>
+<p>那么如果他不收拾房间呢？我们从未讨论过这种可能性。所以，无论我们在这里做什么决定，我们都没有撒谎。所以，如果  \(P\)  是假的，无论结论的真值如何，我们将认为这个命题的结果为真。</p>
+<p>这将引导我们到真值表：</p>
+<p>$$
+\begin{array}{cc|c}
+{P}&amp;{Q}&amp;P\to Q\\
+\hline 
+T&amp;T&amp;T\\
+T&amp;F&amp;F\\
+F&amp;T&amp;T\\
+F&amp;F&amp;T 
+\end{array}
+$$</p>
+<p>重新表述一个陈述通常是有帮助的，确保保持相同的真和假。陈述形式 &quot; \(P\)  <em>当且仅当</em>  \(Q\) &quot; 被称为<em>等价</em>，我们将其写作  \(P \leftrightarrow Q\) 。根据描述，我们可以将其表示为  \((P\to Q)\land (Q\to P)\) 。</p>
+<p>$$
+\begin{array}{c|c|c|c|}\mathbf{P}&amp;\mathbf{Q}&amp;\mathbf{P}\to\mathbf{Q}&amp;\mathbf{Q}\to\mathbf{P}&amp;\mathbf{P}\leftrightarrow\mathbf{Q}\\\hline T&amp;T&amp;T&amp;T&amp;T\\T&amp;F&amp;F&amp;T&amp;F\\F&amp;T&amp;T&amp;F&amp;F\\F&amp;F&amp;T&amp;T&amp;T\end{array}
+$$</p>
+<p>&quot;如果  \(P\) ，则  \(Q\) &quot; 也可以写作  \(P\implies Q\) ，&quot; \(P\)  当且仅当  \(Q\) &quot; 可以写作 &quot; \(P \iff Q\) &quot; 或 &quot; \(P\text{ iff }Q\) &quot;。</p>
+<p>在学习了连接词之后，我们准备定义一个命题公式。命题公式是表示未指定陈述或使用连接词构建的表达式的字母。命题公式可以非常复杂。可以逐步为它们分配真值，就像进行算术运算一样。</p>
+<h1>命题公式: 类型</h1>
+<p>如果真值表的最后一列全为 T，则称为<em>永真式</em>的命题公式。如果最后一列全为 F，则称为<em>矛盾式</em>的命题公式。</p>
+<p>两个命题公式  \(P\)  和  \(Q\)  如果  \(P ↔ Q\)  是一个永真式，就被称为（逻辑上）等价的；而如果通过一致地用英语陈述替换字母，从两个等价的命题公式可以得到两个等价的表述，那么这两个表述也是等价的。</p>
+<p>对我们来说， \(\lnot (P\land Q)\)  与  \(\lnot P\lor \lnot Q\)  表达的是相同的内容。根据定义，我们可以为其列出真值表。</p>
+<p><strong>Thm</strong>. 如果两个陈述形式  \(P\)  和  \(Q\)  有相同的真值表，那么它们等价。</p>
+<p>Proof. 考虑等价式  \(P ↔ Q\)  的真值表：我们知道如果  \(P ↔ Q\)  是一个永真式，那么  \(P ↔ Q\)  的真值为 T（在上面的表中，这是第1行和第4行）。最后， \(P ↔ Q\)  的真值为 T 当且仅当 P 和 Q 的真值相同。由于只有当  \(P ↔ Q\)  是一个永真式时  \(P\)  和  \(Q\)  是等价的，这就证明了定理。 \(\square\) </p>
+<h2>命题的否定</h2>
+<p>虽然能够以等价形式重新陈述某个陈述非常重要，但同样重要的是能够对一个陈述进行否定。一些有用的否定在练习和问题中会出现。在数学中，否定蕴含式尤为重要。如果你思考整数和句子 &quot;如果  \(x\)  是质数，则  \(x\)  是奇数或  \(x = 2\) &quot;，你会发现，即使是一个相对简单的蕴含式，否定可能也很困难。</p>
+<p>构造  \(P \to Q\)  的真值表和  \(¬P ∨ Q\)  的真值表。你注意到了什么？</p>
+<p>如果一切顺利，你会注意到  \(P \to Q\)  等价于  \(¬P ∨ Q\) ，因此&quot;如果  \(P\) ，则  \(Q\) &quot; 的否定是 &quot; \(P\)  且非  \(Q\) &quot;。</p>
+<p>所以说, 回到例子</p>
+<p>$$
+\text { `若 } \underbrace{x \text { 是质数 }}_{P}, \text { 则 } \underbrace{x \text { 是奇数或 } x=2}_{Q} . &quot;
+$$</p>
+<p>的否定是</p>
+<p>$$
+\text { `` } \underbrace{x \text { 是质数 }}_{P} \text { 但是 } \underbrace{ x \text { 既不是奇数有不是 } 2}_{\neg Q} . &quot;
+$$</p>
+<p>蕴含式的否定是应该格外注意的，因为它经常出现。在下面的定理中，我们总结了到目前为止我们所讨论的五个最重要的等价性。前两个经常被称为<em>德摩根定律</em>。</p>
+<p><strong>Thm</strong>. 如果  \(P\)  and  \(Q\)  是命题, 那么这些是恒真式:</p>
+<p>DeMorgan 律:
+$$
+\begin{aligned}\lnot(P\lor Q)&amp;\leftrightarrow(\lnot P\land\lnot Q);\\\lnot(P\land Q)&amp;\leftrightarrow(\lnot P\lor\lnot Q);\end{aligned}
+$$</p>
+<p>蕴含式及其否定</p>
+<p>$$
+\begin{array}{l}(P\to Q)\leftrightarrow(\lnot P\lor Q);\\\lnot(P\to Q)\leftrightarrow(P\land\lnot Q);\end{array}
+$$</p>
+<p>双重否定.  \(\lnot(\lnot P)\leftrightarrow P.\) </p>
+<p> \(\#\) </p>
+<p>通过画出真值表, 很容易可以得到证明.</p>
+<p><em>Exercise</em>. 否定  \(P\to Q \land R\) .</p>
+<p>我们为什么关心永真式呢？因为永真式允许我们用另一个陈述替代一个陈述。例如，假设你想证明一个整数是奇数或质数。你可以证明这个整数是质数或奇数，这不会改变事情，因为它们是等价的。</p>
+<p>对于蕴含式，重新表述你想要证明的内容可能会产生重大影响。我们已经知道  \(P\to Q\)  等价于  \(\lnot P\lor Q\) 。</p>
+<p>现在考虑  \(\lnot Q\to \lnot P\) ，它被称为蕴含式  \(P\to Q\)  的<em>逆否命题</em>。通过比较真值表，我们会发现它们是相同的！</p>
+<p>$$
+\begin{array}{c|c|c}
+\mathbf{P} &amp; \mathbf{Q} &amp; \mathbf{P} \rightarrow \mathbf{Q} \\
+\hline T &amp; T &amp; T \\
+T &amp; F &amp; F \\
+F &amp; T &amp; T \\
+F &amp; F &amp; T
+\end{array} ~~~~~~~~
+\begin{array}{c|c|c}
+\mathbf{P} &amp; \mathbf{Q} &amp; \neg \mathbf{Q} \rightarrow \neg \mathbf{P} \\
+\hline T &amp; T &amp; T \\
+T &amp; F &amp; F \\
+F &amp; T &amp; T \\
+F &amp; F &amp; T
+\end{array}
+$$</p>
+<p>因此，真值表相同，陈述形式逻辑上等价。因此，我们可以通过证明其逆否命题来证明命题。</p>
+<h1>集合符号和量词</h1>
+<p>考虑句子 &quot; \(x^2-1=0\) &quot;。到目前为止我们不认为这是一个命题。它是真的吗？还是假的？实际上，这取决于我们心中所考虑的  \(x\)  是哪个值。接下来，我们将采用一种严格的方式添加一点东西, 将我们的句子  \(x^2-1=0\)  转化为一个<em>命题</em>。但在此之前，我们将回顾一些符号 - 集合符号。</p>
+<p><em>集合</em>的概念很常见。通常，我们将集合视为一组对象的集合。我们既不定义什么是<em>集合</em>，也不定义什么是<em>对象</em>。它可以通过公理来进行精确定义，但为了简单起见，我们现在不会描述它们。（大多数人现在使用的集合公理系统是带有<em>选择公理</em>的<em>泽尔梅洛-弗兰克尔</em>公理系统。当然，乍一看很难理解。）</p>
+<p>回想一下，先前我们学到的一个<em>元素</em>  \(e\)  要么<em>属于</em>集合  \(S\) ，要么<em>不属于</em>集合  \(S\) 。第一种情况我们将写作  \(e\in S\) ，或者否则写作  \(e\notin S\) 。在我们工作的<strong>上下文</strong>中，被认为是所有可能的对象的集合被称为<em>全集</em>，或<em>论域</em>。我们通常用  \(X\)  或  \(U\)  表示它。当我们研究实数时，我们可能会将  \(X\)  设置为  \(\{\text{实数}\}\) 。它甚至可能包括所有在法国生活的奶牛。有些人甚至允许全集是“所有集合的集合”，尽管这个全集本身并不是一个集合。这就是<strong>罗素悖论</strong>。这也是数学家努力公理化集合的原因之一。</p>
+<p>我们还记得， \(\mathbb Z, \mathbb R, \mathbb Q, \mathbb C\)  分别表示常见的数字集合。整数、实数、有理数、复数。</p>
+<p>此外，我们可以用  \(\mathbb R\times\mathbb R\)  表示平面。集合之间的  \(\times\)  表示两个集合元素之间的所有可能的<em>排列</em>。后面我们会看到, 这个就是集合的<em>笛卡尔积</em>。</p>
+<h2>全称量词（ \(\forall\) ）和存在量词（ \(\exists\) ）</h2>
+<p>现在我们可以讨论稍微复杂一些的命题了。想想“每个盒子里都有一个奖品”和“某个盒子里有一个奖品”之间的区别。显然，如果你想要选择让自己获奖的话，你更喜欢第一个描述。在数学中，为了确定一个陈述的真值或假值，上下文中提供的集合也是必不可少的。这里的  \(x\)  说的是一个集合里面的变量。短语 &quot;所有&quot;、&quot;每一个&quot;是全称; &quot;存在&quot; 或 &quot;有一些&quot; 用来是特称。&quot;任意&quot; 或  \(∀\)  是<em>全称量词</em>，&quot;存在&quot; 或  \(∃\)  是<em>存在量词</em>。</p>
+<p>在确定全集为所有实数的情况下，考虑以下陈述：&quot;对于所有的  \(x\) ， \(x^2-1\leq 0\) 。&quot;我们知道这是在要求每个  \(x\)  都满足某个条件。恰好这个陈述是假的，但它仍然是一个清晰的陈述。通常写作  \(\forall x. x^2-1\leq 0\) 。所以我们可以写成</p>
+<p>$$
+\forall x. x^2-1\leq 0. 
+$$</p>
+<p>在我们的命题中，&quot;任意的 x&quot; 后面是另一个句子，我们可以用 p 表示，但由于 p 是涉及 x 的句子，所以我们写作 p(x)。上面的陈述的形式是  \(\forall x. p(x)\) 。</p>
+<p>对于上面的例子，还有一个备注。假设全集仍然是实数，但我们想要将其表示为仅关于正整数的陈述。在这种情况下，我们可以用符号表示我们的陈述如下：</p>
+<p>$$
+\forall x. (x\in \mathbb Z^+ {\color{red}\to} (x^2-1\leq 0))
+$$</p>
+<p>一个非常常见的错误是写成  \(\forall x. (x\in \mathbb Z^+ {\color{red}\land} (x^2-1\leq 0))\) ，而不是上面我们写的那样。但是让我们思考一下这意味着什么：这会说“所有实数都是正整数，并且满足不等式  \(x^2 − 1 ≤ 0\) ”。现在很明显，这不是原始陈述所说的内容。</p>
+<p>以另一个例子为例，假设我们的全集是整数集合，并考虑句子“存在一个整数  \(x\) ，使得  \(x = 0\) ”。这也是一个陈述，也是真的。这个陈述可以用符号表示为</p>
+<p>$$
+\exists x. (x=0).
+$$</p>
+<p>并且读作 &quot;存在一个  \(x\) ，使得  \(x=0\) &quot;。关于最后一个例子还有一个备注。如果我们将实数集作为全集，我们会用符号表示我们的陈述为</p>
+<p>$$
+\exists x, (x\in \mathbb Z \land x=0).
+$$</p>
+<p>请注意，这次我们宣称  \(x\)  存在，是一个整数，并且  \(x = 0\) 。为了让这些条件都成立，我们必须使用一个合取而不是一个蕴含，正如定义中已经指出的那样。这类事情通常需要仔细考虑。我们稍后会给出一个表格。</p>
+<p>当你否定一个陈述时，你必须对你的全集非常清楚。你也可以很容易地看出为什么：如果你否定了  \(x ∈ \mathbb Z\) ，并且  \(\mathbb Z\)  是你的全集，那么就没有剩下的  \(x\) ，但是如果你否定了  \(x ∈ \mathbb Z\) ，并且  \(\mathbb R\)  是你的全集，那么还有很多  \(x\)  要担心。因此，在开始解决问题之前，请务必对你的全集进行仔细考虑。</p>
+<h2>量词的否定</h2>
+<p>我们已经对合取、析取和蕴含进行了否定。现在我们将思考量化陈述的否定。</p>
+<p>假设我们有命题 &quot;每只奶牛都是黑色的&quot;。我们如何否定它？</p>
+<p>一种毫无意义的方式是说 &quot;不是每只奶牛都是黑色的&quot;。更好的方式是说 &quot;存在一只奶牛不是黑色的&quot;。因此，对于  \(\forall x. p(x)\) ，一个有用的否定是  \(\exists x. \lnot p(x)\) 。</p>
+<p>类似地，如果我们说 &quot;存在一只黑色的奶牛&quot;，一个有用的否定是 &quot;没有一只奶牛是黑色的&quot;。因此，对于  \(\exists x. p(x)\) ，一个否定是  \(\forall x. \lnot p(x)\) 。</p>
+<p>你会发现有时你可以直接否定一个句子，而有时你需要转换成符号。这里是另一个例子。</p>
+<p><strong>Exercise</strong>. 对句子 &quot;住在玻璃房子里的人不会扔石头&quot; 进行否定。使用符号  \(g(x)\)  表示  \(x\)  住在玻璃房子里。记号  \(t(x)\)  表示  \(x\)  扔石头。</p>
+<p>$$
+\begin{aligned}
+\lnot (\forall x. (g(x)\to \lnot t(x))) &amp;  &amp;(1)\\
+\exists x. \lnot(g(x)\to \lnot t(x)) &amp;  &amp;(2) \\
+\exists x. \lnot(\lnot g(x)\land \lnot t(x)) &amp;  &amp;(3) \\
+\exists x. (g(x)\land t(x)) &amp;  &amp;(4) \\
+\end{aligned}
+$$</p>
+<p>上面的最后一句话说，&quot;住在玻璃房子里的人不会扔石头&quot; 的否定是 &quot;存在一个住在玻璃房子里并且扔石头的人&quot;。这里还有一件重要的事情需要注意。虽然在句子 &quot;住在玻璃房子里的人不会扔石头&quot; 中没有明显的量词，但我们都会将量词解释为全称量词。如果你或其他人没有明确包含量词，（注意是所有！）人们都会认为你的意思是在这里插入一个全称量词。</p>
+<p>我们强调，虽然练习这些符号操作很好，但理解你所做的事情也很重要。有时候你会发现使用符号表示法更容易，有时候则不是。请确保记住句子的含义，以及你的答案是否合理。在你独自进行之前，我们将一起做一个相当复杂的例子。</p>
+<p><em>Example</em>. 假设我们的全集是实数集，我们希望否定陈述 &quot;对于每一个有理数  \(x\) ，存在一个大于  \(x\)  的整数  \(n\) &quot;。</p>
+<p>让我们试试。首先我们注意到 &quot;对于每一个有理数  \(x\) &quot; 意味着我们被告知 &quot;如果  \(x\)  是一个有理数&quot; 会发生某些事情。什么事情？将会存在一个大于  \(x\)  的整数。因此，这是一个形式为 &quot;对于所有  \(x\) ，如果  \(x\)  是一个有理数，那么存在一个  \(n\) ， \(n\)  是一个整数且  \(n &gt; x\) &quot; 的蕴含。有时候，如果我们用符号表示法替换各种子句，会更容易理解一个陈述。我们使用</p>
+<p>$$
+\begin{aligned}
+p(x) &amp; &amp;\text{代表 } x \text{ 是有理数}\\
+q(n) &amp; &amp;\text{代表} n \text{是整数}\\
+r(n,x) &amp; &amp;\text{代表} n&gt;x. 
+\end{aligned}
+$$</p>
+<p>使用这样的记号, 我们就有</p>
+<p>$$
+∀x, (p(x) → ∃n, (q(n) ∧ r(n, x)))
+$$</p>
+<p>让我们一步一步地尝试否定这个带有量词的命题，从外面开始。</p>
+<p>我们知道当我们否定 &quot;对于所有&quot; 时，它变成了 &quot;存在&quot;。换句话说，我们可以用  \(∃x, ¬(· · · )\)  替换  \(¬(∀x, · · · )\) 。现在我们的表达式变成了：</p>
+<p>$$
+¬(∀x. (p(x) → ∃n. (q(n) ∧ r(n, x))))
+$$</p>
+<p>与</p>
+<p>$$
+∃x, ¬(p(x) → ∃n, (q(n) ∧ r(n, x)))
+$$</p>
+<p>等价.</p>
+<p>现在我们来否定蕴含。根据上面所说，我们知道  \(¬(P → Q)\)  等价于  \(P ∧ ¬Q\) 。我们的表达式变成了：</p>
+<p>$$
+∃x, (p(x) ∧ ¬(∃n, (q(n) ∧ r(n, x)))).
+$$</p>
+<p>我们还需要否定  \(Q\) ，即表达式  \(∃n. (q(n) ∧ r(n, x))\) 。至少现在这比我们开始的时候简单了！现在  \(∃\)  将变为  \(∀\) ，所以我们只需要考虑  \(q(n)∧r(n, x)\) 。但这是一个合取式。因此，最后一步是否定它，我们知道合取的否定将变为  \(¬q(n) ∨ ¬r(n, x)\) 。现在我们的表达式变成了：</p>
+<p>$$
+∃x, (p(x) ∧ (∀n, (¬q(n) ∨ ¬r(n, x))))
+$$</p>
+<p>我们已经完成了我们要做的事情，但是我们的答案仍然是用符号表示的。让我们翻译回来：</p>
+<p>&quot;存在一个  \(x\) ，它是有理数，并且对于所有的  \(n\) ， \(n\)  不是整数或者  \(n\)  不大于  \(x\) &quot;，即 &quot;存在一个有理数  \(x\) ，对于所有的整数  \(n\) ， \(n\)  ≤  \(x\) &quot;。</p>
+<h1>关于量词的一些提示</h1>
+<ul>
+<li>检查每个变量的取值范围，如果不明显的话，写下来。</li>
+<li>当陈述中变量的量词是全称量词时，写作者有时会省略它。例如，你可能会看到关于实数的陈述，如“如果 \(x\) 是负数，则 \(x^2\) 是正数。”因为量词没有明确说明，我们假设作者的意思是“对于每个实数 \(x\) ，如果 \(x\) 是负数，则 \(x^2\) 是正数。”如果你想表达存在这样的 \(x\) ，你必须明显地标注出来使用存在量词。</li>
+<li>假设一个陈述将变量 \(x\) 限定为全总域的一个真子集 \(A\) ，如形式为“对于所有 \(x∈A\) ，性质 \(p(x)\) 成立”的命题。由于 \(x\) 是用任意修饰的，可以写作一个蕴含形式 \(∀x, (x ∈ A → p(x))\) 。</li>
+<li>假设一个命题将变量 \(x\) 限定为全总域的一个真子集 \(A\) ，如形式为“对于一些 \(x∈A\) ，性质 \(p(x)\) 成立”的命题。由于 \(x\) 是用存在修饰的，这是一个合取式形式 \(∃x, (x ∈ A ∧ p(x))\) 。</li>
+<li>简单的陈述通常很容易否定。只需直接取反即可。</li>
+<li>复杂的陈述通常会对不太好“直接取反”。首先以符号形式写出来。确保你知道每个变量上的量化词是什么。检查“如果...，那么...”有哪些不同的表达方式。</li>
+<li>不要在量化词之间使用逻辑联结词（ \(¬, ∧, ∨, →, ↔\) ）。（不要写成“ \(∀x ∨ ∀y · · ·\) ”或“ \(∀x ∧ ∀y · · ·\) ”。）</li>
+<li>熟悉规则。你必须知道如何否定涉及存在、全称、合取、析取和蕴含的命题。最重要的否定也是经常被忘记的是蕴含式的否定。</li>
+<li>练习：每当你遇到一个定义或定理时，尝试对其进行否定。如果你做不到，这可能表明你还没有完全理解它。</li>
+</ul>
+<h2>更多练习</h2>
+<p>你会惊讶地发现以下内容与微积分有些关联。在下面的讨论中，除非另有说明，所有变量都是实数，ε和δ表示正实数。对以下所有内容进行否定。</p>
+<p>(1) 设 \(a\) 是实数集合 \(\mathbb R\) 中的一个给定的元素。对于每个 \(ε\) ，存在 \(δ\) ，使得对于每个 \(x∈R\) ，如果 \(|x−a| &lt; δ\) ，那么 \(|x^2−a^2| &lt; ε\) 。</p>
+<p>(2) 对于所有 \(x\) ，对于每个 \(ε\) ，我们有 \(x &lt; x + ε\) 。</p>
+<p>(3) 对于每个 \(ε\) ，存在 \(δ\) ，使得 \(δ &lt; ε\) 。</p>
+<p>(4) 对于每个 \(ε\) ，存在一个整数 \(N\) ，使得对于所有 \(n ≥ N\) ，有 \(1/n &lt; ε\) 。</p>
+<h1>总结</h1>
+<ul>
+<li>使用逻辑符号有时非常有帮助。</li>
+<li>事情看起来非常困难，是因为缺乏前提条件。</li>
+</ul>
+<p>$$
+-\mathscr {E}\text{nd of the note}-
+$$</p>
+
+    </div>
+
+   
+   
+   
+    <hr>
+
+
+
+
+
+
+    <div id="disqus_thread"></div>
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script>
+        /**
+        *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+        *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+        
+        // var disqus_config = function () {
+        // this.page.url = ;  // Replace PAGE_URL with your page's canonical URL variable
+        // this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        // };
+        
+        (function() { // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        s.src = 'https://augpath.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <script id="dsq-count-scr" src="//augpath.disqus.com/count.js" async></script>
+  </body>
+</html>
