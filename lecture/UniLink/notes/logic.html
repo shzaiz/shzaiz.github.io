@@ -108,7 +108,7 @@ async function copyCode(block) {
     <div class="navbar">
         <a href="https://shzaiz.github.io">AUG's Wiki</a>
         <a href="index.html"> ↑ Back to contents</a>
-        Last updated at 2023-07-08 17:23:18.865794
+        Last updated at 2023-07-09 21:34:26.587611
     </div>
 
     <div class="toc"></div>
@@ -122,12 +122,12 @@ $$</p>
 <p>$$
 \boxed{ \overbrace{\textit{degaokaolization}}^{\small{去高考化}} \text{ Discussion Group | Topic 02}}
 $$</p>
-<p>Personally I recommend reading the book Reading, Writing, and Proving - A Closer Look at Mathematics(Second Edition). Viewing Chapter 2 through 4 is possible. The following note is just a simplified version of the book.</p>
+<p>Personally I recommend reading the book <em>Reading, Writing, and Proving - A Closer Look at Mathematics(Second Edition)</em>. Viewing Chapter 2 through 4 is possible. The following note is just a simplified version of the book.</p>
 <h1>Buildblocks</h1>
 <p>The chemistry teacher currently teaching your class is about to change. Someone says there are only two teachers avaliable. Say teacher RYWang and teacher YBWang. Meanwhile, you happen to know that teacher RYWang is leading his students to IChO, a chemistry competetion worldwide. You are confirmed that the teacher coming next is teacher YBWang.</p>
 <p>This can be generalized. If you are given the <em>message</em> &quot;A or B is true&quot;, and you know that &quot;A is not true&quot;, you can get to know that &quot;B is true&quot;. This is an example of a <em>valid</em> argument.</p>
 <p>In order to understand an argument, we must be able to read and understand the sentences that compose it. We need to be able to tell whether the sentences in our argument are true or false, and whether they follow logically from the previous ones.</p>
-<p>So now for a definition, like you was taught in high school.</p>
+<p>So now for a definition, like you were taught in high school.</p>
 <p><strong>Def.</strong> A statement is a sentence that is true or false, but not both.  \(\#\) </p>
 <p>Because English usage and mathematical usage may differ slightly, we must be certain that we understand our statements before we construct arguments. We now carefully study the truth or falsity of statements:</p>
 <ul>
@@ -239,7 +239,7 @@ statements.</p>
 the negation of “If  \(P\) , then  \(Q\) ” is “ \(P\)  and not  \(Q\) .”</p>
 <p>Back to the example, maybe you will find that negating</p>
 <p>$$
-\text { ``If } \underbrace{x \text { is prime }}_{P}, \text { then } \underbrace{x \text { is odd or } x=2}_{Q} . &quot;
+\text { `If } \underbrace{x \text { is prime }}_{P}, \text { then } \underbrace{x \text { is odd or } x=2}_{Q} . &quot;
 $$</p>
 <p>will lead to</p>
 <p>$$
@@ -251,15 +251,155 @@ $$</p>
 $$
 \begin{aligned}\lnot(P\lor Q)&amp;\leftrightarrow(\lnot P\land\lnot Q);\\\lnot(P\land Q)&amp;\leftrightarrow(\lnot P\lor\lnot Q);\end{aligned}
 $$</p>
-<p>Impliication and its negation</p>
+<p>Implication and its negation</p>
 <p>$$
 \begin{array}{l}(P\to Q)\leftrightarrow(\lnot P\lor Q);\\\lnot(P\to Q)\leftrightarrow(P\land\lnot Q);\end{array}
 $$</p>
 <p>Double negation.  \(\lnot(\lnot P)\leftrightarrow P.\) </p>
 <p> \(\#\) </p>
 <p>You can prove by drawing out all the truth forms.</p>
+<p><em>Exercise</em>. Negate the following:  \(P\to Q \land R\) .</p>
+<p>Why do we care about tautologies? Well,tautologies allow us to replace one statement by another. For example, suppose you want to show that an integer is odd or prime. You can show that the integer is prime or odd, this won&#x27;t change things for they are equivalent.</p>
+<p>For implications, restating what you want to prove can really make a difference. We have known that  \(P\to Q\)  is equivalent to  \(\lnot P\lor Q\) .</p>
+<p>Now consider  \(\lnot Q\to \lnot P\) , which is called the <em>contrapositive</em> of the implication  \(P\to Q\) . As we compare the truth table, we will find that</p>
 <p>$$
--\mathscr {{\color{red}\Large NOT}E}\text{nd of the note}-
+\begin{array}{c|c|c}
+\mathbf{P} &amp; \mathbf{Q} &amp; \mathbf{P} \rightarrow \mathbf{Q} \\
+\hline T &amp; T &amp; T \\
+T &amp; F &amp; F \\
+F &amp; T &amp; T \\
+F &amp; F &amp; T
+\end{array} ~~~~~~~~
+\begin{array}{c|c|c}
+\mathbf{P} &amp; \mathbf{Q} &amp; \neg \mathbf{Q} \rightarrow \neg \mathbf{P} \\
+\hline T &amp; T &amp; T \\
+T &amp; F &amp; F \\
+F &amp; T &amp; T \\
+F &amp; F &amp; T
+\end{array}
+$$</p>
+<p>these are the same!</p>
+<p>So the fact that the truth tables are the same and the statement forms are logically equivalent. Hence, we can prove the proposition by proving its contrapositive.</p>
+<h1>Set Notations and Quantifiers</h1>
+<p>Consider the sentence &quot; \(x^2-1=0\) &quot;  So far, we have appoarched such things intuitively. But is it true? false? In fact, it depends on which  \(x\)  we have in mind. Next, we turn to a rigorous
+way to make our sentence  \(x^2-1=0\)  into a <em>statement</em>. But before that, we will review some notations - the set notations.</p>
+<p>The idea of <em>set</em> is common. Typically, we think of a set as a collection of objects. We will neither define what a <em>collection</em>, nor an <em>object</em> is. It can be defined precisely by the Axioms, but for the sake of simplicity, we will not describe them now. (The set axiom system the most people use now, is the <em>Zermelo–Fraenkel</em> with the <em>Axiom of Choice</em>. Of course, it is hard to understand at first glance.)</p>
+<p>Recall that previously we have learnt a <em>element</em>  \(e\)  is either <em>belongs to</em> a set  \(S\) , or <em>not belongs</em> to a set  \(S\) . The first case we will write  \(e\in S\) , or  \(e\notin S\)  otherwise. The set of all possible objects that are considered <strong>in the context</strong> in which we work is called the <em>universe</em>, or <em>domain of discourse</em>. We will usually denote this by  \(X\)  or  \(U\) . While we are studying real numbers, we probably will set the  \(X=\{\text{Real Numbers}\}\) . It might even consist of all cows living in France when it needs to. Some people even allow the universe to be the “set of all sets,” even though this universe is no set at all. This is known as <strong>Russell&#x27;s Paradox</strong>. And that&#x27;s the reason why mathematicians tried hard to axiomize the sets.</p>
+<p>We also recall that  \(\mathbb Z, \mathbb R, \mathbb Q, \mathbb C\)  denotes common sets of numbers. Integer, real, quotient, complex, respectively.</p>
+<p>Additionally, we can represent the plane with  \(\mathbb R\times\mathbb R\) . The  \(\times\)  notation between sets means all possible <em>arrangement</em> within two sets. This is later known as <em>Cartesian product</em> of sets.</p>
+<h2>Forall( \(\forall\) ) and Exist( \(\exists\) )</h2>
+<p>Now we can talk about slightly more complicated sentences. Think of the difference between the statements “In every box there is a prize” and “In some box there is a prize.” Obviously, if you had to choose (and if it were the same prize), you would go with the first one. In mathematics, in order to determine the truth or falsity of a statement, What we mean should be clear from the context. Letters like  \(x\)  that stand for elements of the universe are called variables. The phrases “for all,” “for every,” “for some,” or “there exists,” quantify variables. “For all,” or  \(∀\) , is the <em>universal quantifier</em> and “there exists,” or  \(∃\) , is the <em>existential quantifier</em>.</p>
+<p>After agreeing that the universe consists of all real numbers, consider the following statement: &quot;Forall  \(x\) ,  \(x^2-1\leq 0\) &quot; We know that we are asking that for every x, something must happen. It just so happens that this statement is false, but it is still a clear statement. For all x is usually written ∀x. So we could write as</p>
+<p>$$
+\forall x. x^2-1\leq 0. 
+$$</p>
+<p>What follows the words “For all x” in our statement is another sentence that we could denote by p, but since p is a sentence involving x, we write p(x). The statement above is of the form  \(\forall x. p(x)\) .</p>
+<p>One more remark about the example above. Suppose the universe is (still) the real numbers, but we want to make this a statement about positive integers only. In that case, we can express our statement symbolically as follows:</p>
+<p>$$
+\forall x. (x\in \mathbb Z^+ {\color{red}\to} (x^2-1\leq 0))
+$$</p>
+<p>One very common error is to write  \(\forall x. (x\in \mathbb Z^+ {\color{red}\land} (x^2-1\leq 0))\) , rather than what we have written above. But let’s think about what this would mean: This would say that “all real numbers are positive integers and satisfy the inequality  \(x^2 − 1 ≤ 0\) .” It is probably clear now that this is not what the original statement said.</p>
+<p>For a different example, suppose that our universe is the set of integers and consider the sentence, “There is an integer  \(x\)  such that  \(x = 0\) .” This, too, is a statement, and happens to be true. This statement can be expressed symbolically by</p>
+<p>$$
+\exists x. (x=0).
+$$</p>
+<p>and is read as &quot;there exists a  \(x\)  so that  \(x=0\) &quot;. One more remark about the last example. If we had chosen the set of the real
+numbers as the universe, we would express our statement symbolically as</p>
+<p>$$
+\exists x, (x\in \mathbb Z \land x=0).
+$$</p>
+<p>Note that this time we are claiming that x exists, is an integer, and x = 0. To make all these things happen, we must use a conjunction rather than an implication, as the definition already noted. These kind of things are usually needs carful considerations. We will give a table later.</p>
+<p>When you negate a statement, you must be 100% clear on what your universe is. You can easily see why, too: if you negate  \(x ∈ \mathbb Z\)  and  \(\mathbb Z\)  is your universe, then there are no  \(x\)  left, but if you negate  \(x ∈ \mathbb Z\)  and  \(\mathbb R\)  is your universe, there are still plenty of  \(x\) s left to worry about. So make sure that you give careful consideration to your universe before beginning a problem.</p>
+<h2>Negation of Quantifiers</h2>
+<p>We negated conjunctions, disjunctions, and implications. Now we will think about the negation of a quantified statement.</p>
+<p>Suppose we have the statement &quot;Every cow is black.&quot; How would we negate it?</p>
+<p>One pretty useless way is to say &quot;<em>Not</em> every cow is black.&quot; It’s better to say &quot;<em>Some</em> cow is <em>not</em> black.&quot; So a useful negation of</p>
+<p>$$
+\forall x. p(x)
+$$</p>
+<p>is</p>
+<p>$$
+\exists x. \lnot p(x)
+$$</p>
+<p>Similarly, if we say &quot;There exists a black cow,&quot; a useful negation is &quot;No cow is black.&quot; So a negation of</p>
+<p>$$
+\exists x. p(x)
+$$</p>
+<p>is</p>
+<p>$$
+\forall x. \lnot p(x)
+$$</p>
+<p>You will find that sometimes you can negate a sentence directly and other times you need to convert to symbols. Here is another example.</p>
+<p><strong>Exercise</strong>. Negate the sentence “People who live in glass houses do not throw stones. With the help of the symbol  \(g(x)\)  meaning  \(x\)  lives in a glass house. The notation  \(t(x)\)  will mean that  \(x\)  throws stones.</p>
+<p>$$
+\begin{aligned}
+\lnot (\forall x. (g(x)\to \lnot t(x))) &amp;  &amp;(1)\\
+\exists x. \lnot(g(x)\to \lnot t(x)) &amp;  &amp;(2) \\
+\exists x. \lnot(\lnot g(x)\land \lnot t(x)) &amp;  &amp;(3) \\
+\exists x. (g(x)\land t(x)) &amp;  &amp;(4) \\
+\end{aligned}
+$$</p>
+<p>The last sentence says that the negation of “People who live in glass houses do not throw stones” is “There exists a person who lives in a glass house and throws stones.” There’s another important thing to notice here. Though there is no obvious quantifier in the sentence “People who live in glass houses do not throw stones,” we all interpret the quantifier as a universal quantifier. If you, or someone else, do not explicitly include a quantifier, (all!) people will assume you meant to insert a universal quantifier.</p>
+<p>We emphasize that while it is good to practice these symbolic manipulations, it is also important to understand what you are doing. Sometimes you will find it easier to use the symbolic notation and sometimes you won’t. Make sure you keep in mind what the sentence says, and whether or not your answer seems reasonable. Before you go off on your own, we’ll do a fairly complicated example together.</p>
+<p><em>Example</em>. Suppose our universe is the set of real numbers and we wish to negate the statement “For every rational number  \(x\) , there exists an integer  \(n\)  that is greater than  \(x\) .”</p>
+<p>Let’s try it. First we note that “For every rational number  \(x\) ” means that we are being told that “if  \(x\)  is a rational number” something will happen. What? There will exist an integer bigger than  \(x\) . So this is an implication of the form “For all  \(x\) , if  \(x\)  is a rational number, then there exists an  \(n\)  such that  \(n\)  is an integer and
+ \(n &gt; x\) .” Sometimes it is easier to understand a statement if we replace the various subsentences with symbolic representations. We use</p>
+<p>$$
+\begin{aligned}
+p(x) &amp; &amp;\text{for } x \text{ is a rational number}\\
+q(n) &amp; &amp;\text{for } n \text{ is an integer}\\
+r(n,x) &amp; &amp;\text{for } n&gt;x. 
+\end{aligned}
+$$</p>
+<p>Using this notation, we have</p>
+<p>$$
+∀x, (p(x) → ∃n, (q(n) ∧ r(n, x)))
+$$</p>
+<p>Let’s try to negate this quantified statement form one step at a time, starting from the outside.</p>
+<p>We know that when we negate “for all” it becomes “there exists.” In other words, we can replace  \(¬(∀x, · · · )\)  with  \(∃x, ¬(· · · )\) . So here’s where we are now:</p>
+<p>$$
+¬(∀x. (p(x) → ∃n. (q(n) ∧ r(n, x))))
+$$</p>
+<p>is equivalent to</p>
+<p>$$
+∃x, ¬(p(x) → ∃n, (q(n) ∧ r(n, x)))
+$$</p>
+<p>Now we negate the implication. From the last chapter we know that  \(¬(P → Q)\)  is equivalent to  \(P ∧ ¬Q\) . We’re up to</p>
+<p>$$
+∃x, (p(x) ∧ ¬(∃n, (q(n) ∧ r(n, x)))).
+$$</p>
+<p>We still need to negate  \(Q\) , which is the expression  \(∃n. (q(n) ∧ r(n, x))\) . At least this is simpler than what we started with! Now  \(∃\)  will change to  \(∀\)  and so we need only worry about  \(q(n)∧r(n, x)\) . But that’s a conjunction. So the final step is to negate that, and we know the negation of the conjunction will become  \(¬q(n) ∨ ¬r(n, x)\) . So here’s where we are now:</p>
+<p>$$
+∃x, (p(x) ∧ (∀n, (¬q(n) ∨ ¬r(n, x))))
+$$</p>
+<p>We’ve done what we were asked to do, in a sense, but our answer is still in symbols. Let’s translate back:</p>
+<p>“There exists an x such that x is a rational number and for all n it is the case that n is not an integer or n is not greater than x.”, that is“There is a rational number x such that for all integers n, n ≤ x.”</p>
+<h1>Tips on Quantification</h1>
+<ul>
+<li>Check the universe for each of the variables. Write it down, if it is not self-evident.</li>
+<li>When a quantifier on a variable in a statement is a universal quantifier, writers sometimes omit it. For example, you may read a statement about real numbers such as “If  \(x\)  is negative, then  \(x^2\)  is positive.” Because the quantifier is not explicitly stated, we assume the author meant, “For every real number  \(x\) , if  \(x\)  is negative, then  \(x^2\)  is positive.” If you want to say that there exists such an  \(x\) , you must include the existential quantifier.</li>
+<li>Suppose a statement restricts the variable  \(x\)  to a proper subset  \(A\)  of the universe as in the statement form, “For all  \(x ∈ A\) , property  \(p(x)\)  holds.” Since  \(x\)  is universally quantified, this is an implication of the form  \(∀x, (x ∈ A → p(x)).\) </li>
+<li>Suppose a statement restricts the variable  \(x\)  to a proper subset  \(A\)  of the universe as in the statement form, “For some  \(x ∈ A\) , property  \(p(x)\)  holds.” Since  \(x\)  is existentially quantified, this is a conjunction of the form  \(∃x, (x ∈ A ∧ p(x)).\) </li>
+<li>Simple statements are usually easy to negate. Just do it.</li>
+<li>Complicated statements will often <em>resist</em> a “just do.” Write them out in symbols first. Make sure you know what the quantifier is on every variable. Check for the various ways one can say “if..., then....”.</li>
+<li>Do not use logical connectives ( \(¬, ∧, ∨, →, ↔\) ) between quantifiers. (Do not write “ \(∀x ∨ ∀y · · ·\) ” or “ \(∀x ∧ ∀y · · ·\) .”)</li>
+<li>Know the rules. You must know how to negate statements involving existential quantifiers, universal quantifiers, conjunctions, disjunctions, and implications. The most important negation is also the one students frequently forget: the negation of an implication.</li>
+<li>Practice: Every time you get a definition or theorem, try negating it. If you can’t, this might indicate that you do not fully understand it.</li>
+</ul>
+<h2>More practice on these</h2>
+<p>You will surprisingly find out that the following is somehow related to Calculus. In what follows, unless otherwise
+stated, all variables are real numbers, and ε and δ represent positive real numbers. Negate all of these.</p>
+<p>(1) Let  \(a\)  be a fixed element of  \(\mathbb R\) . For every  \(ε\)  there exists  \(δ\)  such that for every  \(x ∈ R\) , if  \(|x − a| &lt; δ\)  , then  \(|x^2 − a^2| &lt; ε\) .</p>
+<p>(2) For all  \(x\) , we have  \(x &lt; x + ε\)  for every  \(ε\) .</p>
+<p>(3) For every  \(ε\) , there exists  \(δ\)  such that  \(δ &lt; ε\) .</p>
+<p>(4) For every  \(ε\) , there exists an integer  \(N\)  such that  \(1/n &lt; ε\)  for all  \(n ≥ N\) .</p>
+<h1>Summary</h1>
+<ul>
+<li>Using logic symbols sometimes is of great help.</li>
+<li>It&#x27;s the absense of the prerequisites makes things seems to be really hard.</li>
+</ul>
+<p>$$
+-\mathscr {E}\text{nd of the note}-
 $$</p>
 
     </div>

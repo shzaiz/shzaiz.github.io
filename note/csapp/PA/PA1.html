@@ -108,15 +108,57 @@ async function copyCode(block) {
     <div class="navbar">
         <a href="https://shzaiz.github.io">AUG's Wiki</a>
         <a href="index.html"> ↑ Back to contents</a>
-        Last updated at 2023-07-09 21:34:26.868239
+        Last updated at 2023-07-09 21:34:25.851585
     </div>
 
     <div class="toc"></div>
     <a id="toc-button"><i class="far fa-bookmark"></i></a>
     
     <div>
-      <p><strong><a href="../index.html">←Back</a></strong></p>
-<p><a href="figs/index.html">figs</a></p>
+      <h1>The construction of the project</h1>
+<ul>
+<li>KConfig: handle the dependencies between the <code>#define</code>s.</li>
+</ul>
+<h2>Makefile</h2>
+<ul>
+<li>symbols <code>$&lt;</code> and <code>$@</code> are used as automatic variables to represent specific values.</li>
+</ul>
+<p>I. Some variables</p>
+<ol>
+<li><code>$&lt;</code>: This variable represents the first prerequisite (dependency) of a target in a rule.</li>
+</ol>
+<p>Example:</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #0000FF">target</span><span style="color: #666666">:</span><span style="color: #bbbbbb"> </span>dependency1 dependency2
+<span style="color: #bbbbbb">    </span>&lt;command&gt;
+</pre></div>
+
+<p>this will say dependency 1.</p>
+<ol start="2">
+<li><code>$@</code>: This variable represents the target (output) of a rule. It refers to the file being built or processed by the rule.</li>
+</ol>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #0000FF">target</span><span style="color: #666666">:</span><span style="color: #bbbbbb"> </span>dependency
+<span style="color: #bbbbbb">    </span>&lt;command&gt;<span style="color: #bbbbbb"> </span>-o<span style="color: #bbbbbb"> </span><span style="color: #19177C">$@</span>
+</pre></div>
+
+<p>refer to the target file target.</p>
+<p>II. Observe its execution</p>
+<p>Using <code>make -nB</code> will do. Also, these can be observe with <code>-D</code>.</p>
+<h1>First Guest program</h1>
+<h2>Read the program into mem</h2>
+<p>I. ISA</p>
+<p>II. Memory</p>
+<ul>
+<li>using <code>uint8_t</code> as mem</li>
+<li>See <code>nemu/src/memory/paddr.c</code></li>
+<li>Guest at <code>RESET_VECTOR</code> in <code>paddr.h</code>.</li>
+</ul>
+<h2>Init Registers</h2>
+<h1>Bonus</h1>
+<p>How to push NJUPA to my own Git repo?</p>
+<p>You may set the following:</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span>git<span style="color: #bbbbbb"> </span>remote<span style="color: #bbbbbb"> </span>set-url<span style="color: #bbbbbb"> </span>--push<span style="color: #bbbbbb"> </span>&lt;remote_name&gt;<span style="color: #bbbbbb"> </span>&lt;new_remote_url&gt;
+</pre></div>
+
 
     </div>
 
@@ -154,4 +196,4 @@ async function copyCode(block) {
     <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
     <script id="dsq-count-scr" src="//augpath.disqus.com/count.js" async></script>
   </body>
-</html><p><a href="main.pdf" target="_blank">main</a></p>
+</html>
