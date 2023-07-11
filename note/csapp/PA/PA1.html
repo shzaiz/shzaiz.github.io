@@ -108,7 +108,7 @@ async function copyCode(block) {
     <div class="navbar">
         <a href="https://shzaiz.github.io">AUG's Wiki</a>
         <a href="index.html"> ↑ Back to contents</a>
-        Last updated at 2023-07-11 13:41:08.387921
+        Last updated at 2023-07-11 19:56:31.189971
     </div>
 
     <div class="toc"></div>
@@ -157,6 +157,32 @@ async function copyCode(block) {
 <p>How to push NJUPA to my own Git repo?</p>
 <p>You may set the following:</p>
 <div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span>git<span style="color: #bbbbbb"> </span>remote<span style="color: #bbbbbb"> </span>set-url<span style="color: #bbbbbb"> </span>--push<span style="color: #bbbbbb"> </span>&lt;remote_name&gt;<span style="color: #bbbbbb"> </span>&lt;new_remote_url&gt;
+</pre></div>
+
+<h1>Vim tips</h1>
+<p>Use <code>Ctrl+a</code> to increment a number, <code>Ctrl+x</code> to decrement a number.</p>
+<h1>The genexpr</h1>
+<h2>Generate random int</h2>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #9C6500">#include</span><span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">&lt;stdio.h&gt;</span>
+<span style="color: #9C6500">#include</span><span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">&lt;stdlib.h&gt;</span>
+<span style="color: #9C6500">#include</span><span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">&lt;time.h&gt;</span>
+
+<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">main</span>()<span style="color: #bbbbbb"> </span>{
+<span style="color: #bbbbbb">    </span><span style="color: #3D7B7B; font-style: italic">// Seed the random number generator with the current time</span>
+<span style="color: #bbbbbb">    </span>srand(time(<span style="color: #008000">NULL</span>));
+
+<span style="color: #bbbbbb">    </span><span style="color: #3D7B7B; font-style: italic">// Define the range of the random number</span>
+<span style="color: #bbbbbb">    </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>min<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>;
+<span style="color: #bbbbbb">    </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>max<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">100</span>;
+
+<span style="color: #bbbbbb">    </span><span style="color: #3D7B7B; font-style: italic">// Generate a random integer within the range</span>
+<span style="color: #bbbbbb">    </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>randomInt<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>(rand()<span style="color: #bbbbbb"> </span><span style="color: #666666">%</span><span style="color: #bbbbbb"> </span>(max<span style="color: #bbbbbb"> </span><span style="color: #666666">-</span><span style="color: #bbbbbb"> </span>min<span style="color: #bbbbbb"> </span><span style="color: #666666">+</span><span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>))<span style="color: #bbbbbb"> </span><span style="color: #666666">+</span><span style="color: #bbbbbb"> </span>min;
+
+<span style="color: #bbbbbb">    </span><span style="color: #3D7B7B; font-style: italic">// Output the generated random integer</span>
+<span style="color: #bbbbbb">    </span>printf(<span style="color: #BA2121">&quot;Random integer: %d</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>,<span style="color: #bbbbbb"> </span>randomInt);
+
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">return</span><span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>;
+}
 </pre></div>
 
 
