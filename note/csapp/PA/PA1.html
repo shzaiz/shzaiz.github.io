@@ -108,14 +108,23 @@ async function copyCode(block) {
     <div class="navbar">
         <a href="https://shzaiz.github.io">AUG's Wiki</a>
         <a href="index.html"> ↑ Back to contents</a>
-        Last updated at 2023-07-11 19:56:31.189971
+        Last updated at 2023-07-12 18:12:45.015609
     </div>
 
     <div class="toc"></div>
     <a id="toc-button"><i class="far fa-bookmark"></i></a>
     
     <div>
-      <h1>The construction of the project</h1>
+      <h1>The Git</h1>
+<p>Create a new branch called <code>pa0</code>.</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span>git<span style="color: #bbbbbb"> </span>checkout<span style="color: #bbbbbb"> </span>-b<span style="color: #bbbbbb"> </span>pa0
+</pre></div>
+
+<p>Switch between versions, i.e. switch to <code>pa0</code></p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span>git<span style="color: #bbbbbb"> </span>checkout<span style="color: #bbbbbb"> </span>pa0
+</pre></div>
+
+<h1>The construction of the project</h1>
 <ul>
 <li>KConfig: handle the dependencies between the <code>#define</code>s.</li>
 </ul>
@@ -183,6 +192,10 @@ async function copyCode(block) {
 
 <span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">return</span><span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>;
 }
+</pre></div>
+
+<h2>Count lines</h2>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span>find<span style="color: #bbbbbb"> </span>./src<span style="color: #bbbbbb"> </span>-name<span style="color: #bbbbbb"> </span><span style="color: #BA2121">&#39;*.c&#39;</span><span style="color: #bbbbbb"> </span>|<span style="color: #bbbbbb"> </span>xargs<span style="color: #bbbbbb"> </span>wc<span style="color: #bbbbbb"> </span>-l
 </pre></div>
 
 

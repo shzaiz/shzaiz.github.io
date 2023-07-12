@@ -108,7 +108,7 @@ async function copyCode(block) {
     <div class="navbar">
         <a href="https://shzaiz.github.io">AUG's Wiki</a>
         <a href="index.html"> ↑ Back to contents</a>
-        Last updated at 2023-07-11 19:56:31.981737
+        Last updated at 2023-07-12 18:12:45.805115
     </div>
 
     <div class="toc"></div>
@@ -124,9 +124,36 @@ $$</p>
 $$</p>
 <p>大家可能会说: &quot;我感觉Windows的命令行界面好简陋啊, 快点让我看看Linux的命令行吧! &quot; 不错, Linux的命令行确实很好用. 或者说所有的命令都是用基本上Linux里面都可以用命令行实现.</p>
 <p>下面, 我们试着把Ubuntu 22.04安装到U盘里面, 来简单体验一下.</p>
-<p><strong>提示</strong>. 我们推荐大家使用机房的电脑安装. 因为机房的电脑带有自动还原的保护卡, 因此如果有什么问题, 格式化U盘重启即可.</p>
+<p><strong>提示</strong>. 我们推荐大家使用机房的电脑安装. 因为机房的电脑带有自动还原的保护卡, 因此如果有什么问题, 格式化U盘之后, 重启计算机即可.</p>
 <h1>准备</h1>
 <p>我们需要的原料很简单: 一块 \(\geq 64\texttt G\) 的U盘, 一台<code>x86_64</code>架构的运行<code>windows</code>的计算机. 以及<code>WMWare</code>虚拟机. 我们可以不用序列号, 选择免费试用即可.</p>
+<p><strong>说明</strong>. 以下大部分插图来自<a href="https://www.bilibili.com/video/BV1D34y187P4">这个视频</a>, 因为我没有可以使用的电脑.</p>
+<h1>借助虚拟机</h1>
+<p>先把U盘插入计算机, 然后启动VMWare.</p>
+<p>然后, 在VMWare Workstation的<code>文件</code>下点击<code>新建虚拟机</code>, 选择<code>自定义(高级)</code>选项. 先完成一些比较基本的东西, 对于名字之类的可以按照自己喜好的设置, 但在安装的系统之类的内容需要按照说的来做:</p>
+<p><img src="./FILES/linux-to-go.md/img-20230712175548.png" alt="vmware" /></p>
+<p>下面进入关键的一步骤: 选择安装虚拟机的磁盘为这个U盘. 选择如图所示的选项</p>
+<p><img src="./FILES/linux-to-go.md/img-20230712175713.png" alt="vm-step-10" /></p>
+<p>之后, 选择插入的USB.  \(\color{red}\boxed{一定再三确认这个盘就是你要装的盘. }\)  当只有一个的USB的时候, 一般会显示<code>PhysicalDrive1</code>, 并且选择使用整个磁盘.</p>
+<p><img src="./FILES/linux-to-go.md/img-20230712180007.png" alt="pdrive1" /></p>
+<p>然后一路下一步, 直到完成即可. 虚拟机的环境准备完毕.</p>
+<h1>下载Ubuntu的镜像</h1>
+<p>在Ubuntu的<a href="https://ubuntu.com/download/desktop">官方网站</a>上可以下载镜像. 稍微等一等, 应该不算慢.</p>
+<p>之后, 把Ubuntu的镜像装到VMWare的虚拟机里面. 在编辑虚拟机设置里面, 选择CD/DVD, 把刚刚的ISO文件放进去.</p>
+<p><img src="./FILES/linux-to-go.md/img-20230712180529.png" alt="make-iso" /></p>
+<p>点击开启虚拟机.</p>
+<h1>安装Ubuntu</h1>
+<p><img src="./FILES/linux-to-go.md/img-20230712180637.png" alt="grub" /></p>
+<p>弹出桌面之后, 在安装界面选择Try Ubuntu. 我们建议大家选择英文版, 因为英文版的报错信息很明确, 上网上搜索解决问题会比较快速.</p>
+<p>在出现安装的时候, 选择&quot;Minimal Installation&quot;.</p>
+<p><img src="./FILES/linux-to-go.md/img-20230712181007.png" alt="min-install" /></p>
+<p>我们还要对于整个内容分区. 先删掉U盘的所有分区, 创建第一个分区为Boot, 设置为如下的:</p>
+<p><img src="./FILES/linux-to-go.md/img-20230712181124.png" alt="partition1" /></p>
+<p>注意这个大小需要修改为500MB.</p>
+<p>剩下的就是EFI文件系统了. 再新建一个分区如图:</p>
+<p><img src="./FILES/linux-to-go.md/img-20230712181153.png" alt="partition2" /></p>
+<p>这个大小不用修改.</p>
+<p>然后继续安装就好了.</p>
 <p>$$
 -\text{Not }\mathscr {E}\text{nd of the note}-
 $$</p>
