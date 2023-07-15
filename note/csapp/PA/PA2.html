@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <link rel="stylesheet" href="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/style.css">
+    <script src="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/plugin.js"></script> 
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
+ 
+    <script>
+const copyButtonLabel = "Copy Code";
+
+// use a class selector if available
+let blocks = document.querySelectorAll("pre");
+
+blocks.forEach((block) => {
+  // only add button if browser supports Clipboard API
+  if (navigator.clipboard) {
+    let button = document.createElement("button");
+
+    button.innerText = copyButtonLabel;
+    block.appendChild(button);
+
+    button.addEventListener("click", async () => {
+      await copyCode(block);
+    });
+  }
+});
+
+async function copyCode(block) {
+  let code = block.querySelector("code");
+  let text = code.innerText;
+
+  await navigator.clipboard.writeText(text);
+}
+    </script>
+      <style>
+        body {counter-reset:section;}
+        h1 {counter-reset:subsection;font-size:x-large;}
+        h2 {font-size: large;}
+        
+        h1:before {
+        counter-increment:section;
+        content:counter(section) ". ";
+            font-weight:bold;
+            font-size: x-large;
+        }
+        h2:before {
+        counter-increment:subsection;
+        content:counter(section) "." counter(subsection) " ";
+        font-size: large;
+        }
+        html, body {
+            margin: 8%;
+            font-family: "Times New Roman","SimSun", "STSong", "Songti SC",Times, serif;
+            font-size: 110%;
+        }
+        code {
+            font-family: 'Courier New', Courier, monospace;
+        } 
+
+        pre {
+            font-family: 'Courier New', Courier, monospace;
+        } 
+        div{
+            max-width: 100%;
+            overflow: auto;
+            
+        }
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+            position: fixed; /* Set the navbar to fixed position */
+            top: 0; /* Position the navbar at the top of the page */
+            width: 100%; /* Full width */
+        }
+
+        img {
+        max-width: 80%;
+        height: auto;
+        }
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        a {
+            color: #148bca;
+            text-align: center;
+            padding-left: 2px;
+            padding-right: 2px;
+            text-decoration: none;
+        }
+
+        p.hidden {
+          overflow: hidden;
+        }
+
+    </style>
+  </head>
+  <body>
+    
+    <div class="navbar">
+        <a href="https://shzaiz.github.io">AUG's Wiki</a>
+        <a href="index.html"> ↑ Back to contents</a>
+        Last updated at 2023-07-16 00:15:58.791275
+    </div>
+
+    <div class="toc"></div>
+    <a id="toc-button"><i class="far fa-bookmark"></i></a>
+    
+    <div>
+      <h1>PA2</h1>
+<p>新版的指令非常好懂得. 并且已经做好了signextension.</p>
+<h2>ELF</h2>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span>riscv64-linux-gnu-readelf -a add-riscv32-nemu.elf
+</pre></div>
+
+<p>用这个来读ELF</p>
+<p>Name属性之后, 你会发现这些表项正好对应了程序中定义的函数, 相应的Value属性正好是它们的起始地址, 而相应的Size属性则给出了函数的大小.</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #9C6500">#include</span><span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">&lt;stdio.h&gt;</span>
+<span style="color: #9C6500">#include</span><span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">&lt;elf.h&gt;</span>
+
+<span style="color: #B00040">void</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">print_symbol_table</span>(Elf32_Sym<span style="color: #bbbbbb"> </span><span style="color: #666666">*</span>symbol_table,<span style="color: #bbbbbb"> </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>symbol_count,<span style="color: #bbbbbb"> </span><span style="color: #B00040">char</span><span style="color: #bbbbbb"> </span><span style="color: #666666">*</span>string_table)<span style="color: #bbbbbb"> </span>{
+<span style="color: #bbbbbb">    </span>printf(<span style="color: #BA2121">&quot;Symbol Table:</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>);
+<span style="color: #bbbbbb">    </span>printf(<span style="color: #BA2121">&quot;  Num:    Value     Size     Type    Bind    Name</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>);
+
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">for</span><span style="color: #bbbbbb"> </span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>i<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>;<span style="color: #bbbbbb"> </span>i<span style="color: #bbbbbb"> </span><span style="color: #666666">&lt;</span><span style="color: #bbbbbb"> </span>symbol_count;<span style="color: #bbbbbb"> </span><span style="color: #666666">++</span>i)<span style="color: #bbbbbb"> </span>{
+<span style="color: #bbbbbb">        </span>Elf32_Sym<span style="color: #bbbbbb"> </span><span style="color: #666666">*</span>symbol<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">&amp;</span>symbol_table[i];
+
+<span style="color: #bbbbbb">        </span><span style="color: #3D7B7B; font-style: italic">// Get the symbol name from the string table</span>
+<span style="color: #bbbbbb">        </span><span style="color: #B00040">char</span><span style="color: #bbbbbb"> </span><span style="color: #666666">*</span>symbol_name<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>string_table<span style="color: #bbbbbb"> </span><span style="color: #666666">+</span><span style="color: #bbbbbb"> </span>symbol<span style="color: #666666">-&gt;</span>st_name;
+
+<span style="color: #bbbbbb">        </span>printf(<span style="color: #BA2121">&quot;  %-6d:  %08x  %-8u &quot;</span>,<span style="color: #bbbbbb"> </span>i,<span style="color: #bbbbbb"> </span>symbol<span style="color: #666666">-&gt;</span>st_value,<span style="color: #bbbbbb"> </span>symbol<span style="color: #666666">-&gt;</span>st_size);
+
+<span style="color: #bbbbbb">        </span><span style="color: #008000; font-weight: bold">switch</span><span style="color: #bbbbbb"> </span>(ELF32_ST_TYPE(symbol<span style="color: #666666">-&gt;</span>st_info))<span style="color: #bbbbbb"> </span>{
+<span style="color: #bbbbbb">            </span><span style="color: #008000; font-weight: bold">case</span><span style="color: #bbbbbb"> </span><span style="color: #880000">STT_NOTYPE</span>:
+<span style="color: #bbbbbb">                </span>printf(<span style="color: #BA2121">&quot;NOTYPE  &quot;</span>);
+<span style="color: #bbbbbb">                </span><span style="color: #008000; font-weight: bold">break</span>;
+<span style="color: #bbbbbb">            </span><span style="color: #008000; font-weight: bold">case</span><span style="color: #bbbbbb"> </span><span style="color: #880000">STT_OBJECT</span>:
+<span style="color: #bbbbbb">                </span>printf(<span style="color: #BA2121">&quot;OBJECT  &quot;</span>);
+<span style="color: #bbbbbb">                </span><span style="color: #008000; font-weight: bold">break</span>;
+<span style="color: #bbbbbb">            </span><span style="color: #008000; font-weight: bold">case</span><span style="color: #bbbbbb"> </span><span style="color: #880000">STT_FUNC</span>:
+<span style="color: #bbbbbb">                </span>printf(<span style="color: #BA2121">&quot;FUNC    &quot;</span>);
+<span style="color: #bbbbbb">                </span><span style="color: #008000; font-weight: bold">break</span>;
+<span style="color: #bbbbbb">            </span><span style="color: #008000; font-weight: bold">case</span><span style="color: #bbbbbb"> </span><span style="color: #880000">STT_SECTION</span>:
+<span style="color: #bbbbbb">                </span>printf(<span style="color: #BA2121">&quot;SECTION &quot;</span>);
+<span style="color: #bbbbbb">                </span><span style="color: #008000; font-weight: bold">break</span>;
+<span style="color: #bbbbbb">            </span><span style="color: #008000; font-weight: bold">case</span><span style="color: #bbbbbb"> </span><span style="color: #880000">STT_FILE</span>:
+<span style="color: #bbbbbb">                </span>printf(<span style="color: #BA2121">&quot;FILE    &quot;</span>);
+<span style="color: #bbbbbb">                </span><span style="color: #008000; font-weight: bold">break</span>;
+<span style="color: #bbbbbb">            </span><span style="color: #008000; font-weight: bold">default</span><span style="color: #666666">:</span>
+<span style="color: #bbbbbb">                </span>printf(<span style="color: #BA2121">&quot;UNKNOWN &quot;</span>);
+<span style="color: #bbbbbb">                </span><span style="color: #008000; font-weight: bold">break</span>;
+<span style="color: #bbbbbb">        </span>}
+
+<span style="color: #bbbbbb">        </span><span style="color: #008000; font-weight: bold">switch</span><span style="color: #bbbbbb"> </span>(ELF32_ST_BIND(symbol<span style="color: #666666">-&gt;</span>st_info))<span style="color: #bbbbbb"> </span>{
+<span style="color: #bbbbbb">            </span><span style="color: #008000; font-weight: bold">case</span><span style="color: #bbbbbb"> </span><span style="color: #880000">STB_LOCAL</span>:
+<span style="color: #bbbbbb">                </span>printf(<span style="color: #BA2121">&quot;LOCAL &quot;</span>);
+<span style="color: #bbbbbb">                </span><span style="color: #008000; font-weight: bold">break</span>;
+<span style="color: #bbbbbb">            </span><span style="color: #008000; font-weight: bold">case</span><span style="color: #bbbbbb"> </span><span style="color: #880000">STB_GLOBAL</span>:
+<span style="color: #bbbbbb">                </span>printf(<span style="color: #BA2121">&quot;GLOBAL&quot;</span>);
+<span style="color: #bbbbbb">                </span><span style="color: #008000; font-weight: bold">break</span>;
+<span style="color: #bbbbbb">            </span><span style="color: #008000; font-weight: bold">case</span><span style="color: #bbbbbb"> </span><span style="color: #880000">STB_WEAK</span>:
+<span style="color: #bbbbbb">                </span>printf(<span style="color: #BA2121">&quot;WEAK  &quot;</span>);
+<span style="color: #bbbbbb">                </span><span style="color: #008000; font-weight: bold">break</span>;
+<span style="color: #bbbbbb">            </span><span style="color: #008000; font-weight: bold">default</span><span style="color: #666666">:</span>
+<span style="color: #bbbbbb">                </span>printf(<span style="color: #BA2121">&quot;UNKWN &quot;</span>);
+<span style="color: #bbbbbb">                </span><span style="color: #008000; font-weight: bold">break</span>;
+<span style="color: #bbbbbb">        </span>}
+
+<span style="color: #bbbbbb">        </span>printf(<span style="color: #BA2121">&quot; %s</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>,<span style="color: #bbbbbb"> </span>symbol_name);
+<span style="color: #bbbbbb">    </span>}
+}
+
+<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">main</span>()<span style="color: #bbbbbb"> </span>{
+<span style="color: #bbbbbb">    </span><span style="color: #B00040">FILE</span><span style="color: #bbbbbb"> </span><span style="color: #666666">*</span>file;
+<span style="color: #bbbbbb">    </span>Elf32_Ehdr<span style="color: #bbbbbb"> </span>elf_header;
+
+<span style="color: #bbbbbb">    </span>file<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>fopen(<span style="color: #BA2121">&quot;your_elf_file&quot;</span>,<span style="color: #bbbbbb"> </span><span style="color: #BA2121">&quot;rb&quot;</span>);
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">if</span><span style="color: #bbbbbb"> </span>(file<span style="color: #bbbbbb"> </span><span style="color: #666666">==</span><span style="color: #bbbbbb"> </span><span style="color: #008000">NULL</span>)<span style="color: #bbbbbb"> </span>{
+<span style="color: #bbbbbb">        </span>perror(<span style="color: #BA2121">&quot;Error opening file&quot;</span>);
+<span style="color: #bbbbbb">        </span><span style="color: #008000; font-weight: bold">return</span><span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>;
+<span style="color: #bbbbbb">    </span>}
+
+<span style="color: #bbbbbb">    </span>fread(<span style="color: #666666">&amp;</span>elf_header,<span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">sizeof</span>(Elf32_Ehdr),<span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>,<span style="color: #bbbbbb"> </span>file);
+
+<span style="color: #bbbbbb">    </span><span style="color: #3D7B7B; font-style: italic">// Get the section header table offset</span>
+<span style="color: #bbbbbb">    </span>fseek(file,<span style="color: #bbbbbb"> </span>elf_header.e_shoff,<span style="color: #bbbbbb"> </span>SEEK_SET);
+
+<span style="color: #bbbbbb">    </span><span style="color: #3D7B7B; font-style: italic">// Read the section header table</span>
+<span style="color: #bbbbbb">    </span>Elf32_Shdr<span style="color: #bbbbbb"> </span><span style="color: #666666">*</span>section_headers<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>malloc(elf_header.e_shentsize<span style="color: #bbbbbb"> </span><span style="color: #666666">*</span><span style="color: #bbbbbb"> </span>elf_header.e_shnum);
+<span style="color: #bbbbbb">    </span>fread(section_headers,<span style="color: #bbbbbb"> </span>elf_header.e_shentsize,<span style="color: #bbbbbb"> </span>elf_header.e_shnum,<span style="color: #bbbbbb"> </span>file);
+
+<span style="color: #bbbbbb">    </span><span style="color: #3D7B7B; font-style: italic">// Find the symbol table section and the associated string table</span>
+<span style="color: #bbbbbb">    </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>symbol_table_index<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">-1</span>;
+<span style="color: #bbbbbb">    </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>string_table_index<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">-1</span>;
+
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">for</span><span style="color: #bbbbbb"> </span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>i<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>;<span style="color: #bbbbbb"> </span>i<span style="color: #bbbbbb"> </span><span style="color: #666666">&lt;</span><span style="color: #bbbbbb"> </span>elf_header.e_shnum;<span style="color: #bbbbbb"> </span><span style="color: #666666">++</span>i)<span style="color: #bbbbbb"> </span>{
+<span style="color: #bbbbbb">        </span><span style="color: #008000; font-weight: bold">if</span><span style="color: #bbbbbb"> </span>(section_headers[i].sh_type<span style="color: #bbbbbb"> </span><span style="color: #666666">==</span><span style="color: #bbbbbb"> </span>SHT_SYMTAB)<span style="color: #bbbbbb"> </span>{
+<span style="color: #bbbbbb">            </span>symbol_table_index<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>i;
+<span style="color: #bbbbbb">            </span>string_table_index<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>section_headers[i].sh_link;
+<span style="color: #bbbbbb">            </span><span style="color: #008000; font-weight: bold">break</span>;
+<span style="color: #bbbbbb">        </span>}
+<span style="color: #bbbbbb">    </span>}
+
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">if</span><span style="color: #bbbbbb"> </span>(symbol_table_index<span style="color: #bbbbbb"> </span><span style="color: #666666">==</span><span style="color: #bbbbbb"> </span><span style="color: #666666">-1</span><span style="color: #bbbbbb"> </span><span style="color: #666666">||</span><span style="color: #bbbbbb"> </span>string_table_index<span style="color: #bbbbbb"> </span><span style="color: #666666">==</span><span style="color: #bbbbbb"> </span><span style="color: #666666">-1</span>)<span style="color: #bbbbbb"> </span>{
+<span style="color: #bbbbbb">        </span>printf(<span style="color: #BA2121">&quot;Symbol table or string table not found</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>);
+<span style="color: #bbbbbb">        </span><span style="color: #008000; font-weight: bold">return</span><span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>;
+<span style="color: #bbbbbb">    </span>}
+
+<span style="color: #bbbbbb">    </span><span style="color: #3D7B7B; font-style: italic">// Calculate the number of symbol table entries</span>
+<span style="color: #bbbbbb">    </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>symbol_count<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>section_headers[symbol_table_index].sh_size<span style="color: #bbbbbb"> </span><span style="color: #666666">/</span><span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">sizeof</span>(Elf32_Sym);
+
+<span style="color: #bbbbbb">    </span><span style="color: #3D7B7B; font-style: italic">// Get the symbol table offset</span>
+<span style="color: #bbbbbb">    </span>Elf32_Sym<span style="color: #bbbbbb"> </span><span style="color: #666666">*</span>symbol_table<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>malloc(section_headers[symbol_table_index].sh_size);
+<span style="color: #bbbbbb">    </span>fseek(file,<span style="color: #bbbbbb"> </span>section_headers[symbol_table_index].sh_offset,<span style="color: #bbbbbb"> </span>SEEK_SET);
+<span style="color: #bbbbbb">    </span>fread(symbol_table,<span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">sizeof</span>(Elf32_Sym),<span style="color: #bbbbbb"> </span>symbol_count,<span style="color: #bbbbbb"> </span>file);
+
+<span style="color: #bbbbbb">    </span><span style="color: #3D7B7B; font-style: italic">// Get the string table offset and size</span>
+<span style="color: #bbbbbb">    </span>Elf32_Off<span style="color: #bbbbbb"> </span>string_table_offset<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>section_headers[string_table_index].sh_offset;
+<span style="color: #bbbbbb">    </span>Elf32_Word<span style="color: #bbbbbb"> </span>string_table_size<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>section_headers[string_table_index].sh_size;
+
+<span style="color: #bbbbbb">    </span><span style="color: #3D7B7B; font-style: italic">// Allocate memory for the string table</span>
+<span style="color: #bbbbbb">    </span><span style="color: #B00040">char</span><span style="color: #bbbbbb"> </span><span style="color: #666666">*</span>string_table<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>malloc(string_table_size);
+<span style="color: #bbbbbb">    </span>fseek(file,<span style="color: #bbbbbb"> </span>string_table_offset,<span style="color: #bbbbbb"> </span>SEEK_SET);
+<span style="color: #bbbbbb">    </span>fread(string_table,<span style="color: #bbbbbb"> </span>string_table_size,<span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>,<span style="color: #bbbbbb"> </span>file);
+
+<span style="color: #bbbbbb">    </span><span style="color: #3D7B7B; font-style: italic">// Print the symbol table entries</span>
+<span style="color: #bbbbbb">    </span>print_symbol_table(symbol_table,<span style="color: #bbbbbb"> </span>symbol_count,<span style="color: #bbbbbb"> </span>string_table);
+
+<span style="color: #bbbbbb">    </span><span style="color: #3D7B7B; font-style: italic">// Clean up</span>
+<span style="color: #bbbbbb">    </span>free(section_headers);
+<span style="color: #bbbbbb">    </span>free(symbol_table);
+<span style="color: #bbbbbb">    </span>free(string_table);
+<span style="color: #bbbbbb">    </span>fclose(file);
+
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">return</span><span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>;
+}
+</pre></div>
+
+
+    </div>
+
+   
+   
+   
+    <hr>
+
+
+
+
+
+
+    <div id="disqus_thread"></div>
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script>
+        /**
+        *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+        *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+        
+        // var disqus_config = function () {
+        // this.page.url = ;  // Replace PAGE_URL with your page's canonical URL variable
+        // this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        // };
+        
+        (function() { // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        s.src = 'https://augpath.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <script id="dsq-count-scr" src="//augpath.disqus.com/count.js" async></script>
+  </body>
+</html>
