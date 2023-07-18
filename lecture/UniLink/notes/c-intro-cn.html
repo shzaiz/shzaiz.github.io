@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <link rel="stylesheet" href="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/style.css">
+    <script src="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/plugin.js"></script> 
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
+ 
+    <script>
+const copyButtonLabel = "Copy Code";
+
+// use a class selector if available
+let blocks = document.querySelectorAll("pre");
+
+blocks.forEach((block) => {
+  // only add button if browser supports Clipboard API
+  if (navigator.clipboard) {
+    let button = document.createElement("button");
+
+    button.innerText = copyButtonLabel;
+    block.appendChild(button);
+
+    button.addEventListener("click", async () => {
+      await copyCode(block);
+    });
+  }
+});
+
+async function copyCode(block) {
+  let code = block.querySelector("code");
+  let text = code.innerText;
+
+  await navigator.clipboard.writeText(text);
+}
+    </script>
+      <style>
+        body {counter-reset:section;}
+        h1 {counter-reset:subsection;font-size:x-large;}
+        h2 {font-size: large;}
+        
+        h1:before {
+        counter-increment:section;
+        content:counter(section) ". ";
+            font-weight:bold;
+            font-size: x-large;
+        }
+        h2:before {
+        counter-increment:subsection;
+        content:counter(section) "." counter(subsection) " ";
+        font-size: large;
+        }
+        html, body {
+            margin: 8%;
+            font-family: "Times New Roman","SimSun", "STSong", "Songti SC",Times, serif;
+            font-size: 110%;
+        }
+        code {
+            font-family: 'Courier New', Courier, monospace;
+        } 
+
+        pre {
+            font-family: 'Courier New', Courier, monospace;
+        } 
+        div{
+            max-width: 100%;
+            overflow: auto;
+            
+        }
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+            position: fixed; /* Set the navbar to fixed position */
+            top: 0; /* Position the navbar at the top of the page */
+            width: 100%; /* Full width */
+        }
+
+        img {
+        max-width: 80%;
+        height: auto;
+        }
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        a {
+            color: #148bca;
+            text-align: center;
+            padding-left: 2px;
+            padding-right: 2px;
+            text-decoration: none;
+        }
+
+        p.hidden {
+          overflow: hidden;
+        }
+
+    </style>
+  </head>
+  <body>
+    
+    <div class="navbar">
+        <a href="https://shzaiz.github.io">AUG's Wiki</a>
+        <a href="index.html"> ↑ Back to contents</a>
+        Last updated at 2023-07-19 00:11:02.614911
+    </div>
+
+    <div class="toc"></div>
+    <a id="toc-button"><i class="far fa-bookmark"></i></a>
+    
+    <div>
+      <title>C语言介绍</title>
+<p>$$
+\Huge \textbf{C语言介绍}
+$$</p>
+<p>$$
+\boxed{ \overbrace{\textit{degaokaolization}}^{\small{去高考化}} \text{ Discussion Group | Topic 03B}}
+$$</p>
+<p>(如无特殊说明, 下面的内容是给Windows上面的同学写的)</p>
+<h1>回到基本的内容</h1>
+<p>上一次, 我们介绍了机器可以按照说明书那样为我们执行重复的基本指令. 但是, 都可以有怎样的指令呢? 今天我们仍旧看一个比较基础的编程语言, 让我们可以和计算机用一种比较繁琐的方式来对话.</p>
+<h2>电脑能执行什么?</h2>
+<p>事实上, 电脑在执行的时候只能看懂0, 1序列. 比如这个:</p>
+<p><img src="./FILES/c-intro-cn.md/img-20230717121322.png" alt="seq01" /></p>
+<p>当然, 让人类直接编写0, 1序列显然是没办法做到的(这些0, 1序列是根据机器的构造设计的). 这时候, 人类先忍住自己的不适应感, 写一点简单的工具, 从而让他们更加轻松地写更加复杂的东西. 比如, 这样的0, 1序列可以用像<code>lea</code>这样的缩写表示, 更加方便. (lea是Load Effective Address的意思, 先不用管这是什么)</p>
+<p><img src="./FILES/c-intro-cn.md/img-20230717134718.png" alt="memorics" /></p>
+<p>当然还有更加高级的语言. 现在, 我们有更加方便的工具来表述我们的逻辑. 我们今天就要看比较古老的语言. 在未来的日常工作中, 可能很少会直接用它, 但是了解基本的内容以及它背后的思想是至关重要的.</p>
+<h1>准备环境</h1>
+<p>具体地, 我们来简单看看C语言. 由于这个内容是上个世纪发明出来的, 那时候, 计算机的内存非常的小, 很多东西也远远没有像今天这样方便. 在这种条件下, 人们还是努力制作出了更加方便的工具. 所以现在看来, 这些东西和我们日常的操作还是很不一样的.</p>
+<p>通常来讲, 我比较喜欢使用Visual Studio Code完成一些比较小的任务(注意不是Visual Studio). 所以, 为了方便起见, 我们来先配置环境.</p>
+<h2>简化版本: 使用Dev-C++</h2>
+<p>如果你感到想要一种快速上手的方式编写C程序, 那么你可以搜索并下载Dev-C++这个软件. 不过, 这个还是有时候隐藏了一些细节. 我们下面来看一看你在使用Dev-C++的时候, 电脑实际上做了什么.</p>
+<h2>普通版本: 使用命令行工具</h2>
+<p>早先, 来自<code>GNU</code>组织的人们为我们提供了命令行工具<code>gcc</code>和<code>g++</code>. 但是, 它们只能在Linux上面运行. 后来, 为了方便Windows上面也能方便地调试, 就有了<code>MinGW</code>, 这种奇怪的缩写很常见, 以至于读得多了自己就可以脑补出来. 它的意思是<code>Minimal GNU on Windows</code>. 我们首先需要下载<code>MinGW</code>. <a href="https://sourceforge.net/projects/mingw/">这里</a>是它的官方下载地址.</p>
+<p>在这里面找到<code>gcc</code>和<code>g++</code>, 并安装.</p>
+<h1>第一个例子</h1>
+<p>就像任何一个语言一样, 我们先给出第一个例子: Hello, World:</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #9C6500">#include</span><span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">&lt;stdio.h&gt;</span>
+main(){
+<span style="color: #bbbbbb">    </span>printf(<span style="color: #BA2121">&quot;Hello, World!</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>);
+}
+</pre></div>
+
+<p>注意, 每一条语句(指令)都用分号结束. 这是C的语法.</p>
+<p>如果我们不加分号会怎么样? 这个时候, <code>gcc</code>会拒绝我们, 说我们写的它看不懂.</p>
+<p><img src="./FILES/c-intro-cn.md/img-20230718102216.png" alt="gcc-error" /></p>
+<p><strong>练习1</strong>. 试错: 如果不输入第一行的<code>#include</code>, 可以运行吗? 如果不小心把<code>printf</code>漏了一个字母会怎么样? 这样子的尝试可以防止你未来面对同样的错误不知所措.</p>
+<p>其中<code>\n</code>是给电脑发送一个信号, 让我换一个新的行. 当电脑读到了<code>\</code>的时候, 它不会认为这是一个普通的字符<code>\</code>, 而是想: 这次要执行什么样的魔法呢? 这就取决于<code>\</code>后面的字符了. 比如, <code>\n</code>是开辟新的一行, <code>\t</code>是新加一个制表符, 那么如何表示<code>\</code>它本身? 输入<code>\\</code>!</p>
+<p>我想让电脑输入我的名字, 并且对我打招呼, 该怎么办呢? 事实上, 由于C语言诞生的比较古早, 正常情况下我们必须使用比较复杂的方法来输出. 但是多亏了<code>cs50.h</code>, 我们可以使用方便的方案来获取这些内容.</p>
+<p>请把cs50.h复制到和这个文件一样的目录, 然后加上一行. 这次的include使用引号, 表示引进来的东西应该在当前的目录下面找.</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #9C6500">#include</span><span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">&lt;stdio.h&gt;</span>
+<span style="color: #9C6500">#include</span><span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">&quot;cs50.h&quot; // Include file cs50.h</span>
+main(){
+<span style="color: #bbbbbb">    </span><span style="color: #3D7B7B; font-style: italic">// a function in cs50.h</span>
+<span style="color: #bbbbbb">    </span>string<span style="color: #bbbbbb"> </span>name<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>get_string(<span style="color: #BA2121">&quot;What&#39;s your name? &quot;</span>);<span style="color: #bbbbbb"> </span>
+<span style="color: #bbbbbb">    </span>printf(<span style="color: #BA2121">&quot;Hello, name!&quot;</span>);
+}
+</pre></div>
+
+<p>运行之后, 计算机会输出<code>Hello, name!</code>.</p>
+<p>但是电脑并不知道我们的<code>name</code>是作为一个变量的<code>name</code>. 于是我们需要用某种&quot;占位符&quot;的方式告诉电脑: 这里你要写一个变量名. 在C语言里, 我们通常使用<code>%</code>作为占位符的开始, 告诉计算机, 这里你要输出一个变量.</p>
+<p>把上述代码修改为</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #9C6500">#include</span><span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">&lt;stdio.h&gt;</span>
+<span style="color: #9C6500">#include</span><span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">&lt;cs50.h&gt;</span>
+main(){
+<span style="color: #bbbbbb">    </span>string<span style="color: #bbbbbb"> </span>name<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>get_string(<span style="color: #BA2121">&quot;What&#39;s your name? &quot;</span>);
+<span style="color: #bbbbbb">    </span>printf(<span style="color: #BA2121">&quot;Hello, %s!&quot;</span>,<span style="color: #bbbbbb"> </span>name);
+}
+</pre></div>
+
+<p><code>%s</code>意味着我需要从一个字符串<code>string</code><strong>类型</strong>的变量中读取. C语言里面有很多类型, 来让我们写出正确的代码. 我们列举几个常用的</p>
+<ul>
+<li><code>int</code> integer 整数</li>
+<li><code>float</code> 小数(小数点会浮动)</li>
+<li><code>double</code> 更高精度的小数</li>
+<li><code>char</code> character 字符</li>
+<li><code>string</code> 字符串</li>
+</ul>
+<p>如果要用printf指示, 一般可以用下面列出的对应:</p>
+<ul>
+<li><code>int</code> integer 整数 使用<code>%d</code>(decimal)</li>
+<li><code>float</code> 小数(小数点会浮动) 使用<code>%f</code></li>
+<li><code>double</code> 更高精度的小数 使用<code>%lf</code>(long float)</li>
+<li><code>char</code> character 字符 使用<code>%c</code></li>
+<li><code>string</code> 字符串 使用<code>%s</code>.</li>
+</ul>
+<p>这些内容需要记忆吗? 不怎么需要. 如果你一不小心搞错了, 编译器<code>gcc</code>会友善的触发<code>warning</code>来提示你, 按照它的要求改正就好了.</p>
+<p><img src="./FILES/c-intro-cn.md/img-20230718101626.png" alt="compiler-warn" /></p>
+<p>好, 那么上面的<code>string name = ...</code>是啥意思呢? 其实, 它的意思是声明了一个<strong>变量</strong>.</p>
+<p>现在来讲, 变量可以看做一个小盒子. 里面存放着特定类型的东西. 比如一个只能装整数的小盒子, 名字叫<code>x</code>, 里面有一个数3, 可以这样表示: <code>int x = 3;</code></p>
+<p>发扬我们的叛逆的心理. 如果我强行给它一个值, 会怎么样呢? 我们可以看到, 有些情况, 它照样能够工作, 但是有些时候, 就会有麻烦的报错. 比如<code>int a = &#x27;s&#x27;</code>, 其中用单引号<code>&#x27;</code>引起来的内容其实是一个字符. 我们发现没有任何错误发生. 这是为什么?</p>
+<p>事实上, C语言可以将一些类型悄悄的转换. 大部分情况下, C的类型转换系统还是很正常的. 比如会把3.6这个小数转换为3这个整数. 比如<code>char</code>就可以被转化为<code>int</code>. 对于具体的<code>s</code>而言, 它的值是115. 为什么会有这样的转换呢?</p>
+<p>原因在于人们早就规定好的ASCII码. 事实上, 当你查看他们的内存里面, 用0, 1序列表示的内容还是一样的(除了<code>int</code>一个有更多的0). 都是<code>01110011</code>. 我们可以使用<a href="https://pythontutor.com/c.html#mode=edit">Python Tutor</a>这个网站提供的工具查看一些小的情况.</p>
+<p><img src="./FILES/c-intro-cn.md/img-20230718132133.png" alt="byte-repr" /></p>
+<p>但是有些时候类型转换也不能明白应该如何转换. 这时候, 他就会报错:</p>
+<p><img src="./FILES/c-intro-cn.md/img-20230718133054.png" alt="type-error" /></p>
+<p>另外, 重名的变量有时候是不能同时存在的. 具体什么时候呢? 事实上, 我们稍微使用Python Tutor做一些实验, 就会发现定义在<code>main</code>外面的比变量会安排的比较靠上(我们叫它全局); 在<code>main</code>里面的变量会被<code>main</code>的框框严严地包裹住(我们叫它局部). C程序允许上面的和里面的是允许重复的. 比如说, 这种情况是被允许的:</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #9C6500">#include</span><span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">&lt;stdio.h&gt;</span>
+<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>value<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>;<span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">// (1)</span>
+main(){
+<span style="color: #bbbbbb">    </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>val<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>;<span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">// (2)</span>
+<span style="color: #bbbbbb">    </span>val<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>val<span style="color: #bbbbbb"> </span><span style="color: #666666">+</span><span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>;<span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">// (3)</span>
+}<span style="color: #bbbbbb"> </span>
+</pre></div>
+
+<p>这时候, 语句(3)操作的val其实是语句(2)定义的. 在Python Tutor里面看一看吧!</p>
+<h1>有了变量, 可以做的事情</h1>
+<p>我们现在可以写出很多有趣的小程序了. 比如我们在小学的时候计算多少 \(π\) 等于什么, 我们就可以使用这样的方法进行.</p>
+<p><strong>练习2</strong>. 完成小学时候要做的事情: 输入一个数 \(n\) , 输出 \(n\pi\) .</p>
+<p>事实上, 有了变量之后, 我们就可以做一些基本的东西了. 但是能够做的还是不够多. 目前为止, 我们只能按照程序的行数, 一步一步来. 有没有让程序可以在步骤之间&quot;跳来跳去呢&quot;? 当然是可以的. 下面, 我们来介绍一个比较古老的命令: <code>goto</code></p>
+<p> \(\boxed{\color{red}警告!}\)  在以后书写的语言里面, 都尽量不要使用 <code>goto</code> 语句! 因为它不容易被他人理解, 同时给我们未来找代码的问题带来很大的麻烦. 任何使用 <code>goto</code> 语句的程序可以改写成不需要使用 <code>goto</code> 语句的写法. 这里只是为了大家方便理解程序的&quot;跳来跳去&quot;这样的行为引入的.</p>
+<p> \(\boxed{\color{green}注意}\)  在一些C语言的项目中, 不是一定禁止使用goto的. 有时候使用<code>goto</code>反而会让代码的逻辑更加清晰. 如果你是计算机专业的同学, 这就需要你阅读代码, 来分辨那些大项目里面好的<code>goto</code>语句为什么好, 有什么作用.</p>
+<h1>跳来跳去 - 控制流</h1>
+<h2>什么是<code>goto</code></h2>
+<p><code>goto</code>语句就像是说明书上面的**&quot;请转到另外一个地方继续阅读&quot;**. 比如: 接下页. 这里的&quot;下页&quot;我们叫它为标签(label). 于是如果我们的程序有了这样的标签和明确的goto的话, 就可以用作跳转了. 标签的语法是<code>标签名字:</code>. 要想跳转到某个标签, 就是用<code>goto 标签;</code>就可以了.</p>
+<p>比如看一下下面的内容:</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #9C6500">#include</span><span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">&lt;stdio.h&gt;</span>
+main(){
+<span style="color: #bbbbbb">    </span>printf(<span style="color: #BA2121">&quot;This is 1</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>);
+<span style="color: #bbbbbb">    </span>printf(<span style="color: #BA2121">&quot;This is 2</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>);
+<span style="color: #bbbbbb">    </span>printf(<span style="color: #BA2121">&quot;This is 3</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>);
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">goto</span><span style="color: #bbbbbb"> </span>nextpage;
+<span style="color: #bbbbbb">    </span>printf(<span style="color: #BA2121">&quot;This is 4</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>);
+<span style="color: #bbbbbb">    </span>printf(<span style="color: #BA2121">&quot;This is 5</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>);
+<span style="color: #bbbbbb">    </span>printf(<span style="color: #BA2121">&quot;This is 6</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>);
+<span style="color: #767600">nextpage</span>:<span style="color: #bbbbbb"> </span>
+<span style="color: #bbbbbb">    </span>printf(<span style="color: #BA2121">&quot;This is 7</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>);
+<span style="color: #bbbbbb">    </span>printf(<span style="color: #BA2121">&quot;This is 8</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>);
+<span style="color: #bbbbbb">    </span>printf(<span style="color: #BA2121">&quot;This is 9</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>);
+}
+</pre></div>
+
+<p>哦! 我们跳过了输出4, 5, 6, 直接输出了7, 8, 9. 这是一个非常好的工具. 这个标签在什么地方可以用呢? 只要在同一个&quot;花括号&quot;里面, 这个标志都是可以用的.</p>
+<p>但是我们可能更希望的是根据某个<strong>条件</strong>跳转. 就像我们曾经读过的说明书: 如果某指示灯亮了, 就参考某一节修复.</p>
+<p>这时候, 我们来引入条件判断语句. 它的格式是<code>if(条件) {满足时候执行的语句}</code>.</p>
+<p>我们下面来看几个有趣的小程序.</p>
+<p>我们来看第二个程序: 根据输入的红绿灯信息输入判断走或者停. 这时候, 我们就可以使用刚刚的<code>if</code>语句了.</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #9C6500">#include</span><span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">&lt;stdio.h&gt;</span>
+<span style="color: #9C6500">#include</span><span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">&quot;cs50.h&quot;</span>
+
+main(){
+<span style="color: #bbbbbb">    </span><span style="color: #B00040">char</span><span style="color: #bbbbbb"> </span>light<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #BA2121">&#39;?&#39;</span>;
+<span style="color: #bbbbbb">    </span>light<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>get_char(<span style="color: #BA2121">&quot;What is the light?&quot;</span>);
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">if</span>(light<span style="color: #bbbbbb"> </span><span style="color: #666666">==</span><span style="color: #bbbbbb"> </span><span style="color: #BA2121">&#39;r&#39;</span>){
+<span style="color: #bbbbbb">        </span>printf(<span style="color: #BA2121">&quot;Stop! </span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>);
+<span style="color: #bbbbbb">    </span>}
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">if</span>(light<span style="color: #bbbbbb"> </span><span style="color: #666666">==</span><span style="color: #bbbbbb"> </span><span style="color: #BA2121">&#39;g&#39;</span>){
+<span style="color: #bbbbbb">        </span>printf(<span style="color: #BA2121">&quot;Go! </span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>);
+<span style="color: #bbbbbb">    </span>}
+}
+</pre></div>
+
+<p>其中使用<code>==</code>表示逻辑上的判断相等, 而不是赋值.</p>
+<p>这时候如果我输入<code>G</code>或者<code>R</code>, 它就什么也没有了. 这是因为<code>g</code>和<code>G</code>, <code>r</code>和<code>R</code>在电脑的眼里看上去是不同的东西. 因此, 两个分支都没有走.</p>
+<p>我们希望修复一下这个问题. 一种方法是复制, 粘贴. 比如:</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #9C6500">#include</span><span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">&lt;stdio.h&gt;</span>
+<span style="color: #9C6500">#include</span><span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">&quot;cs50.h&quot;</span>
+
+main(){
+<span style="color: #bbbbbb">    </span><span style="color: #B00040">char</span><span style="color: #bbbbbb"> </span>light<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #BA2121">&#39;?&#39;</span>;
+<span style="color: #bbbbbb">    </span>light<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>get_char(<span style="color: #BA2121">&quot;What is the light?&quot;</span>);
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">if</span>(light<span style="color: #bbbbbb"> </span><span style="color: #666666">==</span><span style="color: #bbbbbb"> </span><span style="color: #BA2121">&#39;r&#39;</span>){
+<span style="color: #bbbbbb">        </span>printf(<span style="color: #BA2121">&quot;Stop! </span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>);
+<span style="color: #bbbbbb">    </span>}
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">if</span>(light<span style="color: #bbbbbb"> </span><span style="color: #666666">==</span><span style="color: #bbbbbb"> </span><span style="color: #BA2121">&#39;g&#39;</span>){
+<span style="color: #bbbbbb">        </span>printf(<span style="color: #BA2121">&quot;Go! </span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>);
+<span style="color: #bbbbbb">    </span>}
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">if</span>(light<span style="color: #bbbbbb"> </span><span style="color: #666666">==</span><span style="color: #bbbbbb"> </span><span style="color: #BA2121">&#39;R&#39;</span>){
+<span style="color: #bbbbbb">        </span>printf(<span style="color: #BA2121">&quot;Stop! </span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>);
+<span style="color: #bbbbbb">    </span>}
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">if</span>(light<span style="color: #bbbbbb"> </span><span style="color: #666666">==</span><span style="color: #bbbbbb"> </span><span style="color: #BA2121">&#39;G&#39;</span>){
+<span style="color: #bbbbbb">        </span>printf(<span style="color: #BA2121">&quot;Go! </span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>);
+<span style="color: #bbbbbb">    </span>}
+}
+</pre></div>
+
+<p>这样的编程方法是十分不可取的. 倒不是说电脑不能运行, 而是说这会给后续的维护带来巨大的麻烦. 比如, 我们希望把Stop换成Stop here, 就要改动两处. 如果项目发展, 复制的东西越来越多, 调bug就痛不欲生了 - 你需要不断的修改每一处你复制粘贴的代码, 一个没有改过来就会导致整个系统崩盘.</p>
+<p> \(\boxed{\color{red}注意}\)  每当你想写令人不适的代码的时候, 总是要想一想有没有更好的方法来做这件事. 有了这个思路了之后, 你在理解一些他人写的项目文件就会轻松许多了.</p>
+<p>我们更喜欢用逻辑表达式. 也就是用<code>||</code>表示或, <code>&amp;&amp;</code>表示与. 这样一来, 这段简洁的代码就写成了:</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">if</span>(light<span style="color: #bbbbbb"> </span><span style="color: #666666">==</span><span style="color: #bbbbbb"> </span><span style="color: #BA2121">&#39;r&#39;</span><span style="color: #bbbbbb"> </span><span style="color: #666666">||</span><span style="color: #bbbbbb"> </span>light<span style="color: #bbbbbb"> </span><span style="color: #666666">==</span><span style="color: #bbbbbb"> </span><span style="color: #BA2121">&#39;R&#39;</span>){
+<span style="color: #bbbbbb">        </span>printf(<span style="color: #BA2121">&quot;Stop! </span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>);
+<span style="color: #bbbbbb">    </span>}
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">if</span>(light<span style="color: #bbbbbb"> </span><span style="color: #666666">==</span><span style="color: #bbbbbb"> </span><span style="color: #BA2121">&#39;g&#39;</span><span style="color: #bbbbbb"> </span><span style="color: #666666">||</span><span style="color: #bbbbbb"> </span>light<span style="color: #bbbbbb"> </span><span style="color: #666666">==</span><span style="color: #bbbbbb"> </span><span style="color: #BA2121">&#39;G&#39;</span>){
+<span style="color: #bbbbbb">        </span>printf(<span style="color: #BA2121">&quot;Go! </span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>);
+<span style="color: #bbbbbb">    </span>}
+</pre></div>
+
+<p>一个有趣的话题: 如果我们写出了这样的代码, 会怎样?</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #9C6500">#include</span><span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">&lt;stdio.h&gt;</span>
+main(){
+<span style="color: #767600">nextpage</span>:<span style="color: #bbbbbb"> </span>
+<span style="color: #bbbbbb">    </span>printf(<span style="color: #BA2121">&quot;This is 1</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>);
+<span style="color: #bbbbbb">    </span>printf(<span style="color: #BA2121">&quot;This is 2</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>);
+<span style="color: #bbbbbb">    </span>printf(<span style="color: #BA2121">&quot;This is 3</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>);
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">goto</span><span style="color: #bbbbbb"> </span>nextpage;
+<span style="color: #bbbbbb">    </span>printf(<span style="color: #BA2121">&quot;This is 4</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>);
+<span style="color: #bbbbbb">    </span>printf(<span style="color: #BA2121">&quot;This is 5</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>);
+<span style="color: #bbbbbb">    </span>printf(<span style="color: #BA2121">&quot;This is 6</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>);
+<span style="color: #bbbbbb">    </span>printf(<span style="color: #BA2121">&quot;This is 7</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>);
+<span style="color: #bbbbbb">    </span>printf(<span style="color: #BA2121">&quot;This is 8</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>);
+<span style="color: #bbbbbb">    </span>printf(<span style="color: #BA2121">&quot;This is 9</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>);
+}
+</pre></div>
+
+<p>现在, 如果你运行了这个程序, 你会看到程序会不停的输出1, 2, 3, 1, ... 永不停止. 这就是我们的循环了. 当然, 我们现在不是很希望这种事情发生.</p>
+<p>但是我们可以聪明地控制标签, 来帮助我们完成这件事: 比如我们希望计算从1加到100的和 \(\sum_{i=1}^{100} i\) . 除去使用等差数列的求和公式之外, 我们还可以使用如下的控制流来模拟我们在手算:</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #9C6500">#include</span><span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">&lt;stdio.h&gt;</span>
+main(){
+<span style="color: #bbbbbb">    </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>ans<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>;<span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">// The final answer</span>
+<span style="color: #bbbbbb">    </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>i<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>;<span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">// The looping i</span>
+<span style="color: #767600">sum_next</span>:
+<span style="color: #bbbbbb">    </span>ans<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>ans<span style="color: #bbbbbb"> </span><span style="color: #666666">+</span><span style="color: #bbbbbb"> </span>i;
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">if</span>(i<span style="color: #666666">&lt;100</span>)<span style="color: #bbbbbb"> </span>{i<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>i<span style="color: #666666">+1</span>;<span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">goto</span><span style="color: #bbbbbb"> </span>sum_next;}
+<span style="color: #bbbbbb">    </span>printf(<span style="color: #BA2121">&quot;The answer is %d</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>,<span style="color: #bbbbbb"> </span>ans);
+}
+</pre></div>
+
+<p>但这样很麻烦: 我们可以先用while改写他. while的语法是这样的: <code>while(条件){只要条件满足, 就一直执行这里面的} 不满足的时候跳出来</code>.</p>
+<p>用图表示出来就是这样的:</p>
+<p><img src="./FILES/c-intro-cn.md/img-20230718233452.png" alt="while-loop" /></p>
+<p>上面的程序就可被改写为:</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #9C6500">#include</span><span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">&lt;stdio.h&gt;</span>
+main(){
+<span style="color: #bbbbbb">    </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>ans<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>;<span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">// The final answer</span>
+<span style="color: #bbbbbb">    </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>i<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>;<span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">// (1) The looping i</span>
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">while</span>(i<span style="color: #666666">&lt;100</span>){<span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">// (2) The condition to continue looping</span>
+<span style="color: #bbbbbb">        </span>ans<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>ans<span style="color: #bbbbbb"> </span><span style="color: #666666">+</span><span style="color: #bbbbbb"> </span>i;
+<span style="color: #bbbbbb">        </span>i<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>i<span style="color: #666666">+1</span>;<span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">// (3) update the looping variable.</span>
+<span style="color: #bbbbbb">    </span>}
+<span style="color: #bbbbbb">    </span>printf(<span style="color: #BA2121">&quot;The answer is %d</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>,<span style="color: #bbbbbb"> </span>ans);
+}
+</pre></div>
+
+<p>随着我们写循环越来越多, 很多时候我们可能需要一个辅助变量, 比如这里的<code>i</code>. 在循环中, 很可能有一个判断条件指示循环要不要继续做下去. 执行完循环之后, 我们很可能要用更新辅助变量.</p>
+<p>我们有时候会在写完循环的逻辑之后忘记更新辅助变量. 想一想, 这里的(3)如果不写, 这个程序就会变成死循环, 并且表达的意思也是错的. 因此, 为了方便起见, 我们设计了一种更加不容易被忘记的<code>for</code>循环. 它的优点是把某一种循环做的更加集中了. for的语法也很简单: 就是<code>for( (1); (2); (3)){过程}</code>.</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #9C6500">#include</span><span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">&lt;stdio.h&gt;</span>
+main(){
+<span style="color: #bbbbbb">    </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>ans<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>;<span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">// The final answer</span>
+<span style="color: #bbbbbb">    </span><span style="color: #3D7B7B; font-style: italic">// int i = 1; // (1) The looping i</span>
+<span style="color: #bbbbbb">    </span><span style="color: #3D7B7B; font-style: italic">// while(i&lt;100){ // (2) The condition to continue looping</span>
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">for</span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>i<span style="color: #666666">=0</span>;<span style="color: #bbbbbb"> </span>i<span style="color: #666666">&lt;100</span>;<span style="color: #bbbbbb"> </span>i<span style="color: #666666">=</span>i<span style="color: #666666">+1</span>){
+<span style="color: #bbbbbb">        </span>ans<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>ans<span style="color: #bbbbbb"> </span><span style="color: #666666">+</span><span style="color: #bbbbbb"> </span>i;
+<span style="color: #bbbbbb">        </span><span style="color: #3D7B7B; font-style: italic">//i = i+1; // (3) update the looping variable.</span>
+<span style="color: #bbbbbb">    </span>}
+<span style="color: #bbbbbb">    </span>printf(<span style="color: #BA2121">&quot;The answer is %d</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>,<span style="color: #bbbbbb"> </span>ans);
+}
+</pre></div>
+
+<p>也就是把上面的都写在一起了. 果然是一个简单的发明! for给我们视觉上的感觉更简单明确了. 不想while, 有些东西都零散地在周围.</p>
+<p>有趣的是, for这三个空不一定是满的. 有时候我们可以用<code>for(;;)</code>表示它的(1), (2), (3)都是空的. 当然其中的一部分是空的也可以.</p>
+<p>那么, for和while哪个更高级呢? 其实他们各有各的好处. 一般而言, 如果是有明确的(1)(2)(3)这样的结构, for循环看上去更好看一些. 当然有时候循环可能也不总是很好这样写, 这时候就要用while了.</p>
+<p>除此之外, for和while给了我们额外的便利: 如果我们在某一个条件之后不想做这个循环了, 或者说想跳过当前循环, 再循环里面也有对应的暗号: <code>break</code>和<code>continue</code>. 它们的图示如下:</p>
+<p><img src="./FILES/c-intro-cn.md/img-20230718234614.png" alt="loop" /></p>
+<p>对于for而言也是一样的. 在这里就不再多说了.</p>
+<p>现在, 我们就可以用好的方法写Meow那个在Scratch里面的程序了:</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #9C6500">#include</span><span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">&lt;stdio.h&gt;</span>
+main(){
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">for</span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>i<span style="color: #666666">=0</span>;<span style="color: #bbbbbb"> </span>i<span style="color: #666666">&lt;3</span>;<span style="color: #bbbbbb"> </span>i<span style="color: #666666">++</span>){
+<span style="color: #bbbbbb">        </span>printf(<span style="color: #BA2121">&quot;Meow!</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121"> &quot;</span>);
+<span style="color: #bbbbbb">    </span>}
+}
+</pre></div>
+
+<p>我们记得, 我们当时专门为Meow做了一块特别的积木. 这里, 能不能有一个积木呢?</p>
+<p>当然可以! 我们把这个拆出来, 写成这样:</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #9C6500">#include</span><span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">&lt;stdio.h&gt;</span>
+main(){
+<span style="color: #bbbbbb">    </span>meow();
+}
+
+<span style="color: #B00040">void</span><span style="color: #bbbbbb"> </span>meow(){
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">for</span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>i<span style="color: #666666">=0</span>;<span style="color: #bbbbbb"> </span>i<span style="color: #666666">&lt;3</span>;<span style="color: #bbbbbb"> </span>i<span style="color: #666666">++</span>){
+<span style="color: #bbbbbb">        </span>printf(<span style="color: #BA2121">&quot;Meow!</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121"> &quot;</span>);
+<span style="color: #bbbbbb">    </span>}
+}
+</pre></div>
+
+<p>我们一点一点看:</p>
+<ul>
+<li>void 指示了运行完这块积木之后, 这块积木不会变成任何的值. (<code>void</code>是虚无的意思)</li>
+<li>meow后面的()表示了这里并不需要任何额外的输入就可以让这块积木运行.</li>
+</ul>
+<p>如果我们想控制它meow了几次呢? 可以这样做:</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #9C6500">#include</span><span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">&lt;stdio.h&gt;</span>
+main(){
+<span style="color: #bbbbbb">    </span>meow(<span style="color: #666666">3</span>);<span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">// (2) I have to tell him how many times</span>
+}
+
+<span style="color: #B00040">void</span><span style="color: #bbbbbb"> </span>meow(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>times){<span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">// (1) You have a input to work</span>
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">for</span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>i<span style="color: #666666">=0</span>;<span style="color: #bbbbbb"> </span>i<span style="color: #666666">&lt;</span>times;<span style="color: #bbbbbb"> </span>i<span style="color: #666666">++</span>){
+<span style="color: #bbbbbb">        </span>printf(<span style="color: #BA2121">&quot;Meow!</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121"> &quot;</span>);
+<span style="color: #bbbbbb">    </span>}
+}
+</pre></div>
+
+<p>哦, 这一次, 我们需要一个输入 - Meow几次 - 来让这块积木正常运行. 那么, 上面我在使用这块积木的时候, 也要告诉他一个整数.</p>
+<p>当然, 有时候我们会把一些计算过程打包过来, 并且把它赋值给一个变量. 比如计算超市的减价程序:</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span>main(){
+<span style="color: #bbbbbb">    </span><span style="color: #B00040">float</span><span style="color: #bbbbbb"> </span>regular<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>get_float(<span style="color: #BA2121">&quot;Regular price: &quot;</span>);
+<span style="color: #bbbbbb">    </span><span style="color: #B00040">float</span><span style="color: #bbbbbb"> </span>sale<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>regular<span style="color: #bbbbbb"> </span><span style="color: #666666">*</span><span style="color: #bbbbbb"> </span><span style="color: #666666">0.8</span>;
+<span style="color: #bbbbbb">    </span>printf(<span style="color: #BA2121">&quot;Sale price: %.2f&quot;</span>,<span style="color: #bbbbbb"> </span>sale);
+}
+</pre></div>
+
+<p>可以这样把<code>regular*0.8</code>提取出来:</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span>main(){
+<span style="color: #bbbbbb">    </span><span style="color: #B00040">float</span><span style="color: #bbbbbb"> </span>regular<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>get_float(<span style="color: #BA2121">&quot;Regular price: &quot;</span>);
+<span style="color: #bbbbbb">    </span><span style="color: #B00040">float</span><span style="color: #bbbbbb"> </span>sale<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>discount(regular);
+<span style="color: #bbbbbb">    </span>printf(<span style="color: #BA2121">&quot;Sale price: %.2f&quot;</span>,<span style="color: #bbbbbb"> </span>sale);
+}
+
+<span style="color: #B00040">float</span><span style="color: #bbbbbb"> </span>discount(<span style="color: #B00040">float</span><span style="color: #bbbbbb"> </span>price){
+<span style="color: #bbbbbb">    </span><span style="color: #B00040">float</span><span style="color: #bbbbbb"> </span>sale<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>price;
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">return</span><span style="color: #bbbbbb"> </span>sale;
+}
+</pre></div>
+
+<p>电脑看到之后, 就首先会执行<code>discount</code>, 并且把<code>discount(regular)</code>这一串替换为return的值. 并且不再继续执行这块个积木.</p>
+<p>好, 我们来用Python Tutor看一看. 这里, 我么为了保证没有不确定的输入, 我们随便给regular一个值:</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #B00040">float</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">discount</span>(<span style="color: #B00040">float</span><span style="color: #bbbbbb"> </span>price){
+<span style="color: #bbbbbb">    </span><span style="color: #B00040">float</span><span style="color: #bbbbbb"> </span>sale<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>price;
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">return</span><span style="color: #bbbbbb"> </span>sale;
+}
+
+main(){
+<span style="color: #bbbbbb">    </span><span style="color: #B00040">float</span><span style="color: #bbbbbb"> </span>regular<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">100.0</span>;
+<span style="color: #bbbbbb">    </span><span style="color: #B00040">float</span><span style="color: #bbbbbb"> </span>sale<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>discount(regular);
+<span style="color: #bbbbbb">    </span>printf(<span style="color: #BA2121">&quot;Sale price: %.2f&quot;</span>,<span style="color: #bbbbbb"> </span>sale);
+}
+</pre></div>
+
+<h2><code>main</code>也是一块积木</h2>
+<p>我们可能没有想到, 其实main也是一个普普通通的积木. 我们刚刚没有写的原因是编译器可以帮助我. 编译器的一个警报告诉我它默认返回了<code>int</code>.</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #666666">6:1:</span><span style="color: #bbbbbb"> </span>warning<span style="color: #666666">:</span><span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">return</span><span style="color: #bbbbbb"> </span>type<span style="color: #bbbbbb"> </span>defaults<span style="color: #bbbbbb"> </span>to<span style="color: #bbbbbb"> </span><span style="color: #BA2121">&#39;int&#39;</span><span style="color: #bbbbbb"> </span><span style="color: #666666">[-</span>Wimplicit<span style="color: #666666">-</span>int<span style="color: #666666">]</span>
+<span style="color: #bbbbbb">    </span><span style="color: #666666">6</span><span style="color: #bbbbbb"> </span><span style="color: #666666">|</span><span style="color: #bbbbbb"> </span>main<span style="color: #666666">(){</span>
+<span style="color: #bbbbbb">      </span><span style="color: #666666">|</span><span style="color: #bbbbbb"> </span><span style="color: #666666">^~~~</span>
+<span style="color: #bbbbbb"> </span>In<span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">function</span><span style="color: #bbbbbb"> </span><span style="color: #BA2121">&#39;main&#39;</span><span style="color: #666666">:</span>
+</pre></div>
+
+<p>那<code>main</code>函数返回<code>int</code>干啥呢? 其实, 这是一个约定, 为了指示程序执行过程中有没有错误. 如果程序执行正常无误, 那么他就应该返回0. 否则, 返回非0的数就可以说明程序在某些地方存在漏洞.</p>
+<p>如果你恰好使用命令行, 有时候会出现右侧红色箭头的东西. 这就指示了上一个程序是以某种错误的状态退出的. 比如下图中, 它没有找到<code>llsa</code>这个程序, 因此返回了127.</p>
+<p><img src="./FILES/c-intro-cn.md/img-20230719001015.png" alt="no-found" /></p>
+<p>$$
+-\mathscr {E}\text{nd of the note}-
+$$</p>
+
+    </div>
+
+   
+   
+   
+    <hr>
+
+
+
+
+
+
+    <div id="disqus_thread"></div>
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script>
+        /**
+        *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+        *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+        
+        // var disqus_config = function () {
+        // this.page.url = ;  // Replace PAGE_URL with your page's canonical URL variable
+        // this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        // };
+        
+        (function() { // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        s.src = 'https://augpath.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <script id="dsq-count-scr" src="//augpath.disqus.com/count.js" async></script>
+  </body>
+</html>
