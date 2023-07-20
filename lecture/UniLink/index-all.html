@@ -108,60 +108,67 @@ async function copyCode(block) {
     <div class="navbar">
         <a href="https://shzaiz.github.io">AUG's Wiki</a>
         <a href="index.html"> ↑ Back to contents</a>
-        Last updated at 2023-07-21 00:47:19.602684
+        Last updated at 2023-07-21 00:47:20.107927
     </div>
 
     <div class="toc"></div>
     <a id="toc-button"><i class="far fa-bookmark"></i></a>
     
     <div>
-      <h1>刚体的定轴转动</h1>
-<p><img src="https://s2.loli.net/2023/05/14/AaXbCvdj7kBLPmZ.png" alt="Img" /></p>
-<p>关键点注意:</p>
+      <title>中学与大学</title>
+<p>$$
+\Huge \textbf{中学与大学}
+$$
+$$
+\large \textbf{一个计算机专业学生的视角}
+$$
+$$
+\text{The Great Learning: A CS student&#x27;s perspective}
+$$</p>
+<h1>动机和目的</h1>
+<p>这份内容旨在帮助想要报考计算机专业的学生. 希望通过这一系列内容能够让大家对于计算机科学做一些简单的了解, 并且尝试使用正确的方法做一些很有趣的事情.</p>
+<p>$$
+\boxed{正在构造中. 可能需要一些时间.}
+$$</p>
+<h1>主题</h1>
 <ul>
-<li>角度量与线量:
+<li><code>INTR0</code> 从游戏到电脑软件</li>
+<li><code>INTR1</code> 说明 使用计算机解答高考题 | <a href="notes/introcn">CN</a> <del>EN</del></li>
+<li><code>TPC00</code> 使用搜索引擎 | <a href="notes/searchingcn">CN</a> <a href="notes/searching">EN</a></li>
+<li><code>PRAC1</code> 练习: 安装Linux To Go到U盘 | <a href="notes/linux-to-go">CN</a> <del>EN</del></li>
+<li><code>TPC01</code> 图形化界面与命令行 | <a href="notes/command-linecn">CN</a> <a href="notes/command-line">EN</a></li>
+<li><code>TPC02</code> 用 &quot;逻辑&quot; 说话 | <a href="notes/logiccn">CN</a> <a href="notes/logic">EN</a></li>
+<li><code>TPC3A</code> &quot;机器&quot; 与 &quot;机械化&quot;(Scratch) | <a href="notes/machine">EN</a></li>
+<li><code>TPC3B</code> C语言介绍 | <a href="notes/c-intro-cn">CN</a></li>
+<li><code>TPC3C</code> C中的数组</li>
+<li><code>TPC3D</code> 用C描述算法</li>
+<li><code>TPC3E</code> 用C描述数据结构</li>
+<li><code>TPC04</code> 使用Python</li>
+</ul>
+<p>讨论群(QQ): 856079423 (<code>「去高考化」讨论小组</code>)</p>
+<h1>参考资料</h1>
+<ol>
+<li>MIT Missing Semester系列
 <ul>
-<li> \(\theta, \omega=d\theta/dt, \beta=d\omega/dt\) 和匀加速直线运动的情形相同.</li>
-<li> \(v=\omega r\) </li>
-<li> \(a_切=\beta r_i, a_法=\omega^2 r\)  (考虑高中的加速度)</li>
+<li><a href="https://missing.csail.mit.edu/license/">课程网站</a></li>
+<li><a href="licence/ccby4.0">许可证 CC BY-NC-SA</a></li>
 </ul>
 </li>
-</ul>
-<p><img src="./FILES/rotation.md/img-20230514220528.png" alt="Img" /></p>
+<li>Havard CS50x
 <ul>
-<li>关键注意:</li>
-<li>转动与Newton的第二定律的关系
-<ul>
-<li> \(M=J\beta\) :  \(M\) 合外力矩(力矩: 力的方向与施力点到支点的距离的叉乘);  \(J\) 是转动惯量.</li>
+<li><a href="https://cs50.harvard.edu/x/2023/">课程网站</a></li>
+<li><a href="licence/ccby4.0">许可证 CC BY-NC-SA</a></li>
 </ul>
 </li>
-</ul>
-<p><img src="./FILES/rotation.md/img-20230514220810.png" alt="Img" /></p>
-<p>注意</p>
+<li>南京大学《问题求解》
 <ul>
-<li>点元的选取: 设任意的一个点 \(x\) , 然后看考虑 \(dx\) 一段的情况.</li>
-<li>圆环面的选取: 设其面元为 \(2\pi r dr\) .</li>
+<li><a href="http://cslabcms.nju.edu.cn/problem_solving/index.php/2022%E7%BA%A7--%E5%AD%A6%E6%9C%9F%E5%AE%89%E6%8E%92_(%E7%AC%AC%E4%B8%80%E5%AD%A6%E6%9C%9F)">课程网站</a></li>
+<li><a href="https://creativecommons.org/licenses/by-sa/3.0/">许可证: CC BY-SA</a></li>
 </ul>
-<p><img src="./FILES/rotation.md/img-20230514221014.png" alt="Img" /></p>
-<p>注意:</p>
-<ul>
-<li>牛顿第二定律: 合外力 = 质量  \(\times\)  加速度</li>
-<li>定轴转动定律: 合外力矩 = 转动惯量  \(\times\)  角加速度 =  \(\vec力\)   \(\times\)   \(AO\) .</li>
-<li> \(a_绳=a_{轮切}\) .</li>
-</ul>
-<p><img src="./FILES/rotation.md/img-20230514221252.png" alt="Img" /></p>
-<p><img src="./FILES/rotation.md/img-20230514221303.png" alt="Img" /></p>
-<p><img src="./FILES/rotation.md/img-20230514221316.png" alt="Img" /></p>
-<p><img src="./FILES/rotation.md/img-20230514221336.png" alt="Img" /></p>
-<p>注意:</p>
-<ul>
-<li>外力矩的动能定理:  \(A_外=\frac12J\omega_末^2-\frac12J\omega_初^2\) </li>
-</ul>
-<p><img src="./FILES/rotation.md/img-20230514221507.png" alt="Img" /></p>
-<p><img src="./FILES/rotation.md/img-20230514221528.png" alt="Img" /></p>
-<ul>
-<li>刚体的角动量守恒:  \(L = J\omega\) </li>
-</ul>
+</li>
+</ol>
+<h1>许可</h1>
+<p>本页面的所有内容遵循<a href="licence/ccby4.0">CC BY-NC-SA 4.0</a>的原则.</p>
 
     </div>
 
