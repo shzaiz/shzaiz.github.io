@@ -108,135 +108,28 @@ async function copyCode(block) {
     <div class="navbar">
         <a href="https://shzaiz.github.io">AUG's Wiki</a>
         <a href="index.html"> ↑ Back to contents</a>
-        Last updated at 2023-07-21 23:53:53.759600
+        Last updated at 2023-07-21 23:53:54.226356
     </div>
 
     <div class="toc"></div>
     <a id="toc-button"><i class="far fa-bookmark"></i></a>
     
     <div>
-      <title>答题界面</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-    }
-
-    .question {
-      margin-bottom: 10px;
-    }
-
-    .result {
-      font-weight: bold;
-      margin-top: 5px;
-    }
-
-    .correct {
-      color: green;
-    }
-
-    .incorrect {
-      color: red;
-    }
-  </style>
-  <script>
-    var questions = [
-      {
-        question: "(Single Choice)19世纪的三大科学发现是马克思主义产生的自然科学前提，它们是：\n·       A. 原子学说、细胞学说、生物进化论\n·       B. 细胞学说、能量守恒与转化定律、生物进化论\n·       C. 细胞学说、遗传定律、生物进化论\n·       D. 原子学说、能量守恒与转化定律、电磁学说",
-        answer: "B"
-      },
-      {
-        question: "(Single Choice)马克思一生的两个伟大发现是：\n·       A. 物质观和实践观\n·       B. 唯物主义和辩证法\n·       C. 唯物史观和剩余价值学说\n·       D. 辩证唯物主义和历史唯物主义",
-        answer: "C"
-      },
-      {
-        question: "(Single Choice)马克思主义的基本立场是：\n·       A. 以人民为中心\n·       B. 以无产阶级为中心\n·       C. 以工人为中心\n·       D. 以无产阶级政党为中心",
-        answer: "A"
-      },
-      {
-        question: "(Single Choice)马克思主义中国化时代化的最新理论成果是：\n·       A. 邓小平理论\n·       B. “三个代表”重要思想\n·       C. 科学发展观\n·       D. 习近平新时代中国特色社会主义思想",
-        answer: "D"
-      },
-      {
-        question: "(Single Choice)马克思主义的人民性、实践性和发展性集中体现为：\n·       A. 科学性\n·       B. 革命性\n·       C. 客观性\n·       D. 能动性",
-        answer: "B"
-      },
-      {
-        question: "(Single Choice)马克思主义的学风是：\n·       A. 理论学习\n·       B. 实践锻炼\n·       C. 理论联系实际\n·       D. 勤奋努力",
-        answer: "C"
-      }
-    ];
-
-    var currentQuestionIndex = 0;
-    var correctCount = 0;
-
-    function showQuestion() {
-      var question = questions[currentQuestionIndex];
-
-      // 显示问题
-      var questionElement = document.getElementById("question");
-      questionElement.innerText = question.question;
-
-      // 清空答案输入
-      var answerElement = document.getElementById("answer");
-      answerElement.value = "";
-
-      // 隐藏结果信息
-      var resultElement = document.getElementById("result");
-      resultElement.innerText = "";
-
-      // 更新题号
-      var questionNumberElement = document.getElementById("questionNumber");
-      questionNumberElement.innerText = "Question " + (currentQuestionIndex + 1) + " of " + questions.length;
-    }
-
-    function checkAnswer() {
-      var question = questions[currentQuestionIndex];
-      var answerElement = document.getElementById("answer");
-      var userAnswer = answerElement.value.trim().toUpperCase();
-
-      // 检查答案
-      var resultElement = document.getElementById("result");
-      if (userAnswer === question.answer) {
-        resultElement.innerText = "Correct!";
-        resultElement.className = "correct";
-        correctCount++;
-      } else {
-        resultElement.innerText = "Incorrect!";
-        resultElement.className = "incorrect";
-      }
-
-      // 计算并显示正确率
-      var accuracy = (correctCount / (currentQuestionIndex + 1)) * 100;
-      var accuracyElement = document.getElementById("accuracy");
-      accuracyElement.innerText = "Correct Rate: " + accuracy.toFixed(1) + "%";
-
-      // 判断是否答完所有题目
-      if (currentQuestionIndex === questions.length - 1) {
-        answerElement.disabled = true;
-        answerElement.value = "";
-        document.getElementById("submitButton").disabled = true;
-      } else {
-        currentQuestionIndex++;
-        showQuestion();
-      }
-    }
-
-    // 初始化显示第一道题目
-    showQuestion();
-  </script>
-</head>
-<body>
-  <h1>答题界面</h1>
-  <div class="question">
-    <p id="question"></p>
-    <input type="text" id="answer" placeholder="请输入你的答案">
-    <button id="submitButton" onclick="checkAnswer()">提交</button>
-    <p id="result"></p>
-    <p id="questionNumber"></p>
-    <p id="accuracy"></p>
-  </div>
-</body>
-</html>
+      <title>C数组</title>
+<p>$$
+\Huge \textbf{C中的数组}
+$$</p>
+<p>$$
+\boxed{ \overbrace{\textit{degaokaolization}}^{\small{去高考化}} \text{ Discussion Group | Topic 03C}}
+$$</p>
+<h1>回顾</h1>
+<p>在上面的内容中, 我们知道了如何对于若干个变量做各种各样的操作, 并且运用控制流使得他们做各种不同的事情. 此外, 我们还模块化了一些东西, 让我们可以轻松地调用.</p>
+<p>但是, 在上一节介绍的内容说完之后, 我们发现一个小问题: 似乎我们连排序成绩这么简单的事情还做不到! 具体地, 我们希望一次就申请<strong>一系列</strong>的变量, 用下标区分:  \(a_0,a_1,\cdots a_n\) . 并且能方便地索引它. 这就需要引入数组的概念.</p>
+<h1>空间的使用</h1>
+<p>事实上,</p>
+<p>$$
+-\mathscr {E}\text{nd of the note}-
+$$</p>
 
     </div>
 
