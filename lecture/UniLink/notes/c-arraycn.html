@@ -108,7 +108,7 @@ async function copyCode(block) {
     <div class="navbar">
         <a href="https://shzaiz.github.io">AUG's Wiki</a>
         <a href="index.html"> ↑ Back to contents</a>
-        Last updated at 2023-07-22 21:49:52.103218
+        Last updated at 2023-07-22 23:49:11.349301
     </div>
 
     <div class="toc"></div>
@@ -124,9 +124,65 @@ $$</p>
 $$</p>
 <h1>回顾</h1>
 <p>在上面的内容中, 我们知道了如何对于若干个变量做各种各样的操作, 并且运用控制流使得他们做各种不同的事情. 此外, 我们还模块化了一些东西, 让我们可以轻松地调用.</p>
+<p>了解了上面的内容之后, 我们就知道了<code>#include &quot;cs50.h&quot;</code>到底做了什么. 打开那份文件, 你会看到许许多多的函数声明, 每一个函数都实现了我们上次展示的功能. 但是你会发现, 有一些新奇的用法: 比如<code>#define</code>这些用<code>#</code>打头的指令, 以及奇怪的<code>*</code>. 不要担心. 我们在下一次就会遇到他们.</p>
+<p>我们来看我们最开始的例子:</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #3D7B7B; font-style: italic">// Greeting.c</span>
+<span style="color: #9C6500">#include</span><span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">&lt;stdio.h&gt;</span>
+<span style="color: #9C6500">#include</span><span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">&quot;cs50.h&quot;</span>
+
+<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">main</span>(){
+<span style="color: #bbbbbb">    </span>string<span style="color: #bbbbbb"> </span>name<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>get_string(<span style="color: #BA2121">&quot;What&#39;s your name&quot;</span>);
+<span style="color: #bbbbbb">    </span>printf(<span style="color: #BA2121">&quot;Hello, %s&quot;</span>,<span style="color: #bbbbbb"> </span>name);
+}
+</pre></div>
+
+<p>其实我们第一次遇到的神秘指令无非就是一些函数调用. 在预处理器处理完这一群东西之后, 源文件就会变成这样:</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span>...(Omitted)
+string<span style="color: #bbbbbb"> </span>get_string(string<span style="color: #bbbbbb"> </span>prompt);
+<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">printf</span>(string<span style="color: #bbbbbb"> </span>format,<span style="color: #bbbbbb"> </span>...);
+...(Omitted)
+
+<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>main(){
+<span style="color: #bbbbbb">    </span>string<span style="color: #bbbbbb"> </span>name<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>get_string(<span style="color: #BA2121">&quot;What&#39;s your name&quot;</span>);
+<span style="color: #bbbbbb">    </span>printf(<span style="color: #BA2121">&quot;Hello, %s&quot;</span>,<span style="color: #bbbbbb"> </span>name);
+}
+</pre></div>
+
+<p>接下来, 编译的过程就会进行, 把它带到更低一层的汇编指令, 就像这样:</p>
+<p><img src="./FILES/c-arraycn.md/img-20230722233342.png" alt="asm" /></p>
+<p>不过这个内容我们现在不必担心. 因为这是计算机专业在之后会了解的一个有趣的内容. 大多数时候, 不理解这个也不影响太多 - 毕竟这个更贴切与计算机自己理解东西的视角. 当编译器和高级语言没有被发明出来的时候, 人们就要用这样的方式操作电脑. 想想就非常的难以置信! 但是, 有些代码可能会被编译器经过一些很蠢的优化降低了性能, 那个时候, 可能也要像这样追求程序的效率了.</p>
+<p>既然这个都已经摆在大家的面前了, 我们来实际看一下: 其中它也按照我们的要求用<code>bl</code>进行了函数的调用, 并且他们前面的<code>add</code>, <code>ldr</code>这一类的就是对于那些最小的单元们做的.</p>
+<h1>调试程序</h1>
+<p>在我们的程序变复杂之前, 我们最好要了解一下调试: 毕竟, 程序变得复杂之后, 我们就很难用脑力追踪程序运行一条之后, 里面的各个变化了. 所以, 我们自然有调试工具帮助我们!</p>
+<h2>第一层防线: 编译器</h2>
+<p>看下面的一段程序:</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #9C6500">#include</span><span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">&lt;stdio.h&gt;</span>
+
+<span style="color: #3D7B7B; font-style: italic">/*</span>
+<span style="color: #3D7B7B; font-style: italic">Goal: Print a 3*3 square</span>
+<span style="color: #3D7B7B; font-style: italic">*/</span>
+
+<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">main</span>(){
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">for</span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>i<span style="color: #666666">=0</span>;<span style="color: #bbbbbb"> </span>i<span style="color: #666666">&lt;=3</span>;<span style="color: #bbbbbb"> </span>i<span style="color: #666666">++</span>){
+<span style="color: #bbbbbb">        </span><span style="color: #008000; font-weight: bold">for</span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>j<span style="color: #666666">=0</span>;<span style="color: #bbbbbb"> </span>j<span style="color: #666666">&lt;=3</span>;<span style="color: #bbbbbb"> </span>j<span style="color: #666666">++</span>){
+<span style="color: #bbbbbb">            </span>printf(<span style="color: #BA2121">&quot;#&quot;</span>)
+<span style="color: #bbbbbb">        </span>}
+<span style="color: #bbbbbb">    </span>}
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">return</span><span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>;
+}
+</pre></div>
+
+<p>首先我们来编译一下, 发现编译器开始报错了 -</p>
+<p><img src="./FILES/c-arraycn.md/img-20230722234514.png" alt="wrong info" /></p>
+<p>如果你配置好了编辑器的话, 把鼠标移到上面就会有这样的提示:</p>
+<p><img src="./FILES/c-arraycn.md/img-20230722234547.png" alt="wrong info in vscode" /></p>
+<p>嗯, 这样子你就需要在后面加上一个分号了. 因为这个是我们C里面的规定.</p>
+<h2>然后是运行</h2>
+<p>过了编译器, 接下来就是运行时看看是不是符合我们的预期了.</p>
+<h1>申请一系列的空间</h1>
 <p>但是, 在上一节介绍的内容说完之后, 我们发现一个小问题: 似乎我们连排序成绩这么简单的事情还做不到! 具体地, 我们希望一次就申请<strong>一系列</strong>的变量, 用下标区分:  \(a_0,a_1,\cdots a_n\) . 并且能方便地索引它. 这就需要引入数组的概念.</p>
 <h1>空间的使用</h1>
-<p>事实上,</p>
+<p>事实上, 我们每一次声明的变量,</p>
 <p>$$
 -\mathscr {E}\text{nd of the note}-
 $$</p>

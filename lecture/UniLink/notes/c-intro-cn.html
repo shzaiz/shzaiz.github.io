@@ -108,7 +108,7 @@ async function copyCode(block) {
     <div class="navbar">
         <a href="https://shzaiz.github.io">AUG's Wiki</a>
         <a href="index.html"> ↑ Back to contents</a>
-        Last updated at 2023-07-22 21:49:52.102191
+        Last updated at 2023-07-22 23:49:11.346948
     </div>
 
     <div class="toc"></div>
@@ -435,6 +435,21 @@ main(){
 }
 </pre></div>
 
+<p>如果你把discount写在了main的下面, 编译器(准确的说在链接的时候)就会报错 - 因为它从上往下扫描的时候没有找到哪个是discount. 这时候我们需要在上面补充一个声明:</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #B00040">float</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">discount</span>(<span style="color: #B00040">float</span><span style="color: #bbbbbb"> </span>price);
+
+main(){
+<span style="color: #bbbbbb">    </span><span style="color: #B00040">float</span><span style="color: #bbbbbb"> </span>regular<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">100.0</span>;
+<span style="color: #bbbbbb">    </span><span style="color: #B00040">float</span><span style="color: #bbbbbb"> </span>sale<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>discount(regular);
+<span style="color: #bbbbbb">    </span>printf(<span style="color: #BA2121">&quot;Sale price: %.2f&quot;</span>,<span style="color: #bbbbbb"> </span>sale);
+}
+
+<span style="color: #B00040">float</span><span style="color: #bbbbbb"> </span>discount(<span style="color: #B00040">float</span><span style="color: #bbbbbb"> </span>price){
+<span style="color: #bbbbbb">    </span><span style="color: #B00040">float</span><span style="color: #bbbbbb"> </span>sale<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>price;
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">return</span><span style="color: #bbbbbb"> </span>sale;
+}
+</pre></div>
+
 <h2><code>main</code>也是一块积木</h2>
 <p>我们可能没有想到, 其实main也是一个普普通通的积木. 我们刚刚没有写的原因是编译器可以帮助我. 编译器的一个警报告诉我它默认返回了<code>int</code>.</p>
 <div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #666666">6:1:</span><span style="color: #bbbbbb"> </span>warning<span style="color: #666666">:</span><span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">return</span><span style="color: #bbbbbb"> </span>type<span style="color: #bbbbbb"> </span>defaults<span style="color: #bbbbbb"> </span>to<span style="color: #bbbbbb"> </span><span style="color: #BA2121">&#39;int&#39;</span><span style="color: #bbbbbb"> </span><span style="color: #666666">[-</span>Wimplicit<span style="color: #666666">-</span>int<span style="color: #666666">]</span>
@@ -444,6 +459,22 @@ main(){
 </pre></div>
 
 <p>那<code>main</code>函数返回<code>int</code>干啥呢? 其实, 这是一个约定, 为了指示程序执行过程中有没有错误. 如果程序执行正常无误, 那么他就应该返回0. 否则, 返回非0的数就可以说明程序在某些地方存在漏洞.</p>
+<p>所以, 我们在写一个程序的时候应该这样写, 才更加合乎情理:</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #B00040">float</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">discount</span>(<span style="color: #B00040">float</span><span style="color: #bbbbbb"> </span>price);
+
+<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">main</span>(){
+<span style="color: #bbbbbb">    </span><span style="color: #B00040">float</span><span style="color: #bbbbbb"> </span>regular<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">100.0</span>;
+<span style="color: #bbbbbb">    </span><span style="color: #B00040">float</span><span style="color: #bbbbbb"> </span>sale<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>discount(regular);
+<span style="color: #bbbbbb">    </span>printf(<span style="color: #BA2121">&quot;Sale price: %.2f&quot;</span>,<span style="color: #bbbbbb"> </span>sale);
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">return</span><span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>;
+}
+
+<span style="color: #B00040">float</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">discount</span>(<span style="color: #B00040">float</span><span style="color: #bbbbbb"> </span>price){
+<span style="color: #bbbbbb">    </span><span style="color: #B00040">float</span><span style="color: #bbbbbb"> </span>sale<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>price;
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">return</span><span style="color: #bbbbbb"> </span>sale;
+}
+</pre></div>
+
 <p>如果你恰好使用命令行, 有时候会出现右侧红色箭头的东西. 这就指示了上一个程序是以某种错误的状态退出的. 比如下图中, 它没有找到<code>llsa</code>这个程序, 因此返回了127.</p>
 <p><img src="./FILES/c-intro-cn.md/img-20230719001015.png" alt="no-found" /></p>
 <p>$$
