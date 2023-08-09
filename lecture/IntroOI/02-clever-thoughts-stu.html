@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <link rel="stylesheet" href="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/style.css">
+    <script src="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/plugin.js"></script> 
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
+ 
+    <script>
+const copyButtonLabel = "Copy Code";
+
+// use a class selector if available
+let blocks = document.querySelectorAll("pre");
+
+blocks.forEach((block) => {
+  // only add button if browser supports Clipboard API
+  if (navigator.clipboard) {
+    let button = document.createElement("button");
+
+    button.innerText = copyButtonLabel;
+    block.appendChild(button);
+
+    button.addEventListener("click", async () => {
+      await copyCode(block);
+    });
+  }
+});
+
+async function copyCode(block) {
+  let code = block.querySelector("code");
+  let text = code.innerText;
+
+  await navigator.clipboard.writeText(text);
+}
+    </script>
+      <style>
+        body {counter-reset:section;}
+        h1 {counter-reset:subsection;font-size:x-large;}
+        h2 {font-size: large;}
+        
+        h1:before {
+        counter-increment:section;
+        content:counter(section) ". ";
+            font-weight:bold;
+            font-size: x-large;
+        }
+        h2:before {
+        counter-increment:subsection;
+        content:counter(section) "." counter(subsection) " ";
+        font-size: large;
+        }
+        html, body {
+            margin: 8%;
+            font-family: "Times New Roman","SimSun", "STSong", "Songti SC",Times, serif;
+            font-size: 110%;
+        }
+        code {
+            font-family: 'Courier New', Courier, monospace;
+        } 
+
+        pre {
+            font-family: 'Courier New', Courier, monospace;
+        } 
+        div{
+            max-width: 100%;
+            overflow: auto;
+            
+        }
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+            position: fixed; /* Set the navbar to fixed position */
+            top: 0; /* Position the navbar at the top of the page */
+            width: 100%; /* Full width */
+        }
+
+        img {
+        max-width: 80%;
+        height: auto;
+        }
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        a {
+            color: #148bca;
+            text-align: center;
+            padding-left: 2px;
+            padding-right: 2px;
+            text-decoration: none;
+        }
+
+        p.hidden {
+          overflow: hidden;
+        }
+
+    </style>
+  </head>
+  <body>
+    
+    <div class="navbar">
+        <a href="https://shzaiz.github.io">AUG's Wiki</a>
+        <a href="index.html"> ↑ Back to contents</a>
+        Last updated at 2023-08-09 22:47:54.020776
+    </div>
+
+    <div class="toc"></div>
+    <a id="toc-button"><i class="far fa-bookmark"></i></a>
+    
+    <div>
+      <title>聪明的想法 I. </title>
+<p>$$
+\Huge \textbf{聪明的想法 I.}
+$$</p>
+<p>$$
+\boxed{\text{Intro-OI Lec. 2 by gwzhang, nydi}}
+$$</p>
+<h1>二分法</h1>
+<h2>基本模板</h2>
+<p>对于靠左侧的:</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #3D7B7B; font-style: italic">// Binary Search: </span>
+
+<span style="color: #3D7B7B; font-style: italic">// case 1:</span>
+<span style="color: #B00040">bool</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">findL</span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>l,<span style="color: #bbbbbb"> </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>r){
+<span style="color: #bbbbbb">	</span><span style="color: #008000; font-weight: bold">while</span>(l<span style="color: #666666">&lt;</span>r){
+<span style="color: #bbbbbb">        </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>mid<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>(l<span style="color: #666666">+</span>r<span style="color: #666666">+1</span>)<span style="color: #666666">/2</span>;
+<span style="color: #bbbbbb">        </span><span style="color: #008000; font-weight: bold">if</span>(check(mid)){
+<span style="color: #bbbbbb">            </span>l<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>mid;
+<span style="color: #bbbbbb">        </span>}<span style="color: #008000; font-weight: bold">else</span>{
+<span style="color: #bbbbbb">            </span>r<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>mid<span style="color: #666666">-1</span>;
+<span style="color: #bbbbbb">        </span>}
+<span style="color: #bbbbbb">    </span>}
+}
+
+<span style="color: #3D7B7B; font-style: italic">// case 2: </span>
+<span style="color: #B00040">bool</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">findR</span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>l,<span style="color: #bbbbbb"> </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>r){
+<span style="color: #bbbbbb">	</span><span style="color: #008000; font-weight: bold">while</span>(l<span style="color: #666666">&lt;</span>r){
+<span style="color: #bbbbbb">        </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>mid<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>(l<span style="color: #666666">+</span>r)<span style="color: #666666">/2</span>;
+<span style="color: #bbbbbb">        </span><span style="color: #008000; font-weight: bold">if</span>(check(mid)){
+<span style="color: #bbbbbb">            </span>l<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>mid;
+<span style="color: #bbbbbb">        </span>}<span style="color: #008000; font-weight: bold">else</span>{
+<span style="color: #bbbbbb">            </span>r<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>mid<span style="color: #666666">+1</span>;
+<span style="color: #bbbbbb">        </span>}
+<span style="color: #bbbbbb">    </span>}
+}
+</pre></div>
+
+<h2>P1182</h2>
+<p>Q1. 如何设计check函数?</p>
+<p>Q2. 二分的过程找的是哪个?</p>
+<p>Q3. L,R应该设置为多少?</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #3D7B7B; font-style: italic">// Buggy, why?</span>
+<span style="color: #9C6500">#include</span><span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">&lt;iostream&gt;</span>
+<span style="color: #008000; font-weight: bold">using</span><span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">namespace</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF; font-weight: bold">std</span>;
+<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>n,m,a[<span style="color: #666666">100005</span>],k,num;
+<span style="color: #B00040">bool</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">check</span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>a1){
+<span style="color: #bbbbbb">	</span>k<span style="color: #666666">=1</span>,num<span style="color: #666666">=0</span>;
+<span style="color: #bbbbbb">	</span><span style="color: #008000; font-weight: bold">for</span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>i<span style="color: #666666">=1</span>;i<span style="color: #666666">&lt;=</span>n;i<span style="color: #666666">++</span>){
+<span style="color: #bbbbbb">		</span><span style="color: #008000; font-weight: bold">if</span>(a[i]<span style="color: #666666">&gt;</span>a1)<span style="color: #008000; font-weight: bold">return</span><span style="color: #bbbbbb"> </span><span style="color: #008000">false</span>;
+<span style="color: #bbbbbb">       	</span><span style="color: #008000; font-weight: bold">if</span>(num<span style="color: #666666">&gt;</span>a1){
+<span style="color: #bbbbbb">			</span>k<span style="color: #666666">++</span>;
+<span style="color: #bbbbbb">			</span>num<span style="color: #666666">=</span>a[i<span style="color: #666666">-1</span>];
+<span style="color: #bbbbbb">		</span>}
+<span style="color: #bbbbbb">		</span>num<span style="color: #666666">+=</span>a[i];
+<span style="color: #bbbbbb">	</span>}
+<span style="color: #bbbbbb">	</span><span style="color: #008000; font-weight: bold">return</span><span style="color: #bbbbbb"> </span>k<span style="color: #666666">&lt;=</span>m;
+}
+<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">main</span>(){
+<span style="color: #bbbbbb">	</span>cin<span style="color: #666666">&gt;&gt;</span>n<span style="color: #666666">&gt;&gt;</span>m;
+<span style="color: #bbbbbb">	</span><span style="color: #008000; font-weight: bold">for</span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>i<span style="color: #666666">=1</span>;i<span style="color: #666666">&lt;=</span>n;i<span style="color: #666666">++</span>){
+<span style="color: #bbbbbb">		</span>cin<span style="color: #666666">&gt;&gt;</span>a[i];
+<span style="color: #bbbbbb">	</span>}
+<span style="color: #bbbbbb">	</span>
+<span style="color: #bbbbbb">	</span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>l<span style="color: #666666">=1</span>,<span style="color: #bbbbbb"> </span>r<span style="color: #666666">=100000000</span>;<span style="color: #bbbbbb"> </span>
+<span style="color: #bbbbbb">	</span><span style="color: #008000; font-weight: bold">while</span>(l<span style="color: #666666">&lt;</span>r){
+<span style="color: #bbbbbb">		</span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>mid<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>(l<span style="color: #666666">+</span>r)<span style="color: #666666">&gt;&gt;1</span>;
+<span style="color: #bbbbbb">		</span><span style="color: #008000; font-weight: bold">if</span>(check(mid))<span style="color: #bbbbbb"> </span>r<span style="color: #666666">=</span>mid;
+<span style="color: #bbbbbb">		</span><span style="color: #008000; font-weight: bold">else</span><span style="color: #bbbbbb"> </span>l<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>mid<span style="color: #666666">+1</span>;
+<span style="color: #bbbbbb">	</span>}
+<span style="color: #bbbbbb">	</span>cout<span style="color: #666666">&lt;&lt;</span>l<span style="color: #666666">&lt;&lt;</span>endl;
+<span style="color: #bbbbbb">	</span><span style="color: #008000; font-weight: bold">return</span><span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>;
+}
+</pre></div>
+
+<h2><a href="https://www.acwing.com/problem/content/791/">数的范围</a></h2>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">main</span>(){
+<span style="color: #bbbbbb">    </span>cin<span style="color: #666666">&gt;&gt;</span>n<span style="color: #666666">&gt;&gt;</span>q;
+<span style="color: #bbbbbb">    </span>F(i,<span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>,<span style="color: #bbbbbb"> </span>n)<span style="color: #bbbbbb"> </span>cin<span style="color: #666666">&gt;&gt;</span>a[i];
+<span style="color: #bbbbbb">    </span>F(i,<span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>,<span style="color: #bbbbbb"> </span>q){
+<span style="color: #bbbbbb">        </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>x;<span style="color: #bbbbbb"> </span>cin<span style="color: #666666">&gt;&gt;</span>x;
+<span style="color: #bbbbbb">        </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>l<span style="color: #666666">=1</span>,<span style="color: #bbbbbb"> </span>r<span style="color: #666666">=</span>n;
+<span style="color: #bbbbbb">        </span><span style="color: #008000; font-weight: bold">while</span>(l<span style="color: #666666">&lt;</span>r){
+<span style="color: #bbbbbb">            </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>mid<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>(l<span style="color: #666666">+</span>r)<span style="color: #666666">&gt;&gt;1</span>;
+<span style="color: #bbbbbb">            </span><span style="color: #008000; font-weight: bold">if</span>(a[mid]<span style="color: #666666">&gt;=</span>x)<span style="color: #bbbbbb"> </span>r<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>mid;
+<span style="color: #bbbbbb">            </span><span style="color: #008000; font-weight: bold">else</span><span style="color: #bbbbbb"> </span>l<span style="color: #666666">=</span>mid<span style="color: #666666">+1</span>;
+<span style="color: #bbbbbb">        </span>}
+<span style="color: #bbbbbb">        </span><span style="color: #008000; font-weight: bold">if</span>(a[l]<span style="color: #bbbbbb"> </span><span style="color: #666666">==</span><span style="color: #bbbbbb"> </span>x)<span style="color: #bbbbbb"> </span>cout<span style="color: #666666">&lt;&lt;</span>l<span style="color: #666666">-1&lt;&lt;</span><span style="color: #BA2121">&quot; &quot;</span>;
+<span style="color: #bbbbbb">        </span><span style="color: #008000; font-weight: bold">else</span><span style="color: #bbbbbb"> </span>{
+<span style="color: #bbbbbb">            </span>cout<span style="color: #666666">&lt;&lt;</span><span style="color: #BA2121">&quot;-1 -1</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>;<span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">continue</span>;
+<span style="color: #bbbbbb">        </span>}
+<span style="color: #bbbbbb">        </span>l<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>,<span style="color: #bbbbbb"> </span>r<span style="color: #666666">=</span>n;
+<span style="color: #bbbbbb">        </span><span style="color: #008000; font-weight: bold">while</span>(l<span style="color: #666666">&lt;</span>r){
+<span style="color: #bbbbbb">            </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>mid<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>(l<span style="color: #666666">+</span>r<span style="color: #666666">+1</span>)<span style="color: #666666">&gt;&gt;1</span>;
+<span style="color: #bbbbbb">            </span><span style="color: #008000; font-weight: bold">if</span>(a[mid]<span style="color: #666666">&lt;=</span>x)<span style="color: #bbbbbb"> </span>l<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>mid;
+<span style="color: #bbbbbb">            </span><span style="color: #008000; font-weight: bold">else</span><span style="color: #bbbbbb"> </span>r<span style="color: #666666">=</span>mid<span style="color: #666666">-1</span>;
+<span style="color: #bbbbbb">        </span>}
+<span style="color: #bbbbbb">        </span>cout<span style="color: #666666">&lt;&lt;</span>l<span style="color: #666666">-1&lt;&lt;</span><span style="color: #BA2121">&#39; &#39;</span><span style="color: #666666">&lt;&lt;</span>endl;
+<span style="color: #bbbbbb">    </span>}
+}
+</pre></div>
+
+<h2>P1163</h2>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #B00040">double</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">calc</span>(<span style="color: #B00040">double</span><span style="color: #bbbbbb"> </span>p){
+<span style="color: #bbbbbb">    </span><span style="color: #B00040">double</span><span style="color: #bbbbbb"> </span>ans<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>,<span style="color: #bbbbbb"> </span>res<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">1.0+</span>p;
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">for</span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>i<span style="color: #666666">=1</span>;<span style="color: #bbbbbb"> </span>i<span style="color: #666666">&lt;=</span>k;<span style="color: #bbbbbb"> </span>i<span style="color: #666666">++</span>){
+<span style="color: #bbbbbb">        </span>ans<span style="color: #bbbbbb"> </span><span style="color: #666666">+=</span><span style="color: #bbbbbb"> </span>m<span style="color: #666666">/</span>res;
+<span style="color: #bbbbbb">        </span>res<span style="color: #bbbbbb"> </span><span style="color: #666666">*=</span><span style="color: #bbbbbb"> </span>(<span style="color: #666666">1.0+</span>p);
+<span style="color: #bbbbbb">    </span>}
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">return</span><span style="color: #bbbbbb"> </span>ans;
+}
+
+<span style="color: #B00040">double</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">query</span>(<span style="color: #B00040">double</span><span style="color: #bbbbbb"> </span>le,<span style="color: #bbbbbb"> </span><span style="color: #B00040">double</span><span style="color: #bbbbbb"> </span>ri){
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">for</span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>i<span style="color: #666666">=0</span>;<span style="color: #bbbbbb"> </span>i<span style="color: #666666">&lt;10000</span>;<span style="color: #bbbbbb"> </span>i<span style="color: #666666">++</span>){
+<span style="color: #bbbbbb">        </span><span style="color: #B00040">double</span><span style="color: #bbbbbb"> </span>mid<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>(le<span style="color: #666666">+</span>ri)<span style="color: #666666">/2</span>
+<span style="color: #bbbbbb">        </span><span style="color: #B00040">double</span><span style="color: #bbbbbb"> </span>hm<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>calc(mid<span style="color: #bbbbbb"> </span><span style="color: #666666">*</span><span style="color: #bbbbbb"> </span><span style="color: #666666">0.01</span>);
+<span style="color: #bbbbbb">        </span><span style="color: #008000; font-weight: bold">if</span>(hm<span style="color: #bbbbbb"> </span><span style="color: #666666">&lt;</span><span style="color: #bbbbbb"> </span>(<span style="color: #B00040">double</span>)n){
+<span style="color: #bbbbbb">            </span>ri<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>mid;
+<span style="color: #bbbbbb">        </span>}<span style="color: #008000; font-weight: bold">else</span><span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">if</span>(hm<span style="color: #bbbbbb"> </span><span style="color: #666666">&gt;</span><span style="color: #bbbbbb"> </span>(<span style="color: #B00040">double</span>)n){
+<span style="color: #bbbbbb">            </span>le<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>mid;
+<span style="color: #bbbbbb">        </span>}<span style="color: #008000; font-weight: bold">else</span>{
+<span style="color: #bbbbbb">            </span><span style="color: #008000; font-weight: bold">return</span><span style="color: #bbbbbb"> </span>mid;
+<span style="color: #bbbbbb">        </span>}
+<span style="color: #bbbbbb">    </span>}
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">return</span><span style="color: #bbbbbb"> </span>mid;
+}
+</pre></div>
+
+<h2>P1676 Aggressive Cows G</h2>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">main</span>(){
+<span style="color: #bbbbbb">    </span>scanf(<span style="color: #BA2121">&quot;%d%d&quot;</span>,<span style="color: #666666">&amp;</span>n,<span style="color: #666666">&amp;</span>m);
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">for</span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>i<span style="color: #666666">=1</span>;i<span style="color: #666666">&lt;=</span>n;i<span style="color: #666666">++</span>)
+<span style="color: #bbbbbb">        </span>scanf(<span style="color: #BA2121">&quot;%d&quot;</span>,<span style="color: #666666">&amp;</span>a[i]);
+<span style="color: #bbbbbb">    </span>sort(a<span style="color: #666666">+1</span>,a<span style="color: #666666">+</span>n<span style="color: #666666">+1</span>);
+<span style="color: #bbbbbb">    </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>l<span style="color: #666666">=0</span>,r<span style="color: #666666">=</span>inf,now,tot;
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">while</span>(l<span style="color: #666666">&lt;</span>r){
+<span style="color: #bbbbbb">        </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>mid<span style="color: #666666">=</span>(l<span style="color: #666666">+</span>r<span style="color: #666666">+1</span>)<span style="color: #666666">&gt;&gt;1</span>;
+<span style="color: #bbbbbb">        </span>now<span style="color: #666666">=</span>a[<span style="color: #666666">1</span>];
+<span style="color: #bbbbbb">        </span>tot<span style="color: #666666">=1</span>;
+<span style="color: #bbbbbb">        </span><span style="color: #008000; font-weight: bold">for</span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>i<span style="color: #666666">=2</span>;i<span style="color: #666666">&lt;=</span>n;<span style="color: #666666">++</span>i){
+<span style="color: #bbbbbb">            </span><span style="color: #008000; font-weight: bold">if</span>(a[i]<span style="color: #666666">-</span>now<span style="color: #666666">&gt;=</span>mid){now<span style="color: #666666">=</span>a[i],<span style="color: #666666">++</span>tot;}
+<span style="color: #bbbbbb">            </span><span style="color: #008000; font-weight: bold">if</span>(tot<span style="color: #666666">&gt;=</span>m)<span style="color: #008000; font-weight: bold">break</span>;
+<span style="color: #bbbbbb">        </span>}
+<span style="color: #bbbbbb">        </span><span style="color: #008000; font-weight: bold">if</span>(tot<span style="color: #666666">&lt;</span>m)r<span style="color: #666666">=</span>mid<span style="color: #666666">-1</span>;
+<span style="color: #bbbbbb">        </span><span style="color: #008000; font-weight: bold">else</span><span style="color: #bbbbbb"> </span>l<span style="color: #666666">=</span>mid;
+<span style="color: #bbbbbb">    </span>}
+<span style="color: #bbbbbb">    </span>cout<span style="color: #666666">&lt;&lt;</span>l<span style="color: #666666">&lt;&lt;</span>endl;
+}
+</pre></div>
+
+<h2>P2678</h2>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #B00040">bool</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">check</span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>x){
+<span style="color: #bbbbbb">	</span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>tot<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>;
+<span style="color: #bbbbbb">	</span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>i<span style="color: #666666">=0</span>;
+<span style="color: #bbbbbb">	</span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>now<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>;
+<span style="color: #bbbbbb">	</span><span style="color: #008000; font-weight: bold">while</span>(i<span style="color: #666666">&lt;</span>n<span style="color: #666666">+1</span>){
+<span style="color: #bbbbbb">		</span>i<span style="color: #666666">++</span>;
+<span style="color: #bbbbbb">		</span><span style="color: #008000; font-weight: bold">if</span>(a[i]<span style="color: #666666">-</span>a[now]<span style="color: #666666">&lt;</span>x){
+<span style="color: #bbbbbb">			</span>tot<span style="color: #666666">++</span>;
+<span style="color: #bbbbbb">		</span>}<span style="color: #008000; font-weight: bold">else</span><span style="color: #bbbbbb"> </span>now<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>i;
+<span style="color: #bbbbbb">		</span>
+<span style="color: #bbbbbb">	</span>}
+<span style="color: #bbbbbb">	</span><span style="color: #008000; font-weight: bold">if</span>(tot<span style="color: #666666">&gt;</span>m)<span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">return</span><span style="color: #bbbbbb"> </span><span style="color: #008000">false</span>;
+<span style="color: #bbbbbb">	</span><span style="color: #008000; font-weight: bold">else</span><span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">return</span><span style="color: #bbbbbb"> </span><span style="color: #008000">true</span>;
+}
+<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">main</span>(){
+<span style="color: #bbbbbb">	</span>cin<span style="color: #666666">&gt;&gt;</span>d<span style="color: #666666">&gt;&gt;</span>n<span style="color: #666666">&gt;&gt;</span>m;
+<span style="color: #bbbbbb">	</span><span style="color: #008000; font-weight: bold">for</span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>i<span style="color: #666666">=1</span>;i<span style="color: #666666">&lt;=</span>n;i<span style="color: #666666">++</span>){
+<span style="color: #bbbbbb">		</span>cin<span style="color: #666666">&gt;&gt;</span>a[i];
+<span style="color: #bbbbbb">	</span>}
+<span style="color: #bbbbbb">	</span>a[n<span style="color: #666666">+1</span>]<span style="color: #666666">=</span>d;
+<span style="color: #bbbbbb">	</span>l<span style="color: #666666">=1</span>,r<span style="color: #666666">=</span>d;
+<span style="color: #bbbbbb">	</span><span style="color: #008000; font-weight: bold">while</span>(l<span style="color: #666666">&lt;=</span>r){
+<span style="color: #bbbbbb">		</span>mid<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>(l<span style="color: #666666">+</span>r<span style="color: #666666">+1</span>)<span style="color: #666666">/2</span>;
+<span style="color: #bbbbbb">		</span><span style="color: #008000; font-weight: bold">if</span>(check(mid)){
+<span style="color: #bbbbbb">			</span>ans<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>mid<span style="color: #bbbbbb"> </span>;
+<span style="color: #bbbbbb">			</span>l<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>mid;
+<span style="color: #bbbbbb">		</span>}<span style="color: #008000; font-weight: bold">else</span>{
+<span style="color: #bbbbbb">			</span>r<span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>mid<span style="color: #666666">-1</span>;
+<span style="color: #bbbbbb">		</span>}
+<span style="color: #bbbbbb">		</span>
+<span style="color: #bbbbbb">	</span>}
+<span style="color: #bbbbbb">	</span>cout<span style="color: #666666">&lt;&lt;</span>ans<span style="color: #666666">&lt;&lt;</span>endl;
+<span style="color: #bbbbbb">	</span><span style="color: #008000; font-weight: bold">return</span><span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>;
+}
+</pre></div>
+
+<h2>P2678 跳石头</h2>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #B00040">bool</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">check</span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>x){
+<span style="color: #bbbbbb">	</span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>tot<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>;
+<span style="color: #bbbbbb">	</span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>i<span style="color: #666666">=0</span>;
+<span style="color: #bbbbbb">	</span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>now<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>;
+<span style="color: #bbbbbb">	</span><span style="color: #008000; font-weight: bold">while</span>(i<span style="color: #666666">&lt;</span>n<span style="color: #666666">+1</span>){
+<span style="color: #bbbbbb">		</span>i<span style="color: #666666">++</span>;
+<span style="color: #bbbbbb">		</span><span style="color: #008000; font-weight: bold">if</span>(a[i]<span style="color: #666666">-</span>a[now]<span style="color: #666666">&lt;</span>x){
+<span style="color: #bbbbbb">			</span>tot<span style="color: #666666">++</span>;
+<span style="color: #bbbbbb">		</span>}<span style="color: #008000; font-weight: bold">else</span><span style="color: #bbbbbb"> </span>now<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>i;
+<span style="color: #bbbbbb">		</span>
+<span style="color: #bbbbbb">	</span>}
+<span style="color: #bbbbbb">	</span><span style="color: #008000; font-weight: bold">if</span>(tot<span style="color: #666666">&gt;</span>m)<span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">return</span><span style="color: #bbbbbb"> </span><span style="color: #008000">false</span>;
+<span style="color: #bbbbbb">	</span><span style="color: #008000; font-weight: bold">else</span><span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">return</span><span style="color: #bbbbbb"> </span><span style="color: #008000">true</span>;
+}
+<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">main</span>(){
+<span style="color: #bbbbbb">	</span>cin<span style="color: #666666">&gt;&gt;</span>d<span style="color: #666666">&gt;&gt;</span>n<span style="color: #666666">&gt;&gt;</span>m;
+<span style="color: #bbbbbb">	</span><span style="color: #008000; font-weight: bold">for</span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>i<span style="color: #666666">=1</span>;i<span style="color: #666666">&lt;=</span>n;i<span style="color: #666666">++</span>){
+<span style="color: #bbbbbb">		</span>cin<span style="color: #666666">&gt;&gt;</span>a[i];
+<span style="color: #bbbbbb">	</span>}
+<span style="color: #bbbbbb">	</span>a[n<span style="color: #666666">+1</span>]<span style="color: #666666">=</span>d;
+<span style="color: #bbbbbb">	</span>l<span style="color: #666666">=1</span>,r<span style="color: #666666">=</span>d;
+<span style="color: #bbbbbb">	</span><span style="color: #008000; font-weight: bold">while</span>(l<span style="color: #666666">&lt;</span>r){
+<span style="color: #bbbbbb">		</span>mid<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>(l<span style="color: #666666">+</span>r<span style="color: #666666">+1</span>)<span style="color: #666666">/2</span>;
+<span style="color: #bbbbbb">		</span><span style="color: #008000; font-weight: bold">if</span>(check(mid)){
+<span style="color: #bbbbbb">			</span>l<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>mid;
+<span style="color: #bbbbbb">		</span>}<span style="color: #008000; font-weight: bold">else</span>{
+<span style="color: #bbbbbb">			</span>r<span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>mid<span style="color: #666666">-1</span>;
+<span style="color: #bbbbbb">		</span>}
+<span style="color: #bbbbbb">		</span>
+<span style="color: #bbbbbb">	</span>}
+<span style="color: #bbbbbb">	</span>cout<span style="color: #666666">&lt;&lt;</span>l<span style="color: #666666">&lt;&lt;</span>endl;
+<span style="color: #bbbbbb">	</span><span style="color: #008000; font-weight: bold">return</span><span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>;
+}
+</pre></div>
+
+<h2>P3853 路标设置</h2>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #B00040">bool</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">solve</span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>np){
+<span style="color: #bbbbbb">    </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>ans<span style="color: #666666">=0</span>;
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">for</span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>i<span style="color: #666666">=1</span>;<span style="color: #bbbbbb"> </span>i<span style="color: #666666">&lt;</span>n;<span style="color: #bbbbbb"> </span>i<span style="color: #666666">++</span>)<span style="color: #bbbbbb"> </span>{
+<span style="color: #bbbbbb">        </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>diff<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>a[i<span style="color: #666666">+1</span>]<span style="color: #666666">-</span>a[i];<span style="color: #bbbbbb"> </span>
+<span style="color: #bbbbbb">        </span><span style="color: #008000; font-weight: bold">if</span>(diff<span style="color: #bbbbbb"> </span><span style="color: #666666">&gt;=</span><span style="color: #bbbbbb"> </span>np){
+<span style="color: #bbbbbb">            </span>ans<span style="color: #bbbbbb"> </span><span style="color: #666666">+=</span><span style="color: #bbbbbb"> </span>floor((<span style="color: #B00040">double</span>)diff<span style="color: #666666">/</span>(<span style="color: #B00040">double</span>)np);<span style="color: #bbbbbb"> </span>
+<span style="color: #bbbbbb">            </span><span style="color: #008000; font-weight: bold">if</span>(diff<span style="color: #666666">%</span>np<span style="color: #666666">==0</span>)<span style="color: #bbbbbb"> </span>ans<span style="color: #666666">-=1</span>;
+<span style="color: #bbbbbb">        </span>}
+<span style="color: #bbbbbb">    </span>}
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">if</span>(ans<span style="color: #666666">&gt;</span>k)<span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">return</span><span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>;<span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">else</span><span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">return</span><span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>;
+}
+<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">main</span>(){
+<span style="color: #bbbbbb">    </span>cin<span style="color: #666666">&gt;&gt;</span>L<span style="color: #666666">&gt;&gt;</span>n<span style="color: #666666">&gt;&gt;</span>k;
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">for</span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>i<span style="color: #666666">=1</span>;<span style="color: #bbbbbb"> </span>i<span style="color: #666666">&lt;=</span>n;<span style="color: #bbbbbb"> </span>i<span style="color: #666666">++</span>)<span style="color: #bbbbbb"> </span>cin<span style="color: #666666">&gt;&gt;</span>a[i];
+<span style="color: #bbbbbb">    </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>l<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>,<span style="color: #bbbbbb"> </span>r<span style="color: #666666">=</span>L;
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">while</span>(l<span style="color: #666666">&lt;</span>r){
+<span style="color: #bbbbbb">        </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>mid<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>(l<span style="color: #666666">+</span>r)<span style="color: #666666">/2</span>;
+<span style="color: #bbbbbb">        </span><span style="color: #008000; font-weight: bold">if</span>(solve(mid)<span style="color: #666666">==1</span>)<span style="color: #bbbbbb"> </span>r<span style="color: #666666">=</span>mid;
+<span style="color: #bbbbbb">        </span><span style="color: #008000; font-weight: bold">else</span><span style="color: #bbbbbb"> </span>l<span style="color: #666666">=</span>mid<span style="color: #666666">+1</span>;
+<span style="color: #bbbbbb">    </span>}
+<span style="color: #bbbbbb">    </span>printf(<span style="color: #BA2121">&quot;%d&quot;</span>,l);
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">return</span><span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>;
+}
+</pre></div>
+
+<h2>P1314 聪明的质检员</h2>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #9C6500">#include</span><span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">&lt;iostream&gt;</span>
+<span style="color: #9C6500">#define ll long long</span>
+<span style="color: #008000; font-weight: bold">using</span><span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">namespace</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF; font-weight: bold">std</span>;
+<span style="color: #9C6500">#define MAXN 200010</span>
+<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>w[MAXN],v[MAXN],l[MAXN],r[MAXN];
+<span style="color: #3D7B7B; font-style: italic">// ll pren[MAXN],prev[MAXN] ;</span>
+ll<span style="color: #bbbbbb"> </span>Y,s,sum;
+<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>n,m,mx<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>,mn<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">2147483647</span>;
+<span style="color: #B00040">bool</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">ch</span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>W){
+<span style="color: #bbbbbb">	</span>ll<span style="color: #bbbbbb"> </span>su<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>;
+<span style="color: #bbbbbb">	</span><span style="color: #008000; font-weight: bold">for</span>(ll<span style="color: #bbbbbb"> </span>i<span style="color: #666666">=1</span>;i<span style="color: #666666">&lt;=</span>m;i<span style="color: #666666">++</span>){
+<span style="color: #bbbbbb">		</span>ll<span style="color: #bbbbbb"> </span>c<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>;
+<span style="color: #bbbbbb">		</span>ll<span style="color: #bbbbbb"> </span>yi<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>;
+<span style="color: #bbbbbb">		</span><span style="color: #008000; font-weight: bold">for</span>(ll<span style="color: #bbbbbb"> </span>j<span style="color: #666666">=</span>l[i];j<span style="color: #666666">&lt;=</span>r[i];j<span style="color: #666666">++</span>){
+<span style="color: #bbbbbb">			</span><span style="color: #008000; font-weight: bold">if</span>(w[j]<span style="color: #666666">&gt;=</span>W)<span style="color: #bbbbbb"> </span>{
+<span style="color: #bbbbbb">				</span>c<span style="color: #666666">=</span>c<span style="color: #666666">+1</span>;
+<span style="color: #bbbbbb">				</span>yi<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>yi<span style="color: #666666">+</span><span style="color: #bbbbbb"> </span>v[j];
+<span style="color: #bbbbbb">			</span>}
+<span style="color: #bbbbbb">		</span>}
+<span style="color: #bbbbbb">		</span>yi<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>yi<span style="color: #666666">*</span>c;
+<span style="color: #bbbbbb">		</span>su<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>su<span style="color: #666666">+</span>yi;
+<span style="color: #bbbbbb">	</span>}
+<span style="color: #bbbbbb">	</span>sum<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>llabs(su<span style="color: #666666">-</span>s);
+<span style="color: #bbbbbb">	</span><span style="color: #008000; font-weight: bold">if</span>(su<span style="color: #666666">&gt;</span>s)<span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">return</span><span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>;
+<span style="color: #bbbbbb">	</span><span style="color: #008000; font-weight: bold">else</span><span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">return</span><span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>;
+<span style="color: #3D7B7B; font-style: italic">// No using prefix sum, so we get TLE. </span>
+<span style="color: #3D7B7B; font-style: italic">//	Y = 0,sum = 0;</span>
+<span style="color: #3D7B7B; font-style: italic">//	memset(prev,0,sizeof prev);</span>
+<span style="color: #3D7B7B; font-style: italic">//	memset(pren,0,sizeof pren);</span>
+<span style="color: #3D7B7B; font-style: italic">//	for(int i=1;i&lt;=n;i++){</span>
+<span style="color: #3D7B7B; font-style: italic">//		if(w[i]&gt;=W) pren[i] = pren[i-1]+1,prev[i] = prev[i-1]+v[i];</span>
+<span style="color: #3D7B7B; font-style: italic">//		else pren[i] = pren[i-1],prev[i] = prev[i-1];</span>
+<span style="color: #3D7B7B; font-style: italic">//	}</span>
+<span style="color: #3D7B7B; font-style: italic">//	for(int i=1;i&lt;=m;i++){</span>
+<span style="color: #3D7B7B; font-style: italic">//		Y+= (pren[r[i]]-pren[l[i]-1])*(prev[r[i]]-prev[l[i]-1]);</span>
+<span style="color: #3D7B7B; font-style: italic">//	}</span>
+<span style="color: #3D7B7B; font-style: italic">//	sum = llabs(Y-s);</span>
+<span style="color: #3D7B7B; font-style: italic">//	if(Y&gt;s) return 1;</span>
+<span style="color: #3D7B7B; font-style: italic">//	else return 0;</span>
+}
+<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">main</span>(){
+<span style="color: #bbbbbb">	</span>cin<span style="color: #666666">&gt;&gt;</span>n<span style="color: #666666">&gt;&gt;</span>m<span style="color: #666666">&gt;&gt;</span>s;
+<span style="color: #bbbbbb">	</span><span style="color: #008000; font-weight: bold">for</span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>i<span style="color: #666666">=1</span>;i<span style="color: #666666">&lt;=</span>n;i<span style="color: #666666">++</span>){
+<span style="color: #bbbbbb">		</span>cin<span style="color: #666666">&gt;&gt;</span>w[i]<span style="color: #666666">&gt;&gt;</span>v[i];
+<span style="color: #bbbbbb">		</span>mx<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>max(mx,w[i]);
+<span style="color: #bbbbbb">		</span>mn<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>min(mn,w[i]);
+<span style="color: #bbbbbb">	</span>}
+<span style="color: #bbbbbb">	</span><span style="color: #008000; font-weight: bold">for</span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>i<span style="color: #bbbbbb"> </span><span style="color: #666666">=1</span>;i<span style="color: #666666">&lt;=</span>m;i<span style="color: #666666">++</span>)<span style="color: #bbbbbb"> </span>cin<span style="color: #666666">&gt;&gt;</span>l[i]<span style="color: #666666">&gt;&gt;</span>r[i];
+<span style="color: #bbbbbb">	</span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>left<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>mn<span style="color: #666666">-1</span>,right<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>mx<span style="color: #666666">+2</span>,mid;
+<span style="color: #bbbbbb">	</span>ll<span style="color: #bbbbbb"> </span>ans<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb">  </span><span style="color: #666666">0x7fffffffff</span>;
+<span style="color: #bbbbbb">	</span><span style="color: #008000; font-weight: bold">while</span>(left<span style="color: #666666">&lt;</span>right){
+<span style="color: #bbbbbb">		</span>mid<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>(left<span style="color: #666666">+</span>right<span style="color: #666666">+1</span>)<span style="color: #666666">/2</span>;
+<span style="color: #bbbbbb">		</span><span style="color: #008000; font-weight: bold">if</span>(ch(mid))<span style="color: #bbbbbb"> </span>left<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>mid;
+<span style="color: #bbbbbb">		</span><span style="color: #008000; font-weight: bold">else</span><span style="color: #bbbbbb"> </span>right<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>mid<span style="color: #666666">-1</span>;
+<span style="color: #bbbbbb">		</span><span style="color: #008000; font-weight: bold">if</span>(sum<span style="color: #666666">&lt;</span>ans)<span style="color: #bbbbbb"> </span>ans<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>sum;
+<span style="color: #bbbbbb">	</span>}
+<span style="color: #bbbbbb">	</span>cout<span style="color: #666666">&lt;&lt;</span>ans;
+}
+</pre></div>
+
+<h2>三分法: P1883</h2>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #3D7B7B; font-style: italic">// Compute f[x,i].</span>
+<span style="color: #B00040">double</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">f</span>(<span style="color: #B00040">double</span><span style="color: #bbbbbb"> </span>x,<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>i){
+<span style="color: #bbbbbb">	</span><span style="color: #008000; font-weight: bold">return</span><span style="color: #bbbbbb"> </span>x<span style="color: #666666">*</span>x<span style="color: #666666">*</span>a[i]<span style="color: #666666">+</span>x<span style="color: #666666">*</span>b[i]<span style="color: #666666">+</span>c[i];
+}
+
+<span style="color: #B00040">double</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">check</span>(<span style="color: #B00040">double</span><span style="color: #bbbbbb"> </span>x){
+<span style="color: #bbbbbb">	</span><span style="color: #B00040">double</span><span style="color: #bbbbbb"> </span>ans<span style="color: #666666">=</span>f(x,<span style="color: #666666">1</span>);
+<span style="color: #bbbbbb">	</span><span style="color: #008000; font-weight: bold">for</span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>i<span style="color: #666666">=2</span>;i<span style="color: #666666">&lt;=</span>n;i<span style="color: #666666">++</span>){
+<span style="color: #bbbbbb">		</span>ans<span style="color: #666666">=</span>max(ans,f(x,i));
+<span style="color: #bbbbbb">	</span>}
+<span style="color: #bbbbbb">	</span><span style="color: #008000; font-weight: bold">return</span><span style="color: #bbbbbb"> </span>ans;
+}
+
+<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">main</span>(){
+<span style="color: #bbbbbb">	</span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>T;<span style="color: #bbbbbb"> </span>cin<span style="color: #666666">&gt;&gt;</span>T;
+<span style="color: #bbbbbb">	</span><span style="color: #008000; font-weight: bold">while</span>(T<span style="color: #666666">--</span>){
+<span style="color: #bbbbbb">		</span>cin<span style="color: #666666">&gt;&gt;</span>n;
+<span style="color: #bbbbbb">		</span><span style="color: #008000; font-weight: bold">for</span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>i<span style="color: #666666">=1</span>;i<span style="color: #666666">&lt;=</span>n;i<span style="color: #666666">++</span>)
+<span style="color: #bbbbbb">			</span>cin<span style="color: #666666">&gt;&gt;</span>a[i]<span style="color: #666666">&gt;&gt;</span>b[i]<span style="color: #666666">&gt;&gt;</span>c[i];
+<span style="color: #bbbbbb">		</span><span style="color: #B00040">double</span><span style="color: #bbbbbb"> </span>l<span style="color: #666666">=0</span>,r<span style="color: #666666">=1000</span>,eps<span style="color: #666666">=1e-11</span>,lsec,rsec;
+<span style="color: #bbbbbb">		</span><span style="color: #008000; font-weight: bold">while</span>(r<span style="color: #666666">-</span>l<span style="color: #666666">&gt;</span>eps){
+<span style="color: #bbbbbb">			</span>lsec<span style="color: #666666">=</span>(r<span style="color: #666666">-</span>l)<span style="color: #666666">/3.0+</span>l;
+<span style="color: #bbbbbb">			</span>rsec<span style="color: #666666">=</span>r<span style="color: #666666">-</span>(r<span style="color: #666666">-</span>l)<span style="color: #666666">/3.0</span>;
+<span style="color: #bbbbbb">			</span><span style="color: #008000; font-weight: bold">if</span>(check(lsec)<span style="color: #666666">&gt;</span>check(rsec))l<span style="color: #666666">=</span>lsec;
+<span style="color: #bbbbbb">			</span><span style="color: #008000; font-weight: bold">else</span><span style="color: #bbbbbb"> </span>r<span style="color: #666666">=</span>rsec;
+<span style="color: #bbbbbb">		</span>}
+<span style="color: #bbbbbb">		</span>printf(<span style="color: #BA2121">&quot;%.4lf</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>,check(l));
+<span style="color: #bbbbbb">	</span>}
+<span style="color: #bbbbbb">	</span>
+<span style="color: #bbbbbb">	</span><span style="color: #008000; font-weight: bold">return</span><span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>;
+}
+</pre></div>
+
+<h1>前缀和和差分</h1>
+<h2>Extra problem</h2>
+<p>Input:</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #666666">5</span><span style="color: #bbbbbb"> </span><span style="color: #666666">3</span>
+<span style="color: #666666">0</span><span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>
+<span style="color: #666666">1</span><span style="color: #bbbbbb"> </span><span style="color: #666666">2</span>
+<span style="color: #666666">2</span><span style="color: #bbbbbb"> </span><span style="color: #666666">3</span>
+<span style="color: #666666">0</span><span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>
+<span style="color: #666666">9</span><span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>
+<span style="color: #666666">1</span><span style="color: #bbbbbb"> </span><span style="color: #666666">5</span>
+<span style="color: #666666">5</span><span style="color: #bbbbbb"> </span><span style="color: #666666">5</span>
+<span style="color: #666666">3</span><span style="color: #bbbbbb"> </span><span style="color: #666666">5</span>
+</pre></div>
+
+<p>Output</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #666666">9</span><span style="color: #bbbbbb"> </span><span style="color: #666666">1</span><span style="color: #bbbbbb"> </span><span style="color: #666666">3</span><span style="color: #bbbbbb"> </span><span style="color: #666666">0</span><span style="color: #bbbbbb"> </span><span style="color: #666666">4</span><span style="color: #bbbbbb"> </span><span style="color: #666666">5</span><span style="color: #bbbbbb"> </span><span style="color: #666666">6</span><span style="color: #bbbbbb"> </span><span style="color: #666666">7</span><span style="color: #bbbbbb"> </span><span style="color: #666666">8</span><span style="color: #bbbbbb"> </span><span style="color: #666666">2</span>
+<span style="color: #666666">9</span><span style="color: #bbbbbb"> </span><span style="color: #666666">1</span><span style="color: #bbbbbb"> </span><span style="color: #666666">2</span><span style="color: #bbbbbb"> </span><span style="color: #666666">3</span><span style="color: #bbbbbb"> </span><span style="color: #666666">4</span><span style="color: #bbbbbb"> </span><span style="color: #666666">5</span><span style="color: #bbbbbb"> </span><span style="color: #666666">6</span><span style="color: #bbbbbb"> </span><span style="color: #666666">7</span><span style="color: #bbbbbb"> </span><span style="color: #666666">8</span><span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>
+<span style="color: #666666">9</span><span style="color: #bbbbbb"> </span><span style="color: #666666">0</span><span style="color: #bbbbbb"> </span><span style="color: #666666">3</span><span style="color: #bbbbbb"> </span><span style="color: #666666">2</span><span style="color: #bbbbbb"> </span><span style="color: #666666">4</span><span style="color: #bbbbbb"> </span><span style="color: #666666">5</span><span style="color: #bbbbbb"> </span><span style="color: #666666">6</span><span style="color: #bbbbbb"> </span><span style="color: #666666">7</span><span style="color: #bbbbbb"> </span><span style="color: #666666">8</span><span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>
+</pre></div>
+
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #9C6500">#include</span><span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">&lt;bits/stdc++.h&gt;</span>
+<span style="color: #008000; font-weight: bold">using</span><span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">namespace</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF; font-weight: bold">std</span>;
+<span style="color: #008000; font-weight: bold">const</span><span style="color: #bbbbbb"> </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>MAXN<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">100005</span>;
+<span style="color: #008000; font-weight: bold">struct</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF; font-weight: bold">ballList</span><span style="color: #bbbbbb"> </span>{
+<span style="color: #bbbbbb">	</span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>pos[<span style="color: #666666">10</span>];
+};
+ballList<span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">operator</span><span style="color: #bbbbbb"> </span><span style="color: #666666">-</span><span style="color: #bbbbbb"> </span>(<span style="color: #008000; font-weight: bold">const</span><span style="color: #bbbbbb"> </span>ballList<span style="color: #bbbbbb"> </span>A,<span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">const</span><span style="color: #bbbbbb"> </span>ballList<span style="color: #bbbbbb"> </span>B)<span style="color: #bbbbbb"> </span>{
+<span style="color: #bbbbbb">	</span>ballList<span style="color: #bbbbbb"> </span>C,<span style="color: #bbbbbb"> </span>temp;
+<span style="color: #bbbbbb">	</span><span style="color: #008000; font-weight: bold">for</span><span style="color: #bbbbbb"> </span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>i<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>;<span style="color: #bbbbbb"> </span>i<span style="color: #bbbbbb"> </span><span style="color: #666666">&lt;</span><span style="color: #bbbbbb"> </span><span style="color: #666666">10</span>;<span style="color: #bbbbbb"> </span><span style="color: #666666">++</span>i)<span style="color: #bbbbbb"> </span>{
+<span style="color: #bbbbbb">		</span>temp.pos[B.pos[i]]<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>i;
+<span style="color: #bbbbbb">	</span>}
+<span style="color: #bbbbbb">	</span><span style="color: #008000; font-weight: bold">for</span><span style="color: #bbbbbb"> </span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>i<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>;<span style="color: #bbbbbb"> </span>i<span style="color: #bbbbbb"> </span><span style="color: #666666">&lt;</span><span style="color: #bbbbbb"> </span><span style="color: #666666">10</span>;<span style="color: #bbbbbb"> </span><span style="color: #666666">++</span>i)<span style="color: #bbbbbb"> </span>{
+<span style="color: #bbbbbb">		</span>C.pos[i]<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>temp.pos[A.pos[i]];
+<span style="color: #bbbbbb">	</span>}
+<span style="color: #bbbbbb">	</span><span style="color: #008000; font-weight: bold">return</span><span style="color: #bbbbbb"> </span>C;
+}
+ostream<span style="color: #bbbbbb"> </span><span style="color: #666666">&amp;</span><span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">operator</span><span style="color: #bbbbbb"> </span><span style="color: #666666">&lt;&lt;</span><span style="color: #bbbbbb"> </span>(ostream<span style="color: #666666">&amp;</span><span style="color: #bbbbbb"> </span>os,<span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">const</span><span style="color: #bbbbbb"> </span>ballList<span style="color: #bbbbbb"> </span><span style="color: #666666">&amp;</span>ob)<span style="color: #bbbbbb"> </span>{
+<span style="color: #bbbbbb">	</span><span style="color: #008000; font-weight: bold">for</span><span style="color: #bbbbbb"> </span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>i<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>;<span style="color: #bbbbbb"> </span>i<span style="color: #bbbbbb"> </span><span style="color: #666666">&lt;</span><span style="color: #bbbbbb"> </span><span style="color: #666666">10</span>;<span style="color: #bbbbbb"> </span><span style="color: #666666">++</span>i)<span style="color: #bbbbbb"> </span>{
+<span style="color: #bbbbbb">		</span><span style="color: #008000; font-weight: bold">if</span><span style="color: #bbbbbb"> </span>(i)os<span style="color: #bbbbbb"> </span><span style="color: #666666">&lt;&lt;</span><span style="color: #bbbbbb"> </span><span style="color: #BA2121">&#39; &#39;</span>;
+<span style="color: #bbbbbb">		</span>os<span style="color: #bbbbbb"> </span><span style="color: #666666">&lt;&lt;</span><span style="color: #bbbbbb"> </span>ob.pos[i];
+<span style="color: #bbbbbb">	</span>}
+<span style="color: #bbbbbb">	</span><span style="color: #008000; font-weight: bold">return</span><span style="color: #bbbbbb"> </span>os;
+}
+ballList<span style="color: #bbbbbb"> </span>presum[MAXN];
+<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>n,<span style="color: #bbbbbb"> </span>m,<span style="color: #bbbbbb"> </span>u[MAXN],<span style="color: #bbbbbb"> </span>v[MAXN],<span style="color: #bbbbbb"> </span>l,<span style="color: #bbbbbb"> </span>r;
+ballList<span style="color: #bbbbbb"> </span><span style="color: #0000FF">bf</span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>l,<span style="color: #bbbbbb"> </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>r)<span style="color: #bbbbbb"> </span>{
+<span style="color: #bbbbbb">	</span>ballList<span style="color: #bbbbbb"> </span>ret;
+<span style="color: #bbbbbb">	</span><span style="color: #008000; font-weight: bold">for</span><span style="color: #bbbbbb"> </span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>i<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>;<span style="color: #bbbbbb"> </span>i<span style="color: #bbbbbb"> </span><span style="color: #666666">&lt;</span><span style="color: #bbbbbb"> </span><span style="color: #666666">10</span>;<span style="color: #bbbbbb"> </span><span style="color: #666666">++</span>i)<span style="color: #bbbbbb"> </span>{
+<span style="color: #bbbbbb">		</span>ret.pos[i]<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>i;
+<span style="color: #bbbbbb">	</span>}
+<span style="color: #bbbbbb">	</span><span style="color: #008000; font-weight: bold">for</span><span style="color: #bbbbbb"> </span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>i<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>l;<span style="color: #bbbbbb"> </span>i<span style="color: #bbbbbb"> </span><span style="color: #666666">&lt;=</span><span style="color: #bbbbbb"> </span>r;<span style="color: #bbbbbb"> </span><span style="color: #666666">++</span>i)<span style="color: #bbbbbb"> </span>{
+<span style="color: #bbbbbb">		</span>swap(ret.pos[u[i]],<span style="color: #bbbbbb"> </span>ret.pos[v[i]]);
+<span style="color: #bbbbbb">	</span>}
+<span style="color: #bbbbbb">	</span><span style="color: #008000; font-weight: bold">return</span><span style="color: #bbbbbb"> </span>ret;
+}
+
+<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">main</span>()
+{
+<span style="color: #bbbbbb">	</span><span style="color: #008000; font-weight: bold">for</span><span style="color: #bbbbbb"> </span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>i<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>;<span style="color: #bbbbbb"> </span>i<span style="color: #bbbbbb"> </span><span style="color: #666666">&lt;</span><span style="color: #bbbbbb"> </span><span style="color: #666666">10</span>;<span style="color: #bbbbbb"> </span><span style="color: #666666">++</span>i)<span style="color: #bbbbbb"> </span>{
+<span style="color: #bbbbbb">		</span>presum<span style="color: #666666">-&gt;</span>pos[i]<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>i;
+<span style="color: #bbbbbb">	</span>}
+<span style="color: #bbbbbb">	</span>cin<span style="color: #bbbbbb"> </span><span style="color: #666666">&gt;&gt;</span><span style="color: #bbbbbb"> </span>n<span style="color: #bbbbbb"> </span><span style="color: #666666">&gt;&gt;</span><span style="color: #bbbbbb"> </span>m;
+<span style="color: #bbbbbb">	</span><span style="color: #008000; font-weight: bold">for</span><span style="color: #bbbbbb"> </span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>i<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>;<span style="color: #bbbbbb"> </span>i<span style="color: #bbbbbb"> </span><span style="color: #666666">&lt;=</span><span style="color: #bbbbbb"> </span>n;<span style="color: #bbbbbb"> </span><span style="color: #666666">++</span>i)<span style="color: #bbbbbb"> </span>{
+<span style="color: #bbbbbb">		</span>cin<span style="color: #bbbbbb"> </span><span style="color: #666666">&gt;&gt;</span><span style="color: #bbbbbb"> </span>u[i]<span style="color: #bbbbbb"> </span><span style="color: #666666">&gt;&gt;</span><span style="color: #bbbbbb"> </span>v[i];
+<span style="color: #bbbbbb">		</span>presum[i]<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>presum[i<span style="color: #bbbbbb"> </span><span style="color: #666666">-</span><span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>];
+<span style="color: #bbbbbb">		</span>swap(presum[i].pos[u[i]],<span style="color: #bbbbbb"> </span>presum[i].pos[v[i]]);
+<span style="color: #bbbbbb">	</span>}
+<span style="color: #bbbbbb">	</span><span style="color: #008000; font-weight: bold">for</span><span style="color: #bbbbbb"> </span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>i<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>;<span style="color: #bbbbbb"> </span>i<span style="color: #bbbbbb"> </span><span style="color: #666666">&lt;=</span><span style="color: #bbbbbb"> </span>m;<span style="color: #bbbbbb"> </span><span style="color: #666666">++</span>i)<span style="color: #bbbbbb"> </span>{
+<span style="color: #bbbbbb">		</span>cin<span style="color: #bbbbbb"> </span><span style="color: #666666">&gt;&gt;</span><span style="color: #bbbbbb"> </span>l<span style="color: #bbbbbb"> </span><span style="color: #666666">&gt;&gt;</span><span style="color: #bbbbbb"> </span>r;
+<span style="color: #bbbbbb">		</span>cout<span style="color: #bbbbbb"> </span><span style="color: #666666">&lt;&lt;</span><span style="color: #bbbbbb"> </span>presum[r]<span style="color: #bbbbbb"> </span><span style="color: #666666">-</span><span style="color: #bbbbbb"> </span>presum[l<span style="color: #bbbbbb"> </span><span style="color: #666666">-</span><span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>]<span style="color: #bbbbbb"> </span><span style="color: #666666">&lt;&lt;</span><span style="color: #bbbbbb"> </span>endl;
+<span style="color: #bbbbbb">	</span>}
+<span style="color: #bbbbbb">	</span><span style="color: #008000; font-weight: bold">return</span><span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>;
+}
+</pre></div>
+
+<h2>Max Flow P</h2>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #008000; font-weight: bold">struct</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF; font-weight: bold">Edge</span>{
+<span style="color: #bbbbbb">	</span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>to,nxt;
+}e[N];
+<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>head[N],cnt<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>,d[N],val[N];
+
+<span style="color: #B00040">void</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">adde</span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>u,<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>v){
+<span style="color: #bbbbbb">	</span>e[<span style="color: #666666">++</span>cnt].to<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>v;
+<span style="color: #bbbbbb">	</span>e[cnt].nxt<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>head[u];
+<span style="color: #bbbbbb">	</span>head[u]<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>cnt;
+}
+<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>n,k;
+<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>dep[N],<span style="color: #bbbbbb"> </span>fa[N][<span style="color: #666666">20</span>];<span style="color: #bbbbbb"> </span>
+<span style="color: #B00040">void</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">dfs1</span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>u,<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>f){
+<span style="color: #bbbbbb">	</span>fa[u][<span style="color: #666666">0</span>]<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>f;
+<span style="color: #bbbbbb">	</span>dep[u]<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>dep[f<span style="color: #bbbbbb"> </span>]<span style="color: #666666">+1</span>;
+<span style="color: #bbbbbb">	</span><span style="color: #008000; font-weight: bold">for</span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>i<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>;i<span style="color: #666666">&lt;20</span>;i<span style="color: #666666">++</span>){
+<span style="color: #bbbbbb">		</span>fa[u][i]<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>fa[fa[u][i<span style="color: #666666">-1</span>]][i<span style="color: #666666">-1</span>];
+<span style="color: #bbbbbb">	</span>}
+<span style="color: #bbbbbb">	</span>fog(i,u){
+<span style="color: #bbbbbb">		</span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>v<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>e[i].to;
+<span style="color: #bbbbbb">		</span><span style="color: #008000; font-weight: bold">if</span>(v<span style="color: #bbbbbb"> </span><span style="color: #666666">==</span><span style="color: #bbbbbb"> </span>f)<span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">continue</span>;
+<span style="color: #bbbbbb">		</span>dfs1(v,u);
+<span style="color: #bbbbbb">	</span>}
+
+}<span style="color: #bbbbbb"> </span>
+
+<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">lca</span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>u,<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>v){
+<span style="color: #bbbbbb">	</span><span style="color: #008000; font-weight: bold">if</span>(dep[u]<span style="color: #666666">&gt;</span>dep[v])<span style="color: #bbbbbb"> </span>swap(u,v);<span style="color: #bbbbbb"> </span>
+<span style="color: #bbbbbb">	</span><span style="color: #008000; font-weight: bold">for</span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>i<span style="color: #bbbbbb"> </span><span style="color: #666666">=19</span>;i<span style="color: #666666">&gt;=0</span>;i<span style="color: #666666">--</span>){
+<span style="color: #bbbbbb">		</span><span style="color: #008000; font-weight: bold">if</span>(dep[u]<span style="color: #666666">&gt;</span>dep[fa[v][i]]<span style="color: #bbbbbb"> </span><span style="color: #666666">||</span><span style="color: #bbbbbb"> </span>fa[v][i]<span style="color: #666666">==0</span>)<span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">continue</span>;
+<span style="color: #bbbbbb">		</span>v<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>fa[v][i];
+<span style="color: #bbbbbb">	</span>}
+<span style="color: #bbbbbb">	</span><span style="color: #008000; font-weight: bold">if</span>(u<span style="color: #666666">==</span>v)<span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">return</span><span style="color: #bbbbbb"> </span>u;
+<span style="color: #bbbbbb">	</span><span style="color: #008000; font-weight: bold">for</span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>i<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">19</span>;i<span style="color: #666666">&gt;=0</span>;i<span style="color: #666666">--</span>){
+<span style="color: #bbbbbb">		</span><span style="color: #008000; font-weight: bold">if</span>(fa[u][i]<span style="color: #bbbbbb"> </span><span style="color: #666666">==</span><span style="color: #bbbbbb"> </span>fa[v][i]<span style="color: #bbbbbb"> </span><span style="color: #666666">||</span><span style="color: #bbbbbb"> </span>fa[u][i]<span style="color: #666666">==0</span><span style="color: #bbbbbb"> </span><span style="color: #666666">||</span><span style="color: #bbbbbb"> </span>fa[v][i]<span style="color: #666666">==0</span>)<span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">continue</span>;
+<span style="color: #bbbbbb">		</span>v<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span>fa[v][i];
+<span style="color: #bbbbbb">		</span>u<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>fa[u][i];
+<span style="color: #bbbbbb">	</span>}
+<span style="color: #bbbbbb">	</span><span style="color: #008000; font-weight: bold">return</span><span style="color: #bbbbbb"> </span>fa[u][<span style="color: #666666">0</span>];
+}
+<span style="color: #bbbbbb"> </span>
+<span style="color: #B00040">void</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">dfs</span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>u,<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>f){
+<span style="color: #bbbbbb">	</span>val[u]<span style="color: #bbbbbb"> </span><span style="color: #666666">+=</span><span style="color: #bbbbbb"> </span>d[u];<span style="color: #bbbbbb"> </span>
+<span style="color: #bbbbbb">	</span>fog(i,u){
+<span style="color: #bbbbbb">		</span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>v<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>e[i].to;
+<span style="color: #bbbbbb">		</span><span style="color: #008000; font-weight: bold">if</span>(v<span style="color: #bbbbbb"> </span><span style="color: #666666">==</span><span style="color: #bbbbbb"> </span>f)<span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">continue</span>;
+<span style="color: #bbbbbb">		</span>dfs(v,u);
+<span style="color: #bbbbbb">		</span>val[u]<span style="color: #bbbbbb"> </span><span style="color: #666666">+=</span><span style="color: #bbbbbb"> </span>val[v];<span style="color: #bbbbbb"> </span>
+<span style="color: #bbbbbb">	</span>}
+}
+<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">main</span>(){
+<span style="color: #bbbbbb">	</span>cin<span style="color: #666666">&gt;&gt;</span>n<span style="color: #666666">&gt;&gt;</span>k;
+<span style="color: #bbbbbb">	</span>fo(i,n<span style="color: #666666">-1</span>){
+<span style="color: #bbbbbb">		</span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>x,y;cin<span style="color: #666666">&gt;&gt;</span>x<span style="color: #666666">&gt;&gt;</span>y;adde(x,y);adde(y,x);
+<span style="color: #bbbbbb">	</span>}
+<span style="color: #bbbbbb">	</span>dfs1(<span style="color: #666666">1</span>,<span style="color: #666666">0</span>);
+<span style="color: #bbbbbb">	</span>fo(i,k){
+<span style="color: #bbbbbb">		</span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>s,t;
+<span style="color: #bbbbbb">		</span>cin<span style="color: #666666">&gt;&gt;</span>s<span style="color: #666666">&gt;&gt;</span>t;
+<span style="color: #bbbbbb">		</span>d[s]<span style="color: #666666">++</span>;<span style="color: #bbbbbb"> </span>d[t]<span style="color: #666666">++</span>;<span style="color: #bbbbbb"> </span>d[lca(s,t)]<span style="color: #666666">--</span>;<span style="color: #bbbbbb"> </span>d[fa[lca(s,t)][<span style="color: #666666">0</span>]]<span style="color: #666666">--</span>;
+<span style="color: #bbbbbb">	</span>}
+<span style="color: #bbbbbb">	</span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>maxxx<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">-1</span>,s;
+<span style="color: #bbbbbb">	</span>dfs(<span style="color: #666666">1</span>,<span style="color: #666666">0</span>);
+<span style="color: #bbbbbb">	</span><span style="color: #008000; font-weight: bold">for</span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>i<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>;i<span style="color: #666666">&lt;=</span>n;i<span style="color: #666666">++</span>){
+<span style="color: #bbbbbb">		</span><span style="color: #008000; font-weight: bold">if</span>(val[i]<span style="color: #666666">&gt;</span>maxxx)<span style="color: #bbbbbb"> </span>s<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>i,<span style="color: #bbbbbb"> </span>maxxx<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>val[i];
+<span style="color: #bbbbbb">	</span>}
+<span style="color: #bbbbbb">	</span>s<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span>s;
+<span style="color: #bbbbbb">	</span>cout<span style="color: #666666">&lt;&lt;</span>maxxx<span style="color: #666666">&lt;&lt;</span>endl;<span style="color: #bbbbbb"> </span>
+}
+</pre></div>
+
+
+    </div>
+
+   
+   
+   
+    <hr>
+
+
+
+
+
+
+    <div id="disqus_thread"></div>
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script>
+        /**
+        *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+        *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+        
+        // var disqus_config = function () {
+        // this.page.url = ;  // Replace PAGE_URL with your page's canonical URL variable
+        // this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        // };
+        
+        (function() { // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        s.src = 'https://augpath.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <script id="dsq-count-scr" src="//augpath.disqus.com/count.js" async></script>
+  </body>
+</html>
