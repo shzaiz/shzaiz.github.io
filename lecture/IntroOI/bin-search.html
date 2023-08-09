@@ -108,7 +108,7 @@ async function copyCode(block) {
     <div class="navbar">
         <a href="https://shzaiz.github.io">AUG's Wiki</a>
         <a href="index.html"> ↑ Back to contents</a>
-        Last updated at 2023-07-29 22:19:45.791750
+        Last updated at 2023-08-09 10:36:44.718788
     </div>
 
     <div class="toc"></div>
@@ -118,17 +118,17 @@ async function copyCode(block) {
       <h1>P1163</h1>
 <div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #9C6500">#include</span><span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">&lt;iostream&gt;</span>
 <span style="color: #9C6500">#include</span><span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">&lt;math.h&gt;</span>
-using<span style="color: #bbbbbb"> </span>namespace<span style="color: #bbbbbb"> </span><span style="color: #0000FF; font-weight: bold">std</span>;
-<span style="color: #008000; font-weight: bold">int</span><span style="color: #bbbbbb"> </span>n,<span style="color: #bbbbbb"> </span>m,<span style="color: #bbbbbb"> </span>k;
+<span style="color: #008000; font-weight: bold">using</span><span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">namespace</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF; font-weight: bold">std</span>;
+<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>n,<span style="color: #bbbbbb"> </span>m,<span style="color: #bbbbbb"> </span>k;
 
-<span style="color: #008000; font-weight: bold">double</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">calc</span>(<span style="color: #008000; font-weight: bold">double</span><span style="color: #bbbbbb"> </span>p){
-<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">double</span><span style="color: #bbbbbb"> </span>ans<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>;
-<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">for</span>(<span style="color: #008000; font-weight: bold">int</span><span style="color: #bbbbbb"> </span>i<span style="color: #666666">=1</span>;<span style="color: #bbbbbb"> </span>i<span style="color: #666666">&lt;=</span>k;<span style="color: #bbbbbb"> </span>i<span style="color: #666666">++</span>){
-<span style="color: #bbbbbb">        </span>ans<span style="color: #bbbbbb"> </span><span style="color: #666666">+=</span><span style="color: #bbbbbb"> </span>m<span style="color: #666666">/</span><span style="color: #0000FF">pow</span>((<span style="color: #666666">1.0+</span>p<span style="color: #666666">*0.01</span>),<span style="color: #bbbbbb"> </span>k);
+<span style="color: #B00040">double</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">calc</span>(<span style="color: #B00040">double</span><span style="color: #bbbbbb"> </span>p){
+<span style="color: #bbbbbb">    </span><span style="color: #B00040">double</span><span style="color: #bbbbbb"> </span>ans<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>;
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">for</span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>i<span style="color: #666666">=1</span>;<span style="color: #bbbbbb"> </span>i<span style="color: #666666">&lt;=</span>k;<span style="color: #bbbbbb"> </span>i<span style="color: #666666">++</span>){
+<span style="color: #bbbbbb">        </span>ans<span style="color: #bbbbbb"> </span><span style="color: #666666">+=</span><span style="color: #bbbbbb"> </span>m<span style="color: #666666">/</span>pow((<span style="color: #666666">1.0+</span>p<span style="color: #666666">*0.01</span>),<span style="color: #bbbbbb"> </span>k);
 <span style="color: #bbbbbb">    </span>}
 <span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">return</span><span style="color: #bbbbbb"> </span>ans;
 }
-<span style="color: #008000; font-weight: bold">int</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">main</span>(){
+<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">main</span>(){
 <span style="color: #bbbbbb">    </span>cin<span style="color: #666666">&gt;&gt;</span>n<span style="color: #666666">&gt;&gt;</span>m<span style="color: #666666">&gt;&gt;</span>k;
 <span style="color: #bbbbbb">    </span>cout<span style="color: #666666">&lt;&lt;</span>calc(<span style="color: #666666">2.8</span>);
 <span style="color: #bbbbbb">    </span>
