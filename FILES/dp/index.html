@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="./static/css/base.css" rel="stylesheet">
+    <link href="./static/css/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.font.im/css?family=Source+Serif+Pro%7CLato%7CInconsolata" rel="stylesheet"
+        type="text/css">
+    <title> slide </title>
+    <!-- browser favicon -->
+    <link rel="shortcut icon" href="./static/img/favicon.png">
+    <style>
+        .font-sans {
+            font-family: 'Lato', 'SimHei', 'STHeiti', 'SimHei', 'Serif';
+        }
+
+        .font-serif {
+            font-family: 'Source Serif Pro', 'Songti SC', 'SimSun', 'Serif', serif;
+        }
+    </style>
+    <!-- <link rel="stylesheet" href="https://jyywiki.cn/static/katex/katex.min.css">
+    <script defer src="https://jyywiki.cn/static/katex/katex.min.js"></script> -->
+    <link rel="stylesheet" href="./static/katex/katex.min.css">
+    <script defer src="./static/katex/katex.min.js"></script>
+    <!-- <script defer src="https://jyywiki.cn/static/katex/auto-render.min.js"
+        integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05"
+        crossorigin="anonymous"></script> -->
+    <script defer src="./static/katex/auto-render.min.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            renderMathInElement(document.body, {
+                // customised options
+                // &#8226; auto-render specific keys, e.g.:
+                delimiters: [
+                    { left: '$$', right: '$$', display: true },
+                    { left: '$', right: '$', display: false },
+                    { left: '\\(', right: '\\)', display: false },
+                    { left: '\\[', right: '\\]', display: true }
+                ],
+                // &#8226; rendering keys, e.g.:
+                throwOnError: false
+            });
+        });
+    </script>
+
+    <link rel="stylesheet" href="./static/reveal/reveal.css">
+    <link rel="stylesheet" href="./static/reveal/theme/simple.css" id="theme">
+    <link rel="stylesheet" href="./static/jyy/jyy.css">
+
+</head>
+
+<body class="d-flex flex-column h-100">
+
+    <div class="reveal">
+        <div class="slides">
+            <section><section><div class="center middle"><div style="width:100%"><div><h1 id="ii" class="text-2xl mt-2 font-sans">动态规划 II</h1>
+<blockquote>
+<p class="font-serif my-1"><a href="shzaiz.github.io">张桄玮</a></p>
+</blockquote></div></div></div></section></section><section><section><div class="center middle"><div style="width:100%"><div><h1 id="_1" class="text-2xl mt-2 font-sans">集合视角的动态规划</h1></div></div></div></section><section><div><h2 id="_1" class="text-xl mt-2 pb-2 font-sans">推荐的思考流程</h2>
+<ul class="list-disc font-serif">
+<li class="ml-8">首先：状态表示. <ul class="list-disc font-serif">
+<li class="ml-8">我的状态表示的是哪一类问题的集合？ </li>
+<li class="ml-8">这些集合里面要求什么？ (min/max/数量)</li>
+</ul>
+</li>
+<li class="ml-8">其次：状态计算. <ul class="list-disc font-serif">
+<li class="ml-8">有哪些内容可以到达这里？ </li>
+<li class="ml-8">到达这里的内容可以有哪些计算方法？ </li>
+</ul>
+</li>
+</ul></div></section><section><div><h2 id="_1" class="text-xl mt-2 pb-2 font-sans">例子：数字三角形</h2>
+<ul class="list-disc font-serif">
+<li class="ml-8">P1004 方格取数</li>
+<li class="ml-8">CF1433F Zero Remainder Sum</li>
+<li class="ml-8">P1008 传纸条</li>
+</ul></div></section><section><div><h2 id="_1" class="text-xl mt-2 pb-2 font-sans">例子：最长上升子序列</h2>
+<p class="font-serif my-1">问题关键：</p>
+<ul class="list-disc font-serif">
+<li class="ml-8">状态设计</li>
+<li class="ml-8">状态转移</li>
+</ul>
+<p class="font-serif my-1">例子：</p>
+<ul class="list-disc font-serif">
+<li class="ml-8"><a href="https://vjudge.net/problem/OpenJ_Bailian-2995">Bailian2995 登山</a></li>
+<li class="ml-8"><a href="https://www.luogu.com.cn/problem/P2782">P2782 友好城市</a></li>
+<li class="ml-8"><a href="https://www.luogu.com.cn/problem/T294782">最长公共上升子序列</a></li>
+</ul></div></section><section><div><h2 id="_1" class="text-xl mt-2 pb-2 font-sans">关于状态的设计</h2>
+<p class="font-serif my-1">使用0/1/2表示当前所在的状态. </p>
+<p class="font-serif my-1">例子：</p>
+<ul class="list-disc font-serif">
+<li class="ml-8"><a href="https://vjudge.net/problem/OpenJ_NOI-CH0206-8462">大盗阿福</a></li>
+<li class="ml-8"><a href="https://www.luogu.com.cn/problem/U298750">股票买卖</a></li>
+</ul></div></section></section><section><section><div class="center middle"><div style="width:100%"><div><h1 id="_1" class="text-2xl mt-2 font-sans">背包问题</h1></div></div></div></section><section><div><h2 id="0-1" class="text-xl mt-2 pb-2 font-sans">0-1背包问题</h2>
+<p class="font-serif my-1">还是老套路：</p>
+<ul class="list-disc font-serif">
+<li class="ml-8">状态表示</li>
+<li class="ml-8">状态计算</li>
+</ul>
+<p class="font-serif my-1">一个优化空间：<a href="https://www.bilibili.com/video/BV1Eb411r7dJ">更新顺序</a></p>
+<p class="font-serif my-1">例子：</p>
+<ul class="list-disc font-serif">
+<li class="ml-8">P1048 采药</li>
+</ul></div></section><section><div><h2 id="_1" class="text-xl mt-2 pb-2 font-sans">完全背包问题</h2>
+<p class="font-serif my-1">表示每件物品可以无限选</p>
+<ul class="list-disc font-serif">
+<li class="ml-8">状态表示</li>
+<li class="ml-8">状态计算</li>
+</ul>
+<p class="font-serif my-1">简化式子, 发现了什么？ </p></div></section><section><div><h2 id="_1" class="text-xl mt-2 pb-2 font-sans">多重背包问题</h2>
+<p class="font-serif my-1">每个物品只有$s$件. </p>
+<ul class="list-disc font-serif">
+<li class="ml-8">状态表示</li>
+<li class="ml-8">状态计算</li>
+</ul>
+<p class="font-serif my-1">考虑两个优化：</p>
+<ul class="list-disc font-serif">
+<li class="ml-8">困难的做法：推式子</li>
+<li class="ml-8">简单的做法：直接拆分</li>
+</ul>
+<p class="font-serif my-1">一个小例子：P1049 装箱问题</p></div></section><section><div><h2 id="_1" class="text-xl mt-2 pb-2 font-sans">二维费用的背包问题</h2>
+<p class="font-serif my-1">还是老面孔：状态表示是二维的</p>
+<ul class="list-disc font-serif">
+<li class="ml-8">状态转移</li>
+<li class="ml-8">状态计算</li>
+</ul>
+<p class="font-serif my-1">例子</p>
+<ul class="list-disc font-serif">
+<li class="ml-8"><a href="https://vjudge.net/problem/OpenJ_Bailian-4102">宠物小精灵</a></li>
+<li class="ml-8"><a href="https://www.luogu.com.cn/problem/U291791">潜水员</a></li>
+</ul></div></section><section><div><h2 id="_1" class="text-xl mt-2 pb-2 font-sans">背包的方案数</h2>
+<p class="font-serif my-1">哦, 从最大值变成了计数的情况. </p>
+<ul class="list-disc font-serif">
+<li class="ml-8">状态表示(不用变)</li>
+<li class="ml-8">状态计算</li>
+</ul>
+<p class="font-serif my-1">例子</p>
+<ul class="list-disc font-serif">
+<li class="ml-8"><a href="https://vjudge.net/problem/OpenJ_Bailian-4004">数字组合</a></li>
+<li class="ml-8"><a href="https://codeforces.com/problemset/problem/785/C">CF785C Anton and Fairy Tale</a>：给定$n$, 求有多少种方法可以把$n$表示成若干个回文数的和(可重复), $n\leq 4\times 10^4$. </li>
+</ul></div></section><section><div><h2 id="_1" class="text-xl mt-2 pb-2 font-sans">分组背包</h2>
+<p class="font-serif my-1">这是什么？ </p>
+<ul class="list-disc font-serif">
+<li class="ml-8">新的限制：能从一个物品组内最多选择一个物品</li>
+</ul>
+<p class="font-serif my-1">套路：</p>
+<ul class="list-disc font-serif">
+<li class="ml-8">状态表示</li>
+<li class="ml-8">状态计算</li>
+</ul>
+<p class="font-serif my-1">模板题：<a href="https://www.acwing.com/problem/content/9/">分组背包问题</a></p>
+<p class="font-serif my-1">例子
++ P1064 金明的预算方案</p></div></section><section><div><h2 id="_1" class="text-xl mt-2 pb-2 font-sans">树上的背包问题</h2>
+<p class="font-serif my-1">在树上：要选孩子必须选父亲, 价值最大. </p>
+<p class="font-serif my-1">套路：</p>
+<ul class="list-disc font-serif">
+<li class="ml-8">状态表示</li>
+<li class="ml-8">状态计算</li>
+</ul>
+<p class="font-serif my-1">例子：</p>
+<ul class="list-disc font-serif">
+<li class="ml-8"><a href="https://www.acwing.com/problem/content/10/">模板题</a></li>
+<li class="ml-8">P2014 选课</li>
+</ul></div></section></section><section><section><div class="center middle"><div style="width:100%"><div><h1 id="dp" class="text-2xl mt-2 font-sans">区间的DP</h1></div></div></div></section><section><div><h2 id="_1" class="text-xl mt-2 pb-2 font-sans">还是老样子</h2>
+<p class="font-serif my-1">套路：</p>
+<ul class="list-disc font-serif">
+<li class="ml-8">状态表示</li>
+<li class="ml-8">状态计算</li>
+</ul>
+<p class="font-serif my-1">例子：</p>
+<ul class="list-disc font-serif">
+<li class="ml-8">P1775 式子合并(弱化) </li>
+<li class="ml-8">P1880 石子合并</li>
+<li class="ml-8">P1063 能量项链</li>
+<li class="ml-8"><a href="https://loj.ac/p/10149">LOJP10149 多边形划分</a></li>
+</ul></div></section><section><div><h2 id="dp" class="text-xl mt-2 pb-2 font-sans">DP中实现高精度</h2>
+<p class="font-serif my-1">我们需要什么：</p>
+<ul class="list-disc font-serif">
+<li class="ml-8"><code>add, sub, mul</code></li>
+<li class="ml-8"><code>cmp</code></li>
+</ul>
+<p class="font-serif my-1">可以使用函数封装! </p></div></section><section><div><h2 id="_1" class="text-xl mt-2 pb-2 font-sans">二维区间</h2>
+<ul class="list-disc font-serif">
+<li class="ml-8">可以使用dfs</li>
+</ul>
+<p class="font-serif my-1">套路：</p>
+<ul class="list-disc font-serif">
+<li class="ml-8">状态表示</li>
+<li class="ml-8">状态计算</li>
+</ul>
+<p class="font-serif my-1">例子：P5752</p>
+<p class="font-serif my-1">题外话：关于22年高考题</p></div></section></section><section><section><div class="center middle"><div style="width:100%"><div><h1 id="dp" class="text-2xl mt-2 font-sans">树形DP</h1></div></div></div></section><section><div><h2 id="_1" class="text-xl mt-2 pb-2 font-sans">树是递归结构</h2>
+<p class="font-serif my-1">套路：</p>
+<ul class="list-disc font-serif">
+<li class="ml-8">状态表示</li>
+<li class="ml-8">状态计算</li>
+</ul>
+<p class="font-serif my-1">练习：</p>
+<ul class="list-disc font-serif">
+<li class="ml-8">P1352 没有上司的舞会</li>
+<li class="ml-8">树的直径</li>
+<li class="ml-8"><a href="https://www.luogu.com.cn/problem/U261056">树的中心</a></li>
+<li class="ml-8"><a href="https://loj.ac/p/10155">数字转换</a></li>
+</ul></div></section><section><div><h2 id="_1" class="text-xl mt-2 pb-2 font-sans">关于树的直径的证明</h2>
+<p class="font-serif my-1">两种方法</p>
+<ul class="list-disc font-serif">
+<li class="ml-8">DP</li>
+<li class="ml-8">两次DFS：证明可以使用反证法</li>
+</ul></div></section><section><div><h2 id="_1" class="text-xl mt-2 pb-2 font-sans">更多的练习</h2>
+<ul class="list-disc font-serif">
+<li class="ml-8"><a href="https://loj.ac/p/10153">二叉苹果树</a></li>
+<li class="ml-8">P2016 战略游戏</li>
+<li class="ml-8"><a href="https://loj.ac/p/10157">皇宫看守</a></li>
+</ul></div></section></section><section><section><div class="center middle"><div style="width:100%"><div><h1 id="end" class="text-2xl mt-2 font-sans">End.</h1></div></div></div></section></section>
+        </div>
+    </div>
+
+    <script src="./static/reveal/reveal.js"></script>
+
+    <script>
+        Reveal.initialize({
+
+            width: 1024, height: 768,
+
+            slideNumber: 'c/t',
+            controlsTutorial: false,
+            progress: false,
+            hash: true,
+            center: false,
+            autoAnimateUnmatched: true,
+            autoAnimateEasing: 'ease-out',
+            autoAnimateDuration: 0.3,
+            transitionSpeed: 'fast'
+        });
+    </script>
+</body>
+
+</html>
