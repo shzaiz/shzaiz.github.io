@@ -108,7 +108,7 @@ async function copyCode(block) {
     <div class="navbar">
         <a href="https://shzaiz.github.io">AUG's Wiki</a>
         <a href="index.html"> ↑ Back to contents</a>
-        Last updated at 2023-09-08 10:22:02.838838
+        Last updated at 2023-09-13 17:17:07.782937
     </div>
 
     <div class="toc"></div>
@@ -126,8 +126,7 @@ $$</p>
 <h1>回到基本的内容</h1>
 <p>上一次, 我们介绍了机器可以按照说明书那样为我们执行重复的基本指令. 但是, 都可以有怎样的指令呢? 今天我们仍旧看一个比较基础的编程语言, 让我们可以和计算机用一种比较繁琐的方式来对话.</p>
 <h2>电脑能执行什么?</h2>
-<p>事实上, 电脑在执行的时候只能看懂0, 1序列. 比如这个:</p>
-<p><img src="./FILES/c-intro-cn.md/img-20230717121322.png" alt="seq01" /></p>
+<p>事实上, 电脑在执行的时候只能看懂0, 1序列.</p>
 <p>当然, 让人类直接编写0, 1序列显然是没办法做到的(这些0, 1序列是根据机器的构造设计的). 这时候, 人类先忍住自己的不适应感, 写一点简单的工具, 从而让他们更加轻松地写更加复杂的东西. 比如, 这样的0, 1序列可以用像<code>lea</code>这样的缩写表示, 更加方便. (lea是Load Effective Address的意思, 先不用管这是什么)</p>
 <p><img src="./FILES/c-intro-cn.md/img-20230717134718.png" alt="memorics" /></p>
 <p>当然还有更加高级的语言. 现在, 我们有更加方便的工具来表述我们的逻辑. 我们今天就要看比较古老的语言. 在未来的日常工作中, 可能很少会直接用它, 但是了解基本的内容以及它背后的思想是至关重要的.</p>
@@ -422,7 +421,7 @@ main(){
 </pre></div>
 
 <p>电脑看到之后, 就首先会执行<code>discount</code>, 并且把<code>discount(regular)</code>这一串替换为return的值. 并且不再继续执行这块个积木.</p>
-<p>好, 我们来用Python Tutor看一看. 这里, 我么为了保证没有不确定的输入, 我们随便给regular一个值:</p>
+<p>好, 我们来用Python Tutor看一看. 这里, 我么为了保证没有不确定的输入, 我们随便给它一个值, 假设传入regular:</p>
 <div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #B00040">float</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">discount</span>(<span style="color: #B00040">float</span><span style="color: #bbbbbb"> </span>price){
 <span style="color: #bbbbbb">    </span><span style="color: #B00040">float</span><span style="color: #bbbbbb"> </span>sale<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>price;
 <span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">return</span><span style="color: #bbbbbb"> </span>sale;

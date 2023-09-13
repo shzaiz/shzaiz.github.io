@@ -108,7 +108,7 @@ async function copyCode(block) {
     <div class="navbar">
         <a href="https://shzaiz.github.io">AUG's Wiki</a>
         <a href="index.html"> ↑ Back to contents</a>
-        Last updated at 2023-09-08 10:22:02.841517
+        Last updated at 2023-09-13 17:17:07.786324
     </div>
 
     <div class="toc"></div>
@@ -179,10 +179,35 @@ string<span style="color: #bbbbbb"> </span>get_string(string<span style="color: 
 <p>嗯, 这样子你就需要在后面加上一个分号了. 因为这个是我们C里面的规定.</p>
 <h2>然后是运行</h2>
 <p>过了编译器, 接下来就是运行时看看是不是符合我们的预期了. 如果在运行的时候, 我们发现没有满足我们的预期, 那么就可以使用调试器. 让它帮助我们理解它是如何进行执行的.</p>
-<h1>申请一系列的空间</h1>
-<p>但是, 在上一节介绍的内容说完之后, 我们发现一个小问题: 似乎我们连排序成绩这么简单的事情还做不到! 具体地, 我们希望一次就申请<strong>一系列</strong>的变量, 用下标区分:  \(a_0,a_1,\cdots a_n\) . 并且能方便地索引它. 这就需要引入数组的概念.</p>
-<h1>空间的使用</h1>
-<p>事实上, 我们每一次声明的变量,</p>
+<h1>调试的思考</h1>
+<p>在调试的时候, 我们实际上是反复地在脑子(或者工具中)考察这样子的状态:</p>
+<ul>
+<li>现在程序执行到哪一行了?</li>
+<li>现在机器里面的状态是什么?</li>
+</ul>
+<p>这里的状态, 实际上包含的是<strong>现在在执行哪一个函数</strong>? 以及现在<strong>变量的值都是多少</strong>.</p>
+<p>根据我们以前的知识, 变量是存在内存里面的. 那么, 内存长什么样?</p>
+<p>实际上, 内存里面所有的内容都仅仅有两个 &quot;状态&quot; -- 即  \(0\)  和  \(1\)  . 一般而言, 计算机会给一些类型分配固定的长度. 比如, 在某一个版本的 C 中, <code>int</code> 会占用 32 位. 这就表示了 <code>int</code> 的最大值是 <code>2147483647</code> -- 因为有一位需要表示符号, 我们只能有  \(2^{31}\)  个可以用的位数.</p>
+<p>一般而言, <code>int, float</code>会占用 32 位; 而更高精度的类型如 <code>long, double</code> 会占用 64 个位. 有些简单的类型如 <code>char</code> 只会占用 8 位. 在现代的机器上面, 类型大小大部分是 8 位的一个整数. 所以我们习惯上面称 8 位为一个字节. 当然, 这个单位可能只是一种大致的说法, 我们在这里没有给它下一个准确的定义.</p>
+<p>但是这件事情好像对于我们以前的一个内容不是很奏效: 那就是<code>string</code>. 想一想, 如果输入了 10 个字母, 和输入了 100 个字母, 内存的占用肯定是不一样的. 实际上, <code>string</code> 是和刚刚的那一类变量不大一样的. 因为本质上, <code>string</code> 就是许多个 <code>char</code> 连成一串得到的结果. 我们能不能让电脑一次给我们分配多个内存空间呢?</p>
+<p>这样是可以的. 这就是数组的观念. 比如我们希望创建一组 64 个<code>int</code>, 我们都可以这样声明变量:</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>x[<span style="color: #666666">64</span>];
+</pre></div>
+
+<p>在后面加上一个<code>[]</code>, 在中括号里面写一个<strong>常数</strong>代表大小, 就可以让计算机帮助我们分配那么多个的变量了.</p>
+<blockquote>
+<p>ASIDE: 数组长度为变量会怎么样?
+实际上会有很多麻烦的事情. 在一些新的标准下, 这样的模式已经被弃用.</p>
+</blockquote>
+<p>那么我们应该如何拿到, 修改这些变量呢? 比如我们想让<code>x</code>的第1个元素赋值为100, 应该怎么办? 我们可以这样写:</p>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span>x[<span style="color: #666666">0</span>]<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">100</span>;
+</pre></div>
+
+<p>由于计算机的内存是从 0 开始计数的(为了让计算机在操作内存单元的时候方便些), 所以普通话里面的 &quot;第几个&quot; 就变成了这里面的 &quot;第几减一个&quot;.</p>
+<p>这时候, <code>x[0]</code> 在等号的左边(有时候专业一点会叫做&quot;左值&quot;), 那么 C 就会找到 <code>x[0]</code> 的空间, 然后把 100 写进这个单元里面. 这样你在一个数学表达式中去要索取<code>x[0]</code>的时候, C就会去找到那个地方, 然后把内存的值取出来.</p>
+<p>为了确保我们大概理解了这些内容, 我们决定来看几个有趣的练习.</p>
+<p><strong>例子1</strong>. 处理物理实验中的数据. 在高中物理实验中, 我们感到比较折磨. 因为就那几个数据在计算的时候非常的麻烦! 这样重复, 具有机械的属性的计算显然是让人类很不快的. 因此, 我们可以输出 \(n\) 个数的平均值 -- 这个功能基本是任何实验都要有的一个步骤.</p>
+<p><strong>例子2</strong>. 凯撒密码.</p>
 <p>$$
 -\mathscr {E}\text{nd of the note}-
 $$</p>
