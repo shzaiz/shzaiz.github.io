@@ -108,15 +108,14 @@ async function copyCode(block) {
     <div class="navbar">
         <a href="https://shzaiz.github.io">AUG's Wiki</a>
         <a href="index.html"> ↑ Back to contents</a>
-        Last updated at 2023-12-26 15:07:27.978377
+        Last updated at 2023-12-26 15:13:33.427600
     </div>
 
     <div class="toc"></div>
     <a id="toc-button"><i class="far fa-bookmark"></i></a>
     
     <div>
-      <h1>Ch6</h1>
-<p>在上一章, 我们提出了一个通用的算法 -- &quot;XX优先遍历算法(whatever-first search)&quot;. 它既可以遍历有向图, 也可以遍历无向图. 这一章中, 我们仔细研究这一个特定的例子: 深度优先搜索(depth first search, DFS), 并且初步地看一下在有向图上面, 这个算法的行为如何.</p>
+      <p>在上一章, 我们提出了一个通用的算法 -- &quot;XX优先遍历算法(whatever-first search)&quot;. 它既可以遍历有向图, 也可以遍历无向图. 这一章中, 我们仔细研究这一个特定的例子: 深度优先搜索(depth first search, DFS), 并且初步地看一下在有向图上面, 这个算法的行为如何.</p>
 <p>尽管深度优先搜索可以用栈实现, 但是通常为了简洁, 我们直接考虑使用一个DFS函数来实现.
 <img src="./FILES/Ch6.md/img-20231225164246.png" alt="Img" /></p>
 <p>在实际中, 我们可以让这个算法稍微快一点. 如果我们在遍历<em>之前</em>, 我们已经标记了这个节点, 那么我们就不管它. 这项改动可以确保我们我们对于每一个节点 \(v\) , 只会调用一次<code>DFS(v)</code>. 这是一个很有趣的框架: 稍加改动, 我们就可以计算其他关于边和点的有用的信息. 具体的, 我们给两个&quot;黑盒&quot;作为子过程: 在遍历一个节点之前做什么, 遍历一个节点之后做什么.  也就是<code>PreVisit</code>以及<code>PostVisit</code>. 但怎么实现, 我们现在先不去详细展开.
