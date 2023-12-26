@@ -108,7 +108,7 @@ async function copyCode(block) {
     <div class="navbar">
         <a href="https://shzaiz.github.io">AUG's Wiki</a>
         <a href="index.html"> ↑ Back to contents</a>
-        Last updated at 2023-12-26 15:13:33.427600
+        Last updated at 2023-12-26 19:14:57.897800
     </div>
 
     <div class="toc"></div>
@@ -127,7 +127,7 @@ async function copyCode(block) {
 <p>像原来一样, 我们可以用这样的判别可达的算法遍历<em>整个</em>输入的图 -- 即使这个图是不联通的. 使用下图左侧的函数, 在<code>DFS</code>函数外面包裹一层, 每一次遍历之后只关注没有被染色的节点. 这里, 我们同样在访问所有节点之前给出设计的空间 -- 一个&quot;黑盒子&quot;. 在这里可以用于在访问节点之前的处理操作, 称作<code>Preprocess</code>.
 <img src="./FILES/Ch6.md/img-20231225215953.png" alt="Img" /></p>
 <p>另外, 如果我们允许修改这个图的话, 我们可以加入另一个<em>源点</em> \(s\) , 使得这个点到图中的每一点, 这样我们就只用调用一次<code>DFS</code>算法了. 就像上图右边写的一样. 这样子修改图, 我们就说我们把原图<em>增广</em>了. 现在, 遍历过程中父亲节点总之在这个修改过的<em>增广</em>图上面形成了一棵生成树, 而非<em>原始</em>的图. 两种方法实际上有本质上相同的行为. (注: 两个包裹在外面的函数是等价的, 这实际上是<strong>深度</strong>优先搜索的特性. 实际上, 如果遍历的顺序是广度优先的, 那么使用第一种写法(用<code>for</code>循环遍历)和第二种写法(添加一个源点 \(s\) )不会有相同的遍历顺序).</p>
-<h2>前序遍历和后序遍历</h2>
+<h1>前序遍历和后序遍历</h1>
 <p>希望你已经熟悉了有根<em>树</em>的前序遍历和后序遍历. 我们可以用深度优先搜索的方式遍历他们. 我们对于任何一个有向图, 也可以定义类似的遍历顺序. 在不连通的情况下, 我们可以像下图一样, 给遍历的顺序一个&quot;时钟&quot;. 这样子, 我们就可以给我们的&quot;深度优先遍历&quot;计时, 只要修改上面提到的三个&quot;黑盒&quot;就可以了.
 <img src="./FILES/Ch6.md/img-20231225221329.png" alt="Img" />
 <img src="./FILES/Ch6.md/img-20231225221344.png" alt="Img" /></p>
