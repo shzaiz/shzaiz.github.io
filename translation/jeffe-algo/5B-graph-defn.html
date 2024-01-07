@@ -108,7 +108,7 @@ async function copyCode(block) {
     <div class="navbar">
         <a href="https://shzaiz.github.io">AUG's Wiki</a>
         <a href="index.html"> ↑ Back to contents</a>
-        Last updated at 2024-01-05 15:48:48.297292
+        Last updated at 2024-01-07 15:14:47.732943
     </div>
 
     <div class="toc"></div>
@@ -116,7 +116,16 @@ async function copyCode(block) {
     
     <div>
       <h1>基本的定义</h1>
-<p>正式地说, 一个简单图是一个有序对 \((V,E)\) 的集合. 其中,  \(V\) 是任意非空的有限集合,  \(V\) 中的元素我们称作顶点(verticies)或节点(nodes),</p>
+<p>正式地说, 一个简单图是一个有序对 \((V,E)\) 的集合. 其中,  \(V\) 是任意非空的有限集合,  \(V\) 中的元素我们称作顶点(verticies)或节点(nodes),  \(E\) 是 \(V\) 中元素的有序或者无序对(pairs)构成的集合, 我们把它叫做(连接两个节点的)边(edges). 在一个无向(undirected)图中, 这些边是无序对(unordered pair), 或者说是大小为2的集合. 在这种情况下, 与其写 \(\{u, v\}\) , 我还不如简单点写做 \(uv\) . 在有向图中, 边是顶点有序对(ordered pairs)构成的集合. 同样的, 我会把它写作 \(u\to v\) , 而不是 \((u,v)\) .</p>
+<p>(注: 顶点的英语单词“vertices”的单数是 vertex 。类似地，“矩阵”的单数是matrix，“索引”的单数是index。除非你说意大利语，否则类似vertice, matrice这样的说法. 在意大利语中, 不仅有vertice, matrice, 还有indice, appendice, helice, apice, vortice, radice, simplice, codice,directrice, dominatrice, Unice, Kleenice, Asterice, Obelice, Dogmatice, Getafice, Cacofonice,Vitalstatistice, Geriatrice, 甚至 Jimi Hendrice! 如果你发现难以记住这条规则，那还是用node代表节点吧!)</p>
+<p>根据习惯(虽然有点让人摸不着头脑), 我还将使用  \(V\)  来表示图中的顶点数, 用 \(E\) 表示图中边的数量. 因此, 在任何无向图中, 我们有 \(0\leq E\leq \binom V2\) , 在有向图中,  \(0\leq E\leq V(V-1)\) .</p>
+<p>边 \(uv\) 或 \(u\to v\) 的<strong>端点</strong>(endpoints) 是它的两个顶点:  \(u\) 和 \(v\) . 对于一个有向边 \(u\to v\) 而言, 我们称 \(u\) 为<strong>尾</strong>(tail),  \(v\) 为<strong>头</strong>(head).</p>
+<p>如果我们使用 \((V,E)\) 这样定义的图不能表示多个有相同端点的无向边. 如果是有向边的情形, 就不能表示多个相同头和尾的有向边(当然一个有向图中可以包含有向边 \(u\to v\) 和它的反向边 \(v\to u\) ). 类似地, 把无向边定义做顶点的无序对就禁止了从一个顶点到其自身的无向边. 如果一个图没有<strong>环</strong>(loops)和<strong>重边</strong>(parallel edges)经常被称为<strong>简单图</strong>(simple graphs), 不是简单图的话, 我们一般叫做<strong>多重图</strong>(multigraphs). 尽管形式上的描述会差别比较大外, 大多数简单图的算法都可以在只需很少的修改, 甚至无需修改, 就可以扩展到多重图. 因此, 我认为这里没有必要给出多重图正式的定义.</p>
+<p>对于无向图中的任意边  \(uv\) , 我们称 \(u\) 是 \(v\) 的<strong>邻居</strong>(neibor),  \(v\) 也是 \(u\) 的邻居. 有时候我们还会说 \(u\) 和 \(v\) <strong>相邻</strong>(adjacent). 一个节点的<strong>度</strong>(degree)是它的邻居的数量. 在有向图中, 我们就要对两种邻居区分开: 对于任意的 \(u\to v\) , 我们称 \(u\) 是 \(v\) 的<strong>前驱</strong>(predecessor),  \(v\) 是 \(u\) 的<strong>后继</strong>(successor). 顶点的<strong>入度</strong>(in-degree)是它的前驱数, 顶点的<strong>出度</strong>(out-degree)是它的后继数.</p>
+<p>如果一个图 \(G^{\prime}=\left(V^{\prime}, E^{\prime}\right)\) 是图 \(G=(V, E)\) 的<strong>子图</strong>(subgraph), 当且仅当 \(V^{\prime} \subseteq V\) 并且 \(E^{\prime} \subseteq E\) . 一个<strong>真子图</strong>(proper subgraph)是除了  \(G\) ​​ 本身之外的任何子图.</p>
+<p>在无向图中的<strong>路径</strong>(walk)是一组顶点的集合, 这些顶点满足每对相邻的顶点在  \(G\)  中都是相邻的. 不正式地来看, 我们可以把它想象作经过按照一定顺序图中的一堆边. 如果这个路径访问每个节点最多一次, 我们就称它为<strong>通路</strong>(path). 对于图  \(G\)  中的任意两个顶点  \(u\)  和  \(v\)  ，如果  \(G\)  包含  \(u\)  和  \(v\)  之间的路径（因此是一个通路），则我们说  \(v\)  从  \(u\)  <strong>可达</strong>(reachable). 如果每个顶点都可以从其他的顶点到达, 那么无向图是<strong>连通</strong>(connected)的. 每一个无向图是由一个或者多个<strong>联通分量</strong>(connected components)组成的: 联通分量指的是最大的联通子图. 两个顶点在同一个联通分量中, 当且仅当它们之间存在一条路径.</p>
+<p>如果路径在同一顶点开始和结束, 则这个路径是<strong>封闭</strong>(closed)的. 一个<strong>环</strong>(cycle)是指, 一个封闭的路径, 满足每个节点最多进入(enter)和离开(leave)一次. 一个无向图是<strong>无环</strong>(acyclic)的, 如果不存在一个子图是一个环; 有时候, 无环图会叫做<strong>森林</strong>(forest). <strong>树</strong>(tree)是联通的无环图, 或者等价地说, 就是只有一个联通分量的森林. 无向图 \(G\) 的<strong>生成树</strong>(spanning tree)是包含 \(G\) 中的每个节点的联通子图. 并且当且仅当图是联通的时候, 它才有生成树. 图 \(G\) 的<strong>生成森林</strong>(spanning forest)是把 \(G\) 中的每一个联通分量做一次生成树构成的集合.</p>
+<p>对于有向图的情况, 我们需要换一种定义方法: 一个<strong>有向路径</strong>(directed walk)是一组顶点 \(v_0 \rightarrow v_1 \rightarrow v_2 \rightarrow \cdots \rightarrow v_{\ell}\) 的集合, 满足对于每一个 \(i\in [1..\ell-1]\) ,  \(v_{i-1} \rightarrow v_i\) 都是一个有向边. 类似地也可以定义<strong>有向通路</strong>(directed path)和<strong>有向环</strong>(directed cycle). 在有向图 \(G\) 中,  \(u\) <strong>可</strong>由 \(v\) 到<strong>达</strong>(可达, reachable), 当且仅当 \(G\) 中有一条有向路径从 \(u\) 到 \(v\) . (也就是有向通路). 有向图如果是强联通(strongly connected)的, 就说明每个顶点都可以从其他每个顶点到达. 如果有向图不包含有向环, 则该有向图是无环(acyclic)的; <strong>有向无环图</strong>(directed acyclic graphs)通常称为DAG.</p>
 
     </div>
 
