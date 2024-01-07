@@ -3,11 +3,11 @@
   <head>
     <link rel="stylesheet" href="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/style.css">
     <script src="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/plugin.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex, nofollow">
     <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
- 
     <script>
 const copyButtonLabel = "Copy Code";
 
@@ -59,14 +59,12 @@ async function copyCode(block) {
         code {
             font-family: 'Courier New', Courier, monospace;
         } 
-
         pre {
             font-family: 'Courier New', Courier, monospace;
         } 
         div{
             max-width: 100%;
             overflow: auto;
-            
         }
         .navbar {
             overflow: hidden;
@@ -75,7 +73,6 @@ async function copyCode(block) {
             top: 0; /* Position the navbar at the top of the page */
             width: 100%; /* Full width */
         }
-
         img {
         max-width: 80%;
         height: auto;
@@ -88,7 +85,6 @@ async function copyCode(block) {
             padding: 14px 16px;
             text-decoration: none;
         }
-
         a {
             color: #148bca;
             text-align: center;
@@ -96,25 +92,22 @@ async function copyCode(block) {
             padding-right: 2px;
             text-decoration: none;
         }
-
         p.hidden {
           overflow: hidden;
         }
-
     </style>
   </head>
   <body>
-    
     <div class="navbar">
         <a href="https://shzaiz.github.io">AUG's Wiki</a>
         <a href="index.html"> ↑ Back to contents</a>
-        Last updated at 2024-01-07 15:14:49.056095
+        Last updated at 2024-01-07 20:32:45.412268
     </div>
 
     <div class="toc"></div>
     <a id="toc-button"><i class="far fa-bookmark"></i></a>
     
-    <div>
+    <div id="renderedContent">
       <hr />
 <h2>mainfont: Noto Sans Mono CJK TC</h2>
 <h1>LN1 - 集合</h1>
@@ -156,30 +149,30 @@ async function copyCode(block) {
 <li>
 <p>是不是要发明一个符号, 来表示一个东西是不是在一个集合里?</p>
 <ul>
-<li>是的! 我们用某元素 \(\in\) 某集合(属于, belong to)这个记号.</li>
-<li>外观上还挺像小于号 \(&lt;\) , 你可以看到右边的元素可能会多一些, 从右边抽出来一个少一点的元素, 就得到了一个元素.</li>
-<li>那不属于呢? 参见 \(=,\neq\) , 你应该会发明出来 \(\cancel\in\) </li>
+<li>是的! 我们用某元素$\in$某集合(属于, belong to)这个记号.</li>
+<li>外观上还挺像小于号$&lt;$, 你可以看到右边的元素可能会多一些, 从右边抽出来一个少一点的元素, 就得到了一个元素.</li>
+<li>那不属于呢? 参见$=,\neq$, 你应该会发明出来$\cancel\in$</li>
 <li>杠往那边划? 无所谓.</li>
 </ul>
 </li>
 <li>
 <p>为什么不把这些都用字母表示呢?</p>
 <ul>
-<li>当然可以! 这样, 因为是一堆元素的collection, 就用大写字母表示好了, 比如 \(A\) ,  \(B\) . 集合中的元素就用小写字母表示就好了.  \(a\) ,  \(b\) .</li>
+<li>当然可以! 这样, 因为是一堆元素的collection, 就用大写字母表示好了, 比如$A$, $B$. 集合中的元素就用小写字母表示就好了. $a$, $b$.</li>
 </ul>
 </li>
 <li>
-<p>举例:  \(a\in A, b\in B\) .</p>
+<p>举例: $a\in A, b\in B$.</p>
 </li>
 </ul>
 <hr />
 <h2>教科书上的概念</h2>
 <p>直接照着书上讲太没意思了! 不如来个好玩的(你以后可能会经常需要用到), 如何在网络上学习数学概念/知识?</p>
 <p><a href="https://baike.baidu.com/item/%E9%9B%86%E5%90%88/2908117?fr=aladdin#1_1">查百度!</a>
-<a href="https://zh.wikipedia.org/wiki/%E9%9B%86%E5%90%88_(%E6%95%B0%E5%AD%A6)#%E5%AE%9A%E4%B9%89">查维基百科!</a><del>不知道Wiki会不会拒绝我们的连接</del></p>
+<a href="https://zh.wikipedia.org/wiki/%E9%9B%86%E5%90%88_(%E6%95%B0%E5%AD%A6)#%E5%AE%9A%E4%B9%89">查维基百科!</a>~~不知道Wiki会不会拒绝我们的连接~~</p>
 <p>有了互联网, 我们就可以学习整个世界上的知识!</p>
 <hr />
-<h2>教科书上的概念(cont&#x27;d)</h2>
+<h2>教科书上的概念(cont'd)</h2>
 <p>在有了这些基础之后, 我们还是来提炼一下我们至少应该知道什么.</p>
 <ul>
 <li>定义</li>
@@ -194,9 +187,9 @@ async function copyCode(block) {
 </li>
 <li>常见数集: 感觉没啥好说的, 照着说说就行了
 <ul>
-<li>为啥 \(N^*\) ? 一般而言, 加*表示去0.</li>
-<li>为啥整数(Integer)是 \(Z\) ? 用德语(Zahlen)的首字母表示, 因为有一位德国数学家对于整数进行了很详细的研究.</li>
-<li> \(Q\) 是啥? Quotient(成比例数, 也就是商)的缩写.</li>
+<li>为啥$N^<em>$? 一般而言, 加</em>表示去0.</li>
+<li>为啥整数(Integer)是$Z$? 用德语(Zahlen)的首字母表示, 因为有一位德国数学家对于整数进行了很详细的研究.</li>
+<li>$Q$是啥? Quotient(成比例数, 也就是商)的缩写.</li>
 <li>Real, Imaginary. 留个悬念. Complex(复杂) 留个悬念.</li>
 </ul>
 </li>
@@ -204,7 +197,7 @@ async function copyCode(block) {
 <ul>
 <li>留意区间</li>
 <li>无穷符号</li>
-<li>默认 \([m,n], m&lt;n\) </li>
+<li>默认$[m,n], m&lt;n$</li>
 </ul>
 </li>
 </ul>
@@ -220,20 +213,20 @@ async function copyCode(block) {
 <hr />
 <h2>名字是浮云, 内容是本质</h2>
 <p>抓住代表元素, 看它想要表达什么.
- \(\{x|x=2k,k\in \mathbb{Z}\}, \{x|x=2k+1,k\in \mathbb{Z}\}, \{x|x=2k-7,k\in \mathbb{Z}\},\{y|y=x+1\},\{x|y=2x\}\) </p>
+${x|x=2k,k\in \Z}, {x|x=2k+1,k\in \Z}, {x|x=2k-7,k\in \Z},{y|y=x+1},{x|y=2x}$</p>
 <hr />
 <h2>练习4,2.</h2>
 <ul>
 <li>对于练习4, 考虑因数!</li>
-<li> \(7=2m+3n\) , 有无数组整数解.
+<li>$7=2m+3n$, 有无数组整数解.
 <ul>
-<li>比如2,1; 那就可以写成 \(7=2\times2+3\times1+t(3\times2+(-2)\times3)\) , 后面的是0.</li>
+<li>比如2,1; 那就可以写成$7=2\times2+3\times1+t(3\times2+(-2)\times3)$, 后面的是0.</li>
 <li>是不是任意整数都可以这样表达? <em>欢迎来到数论的世界!</em></li>
 <li>好像凑出1就可以了...</li>
 <li>本质: 所有整数.</li>
 <li>还可以怎么写, 还可以表示所有整数?</li>
-<li>一个奇数倍的 \(m\) , 偶数倍的 \(n\) , 可以吗?</li>
-<li>如 \(6m+9n\) , 好像只能表示3的倍数呀...</li>
+<li>一个奇数倍的$m$, 偶数倍的$n$, 可以吗?</li>
+<li>如$6m+9n$, 好像只能表示3的倍数呀...</li>
 <li>留个悬念... 提示: 两个数互质(coprime, 两个数的最大公约数(Greatest Common Divisor, GCD或gcd)等于1). 你该怎么证明?</li>
 </ul>
 </li>
@@ -251,12 +244,12 @@ async function copyCode(block) {
 <li>集合要被计算!
 <ul>
 <li>算着算着元素没了!</li>
-<li>看个好玩的:  \(\{\phi\}\)  是空集吗?</li>
-<li> \(\phi \in \{\phi\}\) 吗?</li>
-<li> \(\phi \in \phi\) 吗?</li>
-<li> \(\phi \in \{\{\phi\}\}\) 吗?</li>
+<li>看个好玩的: ${\phi}$ 是空集吗?</li>
+<li>$\phi \in {\phi}$吗?</li>
+<li>$\phi \in \phi$吗?</li>
+<li>$\phi \in {{\phi}}$吗?</li>
 <li>只看第一层的.</li>
-<li> \(1\in \{\mathbb{R}\}\) ?</li>
+<li>$1\in {\R}$?</li>
 </ul>
 </li>
 </ul>
@@ -267,7 +260,7 @@ async function copyCode(block) {
 <p>6的1小问先拆开再配平方.</p>
 </li>
 <li>
-<p>2 转化为 \(ab/b^2=(m/b)^2+(n/b)^2\) .</p>
+<p>2 转化为$ab/b^2=(m/b)^2+(n/b)^2$.</p>
 </li>
 <li>
 <p>好耶!, 但是我们还有更好玩的. 有些集合经历了某些运算之后, 好像会跑出原有的范围. 这就是每次我们扩充数系(number system)的契机.</p>
@@ -298,12 +291,12 @@ async function copyCode(block) {
 <ul>
 <li>为什么不叫父集?</li>
 <li>问英文翻译 sonset(x) subseteq(√) &quot;源自于&quot;</li>
-<li>严格的,(任意 \(\forall\) , any).  \(\forall x\in A, x\in B, A\subseteq B\) .  \(\subseteq\) 包含于(include), 有点像 \(\leq\) .</li>
-<li>从元素个数来看, 就是 \(|A|\leq|B|\) .
+<li>严格的,(任意$\forall$, any). $\forall x\in A, x\in B, A\subseteq B$. $\subseteq$包含于(include), 有点像$\leq$.</li>
+<li>从元素个数来看, 就是$|A|\leq|B|$.
 <ul>
-<li>有时候也用 \(\text{card}(A)\leq \text{card}(B)\) .</li>
+<li>有时候也用$\text{card}(A)\leq \text{card}(B)$.</li>
 <li>但是太不方便敲键盘了.</li>
-<li>以后我可能会专门说一下如何造一个美观的数学文章. ( \(\LaTeX\) 预定).</li>
+<li>以后我可能会专门说一下如何造一个美观的数学文章. ($\LaTeX$预定).</li>
 </ul>
 </li>
 <li>反过来就念了包含.
@@ -318,17 +311,17 @@ async function copyCode(block) {
 <hr />
 <h2>子集(subset)(contd)</h2>
 <ul>
-<li>这对吗?  \(\phi \subseteq \phi\) </li>
+<li>这对吗? $\phi \subseteq \phi$</li>
 <li>不包含(于)</li>
 <li>真包含(于)
 <ul>
-<li> \(A\subseteq A\) ?</li>
+<li>$A\subseteq A$?</li>
 <li>(无耻一点想)辈分乱了哈哈哈</li>
 <li>不行, 必须定义一个严格小的, 就叫&quot;真子集&quot;.</li>
-<li>若 \(A\subseteq b\) , 存在( \(\exist\) , Exist),   \(x\in B, x\cancel\in A\) . 那么 \(A\subsetneqq B\) . (A是B的真子集).</li>
+<li>若$A\subseteq b$, 存在($\exist$, Exist),  $x\in B, x\cancel\in A$. 那么$A\subsetneqq B$. (A是B的真子集).</li>
 </ul>
 </li>
-<li>有没有 \(\cancel\subsetneqq\) ?
+<li>有没有$\cancel\subsetneqq$?
 <ul>
 <li>你说我打出来了就有?</li>
 <li>其实是两个命令的拼接, <code>\cancel(生成斜线)\subseteq(生成子集符号)neqq(生成不等号)</code> 那就是不包含或者相等, 有点模糊.</li>
@@ -336,14 +329,14 @@ async function copyCode(block) {
 </li>
 <li>相等
 <ul>
-<li>若 \(A\subseteq B,B\subseteq A\) ,  \(A=B\) .</li>
+<li>若$A\subseteq B,B\subseteq A$, $A=B$.</li>
 </ul>
 </li>
 </ul>
 <hr />
 <h2>练习8,9.</h2>
 <ul>
-<li> \(\subset\)  是过去表示  \(\subseteq\)  的方法!</li>
+<li>$\subset$ 是过去表示 $\subseteq$ 的方法!</li>
 <li>借助图像!</li>
 </ul>
 <hr />
@@ -397,32 +390,28 @@ async function copyCode(block) {
 <h2>Good luck and have fun!</h2>
 
     </div>
-
-   
-   
-   
     <hr>
-
-
-
-
-
-
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+          inlineMath: [ ['$','$'] ],
+          displayMath: [ ['$$','$$'] ],
+          processEscapes: true
+        },
+        "HTML-CSS": { fonts: ["TeX"] }
+      });
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
     <div id="disqus_thread"></div>
     <script type="text/javascript" async
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
     </script>
     <script>
-        /**
-        *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-        *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
-        
-        // var disqus_config = function () {
-        // this.page.url = ;  // Replace PAGE_URL with your page's canonical URL variable
-        // this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-        // };
-        
-        (function() { // DON'T EDIT BELOW THIS LINE
+        (function() { 
         var d = document, s = d.createElement('script');
         s.src = 'https://augpath.disqus.com/embed.js';
         s.setAttribute('data-timestamp', +new Date());

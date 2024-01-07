@@ -3,11 +3,11 @@
   <head>
     <link rel="stylesheet" href="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/style.css">
     <script src="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/plugin.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex, nofollow">
     <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
- 
     <script>
 const copyButtonLabel = "Copy Code";
 
@@ -59,14 +59,12 @@ async function copyCode(block) {
         code {
             font-family: 'Courier New', Courier, monospace;
         } 
-
         pre {
             font-family: 'Courier New', Courier, monospace;
         } 
         div{
             max-width: 100%;
             overflow: auto;
-            
         }
         .navbar {
             overflow: hidden;
@@ -75,7 +73,6 @@ async function copyCode(block) {
             top: 0; /* Position the navbar at the top of the page */
             width: 100%; /* Full width */
         }
-
         img {
         max-width: 80%;
         height: auto;
@@ -88,7 +85,6 @@ async function copyCode(block) {
             padding: 14px 16px;
             text-decoration: none;
         }
-
         a {
             color: #148bca;
             text-align: center;
@@ -96,25 +92,22 @@ async function copyCode(block) {
             padding-right: 2px;
             text-decoration: none;
         }
-
         p.hidden {
           overflow: hidden;
         }
-
     </style>
   </head>
   <body>
-    
     <div class="navbar">
         <a href="https://shzaiz.github.io">AUG's Wiki</a>
         <a href="index.html"> ↑ Back to contents</a>
-        Last updated at 2024-01-07 15:14:49.446308
+        Last updated at 2024-01-07 20:32:45.750205
     </div>
 
     <div class="toc"></div>
     <a id="toc-button"><i class="far fa-bookmark"></i></a>
     
-    <div>
+    <div id="renderedContent">
       <title>使用命令行</title>
 <p>$$
 \Huge \textbf{使用命令行}
@@ -134,16 +127,14 @@ $$</p>
 <p>命令行在 Windows 中仍然存在。事实上，在更高版本的 Windows 中，有两种命令行。在本节中，我们将介绍相对原始的命令行，即 <code>CMD</code> 程序。 另一个是<code>Powershell</code>, 比起<code>cmd</code>更加高级. 但是我们先不去探讨它了.</p>
 <h2>使用命令提示符</h2>
 <p>启动命令提示符的方法很简单：按下 <code>WINDOWS</code>+<code>R</code> 键，输入 <code>cmd</code>。然后会出现一个黑色窗口，上面写着</p>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span>C:<span style="color: #AA5D1F; font-weight: bold">\U</span>sers<span style="color: #AA5D1F; font-weight: bold">\A</span>dmin<span style="color: #AA5D1F; font-weight: bold">\&gt;</span><span style="color: #bbbbbb"> </span>_
-</pre></div>
-
+<pre><code class="language-shell">C:\Users\Admin\&gt; _
+</code></pre>
 <p>这意味着您的<strong>当前工作目录</strong>位于<code>C:\Users\Admin</code>路径下。你所做的文件和更改将默认反映在此目录下。</p>
 <p>要找到<code>C:/Users/Admin</code>是哪个文件夹, 就可以启动文件资源管理器(或我的电脑)，点击磁盘上的 <code>C</code> ，然后是 <code>Users</code> 文件夹，接着是 <code>Admin</code> 文件夹。您目前正在该目录下工作。</p>
 <p>就像在文件资源管理器中一样，你很想知道如何这些东西里面转一转，也就是在这个里面导航。但在此之前，我们先来看看它是如何启动应用程序的。</p>
 <p>首先，让我们在路径下运行一个程序。如果你没有合适的程序可以运行，我有一个名为 <code>hello.exe</code> 的程序，它可以在屏幕上打印 <code>Hello World</code>。 复制这个exe程序到你刚刚打开的文件夹, 输入</p>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span>hello.exe<span style="color: #bbbbbb"> </span>
-</pre></div>
-
+<pre><code class="language-shell">hello.exe 
+</code></pre>
 <p>也许你会看到屏幕上显示 &quot;Hello World&quot;。如果你看到的是错误信息，那可能是你搞错了这个程序的位置。</p>
 <p>但如果我想打开另一个文件夹中的应用程序呢？这就需要我们熟练掌握文件夹之间的导航。</p>
 <p><strong>更换文件夹(Change Directories)</strong>. 使用 <code>cd</code> 在目录间导航。<code>cd foldername</code> 进入一个文件夹，<code>cd .</code>进入当前文件夹，<code>cd ..</code>返回上一级文件夹。此外，我们还可以 <code>cd path/to/file/name/.../name</code>，将它们组合在一起。</p>
@@ -168,9 +159,8 @@ $$</p>
 <h2>强制退出应用</h2>
 <p>杀死进程(强制退出应用)就像点击窗口上的十字（<code>x</code>）按钮。但有些应用程序，如极域电子教室，不会为你提供关闭按钮。但我们仍然可以使用 <code>taskkill</code> 命令来强制退出程序。</p>
 <p>通常，极域电子教室的名称是<code>StudentMain.exe</code>。你可以执行</p>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span>taskkill<span style="color: #bbbbbb"> </span>/f<span style="color: #bbbbbb"> </span>/im<span style="color: #bbbbbb"> </span>StudentMain.exe
-</pre></div>
-
+<pre><code class="language-shell">taskkill /f /im StudentMain.exe
+</code></pre>
 <p>其中那些标志(flag)的意思是</p>
 <ul>
 <li><code>/f</code> 是强制退出(force quit)的意思</li>
@@ -182,9 +172,8 @@ $$</p>
 <p>您可以执行 <code>echo off</code> 来不显示前面的提示文本 <code>C:\Users\Admin</code>，只留下闪烁的光标。这在批处理文件中非常有用。</p>
 <h1>连接程序</h1>
 <p>也许你认为只显示文本是没什么大不了的。其实确实是这样的。但将文本写入文件就不那么简单了！我们应该怎么做呢? 其实很简单:</p>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #008000">echo</span><span style="color: #bbbbbb"> </span>hello<span style="color: #bbbbbb"> </span>&gt;<span style="color: #bbbbbb"> </span>a.txt<span style="color: #bbbbbb"> </span>
-</pre></div>
-
+<pre><code class="language-shell">echo hello &gt; a.txt 
+</code></pre>
 <p>你的目录中就会出现一个 <code>a.txt</code>。好极了！但为什么会这样呢？</p>
 <p>这种形式的程序基本上有两个与之相关的主要**&quot;流&quot;<strong>：<strong>输入</strong>流和</strong>输出**流--因为这很像算法的输入和输出--从输入端读入，向输出端写出。当程序尝试读取输入时，它会从输入流中读取，而当它打印某些内容时，它会打印到输出流中。</p>
 <h2>输入和输出重定向</h2>
@@ -195,9 +184,8 @@ $$</p>
 <p>比方说，您想列出一个目录中的所有文件，然后在输出中搜索特定字符串。你可以这样做</p>
 <p>首先，输入 <code>dir</code> 获取所有文件；其次，复制输出并使用 <code>find</code> 命令，同时粘贴之前复制的参数。</p>
 <p>但这里还有一个想法--通过 <code>pipe</code>来连接输入和输出，也就是一个小竖条 <code>|</code>。事实上, 你可以这样做</p>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span>dir<span style="color: #bbbbbb"> </span>|<span style="color: #bbbbbb"> </span>find<span style="color: #bbbbbb"> </span><span style="color: #BA2121">&quot;specific string&quot;</span>
-</pre></div>
-
+<pre><code class="language-shell">dir | find &quot;specific string&quot;
+</code></pre>
 <p>即直接将 <code>dir</code> 程序的<strong>输出结果</strong>作为给 <code>find</code> 程序的输入。</p>
 <p>好极了！现在，你已经对命令行有了基本的了解，最重要的是，你可以快速地自动处理事情了！</p>
 <h1>自动化</h1>
@@ -215,32 +203,28 @@ $$</p>
 $$</p>
 
     </div>
-
-   
-   
-   
     <hr>
-
-
-
-
-
-
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+          inlineMath: [ ['$','$'] ],
+          displayMath: [ ['$$','$$'] ],
+          processEscapes: true
+        },
+        "HTML-CSS": { fonts: ["TeX"] }
+      });
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
     <div id="disqus_thread"></div>
     <script type="text/javascript" async
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
     </script>
     <script>
-        /**
-        *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-        *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
-        
-        // var disqus_config = function () {
-        // this.page.url = ;  // Replace PAGE_URL with your page's canonical URL variable
-        // this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-        // };
-        
-        (function() { // DON'T EDIT BELOW THIS LINE
+        (function() { 
         var d = document, s = d.createElement('script');
         s.src = 'https://augpath.disqus.com/embed.js';
         s.setAttribute('data-timestamp', +new Date());

@@ -3,11 +3,11 @@
   <head>
     <link rel="stylesheet" href="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/style.css">
     <script src="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/plugin.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex, nofollow">
     <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
- 
     <script>
 const copyButtonLabel = "Copy Code";
 
@@ -59,14 +59,12 @@ async function copyCode(block) {
         code {
             font-family: 'Courier New', Courier, monospace;
         } 
-
         pre {
             font-family: 'Courier New', Courier, monospace;
         } 
         div{
             max-width: 100%;
             overflow: auto;
-            
         }
         .navbar {
             overflow: hidden;
@@ -75,7 +73,6 @@ async function copyCode(block) {
             top: 0; /* Position the navbar at the top of the page */
             width: 100%; /* Full width */
         }
-
         img {
         max-width: 80%;
         height: auto;
@@ -88,7 +85,6 @@ async function copyCode(block) {
             padding: 14px 16px;
             text-decoration: none;
         }
-
         a {
             color: #148bca;
             text-align: center;
@@ -96,108 +92,101 @@ async function copyCode(block) {
             padding-right: 2px;
             text-decoration: none;
         }
-
         p.hidden {
           overflow: hidden;
         }
-
     </style>
   </head>
   <body>
-    
     <div class="navbar">
         <a href="https://shzaiz.github.io">AUG's Wiki</a>
         <a href="index.html"> ↑ Back to contents</a>
-        Last updated at 2024-01-07 15:14:49.097607
+        Last updated at 2024-01-07 20:32:45.467496
     </div>
 
     <div class="toc"></div>
     <a id="toc-button"><i class="far fa-bookmark"></i></a>
     
-    <div>
+    <div id="renderedContent">
       <h1>EX1 - 集合</h1>
-<p>零. 判断: 很小的实数可以构成集合; 集合 \(\{1,2,3\}\) 与集合 \(\{(1,2,3)\}\) 是同一个集合;</p>
+<p>零. 判断: 很小的实数可以构成集合; 集合${1,2,3}$与集合${(1,2,3)}$是同一个集合;</p>
 <hr />
-<p>一. 填入符号 \(\in\) 或者 \(\notin\) :  \(\sqrt3 \qquad \textbf{Q}, 3 \qquad \textbf{R}\) .</p>
+<p>一. 填入符号$\in$或者$\notin$: $\sqrt3 \qquad \textbf{Q}, 3 \qquad \textbf{R}$.</p>
 <hr />
-<p>二. 填入符号 \(\in\) 或者 \(\notin\) :  \(7\qquad \{x|x=2m+3n,m,n\in \mathbb{Z}\}.\) </p>
+<p>二. 填入符号$\in$或者$\notin$: $7\qquad {x|x=2m+3n,m,n\in \Z}.$</p>
 <hr />
-<p>三. 填入符号 \(\in\) 或者 \(\notin\) :  \(\sqrt{2-\sqrt{3}}+\sqrt{2+\sqrt{3}} \quad\{x \mid x=a+\sqrt{6} b, a \in \mathbf{Q},  b \in \mathbf{Q}\}\) </p>
+<p>三. 填入符号$\in$或者$\notin$: $\sqrt{2-\sqrt{3}}+\sqrt{2+\sqrt{3}} \quad{x \mid x=a+\sqrt{6} b, a \in \mathbf{Q},  b \in \mathbf{Q}}$</p>
 <hr />
-<p>四. 列举集合 \(A\) 的元素, 其中 \(A\) 满足:  \(x\in \mathbb N\) 并且 \({8\over(6-x)}\in \mathbb N\) .</p>
+<p>四. 列举集合$A$的元素, 其中$A$满足: $x\in \mathbb N$并且${8\over(6-x)}\in \mathbb N$.</p>
 <hr />
-<p>五. 设   \(S=\{x \mid x=m+\sqrt{2} n, m, n \in \mathbf{Z}\}\) </p>
-<p>(1)若   \(a \in \mathbf{Z}\)  , 则   \(a\)   是否是集合   \(S\)   的元素?</p>
-<p>(2)对于   \(S\)   中任意两个元素   \(x_{1} , x_{2} , 则  x_{1}+x_{2} , x_{1} \cdot x_{2}\)   是否属于   \(S\)   ?</p>
-<p>(3)对于给定的整数   \(n\)  , 试求满足   \(0&lt;m+n \sqrt{2}&lt;1\)   的   \(S\)   中元素的个数.</p>
+<p>五. 设  $S={x \mid x=m+\sqrt{2} n, m, n \in \mathbf{Z}}$</p>
+<p>(1)若  $a \in \mathbf{Z}$ , 则  $a$  是否是集合  $S$  的元素?</p>
+<p>(2)对于  $S$  中任意两个元素  $x_{1} , x_{2} , 则  x_{1}+x_{2} , x_{1} \cdot x_{2}$  是否属于  $S$  ?</p>
+<p>(3)对于给定的整数  $n$ , 试求满足  $0&lt;m+n \sqrt{2}&lt;1$  的  $S$  中元素的个数.</p>
 <hr />
-<p>六.  \(S=\{x|x=m^2+n^2, m,n\in \mathbb{Z}\}\) , 若 \(a,b\in S\) , 问 \(ab, a/b\) 属于 \(S\) 吗? 如果 \(b\neq 0\) ,  \(a/b\) 是否可以表示为两个有理数的平方和?</p>
+<p>六. $S={x|x=m^2+n^2, m,n\in \Z}$, 若$a,b\in S$, 问$ab, a/b$属于$S$吗? 如果$b\neq 0$, $a/b$是否可以表示为两个有理数的平方和?</p>
 <hr />
-<p>七. 去掉 \((1,2)\) 的 \(xOy\) 坐标平面可以怎么用集合表示? 是{ \((x,y)|x\neq1\)  或  \(y\neq2\) }还是{ \(x,y|x\neq1\)  且  \(y\neq2\) }? 去掉 \((1,2)\) 和 \((3,4)\) 的 \(xOy\) 坐标平面可以怎么用集合表示?</p>
+<p>七. 去掉$(1,2)$的$xOy$坐标平面可以怎么用集合表示? 是{$(x,y)|x\neq1$ 或 $y\neq2$}还是{$x,y|x\neq1$ 且 $y\neq2$}? 去掉$(1,2)$和$(3,4)$的$xOy$坐标平面可以怎么用集合表示?</p>
 <hr />
-<p>八.  \(A=\{2 x \mid x=2 k, k \in \mathbb{Z}\} ,B=\{x \mid x=2 k+8, k \in \mathbb{Z}\}\) , 证明 \(A=B\) .</p>
+<p>八. $A={2 x \mid x=2 k, k \in \Z} ,B={x \mid x=2 k+8, k \in \Z}$, 证明$A=B$.</p>
 <hr />
 <p>九. 做选择</p>
-<p>(1)设集合   \(A=\left\{x \mid x=\frac{7}{9}+2 k\right.  或  \left.x=\frac{11}{9}+2 k, k \in \mathbf{Z}\right\}, B=\left\{y \mid y=\pm \frac{7}{9}+2 k, k \in \mathbf{Z}\right\}\)  , 则   \(A\)   与   \(B\)   的关系是 ( )</p>
-<p>A.   \(A \subseteq B\) </p>
-<p>B.  \(B \subseteq A\) </p>
-<p>C.   \(A=B\) </p>
-<p>D.   \(A \cap B=\left\{\frac{7}{9}\right\}\) </p>
-<p>(2)已知集合  \(M=\left\{x \mid x=m+\frac{1}{6}, m \in \mathbf{Z}\right\}, N=\left\{x \mid x=\frac{n}{2}-\frac{1}{3}, n \in \mathbf{Z}\right\}, P=\left\{x \mid x=\frac{p}{2}+\frac{1}{6}, p \in \mathbf{Z}\right\}\)  , 则   \(M, N, P\)   满足的关系是（  ）</p>
-<p>A.  \(M=N \varsubsetneqq P\) </p>
-<p>B.   \(M \varsubsetneqq N=P\) </p>
-<p>C.   \(M \varsubsetneqq N \varsubsetneqq P\) </p>
-<p>D.   \(N \varsubsetneqq P=M\) </p>
-<p>(3)若   \(A=\{(x, y)|| x|+| y \mid \leqslant 1\}, \quad B=\left\{(x, y) \mid x^{2}+y^{2} \leqslant 1\right\}, \quad C=\{(x, y)|| x|\leqslant 1,| y \mid \leqslant 1  \}\)  , 求  集合   \(A, B, C\)   的关系.</p>
+<p>(1)设集合  $A=\left{x \mid x=\frac{7}{9}+2 k\right.  或  \left.x=\frac{11}{9}+2 k, k \in \mathbf{Z}\right}, B=\left{y \mid y=\pm \frac{7}{9}+2 k, k \in \mathbf{Z}\right}$ , 则  $A$  与  $B$  的关系是 ( )</p>
+<p>A.  $A \subseteq B$</p>
+<p>B. $B \subseteq A$</p>
+<p>C.  $A=B$</p>
+<p>D.  $A \cap B=\left{\frac{7}{9}\right}$</p>
+<p>(2)已知集合 $M=\left{x \mid x=m+\frac{1}{6}, m \in \mathbf{Z}\right}, N=\left{x \mid x=\frac{n}{2}-\frac{1}{3}, n \in \mathbf{Z}\right}, P=\left{x \mid x=\frac{p}{2}+\frac{1}{6}, p \in \mathbf{Z}\right}$ , 则  $M, N, P$  满足的关系是（  ）</p>
+<p>A. $M=N \varsubsetneqq P$</p>
+<p>B.  $M \varsubsetneqq N=P$</p>
+<p>C.  $M \varsubsetneqq N \varsubsetneqq P$</p>
+<p>D.  $N \varsubsetneqq P=M$</p>
+<p>(3)若  $A={(x, y)|| x|+| y \mid \leqslant 1}, \quad B=\left{(x, y) \mid x^{2}+y^{2} \leqslant 1\right}, \quad C={(x, y)|| x|\leqslant 1,| y \mid \leqslant 1  }$ , 求  集合  $A, B, C$  的关系.</p>
 <hr />
 <p>十. 来数数</p>
-<p>(1)求集合   \(\{1,2\},\{1,2,3\},\{1,2,3,4\}\)   的子集的个数, 真子集的个数, 非空真子集的个数, 并推导出   \(\{1,2,3,4,5, \cdots, 100\}\)   的子集和真子集的个数.</p>
-<p>(2)求满足条件   \(\{1,2\} \subseteq A \subseteq\{1,2,3,4,5\}\)   的集合   \(A\)   的个数.</p>
-<p>(3)求集合   \(M=\{1,2,3, \cdots, 100\}\)   的所有子集的元素之和的和 (规定空集的元素和为零).</p>
+<p>(1)求集合  ${1,2},{1,2,3},{1,2,3,4}$  的子集的个数, 真子集的个数, 非空真子集的个数, 并推导出  ${1,2,3,4,5, \cdots, 100}$  的子集和真子集的个数.</p>
+<p>(2)求满足条件  ${1,2} \subseteq A \subseteq{1,2,3,4,5}$  的集合  $A$  的个数.</p>
+<p>(3)求集合  $M={1,2,3, \cdots, 100}$  的所有子集的元素之和的和 (规定空集的元素和为零).</p>
 <hr />
 <p>十一. 填空</p>
-<p>(1) 已知集合   \(A=\{a, a+d, a+2 d\}, B=\left\{a, a q, a q^{2}\right\}\)  , 其中   \(a \neq 0\)  , 且   \(A=B\)  , 则   \(q\)   等于_____.</p>
-<p>(2) 已知集合   \(A=\left\{x \mid x^{2}+a x-6 a^{2} \leqslant 0, x \in \mathbf{R}\right\}, B=\{x|| x-2 \mid&lt;a, x \in \mathbf{R}\}\)  , 当   \(B \varsubsetneqq A\)   时, 则实数   \(a\)   的取值范围是_____.</p>
+<p>(1) 已知集合  $A={a, a+d, a+2 d}, B=\left{a, a q, a q^{2}\right}$ , 其中  $a \neq 0$ , 且  $A=B$ , 则  $q$  等于_____.</p>
+<p>(2) 已知集合  $A=\left{x \mid x^{2}+a x-6 a^{2} \leqslant 0, x \in \mathbf{R}\right}, B={x|| x-2 \mid&lt;a, x \in \mathbf{R}}$ , 当  $B \varsubsetneqq A$  时, 则实数  $a$  的取值范围是_____.</p>
 <hr />
-<p>十二. 方程组   \(\left\{\begin{array}{l}x+y=1 \\ x^{2}-y^{2}=9\end{array}\right.\) 的解集是___.</p>
+<p>十二. 方程组  $\left{\begin{array}{l}x+y=1 \\ x^{2}-y^{2}=9\end{array}\right.$的解集是___.</p>
 <hr />
 <p>十三. 用适当的符号填空</p>
-<p>(1)   \(\sqrt{3} \qquad
-\{x \mid x \leqslant 2\},(1,2) \quad\{(x, y) \mid y=x+1\}\) </p>
-<p>(2)   \(\sqrt{2}+\sqrt{5} \qquad
-\{x \mid x \leqslant 2+\sqrt{3}\}\)  ,</p>
-<p>(3)   \(\left\{x \mid \frac{1}{x}=x, x \in \mathbf{R}\right\} 
-\qquad\left\{x \mid x^{3}-x=0\right\}\) </p>
+<p>(1)  $\sqrt{3} \qquad
+{x \mid x \leqslant 2},(1,2) \quad{(x, y) \mid y=x+1}$</p>
+<p>(2)  $\sqrt{2}+\sqrt{5} \qquad
+{x \mid x \leqslant 2+\sqrt{3}}$ ,</p>
+<p>(3)  $\left{x \mid \frac{1}{x}=x, x \in \mathbf{R}\right}
+\qquad\left{x \mid x^{3}-x=0\right}$</p>
 <hr />
-<p>十四.  若集合  \(M=\left\{x \mid x^{2}-x-2&gt;0\right\}, T=\{x \mid m x+1&lt;0\} \text ,\)  且  \(T \subseteq M\)  求实数  \(m\)  的取值范围.</p>
+<p>十四.  若集合 $M=\left{x \mid x^{2}-x-2&gt;0\right}, T={x \mid m x+1&lt;0} \text ,$ 且 $T \subseteq M$ 求实数 $m$ 的取值范围.</p>
 
     </div>
-
-   
-   
-   
     <hr>
-
-
-
-
-
-
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+          inlineMath: [ ['$','$'] ],
+          displayMath: [ ['$$','$$'] ],
+          processEscapes: true
+        },
+        "HTML-CSS": { fonts: ["TeX"] }
+      });
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
     <div id="disqus_thread"></div>
     <script type="text/javascript" async
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
     </script>
     <script>
-        /**
-        *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-        *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
-        
-        // var disqus_config = function () {
-        // this.page.url = ;  // Replace PAGE_URL with your page's canonical URL variable
-        // this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-        // };
-        
-        (function() { // DON'T EDIT BELOW THIS LINE
+        (function() { 
         var d = document, s = d.createElement('script');
         s.src = 'https://augpath.disqus.com/embed.js';
         s.setAttribute('data-timestamp', +new Date());

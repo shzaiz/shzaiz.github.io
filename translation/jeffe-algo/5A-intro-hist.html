@@ -3,11 +3,11 @@
   <head>
     <link rel="stylesheet" href="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/style.css">
     <script src="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/plugin.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex, nofollow">
     <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
- 
     <script>
 const copyButtonLabel = "Copy Code";
 
@@ -59,14 +59,12 @@ async function copyCode(block) {
         code {
             font-family: 'Courier New', Courier, monospace;
         } 
-
         pre {
             font-family: 'Courier New', Courier, monospace;
         } 
         div{
             max-width: 100%;
             overflow: auto;
-            
         }
         .navbar {
             overflow: hidden;
@@ -75,7 +73,6 @@ async function copyCode(block) {
             top: 0; /* Position the navbar at the top of the page */
             width: 100%; /* Full width */
         }
-
         img {
         max-width: 80%;
         height: auto;
@@ -88,7 +85,6 @@ async function copyCode(block) {
             padding: 14px 16px;
             text-decoration: none;
         }
-
         a {
             color: #148bca;
             text-align: center;
@@ -96,30 +92,27 @@ async function copyCode(block) {
             padding-right: 2px;
             text-decoration: none;
         }
-
         p.hidden {
           overflow: hidden;
         }
-
     </style>
   </head>
   <body>
-    
     <div class="navbar">
         <a href="https://shzaiz.github.io">AUG's Wiki</a>
         <a href="index.html"> ↑ Back to contents</a>
-        Last updated at 2024-01-07 15:14:47.725763
+        Last updated at 2024-01-07 20:32:44.939299
     </div>
 
     <div class="toc"></div>
     <a id="toc-button"><i class="far fa-bookmark"></i></a>
     
-    <div>
+    <div id="renderedContent">
       <p>$$
 \huge 第五章 ~~基本图论算法
 $$</p>
 <h1>历史和介绍</h1>
-<p>一个图可以看做有序对 \((a,b)\) 的集合. 这个有序对的元素的类型可以基本是任意的 -- 比如整数的有序对 \((1,2)\) , 城市的有序对 \((郑州, 武汉)\) , 星星的有序对 \((太阳, 月亮)\) , 论文的有序对 \((&#x27;\text{Attention is all you need}&#x27;, &#x27;\text{A Mathematical Theory of Communication}&#x27;)\) , 网页的有序对 \((``baidu.com&quot;, ``google.com&#x27;&#x27;)\) , 一个游戏状态的有序对, 递归问题的有序对, 甚至图本身的有序对! 我们要是希望对于图进行可视化的话, 一个常见的方法是: 对于那些底层的元素(比如上面的 \(1,2\) ;  \(太阳, 月亮\) ) 我们把它称为节点(vertices)或者顶点(nodes). 那些有序对 \((1,2)\) 我们称为一条边(edges)或者一个弧(arcs). 但事实上, 这些底层对象和有序对可以包含任何东西.</p>
+<p>一个图可以看做有序对$(a,b)$的集合. 这个有序对的元素的类型可以基本是任意的 -- 比如整数的有序对$(1,2)$, 城市的有序对$(郑州, 武汉)$, 星星的有序对$(太阳, 月亮)$, 论文的有序对$('\text{Attention is all you need}', '\text{A Mathematical Theory of Communication}')$, 网页的有序对$(<code>baidu.com&quot;, </code>google.com'')$, 一个游戏状态的有序对, 递归问题的有序对, 甚至图本身的有序对! 我们要是希望对于图进行可视化的话, 一个常见的方法是: 对于那些底层的元素(比如上面的$1,2$; $太阳, 月亮$) 我们把它称为节点(vertices)或者顶点(nodes). 那些有序对$(1,2)$我们称为一条边(edges)或者一个弧(arcs). 但事实上, 这些底层对象和有序对可以包含任何东西.</p>
 <p>图最早的例子之一是绘制地图. 在罗马帝国的鼎盛时期, 罗马工程师建造了一个横跨欧洲、西亚和中亚以及北非的道路, 这些道路超过了400000公里。路上的旅行者会携带一些清单. 这些清单是要怎么走的指引, 有的甚至附上了路上的地标和距离的图像. 《普汀格尔地图》(Tabula Peutingeriana)是一卷13世纪的卷轴，展示了整个罗马公共行程。人们普遍认为它是一份中世纪的复制品，据信是在奥古斯都凯撒统治时期委托制作的第五世纪修订版的第一世纪旅行路线图。这个地图虽不是按照比例尺精确绘制的(历史学家争论它是否有资格作为“地图”!),  但是它将道路用连线表示出来, 就像今天的地铁地图一样. 每条道路沿线的城市由代表该道路的曲线中的拐点表示, 地图上还标出了这些城市的名称以及它们之间的距离. 因此，该地图包含足够的信息来找到5世纪的时候罗马帝国任意两个城市之间的最短路线. 如下图.</p>
 <p><img src="./FILES/5A-intro-hist.md/img-20240105141609.png" alt="Img" /></p>
 <p>(图5.1 康拉德·米勒对普汀格尔地图的部分修复展示了从现代比尔滕（Veteribus，左上方）经科隆（Agripina）和波恩（Bonnae）到美因茨（Mogontiaco，右上方）的罗马道路，还有通往特里尔（Avg Tresvirorvm，中央）和梅斯（Matricorvm，底部中央）的支线。（参见书末的图片来源。）)</p>
@@ -135,32 +128,28 @@ statique, dont le projet fut donné en MDCLXXXVII(新力学或静力学, 1687年
 theory在1926年由André Sainte-Laguë出版. 十年后, Dénes Knig 发表了&quot;第一本&quot;图论相关的著作.</p>
 
     </div>
-
-   
-   
-   
     <hr>
-
-
-
-
-
-
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+          inlineMath: [ ['$','$'] ],
+          displayMath: [ ['$$','$$'] ],
+          processEscapes: true
+        },
+        "HTML-CSS": { fonts: ["TeX"] }
+      });
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
     <div id="disqus_thread"></div>
     <script type="text/javascript" async
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
     </script>
     <script>
-        /**
-        *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-        *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
-        
-        // var disqus_config = function () {
-        // this.page.url = ;  // Replace PAGE_URL with your page's canonical URL variable
-        // this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-        // };
-        
-        (function() { // DON'T EDIT BELOW THIS LINE
+        (function() { 
         var d = document, s = d.createElement('script');
         s.src = 'https://augpath.disqus.com/embed.js';
         s.setAttribute('data-timestamp', +new Date());

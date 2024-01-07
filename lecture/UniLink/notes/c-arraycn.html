@@ -3,11 +3,11 @@
   <head>
     <link rel="stylesheet" href="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/style.css">
     <script src="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/plugin.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex, nofollow">
     <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
- 
     <script>
 const copyButtonLabel = "Copy Code";
 
@@ -59,14 +59,12 @@ async function copyCode(block) {
         code {
             font-family: 'Courier New', Courier, monospace;
         } 
-
         pre {
             font-family: 'Courier New', Courier, monospace;
         } 
         div{
             max-width: 100%;
             overflow: auto;
-            
         }
         .navbar {
             overflow: hidden;
@@ -75,7 +73,6 @@ async function copyCode(block) {
             top: 0; /* Position the navbar at the top of the page */
             width: 100%; /* Full width */
         }
-
         img {
         max-width: 80%;
         height: auto;
@@ -88,7 +85,6 @@ async function copyCode(block) {
             padding: 14px 16px;
             text-decoration: none;
         }
-
         a {
             color: #148bca;
             text-align: center;
@@ -96,25 +92,22 @@ async function copyCode(block) {
             padding-right: 2px;
             text-decoration: none;
         }
-
         p.hidden {
           overflow: hidden;
         }
-
     </style>
   </head>
   <body>
-    
     <div class="navbar">
         <a href="https://shzaiz.github.io">AUG's Wiki</a>
         <a href="index.html"> ↑ Back to contents</a>
-        Last updated at 2024-01-07 15:14:49.417043
+        Last updated at 2024-01-07 20:32:45.733673
     </div>
 
     <div class="toc"></div>
     <a id="toc-button"><i class="far fa-bookmark"></i></a>
     
-    <div>
+    <div id="renderedContent">
       <title>C数组</title>
 <p>$$
 \Huge \textbf{C中的数组}
@@ -126,28 +119,26 @@ $$</p>
 <p>在上面的内容中, 我们知道了如何对于若干个变量做各种各样的操作, 并且运用控制流使得他们做各种不同的事情. 此外, 我们还模块化了一些东西, 让我们可以轻松地调用.</p>
 <p>了解了上面的内容之后, 我们就知道了<code>#include &quot;cs50.h&quot;</code>到底做了什么. 打开那份文件, 你会看到许许多多的函数声明, 每一个函数都实现了我们上次展示的功能. 但是你会发现, 有一些新奇的用法: 比如<code>#define</code>这些用<code>#</code>打头的指令, 以及奇怪的<code>*</code>. 不要担心. 我们在下一次就会遇到他们.</p>
 <p>我们来看我们最开始的例子:</p>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #3D7B7B; font-style: italic">// Greeting.c</span>
-<span style="color: #9C6500">#include</span><span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">&lt;stdio.h&gt;</span>
-<span style="color: #9C6500">#include</span><span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">&quot;cs50.h&quot;</span>
+<pre><code class="language-c">// Greeting.c
+#include &lt;stdio.h&gt;
+#include &quot;cs50.h&quot;
 
-<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">main</span>(){
-<span style="color: #bbbbbb">    </span>string<span style="color: #bbbbbb"> </span>name<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>get_string(<span style="color: #BA2121">&quot;What&#39;s your name&quot;</span>);
-<span style="color: #bbbbbb">    </span>printf(<span style="color: #BA2121">&quot;Hello, %s&quot;</span>,<span style="color: #bbbbbb"> </span>name);
+int main(){
+    string name = get_string(&quot;What's your name&quot;);
+    printf(&quot;Hello, %s&quot;, name);
 }
-</pre></div>
-
+</code></pre>
 <p>其实我们第一次遇到的神秘指令无非就是一些函数调用. 在预处理器处理完这一群东西之后, 源文件就会变成这样:</p>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span>...(Omitted)
-string<span style="color: #bbbbbb"> </span>get_string(string<span style="color: #bbbbbb"> </span>prompt);
-<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">printf</span>(string<span style="color: #bbbbbb"> </span>format,<span style="color: #bbbbbb"> </span>...);
+<pre><code class="language-c">...(Omitted)
+string get_string(string prompt);
+int printf(string format, ...);
 ...(Omitted)
 
-<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>main(){
-<span style="color: #bbbbbb">    </span>string<span style="color: #bbbbbb"> </span>name<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>get_string(<span style="color: #BA2121">&quot;What&#39;s your name&quot;</span>);
-<span style="color: #bbbbbb">    </span>printf(<span style="color: #BA2121">&quot;Hello, %s&quot;</span>,<span style="color: #bbbbbb"> </span>name);
+int main(){
+    string name = get_string(&quot;What's your name&quot;);
+    printf(&quot;Hello, %s&quot;, name);
 }
-</pre></div>
-
+</code></pre>
 <p>接下来, 编译的过程就会进行, 把它带到更低一层的汇编指令, 就像这样:</p>
 <p><img src="./FILES/c-arraycn.md/img-20230722233342.png" alt="asm" /></p>
 <p>不过这个内容我们现在不必担心. 因为这是计算机专业在之后会了解的一个有趣的内容. 大多数时候, 不理解这个也不影响太多 - 毕竟这个更贴切与计算机自己理解东西的视角. 当编译器和高级语言没有被发明出来的时候, 人们就要用这样的方式操作电脑. 想想就非常的难以置信! 但是, 有些代码可能会被编译器经过一些很蠢的优化降低了性能, 那个时候, 可能也要像这样追求程序的效率了.</p>
@@ -156,22 +147,21 @@ string<span style="color: #bbbbbb"> </span>get_string(string<span style="color: 
 <p>在我们的程序变复杂之前, 我们最好要了解一下调试: 毕竟, 程序变得复杂之后, 我们就很难用脑力追踪程序运行一条之后, 里面的各个变化了. 所以, 我们自然有调试工具帮助我们!</p>
 <h2>第一层防线: 编译器</h2>
 <p>看下面的一段程序:</p>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #9C6500">#include</span><span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">&lt;stdio.h&gt;</span>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
 
-<span style="color: #3D7B7B; font-style: italic">/*</span>
-<span style="color: #3D7B7B; font-style: italic">Goal: Print a 3*3 square</span>
-<span style="color: #3D7B7B; font-style: italic">*/</span>
+/*
+Goal: Print a 3*3 square
+*/
 
-<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">main</span>(){
-<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">for</span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>i<span style="color: #666666">=0</span>;<span style="color: #bbbbbb"> </span>i<span style="color: #666666">&lt;=3</span>;<span style="color: #bbbbbb"> </span>i<span style="color: #666666">++</span>){
-<span style="color: #bbbbbb">        </span><span style="color: #008000; font-weight: bold">for</span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>j<span style="color: #666666">=0</span>;<span style="color: #bbbbbb"> </span>j<span style="color: #666666">&lt;=3</span>;<span style="color: #bbbbbb"> </span>j<span style="color: #666666">++</span>){
-<span style="color: #bbbbbb">            </span>printf(<span style="color: #BA2121">&quot;#&quot;</span>)
-<span style="color: #bbbbbb">        </span>}
-<span style="color: #bbbbbb">    </span>}
-<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">return</span><span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>;
+int main(){
+    for(int i=0; i&lt;=3; i++){
+        for(int j=0; j&lt;=3; j++){
+            printf(&quot;#&quot;)
+        }
+    }
+    return 0;
 }
-</pre></div>
-
+</code></pre>
 <p>首先我们来编译一下, 发现编译器开始报错了 -</p>
 <p><img src="./FILES/c-arraycn.md/img-20230722234514.png" alt="wrong info" /></p>
 <p>如果你配置好了编辑器的话, 把鼠标移到上面就会有这样的提示:</p>
@@ -187,58 +177,52 @@ string<span style="color: #bbbbbb"> </span>get_string(string<span style="color: 
 </ul>
 <p>这里的状态, 实际上包含的是<strong>现在在执行哪一个函数</strong>? 以及现在<strong>变量的值都是多少</strong>.</p>
 <p>根据我们以前的知识, 变量是存在内存里面的. 那么, 内存长什么样?</p>
-<p>实际上, 内存里面所有的内容都仅仅有两个 &quot;状态&quot; -- 即  \(0\)  和  \(1\)  . 一般而言, 计算机会给一些类型分配固定的长度. 比如, 在某一个版本的 C 中, <code>int</code> 会占用 32 位. 这就表示了 <code>int</code> 的最大值是 <code>2147483647</code> -- 因为有一位需要表示符号, 我们只能有  \(2^{31}\)  个可以用的位数.</p>
+<p>实际上, 内存里面所有的内容都仅仅有两个 &quot;状态&quot; -- 即 $0$ 和 $1$ . 一般而言, 计算机会给一些类型分配固定的长度. 比如, 在某一个版本的 C 中, <code>int</code> 会占用 32 位. 这就表示了 <code>int</code> 的最大值是 <code>2147483647</code> -- 因为有一位需要表示符号, 我们只能有 $2^{31}$ 个可以用的位数.</p>
 <p>一般而言, <code>int, float</code>会占用 32 位; 而更高精度的类型如 <code>long, double</code> 会占用 64 个位. 有些简单的类型如 <code>char</code> 只会占用 8 位. 在现代的机器上面, 类型大小大部分是 8 位的一个整数. 所以我们习惯上面称 8 位为一个字节. 当然, 这个单位可能只是一种大致的说法, 我们在这里没有给它下一个准确的定义.</p>
 <p>但是这件事情好像对于我们以前的一个内容不是很奏效: 那就是<code>string</code>. 想一想, 如果输入了 10 个字母, 和输入了 100 个字母, 内存的占用肯定是不一样的. 实际上, <code>string</code> 是和刚刚的那一类变量不大一样的. 因为本质上, <code>string</code> 就是许多个 <code>char</code> 连成一串得到的结果. 我们能不能让电脑一次给我们分配多个内存空间呢?</p>
 <p>这样是可以的. 这就是数组的观念. 比如我们希望创建一组 64 个<code>int</code>, 我们都可以这样声明变量:</p>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>x[<span style="color: #666666">64</span>];
-</pre></div>
-
+<pre><code class="language-cpp">int x[64];
+</code></pre>
 <p>在后面加上一个<code>[]</code>, 在中括号里面写一个<strong>常数</strong>代表大小, 就可以让计算机帮助我们分配那么多个的变量了.</p>
 <blockquote>
 <p>ASIDE: 数组长度为变量会怎么样?
 实际上会有很多麻烦的事情. 在一些新的标准下, 这样的模式已经被弃用.</p>
 </blockquote>
 <p>那么我们应该如何拿到, 修改这些变量呢? 比如我们想让<code>x</code>的第1个元素赋值为100, 应该怎么办? 我们可以这样写:</p>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span>x[<span style="color: #666666">0</span>]<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">100</span>;
-</pre></div>
-
+<pre><code class="language-cpp">x[0] = 100;
+</code></pre>
 <p>由于计算机的内存是从 0 开始计数的(为了让计算机在操作内存单元的时候方便些), 所以普通话里面的 &quot;第几个&quot; 就变成了这里面的 &quot;第几减一个&quot;.</p>
 <p>这时候, <code>x[0]</code> 在等号的左边(有时候专业一点会叫做&quot;左值&quot;), 那么 C 就会找到 <code>x[0]</code> 的空间, 然后把 100 写进这个单元里面. 这样你在一个数学表达式中去要索取<code>x[0]</code>的时候, C就会去找到那个地方, 然后把内存的值取出来.</p>
 <p>为了确保我们大概理解了这些内容, 我们决定来看几个有趣的练习.</p>
-<p><strong>例子1</strong>. 处理物理实验中的数据. 在高中物理实验中, 我们感到比较折磨. 因为就那几个数据在计算的时候非常的麻烦! 这样重复, 具有机械的属性的计算显然是让人类很不快的. 因此, 我们可以输出 \(n\) 个数的平均值 -- 这个功能基本是任何实验都要有的一个步骤.</p>
+<p><strong>例子1</strong>. 处理物理实验中的数据. 在高中物理实验中, 我们感到比较折磨. 因为就那几个数据在计算的时候非常的麻烦! 这样重复, 具有机械的属性的计算显然是让人类很不快的. 因此, 我们可以输出$n$个数的平均值 -- 这个功能基本是任何实验都要有的一个步骤.</p>
 <p><strong>例子2</strong>. 凯撒密码. 你要做的是平移字母到下一个单位, 得到最后的密码.</p>
 <p>$$
 -\mathscr {E}\text{nd of the note}-
 $$</p>
 
     </div>
-
-   
-   
-   
     <hr>
-
-
-
-
-
-
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+          inlineMath: [ ['$','$'] ],
+          displayMath: [ ['$$','$$'] ],
+          processEscapes: true
+        },
+        "HTML-CSS": { fonts: ["TeX"] }
+      });
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
     <div id="disqus_thread"></div>
     <script type="text/javascript" async
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
     </script>
     <script>
-        /**
-        *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-        *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
-        
-        // var disqus_config = function () {
-        // this.page.url = ;  // Replace PAGE_URL with your page's canonical URL variable
-        // this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-        // };
-        
-        (function() { // DON'T EDIT BELOW THIS LINE
+        (function() { 
         var d = document, s = d.createElement('script');
         s.src = 'https://augpath.disqus.com/embed.js';
         s.setAttribute('data-timestamp', +new Date());

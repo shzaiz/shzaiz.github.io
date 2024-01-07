@@ -3,11 +3,11 @@
   <head>
     <link rel="stylesheet" href="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/style.css">
     <script src="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/plugin.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex, nofollow">
     <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
- 
     <script>
 const copyButtonLabel = "Copy Code";
 
@@ -59,14 +59,12 @@ async function copyCode(block) {
         code {
             font-family: 'Courier New', Courier, monospace;
         } 
-
         pre {
             font-family: 'Courier New', Courier, monospace;
         } 
         div{
             max-width: 100%;
             overflow: auto;
-            
         }
         .navbar {
             overflow: hidden;
@@ -75,7 +73,6 @@ async function copyCode(block) {
             top: 0; /* Position the navbar at the top of the page */
             width: 100%; /* Full width */
         }
-
         img {
         max-width: 80%;
         height: auto;
@@ -88,7 +85,6 @@ async function copyCode(block) {
             padding: 14px 16px;
             text-decoration: none;
         }
-
         a {
             color: #148bca;
             text-align: center;
@@ -96,84 +92,76 @@ async function copyCode(block) {
             padding-right: 2px;
             text-decoration: none;
         }
-
         p.hidden {
           overflow: hidden;
         }
-
     </style>
   </head>
   <body>
-    
     <div class="navbar">
         <a href="https://shzaiz.github.io">AUG's Wiki</a>
         <a href="index.html"> ↑ Back to contents</a>
-        Last updated at 2024-01-07 15:14:48.878794
+        Last updated at 2024-01-07 20:32:45.242778
     </div>
 
     <div class="toc"></div>
     <a id="toc-button"><i class="far fa-bookmark"></i></a>
     
-    <div>
+    <div id="renderedContent">
       <h1>A. 枚举</h1>
-<p>枚举三个数 \((a_i, a_j, a_k)\) ,  \(a_i \leq a_j\leq a_k\) , 使得 \(a_i\) 和 \(a_k\) 都变成 \(a_j\) 最小的长度即可.</p>
+<p>枚举三个数$(a_i, a_j, a_k)$, $a_i \leq a_j\leq a_k$, 使得$a_i$和$a_k$都变成$a_j$最小的长度即可.</p>
 <p><code>INT_MAX</code>开小了qwq.</p>
 <h1>B. 构造</h1>
-<p>构造 \(1\ 0\ 0 \cdots \ 0 \ 1\) 即可.</p>
+<p>构造$1\ 0\ 0 \cdots \ 0 \ 1$即可.</p>
 <h1>C. 贪心</h1>
 <p>有点那个欧拉筛, 能去掉就去掉, 否则就到下一轮, 每一个都来一次.</p>
 <p>注意开<code>long long</code>.</p>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #B00040">char</span><span style="color: #bbbbbb"> </span>s[MAXN];
-<span style="color: #B00040">bool</span><span style="color: #bbbbbb"> </span>vis[MAXN];
-<span style="color: #B00040">void</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">solve</span>(){
-<span style="color: #bbbbbb">    </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>n;<span style="color: #bbbbbb"> </span>cin<span style="color: #666666">&gt;&gt;</span>n;
-<span style="color: #bbbbbb">    </span>F(i,<span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>,<span style="color: #bbbbbb"> </span>n)<span style="color: #bbbbbb"> </span>vis[i]<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>;
-<span style="color: #bbbbbb">    </span>scanf(<span style="color: #BA2121">&quot;%s&quot;</span>,<span style="color: #bbbbbb"> </span>s<span style="color: #666666">+1</span>);
-<span style="color: #bbbbbb">    </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>ans<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>;
-<span style="color: #bbbbbb">    </span>F(i,<span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>,<span style="color: #bbbbbb"> </span>n){
-<span style="color: #bbbbbb">        </span><span style="color: #008000; font-weight: bold">for</span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>j<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>;<span style="color: #bbbbbb"> </span>j<span style="color: #666666">*</span>i<span style="color: #666666">&lt;=</span>n;<span style="color: #bbbbbb"> </span>j<span style="color: #666666">++</span>){
-<span style="color: #bbbbbb">            </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>ck<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>j<span style="color: #666666">*</span>i;
-<span style="color: #bbbbbb">            </span><span style="color: #008000; font-weight: bold">if</span>(s[ck]<span style="color: #bbbbbb"> </span><span style="color: #666666">==</span><span style="color: #bbbbbb"> </span><span style="color: #BA2121">&#39;0&#39;</span>){
-<span style="color: #bbbbbb">                </span><span style="color: #008000; font-weight: bold">if</span>(<span style="color: #666666">!</span>vis[ck])<span style="color: #bbbbbb"> </span>ans<span style="color: #bbbbbb"> </span><span style="color: #666666">+=</span><span style="color: #bbbbbb"> </span>i;
-<span style="color: #bbbbbb">                </span>vis[ck]<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>;<span style="color: #bbbbbb"> </span>
-<span style="color: #bbbbbb">            </span>}<span style="color: #008000; font-weight: bold">else</span>{
-<span style="color: #bbbbbb">                </span><span style="color: #008000; font-weight: bold">break</span>;
-<span style="color: #bbbbbb">            </span>}
-<span style="color: #bbbbbb">        </span>}
-<span style="color: #bbbbbb">    </span>}
-<span style="color: #bbbbbb">    </span>cout<span style="color: #666666">&lt;&lt;</span>ans<span style="color: #666666">&lt;&lt;</span>endl;
+<pre><code class="language-cpp">char s[MAXN];
+bool vis[MAXN];
+void solve(){
+    int n; cin&gt;&gt;n;
+    F(i, 1, n) vis[i] = 0;
+    scanf(&quot;%s&quot;, s+1);
+    int ans = 0;
+    F(i, 1, n){
+        for(int j = 1; j*i&lt;=n; j++){
+            int ck = j*i;
+            if(s[ck] == '0'){
+                if(!vis[ck]) ans += i;
+                vis[ck] = 1; 
+            }else{
+                break;
+            }
+        }
+    }
+    cout&lt;&lt;ans&lt;&lt;endl;
 }
-</pre></div>
-
+</code></pre>
 <h1>D. 双指针</h1>
 
     </div>
-
-   
-   
-   
     <hr>
-
-
-
-
-
-
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+          inlineMath: [ ['$','$'] ],
+          displayMath: [ ['$$','$$'] ],
+          processEscapes: true
+        },
+        "HTML-CSS": { fonts: ["TeX"] }
+      });
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
     <div id="disqus_thread"></div>
     <script type="text/javascript" async
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
     </script>
     <script>
-        /**
-        *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-        *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
-        
-        // var disqus_config = function () {
-        // this.page.url = ;  // Replace PAGE_URL with your page's canonical URL variable
-        // this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-        // };
-        
-        (function() { // DON'T EDIT BELOW THIS LINE
+        (function() { 
         var d = document, s = d.createElement('script');
         s.src = 'https://augpath.disqus.com/embed.js';
         s.setAttribute('data-timestamp', +new Date());

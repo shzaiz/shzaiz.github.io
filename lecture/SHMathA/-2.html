@@ -3,11 +3,11 @@
   <head>
     <link rel="stylesheet" href="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/style.css">
     <script src="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/plugin.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex, nofollow">
     <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
- 
     <script>
 const copyButtonLabel = "Copy Code";
 
@@ -59,14 +59,12 @@ async function copyCode(block) {
         code {
             font-family: 'Courier New', Courier, monospace;
         } 
-
         pre {
             font-family: 'Courier New', Courier, monospace;
         } 
         div{
             max-width: 100%;
             overflow: auto;
-            
         }
         .navbar {
             overflow: hidden;
@@ -75,7 +73,6 @@ async function copyCode(block) {
             top: 0; /* Position the navbar at the top of the page */
             width: 100%; /* Full width */
         }
-
         img {
         max-width: 80%;
         height: auto;
@@ -88,7 +85,6 @@ async function copyCode(block) {
             padding: 14px 16px;
             text-decoration: none;
         }
-
         a {
             color: #148bca;
             text-align: center;
@@ -96,31 +92,28 @@ async function copyCode(block) {
             padding-right: 2px;
             text-decoration: none;
         }
-
         p.hidden {
           overflow: hidden;
         }
-
     </style>
   </head>
   <body>
-    
     <div class="navbar">
         <a href="https://shzaiz.github.io">AUG's Wiki</a>
         <a href="index.html"> ↑ Back to contents</a>
-        Last updated at 2024-01-07 15:14:49.067002
+        Last updated at 2024-01-07 20:32:45.423361
     </div>
 
     <div class="toc"></div>
     <a id="toc-button"><i class="far fa-bookmark"></i></a>
     
-    <div>
+    <div id="renderedContent">
       <h1>补充资料4: 到你将要上本科的时候, 请阅读这篇材料.</h1>
 <p>Advice to a Beginning Graduate Student
 or
 What is Research?
 or
-The 4 R&#x27;s of Graduate School:
+The 4 R's of Graduate School:
 Reading, Rithmetic, Research, and Writing</p>
 <p>29-AUG-01. Updated 28-AUG-02.
 Manuel Blum</p>
@@ -139,10 +132,10 @@ Permit yourself to open a book and start reading from anywhere.
 In the case of mathematics or physics or anything especially hard, try to find something anything that you can understand.
 Read what you can.
 Write in the margins. (You know how useful that can be.)
-Next time you come back to that book, you&#x27;ll be able to read more.
+Next time you come back to that book, you'll be able to read more.
 You can gradually learn extraordinarily hard things this way.</p>
 <p>Consider writing what you read as you read it.
-This is especially true if you&#x27;re intent on reading something hard.</p>
+This is especially true if you're intent on reading something hard.</p>
 <p>I remember a professor of Mathematics at MIT,
 name of BERTRAM KOSTANT,
 who would keep his door open whenever he was in his office, and he would always be at his desk writing.
@@ -168,33 +161,33 @@ With writing you have the extraordinary power of a Turing machine.</p>
 CLAUDE SHANNON once told me that as a kid, he remembered being stuck on a jigsaw puzzle.
 His brother, who was passing by, said to him:
 &quot;You know: I could tell you something.&quot;
-That&#x27;s all his brother said.
+That's all his brother said.
 Yet that was enough hint to help Claude solve the puzzle.
 The great thing about this hint... is that you can always give it to yourself !!!
-I advise you, when you&#x27;re stuck on a hard problem,
+I advise you, when you're stuck on a hard problem,
 to imagine a little birdie or an older version of yourself whispering
 &quot;... I could tell you something...&quot;</p>
 <p>I once asked UMESH VAZIRANI how he was able,
 as an undergraduate at MIT,
 to take 6 courses each and every semester.
-He said that he knew he didn&#x27;t have the time to work out his answers the hard way.
+He said that he knew he didn't have the time to work out his answers the hard way.
 He had to find a shortcut.
 You see, Umesh understood that problems often have short clever solutions.</p>
 <p>There will come a time when you work on a problem long and hard but UNsuccessfully :(
 And then you learn that someone else found a solution.
 See this as the GREAT opportunity it is to learn something important.
-Don&#x27;t let it pass you by.
+Don't let it pass you by.
 Ask yourself: &quot;How SHOULD I have been thinking to solve that problem?&quot;
 I have found that doing so is a powerful exercise.
 Danny Sleator tells me that BOB FLOYD independently recommended exactly this exercise to his students.
 He would lead them into asking themselves:
 &quot;How COULD I have led myself to that answer?&quot;
 Take the time to think it through.
-It&#x27;s worth it.</p>
+It's worth it.</p>
 <p>There will come a time when you work on a problem long and hard and SUCCESSFULLY :)
 And then you learn that someone else already published. :(
 Hard as that may be for you to take, you must view this too as a great opportunity.
-Don&#x27;t turn off. Read what got published.</p>
+Don't turn off. Read what got published.</p>
 <p>You will be surprised how often the published paper turns out to be different in some significant way. Roughly
 50% of the time, it is NOT at all the same as what you did.
 25% of the time, it is the same but not as good.
@@ -204,13 +197,13 @@ Don&#x27;t turn off. Read what got published.</p>
 In that case, you have a great opportunity to learn.
 Ask yourself: &quot;How SHOULD I have been thinking to solve the problem in this fine way?&quot;</p>
 <p>This is how I discovered, as a young engineer, that I should learn something enormously powerful called &quot;Modern Algebra.&quot;
-It&#x27;s one reason I switched from Electrical Engineering as an undergraduate major to Mathematics as a Graduate major.
+It's one reason I switched from Electrical Engineering as an undergraduate major to Mathematics as a Graduate major.
 Of course, this was before there existed anything called Computer Science.</p>
 <p>Still on THINKING...
 The importance of PARADOX and CONTRADICTION.
 When you can prove that a statement S is true,
 and you can prove that the same statement S is false,
-then you KNOW that that you&#x27;re on to something:
+then you KNOW that that you're on to something:
 Something is wrong somewhere.
 Never underestimate the power of a contradiction.
 It is one of our most potent sources of knowledge.</p>
@@ -221,7 +214,7 @@ Physics has lots of paradoxical material:
 Quantum Theory. The Einstein-Rosen-Podulsky Paradox.
 The relativistically speeding Twins.
 The wave and particle nature of matter.</p>
-<p>Here&#x27;s an ASIDE on my current work, also based on paradox:
+<p>Here's an ASIDE on my current work, also based on paradox:
 I am personally interested in the Paradox of consciousness. Compare the following two views:</p>
 <ol>
 <li>the view that the human is a MECHANISM, an automaton
@@ -245,7 +238,7 @@ is for it.&quot;</p>
 <p>This ends my ASIDE.</p>
 <p>Make a list for yourself of good ways to pursue a problem.
 My own favorite is to try small examples. By comparison,
-DAVID GRIES&#x27;s favorite is to put himself in the middle
+DAVID GRIES's favorite is to put himself in the middle
 of a (presumed) solution. An example is his coffee can problem:
 Given a can of black and white coffee beans, do the following: Pull out two beans: if both are the same color, replace them with a white bean. If the two are different, replace them with a black bean. What color is the last bean?</p>
 <p>Or try out the two methods on the Hershey Bar problem
@@ -256,10 +249,10 @@ horizontal lines. A single crack counts one step. You are to
 make the fewest number of cracks]</p>
 <p>Brains are muscles.
 They grow strong with exercise.
-And even if they&#x27;re strong, they grow weak without it.
+And even if they're strong, they grow weak without it.
 In the months before Kasparov lost to Deep Blue,
 his mother came after him.
-She was worried that he wasn&#x27;t spending enough time
+She was worried that he wasn't spending enough time
 exercising himself (on chess).
 Her worries proved well-founded.</p>
 <p>THE PhD: GETTING STARTED
@@ -271,13 +264,13 @@ of a goldfish retina so that the light would not spill over
 onto any of the adjacent cells.
 Svaetichin had tried making a pinhole in a sheet of black tin,
 and shining his light thru the hole. This worked for moderate size holes, but failed for really small holes, which caused the light to diverge, to form diffraction patterns.</p>
-<p>Since Svaetichin couldn&#x27;t solve the problem, I decided I couldn&#x27;t. Or perhaps it&#x27;s that I thought his problem physically unsolvable. In retrospect, I should have taken out books on physics, especially optics, read as much as I could, talked to others and kept on talking to him.
+<p>Since Svaetichin couldn't solve the problem, I decided I couldn't. Or perhaps it's that I thought his problem physically unsolvable. In retrospect, I should have taken out books on physics, especially optics, read as much as I could, talked to others and kept on talking to him.
 Svaetichin would have helped me if I had shown him I was reading thinking working.</p>
-<p>Don&#x27;t expect your thesis advisor to give you a problem that he or she can answer. Of course, she might.</p>
+<p>Don't expect your thesis advisor to give you a problem that he or she can answer. Of course, she might.</p>
 <ul>
 <li>She might give you a problem to which she already knows an answer.</li>
 <li>She might give you a problem that she thinks is answerable,
-but that she hasn&#x27;t actually answered.</li>
+but that she hasn't actually answered.</li>
 <li>She might give you a problem that is deadly hard.</li>
 <li>If the problem she gives you is hard enough,
 I suggest you look for a NONSTANDARD answer.
@@ -289,21 +282,21 @@ Or she may encourage you to work on something she knows little or nothing about,
 In the latter case, you will have to learn all you can for yourself...
 You will have to learn from other faculty, from courses, from books, from journals. from peers.
 Both kinds of advisors can work out for you.
-I don&#x27;t know that one is necessarily better than the other.
+I don't know that one is necessarily better than the other.
 But you should know which you got.</p>
 <p>Whatever you do, you got to like doing it....
-You got to like it so much that you&#x27;re willing to think about it, work on it, long after everyone else has moved on.</p>
+You got to like it so much that you're willing to think about it, work on it, long after everyone else has moved on.</p>
 <p>THE PhD: DEEP IN THE MIDDLE OF IT.
-There&#x27;s a wonderful quote from ANATOLE FRANCE:
+There's a wonderful quote from ANATOLE FRANCE:
 &quot;A University Student&quot;
 -- and this is especially true for a PhD Student --
 &quot;should know something about everything
 and everything about something.&quot;</p>
-<p>You know the jokes about PhD&#x27;s...
+<p>You know the jokes about PhD's...
 A PhD knows more and more about less and less
 until he knows everything about nothing.</p>
 <p>When working on a PhD, you must focus on a topic so narrow that you can understand it completely.
-It will seem at first that you&#x27;re working on the proverbial needle, a tiny fragment of the world, a minute crystal,
+It will seem at first that you're working on the proverbial needle, a tiny fragment of the world, a minute crystal,
 beautiful but in the scheme of things, microscopic.
 Work with it. And the more you work with it, the more you penetrate it, the more you will come to see that your work, your subject, encompasses the world.
 In time, you will come to see the world in your grain of sand.</p>
@@ -313,9 +306,9 @@ Hold infinity in the palm of your hand
 And eternity in an hour.
 WILLIAM BLAKE (1757-1827)</p>
 <p>This gorgeous quartet is followed by a large number of sometimes deep sometimes questionable aphorisms, which I see much like the occasionally grinding work of a PhD thesis.</p>
-<p>There&#x27;s all kinds of research you can do.
-There&#x27;s research to prove what you know to be true.
-There&#x27;s research -- maybe better called SEARCH -- to figure out what is true.
+<p>There's all kinds of research you can do.
+There's research to prove what you know to be true.
+There's research -- maybe better called SEARCH -- to figure out what is true.
 Some of the best such search succeeds in DISPROVING
 what you initially believed to most certainly be true.</p>
 <p>For example, Sir Fred Hoyle is said to have coined the phrase &quot;Big Bang&quot; at a time when he was looking to disprove it.</p>
@@ -325,12 +318,12 @@ my goal was to prove that any deterministic algorithm to find the MEDIAN of n in
 I was shocked to discover that the median of n integers can be found with just O(n) comparisons.</p>
 <p>When working on proving some statement S true,
 you should spend at least some time trying to prove it false.
-Even if it&#x27;s true, trying to prove it false can give insight.
+Even if it's true, trying to prove it false can give insight.
 And in any case, too often, our intuition is dead wrong.</p>
 <p>There is yet another sense in which, when working on a hard problem, you may find that the answer is NOT what you expected.
 You may be looking for a YES or a NO; it may be something else.</p>
 <p>Some years ago, JOHN HOPCROFT gave one of his PhD students the problem of deciding the Equivalence of Free Boolean Forms.
-The specifics don&#x27;t matter.
+The specifics don't matter.
 The problem appeared as an open problem in Garey and Johnson.
 The question was: Is the Equivalence problem NP-complete?
 Or is it solvable in poly time?
@@ -339,25 +332,25 @@ Chandra, Wegman and I found a randomizing algorithm for this problelm. At the ti
 The question of our time: Are NP-complete problems solvable in poly time?
 Could anything I have said today be useful for so hard a problem as that?
 Probably not. Nevertheless...
-LEONID LEVIN believes as I do that whatever the answer to the P=NP? problem, it won&#x27;t be like anything you think it should be. And he has given some wonderful examples.
+LEONID LEVIN believes as I do that whatever the answer to the P=NP? problem, it won't be like anything you think it should be. And he has given some wonderful examples.
 For one, he has given a FACTORING ALGORITHM that is proVably optimal, up to a multiplicative constant.
 He proves that if his algorithm is exponential,
 then every algorithm for FACTORING is exponential.
 Equivalently, if any algorithm for factoring is poly-time,
 then his algorithm is poly-time.
-But we haven&#x27;t been able to tell the running time of his algorithm because, in a strong sense, it&#x27;s running time is unanalyzable.
+But we haven't been able to tell the running time of his algorithm because, in a strong sense, it's running time is unanalyzable.
 Maybe as STEVEN RUDICH suggests, the P=NP? problem is undecidable in the standard formalization of Mathematics.</p>
-<p>The point is that the answer may not lie where you expect it. Here&#x27;s a poem I wrote when I wondered at the fact that we must sometimes be dragged kicking and screaming in the right direction.
-It&#x27;s a comparison to the blind spot in our eyes,
-which isn&#x27;t really blind but makes things up for us.
+<p>The point is that the answer may not lie where you expect it. Here's a poem I wrote when I wondered at the fact that we must sometimes be dragged kicking and screaming in the right direction.
+It's a comparison to the blind spot in our eyes,
+which isn't really blind but makes things up for us.
 It questions whether there might not be other things in this world that our brains, our minds, by their very nature, make up for us:</p>
 <p>Blind Spots mb 15-MAY-96</p>
 <p>All men have Blind Spots in their eyes,
 That manufacture visions of their vale.
-And shape that void where light&#x27;s unregistered,
+And shape that void where light's unregistered,
 With bold-faced unrepentant tales.</p>
 <p>What other blind spots shape our minds and thoughts?
-What other tales do won&#x27;dring minds unfurl
+What other tales do won'dring minds unfurl
 To woo us unbeguiled we would believe
 To strange and nonexistent worlds?</p>
 <p>ABOUT WRITING:
@@ -369,18 +362,18 @@ and
 Finally give it an accurate title.&quot;
 JOHN SHAW BILLINGS [1838-1913]</p>
 <p>MY ADVICE TO YOU:
-Don&#x27;t expect your thesis advisor to read your thesis. Some thesis advisors can and do give good feedback, but not all.
+Don't expect your thesis advisor to read your thesis. Some thesis advisors can and do give good feedback, but not all.
 Still, make sure that SOMEBODY reads your thesis...
 I especially recommend that you ask your peers.</p>
-<p>Here&#x27;s another piece of advice that I have often had to give myself, and I here give you...
+<p>Here's another piece of advice that I have often had to give myself, and I here give you...
 When you send a paper off to be published,
 and it gets rejected...
-Don&#x27;t be turned off by the mindless cretinous feedback
+Don't be turned off by the mindless cretinous feedback
 that you get to your well-thought-out beautifully-written work!
 Be a MENSCH. Use the feedback to improve your paper!
 Make it better. And send it back.</p>
 <p>Finally, it is my most earnest wish that you should know something that is honestly amazingly true of you... That you are each of you UNIQUE and SPECIAL in some glorious way.</p>
-<p>I wrote a poem to capture this, which I now use to end my sermon. It&#x27;s called &quot;Fundamentals.&quot;</p>
+<p>I wrote a poem to capture this, which I now use to end my sermon. It's called &quot;Fundamentals.&quot;</p>
 <p>FUNDAMENTALS
 mb 05-JUN-96</p>
 <p>Bird must soar. Skunk must stink.
@@ -395,7 +388,7 @@ there is stuff more basic still that underlies and
 DRIVES
 not only man
 but all great beasts,</p>
-<p>And that is nature&#x27;s call to each of us... to be special.
+<p>And that is nature's call to each of us... to be special.
 To be distinguished in some way. To be
 UNIQUE.
 To BE something, to DO something, BETTER than everyone else.</p>
@@ -413,32 +406,28 @@ YOU
 And then DO IT.</p>
 
     </div>
-
-   
-   
-   
     <hr>
-
-
-
-
-
-
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+          inlineMath: [ ['$','$'] ],
+          displayMath: [ ['$$','$$'] ],
+          processEscapes: true
+        },
+        "HTML-CSS": { fonts: ["TeX"] }
+      });
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
     <div id="disqus_thread"></div>
     <script type="text/javascript" async
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
     </script>
     <script>
-        /**
-        *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-        *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
-        
-        // var disqus_config = function () {
-        // this.page.url = ;  // Replace PAGE_URL with your page's canonical URL variable
-        // this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-        // };
-        
-        (function() { // DON'T EDIT BELOW THIS LINE
+        (function() { 
         var d = document, s = d.createElement('script');
         s.src = 'https://augpath.disqus.com/embed.js';
         s.setAttribute('data-timestamp', +new Date());

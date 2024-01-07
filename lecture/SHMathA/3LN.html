@@ -3,11 +3,11 @@
   <head>
     <link rel="stylesheet" href="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/style.css">
     <script src="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/plugin.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex, nofollow">
     <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
- 
     <script>
 const copyButtonLabel = "Copy Code";
 
@@ -59,14 +59,12 @@ async function copyCode(block) {
         code {
             font-family: 'Courier New', Courier, monospace;
         } 
-
         pre {
             font-family: 'Courier New', Courier, monospace;
         } 
         div{
             max-width: 100%;
             overflow: auto;
-            
         }
         .navbar {
             overflow: hidden;
@@ -75,7 +73,6 @@ async function copyCode(block) {
             top: 0; /* Position the navbar at the top of the page */
             width: 100%; /* Full width */
         }
-
         img {
         max-width: 80%;
         height: auto;
@@ -88,7 +85,6 @@ async function copyCode(block) {
             padding: 14px 16px;
             text-decoration: none;
         }
-
         a {
             color: #148bca;
             text-align: center;
@@ -96,25 +92,22 @@ async function copyCode(block) {
             padding-right: 2px;
             text-decoration: none;
         }
-
         p.hidden {
           overflow: hidden;
         }
-
     </style>
   </head>
   <body>
-    
     <div class="navbar">
         <a href="https://shzaiz.github.io">AUG's Wiki</a>
         <a href="index.html"> ↑ Back to contents</a>
-        Last updated at 2024-01-07 15:14:49.074677
+        Last updated at 2024-01-07 20:32:45.435036
     </div>
 
     <div class="toc"></div>
     <a id="toc-button"><i class="far fa-bookmark"></i></a>
     
-    <div>
+    <div id="renderedContent">
       <h1>3LN - 集合的运算, 以及全新版本的函数</h1>
 <h2>一些疑问</h2>
 <ul>
@@ -135,7 +128,7 @@ async function copyCode(block) {
 <p>数学家拿到什么东西都喜欢算一下.
 我们以目睹过的:</p>
 <ul>
-<li>数:  \(114+514=628\) .</li>
+<li>数: $114+514=628$.</li>
 <li>图形: 你们小学的时候肯定没少整.</li>
 <li>集合: 你们上节课目睹的</li>
 </ul>
@@ -147,15 +140,15 @@ async function copyCode(block) {
 <li>诶, 英语好像是&quot;操作&quot;的意思啊...</li>
 <li>就这样, 运算(在一定程度上)就是操作.</li>
 </ul>
-<p>我们心目中的运算:  \(+,-,\times,\div\) </p>
-<p>但是,  \(1/x, x^2, |x|\) 都可以叫做运算.</p>
+<p>我们心目中的运算: $+,-,\times,\div$</p>
+<p>但是, $1/x, x^2, |x|$都可以叫做运算.</p>
 <ul>
 <li>有什么区别?</li>
 <li>上面的是对于两个数的运算, 下面的是对一个数的运算.</li>
 <li>二元(个东西的)运算符, 一元运算符...</li>
 </ul>
 <p>哦, 经过这这样的探讨, 我们感到: 运算时对一个或多个对象按照某个规则产生一个新对象的过程(可以和原来一样).(就是描述操作!).</p>
-<p>例子:  \(3+2, 3\times2, 3^2,\cdots\) </p>
+<p>例子: $3+2, 3\times2, 3^2,\cdots$</p>
 <p>联系实际:</p>
 <ul>
 <li>你们每个人都是一个对象(object), 规则(rule)叫做找爸爸(father), 就得到了一个&quot;新&quot;对象(你爸爸).</li>
@@ -165,8 +158,8 @@ async function copyCode(block) {
 <ul>
 <li>运算律记得吗?
 <ul>
-<li>加法交换律  \(a+b=b+a\) </li>
-<li>加法结合律: \((a+b)+c=a+(b+c)\) </li>
+<li>加法交换律 $a+b=b+a$</li>
+<li>加法结合律:$(a+b)+c=a+(b+c)$</li>
 <li>那一堆,远远不止这些!</li>
 <li>不要小看这些, 大学玩命学这个.</li>
 <li>当然对象不是数这么简单了. 会很复杂.</li>
@@ -178,19 +171,19 @@ async function copyCode(block) {
 <li>运算律越多越好!</li>
 </ul>
 <p>我们还可以定义!
-平面上两个点A, B. 规定&quot; \(A 🐕 B\) &quot;表示AB的中点.
+平面上两个点A, B. 规定&quot;$A 🐕 B$&quot;表示AB的中点.
 这个运算好吗?</p>
 <ul>
 <li>交换律? OK.</li>
 <li>结合律? NO. (重心) 当ABC三点是同一个点的时候成立(平凡,trivial)</li>
 </ul>
-<p>举个不满足交换率的例子: 定义 \(A 💡 B\) 表示 \(A\) 关于 \(B\) 的对称点.</p>
+<p>举个不满足交换率的例子: 定义$A 💡 B$表示$A$关于$B$的对称点.</p>
 <h2>集合定义了怎样的运算?</h2>
 <p>这些运算是不是好的运算呢?</p>
 <ul>
 <li>
-<p>并集(Union set): 集合里面的所有元素.  \(\cup\) : 开口向上的马蹄形.
-也就是 \(A\cup B = \{ x|x\in A 或x\in B \}\) 
+<p>并集(Union set): 集合里面的所有元素. $\cup$: 开口向上的马蹄形.
+也就是$A\cup B = { x|x\in A 或x\in B }$
 来源, Union.(我们联合!) 或(or): 满足一条可以, 满足两条更可以!</p>
 <ul>
 <li>画一下Venn图.</li>
@@ -200,7 +193,7 @@ async function copyCode(block) {
 </ul>
 </li>
 <li>
-<p>交集(intersection set): 集合里面的共有元素.  \(\cap\) :  \(A\cup B = \{ x|x\in A 且x\in B \}\) </p>
+<p>交集(intersection set): 集合里面的共有元素. $\cap$: $A\cup B = { x|x\in A 且x\in B }$</p>
 <ul>
 <li>Venn图</li>
 <li>看1(2)</li>
@@ -211,7 +204,7 @@ async function copyCode(block) {
 <li>
 <p>它们好吗? 自己玩玩看!</p>
 <ul>
-<li>是的, 它们都是好的. ( \(\TeX\) 敲集合太麻烦, 所以省略.).</li>
+<li>是的, 它们都是好的. ($\TeX$敲集合太麻烦, 所以省略.).</li>
 <li>问题: 把交集和并集放在一起, 满足结合律吗?</li>
 </ul>
 </li>
@@ -219,9 +212,9 @@ async function copyCode(block) {
 <p>补集(complementary set): 从一个范围里面刨掉另一些东西. &quot;不在, 其他&quot;</p>
 <ul>
 <li>得有一个范围! 那就是全集.</li>
-<li>全集: 大范围要给定. 范围可以足够大. 一般用 \(U\) (斜体)表示.</li>
-<li>补集:  \(\complement_UA\) (不是铜( \(\text{Cu}\) ), 化学式一般都是正体, 所以哪天见了 \(CaCO_3\) 这样的就尽情吐槽吧)
- \(\complement_UA:=\{x\in U | x\cancel\in A\}.\) </li>
+<li>全集: 大范围要给定. 范围可以足够大. 一般用$U$(斜体)表示.</li>
+<li>补集: $\complement_UA$(不是铜($\text{Cu}$), 化学式一般都是正体, 所以哪天见了$CaCO_3$这样的就尽情吐槽吧)
+$\complement_UA:={x\in U | x\cancel\in A}.$</li>
 <li>Venn图.</li>
 <li>看1(3).</li>
 </ul>
@@ -231,7 +224,7 @@ async function copyCode(block) {
 <ul>
 <li>Trivial, 注意两边大括号.</li>
 <li>不要认为麻烦. 多用用就熟练了.</li>
-<li> \(A\cap \left(\complement_UB\right)\) 是什么.
+<li>$A\cap \left(\complement_UB\right)$是什么.
 <ul>
 <li>用人话说. 在A且不在B.</li>
 <li>所有运算可以直观理解 : 并集=或, 交集=且, 补集=不在.</li>
@@ -240,11 +233,11 @@ async function copyCode(block) {
 </li>
 </ul>
 <p><img src="./FILES/3LN.md/img-20220707102848.png" alt="Img" />
-不在(A或B) =  \(\complement_U(A\cup B)\) 
-(不在A)而且(不在B)) =  \(\complement_UA\cap \complement_UB\) </p>
+不在(A或B) = $\complement_U(A\cup B)$
+(不在A)而且(不在B)) = $\complement_UA\cap \complement_UB$</p>
 <ul>
-<li>也就是 \(\complement_U(A\cup B)\) =  \(\complement_UA\cap \complement_UB\)  (德摩根定律, De Morgan&#x27;s laws)</li>
-<li>自己画图验证:  \(\complement_U(A\cap B)\) =  \(\complement_UA\cup \complement_UB\) </li>
+<li>也就是$\complement_U(A\cup B)$= $\complement_UA\cap \complement_UB$ (德摩根定律, De Morgan's laws)</li>
+<li>自己画图验证: $\complement_U(A\cap B)$= $\complement_UA\cup \complement_UB$</li>
 </ul>
 <p><img src="./FILES/3LN.md/img-20220707103311.png" alt="Img" /></p>
 <h2>给三个集合</h2>
@@ -255,7 +248,7 @@ async function copyCode(block) {
 <p>并集和交集的分配律(回收悬念1)</p>
 </li>
 <li>
-<p> \(B\cap (A\cup C)=(B\cap A) \cup (B\cap C)\) . 分配律.</p>
+<p>$B\cap (A\cup C)=(B\cap A) \cup (B\cap C)$. 分配律.</p>
 </li>
 <li>
 <p>看3,4.</p>
@@ -263,7 +256,7 @@ async function copyCode(block) {
 </ul>
 <h2>数学语言</h2>
 <p>各国的数学家用不同的母语, 但有一套体系可以更好传达信息.</p>
-<p>这些是数学语言的一些实例. 比如你以前学过的 \(\therefore , \because, \perp,\cdots \#\) .</p>
+<p>这些是数学语言的一些实例. 比如你以前学过的$\therefore , \because, \perp,\cdots #$.</p>
 <p>所以给我们看英文论文带来了很大的方便!</p>
 <ul>
 <li>证明: Proof</li>
@@ -275,12 +268,12 @@ async function copyCode(block) {
 <h2>看3(2).</h2>
 <ul>
 <li>想想你们的小学奥数, 是不是很像?</li>
-<li>有一个问题  \(|A|+|B|\quad?\quad|A\cup B|\) 
+<li>有一个问题 $|A|+|B|\quad?\quad|A\cup B|$
 <ul>
 <li>啊哈, 容斥原理(
 Principle of Inclusion and Exclusion,PIE)! (留个悬念)</li>
 <li>为什么要说&quot;原理&quot;? 课下参见<a href="https://www.bilibili.com/video/BV1G3411h7f5">容斥原理和组合计数(蒋炎岩)</a>.(2小时)</li>
-<li> \(|A|+|B|=|A\cup B|+|A\cap B|\) .</li>
+<li>$|A|+|B|=|A\cup B|+|A\cap B|$.</li>
 </ul>
 </li>
 <li>那么三个集合呢?</li>
@@ -293,8 +286,8 @@ Principle of Inclusion and Exclusion,PIE)! (留个悬念)</li>
 \end{aligned}
 $$</p>
 <ul>
-<li> \(n\) 个呢? 提示: 前面的系数和 \((-1)^n\) 有关.</li>
-<li>如果 \(|A\cap B |=|A|+|B|\) , 那么 \(A\cap B = \phi\) .</li>
+<li>$n$个呢? 提示: 前面的系数和$(-1)^n$有关.</li>
+<li>如果$|A\cap B |=|A|+|B|$, 那么$A\cap B = \phi$.</li>
 </ul>
 <h2>故事时间</h2>
 <p>第三次数学危机(不知道上次的集合: 老师不会给你讲的集合故事那个视频看了没, 不过in a nutshell:)</p>
@@ -304,7 +297,7 @@ $$</p>
 <li>Russell说: 集合论好像有点问题!
 <ul>
 <li>Russell 悖论(paradox): 科普版: 理发师悖论.</li>
-<li>专业: 规定一个集合 \(A\) ,  \(A=\{x|x\cancel\in A\}\) , 问 \(x\in A\) ?</li>
+<li>专业: 规定一个集合$A$, $A={x|x\cancel\in A}$, 问$x\in A$?</li>
 <li>集合真的对吗?</li>
 <li>后续. Cantor死在精神病院里.</li>
 <li>拓展阅读: 集合论, ZFC公理体系.
@@ -336,22 +329,22 @@ $$</p>
 <h1>然后说说函数(function)</h1>
 <h2>定义</h2>
 <blockquote>
-<p>对于非空(non-empty)数集 \(A,B\) , 存在对应法则(corresponding rule),  \(f: A\to B\) .
-对于 \(\color{red}\forall x\in A\) , 在 \(B\) 中存在<strong>唯一确定</strong>(univalent)的 \(y\) 与之对应.
-写作 \(y=f(x)\) . 成 \(f\) 是定义在 \(A\) 上的函数</p>
+<p>对于非空(non-empty)数集$A,B$, 存在对应法则(corresponding rule), $f: A\to B$.
+对于$\color{red}\forall x\in A$, 在$B$中存在<strong>唯一确定</strong>(univalent)的$y$与之对应.
+写作$y=f(x)$. 成$f$是定义在$A$上的函数</p>
 </blockquote>
-<p>通俗的说, 就是 \(x\) 被 \(f\) 一下就 \(y\) 了.  \(f\) 在这里<del>名词作动词</del>. 很有意思.</p>
-<p>所以引出了两种记号:  \(y=x^2, f(x)=x^2\) .</p>
+<p>通俗的说, 就是$x$被$f$一下就$y$了. $f$在这里~~名词作动词~~. 很有意思.</p>
+<p>所以引出了两种记号: $y=x^2, f(x)=x^2$.</p>
 <ul>
 <li>
-<p>有什么好处?  \(f(2)=4\) .</p>
+<p>有什么好处? $f(2)=4$.</p>
 </li>
 <li>
 <p>对比初中定义</p>
 <ul>
 <li>唯一确定, 亘古不变.</li>
-<li>函数是定义在集合上的! 我们可以对 \(x\) 加以限制.
-例子:  \(f(x)=x^2(x&gt;0)\) ,    \(f(x)=x^2(x&lt;0)\) 是不同的函数.</li>
+<li>函数是定义在集合上的! 我们可以对$x$加以限制.
+例子: $f(x)=x^2(x&gt;0)$,   $f(x)=x^2(x&lt;0)$是不同的函数.</li>
 <li>函数的本质是对应法则. &quot;你是怎么把每个数对应走的&quot;.</li>
 <li>人人射箭, 每人一箭.</li>
 </ul>
@@ -370,28 +363,28 @@ $$</p>
 <ul>
 <li>九章算术: 方田
 <ul>
-<li> \(1/4+2/3=11/12\) </li>
+<li>$1/4+2/3=11/12$</li>
 <li>术曰: 母互乘子, 并以为实, 母相乘位法, 实如法而一.</li>
 </ul>
 </li>
 </ul>
 <h2>函数三要素</h2>
 <ul>
-<li> \(A\) : 定义域(domain)
+<li>$A$: 定义域(domain)
 <ul>
 <li>定义(define)在A上的集合(域, set)</li>
 </ul>
 </li>
-<li> \(f\) : 对应法则</li>
+<li>$f$: 对应法则</li>
 <li>值的集合: 值域(不一定是另一个整的集合, 一定是另一个的子集!).
 <ul>
-<li>一种写法:  \(\{y|y=f(x),x\in A\}\) .</li>
+<li>一种写法: ${y|y=f(x),x\in A}$.</li>
 <li>那B到底是什么? 陪域(codomain, 前缀&quot;co-&quot;表示一起), 打酱油的.</li>
 <li>看上去好没用! 干嘛写这个B?</li>
 <li>直接写值域行不行?</li>
-<li>理想:  \(f(x)=x+1, x\in(2,3)\) , 写作 \(f:(2,3)\to(3,4)\) .</li>
-<li>现实:  \(f(x)={x^3-2x\over x^2+6x-12}\) . 写作:  \(f: \mathbb R \rightarrow 不知道\) .</li>
-<li>还是先偷点懒,  \(f: \mathbb R\rightarrow \mathbb R\) .</li>
+<li>理想: $f(x)=x+1, x\in(2,3)$, 写作$f:(2,3)\to(3,4)$.</li>
+<li>现实: $f(x)={x^3-2x\over x^2+6x-12}$. 写作: $f: \mathbb R \rightarrow 不知道$.</li>
+<li>还是先偷点懒, $f: \mathbb R\rightarrow \mathbb R$.</li>
 </ul>
 </li>
 </ul>
@@ -408,7 +401,7 @@ $$</p>
 <li>优点(pros): 不用算了.</li>
 <li>缺点(cons): 无穷多甚至不可数, 咋摆?
 <ul>
-<li> \(x,y\) 之间的变化关系.</li>
+<li>$x,y$之间的变化关系.</li>
 </ul>
 </li>
 <li>我选择<a href="https://www.bilibili.com/video/BV12S4y1e72P">开摆</a>!</li>
@@ -454,7 +447,7 @@ $$</p>
 </ul>
 <p>娱乐一下: 考虑Dirichlet函数
 $$
-f(x)=\left\{\begin{array}{ll}
+f(x)=\left{\begin{array}{ll}
 1 &amp; x \in Q \\
 0 &amp; x \notin Q
 \end{array}\right.
@@ -476,32 +469,28 @@ $$
 <p>相信自己是一个人类, 并且坚信一个人可以在经过一段时间努力之后理解任何一个同类希望表达的东西. (有点像动物园规则类怪谈哈哈哈).</p>
 
     </div>
-
-   
-   
-   
     <hr>
-
-
-
-
-
-
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+          inlineMath: [ ['$','$'] ],
+          displayMath: [ ['$$','$$'] ],
+          processEscapes: true
+        },
+        "HTML-CSS": { fonts: ["TeX"] }
+      });
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
     <div id="disqus_thread"></div>
     <script type="text/javascript" async
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
     </script>
     <script>
-        /**
-        *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-        *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
-        
-        // var disqus_config = function () {
-        // this.page.url = ;  // Replace PAGE_URL with your page's canonical URL variable
-        // this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-        // };
-        
-        (function() { // DON'T EDIT BELOW THIS LINE
+        (function() { 
         var d = document, s = d.createElement('script');
         s.src = 'https://augpath.disqus.com/embed.js';
         s.setAttribute('data-timestamp', +new Date());

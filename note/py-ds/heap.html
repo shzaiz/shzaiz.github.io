@@ -3,11 +3,11 @@
   <head>
     <link rel="stylesheet" href="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/style.css">
     <script src="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/plugin.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex, nofollow">
     <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
- 
     <script>
 const copyButtonLabel = "Copy Code";
 
@@ -59,14 +59,12 @@ async function copyCode(block) {
         code {
             font-family: 'Courier New', Courier, monospace;
         } 
-
         pre {
             font-family: 'Courier New', Courier, monospace;
         } 
         div{
             max-width: 100%;
             overflow: auto;
-            
         }
         .navbar {
             overflow: hidden;
@@ -75,7 +73,6 @@ async function copyCode(block) {
             top: 0; /* Position the navbar at the top of the page */
             width: 100%; /* Full width */
         }
-
         img {
         max-width: 80%;
         height: auto;
@@ -88,7 +85,6 @@ async function copyCode(block) {
             padding: 14px 16px;
             text-decoration: none;
         }
-
         a {
             color: #148bca;
             text-align: center;
@@ -96,161 +92,153 @@ async function copyCode(block) {
             padding-right: 2px;
             text-decoration: none;
         }
-
         p.hidden {
           overflow: hidden;
         }
-
     </style>
   </head>
   <body>
-    
     <div class="navbar">
         <a href="https://shzaiz.github.io">AUG's Wiki</a>
         <a href="index.html"> ↑ Back to contents</a>
-        Last updated at 2024-01-07 15:14:48.467680
+        Last updated at 2024-01-07 20:32:45.009119
     </div>
 
     <div class="toc"></div>
     <a id="toc-button"><i class="far fa-bookmark"></i></a>
     
-    <div>
+    <div id="renderedContent">
       <h1>Priority Queue using heap</h1>
 <p>Complete binary tree: Full size, left to right like.</p>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Heap</span>:
-    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__init__</span>(<span style="color: #008000">self</span>, key<span style="color: #666666">=</span><span style="color: #008000; font-weight: bold">lambda</span> x:x):
-        <span style="color: #008000">self</span><span style="color: #666666">.</span>data <span style="color: #666666">=</span> []
-        <span style="color: #008000">self</span><span style="color: #666666">.</span>key  <span style="color: #666666">=</span> key
+<pre><code class="language-py">class Heap:
+    def __init__(self, key=lambda x:x):
+        self.data = []
+        self.key  = key
 
-    <span style="color: #AA22FF">@staticmethod</span>
-    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">_parent</span>(idx):
-        <span style="color: #008000; font-weight: bold">return</span> (idx<span style="color: #666666">-1</span>)<span style="color: #666666">//2</span>
+    @staticmethod
+    def _parent(idx):
+        return (idx-1)//2
         
-    <span style="color: #AA22FF">@staticmethod</span>
-    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">_left</span>(idx):
-        <span style="color: #008000; font-weight: bold">return</span> idx<span style="color: #666666">*2+1</span>
+    @staticmethod
+    def _left(idx):
+        return idx*2+1
 
-    <span style="color: #AA22FF">@staticmethod</span>
-    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">_right</span>(idx):
-        <span style="color: #008000; font-weight: bold">return</span> idx<span style="color: #666666">*2+2</span>
+    @staticmethod
+    def _right(idx):
+        return idx*2+2
     
-    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">heapify</span>(<span style="color: #008000">self</span>, idx<span style="color: #666666">=0</span>):
-        <span style="color: #008000; font-weight: bold">while</span> <span style="color: #008000; font-weight: bold">True</span>:
-            l <span style="color: #666666">=</span> Heap<span style="color: #666666">.</span>_left(idx)
-            r <span style="color: #666666">=</span> Heap<span style="color: #666666">.</span>_right(idx)
+    def heapify(self, idx=0):
+        while True:
+            l = Heap._left(idx)
+            r = Heap._right(idx)
             
-            pk <span style="color: #666666">=</span> idx
-            le <span style="color: #666666">=</span> <span style="color: #008000">len</span>(<span style="color: #008000">self</span><span style="color: #666666">.</span>data)
-            <span style="color: #008000; font-weight: bold">if</span>( l<span style="color: #666666">&lt;</span>le <span style="color: #AA22FF; font-weight: bold">and</span>
-                <span style="color: #008000">self</span><span style="color: #666666">.</span>key(<span style="color: #008000">self</span><span style="color: #666666">.</span>data[l]) <span style="color: #666666">&gt;</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>key(<span style="color: #008000">self</span><span style="color: #666666">.</span>data[pk])):
-                pk <span style="color: #666666">=</span> l 
-            <span style="color: #008000; font-weight: bold">if</span>( r<span style="color: #666666">&lt;</span>le <span style="color: #AA22FF; font-weight: bold">and</span>
-                <span style="color: #008000">self</span><span style="color: #666666">.</span>key(<span style="color: #008000">self</span><span style="color: #666666">.</span>data[r]) <span style="color: #666666">&gt;</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>key(<span style="color: #008000">self</span><span style="color: #666666">.</span>data[pk])):
-                pk <span style="color: #666666">=</span> r
+            pk = idx
+            le = len(self.data)
+            if( l&lt;le and
+                self.key(self.data[l]) &gt; self.key(self.data[pk])):
+                pk = l 
+            if( r&lt;le and
+                self.key(self.data[r]) &gt; self.key(self.data[pk])):
+                pk = r
             
-            <span style="color: #008000; font-weight: bold">if</span>(pk <span style="color: #666666">==</span> idx):
-                <span style="color: #008000; font-weight: bold">break</span>
-            <span style="color: #008000; font-weight: bold">else</span>:
-                <span style="color: #008000">self</span><span style="color: #666666">.</span>data[idx],<span style="color: #008000">self</span><span style="color: #666666">.</span>data[pk]<span style="color: #666666">=</span><span style="color: #008000">self</span><span style="color: #666666">.</span>data[pk],<span style="color: #008000">self</span><span style="color: #666666">.</span>data[idx]
-                idx<span style="color: #666666">=</span>pk
+            if(pk == idx):
+                break
+            else:
+                self.data[idx],self.data[pk]=self.data[pk],self.data[idx]
+                idx=pk
 
             
-    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">add</span>(<span style="color: #008000">self</span>, x):
-        <span style="color: #008000">self</span><span style="color: #666666">.</span>data<span style="color: #666666">.</span>append(x)
-        cidx <span style="color: #666666">=</span> <span style="color: #008000">len</span>(<span style="color: #008000">self</span><span style="color: #666666">.</span>data)<span style="color: #666666">-1</span>
-        cprt <span style="color: #666666">=</span> Heap<span style="color: #666666">.</span>_parent(cidx)
-        <span style="color: #008000; font-weight: bold">while</span>(cidx<span style="color: #666666">&gt;0</span> <span style="color: #AA22FF; font-weight: bold">and</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>key(<span style="color: #008000">self</span><span style="color: #666666">.</span>data[cidx])<span style="color: #666666">&gt;</span><span style="color: #008000">self</span><span style="color: #666666">.</span>key(<span style="color: #008000">self</span><span style="color: #666666">.</span>data[cprt])):
-            <span style="color: #008000">self</span><span style="color: #666666">.</span>data[cidx], <span style="color: #008000">self</span><span style="color: #666666">.</span>data[cprt] <span style="color: #666666">=</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>data[cprt], <span style="color: #008000">self</span><span style="color: #666666">.</span>data[cidx]
-            cidx <span style="color: #666666">=</span> cprt
-            cprt <span style="color: #666666">=</span> Heap<span style="color: #666666">.</span>_parent(cidx) 
+    def add(self, x):
+        self.data.append(x)
+        cidx = len(self.data)-1
+        cprt = Heap._parent(cidx)
+        while(cidx&gt;0 and self.key(self.data[cidx])&gt;self.key(self.data[cprt])):
+            self.data[cidx], self.data[cprt] = self.data[cprt], self.data[cidx]
+            cidx = cprt
+            cprt = Heap._parent(cidx) 
         
-    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">peek</span>(<span style="color: #008000">self</span>):
-        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>data[<span style="color: #666666">0</span>]
+    def peek(self):
+        return self.data[0]
 
-    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">pop</span>(<span style="color: #008000">self</span>):
-        ret <span style="color: #666666">=</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>data[<span style="color: #666666">0</span>]
-        <span style="color: #008000">self</span><span style="color: #666666">.</span>data[<span style="color: #666666">0</span>] <span style="color: #666666">=</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>data[<span style="color: #008000">len</span>(<span style="color: #008000">self</span><span style="color: #666666">.</span>data)<span style="color: #666666">-1</span>]
-        <span style="color: #008000; font-weight: bold">del</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>data[<span style="color: #008000">len</span>(<span style="color: #008000">self</span><span style="color: #666666">.</span>data)<span style="color: #666666">-1</span>]
-        <span style="color: #008000">self</span><span style="color: #666666">.</span>heapify()
-        <span style="color: #008000; font-weight: bold">return</span> ret
+    def pop(self):
+        ret = self.data[0]
+        self.data[0] = self.data[len(self.data)-1]
+        del self.data[len(self.data)-1]
+        self.heapify()
+        return ret
     
-    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__bool__</span>(<span style="color: #008000">self</span>):
-        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">len</span>(<span style="color: #008000">self</span><span style="color: #666666">.</span>data) <span style="color: #666666">&gt;</span> <span style="color: #666666">0</span>
+    def __bool__(self):
+        return len(self.data) &gt; 0
 
-    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__len__</span>(<span style="color: #008000">self</span>):
-        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">len</span>(<span style="color: #008000">self</span><span style="color: #666666">.</span>data)
+    def __len__(self):
+        return len(self.data)
 
-    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__repr__</span>(<span style="color: #008000">self</span>):
-        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">repr</span>(<span style="color: #008000">self</span><span style="color: #666666">.</span>data)
-</pre></div>
-
+    def __repr__(self):
+        return repr(self.data)
+</code></pre>
 <h1>Application: Running Median</h1>
 <p>We shall use this kind of idea, to generate a max and a min heap, then control their bypasses. Making the delta less than 1.</p>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">running_medians</span>(it):
-    med <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">None</span>
-    mxh <span style="color: #666666">=</span> Heap(<span style="color: #008000; font-weight: bold">lambda</span> x: x)
-    mih <span style="color: #666666">=</span> Heap(<span style="color: #008000; font-weight: bold">lambda</span> x: <span style="color: #666666">-</span>x)
-    ans <span style="color: #666666">=</span> []
-    <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> it:
-        <span style="color: #3D7B7B; font-style: italic"># print(i)</span>
-        <span style="color: #008000; font-weight: bold">if</span>(med <span style="color: #666666">==</span> <span style="color: #008000; font-weight: bold">None</span>):
-            mxh<span style="color: #666666">.</span>add(i)
-            med <span style="color: #666666">=</span> i
-            ans<span style="color: #666666">.</span>append(med)
-            <span style="color: #008000; font-weight: bold">continue</span>
+<pre><code class="language-py">def running_medians(it):
+    med = None
+    mxh = Heap(lambda x: x)
+    mih = Heap(lambda x: -x)
+    ans = []
+    for i in it:
+        # print(i)
+        if(med == None):
+            mxh.add(i)
+            med = i
+            ans.append(med)
+            continue
         
-        <span style="color: #008000; font-weight: bold">if</span>(i<span style="color: #666666">&lt;</span>med):
-            mxh<span style="color: #666666">.</span>add(i)
-        <span style="color: #008000; font-weight: bold">elif</span>(i<span style="color: #666666">&gt;=</span>med):
-            mih<span style="color: #666666">.</span>add(i)
+        if(i&lt;med):
+            mxh.add(i)
+        elif(i&gt;=med):
+            mih.add(i)
         
-        <span style="color: #008000; font-weight: bold">if</span>(<span style="color: #008000">len</span>(mxh)<span style="color: #666666">-</span><span style="color: #008000">len</span>(mih)<span style="color: #666666">&gt;1</span>):
-            mih<span style="color: #666666">.</span>add(mxh<span style="color: #666666">.</span>pop())  
-        <span style="color: #008000; font-weight: bold">if</span>(<span style="color: #008000">len</span>(mih)<span style="color: #666666">-</span><span style="color: #008000">len</span>(mxh)<span style="color: #666666">&gt;1</span>):
-            mxh<span style="color: #666666">.</span>add(mih<span style="color: #666666">.</span>pop())
+        if(len(mxh)-len(mih)&gt;1):
+            mih.add(mxh.pop())  
+        if(len(mih)-len(mxh)&gt;1):
+            mxh.add(mih.pop())
 
-        <span style="color: #008000; font-weight: bold">if</span>(<span style="color: #008000">len</span>(mxh) <span style="color: #666666">==</span> <span style="color: #008000">len</span>(mih)):
-            med <span style="color: #666666">=</span> (mxh<span style="color: #666666">.</span>peek()<span style="color: #666666">+</span>mih<span style="color: #666666">.</span>peek())<span style="color: #666666">/2</span>
-        <span style="color: #008000; font-weight: bold">elif</span>(<span style="color: #008000">len</span>(mxh)<span style="color: #666666">&gt;</span><span style="color: #008000">len</span>(mih)):
-            med <span style="color: #666666">=</span> mxh<span style="color: #666666">.</span>peek()
-        <span style="color: #008000; font-weight: bold">else</span>:
-            med <span style="color: #666666">=</span> mih<span style="color: #666666">.</span>peek()
+        if(len(mxh) == len(mih)):
+            med = (mxh.peek()+mih.peek())/2
+        elif(len(mxh)&gt;len(mih)):
+            med = mxh.peek()
+        else:
+            med = mih.peek()
         
-        ans<span style="color: #666666">.</span>append(med)
-    <span style="color: #3D7B7B; font-style: italic"># print(ans)</span>
-    <span style="color: #008000; font-weight: bold">return</span> ans        
+        ans.append(med)
+    # print(ans)
+    return ans        
         
         
-</pre></div>
 
+</code></pre>
 
     </div>
-
-   
-   
-   
     <hr>
-
-
-
-
-
-
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+          inlineMath: [ ['$','$'] ],
+          displayMath: [ ['$$','$$'] ],
+          processEscapes: true
+        },
+        "HTML-CSS": { fonts: ["TeX"] }
+      });
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
     <div id="disqus_thread"></div>
     <script type="text/javascript" async
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
     </script>
     <script>
-        /**
-        *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-        *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
-        
-        // var disqus_config = function () {
-        // this.page.url = ;  // Replace PAGE_URL with your page's canonical URL variable
-        // this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-        // };
-        
-        (function() { // DON'T EDIT BELOW THIS LINE
+        (function() { 
         var d = document, s = d.createElement('script');
         s.src = 'https://augpath.disqus.com/embed.js';
         s.setAttribute('data-timestamp', +new Date());

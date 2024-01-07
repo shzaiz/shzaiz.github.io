@@ -3,11 +3,11 @@
   <head>
     <link rel="stylesheet" href="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/style.css">
     <script src="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/plugin.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex, nofollow">
     <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
- 
     <script>
 const copyButtonLabel = "Copy Code";
 
@@ -59,14 +59,12 @@ async function copyCode(block) {
         code {
             font-family: 'Courier New', Courier, monospace;
         } 
-
         pre {
             font-family: 'Courier New', Courier, monospace;
         } 
         div{
             max-width: 100%;
             overflow: auto;
-            
         }
         .navbar {
             overflow: hidden;
@@ -75,7 +73,6 @@ async function copyCode(block) {
             top: 0; /* Position the navbar at the top of the page */
             width: 100%; /* Full width */
         }
-
         img {
         max-width: 80%;
         height: auto;
@@ -88,7 +85,6 @@ async function copyCode(block) {
             padding: 14px 16px;
             text-decoration: none;
         }
-
         a {
             color: #148bca;
             text-align: center;
@@ -96,81 +92,73 @@ async function copyCode(block) {
             padding-right: 2px;
             text-decoration: none;
         }
-
         p.hidden {
           overflow: hidden;
         }
-
     </style>
   </head>
   <body>
-    
     <div class="navbar">
         <a href="https://shzaiz.github.io">AUG's Wiki</a>
         <a href="index.html"> ↑ Back to contents</a>
-        Last updated at 2024-01-07 15:14:48.827035
+        Last updated at 2024-01-07 20:32:45.222835
     </div>
 
     <div class="toc"></div>
     <a id="toc-button"><i class="far fa-bookmark"></i></a>
     
-    <div>
+    <div id="renderedContent">
       <h1>CF1695C</h1>
-<p><strong>描述</strong>: 给你一个  \(n \times m\)  ( \(1 \le n, m \le 1000\) ) 的格点图，每个格子的值要么是  \(-1\) ，要么是  \(1\) ，现在问你，是否有一条从  \((1, 1)\)  到  \((n, m)\)  的路径，使得路径上经过的格点的值的和为  \(0\) 。在路径中，只能从  \(a_{i, j}\)  移动到  \(a_{i + 1, j}\)  或是  \(a_{i, j + 1}\) （向右或是向下走）。</p>
-<p><strong>考虑DP</strong>:  \(f[i][j][k]\) 表示在 \((i,j)\) , 取得了 \(k\) 个1, 是否存在方案. 因为 \(k\) 非常的小, 可以用bitset艹过去.</p>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>a[<span style="color: #666666">1005</span>][<span style="color: #666666">1005</span>];
-bitset<span style="color: #666666">&lt;</span><span style="color: #bbbbbb"> </span><span style="color: #666666">1001&gt;</span><span style="color: #bbbbbb"> </span>f[<span style="color: #666666">1001</span>][<span style="color: #666666">1001</span>];
-<span style="color: #B00040">void</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">solve</span>(){
-<span style="color: #bbbbbb">    </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>n,<span style="color: #bbbbbb"> </span>m;<span style="color: #bbbbbb"> </span>cin<span style="color: #666666">&gt;&gt;</span>n<span style="color: #666666">&gt;&gt;</span>m;
-<span style="color: #bbbbbb">    </span>F(i,<span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>,<span style="color: #bbbbbb"> </span>n)<span style="color: #bbbbbb"> </span>F(j,<span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>,<span style="color: #bbbbbb"> </span>m){
-<span style="color: #bbbbbb">        </span>cin<span style="color: #666666">&gt;&gt;</span>a[i][j];
-<span style="color: #bbbbbb">        </span>f[i][j].reset();
-<span style="color: #bbbbbb">        </span><span style="color: #008000; font-weight: bold">if</span>(a[i][j]<span style="color: #bbbbbb"> </span><span style="color: #666666">==</span><span style="color: #bbbbbb"> </span><span style="color: #666666">-1</span>)<span style="color: #bbbbbb"> </span>a[i][j]<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>;
-<span style="color: #bbbbbb">    </span>}
+<p><strong>描述</strong>: 给你一个 $n \times m$ ($1 \le n, m \le 1000$) 的格点图，每个格子的值要么是 $-1$，要么是 $1$，现在问你，是否有一条从 $(1, 1)$ 到 $(n, m)$ 的路径，使得路径上经过的格点的值的和为 $0$。在路径中，只能从 $a_{i, j}$ 移动到 $a_{i + 1, j}$ 或是 $a_{i, j + 1}$（向右或是向下走）。</p>
+<p><strong>考虑DP</strong>: $f[i][j][k]$表示在$(i,j)$, 取得了$k$个1, 是否存在方案. 因为$k$非常的小, 可以用bitset艹过去.</p>
+<pre><code class="language-cpp">int a[1005][1005];
+bitset&lt; 1001&gt; f[1001][1001];
+void solve(){
+    int n, m; cin&gt;&gt;n&gt;&gt;m;
+    F(i, 1, n) F(j, 1, m){
+        cin&gt;&gt;a[i][j];
+        f[i][j].reset();
+        if(a[i][j] == -1) a[i][j] = 0;
+    }
 
-<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">if</span>((n<span style="color: #666666">+</span>m<span style="color: #666666">-1</span><span style="color: #bbbbbb"> </span>)<span style="color: #666666">%2</span>)<span style="color: #bbbbbb"> </span>{printf(<span style="color: #BA2121">&quot;No</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>);<span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">return</span><span style="color: #bbbbbb"> </span>;}
+    if((n+m-1 )%2) {printf(&quot;No\n&quot;); return ;}
 
-<span style="color: #bbbbbb">    </span>f[<span style="color: #666666">0</span>][<span style="color: #666666">1</span>][<span style="color: #666666">0</span>]<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>;
-<span style="color: #bbbbbb">    </span>F(i,<span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>,<span style="color: #bbbbbb"> </span>n){
-<span style="color: #bbbbbb">        </span>F(j,<span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>,<span style="color: #bbbbbb"> </span>m){
-<span style="color: #bbbbbb">            </span>f[i][j]<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>(f[i<span style="color: #666666">-1</span>][j]<span style="color: #bbbbbb"> </span><span style="color: #666666">|</span><span style="color: #bbbbbb"> </span>f[i][j<span style="color: #666666">-1</span>])<span style="color: #666666">&lt;&lt;</span>a[i][j];
-<span style="color: #bbbbbb">        </span>}
-<span style="color: #bbbbbb">    </span>}
-<span style="color: #bbbbbb">    </span>printf(<span style="color: #BA2121">&quot;%s</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>,<span style="color: #bbbbbb"> </span>f[n][m][(n<span style="color: #666666">+</span>m)<span style="color: #666666">&gt;&gt;1</span>]<span style="color: #666666">?</span><span style="color: #BA2121">&quot;Yes&quot;</span><span style="color: #666666">:</span><span style="color: #BA2121">&quot;No&quot;</span>);
+    f[0][1][0] = 1;
+    F(i, 1, n){
+        F(j, 1, m){
+            f[i][j] = (f[i-1][j] | f[i][j-1])&lt;&lt;a[i][j];
+        }
+    }
+    printf(&quot;%s\n&quot;, f[n][m][(n+m)&gt;&gt;1]?&quot;Yes&quot;:&quot;No&quot;);
 
 
 }
-</pre></div>
-
-<p> \(\mathbb{}\) </p>
+</code></pre>
+<p>$\mathbb{}$</p>
 
     </div>
-
-   
-   
-   
     <hr>
-
-
-
-
-
-
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+          inlineMath: [ ['$','$'] ],
+          displayMath: [ ['$$','$$'] ],
+          processEscapes: true
+        },
+        "HTML-CSS": { fonts: ["TeX"] }
+      });
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
     <div id="disqus_thread"></div>
     <script type="text/javascript" async
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
     </script>
     <script>
-        /**
-        *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-        *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
-        
-        // var disqus_config = function () {
-        // this.page.url = ;  // Replace PAGE_URL with your page's canonical URL variable
-        // this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-        // };
-        
-        (function() { // DON'T EDIT BELOW THIS LINE
+        (function() { 
         var d = document, s = d.createElement('script');
         s.src = 'https://augpath.disqus.com/embed.js';
         s.setAttribute('data-timestamp', +new Date());

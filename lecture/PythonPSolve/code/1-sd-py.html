@@ -3,11 +3,11 @@
   <head>
     <link rel="stylesheet" href="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/style.css">
     <script src="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/plugin.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex, nofollow">
     <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
- 
     <script>
 const copyButtonLabel = "Copy Code";
 
@@ -59,14 +59,12 @@ async function copyCode(block) {
         code {
             font-family: 'Courier New', Courier, monospace;
         } 
-
         pre {
             font-family: 'Courier New', Courier, monospace;
         } 
         div{
             max-width: 100%;
             overflow: auto;
-            
         }
         .navbar {
             overflow: hidden;
@@ -75,7 +73,6 @@ async function copyCode(block) {
             top: 0; /* Position the navbar at the top of the page */
             width: 100%; /* Full width */
         }
-
         img {
         max-width: 80%;
         height: auto;
@@ -88,7 +85,6 @@ async function copyCode(block) {
             padding: 14px 16px;
             text-decoration: none;
         }
-
         a {
             color: #148bca;
             text-align: center;
@@ -96,78 +92,74 @@ async function copyCode(block) {
             padding-right: 2px;
             text-decoration: none;
         }
-
         p.hidden {
           overflow: hidden;
         }
-
     </style>
   </head>
   <body>
-    
     <div class="navbar">
         <a href="https://shzaiz.github.io">AUG's Wiki</a>
         <a href="index.html"> ↑ Back to contents</a>
-        Last updated at 2024-01-07 15:14:49.729429
+        Last updated at 2024-01-07 20:32:45.999349
     </div>
 
     <div class="toc"></div>
     <a id="toc-button"><i class="far fa-bookmark"></i></a>
     
-    <div>
+    <div id="renderedContent">
       <h1>z3库小例子简介</h1>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">z3</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>
+<pre><code class="language-py">from z3 import *
 
-<span style="color: #3D7B7B; font-style: italic"># First we create an Integer Variable for each cell of the Sudoku grid.</span>
-<span style="color: #3D7B7B; font-style: italic"># Each cell must contain a digit (1 to 9)</span>
-X <span style="color: #666666">=</span> [ [ Int(<span style="color: #BA2121">&quot;x_</span><span style="color: #A45A77; font-weight: bold">%s</span><span style="color: #BA2121">_</span><span style="color: #A45A77; font-weight: bold">%s</span><span style="color: #BA2121">&quot;</span> <span style="color: #666666">%</span> (i<span style="color: #666666">+1</span>, j<span style="color: #666666">+1</span>)) <span style="color: #008000; font-weight: bold">for</span> j <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">9</span>) ] 
-      <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">9</span>) ]
+# First we create an Integer Variable for each cell of the Sudoku grid.
+# Each cell must contain a digit (1 to 9)
+X = [ [ Int(&quot;x_%s_%s&quot; % (i+1, j+1)) for j in range(9) ] 
+      for i in range(9) ]
 
-<span style="color: #3D7B7B; font-style: italic"># Every digit has to be placed exactly once in each row</span>
-cells_c  <span style="color: #666666">=</span> [ And(<span style="color: #666666">1</span> <span style="color: #666666">&lt;=</span> X[i][j], X[i][j] <span style="color: #666666">&lt;=</span> <span style="color: #666666">9</span>) 
-             <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">9</span>) <span style="color: #008000; font-weight: bold">for</span> j <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">9</span>) ]
+# Every digit has to be placed exactly once in each row
+cells_c  = [ And(1 &lt;= X[i][j], X[i][j] &lt;= 9) 
+             for i in range(9) for j in range(9) ]
 
-<span style="color: #3D7B7B; font-style: italic"># Every digit has to be placed exactly once in each column</span>
-rows_c   <span style="color: #666666">=</span> [ Distinct(X[i]) <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">9</span>) ]
+# Every digit has to be placed exactly once in each column
+rows_c   = [ Distinct(X[i]) for i in range(9) ]
 
-cols_c   <span style="color: #666666">=</span> [ Distinct([ X[i][j] <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">9</span>) ]) 
-             <span style="color: #008000; font-weight: bold">for</span> j <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">9</span>) ]
+cols_c   = [ Distinct([ X[i][j] for i in range(9) ]) 
+             for j in range(9) ]
 
-<span style="color: #3D7B7B; font-style: italic"># Every digit has to be placed exactly once in each 3x3 subgrid</span>
-sq_c     <span style="color: #666666">=</span> [ Distinct([ X[<span style="color: #666666">3*</span>i0 <span style="color: #666666">+</span> i][<span style="color: #666666">3*</span>j0 <span style="color: #666666">+</span> j] 
-                        <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">3</span>) <span style="color: #008000; font-weight: bold">for</span> j <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">3</span>) ]) 
-             <span style="color: #008000; font-weight: bold">for</span> i0 <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">3</span>) <span style="color: #008000; font-weight: bold">for</span> j0 <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">3</span>) ]
+# Every digit has to be placed exactly once in each 3x3 subgrid
+sq_c     = [ Distinct([ X[3*i0 + i][3*j0 + j] 
+                        for i in range(3) for j in range(3) ]) 
+             for i0 in range(3) for j0 in range(3) ]
 
-sudoku_c <span style="color: #666666">=</span> cells_c <span style="color: #666666">+</span> rows_c <span style="color: #666666">+</span> cols_c <span style="color: #666666">+</span> sq_c
+sudoku_c = cells_c + rows_c + cols_c + sq_c
 
-instance <span style="color: #666666">=</span> ((<span style="color: #666666">5</span>,<span style="color: #666666">3</span>,<span style="color: #666666">0</span>,<span style="color: #666666">0</span>,<span style="color: #666666">7</span>,<span style="color: #666666">0</span>,<span style="color: #666666">0</span>,<span style="color: #666666">0</span>,<span style="color: #666666">0</span>),
-            (<span style="color: #666666">6</span>,<span style="color: #666666">0</span>,<span style="color: #666666">0</span>,<span style="color: #666666">1</span>,<span style="color: #666666">9</span>,<span style="color: #666666">5</span>,<span style="color: #666666">0</span>,<span style="color: #666666">0</span>,<span style="color: #666666">0</span>),
-            (<span style="color: #666666">0</span>,<span style="color: #666666">9</span>,<span style="color: #666666">8</span>,<span style="color: #666666">0</span>,<span style="color: #666666">0</span>,<span style="color: #666666">0</span>,<span style="color: #666666">0</span>,<span style="color: #666666">6</span>,<span style="color: #666666">0</span>),
-            (<span style="color: #666666">8</span>,<span style="color: #666666">0</span>,<span style="color: #666666">0</span>,<span style="color: #666666">0</span>,<span style="color: #666666">6</span>,<span style="color: #666666">0</span>,<span style="color: #666666">0</span>,<span style="color: #666666">0</span>,<span style="color: #666666">3</span>),
-            (<span style="color: #666666">4</span>,<span style="color: #666666">0</span>,<span style="color: #666666">0</span>,<span style="color: #666666">8</span>,<span style="color: #666666">0</span>,<span style="color: #666666">3</span>,<span style="color: #666666">0</span>,<span style="color: #666666">0</span>,<span style="color: #666666">1</span>),
-            (<span style="color: #666666">7</span>,<span style="color: #666666">0</span>,<span style="color: #666666">0</span>,<span style="color: #666666">0</span>,<span style="color: #666666">2</span>,<span style="color: #666666">0</span>,<span style="color: #666666">0</span>,<span style="color: #666666">0</span>,<span style="color: #666666">6</span>),
-            (<span style="color: #666666">0</span>,<span style="color: #666666">6</span>,<span style="color: #666666">0</span>,<span style="color: #666666">0</span>,<span style="color: #666666">0</span>,<span style="color: #666666">0</span>,<span style="color: #666666">2</span>,<span style="color: #666666">8</span>,<span style="color: #666666">0</span>),
-            (<span style="color: #666666">0</span>,<span style="color: #666666">0</span>,<span style="color: #666666">0</span>,<span style="color: #666666">4</span>,<span style="color: #666666">1</span>,<span style="color: #666666">9</span>,<span style="color: #666666">0</span>,<span style="color: #666666">0</span>,<span style="color: #666666">5</span>),
-            (<span style="color: #666666">0</span>,<span style="color: #666666">0</span>,<span style="color: #666666">0</span>,<span style="color: #666666">0</span>,<span style="color: #666666">8</span>,<span style="color: #666666">0</span>,<span style="color: #666666">0</span>,<span style="color: #666666">7</span>,<span style="color: #666666">9</span>))
+instance = ((5,3,0,0,7,0,0,0,0),
+            (6,0,0,1,9,5,0,0,0),
+            (0,9,8,0,0,0,0,6,0),
+            (8,0,0,0,6,0,0,0,3),
+            (4,0,0,8,0,3,0,0,1),
+            (7,0,0,0,2,0,0,0,6),
+            (0,6,0,0,0,0,2,8,0),
+            (0,0,0,4,1,9,0,0,5),
+            (0,0,0,0,8,0,0,7,9))
 
-<span style="color: #3D7B7B; font-style: italic"># Note that we use the number 0 to indicate blank fields. We need to convert this input to the variables managed by z3:</span>
+# Note that we use the number 0 to indicate blank fields. We need to convert this input to the variables managed by z3:
 
-instance_c <span style="color: #666666">=</span> [ If(instance[i][j] <span style="color: #666666">==</span> <span style="color: #666666">0</span>, 
-                  <span style="color: #008000; font-weight: bold">True</span>, 
-                  X[i][j] <span style="color: #666666">==</span> instance[i][j]) 
-               <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">9</span>) <span style="color: #008000; font-weight: bold">for</span> j <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">9</span>) ]
+instance_c = [ If(instance[i][j] == 0, 
+                  True, 
+                  X[i][j] == instance[i][j]) 
+               for i in range(9) for j in range(9) ]
 
-s <span style="color: #666666">=</span> Solver()                                            <span style="color: #3D7B7B; font-style: italic"># (1)</span>
-s<span style="color: #666666">.</span>add(sudoku_c <span style="color: #666666">+</span> instance_c)                            <span style="color: #3D7B7B; font-style: italic"># (2)</span>
-<span style="color: #008000; font-weight: bold">if</span> s<span style="color: #666666">.</span>check() <span style="color: #666666">==</span> sat:                                    <span style="color: #3D7B7B; font-style: italic"># (3)</span>
-    m <span style="color: #666666">=</span> s<span style="color: #666666">.</span>model()                                       <span style="color: #3D7B7B; font-style: italic"># (4)</span>
-    r <span style="color: #666666">=</span> [ [ m<span style="color: #666666">.</span>evaluate(X[i][j]) <span style="color: #008000; font-weight: bold">for</span> j <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">9</span>) ]     <span style="color: #3D7B7B; font-style: italic"># (5)</span>
-          <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">9</span>) ]
-    print_matrix(r)                                     <span style="color: #3D7B7B; font-style: italic"># (6)</span>
-<span style="color: #008000; font-weight: bold">else</span>:
-    <span style="color: #008000">print</span>(<span style="color: #BA2121">&quot;failed to solve&quot;</span>)                            <span style="color: #3D7B7B; font-style: italic"># (7)</span>
-</pre></div>
-
+s = Solver()                                            # (1)
+s.add(sudoku_c + instance_c)                            # (2)
+if s.check() == sat:                                    # (3)
+    m = s.model()                                       # (4)
+    r = [ [ m.evaluate(X[i][j]) for j in range(9) ]     # (5)
+          for i in range(9) ]
+    print_matrix(r)                                     # (6)
+else:
+    print(&quot;failed to solve&quot;)                            # (7)
+</code></pre>
 <p>(1): Create the Solver object
 (2): Adding our ruleset and our pre-filled grid to the solver
 (3): let z3 check if there is at least one solution satisfying all the rules
@@ -175,32 +167,28 @@ s<span style="color: #666666">.</span>add(sudoku_c <span style="color: #666666">
 (5): with the evaluate() method, we now just extract each variable’s value to build a 9x9 matrix</p>
 
     </div>
-
-   
-   
-   
     <hr>
-
-
-
-
-
-
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+          inlineMath: [ ['$','$'] ],
+          displayMath: [ ['$$','$$'] ],
+          processEscapes: true
+        },
+        "HTML-CSS": { fonts: ["TeX"] }
+      });
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
     <div id="disqus_thread"></div>
     <script type="text/javascript" async
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
     </script>
     <script>
-        /**
-        *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-        *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
-        
-        // var disqus_config = function () {
-        // this.page.url = ;  // Replace PAGE_URL with your page's canonical URL variable
-        // this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-        // };
-        
-        (function() { // DON'T EDIT BELOW THIS LINE
+        (function() { 
         var d = document, s = d.createElement('script');
         s.src = 'https://augpath.disqus.com/embed.js';
         s.setAttribute('data-timestamp', +new Date());

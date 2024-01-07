@@ -3,11 +3,11 @@
   <head>
     <link rel="stylesheet" href="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/style.css">
     <script src="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/plugin.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex, nofollow">
     <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
- 
     <script>
 const copyButtonLabel = "Copy Code";
 
@@ -59,14 +59,12 @@ async function copyCode(block) {
         code {
             font-family: 'Courier New', Courier, monospace;
         } 
-
         pre {
             font-family: 'Courier New', Courier, monospace;
         } 
         div{
             max-width: 100%;
             overflow: auto;
-            
         }
         .navbar {
             overflow: hidden;
@@ -75,7 +73,6 @@ async function copyCode(block) {
             top: 0; /* Position the navbar at the top of the page */
             width: 100%; /* Full width */
         }
-
         img {
         max-width: 80%;
         height: auto;
@@ -88,7 +85,6 @@ async function copyCode(block) {
             padding: 14px 16px;
             text-decoration: none;
         }
-
         a {
             color: #148bca;
             text-align: center;
@@ -96,25 +92,22 @@ async function copyCode(block) {
             padding-right: 2px;
             text-decoration: none;
         }
-
         p.hidden {
           overflow: hidden;
         }
-
     </style>
   </head>
   <body>
-    
     <div class="navbar">
         <a href="https://shzaiz.github.io">AUG's Wiki</a>
         <a href="index.html"> ↑ Back to contents</a>
-        Last updated at 2024-01-07 15:14:49.388666
+        Last updated at 2024-01-07 20:32:45.722999
     </div>
 
     <div class="toc"></div>
     <a id="toc-button"><i class="far fa-bookmark"></i></a>
     
-    <div>
+    <div id="renderedContent">
       <title>简单介绍</title>
 <p>$$
 \Huge \textbf{简单介绍}
@@ -125,7 +118,7 @@ $$</p>
 <h1>欢迎</h1>
 <p>欢迎各位刚经历过高考的同学们! 在高中的时候, 你们的老师可能告诉过你们&quot;上了大学就轻松了&quot;、&quot;只要上了好大学, 就一定有怎样的好工作等等&quot;.</p>
 <p>但是事实是: 老师的这些话语并不是真的. 或者说, 他们是不符合实际情况的 - 至少不符合计算机系的实际情况. 但也不要过于悲观, 一会我们会简单说说关于&quot;竞争&quot;与&quot;学习&quot;.</p>
-<p>到了大学以来, 不同于以往的&quot;<a href="https://www.bilibili.com/video/BV1UW4y1D7vv">付出就有收获</a>&quot;的价值观, 你可能会亲眼看见(甚至就是你自己)那些&quot;努力也无法获得回报&quot;的人, 那些&quot;想努力却无从努力的人&quot;, &quot;太过努力而身心俱毁的人&quot;, 还有&quot;本想好好努力, 但是一想到&#x27;反正也轮不到我&#x27;就打退堂鼓的人&quot;...</p>
+<p>到了大学以来, 不同于以往的&quot;<a href="https://www.bilibili.com/video/BV1UW4y1D7vv">付出就有收获</a>&quot;的价值观, 你可能会亲眼看见(甚至就是你自己)那些&quot;努力也无法获得回报&quot;的人, 那些&quot;想努力却无从努力的人&quot;, &quot;太过努力而身心俱毁的人&quot;, 还有&quot;本想好好努力, 但是一想到'反正也轮不到我'就打退堂鼓的人&quot;...</p>
 <p>所以, 之所以你认为&quot;努力就有回报&quot;, 那是因为你一直以来的环境: 有人鼓励你, 在背后推着你走; 在面前提携你, 肯定你的进步. 因此, 环境因素不容小觑, 很大程度上是环境造就了你的方方面面.</p>
 <p>当你与来自更优渥的环境中的同学进行比较的时候, 往往会陷入深深的焦虑. 提出诸如&quot;为什么我不行而他可以&quot;的问题. 要回答这个问题, 可能需要追溯到很久很久之前. 而&quot;如何达到像他一样的水平&quot;, 有些时候也是无解的.</p>
 <p>大家都过着同样的时间, 而你一定是用这些时间探索其他的事情去了. 因此, 不用太担心 - 因为你总有一个方面是经历了时间的考验的, 做得比别人好的, 拿出手来有自信的. 可能只是暂时因为外界评价的原因, 暂时封藏在了心底. 如果感到苦恼, 试着像一个办法认识一下自己, 一点也不要着急.</p>
@@ -176,32 +169,28 @@ $$</p>
 $$</p>
 
     </div>
-
-   
-   
-   
     <hr>
-
-
-
-
-
-
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+          inlineMath: [ ['$','$'] ],
+          displayMath: [ ['$$','$$'] ],
+          processEscapes: true
+        },
+        "HTML-CSS": { fonts: ["TeX"] }
+      });
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
     <div id="disqus_thread"></div>
     <script type="text/javascript" async
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
     </script>
     <script>
-        /**
-        *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-        *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
-        
-        // var disqus_config = function () {
-        // this.page.url = ;  // Replace PAGE_URL with your page's canonical URL variable
-        // this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-        // };
-        
-        (function() { // DON'T EDIT BELOW THIS LINE
+        (function() { 
         var d = document, s = d.createElement('script');
         s.src = 'https://augpath.disqus.com/embed.js';
         s.setAttribute('data-timestamp', +new Date());

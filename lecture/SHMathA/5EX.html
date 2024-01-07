@@ -3,11 +3,11 @@
   <head>
     <link rel="stylesheet" href="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/style.css">
     <script src="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/plugin.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex, nofollow">
     <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
- 
     <script>
 const copyButtonLabel = "Copy Code";
 
@@ -59,14 +59,12 @@ async function copyCode(block) {
         code {
             font-family: 'Courier New', Courier, monospace;
         } 
-
         pre {
             font-family: 'Courier New', Courier, monospace;
         } 
         div{
             max-width: 100%;
             overflow: auto;
-            
         }
         .navbar {
             overflow: hidden;
@@ -75,7 +73,6 @@ async function copyCode(block) {
             top: 0; /* Position the navbar at the top of the page */
             width: 100%; /* Full width */
         }
-
         img {
         max-width: 80%;
         height: auto;
@@ -88,7 +85,6 @@ async function copyCode(block) {
             padding: 14px 16px;
             text-decoration: none;
         }
-
         a {
             color: #148bca;
             text-align: center;
@@ -96,105 +92,98 @@ async function copyCode(block) {
             padding-right: 2px;
             text-decoration: none;
         }
-
         p.hidden {
           overflow: hidden;
         }
-
     </style>
   </head>
   <body>
-    
     <div class="navbar">
         <a href="https://shzaiz.github.io">AUG's Wiki</a>
         <a href="index.html"> ↑ Back to contents</a>
-        Last updated at 2024-01-07 15:14:49.051349
+        Last updated at 2024-01-07 20:32:45.405840
     </div>
 
     <div class="toc"></div>
     <a id="toc-button"><i class="far fa-bookmark"></i></a>
     
-    <div>
+    <div id="renderedContent">
       <h1>5EX</h1>
 <p>一. 我们在初中学习过三种函数:</p>
-<p>(1) 一次函数:   \(f(x)=k x+b \quad(k \neq 0)\)  ;</p>
-<p>(2)反比例函数:   \(g(x)=\frac{m}{x}(m \neq 0)\)  ;</p>
-<p>(3) 二次函数:   \(h(x)=a x^{2}+b x+c \quad(a \neq 0)\)  .</p>
+<p>(1) 一次函数:  $f(x)=k x+b \quad(k \neq 0)$ ;</p>
+<p>(2)反比例函数:  $g(x)=\frac{m}{x}(m \neq 0)$ ;</p>
+<p>(3) 二次函数:  $h(x)=a x^{2}+b x+c \quad(a \neq 0)$ .</p>
 <p>分情况画出它们的图象, 并指出其定义域和值域, 然后探索、证明它们的单调性（注意分区间).</p>
 <hr />
-<p>二. <strong>证明</strong>:  \(f(x)=x^3\) 在 \(\mathbb{R}\) 上单增.</p>
+<p>二. <strong>证明</strong>: $f(x)=x^3$在$\R$上单增.</p>
 <ol start="3">
 <li>
-<p><strong>证明</strong>:  \(f(x)=\sqrt x\) 在 \([0,+\infty)\) 上单增.</p>
+<p><strong>证明</strong>: $f(x)=\sqrt x$在$[0,+\infty)$上单增.</p>
 </li>
 <li>
-<p>设函数   \(f(x)\)   与   \(g(x)\)   有公共的讨论区间   \(I\)  ,
-(1) 若   \(f(x)\)   和   \(g(x)\)   在   \(I\)   上均为单调递增函数, 试探究   \(f(x)+g(x)\)   的单调性;
-(2) 若   \(f(x)\)   与   \(g(x)\)   在   \(I\)   上均为单调递增函数, 且为恒正函数, 试探究   \(f(x)\)   \(\cdot g(x)\)   的单调性;
-(3) 若   \(f(x)\)   和   \(g(x)\)   在   \(I\)   上均为单调递增函数, 试探究   \(f(x) \cdot g(x)\)   的单调性.</p>
+<p>设函数  $f(x)$  与  $g(x)$  有公共的讨论区间  $I$ ,
+(1) 若  $f(x)$  和  $g(x)$  在  $I$  上均为单调递增函数, 试探究  $f(x)+g(x)$  的单调性;
+(2) 若  $f(x)$  与  $g(x)$  在  $I$  上均为单调递增函数, 且为恒正函数, 试探究  $f(x)$ $\cdot g(x)$  的单调性;
+(3) 若  $f(x)$  和  $g(x)$  在  $I$  上均为单调递增函数, 试探究  $f(x) \cdot g(x)$  的单调性.</p>
 </li>
 <li>
 <p>求下列函数的单调区间.
-(1)   \(y=(x+1)^{3}, \quad y=(1-x)^{3}\) 
-(2)   \(y=\dfrac{1}{x+1}\) 
-(3)   \(y=\dfrac{1}{x}+5\) 
-(4)   \(y=5-\dfrac{1}{x}\) </p>
+(1)  $y=(x+1)^{3}, \quad y=(1-x)^{3}$
+(2)  $y=\dfrac{1}{x+1}$
+(3)  $y=\dfrac{1}{x}+5$
+(4)  $y=5-\dfrac{1}{x}$</p>
 </li>
 <li>
-<p>求 \(f(x)=|x-1|+|x-2|+\cdots+|x-2013|\) 的最小值时,  \(x\) 的值.(也可写作求满足 \(\min{\sum_{i=1}^{2013} |x-i|}\) 的 \(x\) 值.)</p>
+<p>求$f(x)=|x-1|+|x-2|+\cdots+|x-2013|$的最小值时, $x$的值.(也可写作求满足$\min{\sum_{i=1}^{2013} |x-i|}$的$x$值.)</p>
 </li>
 <li>
-<p>(1) 证明反比例函数   \(f(x)=\frac{m}{x}(m \neq 0)\)   是奇函数;
-(2) 证明“对勾函数”   \(g(x)=x+\frac{a}{x}\) (a&gt;0)  是奇函数. 画出其在定义域   \(\mathbf{R}^{*}\)   上的图象, 并㝍出其值域.</p>
+<p>(1) 证明反比例函数  $f(x)=\frac{m}{x}(m \neq 0)$  是奇函数;
+(2) 证明“对勾函数”  $g(x)=x+\frac{a}{x}$(a&gt;0)  是奇函数. 画出其在定义域  $\mathbf{R}^{*}$  上的图象, 并㝍出其值域.</p>
 </li>
 <li>
-<p>关于函数   \(f(x)=\dfrac{k}{x}(k&lt;0)\)   的下列说法正确的是 (  ) .
-A.   \(f(x)\)   在   \((0,+\infty)\)   上单调递减
-B.   \(f(x)\)   在   \((-\infty, 0)\)   上单调递减
-C.   \(f(x)\)   的单调增区间为   \((-\infty, 0)\)   \(\cup(0,+\infty)\) 
-D.   \(f(x)\)   的单调增区间为   \((-\infty, 0)\)   和   \((0,+\infty)\)  .</p>
+<p>关于函数  $f(x)=\dfrac{k}{x}(k&lt;0)$  的下列说法正确的是 (  ) .
+A.  $f(x)$  在  $(0,+\infty)$  上单调递减
+B.  $f(x)$  在  $(-\infty, 0)$  上单调递减
+C.  $f(x)$  的单调增区间为  $(-\infty, 0)$ $\cup(0,+\infty)$
+D.  $f(x)$  的单调增区间为  $(-\infty, 0)$  和  $(0,+\infty)$ .</p>
 </li>
 <li>
-<p>已知函数 \(f(x)=a x^{2}+(1-3 a) x+a\)  在区间 \([1,+\infty)\) 上递增, 则 \(a\) 的取值范围是.</p>
+<p>已知函数$f(x)=a x^{2}+(1-3 a) x+a$ 在区间$[1,+\infty)$上递增, 则$a$的取值范围是.</p>
 </li>
 <li>
-<p>(请使用计算机完成作答) 在GeoGebra上画出 \(x^2+y^2=1\) 的图像.</p>
+<p>(请使用计算机完成作答) 在GeoGebra上画出$x^2+y^2=1$的图像.</p>
 </li>
 <li>
-<p>(请使用计算机完成作答) 在GeoGebra上画出 \(^x\sqrt{x}\) 的图像.</p>
+<p>(请使用计算机完成作答) 在GeoGebra上画出$^x\sqrt{x}$的图像.</p>
 </li>
 <li>
-<p>(请使用计算机完成作答) 在GeoGebra(3D)上画出 \(x^2+y^2+z^2=1\) 的图像.</p>
+<p>(请使用计算机完成作答) 在GeoGebra(3D)上画出$x^2+y^2+z^2=1$的图像.</p>
 </li>
 </ol>
 
     </div>
-
-   
-   
-   
     <hr>
-
-
-
-
-
-
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+          inlineMath: [ ['$','$'] ],
+          displayMath: [ ['$$','$$'] ],
+          processEscapes: true
+        },
+        "HTML-CSS": { fonts: ["TeX"] }
+      });
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
     <div id="disqus_thread"></div>
     <script type="text/javascript" async
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
     </script>
     <script>
-        /**
-        *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-        *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
-        
-        // var disqus_config = function () {
-        // this.page.url = ;  // Replace PAGE_URL with your page's canonical URL variable
-        // this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-        // };
-        
-        (function() { // DON'T EDIT BELOW THIS LINE
+        (function() { 
         var d = document, s = d.createElement('script');
         s.src = 'https://augpath.disqus.com/embed.js';
         s.setAttribute('data-timestamp', +new Date());

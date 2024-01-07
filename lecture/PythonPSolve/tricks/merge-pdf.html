@@ -3,11 +3,11 @@
   <head>
     <link rel="stylesheet" href="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/style.css">
     <script src="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/plugin.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex, nofollow">
     <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
- 
     <script>
 const copyButtonLabel = "Copy Code";
 
@@ -59,14 +59,12 @@ async function copyCode(block) {
         code {
             font-family: 'Courier New', Courier, monospace;
         } 
-
         pre {
             font-family: 'Courier New', Courier, monospace;
         } 
         div{
             max-width: 100%;
             overflow: auto;
-            
         }
         .navbar {
             overflow: hidden;
@@ -75,7 +73,6 @@ async function copyCode(block) {
             top: 0; /* Position the navbar at the top of the page */
             width: 100%; /* Full width */
         }
-
         img {
         max-width: 80%;
         height: auto;
@@ -88,7 +85,6 @@ async function copyCode(block) {
             padding: 14px 16px;
             text-decoration: none;
         }
-
         a {
             color: #148bca;
             text-align: center;
@@ -96,42 +92,38 @@ async function copyCode(block) {
             padding-right: 2px;
             text-decoration: none;
         }
-
         p.hidden {
           overflow: hidden;
         }
-
     </style>
   </head>
   <body>
-    
     <div class="navbar">
         <a href="https://shzaiz.github.io">AUG's Wiki</a>
         <a href="index.html"> ↑ Back to contents</a>
-        Last updated at 2024-01-07 15:14:49.725088
+        Last updated at 2024-01-07 20:32:45.997686
     </div>
 
     <div class="toc"></div>
     <a id="toc-button"><i class="far fa-bookmark"></i></a>
     
-    <div>
+    <div id="renderedContent">
       <p>PDF-merging</p>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">pypdf</span> <span style="color: #008000; font-weight: bold">import</span> PdfMerger
+<pre><code class="language-py">from pypdf import PdfMerger
 
-pdfs <span style="color: #666666">=</span> [<span style="color: #BA2121">&#39;file1.pdf&#39;</span>, <span style="color: #BA2121">&#39;file2.pdf&#39;</span>, <span style="color: #BA2121">&#39;file3.pdf&#39;</span>, <span style="color: #BA2121">&#39;file4.pdf&#39;</span>]
+pdfs = ['file1.pdf', 'file2.pdf', 'file3.pdf', 'file4.pdf']
 
-merger <span style="color: #666666">=</span> PdfMerger()
+merger = PdfMerger()
 
-<span style="color: #008000; font-weight: bold">for</span> pdf <span style="color: #AA22FF; font-weight: bold">in</span> pdfs:
-    merger<span style="color: #666666">.</span>append(pdf)
+for pdf in pdfs:
+    merger.append(pdf)
 
-merger<span style="color: #666666">.</span>write(<span style="color: #BA2121">&quot;result.pdf&quot;</span>)
-merger<span style="color: #666666">.</span>close()
-</pre></div>
-
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span>&lt;<span style="color: #008000; font-weight: bold">head</span>&gt;
-  &lt;<span style="color: #008000; font-weight: bold">script</span> <span style="color: #687822">src</span><span style="color: #666666">=</span><span style="color: #BA2121">&quot;path/to/clipboard.min.js&quot;</span>&gt;&lt;/<span style="color: #008000; font-weight: bold">script</span>&gt;
-&lt;/<span style="color: #008000; font-weight: bold">head</span>&gt;
+merger.write(&quot;result.pdf&quot;)
+merger.close()
+</code></pre>
+<pre><code class="language-html">&lt;head&gt;
+  &lt;script src=&quot;path/to/clipboard.min.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
 
 .reveal pre code {
   position: relative;
@@ -188,36 +180,33 @@ merger<span style="color: #666666">.</span>close()
 
 .reveal pre code[data-clipboard-target]:hover::after {
   opacity:
-</pre></div>
 
+
+</code></pre>
 
     </div>
-
-   
-   
-   
     <hr>
-
-
-
-
-
-
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+          inlineMath: [ ['$','$'] ],
+          displayMath: [ ['$$','$$'] ],
+          processEscapes: true
+        },
+        "HTML-CSS": { fonts: ["TeX"] }
+      });
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
     <div id="disqus_thread"></div>
     <script type="text/javascript" async
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
     </script>
     <script>
-        /**
-        *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-        *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
-        
-        // var disqus_config = function () {
-        // this.page.url = ;  // Replace PAGE_URL with your page's canonical URL variable
-        // this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-        // };
-        
-        (function() { // DON'T EDIT BELOW THIS LINE
+        (function() { 
         var d = document, s = d.createElement('script');
         s.src = 'https://augpath.disqus.com/embed.js';
         s.setAttribute('data-timestamp', +new Date());

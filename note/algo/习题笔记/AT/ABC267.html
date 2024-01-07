@@ -3,11 +3,11 @@
   <head>
     <link rel="stylesheet" href="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/style.css">
     <script src="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/plugin.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex, nofollow">
     <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
- 
     <script>
 const copyButtonLabel = "Copy Code";
 
@@ -59,14 +59,12 @@ async function copyCode(block) {
         code {
             font-family: 'Courier New', Courier, monospace;
         } 
-
         pre {
             font-family: 'Courier New', Courier, monospace;
         } 
         div{
             max-width: 100%;
             overflow: auto;
-            
         }
         .navbar {
             overflow: hidden;
@@ -75,7 +73,6 @@ async function copyCode(block) {
             top: 0; /* Position the navbar at the top of the page */
             width: 100%; /* Full width */
         }
-
         img {
         max-width: 80%;
         height: auto;
@@ -88,7 +85,6 @@ async function copyCode(block) {
             padding: 14px 16px;
             text-decoration: none;
         }
-
         a {
             color: #148bca;
             text-align: center;
@@ -96,25 +92,22 @@ async function copyCode(block) {
             padding-right: 2px;
             text-decoration: none;
         }
-
         p.hidden {
           overflow: hidden;
         }
-
     </style>
   </head>
   <body>
-    
     <div class="navbar">
         <a href="https://shzaiz.github.io">AUG's Wiki</a>
         <a href="index.html"> ↑ Back to contents</a>
-        Last updated at 2024-01-07 15:14:48.788944
+        Last updated at 2024-01-07 20:32:45.186315
     </div>
 
     <div class="toc"></div>
     <a id="toc-button"><i class="far fa-bookmark"></i></a>
     
-    <div>
+    <div id="renderedContent">
       <h1>0904 ABC267 补题</h1>
 <h2>总评: 菜, 太菜了.</h2>
 <p>其实有两方面原因, 其中之一是在假期训练不够, 另一个原因可能是由于真的是很疲惫, 最近的睡眠时间和质量都不太好, 造成了精力不足然后疯狂寄掉.</p>
@@ -127,56 +120,52 @@ async function copyCode(block) {
 <p><strong>wssb</strong>. 因为debug信息没删完.</p>
 <h3>2C: 前缀和</h3>
 <p><strong>我的想法</strong>. 看到连续区间一般会想到前缀和处理.</p>
-<p>可以维护两个数组 <code>isum</code> 和 <code>sum</code>. 其中, <code>sum</code>是一个普通的前缀和 \(\sum_{i=1}^n a_i\) , <code>isum</code> 维护了  \(\sum_{i=1}^n i\times a_i\) . 所以如果要求  \([l..r]\)  之间的答案, 只需要计算
+<p>可以维护两个数组 <code>isum</code> 和 <code>sum</code>. 其中, <code>sum</code>是一个普通的前缀和$\sum_{i=1}^n a_i$, <code>isum</code> 维护了 $\sum_{i=1}^n i\times a_i$. 所以如果要求 $[l..r]$ 之间的答案, 只需要计算
 $$
-\text{isum}[j]-\text{isum}[i-1]-(i-1)\times(\text{sum}[j]-\text{sum}[i-1]). 
+\text{isum}[j]-\text{isum}[i-1]-(i-1)\times(\text{sum}[j]-\text{sum}[i-1]).
 $$</p>
 <p><strong>答案的想法</strong>. 好像区别不大, 可是为什么总是WA甚至RE呢呜呜呜, 肯定是什么东西错了.</p>
 <p><strong>wssb</strong>. 读错题意导致 MLE 了</p>
 <h3>2D: 小DP</h3>
 <p><strong>解答前提示</strong>. 要用dp.</p>
 <p><strong>我的想法</strong>. 由于可以使决策有序化, 因此考虑没有后效性的 DP . (或者注意到这就是一个选数的背包)</p>
-<p>具体地, 考虑  \(\text{dp}[i][j]\)  表示当前进行到了第  \(i\)  个数字, 选择了  \(j\)  个数字. 那么根据状态转移就有</p>
+<p>具体地, 考虑 $\text{dp}[i][j]$ 表示当前进行到了第 $i$ 个数字, 选择了 $j$ 个数字. 那么根据状态转移就有</p>
 <p>$$
-dp[i][j] = \min\{dp[i-1][j], dp[i-1][j-1] + A_i\times j\}.
+dp[i][j] = \min{dp[i-1][j], dp[i-1][j-1] + A_i\times j}.
 $$</p>
-<p>边界条件是 \(dp[1][1]=A[1]\) .</p>
-<p><strong>不足之处</strong>. 交了两次, 第一次忘记把数组置为 \(-\infty\) 了.</p>
+<p>边界条件是$dp[1][1]=A[1]$.</p>
+<p><strong>不足之处</strong>. 交了两次, 第一次忘记把数组置为$-\infty$了.</p>
 <h3>2E: 小二分</h3>
 <p><strong>遇到的一些困难</strong>. 样例有点少导致思路不是太顺畅. (其实是读错题了, cost是取最大值作为cost而不是sum的cost).</p>
-<p><strong>观察题面</strong>. 一个小套路, 应该是要用二分的方法. 因此把问题转换为&quot;进行 \(n\) 次操作, 使得最大的cost不超过给定的 \(T\) &quot;. 并且观察到随着时间的增多, 操作是单调递减的. 因为根据删除边的定义, 下一次删除边之后连的边变少了, 删除自然自然会使得后续内容变少.</p>
-<p><strong>设计贪心算法</strong>. 初始状态下, 先把选择每个点的操作代价计算出来. 维护一个&quot;可以被选择&quot;的队列, 首先加入代价和小于等于 \(T\) 的内容.
+<p><strong>观察题面</strong>. 一个小套路, 应该是要用二分的方法. 因此把问题转换为&quot;进行$n$次操作, 使得最大的cost不超过给定的$T$&quot;. 并且观察到随着时间的增多, 操作是单调递减的. 因为根据删除边的定义, 下一次删除边之后连的边变少了, 删除自然自然会使得后续内容变少.</p>
+<p><strong>设计贪心算法</strong>. 初始状态下, 先把选择每个点的操作代价计算出来. 维护一个&quot;可以被选择&quot;的队列, 首先加入代价和小于等于$T$的内容.
 接下来, 每次从队首取出一个元素, 然后每次维护可加的就行了.</p>
-<p><strong>上界和下界</strong>. 上界是 \(\sum_{i=1}^n A[i]\) , 下界是 \(0\) .</p>
+<p><strong>上界和下界</strong>. 上界是$\sum_{i=1}^n A[i]$, 下界是$0$.</p>
 <p>二分板子炸了, 但是还不知道咋办.</p>
 
     </div>
-
-   
-   
-   
     <hr>
-
-
-
-
-
-
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+          inlineMath: [ ['$','$'] ],
+          displayMath: [ ['$$','$$'] ],
+          processEscapes: true
+        },
+        "HTML-CSS": { fonts: ["TeX"] }
+      });
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
     <div id="disqus_thread"></div>
     <script type="text/javascript" async
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
     </script>
     <script>
-        /**
-        *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-        *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
-        
-        // var disqus_config = function () {
-        // this.page.url = ;  // Replace PAGE_URL with your page's canonical URL variable
-        // this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-        // };
-        
-        (function() { // DON'T EDIT BELOW THIS LINE
+        (function() { 
         var d = document, s = d.createElement('script');
         s.src = 'https://augpath.disqus.com/embed.js';
         s.setAttribute('data-timestamp', +new Date());

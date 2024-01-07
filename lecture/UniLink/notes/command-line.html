@@ -3,11 +3,11 @@
   <head>
     <link rel="stylesheet" href="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/style.css">
     <script src="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/plugin.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex, nofollow">
     <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
- 
     <script>
 const copyButtonLabel = "Copy Code";
 
@@ -59,14 +59,12 @@ async function copyCode(block) {
         code {
             font-family: 'Courier New', Courier, monospace;
         } 
-
         pre {
             font-family: 'Courier New', Courier, monospace;
         } 
         div{
             max-width: 100%;
             overflow: auto;
-            
         }
         .navbar {
             overflow: hidden;
@@ -75,7 +73,6 @@ async function copyCode(block) {
             top: 0; /* Position the navbar at the top of the page */
             width: 100%; /* Full width */
         }
-
         img {
         max-width: 80%;
         height: auto;
@@ -88,7 +85,6 @@ async function copyCode(block) {
             padding: 14px 16px;
             text-decoration: none;
         }
-
         a {
             color: #148bca;
             text-align: center;
@@ -96,25 +92,22 @@ async function copyCode(block) {
             padding-right: 2px;
             text-decoration: none;
         }
-
         p.hidden {
           overflow: hidden;
         }
-
     </style>
   </head>
   <body>
-    
     <div class="navbar">
         <a href="https://shzaiz.github.io">AUG's Wiki</a>
         <a href="index.html"> ↑ Back to contents</a>
-        Last updated at 2024-01-07 15:14:49.423907
+        Last updated at 2024-01-07 20:32:45.739863
     </div>
 
     <div class="toc"></div>
     <a id="toc-button"><i class="far fa-bookmark"></i></a>
     
-    <div>
+    <div id="renderedContent">
       <title>The command line</title>
 <p>$$
 \Huge \textbf{The Command Line}
@@ -123,8 +116,8 @@ $$</p>
 \boxed{ \overbrace{\textit{degaokaolization}}^{\small{去高考化}} \text{ Discussion Group | Topic 01}}
 $$</p>
 <h1>A bit of History</h1>
-<p>In today&#x27;s world, modern technology, particularly computers, has empowered us to achieve incredible feats. However, despite their capabilities, we have noticed that some students view operating computers as mere &quot;magic spells&quot;. This mindset can lead them into trouble when confronted with more complex challenges.</p>
-<p>The way we usually operate our computers is by mouse and keyboard - by dragging the clicking the so-called &#x27;window&#x27; stuff on your screen, and sometimes type something into it. This is called a <em>GUI interface</em> - GUI stands for Graphical User Interface - things are perfectly laid to you over the screen. When a window comes up, some possible operations are now clearly in front of you. Even if you haven&#x27;t seen the window before, you will be instantly clear of what it means and respond quickly and accurately.</p>
+<p>In today's world, modern technology, particularly computers, has empowered us to achieve incredible feats. However, despite their capabilities, we have noticed that some students view operating computers as mere &quot;magic spells&quot;. This mindset can lead them into trouble when confronted with more complex challenges.</p>
+<p>The way we usually operate our computers is by mouse and keyboard - by dragging the clicking the so-called 'window' stuff on your screen, and sometimes type something into it. This is called a <em>GUI interface</em> - GUI stands for Graphical User Interface - things are perfectly laid to you over the screen. When a window comes up, some possible operations are now clearly in front of you. Even if you haven't seen the window before, you will be instantly clear of what it means and respond quickly and accurately.</p>
 <p>It also suggests that there is another different way of operating computers. Shortly speaking, by purely typing. That is, type some commands into the computer and let them give us the result. This is called <em>CLI interface</em> - CLI stands for Command Line Interface.</p>
 <p>GUIs were a hot topic in the early 1980s. With GUI, technical companies can easily promote their technical products to more customers. By packing many features into a button with a single click, they can of course hit the markets.</p>
 <p>This leads to a weird question: Why do CLIs exist, even today? Intuitively, the behavior of CLIs are somehow confusing, and of course, not easy to use.</p>
@@ -134,44 +127,41 @@ $$</p>
 <p>CLI still exists in Windows. In fact, in higher versions of Windows, there are 2 CLIs. In this section, we will take a glance at the relatively primitive one, the CMD program.</p>
 <h2>Using the shell</h2>
 <p>The way to launch the shell is simple: press <code>WINDOWS</code>+<code>R</code>, type in <code>cmd</code>. Then a window in black will appear with words</p>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span>C:<span style="color: #AA5D1F; font-weight: bold">\U</span>sers<span style="color: #AA5D1F; font-weight: bold">\A</span>dmin<span style="color: #AA5D1F; font-weight: bold">\&gt;</span><span style="color: #bbbbbb"> </span>_
-</pre></div>
-
+<pre><code class="language-shell">C:\Users\Admin\&gt; _
+</code></pre>
 <p>This means that your current working directory is under the path <code>C:\Users\Admin</code>. Files and changes you make will apply to this directory by default.</p>
 <p><code>C:\Users\Admin</code> means that this is equivalent to starting File Explorer, or My Computer, click on the disk <code>C</code> icon, then <code>Users</code> folder, then <code>Admin</code> folder. You are currently working on this directory.</p>
 <p>Like in file explorer, you are curious about how to go around this stuff, that is navigating in this shell. But before doing this, we will watch how this launches applications.</p>
-<p>First, let&#x27;s run a program here. If you don&#x27;t have a proper program to run, I have one application named <code>hello.exe</code> that can print <code>&quot;Hello World&quot;</code> to the screen.</p>
+<p>First, let's run a program here. If you don't have a proper program to run, I have one application named <code>hello.exe</code> that can print <code>&quot;Hello World&quot;</code> to the screen.</p>
 <p>Type in</p>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span>hello.exe<span style="color: #bbbbbb"> </span>
-</pre></div>
-
+<pre><code class="language-shell">hello.exe 
+</code></pre>
 <p>and maybe you will see <code>Hello World</code> displaying on the screen. If you see an error message, maybe you have mistaken the place for this program.</p>
 <p>But what if I want to open an application in another folder? This requires us to have a good command of navigating between folders.</p>
 <p><strong>Change Directories</strong>. Use <code>cd</code> to navigate between directories. <code>cd foldername</code> to enter a folder, <code>cd .</code> to come into the current one, <code>cd ..</code> to back to the upper level. Also, we can <code>cd path/to/file/name/../name</code>, combining them together.</p>
 <p><strong>Getting Help</strong>. Command line tools are designed to show help. By attaching an extra <em>flag</em> <code>-h</code>(Windows 7 and after) or <code>/h</code>(Windows XP), you will receive the help message.</p>
 <h2>The PATH environment</h2>
-<p>Now enter <code>calc.exe</code> in <code>cmd</code>. To our surprise, it started Calculator. But we don&#x27;t have a calculator under this directory! Why?</p>
+<p>Now enter <code>calc.exe</code> in <code>cmd</code>. To our surprise, it started Calculator. But we don't have a calculator under this directory! Why?</p>
 <p>The answer is in the PATH environment. When you typed a line of text, the system firstly finds the application under this folder, then, it starts to search in the PATH folders. There are many critical pathes in your system, like <code>C:\Windows\System32</code> which has tons of applications in it. You may find <code>calc.exe</code> in this folder.</p>
-<p>This is basically a lazy idea - we don&#x27;t have to change the directory every time we want to execute a file, which is good!</p>
+<p>This is basically a lazy idea - we don't have to change the directory every time we want to execute a file, which is good!</p>
 <p>Another advantage of this design is that we can leave more options to users. For example, one user may installed the executable file <code>a.exe</code> to <code>C:\Program Files</code>, while another user installed it to <code>D:\Program Files</code>. This kind of technique will make the application easier to access.</p>
 <p>However, there are some shortcomings of this pattern. If you have two applications with the exact name included in the PATH, then it will be confusing for you. So in Unix system, there are no such things as <em>global variables</em>. Instead, the PATH is set for each terminal. Every time you start a terminal window, the PATH sets to its initial state. It has a startup script configuring the PATH and other stuff.</p>
 <h2>Other handy operations</h2>
-<p><strong>Listing Files in a directory</strong>. Want to know what&#x27;s in your current directory? You may enter <code>dir -s</code>, where <code>s</code> stands for <code>show</code>.</p>
+<p><strong>Listing Files in a directory</strong>. Want to know what's in your current directory? You may enter <code>dir -s</code>, where <code>s</code> stands for <code>show</code>.</p>
 <p><strong>Move file</strong>. Use <code>move</code> command. If you want to move the file from <code>C:\first</code> to <code>D:\second</code>, you should say <code>move C:\first D:\second</code>. Both two arguments can be file or directory.</p>
-<p>There are other bunch of commands operating this way. Like <code>copy</code>, <code>rename</code>, and it&#x27;s not hard to guess what to pass in, based on <code>move</code> command.</p>
-<p><strong>Tip</strong>. Don&#x27;t be afraid of mistakes. If you encounter errors, it&#x27;s totally fine. Don&#x27;t be shocked or even overwhelmed by errors! In fact, having errors is normal in learning!</p>
+<p>There are other bunch of commands operating this way. Like <code>copy</code>, <code>rename</code>, and it's not hard to guess what to pass in, based on <code>move</code> command.</p>
+<p><strong>Tip</strong>. Don't be afraid of mistakes. If you encounter errors, it's totally fine. Don't be shocked or even overwhelmed by errors! In fact, having errors is normal in learning!</p>
 <h1>Some fun commands</h1>
 <h2>Shutdown</h2>
-<p>Shutdown means turning off your computer. Maybe you have dreamed of turning off your teacher&#x27;s computer in a boring lesson so that he would have no slides to continue the lecture.</p>
-<p>But it&#x27;s risky to rush up and plug off your teacher&#x27;s computer directly. Is it possible to set a timer, as the timer reaches 0, the computer will shut down automatically?</p>
+<p>Shutdown means turning off your computer. Maybe you have dreamed of turning off your teacher's computer in a boring lesson so that he would have no slides to continue the lecture.</p>
+<p>But it's risky to rush up and plug off your teacher's computer directly. Is it possible to set a timer, as the timer reaches 0, the computer will shut down automatically?</p>
 <p>Yes! <code>shutdown</code> can do this exactly. Type in <code>shutdown</code>, and you will get the help message.</p>
-<p>What&#x27;s more, <code>shutdown</code> command can even shutdown computers remotely - of course in your local web. There&#x27;s also help message in it.</p>
+<p>What's more, <code>shutdown</code> command can even shutdown computers remotely - of course in your local web. There's also help message in it.</p>
 <h2>Task kill</h2>
 <p>To kill a task is like clicking the cross(<code>x</code>) button on your window. But some applications like 极域电子教室 will not offer you that close button. But we can still kill the program, by using <code>taskkill</code> command.</p>
 <p>Normally, the name for 极域电子教室 is <code>StudentMain.exe</code>. You can execute</p>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span>taskkill<span style="color: #bbbbbb"> </span>/f<span style="color: #bbbbbb"> </span>/im<span style="color: #bbbbbb"> </span>StudentMain.exe
-</pre></div>
-
+<pre><code class="language-shell">taskkill /f /im StudentMain.exe
+</code></pre>
 <p>The option is</p>
 <ul>
 <li><code>/f</code> means force quit;</li>
@@ -182,24 +172,22 @@ $$</p>
 <p>To do this, we can use <code>echo</code> command. For example: <code>echo &quot;Hello World&quot;</code>.</p>
 <p>You can execute <code>echo off</code> to disable the <code>C:\Users\Admin</code> and only leave the blinking cursor. This is extremely useful in batch files.</p>
 <h1>Connecting programs</h1>
-<p>Maybe your idea is that only displaying texts is trivial. That&#x27;s true. But what can not be so trivial is that actually write the text into a file!</p>
+<p>Maybe your idea is that only displaying texts is trivial. That's true. But what can not be so trivial is that actually write the text into a file!</p>
 <p>For example:</p>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #008000">echo</span><span style="color: #bbbbbb"> </span>hello<span style="color: #bbbbbb"> </span>&gt;<span style="color: #bbbbbb"> </span>a.txt<span style="color: #bbbbbb"> </span>
-</pre></div>
-
+<pre><code class="language-shell">echo hello &gt; a.txt 
+</code></pre>
 <p>and a <code>a.txt</code> will appear in your directory. Great! But why is it happening?</p>
-<p>The program of this form basically has two primary <strong>“streams”</strong> associated with them: the <em>input</em> stream and <em>output</em> stream - since that&#x27;s pretty like an algorithm - reads in from input and writes out to output. When the program tries to read input, it reads from the input stream, and when it prints something, it prints to its output stream.</p>
+<p>The program of this form basically has two primary <strong>“streams”</strong> associated with them: the <em>input</em> stream and <em>output</em> stream - since that's pretty like an algorithm - reads in from input and writes out to output. When the program tries to read input, it reads from the input stream, and when it prints something, it prints to its output stream.</p>
 <h2>Input and Output redirection</h2>
 <p>Normally, a program’s input and output are both your terminal. That is, your keyboard as input and your screen as output. However, we can also rewire those streams!</p>
 <p>But using the <code>&gt;</code>, we changed its output stream(short for <em>ostream</em>) to a file <code>a.txt</code>, hence it outputs its data there.</p>
 <p>Likewize, we have <code>&lt; file</code> for read in from file. You may try it yourself.</p>
 <h2>Chain data through pipe</h2>
-<p>Let&#x27;s say you want to list all the files in a directory and then search for a specific string within the output. Here&#x27;s something you might do:</p>
+<p>Let's say you want to list all the files in a directory and then search for a specific string within the output. Here's something you might do:</p>
 <p>First, type in <code>dir</code> to get all of the file; Second, copy the output and use the <code>find</code> command, with args you copied earlier pasted.</p>
-<p>But here&#x27;s another idea - working together through <code>pipe</code>, that is a small vertical bar <code>|</code>. You can do this:</p>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span>dir<span style="color: #bbbbbb"> </span>|<span style="color: #bbbbbb"> </span>find<span style="color: #bbbbbb"> </span><span style="color: #BA2121">&quot;specific string&quot;</span>
-</pre></div>
-
+<p>But here's another idea - working together through <code>pipe</code>, that is a small vertical bar <code>|</code>. You can do this:</p>
+<pre><code class="language-shell">dir | find &quot;specific string&quot;
+</code></pre>
 <p>That is directly passing the <strong>result</strong> of <code>dir</code> program, and pass in to the input of <code>find</code> program.</p>
 <p>Great! You have now have a basic idea what a command line is, and mostly, you can automate things really fast!</p>
 <h1>Automation</h1>
@@ -209,7 +197,7 @@ $$</p>
 <p><img src="./FILES/command-line.md/img-20230707145829.png" alt="ask-gpt" /></p>
 <h1>Summary</h1>
 <p>This is the first language you learn. And this will give you the power to organize computers better. If you are about to use the Unix system like Linux, you will find these techniques are needed badly.</p>
-<p>MacOS is a Unix-like system, and my daily routine can&#x27;t be done without shells. For example, here is the shell script to update the Lecture Notes:</p>
+<p>MacOS is a Unix-like system, and my daily routine can't be done without shells. For example, here is the shell script to update the Lecture Notes:</p>
 <p><img src="./FILES/command-line.md/img-20230707150235.png" alt="lec-note-upd" /></p>
 <p>If you are a Computer Science(CS for short) student, then maybe later you will find using Unix-like systems with fun and efficiency. Then it is the time watching <a href="https://missing.csail.mit.edu/">Missing Semester Series</a> by MIT OCW(Open CourseWare).</p>
 <p>$$
@@ -217,32 +205,28 @@ $$</p>
 $$</p>
 
     </div>
-
-   
-   
-   
     <hr>
-
-
-
-
-
-
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+          inlineMath: [ ['$','$'] ],
+          displayMath: [ ['$$','$$'] ],
+          processEscapes: true
+        },
+        "HTML-CSS": { fonts: ["TeX"] }
+      });
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
     <div id="disqus_thread"></div>
     <script type="text/javascript" async
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
     </script>
     <script>
-        /**
-        *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-        *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
-        
-        // var disqus_config = function () {
-        // this.page.url = ;  // Replace PAGE_URL with your page's canonical URL variable
-        // this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-        // };
-        
-        (function() { // DON'T EDIT BELOW THIS LINE
+        (function() { 
         var d = document, s = d.createElement('script');
         s.src = 'https://augpath.disqus.com/embed.js';
         s.setAttribute('data-timestamp', +new Date());

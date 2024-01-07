@@ -3,11 +3,11 @@
   <head>
     <link rel="stylesheet" href="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/style.css">
     <script src="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/plugin.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex, nofollow">
     <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
- 
     <script>
 const copyButtonLabel = "Copy Code";
 
@@ -59,14 +59,12 @@ async function copyCode(block) {
         code {
             font-family: 'Courier New', Courier, monospace;
         } 
-
         pre {
             font-family: 'Courier New', Courier, monospace;
         } 
         div{
             max-width: 100%;
             overflow: auto;
-            
         }
         .navbar {
             overflow: hidden;
@@ -75,7 +73,6 @@ async function copyCode(block) {
             top: 0; /* Position the navbar at the top of the page */
             width: 100%; /* Full width */
         }
-
         img {
         max-width: 80%;
         height: auto;
@@ -88,7 +85,6 @@ async function copyCode(block) {
             padding: 14px 16px;
             text-decoration: none;
         }
-
         a {
             color: #148bca;
             text-align: center;
@@ -96,162 +92,151 @@ async function copyCode(block) {
             padding-right: 2px;
             text-decoration: none;
         }
-
         p.hidden {
           overflow: hidden;
         }
-
     </style>
   </head>
   <body>
-    
     <div class="navbar">
         <a href="https://shzaiz.github.io">AUG's Wiki</a>
         <a href="index.html"> ↑ Back to contents</a>
-        Last updated at 2024-01-07 15:14:48.860811
+        Last updated at 2024-01-07 20:32:45.233747
     </div>
 
     <div class="toc"></div>
     <a id="toc-button"><i class="far fa-bookmark"></i></a>
     
-    <div>
+    <div id="renderedContent">
       <h1>A. 水构造.</h1>
 <p>经过观察, 求最大的值的下标就可以了.</p>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>a[MAXN],<span style="color: #bbbbbb"> </span>b[MAXN];
-<span style="color: #B00040">void</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">solve</span>(){
-<span style="color: #bbbbbb">    </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>n;<span style="color: #bbbbbb"> </span>
-<span style="color: #bbbbbb">    </span>cin<span style="color: #666666">&gt;&gt;</span>n;
-<span style="color: #bbbbbb">    </span>F(i,<span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>,<span style="color: #bbbbbb"> </span>n){
-<span style="color: #bbbbbb">        </span>cin<span style="color: #666666">&gt;&gt;</span>a[i];
-<span style="color: #bbbbbb">        </span>b[i]<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>a[i];
-<span style="color: #bbbbbb">    </span>}
-<span style="color: #bbbbbb">    </span>sort(a<span style="color: #666666">+1</span>,<span style="color: #bbbbbb"> </span>a<span style="color: #666666">+</span>n<span style="color: #666666">+1</span>);
-<span style="color: #bbbbbb">    </span><span style="color: #3D7B7B; font-style: italic">// cout&lt;&lt;a[n]&lt;&lt;endl;</span>
-<span style="color: #bbbbbb">    </span>F(i,<span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>,<span style="color: #bbbbbb"> </span>n){
-<span style="color: #bbbbbb">        </span><span style="color: #008000; font-weight: bold">if</span>(b[i]<span style="color: #bbbbbb"> </span><span style="color: #666666">==</span><span style="color: #bbbbbb"> </span>a[n]){
-<span style="color: #bbbbbb">            </span>printf(<span style="color: #BA2121">&quot;%d</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>,<span style="color: #bbbbbb"> </span>i);
-<span style="color: #bbbbbb">            </span><span style="color: #008000; font-weight: bold">return</span><span style="color: #bbbbbb"> </span>;
-<span style="color: #bbbbbb">        </span>}
-<span style="color: #bbbbbb">    </span>}
+<pre><code class="language-cpp">int a[MAXN], b[MAXN];
+void solve(){
+    int n; 
+    cin&gt;&gt;n;
+    F(i, 1, n){
+        cin&gt;&gt;a[i];
+        b[i] = a[i];
+    }
+    sort(a+1, a+n+1);
+    // cout&lt;&lt;a[n]&lt;&lt;endl;
+    F(i, 1, n){
+        if(b[i] == a[n]){
+            printf(&quot;%d\n&quot;, i);
+            return ;
+        }
+    }
 
 }
-</pre></div>
-
+</code></pre>
 <h1>B. 水构造</h1>
 <p>注意到整数的大小关系就可以了.</p>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #B00040">void</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">solve</span>(){
-<span style="color: #bbbbbb">    </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>n;<span style="color: #bbbbbb"> </span>cin<span style="color: #666666">&gt;&gt;</span>n;
-<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">if</span>(n<span style="color: #666666">==4</span>){cout<span style="color: #666666">&lt;&lt;</span><span style="color: #BA2121">&quot;2 1 3 4</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>;<span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">return</span>;}
-<span style="color: #bbbbbb">    </span>Fd(i,<span style="color: #bbbbbb"> </span>n<span style="color: #666666">-2</span>,<span style="color: #bbbbbb"> </span><span style="color: #666666">4</span>)<span style="color: #bbbbbb"> </span>cout<span style="color: #666666">&lt;&lt;</span>i<span style="color: #666666">&lt;&lt;</span><span style="color: #BA2121">&#39; &#39;</span>;
-<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">if</span>(n<span style="color: #666666">%2</span>){
-<span style="color: #bbbbbb">        </span>printf(<span style="color: #BA2121">&quot;2 3 1 &quot;</span>);
-<span style="color: #bbbbbb">    </span>}<span style="color: #008000; font-weight: bold">else</span>{
-<span style="color: #bbbbbb">        </span>printf(<span style="color: #BA2121">&quot;3 2 1 &quot;</span>);
-<span style="color: #bbbbbb">    </span>}
-<span style="color: #bbbbbb">    </span>cout<span style="color: #666666">&lt;&lt;</span>n<span style="color: #666666">-1&lt;&lt;</span><span style="color: #BA2121">&#39; &#39;</span><span style="color: #666666">&lt;&lt;</span>n<span style="color: #666666">&lt;&lt;</span>endl;
+<pre><code class="language-cpp">void solve(){
+    int n; cin&gt;&gt;n;
+    if(n==4){cout&lt;&lt;&quot;2 1 3 4\n&quot;; return;}
+    Fd(i, n-2, 4) cout&lt;&lt;i&lt;&lt;' ';
+    if(n%2){
+        printf(&quot;2 3 1 &quot;);
+    }else{
+        printf(&quot;3 2 1 &quot;);
+    }
+    cout&lt;&lt;n-1&lt;&lt;' '&lt;&lt;n&lt;&lt;endl;
 }
-</pre></div>
-
+</code></pre>
 <h1>C. 贪心+数据结构</h1>
-<p><strong>为什么赛事没有做出</strong>. 看到时间 \(3\times10^5\) , 意味着我们需要一个 \(\mathcal O(n\log n)\) 的算法, 但是评判两个是不是相等扫一遍就要 \(\mathcal O(n^2)\) , 显然无法做到. 因此要用优先队列的数据结构维护.</p>
+<p><strong>为什么赛事没有做出</strong>. 看到时间$3\times10^5$, 意味着我们需要一个$\mathcal O(n\log n)$的算法, 但是评判两个是不是相等扫一遍就要$\mathcal O(n^2)$, 显然无法做到. 因此要用优先队列的数据结构维护.</p>
 <p><strong>思考</strong>. 为什么用优先维护的队列这样做是可行的?</p>
 <p>原因: 其实我们要的是数字与数字的差值. 并且和顺序无关, 因此就应该放在优先队列里面进行完成.</p>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span>multiset<span style="color: #666666">&lt;</span><span style="color: #B00040">int</span>,<span style="color: #bbbbbb"> </span>greater<span style="color: #666666">&lt;</span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span><span style="color: #666666">&gt;</span><span style="color: #bbbbbb"> </span><span style="color: #666666">&gt;</span><span style="color: #bbbbbb"> </span>a,<span style="color: #bbbbbb"> </span>b;
-<span style="color: #B00040">void</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">solve</span>(){
-<span style="color: #bbbbbb">    </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>n;<span style="color: #bbbbbb"> </span>cin<span style="color: #666666">&gt;&gt;</span>n;
-<span style="color: #bbbbbb">    </span>F(i,<span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>,<span style="color: #bbbbbb"> </span>n){<span style="color: #bbbbbb"> </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>x;<span style="color: #bbbbbb"> </span>cin<span style="color: #666666">&gt;&gt;</span>x;<span style="color: #bbbbbb"> </span>a.insert(x);}
-<span style="color: #bbbbbb">    </span>F(i,<span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>,<span style="color: #bbbbbb"> </span>n){<span style="color: #bbbbbb"> </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>x;<span style="color: #bbbbbb"> </span>cin<span style="color: #666666">&gt;&gt;</span>x;<span style="color: #bbbbbb"> </span>b.insert(x);}
-<span style="color: #bbbbbb">    </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>ans<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>;
-<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">while</span>(a.size()){
-<span style="color: #bbbbbb">        </span><span style="color: #008000; font-weight: bold">if</span>(<span style="color: #666666">*</span>a.begin()<span style="color: #bbbbbb"> </span><span style="color: #666666">==</span><span style="color: #bbbbbb"> </span><span style="color: #666666">*</span>b.begin()){
-<span style="color: #bbbbbb">            </span>a.erase(a.begin());
-<span style="color: #bbbbbb">            </span>b.erase(b.begin());
-<span style="color: #bbbbbb">            </span><span style="color: #008000; font-weight: bold">continue</span>;
-<span style="color: #bbbbbb">        </span>}
-<span style="color: #bbbbbb">        </span><span style="color: #008000; font-weight: bold">if</span>(<span style="color: #666666">*</span>a.begin()<span style="color: #666666">&gt;*</span>b.begin())<span style="color: #bbbbbb"> </span>swap(a,<span style="color: #bbbbbb"> </span>b);
-<span style="color: #bbbbbb">        </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>xxx<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">*</span>b.begin();<span style="color: #bbbbbb">       </span>
-<span style="color: #bbbbbb">        </span>b.erase(b.begin());
-<span style="color: #bbbbbb">        </span>
-<span style="color: #bbbbbb">        </span>b.insert(to_string(xxx).length());
-<span style="color: #bbbbbb">        </span>ans<span style="color: #666666">++</span>;
-<span style="color: #bbbbbb">    </span>}
-<span style="color: #bbbbbb">    </span>printf(<span style="color: #BA2121">&quot;%d</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>,<span style="color: #bbbbbb"> </span>ans);
-<span style="color: #bbbbbb">    </span>
+<pre><code class="language-cpp">multiset&lt;int, greater&lt;int &gt; &gt; a, b;
+void solve(){
+    int n; cin&gt;&gt;n;
+    F(i, 1, n){ int x; cin&gt;&gt;x; a.insert(x);}
+    F(i, 1, n){ int x; cin&gt;&gt;x; b.insert(x);}
+    int ans = 0;
+    while(a.size()){
+        if(*a.begin() == *b.begin()){
+            a.erase(a.begin());
+            b.erase(b.begin());
+            continue;
+        }
+        if(*a.begin()&gt;*b.begin()) swap(a, b);
+        int xxx = *b.begin();       
+        b.erase(b.begin());
+        
+        b.insert(to_string(xxx).length());
+        ans++;
+    }
+    printf(&quot;%d\n&quot;, ans);
+    
 }
-</pre></div>
-
+</code></pre>
 <h1>D. 贪心(c)</h1>
-<p><strong>观察</strong>. 注意试题的 \(n\leq 2000\) , 因此 \(\mathcal O(n^2)\) 算法是完全可以过的.</p>
+<p><strong>观察</strong>. 注意试题的$n\leq 2000$, 因此$\mathcal O(n^2)$算法是完全可以过的.</p>
 <p><strong>观察</strong>. Bob最好的情况就是平局. 因为Alice具有绝对的主动权, 可以去掉最小的, 把大的留给Bob.</p>
 <p>所以和C有点像, 先做把一样的消掉, 再判定是不是可以相等.</p>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>dp[<span style="color: #666666">2005</span>][<span style="color: #666666">2005</span>];
-<span style="color: #B00040">void</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">solve</span>(){
-<span style="color: #bbbbbb">    </span>deb<span style="color: #bbbbbb"> </span>printf(<span style="color: #BA2121">&quot;====</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>);
-<span style="color: #bbbbbb">    </span>string<span style="color: #bbbbbb"> </span>s;<span style="color: #bbbbbb"> </span>cin<span style="color: #666666">&gt;&gt;</span>s;<span style="color: #bbbbbb"> </span>
-<span style="color: #bbbbbb">    </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>len<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>s.length();
-<span style="color: #bbbbbb">    </span>s<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #BA2121">&quot; &quot;</span><span style="color: #666666">+</span>s;
-<span style="color: #bbbbbb">    </span>F(i,<span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>,<span style="color: #bbbbbb"> </span>len<span style="color: #666666">-1</span>){
-<span style="color: #bbbbbb">        </span><span style="color: #008000; font-weight: bold">if</span>(s[i]<span style="color: #666666">==</span>s[i<span style="color: #666666">+1</span>])<span style="color: #bbbbbb"> </span>dp[i][i<span style="color: #666666">+1</span>]<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>;
-<span style="color: #bbbbbb">        </span><span style="color: #008000; font-weight: bold">if</span>(s[i]<span style="color: #666666">!=</span>s[i<span style="color: #666666">+1</span>])<span style="color: #bbbbbb"> </span>dp[i][i<span style="color: #666666">+1</span>]<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>;
-<span style="color: #bbbbbb">    </span>}
-<span style="color: #bbbbbb">    </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>l<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>;
-<span style="color: #bbbbbb">    </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>r<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>len;
-<span style="color: #bbbbbb">        </span>
-<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">while</span>(r<span style="color: #666666">-</span>l<span style="color: #666666">&gt;1</span><span style="color: #bbbbbb"> </span><span style="color: #666666">&amp;&amp;</span><span style="color: #bbbbbb"> </span>s[l]<span style="color: #bbbbbb"> </span><span style="color: #666666">==</span><span style="color: #bbbbbb"> </span>s[r]){
-<span style="color: #bbbbbb">        </span>l<span style="color: #666666">++</span>,<span style="color: #bbbbbb"> </span>r<span style="color: #666666">--</span>;
-<span style="color: #bbbbbb">    </span>}
+<pre><code class="language-cpp">int dp[2005][2005];
+void solve(){
+    deb printf(&quot;====\n&quot;);
+    string s; cin&gt;&gt;s; 
+    int len = s.length();
+    s = &quot; &quot;+s;
+    F(i, 1, len-1){
+        if(s[i]==s[i+1]) dp[i][i+1] = 0;
+        if(s[i]!=s[i+1]) dp[i][i+1] = 1;
+    }
+    int l = 1;
+    int r = len;
+        
+    while(r-l&gt;1 &amp;&amp; s[l] == s[r]){
+        l++, r--;
+    }
 
-<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">if</span>(len<span style="color: #666666">==2</span>){
-<span style="color: #bbbbbb">        </span><span style="color: #008000; font-weight: bold">if</span>(s[<span style="color: #666666">1</span>]<span style="color: #bbbbbb"> </span><span style="color: #666666">==</span><span style="color: #bbbbbb"> </span>s[<span style="color: #666666">2</span>]){
-<span style="color: #bbbbbb">            </span>printf(<span style="color: #BA2121">&quot;Draw</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>);
-<span style="color: #bbbbbb">            </span><span style="color: #008000; font-weight: bold">return</span>;
-<span style="color: #bbbbbb">        </span>}<span style="color: #008000; font-weight: bold">else</span>{
-<span style="color: #bbbbbb">            </span>printf(<span style="color: #BA2121">&quot;Alice</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>);
-<span style="color: #bbbbbb">            </span><span style="color: #008000; font-weight: bold">return</span>;
-<span style="color: #bbbbbb">        </span>}
-<span style="color: #bbbbbb">    </span>}
+    if(len==2){
+        if(s[1] == s[2]){
+            printf(&quot;Draw\n&quot;);
+            return;
+        }else{
+            printf(&quot;Alice\n&quot;);
+            return;
+        }
+    }
 
-<span style="color: #bbbbbb">    </span><span style="color: #B00040">bool</span><span style="color: #bbbbbb"> </span>flag<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>;
+    bool flag = 0;
 
-<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">for</span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>i<span style="color: #666666">=</span>l;<span style="color: #bbbbbb"> </span>i<span style="color: #666666">&lt;=</span>r;i<span style="color: #666666">+=2</span>){
-<span style="color: #bbbbbb">        </span>
-<span style="color: #bbbbbb">        </span><span style="color: #008000; font-weight: bold">if</span>(s[i]<span style="color: #bbbbbb"> </span><span style="color: #666666">!=</span><span style="color: #bbbbbb"> </span>s[i<span style="color: #666666">+1</span>])<span style="color: #bbbbbb"> </span>flag<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>;
+    for(int i=l; i&lt;=r;i+=2){
+        
+        if(s[i] != s[i+1]) flag = 1;
 
-<span style="color: #bbbbbb">    </span>}
-<span style="color: #bbbbbb">    </span>cout<span style="color: #666666">&lt;&lt;</span>(flag<span style="color: #bbbbbb"> </span><span style="color: #666666">?</span><span style="color: #bbbbbb"> </span><span style="color: #BA2121">&quot;Alice&quot;</span><span style="color: #666666">:</span><span style="color: #bbbbbb"> </span><span style="color: #BA2121">&quot;Draw&quot;</span>)<span style="color: #666666">&lt;&lt;</span>endl;
+    }
+    cout&lt;&lt;(flag ? &quot;Alice&quot;: &quot;Draw&quot;)&lt;&lt;endl;
 
 }
-</pre></div>
-
+</code></pre>
 <p>但是感觉区间dp那种做法我还是不会, 以前的代码逻辑好像有问题.</p>
 
     </div>
-
-   
-   
-   
     <hr>
-
-
-
-
-
-
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+          inlineMath: [ ['$','$'] ],
+          displayMath: [ ['$$','$$'] ],
+          processEscapes: true
+        },
+        "HTML-CSS": { fonts: ["TeX"] }
+      });
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
     <div id="disqus_thread"></div>
     <script type="text/javascript" async
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
     </script>
     <script>
-        /**
-        *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-        *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
-        
-        // var disqus_config = function () {
-        // this.page.url = ;  // Replace PAGE_URL with your page's canonical URL variable
-        // this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-        // };
-        
-        (function() { // DON'T EDIT BELOW THIS LINE
+        (function() { 
         var d = document, s = d.createElement('script');
         s.src = 'https://augpath.disqus.com/embed.js';
         s.setAttribute('data-timestamp', +new Date());

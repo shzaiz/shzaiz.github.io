@@ -3,11 +3,11 @@
   <head>
     <link rel="stylesheet" href="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/style.css">
     <script src="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/plugin.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex, nofollow">
     <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
- 
     <script>
 const copyButtonLabel = "Copy Code";
 
@@ -59,14 +59,12 @@ async function copyCode(block) {
         code {
             font-family: 'Courier New', Courier, monospace;
         } 
-
         pre {
             font-family: 'Courier New', Courier, monospace;
         } 
         div{
             max-width: 100%;
             overflow: auto;
-            
         }
         .navbar {
             overflow: hidden;
@@ -75,7 +73,6 @@ async function copyCode(block) {
             top: 0; /* Position the navbar at the top of the page */
             width: 100%; /* Full width */
         }
-
         img {
         max-width: 80%;
         height: auto;
@@ -88,7 +85,6 @@ async function copyCode(block) {
             padding: 14px 16px;
             text-decoration: none;
         }
-
         a {
             color: #148bca;
             text-align: center;
@@ -96,58 +92,52 @@ async function copyCode(block) {
             padding-right: 2px;
             text-decoration: none;
         }
-
         p.hidden {
           overflow: hidden;
         }
-
     </style>
   </head>
   <body>
-    
     <div class="navbar">
         <a href="https://shzaiz.github.io">AUG's Wiki</a>
         <a href="index.html"> ↑ Back to contents</a>
-        Last updated at 2024-01-07 15:14:48.484519
+        Last updated at 2024-01-07 20:32:45.011789
     </div>
 
     <div class="toc"></div>
     <a id="toc-button"><i class="far fa-bookmark"></i></a>
     
-    <div>
+    <div id="renderedContent">
       <h1>Timing</h1>
 <h2>The <code>time</code> function</h2>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">time</span>
-time<span style="color: #666666">.</span>time() <span style="color: #3D7B7B; font-style: italic"># to get current time</span>
-</pre></div>
-
+<pre><code class="language-py">import time
+time.time() # to get current time
+</code></pre>
 <p>Time between testcases:</p>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">myTimer</span>(f, count):
-    st <span style="color: #666666">=</span> time<span style="color: #666666">.</span>time()
-    <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(count): 
+<pre><code class="language-py">def myTimer(f, count):
+    st = time.time()
+    for i in range(count): 
         f()
-    ed <span style="color: #666666">=</span> time<span style="color: #666666">.</span>time()
-    <span style="color: #008000; font-weight: bold">return</span> (ed<span style="color: #666666">-</span>st)<span style="color: #666666">/</span>count
-</pre></div>
-
+    ed = time.time()
+    return (ed-st)/count
+</code></pre>
 <h2>The <code>timeit</code> function</h2>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #3D7B7B; font-style: italic">#  timeit arguments  stmt=&#39;whatever statement you want to run&#39;</span>
-<span style="color: #3D7B7B; font-style: italic">#  timeit arguments  number=how many times to run stmt</span>
-<span style="color: #3D7B7B; font-style: italic">#  timeit arguments  setup=&#39;statements run once before the timing iteration&#39;</span>
+<pre><code class="language-py">#  timeit arguments  stmt='whatever statement you want to run'
+#  timeit arguments  number=how many times to run stmt
+#  timeit arguments  setup='statements run once before the timing iteration'
 
-timeit<span style="color: #666666">.</span>timeit(stmt<span style="color: #666666">=</span><span style="color: #BA2121">&#39;sorted(lst)&#39;</span>,
-              setup<span style="color: #666666">=</span><span style="color: #BA2121">&#39;import random; lst=[random.random() for i in range(100)]&#39;</span>,
-              number<span style="color: #666666">=100</span>,
-              <span style="color: #008000">globals</span><span style="color: #666666">=</span><span style="color: #008000">globals</span>())
-</pre></div>
-
+timeit.timeit(stmt='sorted(lst)',
+              setup='import random; lst=[random.random() for i in range(100)]',
+              number=100,
+              globals=globals())
+</code></pre>
 <h2>Timing with examples</h2>
 <h3>Array indexing</h3>
 <ul>
-<li>Time complexity is  \(\mathcal O(1)\) .</li>
+<li>Time complexity is $\mathcal O(1)$.</li>
 <li>Machanism: To access an element in an array, the interpreter:
 <ul>
-<li>Computes an offset into the array by multiplying the element&#x27;s index by the size of each array entry (which are uniformly sized, since they are merely references to the actual elements)</li>
+<li>Computes an offset into the array by multiplying the element's index by the size of each array entry (which are uniformly sized, since they are merely references to the actual elements)</li>
 <li>Adds the offset to the base address of the array</li>
 </ul>
 </li>
@@ -155,7 +145,7 @@ timeit<span style="color: #666666">.</span>timeit(stmt<span style="color: #66666
 <h3>Linear searching</h3>
 <ul>
 <li>Task: to locate an element with a given value in a list (array).</li>
-<li>complexity:  \(\mathcal O(n)\) </li>
+<li>complexity: $\mathcal O(n)$</li>
 </ul>
 <h3>Binary Searching</h3>
 <ul>
@@ -163,68 +153,64 @@ timeit<span style="color: #666666">.</span>timeit(stmt<span style="color: #66666
 </ul>
 <p>(See also notes at <a href="../%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8/01%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95.html">Notes on Algorithms</a>)</p>
 <p>Code:</p>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">index1</span>(lst, x):
-    <span style="color: #3D7B7B; font-style: italic"># assume that lst is sorted!!!</span>
-    low<span style="color: #666666">=0</span>
-    high<span style="color: #666666">=</span><span style="color: #008000">len</span>(lst)<span style="color: #666666">-1</span>
+<pre><code class="language-py">def index1(lst, x):
+    # assume that lst is sorted!!!
+    low=0
+    high=len(lst)-1
     
-    <span style="color: #008000; font-weight: bold">while</span> low <span style="color: #666666">&lt;=</span> high:
-        mid <span style="color: #666666">=</span> (low<span style="color: #666666">+</span>high)<span style="color: #666666">//2</span>
-        <span style="color: #008000; font-weight: bold">if</span> lst[mid]<span style="color: #666666">==</span>x:
-            <span style="color: #008000; font-weight: bold">return</span> mid
-        <span style="color: #008000; font-weight: bold">else</span>:
-            <span style="color: #008000; font-weight: bold">if</span> lst[mid] <span style="color: #666666">&gt;</span> x: <span style="color: #3D7B7B; font-style: italic"># go to left half</span>
-                high<span style="color: #666666">=</span>mid<span style="color: #666666">-1</span>
-            <span style="color: #008000; font-weight: bold">else</span>:            <span style="color: #3D7B7B; font-style: italic"># go to the right half </span>
-                low<span style="color: #666666">=</span>mid<span style="color: #666666">+1</span>
-    <span style="color: #008000; font-weight: bold">raise</span> <span style="color: #CB3F38; font-weight: bold">ValueError</span>(x)
-    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000; font-weight: bold">None</span>
-</pre></div>
-
+    while low &lt;= high:
+        mid = (low+high)//2
+        if lst[mid]==x:
+            return mid
+        else:
+            if lst[mid] &gt; x: # go to left half
+                high=mid-1
+            else:            # go to the right half 
+                low=mid+1
+    raise ValueError(x)
+    return None
+</code></pre>
 <p>Another code:</p>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">index1</span>(lst, x):
-    <span style="color: #3D7B7B; font-style: italic"># assume that lst is sorted!!!</span>
-    l<span style="color: #666666">=0</span>
-    r<span style="color: #666666">=</span><span style="color: #008000">len</span>(lst<span style="color: #666666">-1</span>)
-    <span style="color: #008000; font-weight: bold">while</span>(l<span style="color: #666666">&lt;=</span>r): 
-        mid <span style="color: #666666">=</span> (l<span style="color: #666666">+</span>r)<span style="color: #666666">//2</span>
-        <span style="color: #008000; font-weight: bold">if</span>(a[mid]<span style="color: #666666">&gt;=</span>x): 
-            r<span style="color: #666666">=</span>mid 
-        <span style="color: #008000; font-weight: bold">else</span>: 
-            l<span style="color: #666666">=</span>mid<span style="color: #666666">+1</span>
+<pre><code class="language-py">def index1(lst, x):
+    # assume that lst is sorted!!!
+    l=0
+    r=len(lst-1)
+    while(l&lt;=r): 
+        mid = (l+r)//2
+        if(a[mid]&gt;=x): 
+            r=mid 
+        else: 
+            l=mid+1
     
-    <span style="color: #008000; font-weight: bold">if</span>(a[l]<span style="color: #666666">==</span>x): 
-        <span style="color: #008000; font-weight: bold">return</span> l
-    <span style="color: #008000; font-weight: bold">else</span>: 
-        <span style="color: #008000; font-weight: bold">raise</span> <span style="color: #CB3F38; font-weight: bold">IndexError</span>()
-</pre></div>
-
+    if(a[l]==x): 
+        return l
+    else: 
+        raise IndexError()
+</code></pre>
 <p>Another code(is it wrong?)</p>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">index2</span>(lst, x):
-    <span style="color: #3D7B7B; font-style: italic"># assume that lst is sorted!!!</span>
-    <span style="color: #008000; font-weight: bold">while</span> <span style="color: #008000">len</span>(lst)<span style="color: #666666">&gt;0</span>:
-        mid <span style="color: #666666">=</span> <span style="color: #008000">len</span>(lst)<span style="color: #666666">//2</span>
-        <span style="color: #008000; font-weight: bold">if</span> lst[mid]<span style="color: #666666">==</span>x:
-            <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000; font-weight: bold">True</span>
-        <span style="color: #008000; font-weight: bold">else</span>:
-            <span style="color: #008000; font-weight: bold">if</span> lst[mid] <span style="color: #666666">&gt;</span> x: <span style="color: #3D7B7B; font-style: italic"># go to left half</span>
-                lst <span style="color: #666666">=</span> lst[<span style="color: #666666">0</span>:mid]
-            <span style="color: #008000; font-weight: bold">else</span>:            <span style="color: #3D7B7B; font-style: italic"># go to the right half </span>
-                lst <span style="color: #666666">=</span> lst[mid<span style="color: #666666">+1</span>:]
-    <span style="color: #3D7B7B; font-style: italic">#raise ValueError(x)</span>
-    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000; font-weight: bold">False</span>
-</pre></div>
-
+<pre><code class="language-py">def index2(lst, x):
+    # assume that lst is sorted!!!
+    while len(lst)&gt;0:
+        mid = len(lst)//2
+        if lst[mid]==x:
+            return True
+        else:
+            if lst[mid] &gt; x: # go to left half
+                lst = lst[0:mid]
+            else:            # go to the right half 
+                lst = lst[mid+1:]
+    #raise ValueError(x)
+    return False
+</code></pre>
 <h3>Insertion Sort</h3>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">isort</span>(lst): 
-    <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">1</span>, <span style="color: #008000">len</span>(lst)): 
-        <span style="color: #008000; font-weight: bold">for</span> j <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(i<span style="color: #666666">-1</span>, <span style="color: #666666">-1</span>, <span style="color: #666666">-1</span>): 
-            <span style="color: #008000; font-weight: bold">if</span>(lst[j]<span style="color: #666666">&gt;</span>lst[j<span style="color: #666666">+1</span>]): 
-                lst[j], lst[j<span style="color: #666666">+1</span>]<span style="color: #666666">=</span> lst[j<span style="color: #666666">+1</span>], lst[j]
-            <span style="color: #008000; font-weight: bold">else</span>: 
-                <span style="color: #008000; font-weight: bold">break</span>
-</pre></div>
-
+<pre><code class="language-py">def isort(lst): 
+    for i in range(1, len(lst)): 
+        for j in range(i-1, -1, -1): 
+            if(lst[j]&gt;lst[j+1]): 
+                lst[j], lst[j+1]= lst[j+1], lst[j]
+            else: 
+                break
+</code></pre>
 <h1>Timing with practice</h1>
 <p>Our runtime analysis so far has been based on empirical evidence (runtimes obtained from actually running our algorithms).</p>
 <p>But measured runtime is very sensitive to:</p>
@@ -242,74 +228,66 @@ timeit<span style="color: #666666">.</span>timeit(stmt<span style="color: #66666
 <li>ideally, machine independent!</li>
 </ul>
 <p>Example:</p>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #19177C">def</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">factorial(n)</span>:<span style="color: #bbbbbb">				</span><span style="color: #19177C">cost</span><span style="color: #bbbbbb">	</span><span style="color: #19177C">times</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">executed</span>
-<span style="color: #bbbbbb">    </span><span style="color: #19177C">prod</span><span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">1</span><span style="color: #bbbbbb">					</span><span style="color: #19177C">c1</span><span style="color: #bbbbbb">		</span><span style="color: #666666">1</span>
-<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">for</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">k</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">in</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">range(</span><span style="color: #666666">2</span>,<span style="color: #bbbbbb"> </span><span style="color: #19177C">n</span><span style="color: #666666">+1</span><span style="color: #19177C">)</span>:<span style="color: #bbbbbb">		</span><span style="color: #19177C">c2</span><span style="color: #bbbbbb">		</span><span style="color: #19177C">n</span><span style="color: #666666">-1</span>
-<span style="color: #bbbbbb">        </span><span style="color: #19177C">prod</span><span style="color: #bbbbbb"> </span><span style="color: #666666">*=</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">k</span><span style="color: #bbbbbb">				</span><span style="color: #19177C">c3</span><span style="color: #bbbbbb">		</span><span style="color: #19177C">n</span><span style="color: #666666">-1</span>
-<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">return</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">prod</span><span style="color: #bbbbbb">					</span><span style="color: #19177C">c4</span><span style="color: #bbbbbb">		</span><span style="color: #666666">1</span>
-</pre></div>
-
+<pre><code>def factorial(n):				cost	times executed
+    prod = 1					c1		1
+    for k in range(2, n+1):		c2		n-1
+        prod *= k				c3		n-1
+    return prod					c4		1
+</code></pre>
 <p>T(n) = c1  + (n - 1)(c2  + c3) + c4     Messy! Per-instruction costs obscure the “big picture” runtime function.</p>
 <p>Asymptotic Analysis Simplification (learn more about this in CS430): ignore actual cost of each line of code.
 T(n) = 2(n - 1) + 2 = 2n     Runtime is linear w.r.t. input size.</p>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span>This is called O(n)   &quot;big O of n&quot;
-</pre></div>
-
+<pre><code>This is called O(n)   &quot;big O of n&quot;
+</code></pre>
 <p>For each example below, analyze the iteration as above and predict the runtime growth. Then run an experiment and fill in the plots for your predicted growth (lower bound and upper bound)</p>
 <h1>Examples</h1>
 <h2>Bubble sort</h2>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">bsort</span>(lst):    <span style="color: #3D7B7B; font-style: italic">#bubble sort</span>
-    <span style="color: #008000; font-weight: bold">while</span> <span style="color: #008000; font-weight: bold">True</span>:
-        swapped <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">False</span>
-        <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #008000">len</span>(lst)<span style="color: #666666">-1</span>):    <span style="color: #3D7B7B; font-style: italic"># inner loop is called bubble</span>
-            <span style="color: #008000; font-weight: bold">if</span> lst[i] <span style="color: #666666">&gt;</span> lst[i<span style="color: #666666">+1</span>]:
-                lst[i], lst[i<span style="color: #666666">+1</span>] <span style="color: #666666">=</span> lst[i<span style="color: #666666">+1</span>], lst[i]
-                swapped <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">True</span>
-        <span style="color: #008000; font-weight: bold">if</span> <span style="color: #AA22FF; font-weight: bold">not</span> swapped:
-            <span style="color: #008000; font-weight: bold">break</span>
-</pre></div>
-
+<pre><code class="language-py">def bsort(lst):    #bubble sort
+    while True:
+        swapped = False
+        for i in range(len(lst)-1):    # inner loop is called bubble
+            if lst[i] &gt; lst[i+1]:
+                lst[i], lst[i+1] = lst[i+1], lst[i]
+                swapped = True
+        if not swapped:
+            break
+</code></pre>
 <h2>Exp complexity</h2>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f4</span>(n):
-    counters <span style="color: #666666">=</span> [<span style="color: #666666">0</span>] <span style="color: #666666">*</span> n
-    <span style="color: #008000; font-weight: bold">while</span> <span style="color: #AA22FF; font-weight: bold">not</span> <span style="color: #008000">all</span>(counters):  <span style="color: #3D7B7B; font-style: italic"># while all counters not 1</span>
-    <span style="color: #3D7B7B; font-style: italic">#    print(counters)</span>
-        <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(n):
-            <span style="color: #008000; font-weight: bold">if</span> counters[i]:  <span style="color: #3D7B7B; font-style: italic">#if counters[i]==1</span>
-                counters[i] <span style="color: #666666">=</span> <span style="color: #666666">0</span>
-            <span style="color: #008000; font-weight: bold">else</span>:
-                counters[i] <span style="color: #666666">=</span> <span style="color: #666666">1</span>
-                <span style="color: #008000; font-weight: bold">break</span>
-</pre></div>
-
+<pre><code class="language-py">def f4(n):
+    counters = [0] * n
+    while not all(counters):  # while all counters not 1
+    #    print(counters)
+        for i in range(n):
+            if counters[i]:  #if counters[i]==1
+                counters[i] = 0
+            else:
+                counters[i] = 1
+                break
+</code></pre>
 
     </div>
-
-   
-   
-   
     <hr>
-
-
-
-
-
-
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+          inlineMath: [ ['$','$'] ],
+          displayMath: [ ['$$','$$'] ],
+          processEscapes: true
+        },
+        "HTML-CSS": { fonts: ["TeX"] }
+      });
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
     <div id="disqus_thread"></div>
     <script type="text/javascript" async
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
     </script>
     <script>
-        /**
-        *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-        *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
-        
-        // var disqus_config = function () {
-        // this.page.url = ;  // Replace PAGE_URL with your page's canonical URL variable
-        // this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-        // };
-        
-        (function() { // DON'T EDIT BELOW THIS LINE
+        (function() { 
         var d = document, s = d.createElement('script');
         s.src = 'https://augpath.disqus.com/embed.js';
         s.setAttribute('data-timestamp', +new Date());

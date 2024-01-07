@@ -3,11 +3,11 @@
   <head>
     <link rel="stylesheet" href="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/style.css">
     <script src="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/plugin.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex, nofollow">
     <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
- 
     <script>
 const copyButtonLabel = "Copy Code";
 
@@ -59,14 +59,12 @@ async function copyCode(block) {
         code {
             font-family: 'Courier New', Courier, monospace;
         } 
-
         pre {
             font-family: 'Courier New', Courier, monospace;
         } 
         div{
             max-width: 100%;
             overflow: auto;
-            
         }
         .navbar {
             overflow: hidden;
@@ -75,7 +73,6 @@ async function copyCode(block) {
             top: 0; /* Position the navbar at the top of the page */
             width: 100%; /* Full width */
         }
-
         img {
         max-width: 80%;
         height: auto;
@@ -88,7 +85,6 @@ async function copyCode(block) {
             padding: 14px 16px;
             text-decoration: none;
         }
-
         a {
             color: #148bca;
             text-align: center;
@@ -96,60 +92,57 @@ async function copyCode(block) {
             padding-right: 2px;
             text-decoration: none;
         }
-
         p.hidden {
           overflow: hidden;
         }
-
     </style>
   </head>
   <body>
-    
     <div class="navbar">
         <a href="https://shzaiz.github.io">AUG's Wiki</a>
         <a href="index.html"> ↑ Back to contents</a>
-        Last updated at 2024-01-07 15:14:49.100304
+        Last updated at 2024-01-07 20:32:45.471361
     </div>
 
     <div class="toc"></div>
     <a id="toc-button"><i class="far fa-bookmark"></i></a>
     
-    <div>
+    <div id="renderedContent">
       <h1>9LN - 对数函数, 幂函数</h1>
 <h1>前情提要</h1>
 <p>我们讲到了一个对数的东西. 我们先回顾下.</p>
-<p> \(\log_ab\) 
+<p>$\log_ab$
 上节课, 我们的&quot;换底公式&quot;证明方法和课本很是不一样, 请阅读课本上的证明过程, 想一想, <strong>为什么</strong>课本会这样证明?</p>
 <p>能不能给他找一个理由?</p>
 <p>对数相加, 真数相乘;
 对数相减, 真数相除;
 真数有指数, 可以往前拽.</p>
-<p>例子:  \(4^{\log_23}\) </p>
+<p>例子: $4^{\log_23}$</p>
 <h1>对数函数</h1>
 <p>既然我们可以往对数里面塞各种各样的正实数, 那为什么不用函数来表示呢?</p>
 <ul>
-<li>(1) 对数函数:  \(y=\log_ax(a\neq 1, a&gt;0)\) .
+<li>(1) 对数函数: $y=\log_ax(a\neq 1, a&gt;0)$.
 <ul>
 <li>对它进行改造的都不行!</li>
 </ul>
 </li>
-<li>(2) 定义域: \((0,+\infty)\) . 真数必须大于0. !</li>
+<li>(2) 定义域:$(0,+\infty)$. 真数必须大于0. !</li>
 </ul>
 <h2>图像</h2>
 <p>注意, 二三象限没有图像, 可以空间稍微压缩一点.
-来画:  \(y=\log_2x, y=\log_{\frac{1}{2}}x\) 的图像.</p>
+来画: $y=\log_2x, y=\log_{\frac{1}{2}}x$的图像.</p>
 <ul>
 <li>(3) 值域: 有没有上界? 但是依然可以涨到无穷.</li>
 <li>(4) 单调性: 增/减.</li>
 <li>(5) 对称性x</li>
-<li>(6) 定点 \((1,0)\) .</li>
-<li>(7) 重要的点:  \((a,1)\) .</li>
+<li>(6) 定点$(1,0)$.</li>
+<li>(7) 重要的点: $(a,1)$.</li>
 </ul>
 <p>指数函数和对数函数都满足大(于1)增, 小(于1)减.</p>
 <p>看Ex1.</p>
 <h2>一些特性</h2>
 <ul>
-<li>(1)  \(y=\log_ax\) 与 \(y=\log_{1\over a}x\) 关于 \(x\) 轴对称.</li>
+<li>(1) $y=\log_ax$与$y=\log_{1\over a}x$关于$x$轴对称.</li>
 <li>(2) 对数函数是非常慢的函数.
 <ul>
 <li>增长快的可以很好的降下来.</li>
@@ -170,10 +163,10 @@ async function copyCode(block) {
 增长快的取对数就可以降下来.</p>
 </li>
 <li>
-<p>(3) 对数函数和指数函数挺像: 把 \(x,y\) 颠倒一下.</p>
+<p>(3) 对数函数和指数函数挺像: 把$x,y$颠倒一下.</p>
 <ul>
-<li>关于 \(y=x\) 对称.</li>
-<li>为什么?  \((m,n)\rightarrow (n,m)\) .</li>
+<li>关于$y=x$对称.</li>
+<li>为什么? $(m,n)\rightarrow (n,m)$.</li>
 </ul>
 </li>
 <li>
@@ -181,12 +174,12 @@ async function copyCode(block) {
 <ul>
 <li>
 <ol>
-<li>满足 \(0&lt;|b/a|&lt;1\) </li>
+<li>满足$0&lt;|b/a|&lt;1$</li>
 </ol>
 </li>
 <li>
 <ol start="2">
-<li>满足 \(|b/a|&gt;1\) </li>
+<li>满足$|b/a|&gt;1$</li>
 </ol>
 </li>
 </ul>
@@ -199,37 +192,37 @@ async function copyCode(block) {
 <li>不同底不同真: 中间量(0,1).</li>
 </ul>
 <p>学的东西越多, 改的东西也越多.</p>
-<p>小技巧:  \((0,1),(1,+\infty)\) , 同一区间正, 不同区间负.</p>
+<p>小技巧: $(0,1),(1,+\infty)$, 同一区间正, 不同区间负.</p>
 <h2>对数函数和其他函数的复合</h2>
 <ul>
 <li>注意定义域!</li>
 </ul>
 <h1>抵消掉的&quot;函数&quot;</h1>
-<p>还有很多函数关于 \(y=x\) 对称!</p>
+<p>还有很多函数关于$y=x$对称!</p>
 <ul>
-<li> \(f\) 干啥,  \(g\) 就弄回来.</li>
+<li>$f$干啥, $g$就弄回来.</li>
 <li>这样叫做&quot;反函数&quot;, 核心是把自变量当函数值, 把函数值当自变量.</li>
-<li>原函数 \(f(x)\) , 反函数 \(f^{-1}(x)\) ( \(f\) 逆 \(x\) )</li>
+<li>原函数$f(x)$, 反函数$f^{-1}(x)$($f$逆$x$)</li>
 <li>经常称作两个函数互为反函数.</li>
 </ul>
-<p>什么样的两个函数具有满足 \(y=x\) 对称的潜力?</p>
+<p>什么样的两个函数具有满足$y=x$对称的潜力?</p>
 <ul>
 <li>
 <p>双射!</p>
 </li>
 <li>
 <p>Ex6.
- \(x,y\) 对调, 解个方程就行了...</p>
+$x,y$对调, 解个方程就行了...</p>
 </li>
 </ul>
 <p>性质:</p>
 <ul>
-<li>关于 \(y=x\) 对称;</li>
+<li>关于$y=x$对称;</li>
 <li>定义域, 值域互换.</li>
 </ul>
 <h2>Ex.7</h2>
 <p>所以以后求值域, 有时候可以求反函数的定义域.
- \(y=ka/x\) ...</p>
+$y=ka/x$...</p>
 <h2>Ex.8</h2>
 <ul>
 <li>这货好难啊!</li>
@@ -240,16 +233,16 @@ async function copyCode(block) {
 y=f(x)=\sqrt[3]{x+\sqrt{1+x^{2}}}+\sqrt[3]{x-\sqrt{1+x^{2}}} .\\f{(x)}=\sqrt[3]{a+b}+\sqrt[3]{a-b}\\
 y^{3}=2 a +{3(a+b)^{\frac{2}{3}}(a+b)^{\frac{1}{3}}}
 +{3(a+b)^{\frac{1}{3}}(a-b)^{\frac{2}{3}}}\\=2a+
-\underbrace{3(a+b)^{\frac{1}{3}}(a-b)^{\frac{1}{3}}}_{-3}[\underbrace{\left[(a+b)^{\frac{1}{3}}+(a-b)^{1\over3}\right]}_{y}]
+\underbrace{3(a+b)^{\frac{1}{3}}(a-b)^{\frac{1}{3}}}<em>{-3}[\underbrace{\left[(a+b)^{\frac{1}{3}}+(a-b)^{1\over3}\right]}</em>{y}]
 \end{array}
 $$</p>
 <ul>
 <li>与往常的分离变量直接的方法不同, 这个是整体构造.</li>
-<li>就像以前的 \(x+1/x=3,\) 问 \(x^2+1/x^2\) 的结果.</li>
+<li>就像以前的$x+1/x=3,$问$x^2+1/x^2$的结果.</li>
 </ul>
 <h1>幂函数</h1>
-<p>幂就是几次方, 也可以叫做函数.  \(y=x^2\) . <del>底数函数</del>
- \(y=x^a\) .</p>
+<p>幂就是几次方, 也可以叫做函数. $y=x^2$. ~~底数函数~~
+$y=x^a$.</p>
 <ul>
 <li>初中函数里面就学了这个, 学了三年.</li>
 <li>以后会有更多的知识.</li>
@@ -262,7 +255,7 @@ $$</p>
 <li>越学越无知.</li>
 </ul>
 <p>请画出:
- \(y=x^1,y=x^2,y=x^3,y=x^{1/2},y=x^{-1},y=x^0\) .</p>
+$y=x^1,y=x^2,y=x^3,y=x^{1/2},y=x^{-1},y=x^0$.</p>
 <ul>
 <li>如此千奇百怪的函数还能叫做幂函数?</li>
 </ul>
@@ -276,32 +269,28 @@ $$</p>
 <h2>Always reading.</h2>
 
     </div>
-
-   
-   
-   
     <hr>
-
-
-
-
-
-
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+          inlineMath: [ ['$','$'] ],
+          displayMath: [ ['$$','$$'] ],
+          processEscapes: true
+        },
+        "HTML-CSS": { fonts: ["TeX"] }
+      });
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
     <div id="disqus_thread"></div>
     <script type="text/javascript" async
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
     </script>
     <script>
-        /**
-        *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-        *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
-        
-        // var disqus_config = function () {
-        // this.page.url = ;  // Replace PAGE_URL with your page's canonical URL variable
-        // this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-        // };
-        
-        (function() { // DON'T EDIT BELOW THIS LINE
+        (function() { 
         var d = document, s = d.createElement('script');
         s.src = 'https://augpath.disqus.com/embed.js';
         s.setAttribute('data-timestamp', +new Date());

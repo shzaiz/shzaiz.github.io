@@ -3,11 +3,11 @@
   <head>
     <link rel="stylesheet" href="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/style.css">
     <script src="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/plugin.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex, nofollow">
     <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
- 
     <script>
 const copyButtonLabel = "Copy Code";
 
@@ -59,14 +59,12 @@ async function copyCode(block) {
         code {
             font-family: 'Courier New', Courier, monospace;
         } 
-
         pre {
             font-family: 'Courier New', Courier, monospace;
         } 
         div{
             max-width: 100%;
             overflow: auto;
-            
         }
         .navbar {
             overflow: hidden;
@@ -75,7 +73,6 @@ async function copyCode(block) {
             top: 0; /* Position the navbar at the top of the page */
             width: 100%; /* Full width */
         }
-
         img {
         max-width: 80%;
         height: auto;
@@ -88,7 +85,6 @@ async function copyCode(block) {
             padding: 14px 16px;
             text-decoration: none;
         }
-
         a {
             color: #148bca;
             text-align: center;
@@ -96,48 +92,44 @@ async function copyCode(block) {
             padding-right: 2px;
             text-decoration: none;
         }
-
         p.hidden {
           overflow: hidden;
         }
-
     </style>
   </head>
   <body>
-    
     <div class="navbar">
         <a href="https://shzaiz.github.io">AUG's Wiki</a>
         <a href="index.html"> ↑ Back to contents</a>
-        Last updated at 2024-01-07 15:14:48.305532
+        Last updated at 2024-01-07 20:32:44.972105
     </div>
 
     <div class="toc"></div>
     <a id="toc-button"><i class="far fa-bookmark"></i></a>
     
-    <div>
+    <div id="renderedContent">
       <h1>What others had done</h1>
 <p>An implementation with Python
 <a href="https://stackoverflow.com/questions/49888178/python-sympy-and-elliptic-curves">Python, Sympy and elliptic curves - Stack Overflow</a></p>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__add__</span>(<span style="color: #008000">self</span>, other):
+<pre><code class="language-python">def __add__(self, other):
 
-    <span style="color: #008000; font-weight: bold">if</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>ec <span style="color: #666666">!=</span> other<span style="color: #666666">.</span>ec:
-        <span style="color: #008000; font-weight: bold">raise</span> <span style="color: #CB3F38; font-weight: bold">ValueError</span>(<span style="color: #BA2121">&#39;These points are on different curves&#39;</span>)
-    <span style="color: #008000; font-weight: bold">if</span> <span style="color: #008000">self</span> <span style="color: #666666">==</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>ec<span style="color: #666666">.</span>O:
-        <span style="color: #008000; font-weight: bold">return</span> Point(ec, other<span style="color: #666666">.</span>x, other<span style="color: #666666">.</span>y)
-    <span style="color: #008000; font-weight: bold">if</span> other <span style="color: #666666">==</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>ec<span style="color: #666666">.</span>O:
-        <span style="color: #008000; font-weight: bold">return</span> Point(ec, <span style="color: #008000">self</span><span style="color: #666666">.</span>x, <span style="color: #008000">self</span><span style="color: #666666">.</span>y)
-    <span style="color: #008000; font-weight: bold">if</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>x<span style="color: #666666">==</span>other<span style="color: #666666">.</span>x <span style="color: #AA22FF; font-weight: bold">and</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>y<span style="color: #666666">==-</span>other<span style="color: #666666">.</span>y:
-        <span style="color: #008000; font-weight: bold">return</span> O
-    <span style="color: #008000; font-weight: bold">if</span> <span style="color: #008000">self</span><span style="color: #666666">==</span>other:
-        k <span style="color: #666666">=</span> <span style="color: #666666">3*</span>(<span style="color: #008000">self</span><span style="color: #666666">.</span>x<span style="color: #666666">**2+</span><span style="color: #008000">self</span><span style="color: #666666">.</span>ec<span style="color: #666666">.</span>a)<span style="color: #666666">/</span>(<span style="color: #666666">2*</span><span style="color: #008000">self</span><span style="color: #666666">.</span>y)
-        x3 <span style="color: #666666">=</span> k<span style="color: #666666">**2-</span><span style="color: #008000">self</span><span style="color: #666666">.</span>x<span style="color: #666666">-</span>other<span style="color: #666666">.</span>x
-        <span style="color: #008000; font-weight: bold">return</span> Point(<span style="color: #008000">self</span><span style="color: #666666">.</span>ec, x3,k<span style="color: #666666">*</span>(<span style="color: #008000">self</span><span style="color: #666666">.</span>x<span style="color: #666666">-</span>x3)<span style="color: #666666">-</span><span style="color: #008000">self</span><span style="color: #666666">.</span>y)
+    if self.ec != other.ec:
+        raise ValueError('These points are on different curves')
+    if self == self.ec.O:
+        return Point(ec, other.x, other.y)
+    if other == self.ec.O:
+        return Point(ec, self.x, self.y)
+    if self.x==other.x and self.y==-other.y:
+        return O
+    if self==other:
+        k = 3*(self.x**2+self.ec.a)/(2*self.y)
+        x3 = k**2-self.x-other.x
+        return Point(self.ec, x3,k*(self.x-x3)-self.y)
 
-    k <span style="color: #666666">=</span> (other<span style="color: #666666">.</span>y<span style="color: #666666">-</span><span style="color: #008000">self</span><span style="color: #666666">.</span>y)<span style="color: #666666">/</span>(other<span style="color: #666666">.</span>x<span style="color: #666666">-</span><span style="color: #008000">self</span><span style="color: #666666">.</span>x)
-    x3 <span style="color: #666666">=</span> k <span style="color: #666666">**</span> <span style="color: #666666">2</span> <span style="color: #666666">-</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>x <span style="color: #666666">-</span> other<span style="color: #666666">.</span>x
-    <span style="color: #008000; font-weight: bold">return</span> Point(<span style="color: #008000">self</span><span style="color: #666666">.</span>ec, x3, k<span style="color: #666666">*</span>(<span style="color: #008000">self</span><span style="color: #666666">.</span>x <span style="color: #666666">-</span> x3) <span style="color: #666666">-</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>y)
-</pre></div>
-
+    k = (other.y-self.y)/(other.x-self.x)
+    x3 = k ** 2 - self.x - other.x
+    return Point(self.ec, x3, k*(self.x - x3) - self.y)
+</code></pre>
 <p><a href="https://www.youtube.com/watch?v=A2KNrgiWquU&amp;list=PLYpVTXjEi1oe1OeAllJpNhFoI4B7Ws8Yl">What is... an elliptic curve? - YouTube</a>
 Elliptic curve introduction (Series)</p>
 <p><a href="https://alozano.clas.uconn.edu/math5020-elliptic-curves/">MATH 5020 - The Arithmetic of Elliptic Curves | Álvaro Lozano-Robledo (uconn.edu)</a>
@@ -150,32 +142,28 @@ Course of this elliptic curve</p>
 <p><a href="https://github.com/mathSlib-dev/mathSlib/tree/master/mathS">mathSlib/mathS at master · mathSlib-dev/mathSlib · GitHub</a> Here is another one</p>
 
     </div>
-
-   
-   
-   
     <hr>
-
-
-
-
-
-
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+          inlineMath: [ ['$','$'] ],
+          displayMath: [ ['$$','$$'] ],
+          processEscapes: true
+        },
+        "HTML-CSS": { fonts: ["TeX"] }
+      });
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
     <div id="disqus_thread"></div>
     <script type="text/javascript" async
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
     </script>
     <script>
-        /**
-        *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-        *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
-        
-        // var disqus_config = function () {
-        // this.page.url = ;  // Replace PAGE_URL with your page's canonical URL variable
-        // this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-        // };
-        
-        (function() { // DON'T EDIT BELOW THIS LINE
+        (function() { 
         var d = document, s = d.createElement('script');
         s.src = 'https://augpath.disqus.com/embed.js';
         s.setAttribute('data-timestamp', +new Date());

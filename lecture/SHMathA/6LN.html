@@ -3,11 +3,11 @@
   <head>
     <link rel="stylesheet" href="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/style.css">
     <script src="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/plugin.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex, nofollow">
     <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
- 
     <script>
 const copyButtonLabel = "Copy Code";
 
@@ -59,14 +59,12 @@ async function copyCode(block) {
         code {
             font-family: 'Courier New', Courier, monospace;
         } 
-
         pre {
             font-family: 'Courier New', Courier, monospace;
         } 
         div{
             max-width: 100%;
             overflow: auto;
-            
         }
         .navbar {
             overflow: hidden;
@@ -75,7 +73,6 @@ async function copyCode(block) {
             top: 0; /* Position the navbar at the top of the page */
             width: 100%; /* Full width */
         }
-
         img {
         max-width: 80%;
         height: auto;
@@ -88,7 +85,6 @@ async function copyCode(block) {
             padding: 14px 16px;
             text-decoration: none;
         }
-
         a {
             color: #148bca;
             text-align: center;
@@ -96,25 +92,22 @@ async function copyCode(block) {
             padding-right: 2px;
             text-decoration: none;
         }
-
         p.hidden {
           overflow: hidden;
         }
-
     </style>
   </head>
   <body>
-    
     <div class="navbar">
         <a href="https://shzaiz.github.io">AUG's Wiki</a>
         <a href="index.html"> ↑ Back to contents</a>
-        Last updated at 2024-01-07 15:14:49.027841
+        Last updated at 2024-01-07 20:32:45.374588
     </div>
 
     <div class="toc"></div>
     <a id="toc-button"><i class="far fa-bookmark"></i></a>
     
-    <div>
+    <div id="renderedContent">
       <h1>6LN - 函数的更多性质</h1>
 <h1>一些闲话</h1>
 <h2>人人都可以讲课</h2>
@@ -123,22 +116,22 @@ async function copyCode(block) {
 <p>正所谓&quot;温故而知新, 可以为师矣.&quot; 大家加油!</p>
 <h2>试着画一点函数图像吧!</h2>
 <ul>
-<li> \(f(x)=x^4+2x^2+1\) </li>
-<li> \(g(x)=|x-1|-|x-2|\) </li>
-<li> \(h(x)={1/(x^2-2x+2)}\) </li>
+<li>$f(x)=x^4+2x^2+1$</li>
+<li>$g(x)=|x-1|-|x-2|$</li>
+<li>$h(x)={1/(x^2-2x+2)}$</li>
 </ul>
-<p>为什么 \(h(x)\) 是平的?</p>
+<p>为什么$h(x)$是平的?</p>
 <ul>
-<li>因为二次函数那边也是平的(当 \(x\) 变化的时候 \(y\) 的变化很小).</li>
+<li>因为二次函数那边也是平的(当$x$变化的时候$y$的变化很小).</li>
 <li>这就是导数的直观感受</li>
 </ul>
-<p>猜一猜 \(h(x)={1/(x^2-2x)}\) 的函数图像.</p>
+<p>猜一猜$h(x)={1/(x^2-2x)}$的函数图像.</p>
 <ul>
 <li>本质上还是求一堆倒数.</li>
 <li>玩多了, 会的越多, 不会的也越多.</li>
 </ul>
 <h1>奇偶性</h1>
-<h2>奇偶性cont&#x27;d</h2>
+<h2>奇偶性cont'd</h2>
 <ul>
 <li>
 <p>运算</p>
@@ -153,7 +146,7 @@ async function copyCode(block) {
 <li>不是0就非机非偶</li>
 </ul>
 </li>
-<li>奇函数 \(\times\) 奇函数=?</li>
+<li>奇函数$\times$奇函数=?</li>
 </ul>
 </li>
 <li>
@@ -164,8 +157,8 @@ async function copyCode(block) {
 <ul>
 <li>我会画图...</li>
 <li>但是我不知道那一边怎么样.</li>
-<li>代数推演! 不妨让 \(-x\) 出现.</li>
-<li>又因为 \(f(x)=-f(x)\) .</li>
+<li>代数推演! 不妨让$-x$出现.</li>
+<li>又因为$f(x)=-f(x)$.</li>
 <li>小心0. !</li>
 </ul>
 </li>
@@ -173,7 +166,7 @@ async function copyCode(block) {
 <p>看Ex.2(1,2,3).</p>
 <ul>
 <li>提示! 定义域!</li>
-<li>参考答案: 大中小, \((1/3,2/3),(0,1/3)\) .</li>
+<li>参考答案: 大中小,$(1/3,2/3),(0,1/3)$.</li>
 <li>自己重视, 要有痛感.</li>
 </ul>
 </li>
@@ -188,7 +181,7 @@ async function copyCode(block) {
 <li>
 <p>看3. (2)</p>
 <ul>
-<li>想办法搞出来个 \(-x\) 玩玩.</li>
+<li>想办法搞出来个$-x$玩玩.</li>
 <li>然后解方程组即可.</li>
 </ul>
 </li>
@@ -198,7 +191,7 @@ async function copyCode(block) {
 <li>还是要谁出现来着?</li>
 <li>好抽象... 不用害怕.</li>
 </ul>
-<p>试试看拆一下 \(f(x)=x^3+3x^2+2x+1\) .</p>
+<p>试试看拆一下$f(x)=x^3+3x^2+2x+1$.</p>
 <ul>
 <li>别忘里面代, 有点麻烦.</li>
 <li>很多时候我们浇了一个高级一点的普适性方法, 大家就不用基础的方法了.</li>
@@ -209,24 +202,24 @@ async function copyCode(block) {
 <p>混入了非奇非偶的会怎么样?</p>
 <h1>对称性: 轴对称</h1>
 <p>更一般的对称性是怎样的?</p>
-<p><del>像上节课一样, 画一个小人</del></p>
+<p>~~像上节课一样, 画一个小人~~</p>
 <h2>代数化的表示</h2>
 <ul>
-<li> \(f(a+x)=f(a-x)\) , 关于 \(x=a\) 对称. (轴对称)
+<li>$f(a+x)=f(a-x)$, 关于$x=a$对称. (轴对称)
 <ul>
-<li>我们会代换! 于是有了 \(f(x)=f(2a-x)\) .</li>
+<li>我们会代换! 于是有了$f(x)=f(2a-x)$.</li>
 </ul>
 </li>
-<li>那么 \(f(a+x)=f(b-x)\) , 说明什么?
+<li>那么$f(a+x)=f(b-x)$, 说明什么?
 <ul>
-<li>那就是用 \(a,b\) 的中间对称了!</li>
+<li>那就是用$a,b$的中间对称了!</li>
 </ul>
 </li>
 </ul>
 <p>我们来试试看! Ex4(1)(2).</p>
 <ul>
 <li>是不是可以用给一半, 求一半的原则?</li>
-<li>只不过这里是 \(4-x\) 必须出现了!</li>
+<li>只不过这里是$4-x$必须出现了!</li>
 <li>⑨. !</li>
 </ul>
 <h2>休息与闲聊</h2>
@@ -242,11 +235,11 @@ async function copyCode(block) {
 <p>大学我们会学! 加油!</p>
 <h1>对称性: 中心对称</h1>
 <p>仿照轴对称, 请写出中心对称的三个式子.
-<del>还是画小人</del></p>
+~~还是画小人~~</p>
 <ul>
-<li> \(f(a+x)=2b-f(a-x)\) , 关于 \((a,b)\) 对称.</li>
-<li> \(f(x)+f(2a-x)=2b\) , 关于 \((a,b)\) 对称.</li>
-<li> \(f(a-x)+f(b+x)=m\) , 关于 \(((a+b)/2,m/2)\) 对称.</li>
+<li>$f(a+x)=2b-f(a-x)$, 关于$(a,b)$对称.</li>
+<li>$f(x)+f(2a-x)=2b$, 关于$(a,b)$对称.</li>
+<li>$f(a-x)+f(b+x)=m$, 关于$((a+b)/2,m/2)$对称.</li>
 </ul>
 <h2>看Ex4(3).</h2>
 <ul>
@@ -263,10 +256,10 @@ async function copyCode(block) {
 <h2>从逆运算的角度看指数函数</h2>
 <p>我们学过加法, 乘法, 它们都有逆运算.
 指数也有, 我们后面回学习.</p>
-<p>总之看下指数的定义: 有点难打, 大家应该都会,  \(n\) 个 \(a\) 相乘. 底数, 指数, 幂.</p>
+<p>总之看下指数的定义: 有点难打, 大家应该都会, $n$个$a$相乘. 底数, 指数, 幂.</p>
 <ul>
 <li>指数是正整数.</li>
-<li>我们要拓展!  \(\N^*\to \N, a^0=1\) .</li>
+<li>我们要拓展! $\N^*\to \N, a^0=1$.</li>
 </ul>
 <h1>总结: 学到了什么</h1>
 <ul>
@@ -276,36 +269,32 @@ async function copyCode(block) {
 <li>指数的逆运算是什么(下几次的悬念).</li>
 </ul>
 <h1>End.</h1>
-<h2>Don&#x27;t Panic.</h2>
+<h2>Don't Panic.</h2>
 <p>如果你还没有入门, 仍然感到恐惧, 请记住：坚持住, 进入未知领域, 从简单的、能理解的东西试起, 投入时间, 就有收获. 从这里开始, 你就能慢慢克服恐惧了. 我们为大家准备了的这些讲稿基本上是按照上课的思路来的. 如果你能好好运用这些材料, 你就会感受到真正的力量!</p>
 
     </div>
-
-   
-   
-   
     <hr>
-
-
-
-
-
-
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+          inlineMath: [ ['$','$'] ],
+          displayMath: [ ['$$','$$'] ],
+          processEscapes: true
+        },
+        "HTML-CSS": { fonts: ["TeX"] }
+      });
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
     <div id="disqus_thread"></div>
     <script type="text/javascript" async
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
     </script>
     <script>
-        /**
-        *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-        *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
-        
-        // var disqus_config = function () {
-        // this.page.url = ;  // Replace PAGE_URL with your page's canonical URL variable
-        // this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-        // };
-        
-        (function() { // DON'T EDIT BELOW THIS LINE
+        (function() { 
         var d = document, s = d.createElement('script');
         s.src = 'https://augpath.disqus.com/embed.js';
         s.setAttribute('data-timestamp', +new Date());

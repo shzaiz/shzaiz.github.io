@@ -3,11 +3,11 @@
   <head>
     <link rel="stylesheet" href="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/style.css">
     <script src="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/plugin.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex, nofollow">
     <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
- 
     <script>
 const copyButtonLabel = "Copy Code";
 
@@ -59,14 +59,12 @@ async function copyCode(block) {
         code {
             font-family: 'Courier New', Courier, monospace;
         } 
-
         pre {
             font-family: 'Courier New', Courier, monospace;
         } 
         div{
             max-width: 100%;
             overflow: auto;
-            
         }
         .navbar {
             overflow: hidden;
@@ -75,7 +73,6 @@ async function copyCode(block) {
             top: 0; /* Position the navbar at the top of the page */
             width: 100%; /* Full width */
         }
-
         img {
         max-width: 80%;
         height: auto;
@@ -88,7 +85,6 @@ async function copyCode(block) {
             padding: 14px 16px;
             text-decoration: none;
         }
-
         a {
             color: #148bca;
             text-align: center;
@@ -96,126 +92,116 @@ async function copyCode(block) {
             padding-right: 2px;
             text-decoration: none;
         }
-
         p.hidden {
           overflow: hidden;
         }
-
     </style>
   </head>
   <body>
-    
     <div class="navbar">
         <a href="https://shzaiz.github.io">AUG's Wiki</a>
         <a href="index.html"> ↑ Back to contents</a>
-        Last updated at 2024-01-07 15:14:48.799757
+        Last updated at 2024-01-07 20:32:45.196566
     </div>
 
     <div class="toc"></div>
     <a id="toc-button"><i class="far fa-bookmark"></i></a>
     
-    <div>
+    <div id="renderedContent">
       <h1>0x01. 位运算</h1>
 <h2>Eg1, 2: 快速幂, 快速加</h2>
 <p>实质上就是对于二进制拆, 比较简单.</p>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">qpow</span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>a,<span style="color: #bbbbbb"> </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>b,<span style="color: #bbbbbb"> </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>mod){
-<span style="color: #bbbbbb">	</span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>ans<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>;
-<span style="color: #bbbbbb">	</span><span style="color: #008000; font-weight: bold">while</span>(b){
-<span style="color: #bbbbbb">		</span><span style="color: #008000; font-weight: bold">if</span>(b<span style="color: #666666">&amp;1</span>)<span style="color: #bbbbbb"> </span>ans<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>ans<span style="color: #bbbbbb"> </span><span style="color: #666666">*</span><span style="color: #bbbbbb"> </span>a<span style="color: #bbbbbb"> </span><span style="color: #666666">%</span><span style="color: #bbbbbb"> </span>mod;
-<span style="color: #bbbbbb">		</span><span style="color: #008000; font-weight: bold">else</span><span style="color: #bbbbbb"> </span>a<span style="color: #666666">=</span>a<span style="color: #666666">*</span>a<span style="color: #bbbbbb"> </span><span style="color: #666666">%</span>mod;
-<span style="color: #bbbbbb">		</span>b<span style="color: #666666">&gt;&gt;=1</span>;
-<span style="color: #bbbbbb">	</span>}
-<span style="color: #bbbbbb">	</span><span style="color: #008000; font-weight: bold">return</span><span style="color: #bbbbbb"> </span>ans;
+<pre><code class="language-cpp">int qpow(int a, int b, int mod){
+	int ans = 1;
+	while(b){
+		if(b&amp;1) ans = ans * a % mod;
+		else a=a*a %mod;
+		b&gt;&gt;=1;
+	}
+	return ans;
 }
 
-<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">qmul</span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>a,<span style="color: #bbbbbb"> </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>b,<span style="color: #bbbbbb"> </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>mod){
-<span style="color: #bbbbbb">	</span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>ans<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>;
-<span style="color: #bbbbbb">	</span><span style="color: #008000; font-weight: bold">while</span>(b){
-<span style="color: #bbbbbb">		</span><span style="color: #008000; font-weight: bold">if</span>(b<span style="color: #666666">&amp;1</span>)<span style="color: #bbbbbb"> </span>ans<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>ans<span style="color: #bbbbbb"> </span><span style="color: #666666">+</span><span style="color: #bbbbbb"> </span>a<span style="color: #bbbbbb"> </span><span style="color: #666666">%</span>mod;
-<span style="color: #bbbbbb">		</span><span style="color: #008000; font-weight: bold">else</span><span style="color: #bbbbbb"> </span>ans<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>ans<span style="color: #bbbbbb"> </span><span style="color: #666666">+</span><span style="color: #bbbbbb"> </span>ans<span style="color: #666666">%</span>mod;
-<span style="color: #bbbbbb">		</span>b<span style="color: #666666">&gt;&gt;=1</span>;
-<span style="color: #bbbbbb">	</span>}
+int qmul(int a, int b, int mod){
+	int ans = 0;
+	while(b){
+		if(b&amp;1) ans = ans + a %mod;
+		else ans = ans + ans%mod;
+		b&gt;&gt;=1;
+	}
 }
-</pre></div>
-
+</code></pre>
 <p>有1的时候乘a, 没1的时候a自己倍增.</p>
 <h2>Eg3: 哈密顿回路</h2>
 <h3>Subtask1. 计算哈密顿回路的最短路</h3>
-<p>定义 \(f[S][i]\) 表示状态集合为 \(S\) 的时候, 当前处于 \(i\) , 目前处于点 \(j\) 的时候. 有如下的转移方程.</p>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>g[<span style="color: #666666">25</span>][<span style="color: #666666">25</span>];
-<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>a[MAXN];
-<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>f[(<span style="color: #666666">1&lt;&lt;15</span>)<span style="color: #666666">+1</span>][<span style="color: #666666">20</span>];
-<span style="color: #B00040">void</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">solve</span>(){
-<span style="color: #bbbbbb">	</span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>n,<span style="color: #bbbbbb"> </span>m;
-<span style="color: #bbbbbb">	</span>cin<span style="color: #666666">&gt;&gt;</span>n<span style="color: #666666">&gt;&gt;</span>m;
-<span style="color: #bbbbbb">	</span>memset(f,<span style="color: #bbbbbb"> </span><span style="color: #666666">0x3f</span>,<span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">sizeof</span><span style="color: #bbbbbb"> </span>f<span style="color: #bbbbbb"> </span>);
-<span style="color: #bbbbbb">	</span>f[<span style="color: #666666">1</span>][<span style="color: #666666">0</span>]<span style="color: #666666">=0</span>;
-<span style="color: #bbbbbb">	</span>F(i,<span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>,<span style="color: #bbbbbb"> </span>m){
-<span style="color: #bbbbbb">		</span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>x,<span style="color: #bbbbbb"> </span>y,<span style="color: #bbbbbb"> </span>w;<span style="color: #bbbbbb"> </span>
-<span style="color: #bbbbbb">		</span>cin<span style="color: #666666">&gt;&gt;</span>x<span style="color: #666666">&gt;&gt;</span>y<span style="color: #666666">&gt;&gt;</span>w;
-<span style="color: #bbbbbb">		</span>g[x][y]<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>w;<span style="color: #bbbbbb"> </span>g[y][x]<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>w;<span style="color: #bbbbbb"> </span>
-<span style="color: #bbbbbb">	</span>}
-<span style="color: #bbbbbb">	</span><span style="color: #3D7B7B; font-style: italic">// F(i, 1, (1&lt;&lt;n)-1)F(j, 0, n-1)if(i&gt;&gt;j&amp;1)F(k, 0, n-1)if(i&gt;&gt;k&amp;1){</span>
-<span style="color: #bbbbbb">	</span><span style="color: #3D7B7B; font-style: italic">// 	f[i][j] = min(f[i^1&lt;&lt;j][k]+g[k][j], f[i][j]);</span>
-<span style="color: #bbbbbb">	</span><span style="color: #3D7B7B; font-style: italic">// 	debug(i, j, f[i][j]);</span>
-<span style="color: #bbbbbb">	</span><span style="color: #3D7B7B; font-style: italic">// }</span>
-<span style="color: #bbbbbb">	</span><span style="color: #008000; font-weight: bold">for</span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>i<span style="color: #666666">=1</span>;<span style="color: #bbbbbb"> </span>i<span style="color: #666666">&lt;1&lt;&lt;</span>n;<span style="color: #bbbbbb"> </span>i<span style="color: #666666">++</span>)
-<span style="color: #bbbbbb">	</span><span style="color: #008000; font-weight: bold">for</span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>j<span style="color: #666666">=0</span>;<span style="color: #bbbbbb"> </span>j<span style="color: #666666">&lt;</span>n;j<span style="color: #666666">++</span>)<span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">if</span>(i<span style="color: #666666">&gt;&gt;</span>j<span style="color: #666666">&amp;1</span>)
-<span style="color: #bbbbbb">	</span><span style="color: #008000; font-weight: bold">for</span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>k<span style="color: #666666">=0</span>;<span style="color: #bbbbbb"> </span>k<span style="color: #666666">&lt;</span>n;k<span style="color: #666666">++</span>)<span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">if</span>(i<span style="color: #666666">&gt;&gt;</span>k<span style="color: #666666">&amp;1</span>)
-<span style="color: #bbbbbb">	</span>f[i][j]<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>min(f[i][j],<span style="color: #bbbbbb"> </span>f[i<span style="color: #666666">^1&lt;&lt;</span>j][k]<span style="color: #666666">+</span>g[k][j]);
-<span style="color: #bbbbbb">	</span>cout<span style="color: #666666">&lt;&lt;</span>f[(<span style="color: #666666">1&lt;&lt;</span>n)<span style="color: #666666">-1</span>][n<span style="color: #666666">-1</span>]<span style="color: #666666">&lt;&lt;</span>endl;
+<p>定义$f[S][i]$表示状态集合为$S$的时候, 当前处于$i$, 目前处于点$j$的时候. 有如下的转移方程.</p>
+<pre><code class="language-cpp">int g[25][25];
+int a[MAXN];
+int f[(1&lt;&lt;15)+1][20];
+void solve(){
+	int n, m;
+	cin&gt;&gt;n&gt;&gt;m;
+	memset(f, 0x3f, sizeof f );
+	f[1][0]=0;
+	F(i, 1, m){
+		int x, y, w; 
+		cin&gt;&gt;x&gt;&gt;y&gt;&gt;w;
+		g[x][y] = w; g[y][x] = w; 
+	}
+	// F(i, 1, (1&lt;&lt;n)-1)F(j, 0, n-1)if(i&gt;&gt;j&amp;1)F(k, 0, n-1)if(i&gt;&gt;k&amp;1){
+	// 	f[i][j] = min(f[i^1&lt;&lt;j][k]+g[k][j], f[i][j]);
+	// 	debug(i, j, f[i][j]);
+	// }
+	for(int i=1; i&lt;1&lt;&lt;n; i++)
+	for(int j=0; j&lt;n;j++) if(i&gt;&gt;j&amp;1)
+	for(int k=0; k&lt;n;k++) if(i&gt;&gt;k&amp;1)
+	f[i][j] = min(f[i][j], f[i^1&lt;&lt;j][k]+g[k][j]);
+	cout&lt;&lt;f[(1&lt;&lt;n)-1][n-1]&lt;&lt;endl;
 }
-</pre></div>
-
+</code></pre>
 <p>当然可以用<code>dfs</code>记忆化搜索, 但我还不会写.</p>
 <h3>Subtask2. POJ2288</h3>
 <p>还不会</p>
 <h1>0x02. 枚举</h1>
 <h2>Eg1. POJ1998</h2>
-<p>注意到 \(f[n]=\min_{i=1}^{n-1}\{2f[i]+d[n-i]\}\) .</p>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>d[<span style="color: #666666">13</span>]<span style="color: #666666">=</span>{<span style="color: #666666">0</span>,<span style="color: #666666">1</span>,<span style="color: #666666">3</span>,<span style="color: #666666">7</span>,<span style="color: #666666">15</span>,<span style="color: #666666">31</span>,<span style="color: #666666">63</span>,<span style="color: #666666">127</span>,<span style="color: #666666">255</span>,<span style="color: #666666">511</span>,<span style="color: #666666">1023</span>,<span style="color: #666666">2047</span>,<span style="color: #666666">8191</span>};
-<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>f[<span style="color: #666666">13</span>]<span style="color: #666666">=</span>{};
-<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">main</span>(){
-<span style="color: #bbbbbb">    </span>memset(f,<span style="color: #bbbbbb"> </span><span style="color: #666666">0x3f</span>,<span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">sizeof</span><span style="color: #bbbbbb"> </span>f);
-<span style="color: #bbbbbb">    </span>f[<span style="color: #666666">1</span>]<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>;
-<span style="color: #bbbbbb">    </span>F(i,<span style="color: #666666">1</span>,<span style="color: #666666">12</span>){
-<span style="color: #bbbbbb">        </span>Fr(j,<span style="color: #666666">1</span>,i){
-<span style="color: #bbbbbb">            </span>f[i]<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>min(<span style="color: #666666">2*</span>f[j]<span style="color: #666666">+</span>d[i<span style="color: #666666">-</span>j],<span style="color: #bbbbbb"> </span>f[i]);
-<span style="color: #bbbbbb">        </span>}
-<span style="color: #bbbbbb">    </span>}
-<span style="color: #bbbbbb">    </span>F(i,<span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>,<span style="color: #bbbbbb"> </span><span style="color: #666666">12</span>)<span style="color: #bbbbbb"> </span>cout<span style="color: #666666">&lt;&lt;</span>f[i]<span style="color: #666666">&lt;&lt;</span><span style="color: #BA2121">&quot;</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>;
+<p>注意到$f[n]=\min_{i=1}^{n-1}{2f[i]+d[n-i]}$.</p>
+<pre><code class="language-cpp">int d[13]={0,1,3,7,15,31,63,127,255,511,1023,2047,8191};
+int f[13]={};
+int main(){
+    memset(f, 0x3f, sizeof f);
+    f[1] = 1;
+    F(i,1,12){
+        Fr(j,1,i){
+            f[i] = min(2*f[j]+d[i-j], f[i]);
+        }
+    }
+    F(i, 1, 12) cout&lt;&lt;f[i]&lt;&lt;&quot;\n&quot;;
 }
-</pre></div>
-
+</code></pre>
 <h2>Eg2.</h2>
 
     </div>
-
-   
-   
-   
     <hr>
-
-
-
-
-
-
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+          inlineMath: [ ['$','$'] ],
+          displayMath: [ ['$$','$$'] ],
+          processEscapes: true
+        },
+        "HTML-CSS": { fonts: ["TeX"] }
+      });
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
     <div id="disqus_thread"></div>
     <script type="text/javascript" async
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
     </script>
     <script>
-        /**
-        *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-        *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
-        
-        // var disqus_config = function () {
-        // this.page.url = ;  // Replace PAGE_URL with your page's canonical URL variable
-        // this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-        // };
-        
-        (function() { // DON'T EDIT BELOW THIS LINE
+        (function() { 
         var d = document, s = d.createElement('script');
         s.src = 'https://augpath.disqus.com/embed.js';
         s.setAttribute('data-timestamp', +new Date());

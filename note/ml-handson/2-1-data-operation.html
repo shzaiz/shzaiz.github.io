@@ -3,11 +3,11 @@
   <head>
     <link rel="stylesheet" href="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/style.css">
     <script src="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/plugin.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex, nofollow">
     <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
- 
     <script>
 const copyButtonLabel = "Copy Code";
 
@@ -59,14 +59,12 @@ async function copyCode(block) {
         code {
             font-family: 'Courier New', Courier, monospace;
         } 
-
         pre {
             font-family: 'Courier New', Courier, monospace;
         } 
         div{
             max-width: 100%;
             overflow: auto;
-            
         }
         .navbar {
             overflow: hidden;
@@ -75,7 +73,6 @@ async function copyCode(block) {
             top: 0; /* Position the navbar at the top of the page */
             width: 100%; /* Full width */
         }
-
         img {
         max-width: 80%;
         height: auto;
@@ -88,7 +85,6 @@ async function copyCode(block) {
             padding: 14px 16px;
             text-decoration: none;
         }
-
         a {
             color: #148bca;
             text-align: center;
@@ -96,25 +92,22 @@ async function copyCode(block) {
             padding-right: 2px;
             text-decoration: none;
         }
-
         p.hidden {
           overflow: hidden;
         }
-
     </style>
   </head>
   <body>
-    
     <div class="navbar">
         <a href="https://shzaiz.github.io">AUG's Wiki</a>
         <a href="index.html"> ↑ Back to contents</a>
-        Last updated at 2024-01-07 15:14:48.976716
+        Last updated at 2024-01-07 20:32:45.335091
     </div>
 
     <div class="toc"></div>
     <a id="toc-button"><i class="far fa-bookmark"></i></a>
     
-    <div>
+    <div id="renderedContent">
       <h1>数据的操作</h1>
 <p>目的: 使用机械化的方法帮助我们处理数据.</p>
 <p>一. 张量(tensor)</p>
@@ -125,7 +118,7 @@ async function copyCode(block) {
 <ul>
 <li><code>torch.arange(a)</code> 生成一个从0开始的前a个整数.</li>
 <li><code>x.numel()</code> 对象中元素的总和(大小)</li>
-<li><code>torch.reshape(x, (a, b))</code> 把x改为 \(a\times b\) , 特别的, 可以用<code>reshape(x,(-1,))</code>来拉平.</li>
+<li><code>torch.reshape(x, (a, b))</code> 把x改为$a\times b$, 特别的, 可以用<code>reshape(x,(-1,))</code>来拉平.</li>
 <li><code>torch.zeros()</code> 生成全0的张量</li>
 <li><code>torch.ones()</code> 生成全1的张量</li>
 <li><code>torch.randn()</code> 生成均值为0, 方差为1的Gauss分布中随机取样</li>
@@ -152,37 +145,35 @@ async function copyCode(block) {
 </li>
 </ul>
 <p>例子:</p>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> a <span style="color: #666666">=</span> torch<span style="color: #666666">.</span>arange(<span style="color: #666666">3</span>)<span style="color: #666666">.</span>reshape((<span style="color: #666666">3</span>, <span style="color: #666666">1</span>))
-    (tensor([[<span style="color: #666666">0</span>],
-         	 [<span style="color: #666666">1</span>],
-         	 [<span style="color: #666666">2</span>]]),
-<span style="color: #666666">&gt;&gt;&gt;</span> b <span style="color: #666666">=</span> torch<span style="color: #666666">.</span>arange(<span style="color: #666666">2</span>)<span style="color: #666666">.</span>reshape((<span style="color: #666666">1</span>, <span style="color: #666666">2</span>))
-    tensor([[<span style="color: #666666">0</span>, <span style="color: #666666">1</span>]]))
-<span style="color: #666666">&gt;&gt;&gt;</span> a <span style="color: #666666">+</span> b
-<span style="color: #3D7B7B; font-style: italic"># 0 0       0 1</span>
-<span style="color: #3D7B7B; font-style: italic"># 1 1   +   0 1 =</span>
-<span style="color: #3D7B7B; font-style: italic"># 2 2       0 1</span>
-     tensor([[<span style="color: #666666">0</span>, <span style="color: #666666">1</span>],
-        	 [<span style="color: #666666">1</span>, <span style="color: #666666">2</span>],
-        	 [<span style="color: #666666">2</span>, <span style="color: #666666">3</span>]])
-</pre></div>
-
+<pre><code class="language-py">&gt;&gt;&gt; a = torch.arange(3).reshape((3, 1))
+    (tensor([[0],
+         	 [1],
+         	 [2]]),
+&gt;&gt;&gt; b = torch.arange(2).reshape((1, 2))
+    tensor([[0, 1]]))
+&gt;&gt;&gt; a + b
+# 0 0       0 1
+# 1 1   +   0 1 =
+# 2 2       0 1
+     tensor([[0, 1],
+        	 [1, 2],
+        	 [2, 3]])
+</code></pre>
 <p>例子2:</p>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span>In [<span style="color: #666666">8</span>]: C<span style="color: #666666">.</span>sum(axis<span style="color: #666666">=0</span>)
-Out[<span style="color: #666666">8</span>]: 
-tensor([[<span style="color: #666666">12.</span>, <span style="color: #666666">14.</span>, <span style="color: #666666">16.</span>, <span style="color: #666666">18.</span>],
-        [<span style="color: #666666">20.</span>, <span style="color: #666666">22.</span>, <span style="color: #666666">24.</span>, <span style="color: #666666">26.</span>],
-        [<span style="color: #666666">28.</span>, <span style="color: #666666">30.</span>, <span style="color: #666666">32.</span>, <span style="color: #666666">34.</span>]])
+<pre><code class="language-py">In [8]: C.sum(axis=0)
+Out[8]: 
+tensor([[12., 14., 16., 18.],
+        [20., 22., 24., 26.],
+        [28., 30., 32., 34.]])
 
-In [<span style="color: #666666">9</span>]: C <span style="color: #666666">/</span> C<span style="color: #666666">.</span>sum(axis<span style="color: #666666">=1</span>)
-<span style="color: #666666">---------------------------------------------------------------------------</span>
-<span style="color: #CB3F38; font-weight: bold">RuntimeError</span>                              Traceback (most recent call last)
-Cell In[<span style="color: #666666">9</span>], line <span style="color: #666666">1</span>
-<span style="color: #666666">----&gt;</span> <span style="color: #666666">1</span> C <span style="color: #666666">/</span> C<span style="color: #666666">.</span>sum(axis<span style="color: #666666">=1</span>)
+In [9]: C / C.sum(axis=1)
+---------------------------------------------------------------------------
+RuntimeError                              Traceback (most recent call last)
+Cell In[9], line 1
+----&gt; 1 C / C.sum(axis=1)
 
-<span style="color: #CB3F38; font-weight: bold">RuntimeError</span>: The size of tensor a (<span style="color: #666666">3</span>) must match the size of tensor b (<span style="color: #666666">2</span>) at non<span style="color: #666666">-</span>singleton dimension <span style="color: #666666">1</span>
-</pre></div>
-
+RuntimeError: The size of tensor a (3) must match the size of tensor b (2) at non-singleton dimension 1
+</code></pre>
 <ul>
 <li>索引和切片: [start:stop:jump], 使用负数倒着选.</li>
 <li>通过下标写入: <code>a[1,2]</code>
@@ -209,32 +200,31 @@ Cell In[<span style="color: #666666">9</span>], line <span style="color: #666666
 <ol>
 <li>运行本节中的代码。将本节中的条件语句X == Y更改为X &lt; Y或X &gt; Y，然后看看你可以得到什么样的张量。</li>
 </ol>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">torch</span>
-X <span style="color: #666666">=</span> torch<span style="color: #666666">.</span>arange(<span style="color: #666666">12</span>, dtype<span style="color: #666666">=</span>torch<span style="color: #666666">.</span>float32)<span style="color: #666666">.</span>reshape((<span style="color: #666666">3</span>,<span style="color: #666666">4</span>))
-Y <span style="color: #666666">=</span> torch<span style="color: #666666">.</span>tensor([[<span style="color: #666666">2.0</span>, <span style="color: #666666">1</span>, <span style="color: #666666">4</span>, <span style="color: #666666">3</span>], [<span style="color: #666666">1</span>, <span style="color: #666666">2</span>, <span style="color: #666666">3</span>, <span style="color: #666666">4</span>], [<span style="color: #666666">4</span>, <span style="color: #666666">3</span>, <span style="color: #666666">2</span>, <span style="color: #666666">1</span>]])
-<span style="color: #008000">print</span>(X <span style="color: #666666">&gt;</span> Y)
-<span style="color: #008000">print</span>(X <span style="color: #666666">&lt;</span> Y)
+<pre><code class="language-py">import torch
+X = torch.arange(12, dtype=torch.float32).reshape((3,4))
+Y = torch.tensor([[2.0, 1, 4, 3], [1, 2, 3, 4], [4, 3, 2, 1]])
+print(X &gt; Y)
+print(X &lt; Y)
 
 
-tensor([[<span style="color: #008000; font-weight: bold">False</span>, <span style="color: #008000; font-weight: bold">False</span>, <span style="color: #008000; font-weight: bold">False</span>, <span style="color: #008000; font-weight: bold">False</span>],
-        [ <span style="color: #008000; font-weight: bold">True</span>,  <span style="color: #008000; font-weight: bold">True</span>,  <span style="color: #008000; font-weight: bold">True</span>,  <span style="color: #008000; font-weight: bold">True</span>],
-        [ <span style="color: #008000; font-weight: bold">True</span>,  <span style="color: #008000; font-weight: bold">True</span>,  <span style="color: #008000; font-weight: bold">True</span>,  <span style="color: #008000; font-weight: bold">True</span>]])
-tensor([[ <span style="color: #008000; font-weight: bold">True</span>, <span style="color: #008000; font-weight: bold">False</span>,  <span style="color: #008000; font-weight: bold">True</span>, <span style="color: #008000; font-weight: bold">False</span>],
-        [<span style="color: #008000; font-weight: bold">False</span>, <span style="color: #008000; font-weight: bold">False</span>, <span style="color: #008000; font-weight: bold">False</span>, <span style="color: #008000; font-weight: bold">False</span>],
-        [<span style="color: #008000; font-weight: bold">False</span>, <span style="color: #008000; font-weight: bold">False</span>, <span style="color: #008000; font-weight: bold">False</span>, <span style="color: #008000; font-weight: bold">False</span>]])
-</pre></div>
+tensor([[False, False, False, False],
+        [ True,  True,  True,  True],
+        [ True,  True,  True,  True]])
+tensor([[ True, False,  True, False],
+        [False, False, False, False],
+        [False, False, False, False]])
 
+</code></pre>
 <ol start="2">
 <li>用其他形状（例如三维张量）替换广播机制中按元素操作的两个张量。结果是否与预期相同？</li>
 </ol>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">torch</span>
-a <span style="color: #666666">=</span> torch<span style="color: #666666">.</span>arange(<span style="color: #666666">4</span>)<span style="color: #666666">.</span>reshape((<span style="color: #666666">1</span>, <span style="color: #666666">1</span>, <span style="color: #666666">4</span>))
-b <span style="color: #666666">=</span> torch<span style="color: #666666">.</span>arange(<span style="color: #666666">20</span>)<span style="color: #666666">.</span>reshape((<span style="color: #666666">5</span>, <span style="color: #666666">1</span>, <span style="color: #666666">4</span>))
+<pre><code class="language-py">import torch
+a = torch.arange(4).reshape((1, 1, 4))
+b = torch.arange(20).reshape((5, 1, 4))
 
-a <span style="color: #666666">+</span> b
-</pre></div>
-
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span>tensor([[[ 0,  2,  4,  6]],
+a + b
+</code></pre>
+<pre><code>tensor([[[ 0,  2,  4,  6]],
 
         [[ 4,  6,  8, 10]],
 
@@ -243,27 +233,24 @@ a <span style="color: #666666">+</span> b
         [[12, 14, 16, 18]],
 
         [[16, 18, 20, 22]]])
-</pre></div>
-
+</code></pre>
 <h2>读取数据集</h2>
 <p>(1) 创建一个人工数据集, 并存储在CSV中(路径<code> ../data/house_tiny.csv</code>)</p>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">os</span>
-os<span style="color: #666666">.</span>makedirs(os<span style="color: #666666">.</span>path<span style="color: #666666">.</span>join(<span style="color: #BA2121">&#39;..&#39;</span>, <span style="color: #BA2121">&#39;data&#39;</span>), exist_ok<span style="color: #666666">=</span><span style="color: #008000; font-weight: bold">True</span>)
-data_file <span style="color: #666666">=</span> os<span style="color: #666666">.</span>path<span style="color: #666666">.</span>join(<span style="color: #BA2121">&#39;..&#39;</span>, <span style="color: #BA2121">&#39;data&#39;</span>, <span style="color: #BA2121">&#39;house_tiny.csv&#39;</span>)
-<span style="color: #008000; font-weight: bold">with</span> <span style="color: #008000">open</span>(data_file, <span style="color: #BA2121">&#39;w&#39;</span>) <span style="color: #008000; font-weight: bold">as</span> f:
-    f<span style="color: #666666">.</span>write(<span style="color: #BA2121">&#39;NumRooms,Alley,Price</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&#39;</span>) <span style="color: #3D7B7B; font-style: italic"># 列名</span>
-    f<span style="color: #666666">.</span>write(<span style="color: #BA2121">&#39;NA,Pave,127500</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&#39;</span>) <span style="color: #3D7B7B; font-style: italic"># 每⾏表⽰⼀个数据样本</span>
-    f<span style="color: #666666">.</span>write(<span style="color: #BA2121">&#39;2,NA,106000</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&#39;</span>) 
-    f<span style="color: #666666">.</span>write(<span style="color: #BA2121">&#39;4,NA,178100</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&#39;</span>) 
-    f<span style="color: #666666">.</span>write(<span style="color: #BA2121">&#39;NA,NA,140000</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&#39;</span>)
-</pre></div>
-
+<pre><code class="language-py">import os
+os.makedirs(os.path.join('..', 'data'), exist_ok=True)
+data_file = os.path.join('..', 'data', 'house_tiny.csv')
+with open(data_file, 'w') as f:
+    f.write('NumRooms,Alley,Price\n') # 列名
+    f.write('NA,Pave,127500\n') # 每⾏表⽰⼀个数据样本
+    f.write('2,NA,106000\n') 
+    f.write('4,NA,178100\n') 
+    f.write('NA,NA,140000\n')
+</code></pre>
 <p>(2) 使用<code>pandas</code>读取数据</p>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">pandas</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">pd</span>
-data <span style="color: #666666">=</span> pd<span style="color: #666666">.</span>read_csv(data_file)
-<span style="color: #008000">print</span>(data)
-</pre></div>
-
+<pre><code class="language-py">import pandas as pd
+data = pd.read_csv(data_file)
+print(data)
+</code></pre>
 <p>(3) 处理缺失值</p>
 <ul>
 <li>缺失值: NaN(Not a number)</li>
@@ -275,10 +262,9 @@ data <span style="color: #666666">=</span> pd<span style="color: #666666">.</spa
 </li>
 <li>索引: <code>iloc[:]</code>(indexlocate)</li>
 </ul>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span>inputs, outputs <span style="color: #666666">=</span> data<span style="color: #666666">.</span>iloc[:, <span style="color: #666666">0</span>:<span style="color: #666666">2</span>], data<span style="color: #666666">.</span>iloc[:, <span style="color: #666666">2</span>]
-inputs <span style="color: #666666">=</span> inputs<span style="color: #666666">.</span>fillna(inputs<span style="color: #666666">.</span>mean())
-</pre></div>
-
+<pre><code class="language-py">inputs, outputs = data.iloc[:, 0:2], data.iloc[:, 2]
+inputs = inputs.fillna(inputs.mean())
+</code></pre>
 <p>补充: dummy方法
 get_dummies()是用于特征处理的，也叫one-hot-encodin处理，如一列是gender，性别有male和famale，那么这一列是有两个特征，然后把gender这一列换成gender_male和gender_famale分别体现gender的两个特征，那么符合male的为1，否则为0，famale同理。</p>
 <p>dummy的意思:
@@ -287,51 +273,44 @@ e.g. &quot;a waxwork dummy&quot;
 2.something designed to resemble and serve as a substitute for the real or usual thing; a counterfeit or sham.
 e.g. &quot;tests using stuffed owls and wooden dummies&quot;</p>
 <p>于是就可以分类了.</p>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span>inputs <span style="color: #666666">=</span> pd<span style="color: #666666">.</span>get_dummies(inputs,dummy_na<span style="color: #666666">=</span><span style="color: #008000; font-weight: bold">True</span>)
-</pre></div>
-
+<pre><code class="language-py">inputs = pd.get_dummies(inputs,dummy_na=True)
+</code></pre>
 <p>(3) 转换为张量类型: 仍然用torch.tensor()即可.</p>
 <h2>练习题</h2>
 <ol>
 <li>删除缺失值最多的一列</li>
 </ol>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span>data <span style="color: #666666">=</span> data<span style="color: #666666">.</span>drop(data<span style="color: #666666">.</span>count()<span style="color: #666666">.</span>idxmin(),axis<span style="color: #666666">=1</span>)
-</pre></div>
-
+<pre><code class="language-py">data = data.drop(data.count().idxmin(),axis=1)
+</code></pre>
 <ol start="2">
 <li>并且转化为张量形式</li>
 </ol>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span>torch<span style="color: #666666">.</span>tensor(data<span style="color: #666666">.</span>values())
-</pre></div>
-
+<pre><code class="language-py">torch.tensor(data.values())
+</code></pre>
 
     </div>
-
-   
-   
-   
     <hr>
-
-
-
-
-
-
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+          inlineMath: [ ['$','$'] ],
+          displayMath: [ ['$$','$$'] ],
+          processEscapes: true
+        },
+        "HTML-CSS": { fonts: ["TeX"] }
+      });
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
     <div id="disqus_thread"></div>
     <script type="text/javascript" async
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
     </script>
     <script>
-        /**
-        *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-        *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
-        
-        // var disqus_config = function () {
-        // this.page.url = ;  // Replace PAGE_URL with your page's canonical URL variable
-        // this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-        // };
-        
-        (function() { // DON'T EDIT BELOW THIS LINE
+        (function() { 
         var d = document, s = d.createElement('script');
         s.src = 'https://augpath.disqus.com/embed.js';
         s.setAttribute('data-timestamp', +new Date());

@@ -3,11 +3,11 @@
   <head>
     <link rel="stylesheet" href="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/style.css">
     <script src="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/plugin.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex, nofollow">
     <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
- 
     <script>
 const copyButtonLabel = "Copy Code";
 
@@ -59,14 +59,12 @@ async function copyCode(block) {
         code {
             font-family: 'Courier New', Courier, monospace;
         } 
-
         pre {
             font-family: 'Courier New', Courier, monospace;
         } 
         div{
             max-width: 100%;
             overflow: auto;
-            
         }
         .navbar {
             overflow: hidden;
@@ -75,7 +73,6 @@ async function copyCode(block) {
             top: 0; /* Position the navbar at the top of the page */
             width: 100%; /* Full width */
         }
-
         img {
         max-width: 80%;
         height: auto;
@@ -88,7 +85,6 @@ async function copyCode(block) {
             padding: 14px 16px;
             text-decoration: none;
         }
-
         a {
             color: #148bca;
             text-align: center;
@@ -96,31 +92,28 @@ async function copyCode(block) {
             padding-right: 2px;
             text-decoration: none;
         }
-
         p.hidden {
           overflow: hidden;
         }
-
     </style>
   </head>
   <body>
-    
     <div class="navbar">
         <a href="https://shzaiz.github.io">AUG's Wiki</a>
         <a href="index.html"> ↑ Back to contents</a>
-        Last updated at 2024-01-07 15:14:48.284724
+        Last updated at 2024-01-07 20:32:44.970625
     </div>
 
     <div class="toc"></div>
     <a id="toc-button"><i class="far fa-bookmark"></i></a>
     
-    <div>
+    <div id="renderedContent">
       <hr />
 <h2>title: 课设报告
 separator: ----
 verticalSeparator: ---
 revealOptions:
-transition: &#x27;slide&#x27;
+transition: 'slide'
 center: false</h2>
 <h1>Bell多项式</h1>
 <hr />
@@ -133,14 +126,13 @@ center: false</h2>
 \displaystyle{  B_{n,k} = \sum_{i=1}^{n-k+1} \binom{n-1}{i-1} x_i B_{n-i,k-1}, }
 $$</p>
 <hr />
-<h2>完全Bell多项式: 从 \(1\) 到 \(n\) 求和</h2>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span>...
-<span style="color: #bbbbbb">	</span><span style="color: #008000; font-weight: bold">for</span><span style="color: #19177C">(int</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">i</span><span style="color: #666666">=2</span><span style="color: #3D7B7B; font-style: italic">; i&lt;=n; i++){</span>
-<span style="color: #bbbbbb">        </span><span style="color: #008000">result</span><span style="color: #bbbbbb"> </span><span style="color: #666666">+=</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">bell_incomplete_poly(n</span>,<span style="color: #bbbbbb"> </span><span style="color: #19177C">i</span>,<span style="color: #bbbbbb"> </span><span style="color: #19177C">symbols)</span><span style="color: #3D7B7B; font-style: italic">;</span>
-<span style="color: #bbbbbb">    </span>}
+<h2>完全Bell多项式: 从$1$到$n$求和</h2>
+<pre><code>...
+	for(int i=2; i&lt;=n; i++){
+        result += bell_incomplete_poly(n, i, symbols);
+    }
 ...
-</pre></div>
-
+</code></pre>
 <hr />
 <h1>理论基础</h1>
 <hr />
@@ -149,19 +141,19 @@ $$</p>
 <li>随机变量之间的相关性和依赖关系</li>
 <li>如同协方差(两个随机变量之间的线性关系强度), 相关系数
 <ul>
-<li>协方差:  \(\text{Cov}(X,Y) = \frac{{\sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y})}}{{n}}\) </li>
-<li>相关系数:  \(\rho_{X,Y} = \frac{{\text{Cov}(X,Y)}}{{\sigma_X \sigma_Y}}\) </li>
+<li>协方差: $\text{Cov}(X,Y) = \frac{{\sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y})}}{{n}}$</li>
+<li>相关系数: $\rho_{X,Y} = \frac{{\text{Cov}(X,Y)}}{{\sigma_X \sigma_Y}}$</li>
 </ul>
 </li>
 </ul>
 <hr />
 <h2>Joint cumulants 计算</h2>
 <ul>
-<li>给定一个 \(k\) 个随机变量的集合</li>
+<li>给定一个$k$个随机变量的集合</li>
 <li>计算raw moments(变量的个数幂次和)
 <ul>
-<li>一个变量:  \((\frac{1}{n})x_{1}+x_{2}+x_{3}+\cdots +x_{n}.\) </li>
-<li>两个变量:  \((\frac{1}{n^{2}})x_{1}^{2}+x_{2}^{2}+\cdots +x_n^2.\) </li>
+<li>一个变量: $(\frac{1}{n})x_{1}+x_{2}+x_{3}+\cdots +x_{n}.$</li>
+<li>两个变量: $(\frac{1}{n^{2}})x_{1}^{2}+x_{2}^{2}+\cdots +x_n^2.$</li>
 <li>...</li>
 </ul>
 </li>
@@ -176,12 +168,12 @@ $$
 \displaystyle{ \kappa(X_1,\dots,X_n) =\sum_\pi (|\pi|-1)!(-1)^{|\pi|-1}\prod_{B\in\pi}E\left(\prod_{i\in B}X_i\right) }
 $$</p>
 <ul>
-<li> \(\pi\) 是所有的集合的划分(Bell数)</li>
+<li>$\pi$是所有的集合的划分(Bell数)</li>
 <li>例子:
 <ul>
-<li> \(\small{ \kappa(X,Y)=\operatorname E(XY) - \operatorname E(X) \operatorname E(Y), }\) </li>
-<li> \(\small{ \kappa(X,Y,Z)=\operatorname E(XYZ) - \operatorname E(XY) \operatorname E(Z) - \operatorname E(XZ) \operatorname E(Y) - \operatorname E(YZ) \operatorname E(X) + 2\operatorname E(X)\operatorname E(Y)\operatorname E(Z).\, }\) </li>
-<li> \(\small{ \kappa(X,X,Z)=\operatorname E(X^2Z)  -2\operatorname E(XZ)\operatorname E(X) - \operatorname E(X^2)\operatorname E(Z) + 2\operatorname E(X)^2\operatorname E(Z),\, }\) </li>
+<li>$\small{ \kappa(X,Y)=\operatorname E(XY) - \operatorname E(X) \operatorname E(Y), }$</li>
+<li>$\small{ \kappa(X,Y,Z)=\operatorname E(XYZ) - \operatorname E(XY) \operatorname E(Z) - \operatorname E(XZ) \operatorname E(Y) - \operatorname E(YZ) \operatorname E(X) + 2\operatorname E(X)\operatorname E(Y)\operatorname E(Z)., }$</li>
+<li>$\small{ \kappa(X,X,Z)=\operatorname E(X^2Z)  -2\operatorname E(XZ)\operatorname E(X) - \operatorname E(X^2)\operatorname E(Z) + 2\operatorname E(X)^2\operatorname E(Z),, }$</li>
 </ul>
 </li>
 </ul>
@@ -192,7 +184,7 @@ $$
 \displaystyle{ \kappa(X_1,\dots,X_n) =\sum_\pi (|\pi|-1)!(-1)^{|\pi|-1}\prod_{B\in\pi}E\left(\prod_{i\in B}X_i\right) }
 $$</p>
 <ul>
-<li> \(\pi\) 是所有的集合的划分(Bell数)</li>
+<li>$\pi$是所有的集合的划分(Bell数)</li>
 <li>演示
 <ul>
 <li><code>-Ex(y)*Ex(x)+Ex(y*x)</code></li>
@@ -219,14 +211,13 @@ $$</p>
 <ul>
 <li>为了可拓展性:</li>
 </ul>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #bbbbbb">    </span><span style="color: #3D7B7B; font-style: italic">// REG_MENU_ITEM(initReading);</span>
-<span style="color: #bbbbbb">    </span><span style="color: #3D7B7B; font-style: italic">// REG_MENU_ITEM(initFunction);</span>
-<span style="color: #bbbbbb">    </span><span style="color: #3D7B7B; font-style: italic">// REG_MENU_ITEM(changeVar);</span>
-<span style="color: #bbbbbb">    </span><span style="color: #3D7B7B; font-style: italic">// REG_MENU_ITEM(changeVal);</span>
-<span style="color: #bbbbbb">    </span><span style="color: #3D7B7B; font-style: italic">// REG_MENU_ITEM(evaluateExpr);</span>
-<span style="color: #bbbbbb">    </span><span style="color: #3D7B7B; font-style: italic">// REG_MENU_ITEM(evaluateNumeral);</span>
-</pre></div>
-
+<pre><code class="language-cpp">    // REG_MENU_ITEM(initReading);
+    // REG_MENU_ITEM(initFunction);
+    // REG_MENU_ITEM(changeVar);
+    // REG_MENU_ITEM(changeVal);
+    // REG_MENU_ITEM(evaluateExpr);
+    // REG_MENU_ITEM(evaluateNumeral);
+</code></pre>
 <hr />
 <h2>元编程(contd)</h2>
 <ul>
@@ -238,55 +229,49 @@ $$</p>
 </li>
 <li>应用案例: 菜单</li>
 </ul>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #9C6500">#define MENU_ITEM_LOGIC(name, procedure, stat) \</span>
-<span style="color: #9C6500">		void name(){ procedure ;pause(); }\</span>
-<span style="color: #9C6500">	    static void name##Stat(){ cout&lt;&lt;(stat);}</span>
-</pre></div>
-
+<pre><code class="language-cpp">#define MENU_ITEM_LOGIC(name, procedure, stat) \
+		void name(){ procedure ;pause(); }\
+	    static void name##Stat(){ cout&lt;&lt;(stat);}
+</code></pre>
 <hr />
 <h2>X-Macro</h2>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #9C6500">#define FUNCTIONS \</span>
-<span style="color: #9C6500">        X(initReading)\</span>
-<span style="color: #9C6500">        X(initFunction)\</span>
-<span style="color: #9C6500">        X(changeVar) \</span>
-<span style="color: #9C6500">        X(changeVal) \</span>
-<span style="color: #9C6500">        X(evaluateExpr) \</span>
-<span style="color: #9C6500">        X(evaluateNumeral)</span>
-<span style="color: #9C6500">#define REG_MENU_ITEM(name) menu.addOption(name, name##Stat); </span>
+<pre><code class="language-cpp">#define FUNCTIONS \
+        X(initReading)\
+        X(initFunction)\
+        X(changeVar) \
+        X(changeVal) \
+        X(evaluateExpr) \
+        X(evaluateNumeral)
+#define REG_MENU_ITEM(name) menu.addOption(name, name##Stat); 
 
-<span style="color: #9C6500">#define X(val) REG_MENU_ITEM(val);</span>
+#define X(val) REG_MENU_ITEM(val);
 FUNCTIONS;
-<span style="color: #9C6500">#undef X</span>
-</pre></div>
-
+#undef X
+</code></pre>
 
     </div>
-
-   
-   
-   
     <hr>
-
-
-
-
-
-
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+          inlineMath: [ ['$','$'] ],
+          displayMath: [ ['$$','$$'] ],
+          processEscapes: true
+        },
+        "HTML-CSS": { fonts: ["TeX"] }
+      });
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
     <div id="disqus_thread"></div>
     <script type="text/javascript" async
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
     </script>
     <script>
-        /**
-        *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-        *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
-        
-        // var disqus_config = function () {
-        // this.page.url = ;  // Replace PAGE_URL with your page's canonical URL variable
-        // this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-        // };
-        
-        (function() { // DON'T EDIT BELOW THIS LINE
+        (function() { 
         var d = document, s = d.createElement('script');
         s.src = 'https://augpath.disqus.com/embed.js';
         s.setAttribute('data-timestamp', +new Date());

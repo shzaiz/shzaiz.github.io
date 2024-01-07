@@ -3,11 +3,11 @@
   <head>
     <link rel="stylesheet" href="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/style.css">
     <script src="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/plugin.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex, nofollow">
     <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
- 
     <script>
 const copyButtonLabel = "Copy Code";
 
@@ -59,14 +59,12 @@ async function copyCode(block) {
         code {
             font-family: 'Courier New', Courier, monospace;
         } 
-
         pre {
             font-family: 'Courier New', Courier, monospace;
         } 
         div{
             max-width: 100%;
             overflow: auto;
-            
         }
         .navbar {
             overflow: hidden;
@@ -75,7 +73,6 @@ async function copyCode(block) {
             top: 0; /* Position the navbar at the top of the page */
             width: 100%; /* Full width */
         }
-
         img {
         max-width: 80%;
         height: auto;
@@ -88,7 +85,6 @@ async function copyCode(block) {
             padding: 14px 16px;
             text-decoration: none;
         }
-
         a {
             color: #148bca;
             text-align: center;
@@ -96,185 +92,175 @@ async function copyCode(block) {
             padding-right: 2px;
             text-decoration: none;
         }
-
         p.hidden {
           overflow: hidden;
         }
-
     </style>
   </head>
   <body>
-    
     <div class="navbar">
         <a href="https://shzaiz.github.io">AUG's Wiki</a>
         <a href="index.html"> ↑ Back to contents</a>
-        Last updated at 2024-01-07 15:14:48.876513
+        Last updated at 2024-01-07 20:32:45.240935
     </div>
 
     <div class="toc"></div>
     <a id="toc-button"><i class="far fa-bookmark"></i></a>
     
-    <div>
+    <div id="renderedContent">
       <h1>1698C</h1>
-<p><strong>题目大意</strong>: 给一个数组 \(a\) , 对于均不相等的 \(i,j,k\) , 不相同的三元组 \((i,j,k)\) 满足 \(a_i+a_j+a_k\) 的值存在于 \(a\) 中, . 判断这个数组是不是好的.</p>
-<p><strong>一些观察</strong>: 如果存在 \(a_i+a_j+a_k&gt;a_{\text{max}}\) , 会怎么样? 说明至多有2个正数. 同样的, 这个数列中至多有2个负数. 还有, 数组中有2个以上的0是没有意义的, 我们可以把它除去, 照样可以做到. 因此, 这个数组最多有6项.</p>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #9C6500">#include</span><span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">&lt;bits/stdc++.h&gt;</span>
-<span style="color: #008000; font-weight: bold">using</span><span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">namespace</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF; font-weight: bold">std</span>;
-<span style="color: #9C6500">#define F(i,j,k) for(int (i)=j;i&lt;=k;i++)</span>
+<p><strong>题目大意</strong>: 给一个数组$a$, 对于均不相等的$i,j,k$, 不相同的三元组$(i,j,k)$满足$a_i+a_j+a_k$的值存在于$a$中, . 判断这个数组是不是好的.</p>
+<p><strong>一些观察</strong>: 如果存在$a_i+a_j+a_k&gt;a_{\text{max}}$, 会怎么样? 说明至多有2个正数. 同样的, 这个数列中至多有2个负数. 还有, 数组中有2个以上的0是没有意义的, 我们可以把它除去, 照样可以做到. 因此, 这个数组最多有6项.</p>
+<pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+#define F(i,j,k) for(int (i)=j;i&lt;=k;i++)
 
-<span style="color: #9C6500">#define MAXN 200005</span>
-<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>a[MAXN];
-<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>v[MAXN];
-<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>top<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>;
-<span style="color: #B00040">void</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">solve</span>(){
-<span style="color: #bbbbbb">    </span>top<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>;
-<span style="color: #bbbbbb">    </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>nn;<span style="color: #bbbbbb"> </span>cin<span style="color: #666666">&gt;&gt;</span>nn;
-<span style="color: #bbbbbb">    </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>p<span style="color: #666666">=0</span>,n<span style="color: #666666">=0</span>,z<span style="color: #666666">=0</span>;
-<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">for</span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>i<span style="color: #666666">=1</span>;i<span style="color: #666666">&lt;=</span>nn<span style="color: #bbbbbb"> </span>;i<span style="color: #666666">++</span>){
-<span style="color: #bbbbbb">        </span>cin<span style="color: #666666">&gt;&gt;</span>a[i];
-<span style="color: #bbbbbb">        </span><span style="color: #008000; font-weight: bold">if</span>(a[i]<span style="color: #666666">&gt;0</span>)<span style="color: #bbbbbb"> </span>p<span style="color: #666666">++</span>;
-<span style="color: #bbbbbb">        </span><span style="color: #008000; font-weight: bold">else</span><span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">if</span><span style="color: #bbbbbb"> </span>(a[i]<span style="color: #666666">&lt;0</span>)<span style="color: #bbbbbb"> </span>n<span style="color: #666666">++</span>;
-<span style="color: #bbbbbb">        </span><span style="color: #008000; font-weight: bold">else</span><span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">if</span><span style="color: #bbbbbb"> </span>(a[i]<span style="color: #666666">==0</span>)<span style="color: #bbbbbb"> </span>z<span style="color: #666666">++</span>;
-<span style="color: #bbbbbb">    </span>}
+#define MAXN 200005
+int a[MAXN];
+int v[MAXN];
+int top = 0;
+void solve(){
+    top = 0;
+    int nn; cin&gt;&gt;nn;
+    int p=0,n=0,z=0;
+    for(int i=1;i&lt;=nn ;i++){
+        cin&gt;&gt;a[i];
+        if(a[i]&gt;0) p++;
+        else if (a[i]&lt;0) n++;
+        else if (a[i]==0) z++;
+    }
 
-<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">if</span>(p<span style="color: #666666">&gt;2</span><span style="color: #bbbbbb"> </span><span style="color: #666666">||</span><span style="color: #bbbbbb"> </span>n<span style="color: #666666">&gt;2</span>)<span style="color: #bbbbbb"> </span>{printf(<span style="color: #BA2121">&quot;NO</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>);<span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">return</span>;}
+    if(p&gt;2 || n&gt;2) {printf(&quot;NO\n&quot;); return;}
 
-<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">if</span>(z<span style="color: #666666">&gt;2</span>){
-<span style="color: #bbbbbb">        </span>v[<span style="color: #666666">++</span>top]<span style="color: #666666">=0</span>;v[<span style="color: #666666">++</span>top]<span style="color: #666666">=0</span>;
-<span style="color: #bbbbbb">        </span><span style="color: #008000; font-weight: bold">for</span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>i<span style="color: #666666">=1</span>;i<span style="color: #666666">&lt;=</span>nn;i<span style="color: #666666">++</span>){<span style="color: #008000; font-weight: bold">if</span>(a[i]<span style="color: #666666">!=0</span>)<span style="color: #bbbbbb"> </span>v[<span style="color: #666666">++</span>top]<span style="color: #666666">=</span>(a[i]);}
-<span style="color: #bbbbbb">    </span>}<span style="color: #008000; font-weight: bold">else</span>{
-<span style="color: #bbbbbb">        </span><span style="color: #008000; font-weight: bold">for</span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>i<span style="color: #666666">=1</span>;i<span style="color: #666666">&lt;=</span>nn;i<span style="color: #666666">++</span>)v[<span style="color: #666666">++</span>top]<span style="color: #666666">=</span>(a[i]);
-<span style="color: #bbbbbb">    </span>}
-<span style="color: #bbbbbb">    </span><span style="color: #B00040">bool</span><span style="color: #bbbbbb"> </span>flag<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>;
-<span style="color: #bbbbbb">    </span>F(i,<span style="color: #666666">1</span>,top)<span style="color: #bbbbbb"> </span>F(j,<span style="color: #666666">1</span>,top)<span style="color: #bbbbbb"> </span>F(k,<span style="color: #666666">1</span>,top)<span style="color: #bbbbbb"> </span>{
-<span style="color: #bbbbbb">        </span><span style="color: #008000; font-weight: bold">if</span>(i<span style="color: #666666">!=</span>j<span style="color: #bbbbbb"> </span><span style="color: #666666">&amp;&amp;</span><span style="color: #bbbbbb"> </span>j<span style="color: #666666">!=</span><span style="color: #bbbbbb"> </span>k<span style="color: #bbbbbb"> </span><span style="color: #666666">&amp;&amp;</span><span style="color: #bbbbbb"> </span>i<span style="color: #666666">!=</span>k){
-<span style="color: #bbbbbb">            </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>sum<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>v[i]<span style="color: #666666">+</span>v[j]<span style="color: #666666">+</span>v[k];
-<span style="color: #bbbbbb">            </span><span style="color: #B00040">bool</span><span style="color: #bbbbbb"> </span>flg<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>;
-<span style="color: #bbbbbb">            </span>F(l,<span style="color: #666666">1</span>,top)<span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">if</span>(sum<span style="color: #666666">==</span>v[l])<span style="color: #bbbbbb"> </span>flg<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>;
-<span style="color: #bbbbbb">            </span><span style="color: #008000; font-weight: bold">if</span>(flg<span style="color: #bbbbbb"> </span><span style="color: #666666">==</span><span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>)<span style="color: #bbbbbb"> </span>{printf(<span style="color: #BA2121">&quot;NO</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>);<span style="color: #008000; font-weight: bold">return</span>;}
-<span style="color: #bbbbbb">        </span>}
-<span style="color: #bbbbbb">        </span>
-<span style="color: #bbbbbb">    </span>}
-<span style="color: #bbbbbb">    </span>printf(<span style="color: #BA2121">&quot;YES</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>);
+    if(z&gt;2){
+        v[++top]=0;v[++top]=0;
+        for(int i=1;i&lt;=nn;i++){if(a[i]!=0) v[++top]=(a[i]);}
+    }else{
+        for(int i=1;i&lt;=nn;i++)v[++top]=(a[i]);
+    }
+    bool flag = 1;
+    F(i,1,top) F(j,1,top) F(k,1,top) {
+        if(i!=j &amp;&amp; j!= k &amp;&amp; i!=k){
+            int sum = v[i]+v[j]+v[k];
+            bool flg = 0;
+            F(l,1,top) if(sum==v[l]) flg = 1;
+            if(flg == 0) {printf(&quot;NO\n&quot;);return;}
+        }
+        
+    }
+    printf(&quot;YES\n&quot;);
 }
 
-<span style="color: #B00040">signed</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">main</span>(){
-<span style="color: #bbbbbb">    </span><span style="color: #9C6500">#ifdef XBZAKIOI</span>
-<span style="color: #bbbbbb">    </span>freopen(<span style="color: #BA2121">&quot;D:</span><span style="color: #AA5D1F; font-weight: bold">\\</span><span style="color: #BA2121">Testcases</span><span style="color: #AA5D1F; font-weight: bold">\\</span><span style="color: #BA2121">in.ac&quot;</span>,<span style="color: #BA2121">&quot;r&quot;</span>,stdin);
-<span style="color: #bbbbbb">    </span>freopen(<span style="color: #BA2121">&quot;D:</span><span style="color: #AA5D1F; font-weight: bold">\\</span><span style="color: #BA2121">Testcases</span><span style="color: #AA5D1F; font-weight: bold">\\</span><span style="color: #BA2121">out.ac&quot;</span>,<span style="color: #BA2121">&quot;w&quot;</span>,stdout);
-<span style="color: #bbbbbb">    </span><span style="color: #9C6500">#endif</span>
+signed main(){
+    #ifdef XBZAKIOI
+    freopen(&quot;D:\\\\Testcases\\\\in.ac&quot;,&quot;r&quot;,stdin);
+    freopen(&quot;D:\\\\Testcases\\\\out.ac&quot;,&quot;w&quot;,stdout);
+    #endif
 
-<span style="color: #bbbbbb">    </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>N;cin<span style="color: #666666">&gt;&gt;</span>N;
-<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">while</span>(N<span style="color: #666666">--</span>)<span style="color: #bbbbbb"> </span>solve();
+    int N;cin&gt;&gt;N;
+    while(N--) solve();
 
 
-<span style="color: #bbbbbb">    </span>
+    
 }
-</pre></div>
-
+</code></pre>
 <h1>1699C</h1>
-<p><strong>题目大意</strong>: 对于一个 \([0..n]\) 的排列, 找到所有可能相似的排列数量.
-相似的排列的定义是: 对于所有可能的区间 \([l..r]\) , 都有 \(\operatorname{MEX}[a_l..a_r]=\operatorname{MEX}[b_l..b_r]\) .</p>
-<p><strong>一些观察</strong>: 首先要确定0的位置. 然后从0开始扩展. 不妨定义两个指针,  \(l = pos[0], r=pos[0]\) .
-接下来枚举每一个数, 对于每一个数 \(i\) , 如果它的位置小于 \(l\) , 那么就可以更新 \(l\) 的位置, 如果位置大于 \(r\) , 那就可以更新 \(r\) 的位置, 从而可交换区间中, 对于当前的 \(i\) 就可以确定位置. 如果无法进行更新, 那就可以直接对于这个答案中的元素进行交换. 也就是答案需要乘上 \(r-l+1-i\) .</p>
+<p><strong>题目大意</strong>: 对于一个$[0..n]$的排列, 找到所有可能相似的排列数量.
+相似的排列的定义是: 对于所有可能的区间$[l..r]$, 都有$\operatorname{MEX}[a_l..a_r]=\operatorname{MEX}[b_l..b_r]$.</p>
+<p><strong>一些观察</strong>: 首先要确定0的位置. 然后从0开始扩展. 不妨定义两个指针, $l = pos[0], r=pos[0]$.
+接下来枚举每一个数, 对于每一个数$i$, 如果它的位置小于$l$, 那么就可以更新$l$的位置, 如果位置大于$r$, 那就可以更新$r$的位置, 从而可交换区间中, 对于当前的$i$就可以确定位置. 如果无法进行更新, 那就可以直接对于这个答案中的元素进行交换. 也就是答案需要乘上$r-l+1-i$.</p>
 <p><strong>Code</strong>:</p>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span>LL<span style="color: #bbbbbb"> </span>a[MAXN],<span style="color: #bbbbbb"> </span>pos[MAXN];
+<pre><code class="language-cpp">LL a[MAXN], pos[MAXN];
 
-<span style="color: #B00040">void</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">solve</span>(){
-<span style="color: #bbbbbb">    </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>n;cin<span style="color: #666666">&gt;&gt;</span>n;
-<span style="color: #bbbbbb">    </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>l,r;
-<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">for</span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>i<span style="color: #666666">=0</span>;i<span style="color: #666666">&lt;</span>n;i<span style="color: #666666">++</span>){cin<span style="color: #666666">&gt;&gt;</span>a[i];pos[a[i]]<span style="color: #666666">=</span>i;}
-<span style="color: #bbbbbb">    </span>l<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>pos[<span style="color: #666666">0</span>],<span style="color: #bbbbbb"> </span>r<span style="color: #666666">=</span>pos[<span style="color: #666666">0</span>];
-<span style="color: #bbbbbb">    </span>LL<span style="color: #bbbbbb"> </span>ans<span style="color: #666666">=1</span>;
-<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">for</span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>i<span style="color: #666666">=0</span>;i<span style="color: #666666">&lt;</span>n;i<span style="color: #666666">++</span>){
-<span style="color: #bbbbbb">        </span><span style="color: #008000; font-weight: bold">if</span>(pos[i]<span style="color: #666666">&lt;</span>l)<span style="color: #bbbbbb"> </span>{l<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>pos[i];<span style="color: #008000; font-weight: bold">continue</span>;}
-<span style="color: #bbbbbb">        </span><span style="color: #008000; font-weight: bold">if</span>(pos[i]<span style="color: #666666">&gt;</span>r)<span style="color: #bbbbbb"> </span>{r<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>pos[i];<span style="color: #008000; font-weight: bold">continue</span>;}
-<span style="color: #bbbbbb">        </span>ans<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>ans<span style="color: #bbbbbb"> </span><span style="color: #666666">*</span><span style="color: #bbbbbb"> </span>(r<span style="color: #666666">-</span>l<span style="color: #666666">+1-</span>i)<span style="color: #666666">%</span>MOD;
-<span style="color: #bbbbbb">    </span>}
-<span style="color: #bbbbbb">    </span>cout<span style="color: #666666">&lt;&lt;</span>ans<span style="color: #666666">&lt;&lt;</span>endl;
+void solve(){
+    int n;cin&gt;&gt;n;
+    int l,r;
+    for(int i=0;i&lt;n;i++){cin&gt;&gt;a[i];pos[a[i]]=i;}
+    l = pos[0], r=pos[0];
+    LL ans=1;
+    for(int i=0;i&lt;n;i++){
+        if(pos[i]&lt;l) {l = pos[i];continue;}
+        if(pos[i]&gt;r) {r = pos[i];continue;}
+        ans = ans * (r-l+1-i)%MOD;
+    }
+    cout&lt;&lt;ans&lt;&lt;endl;
 
 }
-</pre></div>
 
+</code></pre>
 <h1>1700C</h1>
-<p><strong>题目大意</strong>: 给一个长度为 \(n\) 的数列, 有以下操作, 一个是选择 \(i\) , 把 \([1..i]\) 减少1, 或者是把 \([i..n]\) 的减少1, 或者全部增加1. 最后我们要把所有的都变成0, 问至少要操作几次.</p>
+<p><strong>题目大意</strong>: 给一个长度为$n$的数列, 有以下操作, 一个是选择$i$, 把$[1..i]$减少1, 或者是把$[i..n]$的减少1, 或者全部增加1. 最后我们要把所有的都变成0, 问至少要操作几次.</p>
 <p><strong>一些观察</strong>: 对问题进行转化: 对原序列做差分, 在差分是0的时候, 让序列中成为了同一个数字, 然后再让整个序列都变成0就可以了.</p>
 <p>Code:</p>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span>LL<span style="color: #bbbbbb"> </span>a[MAXN],d[MAXN];
-<span style="color: #bbbbbb"> </span>
-<span style="color: #B00040">void</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">solve</span>(){
-<span style="color: #bbbbbb">    </span>LL<span style="color: #bbbbbb"> </span>m;<span style="color: #bbbbbb"> </span>cin<span style="color: #666666">&gt;&gt;</span>m;
-<span style="color: #bbbbbb">    </span>LL<span style="color: #bbbbbb"> </span>tm<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>;
-<span style="color: #bbbbbb">    </span>F(i,<span style="color: #666666">1</span>,m)cin<span style="color: #666666">&gt;&gt;</span>a[i];
-<span style="color: #bbbbbb">    </span>LL<span style="color: #bbbbbb"> </span>h<span style="color: #666666">=</span>a[m];
-<span style="color: #bbbbbb">    </span>F(i,<span style="color: #666666">1</span>,m<span style="color: #666666">-1</span>)<span style="color: #bbbbbb"> </span>{d[i]<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>a[i<span style="color: #666666">+1</span>]<span style="color: #666666">-</span>a[i];<span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">if</span>(d[i]<span style="color: #666666">&gt;0</span>)<span style="color: #bbbbbb"> </span>h<span style="color: #666666">-=</span>d[i];}
-<span style="color: #bbbbbb">    </span>F(i,<span style="color: #666666">1</span>,m<span style="color: #666666">-1</span>)<span style="color: #bbbbbb"> </span>tm<span style="color: #bbbbbb"> </span><span style="color: #666666">+=</span><span style="color: #bbbbbb"> </span>abs(d[i]);
-<span style="color: #bbbbbb">    </span>tm<span style="color: #666666">+=</span>abs(h);
-<span style="color: #bbbbbb">    </span>cout<span style="color: #666666">&lt;&lt;</span>tm<span style="color: #666666">&lt;&lt;</span>endl;
+<pre><code class="language-cpp">LL a[MAXN],d[MAXN];
+ 
+void solve(){
+    LL m; cin&gt;&gt;m;
+    LL tm = 0;
+    F(i,1,m)cin&gt;&gt;a[i];
+    LL h=a[m];
+    F(i,1,m-1) {d[i] = a[i+1]-a[i]; if(d[i]&gt;0) h-=d[i];}
+    F(i,1,m-1) tm += abs(d[i]);
+    tm+=abs(h);
+    cout&lt;&lt;tm&lt;&lt;endl;
 }
-</pre></div>
-
+</code></pre>
 <h1>1700D</h1>
-<p><strong>题目大意</strong>: 有  \(n\)  个容器，第  \(i\)  个容器容量为  \(v_i\)  升，可以容纳  \([0,v_i]\)  升的水。</p>
-<p>满出去的水会将从容器  \(i\)  转移到容器  \(i+1\) ，如果  \(i+1\)  也满了会转移得更远。满出最后一个容器的水会倒到河中。</p>
-<p>现在要将所有容器填满。你可以选择一些容器注水，让这些容器每秒进入一升水。 \(q\)  次询问，问最初所有容器都是空的，最少选择多少个容器注水使得  \(t_i\)  秒内能填满所有容器。</p>
-<p> \(1\leq n,q\leq 2\times 10^5\) ， \(1\leq v_i,t_i\leq 10^9\) 。</p>
+<p><strong>题目大意</strong>: 有 $n$ 个容器，第 $i$ 个容器容量为 $v_i$ 升，可以容纳 $[0,v_i]$ 升的水。</p>
+<p>满出去的水会将从容器 $i$ 转移到容器 $i+1$，如果 $i+1$ 也满了会转移得更远。满出最后一个容器的水会倒到河中。</p>
+<p>现在要将所有容器填满。你可以选择一些容器注水，让这些容器每秒进入一升水。$q$ 次询问，问最初所有容器都是空的，最少选择多少个容器注水使得 $t_i$ 秒内能填满所有容器。</p>
+<p>$1\leq n,q\leq 2\times 10^5$，$1\leq v_i,t_i\leq 10^9$。</p>
 <p><strong>贪心</strong>: 先开前面的比先开后面的优.</p>
-<p><strong>直觉</strong>: 既然有 \(n\) 个, 那是不是 \(\lceil \sum v_i/t\rceil\) ? 看上去好像是的, 但是实际上有些情况会出现 \(-1\) 的状况. 举例子:  \(n=2, v_1=192, v_2=1\) , 因此会在 \(t\leq192\) 的时候会没有解答. 因此有解答的时候必须要求把前 \(i\) 个水槽都填满. 因此需要 \(\max_i\lceil\sum_{i=1}^jv_i/i\rceil\) 的时间, 才可以填满.</p>
+<p><strong>直觉</strong>: 既然有$n$个, 那是不是$\lceil \sum v_i/t\rceil$? 看上去好像是的, 但是实际上有些情况会出现$-1$的状况. 举例子: $n=2, v_1=192, v_2=1$, 因此会在$t\leq192$的时候会没有解答. 因此有解答的时候必须要求把前$i$个水槽都填满. 因此需要$\max_i\lceil\sum_{i=1}^jv_i/i\rceil$的时间, 才可以填满.</p>
 <p><strong>Code</strong>:</p>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #9C6500">#define MAXN 200009</span>
-<span style="color: #9C6500">#define int long long</span>
-<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>n,<span style="color: #bbbbbb"> </span>a[MAXN],<span style="color: #bbbbbb"> </span>sum[MAXN];
-<span style="color: #B00040">signed</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">main</span>(){
-<span style="color: #bbbbbb">    </span><span style="color: #9C6500">#ifdef XBZAKIOI</span>
-<span style="color: #bbbbbb">    </span>freopen(<span style="color: #BA2121">&quot;D:</span><span style="color: #AA5D1F; font-weight: bold">\\</span><span style="color: #BA2121">Testcases</span><span style="color: #AA5D1F; font-weight: bold">\\</span><span style="color: #BA2121">in.ac&quot;</span>,<span style="color: #BA2121">&quot;r&quot;</span>,stdin);
-<span style="color: #bbbbbb">    </span>freopen(<span style="color: #BA2121">&quot;D:</span><span style="color: #AA5D1F; font-weight: bold">\\</span><span style="color: #BA2121">Testcases</span><span style="color: #AA5D1F; font-weight: bold">\\</span><span style="color: #BA2121">out.ac&quot;</span>,<span style="color: #BA2121">&quot;w&quot;</span>,stdout);
-<span style="color: #bbbbbb">    </span><span style="color: #9C6500">#endif</span>
+<pre><code class="language-cpp">#define MAXN 200009
+#define int long long
+int n, a[MAXN], sum[MAXN];
+signed main(){
+    #ifdef XBZAKIOI
+    freopen(&quot;D:\\\\Testcases\\\\in.ac&quot;,&quot;r&quot;,stdin);
+    freopen(&quot;D:\\\\Testcases\\\\out.ac&quot;,&quot;w&quot;,stdout);
+    #endif
 
-<span style="color: #bbbbbb">    </span>cin<span style="color: #666666">&gt;&gt;</span>n;
-<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">for</span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>i<span style="color: #666666">=1</span>;i<span style="color: #666666">&lt;=</span>n;i<span style="color: #666666">++</span>){
-<span style="color: #bbbbbb">        </span>cin<span style="color: #666666">&gt;&gt;</span>a[i];<span style="color: #bbbbbb"> </span>sum[i]<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>sum[i<span style="color: #666666">-1</span>]<span style="color: #666666">+</span>a[i];
-<span style="color: #bbbbbb">    </span>}
-<span style="color: #bbbbbb">    </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>q;cin<span style="color: #666666">&gt;&gt;</span>q;
-<span style="color: #bbbbbb">    </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>maxx<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">-114514</span>;
-<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">for</span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>i<span style="color: #666666">=0</span>;i<span style="color: #666666">&lt;=</span>n;i<span style="color: #666666">++</span>){
-<span style="color: #bbbbbb">        </span>maxx<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>max(maxx,<span style="color: #bbbbbb"> </span>(<span style="color: #B00040">int</span>)ceil((<span style="color: #B00040">double</span>)sum[i]<span style="color: #666666">/</span>(<span style="color: #bbbbbb"> </span><span style="color: #B00040">double</span>)i));
-<span style="color: #bbbbbb">    </span>}
-<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">while</span>(q<span style="color: #666666">--</span>){
-<span style="color: #bbbbbb">        </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>p;<span style="color: #bbbbbb"> </span>cin<span style="color: #666666">&gt;&gt;</span>p;<span style="color: #008000; font-weight: bold">if</span>(p<span style="color: #666666">&lt;</span>maxx)<span style="color: #bbbbbb"> </span>{printf(<span style="color: #BA2121">&quot;-1</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>);<span style="color: #008000; font-weight: bold">continue</span>;}<span style="color: #bbbbbb"> </span><span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>ans<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>ceil((<span style="color: #B00040">double</span>)sum[n]<span style="color: #666666">/</span>(<span style="color: #B00040">double</span>)p);<span style="color: #bbbbbb"> </span>cout<span style="color: #666666">&lt;&lt;</span>(<span style="color: #008000">true</span><span style="color: #666666">?</span>(ans)<span style="color: #666666">:-1</span>)<span style="color: #666666">&lt;&lt;</span><span style="color: #BA2121">&quot;</span><span style="color: #AA5D1F; font-weight: bold">\n</span><span style="color: #BA2121">&quot;</span>;
-<span style="color: #bbbbbb">    </span>}
+    cin&gt;&gt;n;
+    for(int i=1;i&lt;=n;i++){
+        cin&gt;&gt;a[i]; sum[i] = sum[i-1]+a[i];
+    }
+    int q;cin&gt;&gt;q;
+    int maxx = -114514;
+    for(int i=0;i&lt;=n;i++){
+        maxx = max(maxx, (int)ceil((double)sum[i]/( double)i));
+    }
+    while(q--){
+        int p; cin&gt;&gt;p;if(p&lt;maxx) {printf(&quot;-1\n&quot;);continue;} int ans = ceil((double)sum[n]/(double)p); cout&lt;&lt;(true?(ans):-1)&lt;&lt;&quot;\n&quot;;
+    }
 
 }
-</pre></div>
-
+</code></pre>
 
     </div>
-
-   
-   
-   
     <hr>
-
-
-
-
-
-
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+          inlineMath: [ ['$','$'] ],
+          displayMath: [ ['$$','$$'] ],
+          processEscapes: true
+        },
+        "HTML-CSS": { fonts: ["TeX"] }
+      });
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
     <div id="disqus_thread"></div>
     <script type="text/javascript" async
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
     </script>
     <script>
-        /**
-        *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-        *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
-        
-        // var disqus_config = function () {
-        // this.page.url = ;  // Replace PAGE_URL with your page's canonical URL variable
-        // this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-        // };
-        
-        (function() { // DON'T EDIT BELOW THIS LINE
+        (function() { 
         var d = document, s = d.createElement('script');
         s.src = 'https://augpath.disqus.com/embed.js';
         s.setAttribute('data-timestamp', +new Date());

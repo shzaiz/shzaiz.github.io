@@ -3,11 +3,11 @@
   <head>
     <link rel="stylesheet" href="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/style.css">
     <script src="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/plugin.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex, nofollow">
     <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
- 
     <script>
 const copyButtonLabel = "Copy Code";
 
@@ -59,14 +59,12 @@ async function copyCode(block) {
         code {
             font-family: 'Courier New', Courier, monospace;
         } 
-
         pre {
             font-family: 'Courier New', Courier, monospace;
         } 
         div{
             max-width: 100%;
             overflow: auto;
-            
         }
         .navbar {
             overflow: hidden;
@@ -75,7 +73,6 @@ async function copyCode(block) {
             top: 0; /* Position the navbar at the top of the page */
             width: 100%; /* Full width */
         }
-
         img {
         max-width: 80%;
         height: auto;
@@ -88,7 +85,6 @@ async function copyCode(block) {
             padding: 14px 16px;
             text-decoration: none;
         }
-
         a {
             color: #148bca;
             text-align: center;
@@ -96,25 +92,22 @@ async function copyCode(block) {
             padding-right: 2px;
             text-decoration: none;
         }
-
         p.hidden {
           overflow: hidden;
         }
-
     </style>
   </head>
   <body>
-    
     <div class="navbar">
         <a href="https://shzaiz.github.io">AUG's Wiki</a>
         <a href="index.html"> ↑ Back to contents</a>
-        Last updated at 2024-01-07 15:14:49.517081
+        Last updated at 2024-01-07 20:32:45.808473
     </div>
 
     <div class="toc"></div>
     <a id="toc-button"><i class="far fa-bookmark"></i></a>
     
-    <div>
+    <div id="renderedContent">
       <p>Note at shzaiz.github.io</p>
 <p>$$
 {\Huge{\text{漫游计算机系}}}\\
@@ -136,19 +129,18 @@ $$</p>
 <p>我们需要一些哲♂学探讨...</p>
 <p>机械的思维并不复杂:</p>
 <h2><a href="https://plato.stanford.edu/entries/turing-machine/">Turing 的想法</a></h2>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #008000">+--------+---+--+------+---------+</span>
-<span style="color: #3D7B7B; font-style: italic">|        |   |</span><span style="color: #008000; font-weight: bold">..</span><span style="color: #3D7B7B; font-style: italic">|      |         |</span>
-<span style="color: #3D7B7B; font-style: italic">|        |   |</span><span style="color: #008000; font-weight: bold">..</span><span style="color: #3D7B7B; font-style: italic">|      |         | </span>
-<span style="color: #008000">+--------</span><span style="color: #3D7B7B; font-style: italic">|</span><span style="color: #008000">---+--+------+---------+</span>
-<span style="color: #3D7B7B; font-style: italic">   #0     #1  </span><span style="color: #008000; font-weight: bold">...</span><span style="color: #3D7B7B; font-style: italic"> #n</span><span style="color: #008000">-</span><span style="color: #3D7B7B; font-style: italic">1    #n</span>
-</pre></div>
-
+<pre><code>+--------+---+--+------+---------+
+|        |   |..|      |         |
+|        |   |..|      |         | 
++--------|---+--+------+---------+
+   #0     #1  ... #n-1    #n
+</code></pre>
 <p>Turing的想法就像描述一个说明书:</p>
 <ul>
 <li>步骤1. 修改第1个数的值为37</li>
 <li>步骤2. 修改第2个数的值为20</li>
 <li>步骤3. 把第3个数修改为第2个数的值</li>
-<li>步骤4. 把第4个数修改为 \(a \div b\) 的余数</li>
+<li>步骤4. 把第4个数修改为$a \div b$的余数</li>
 <li>步骤5. 把第1个数的内容修改为第3个数的内容</li>
 <li>步骤6. 把第2个数的内容修改为第4个数的内容</li>
 <li>步骤7. 如果第2个数不等于0, (goto)执行步骤3.</li>
@@ -170,7 +162,7 @@ $$</p>
 &amp;\langle \text{Substitute 2 for } x\rangle \\
 &amp;= 4-4+5
 &amp;\langle\text{Arithmetic}\rangle \\
-&amp;= 5 
+&amp;= 5
 &amp;\langle\text{Arithmetic}\rangle
 \end{align}
 $$</p>
@@ -185,16 +177,15 @@ $$</p>
 <p>当然需要<em>更好的工具</em>!</p>
 <p><img src="https://s2.loli.net/2023/04/09/5OnkRdqpJTVufMQ.png" alt="Img" /></p>
 <p>第二小问:</p>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span>DChange[
-<span style="color: #bbbbbb">    </span>D[f[x,<span style="color: #bbbbbb"> </span>y],<span style="color: #bbbbbb"> </span>x,<span style="color: #bbbbbb"> </span>x]<span style="color: #bbbbbb"> </span><span style="color: #666666">+</span><span style="color: #bbbbbb"> </span>D[f[x,<span style="color: #bbbbbb"> </span>y],<span style="color: #bbbbbb"> </span>y,<span style="color: #bbbbbb"> </span>y],<span style="color: #bbbbbb"> </span>
-<span style="color: #bbbbbb">    </span>{rho<span style="color: #bbbbbb"> </span><span style="color: #666666">==</span><span style="color: #bbbbbb"> </span>Sqrt[x<span style="color: #666666">^2</span><span style="color: #bbbbbb"> </span><span style="color: #666666">+</span><span style="color: #bbbbbb"> </span>y<span style="color: #666666">^2</span>],<span style="color: #bbbbbb"> </span>
-<span style="color: #bbbbbb">     </span>theta<span style="color: #bbbbbb"> </span><span style="color: #666666">==</span><span style="color: #bbbbbb"> </span>ArcTan[y<span style="color: #666666">/</span>x],<span style="color: #bbbbbb"> </span>x<span style="color: #bbbbbb"> </span><span style="color: #666666">&gt;</span><span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>,<span style="color: #bbbbbb"> </span>y<span style="color: #bbbbbb"> </span><span style="color: #666666">&gt;</span><span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>},
-<span style="color: #bbbbbb">    </span>{x,<span style="color: #bbbbbb"> </span>y},<span style="color: #bbbbbb"> </span>
-<span style="color: #bbbbbb">    </span>{rho,<span style="color: #bbbbbb"> </span>theta},<span style="color: #bbbbbb"> </span>
-<span style="color: #bbbbbb">    </span>f[x,<span style="color: #bbbbbb"> </span>y]
+<pre><code class="language-mma">DChange[
+    D[f[x, y], x, x] + D[f[x, y], y, y], 
+    {rho == Sqrt[x^2 + y^2], 
+     theta == ArcTan[y/x], x &gt; 0, y &gt; 0},
+    {x, y}, 
+    {rho, theta}, 
+    f[x, y]
 ]
-</pre></div>
-
+</code></pre>
 <p>分别的输出结果:</p>
 <p><img src="https://s2.loli.net/2023/03/22/7Hz4lCDULdm8egR.png" alt="Img" /></p>
 <h2>证明定理有时候也管用</h2>
@@ -251,32 +242,28 @@ $$</p>
 <p>计算机科学在生活中的应用类似于哲学在科学中的作用.</p>
 
     </div>
-
-   
-   
-   
     <hr>
-
-
-
-
-
-
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+          inlineMath: [ ['$','$'] ],
+          displayMath: [ ['$$','$$'] ],
+          processEscapes: true
+        },
+        "HTML-CSS": { fonts: ["TeX"] }
+      });
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
     <div id="disqus_thread"></div>
     <script type="text/javascript" async
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
     </script>
     <script>
-        /**
-        *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-        *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
-        
-        // var disqus_config = function () {
-        // this.page.url = ;  // Replace PAGE_URL with your page's canonical URL variable
-        // this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-        // };
-        
-        (function() { // DON'T EDIT BELOW THIS LINE
+        (function() { 
         var d = document, s = d.createElement('script');
         s.src = 'https://augpath.disqus.com/embed.js';
         s.setAttribute('data-timestamp', +new Date());

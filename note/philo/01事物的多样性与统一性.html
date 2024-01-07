@@ -3,11 +3,11 @@
   <head>
     <link rel="stylesheet" href="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/style.css">
     <script src="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/plugin.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex, nofollow">
     <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
- 
     <script>
 const copyButtonLabel = "Copy Code";
 
@@ -59,14 +59,12 @@ async function copyCode(block) {
         code {
             font-family: 'Courier New', Courier, monospace;
         } 
-
         pre {
             font-family: 'Courier New', Courier, monospace;
         } 
         div{
             max-width: 100%;
             overflow: auto;
-            
         }
         .navbar {
             overflow: hidden;
@@ -75,7 +73,6 @@ async function copyCode(block) {
             top: 0; /* Position the navbar at the top of the page */
             width: 100%; /* Full width */
         }
-
         img {
         max-width: 80%;
         height: auto;
@@ -88,7 +85,6 @@ async function copyCode(block) {
             padding: 14px 16px;
             text-decoration: none;
         }
-
         a {
             color: #148bca;
             text-align: center;
@@ -96,25 +92,22 @@ async function copyCode(block) {
             padding-right: 2px;
             text-decoration: none;
         }
-
         p.hidden {
           overflow: hidden;
         }
-
     </style>
   </head>
   <body>
-    
     <div class="navbar">
         <a href="https://shzaiz.github.io">AUG's Wiki</a>
         <a href="index.html"> ↑ Back to contents</a>
-        Last updated at 2024-01-07 15:14:48.899685
+        Last updated at 2024-01-07 20:32:45.259712
     </div>
 
     <div class="toc"></div>
     <a id="toc-button"><i class="far fa-bookmark"></i></a>
     
-    <div>
+    <div id="renderedContent">
       <p>本章解决: 事件论和辩证法</p>
 <h1>哲学与哲学基本问题</h1>
 <ul>
@@ -132,33 +125,29 @@ async function copyCode(block) {
 </li>
 </ul>
 <p>唯物主义和唯心主义.</p>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span>vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+<pre><code>vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
 古代朴素唯物主义      |   
 近代形而上学唯物主义      主观唯心主义
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ 
 现代唯物主义             客观唯心主义
-</pre></div>
-
+</code></pre>
 <h1>物质及其存在形态</h1>
 <ol>
 <li>物质范畴:</li>
 </ol>
 <ul>
-<li>
-<p>什么是物质?</p>
+<li>什么是物质?
 <ul>
 <li>Marx. “物 物质无非是各种物的总和，而这个概念就是从这一总和中抽象出来的“</li>
 <li>列宁. “物质是标志客观实在的哲学范畴，这种客观实在是人通过感觉感知的，它不依赖于我们的感觉而存在，为我们的感觉所复写、摄影、反映.</li>
 </ul>
 </li>
-<li>
-<p>物质概念的意义</p>
+<li>物质概念的意义
 <ul>
 <li>表明了物质就是不依赖于人类的意识而存在，并能为人类的意识所反映的客观实在</li>
 </ul>
 </li>
-<li>
-<p>物质的存在形态: 运动和时空</p>
+<li>物质的存在形态: 运动和时空
 <ul>
 <li>时间和空间是运动着的物质的基本存在形式 时间是指物质运动的持续性、顺序性，特点是一维性，即时间的流逝一去不复返 空间是指物质运动的广延性 伸张性，特点是三维性，即空间具有长、宽、高 方面的规定性 物质运动总是在一定的时间和空间中进行的，没有离开物质运动的“纯粹”时间和空间，也没有离开时间和空间的物质运动 物质运动与时间和空间的不可分割，证明了时间和空间的客观性 具体物质形态的时空是有限的，而整个物质世界的时空是无限的.</li>
 </ul>
@@ -203,11 +192,8 @@ Floyd梦的分析</p>
 <li>物质与意识的辩证关系</li>
 </ol>
 <ul>
-<li>
-<p>物质决定意识</p>
-</li>
-<li>
-<p>意识对于物质有反作用</p>
+<li>物质决定意识</li>
+<li>意识对于物质有反作用
 <ul>
 <li>意识行动有目的性, 计划性和创造性</li>
 <li>意识有知道实践改造客观世界的作用</li>
@@ -414,32 +400,28 @@ Floyd梦的分析</p>
 </ul>
 
     </div>
-
-   
-   
-   
     <hr>
-
-
-
-
-
-
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+          inlineMath: [ ['$','$'] ],
+          displayMath: [ ['$$','$$'] ],
+          processEscapes: true
+        },
+        "HTML-CSS": { fonts: ["TeX"] }
+      });
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
     <div id="disqus_thread"></div>
     <script type="text/javascript" async
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
     </script>
     <script>
-        /**
-        *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-        *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
-        
-        // var disqus_config = function () {
-        // this.page.url = ;  // Replace PAGE_URL with your page's canonical URL variable
-        // this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-        // };
-        
-        (function() { // DON'T EDIT BELOW THIS LINE
+        (function() { 
         var d = document, s = d.createElement('script');
         s.src = 'https://augpath.disqus.com/embed.js';
         s.setAttribute('data-timestamp', +new Date());

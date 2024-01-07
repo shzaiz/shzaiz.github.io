@@ -3,11 +3,11 @@
   <head>
     <link rel="stylesheet" href="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/style.css">
     <script src="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/plugin.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex, nofollow">
     <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
- 
     <script>
 const copyButtonLabel = "Copy Code";
 
@@ -59,14 +59,12 @@ async function copyCode(block) {
         code {
             font-family: 'Courier New', Courier, monospace;
         } 
-
         pre {
             font-family: 'Courier New', Courier, monospace;
         } 
         div{
             max-width: 100%;
             overflow: auto;
-            
         }
         .navbar {
             overflow: hidden;
@@ -75,7 +73,6 @@ async function copyCode(block) {
             top: 0; /* Position the navbar at the top of the page */
             width: 100%; /* Full width */
         }
-
         img {
         max-width: 80%;
         height: auto;
@@ -88,7 +85,6 @@ async function copyCode(block) {
             padding: 14px 16px;
             text-decoration: none;
         }
-
         a {
             color: #148bca;
             text-align: center;
@@ -96,43 +92,40 @@ async function copyCode(block) {
             padding-right: 2px;
             text-decoration: none;
         }
-
         p.hidden {
           overflow: hidden;
         }
-
     </style>
   </head>
   <body>
-    
     <div class="navbar">
         <a href="https://shzaiz.github.io">AUG's Wiki</a>
         <a href="index.html"> ↑ Back to contents</a>
-        Last updated at 2024-01-07 15:14:49.034668
+        Last updated at 2024-01-07 20:32:45.383418
     </div>
 
     <div class="toc"></div>
     <a id="toc-button"><i class="far fa-bookmark"></i></a>
     
-    <div>
+    <div id="renderedContent">
       <h1>7LN - 指数函数(1)</h1>
 <h1>指数函数contd</h1>
 <h2>从逆运算的角度看指数函数</h2>
 <p>我们学过加法, 乘法, 它们都有逆运算.
 指数也有, 我们后面回学习.</p>
-<p>总之看下指数的定义: 有点难打, 大家应该都会,  \(n\) 个 \(a\) 相乘. 底数, 指数, 幂.</p>
+<p>总之看下指数的定义: 有点难打, 大家应该都会, $n$个$a$相乘. 底数, 指数, 幂.</p>
 <ul>
 <li>指数是正整数.</li>
-<li>我们要拓展!  \(\N^*\to \N, a^0=1(a\neq 0)\) .
+<li>我们要拓展! $\N^*\to \N, a^0=1(a\neq 0)$.
 <ul>
 <li>为什么? 要满足一些条件, 新定义要满足所有的运算法则.</li>
-<li>为了满足 \(a^ma^n=a^{mn}\) .</li>
-<li>那么 \(a^n/a^n=1=a^0\) , 而且分母不能为0.</li>
+<li>为了满足$a^ma^n=a^{mn}$.</li>
+<li>那么$a^n/a^n=1=a^0$, 而且分母不能为0.</li>
 </ul>
 </li>
 </ul>
 <p>$$
-\left\{\begin{array}{l}
+\left{\begin{array}{l}
 a^{m} \cdot a^{n}=a^{m+n} \\
 a^{m} / a^{n}=a^{m-n} \\
 \left(a^{m}\right)^{n}=a^{m \cdot n} \\
@@ -140,39 +133,39 @@ a^{m} / a^{n}=a^{m-n} \\
 \end{array}\right.
 $$</p>
 <ul>
-<li>我们还要拓展!  \(\N \to \mathbb{Z}\) 怎么办?
+<li>我们还要拓展! $\N \to \Z$怎么办?
 <ul>
-<li> \(a^{-n}=1/a^n\) .</li>
-<li>问:  \((1/3)^{-4}\) .</li>
+<li>$a^{-n}=1/a^n$.</li>
+<li>问: $(1/3)^{-4}$.</li>
 </ul>
 </li>
-<li>我们还要拓展!  \(\mathbb{Z} \to \textbf{Q}\) 怎么办?
+<li>我们还要拓展! $\Z \to \textbf{Q}$怎么办?
 <ul>
-<li> \(a^{1/n}\) 怎么说?</li>
-<li>我们知道 \((a^{m/n})^n=a^m\) , 那就挺好的. 那就是表示 \(\sqrt[n]{a^m}\) .</li>
+<li>$a^{1/n}$怎么说?</li>
+<li>我们知道$(a^{m/n})^n=a^m$, 那就挺好的. 那就是表示$\sqrt[n]{a^m}$.</li>
 <li>哦, 那你就明白了, 所有的规则都是一样的.</li>
-<li>(1)另一种视角:  \(a^{m/n}=\sqrt[n]{a^m}=(\sqrt[n]a)^m\) </li>
-<li>这两个式子一样吗? 用 \(a^{4/6}\) 举一个例子.
+<li>(1)另一种视角: $a^{m/n}=\sqrt[n]{a^m}=(\sqrt[n]a)^m$</li>
+<li>这两个式子一样吗? 用$a^{4/6}$举一个例子.
 <ul>
-<li>令 \(a=-1\) ,  \(a^{4/6} \quad ?\quad a^{2/3}\) , 一样吗?</li>
-<li>不行, 要求 \(m,n\) 既约(已经约分干净了, 也就是互质).</li>
-<li>其余的都可以吗?  \(a^{1/2}\) </li>
+<li>令$a=-1$, $a^{4/6} \quad ?\quad a^{2/3}$, 一样吗?</li>
+<li>不行, 要求$m,n$既约(已经约分干净了, 也就是互质).</li>
+<li>其余的都可以吗? $a^{1/2}$</li>
 <li>能算的都能算, 不能算的两个都不能算. 这才叫保持一致(consistency).</li>
 </ul>
 </li>
-<li>(2)负分数指数:  \(a^{-m/n}=1/a^{m/n}\) .</li>
+<li>(2)负分数指数: $a^{-m/n}=1/a^{m/n}$.</li>
 </ul>
 </li>
 <li>一点预告:
 <ul>
-<li> \(a=-1\) 真的不能算吗? 后面我们会学 \(i=\sqrt{-1}, 以及\textbf{C}\) .</li>
+<li>$a=-1$真的不能算吗? 后面我们会学$i=\sqrt{-1}, 以及\textbf{C}$.</li>
 </ul>
 </li>
 </ul>
-<p>例子: 计算 \((16/9)^{-3/2}\) . ( \(27/64\) ).</p>
+<p>例子: 计算$(16/9)^{-3/2}$. ($27/64$).</p>
 <p>好耶! 我们已经拓展到了有理数了!</p>
 <ul>
-<li> \(\textbf{Q} \to \mathbb{R}\)  不会!
+<li>$\textbf{Q} \to \R$ 不会!
 <ul>
 <li>为什么? 因为我们不知道什么是<strong>无理数</strong>.</li>
 <li>我知道啊, 无限不循环小数啊!</li>
@@ -180,7 +173,7 @@ $$</p>
 <li>由于加减乘除运算的封闭性, 暂时还得不到这样的结论.</li>
 <li>开根号不可以吗?</li>
 <li>这是无理数的一小部分(代数数, 某一个多项式的根)</li>
-<li>其他部分叫做超越数.  \(\pi, e\) 等等, 我们不知道如何得到的.</li>
+<li>其他部分叫做超越数. $\pi, e$等等, 我们不知道如何得到的.</li>
 <li>可以无限去逼近. 想要多接近, 就有多接近.</li>
 <li>这个过程通常被成为&quot;夹逼&quot;.</li>
 <li>(1)是实数</li>
@@ -193,17 +186,17 @@ $$</p>
 <li>
 <p>Ex.1</p>
 <ul>
-<li>技巧: 答案一定形如  \(?x^?y^?\) .</li>
+<li>技巧: 答案一定形如 $?x^?y^?$.</li>
 <li>认识式子结构, 关注每一个部分, 会快很多.</li>
 <li>练习口算, 既快有准.</li>
-<li> \(-27/2x^0y^1\) .</li>
-<li>推荐时间,  \(&lt;10\text{s}\) </li>
+<li>$-27/2x^0y^1$.</li>
+<li>推荐时间, $&lt;10\text{s}$</li>
 </ul>
 </li>
 <li>
 <p>Ex.2</p>
 <ul>
-<li>(1) \(4x^{1/2}-3^3-4x^{1/2}+4\) .</li>
+<li>(1)$4x^{1/2}-3^3-4x^{1/2}+4$.</li>
 <li>(2) 请大家化简.
 <ul>
 <li>不是把所有括号打开=化简!</li>
@@ -219,23 +212,23 @@ $$</p>
 </blockquote>
 <ul>
 <li>
-<p>观察式子有什么关系. 注意 \((n+m), (n^2+m^2), (n^4+m^4)\cdots\) </p>
+<p>观察式子有什么关系. 注意$(n+m), (n^2+m^2), (n^4+m^4)\cdots$</p>
 </li>
 <li>
 <p>就像以前一样, 观察它们之间的<strong>关系</strong>而不是<strong>形式</strong>.</p>
 </li>
 <li>
-<p>关系是平方. 派一个 \((n-m)\) 就行了! Easy!</p>
+<p>关系是平方. 派一个$(n-m)$就行了! Easy!</p>
 </li>
 <li>
-<p>答案是 \((1-1/2)/(1-2^{-1/32})=1/2(1-2^{-1/32})^{-1}\) . 尽量用分数指数来写, 会方便很多.</p>
+<p>答案是$(1-1/2)/(1-2^{-1/32})=1/2(1-2^{-1/32})^{-1}$. 尽量用分数指数来写, 会方便很多.</p>
 </li>
 <li>
 <p>Ex.3 (5min)</p>
 <ul>
-<li>(1) 看定义域.  \(8/27\) .</li>
+<li>(1) 看定义域. $8/27$.</li>
 <li>(2) 注意绝对值. D. (初中知识)</li>
-<li>(3)  \(\pm {\sqrt2\over4}\) .
+<li>(3) $\pm {\sqrt2\over4}$.
 <ul>
 <li>最终要分母有理化.</li>
 </ul>
@@ -251,42 +244,42 @@ $$</p>
 <h1>指数函数</h1>
 <h2>一些定义</h2>
 <ul>
-<li>(1)  \(f(x)=a^x, a&gt;0, a\neq1\) .
+<li>(1) $f(x)=a^x, a&gt;0, a\neq1$.
 <ul>
-<li>这个定义的原因, 比如 \(-1\) 作为底数, 有的能算, 有的不能算, 很烦人. 高中不研究, 而且 \((-1)^{\pi}\) 咋整?</li>
-<li> \(a=1\) 太没劲. 研究的时候形式不太一样.</li>
+<li>这个定义的原因, 比如$-1$作为底数, 有的能算, 有的不能算, 很烦人. 高中不研究, 而且$(-1)^{\pi}$咋整?</li>
+<li>$a=1$太没劲. 研究的时候形式不太一样.</li>
 <li>只有长成这样的叫指数函数. 其他的都不叫.</li>
 </ul>
 </li>
 </ul>
-<p>判断:  \(2^x, 2^x+1, (1/2)^x, 2^{-x}.\) </p>
+<p>判断: $2^x, 2^x+1, (1/2)^x, 2^{-x}.$</p>
 <h2>图像与性质</h2>
 <ul>
-<li>描点, 画图. 请画出 \(y=2^x, y=(1/2)^x\) .</li>
+<li>描点, 画图. 请画出$y=2^x, y=(1/2)^x$.</li>
 <li>一二象限最好多一点. 因为它们都是正数.</li>
 </ul>
 <p>这是两个代表, 下面看一些性质.
-(1) 定义域 \(\mathbb{R}\) , 值域 \((0,+\infty)\) , 渐近线为 \(y=0\) .
-(2) 单调性:  \(a&gt;1\) , 在 \(\mathbb{R}\) 上增.  \(a\) 大就增, 小就减.
+(1) 定义域$\R$, 值域$(0,+\infty)$, 渐近线为$y=0$.
+(2) 单调性: $a&gt;1$, 在$\R$上增. $a$大就增, 小就减.
 (3) 对称性: 没有.
-(4) 定点:  \((0,1)\) .</p>
+(4) 定点: $(0,1)$.</p>
 <ul>
 <li>
-<p>可以有 \((0,1),(1,a)\) .</p>
+<p>可以有$(0,1),(1,a)$.</p>
 </li>
 <li>
 <p>注意大小关系.</p>
 </li>
 <li>
-<p>Ex4. 我要画 \(x=...\) </p>
+<p>Ex4. 我要画$x=...$</p>
 </li>
 </ul>
 <h2>特性(性质)</h2>
 <ul>
-<li>(1)  \(y=a^x\) 与 \(y=(1/a)^x\) 关于 \(y\) 对称.</li>
-<li>(2) 当底数大于1的时候, 增长非常快. 快到一切我们能想到的其他函数.  \(x^2 \text{  v.s.  } 2^x\) .
+<li>(1) $y=a^x$与$y=(1/a)^x$关于$y$对称.</li>
+<li>(2) 当底数大于1的时候, 增长非常快. 快到一切我们能想到的其他函数. $x^2 \text{  v.s.  } 2^x$.
 <ul>
-<li>关于国际象棋和 \(2^{64}\) 的一个故事.</li>
+<li>关于国际象棋和$2^{64}$的一个故事.</li>
 <li>等于</li>
 </ul>
 </li>
@@ -296,13 +289,13 @@ $$</p>
 <p>Fun idea: 如果围棋发明者问你呢?
 <img src="./FILES/7LN.md/img-20220717172127.png" alt="Img" /></p>
 </blockquote>
-<p>一张纸 \(0.1\text{mm}\) , 42次就可以从地球到月球.</p>
-<p>看 \(y=1.1^x\) 的图像的样子.
+<p>一张纸$0.1\text{mm}$, 42次就可以从地球到月球.</p>
+<p>看$y=1.1^x$的图像的样子.
 <img src="./FILES/7LN.md/img-20220717172639.png" alt="Img" />
 <img src="./FILES/7LN.md/img-20220717172647.png" alt="Img" />
 <img src="./FILES/7LN.md/img-20220717172656.png" alt="Img" /></p>
-<p>这就解释了一个鸡汤 \((1.01)^{365}\approx37.8\) .
-这就解释了一个鸡汤 \((0.09)^{365}\approx0.09\) .</p>
+<p>这就解释了一个鸡汤$(1.01)^{365}\approx37.8$.
+这就解释了一个鸡汤$(0.09)^{365}\approx0.09$.</p>
 <blockquote>
 <p>其实本质原因是学习缺乏一个量化的及时反馈.
 很难量化! 而且在短期内可能看不见成效.
@@ -314,10 +307,10 @@ $$</p>
 <ul>
 <li>Ex. 5
 <ul>
-<li>(2) 我们知道 \(0\le b/a\le 1\) , 但是分不清正负, 但可以判定对称轴. ( \(\alpha\) )</li>
+<li>(2) 我们知道$0\le b/a\le 1$, 但是分不清正负, 但可以判定对称轴. ($\alpha$)</li>
 <li>有没有可能还有谁? 画出所有的满足的</li>
 <li>还可以开口向下的!</li>
-<li>(3) 左加右减.   \(((1/4)^{-1/2})^{1-2x}\) </li>
+<li>(3) 左加右减.  $((1/4)^{-1/2})^{1-2x}$</li>
 </ul>
 </li>
 <li>Ex. 6
@@ -327,7 +320,7 @@ $$</p>
 </ul>
 </li>
 </ul>
-<p>练习:  \(3^x, x\in[-2,3]; \qquad 1/2^x, x\in[-3,6]\) .</p>
+<p>练习: $3^x, x\in[-2,3]; \qquad 1/2^x, x\in[-3,6]$.</p>
 <ul>
 <li>
 <p>出题人是怎么想的?</p>
@@ -374,32 +367,28 @@ $$</p>
 </blockquote>
 
     </div>
-
-   
-   
-   
     <hr>
-
-
-
-
-
-
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+          inlineMath: [ ['$','$'] ],
+          displayMath: [ ['$$','$$'] ],
+          processEscapes: true
+        },
+        "HTML-CSS": { fonts: ["TeX"] }
+      });
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
     <div id="disqus_thread"></div>
     <script type="text/javascript" async
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
     </script>
     <script>
-        /**
-        *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-        *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
-        
-        // var disqus_config = function () {
-        // this.page.url = ;  // Replace PAGE_URL with your page's canonical URL variable
-        // this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-        // };
-        
-        (function() { // DON'T EDIT BELOW THIS LINE
+        (function() { 
         var d = document, s = d.createElement('script');
         s.src = 'https://augpath.disqus.com/embed.js';
         s.setAttribute('data-timestamp', +new Date());

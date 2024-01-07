@@ -3,11 +3,11 @@
   <head>
     <link rel="stylesheet" href="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/style.css">
     <script src="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/plugin.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex, nofollow">
     <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
- 
     <script>
 const copyButtonLabel = "Copy Code";
 
@@ -59,14 +59,12 @@ async function copyCode(block) {
         code {
             font-family: 'Courier New', Courier, monospace;
         } 
-
         pre {
             font-family: 'Courier New', Courier, monospace;
         } 
         div{
             max-width: 100%;
             overflow: auto;
-            
         }
         .navbar {
             overflow: hidden;
@@ -75,7 +73,6 @@ async function copyCode(block) {
             top: 0; /* Position the navbar at the top of the page */
             width: 100%; /* Full width */
         }
-
         img {
         max-width: 80%;
         height: auto;
@@ -88,7 +85,6 @@ async function copyCode(block) {
             padding: 14px 16px;
             text-decoration: none;
         }
-
         a {
             color: #148bca;
             text-align: center;
@@ -96,95 +92,88 @@ async function copyCode(block) {
             padding-right: 2px;
             text-decoration: none;
         }
-
         p.hidden {
           overflow: hidden;
         }
-
     </style>
   </head>
   <body>
-    
     <div class="navbar">
         <a href="https://shzaiz.github.io">AUG's Wiki</a>
         <a href="index.html"> ↑ Back to contents</a>
-        Last updated at 2024-01-07 15:14:49.057735
+        Last updated at 2024-01-07 20:32:45.414520
     </div>
 
     <div class="toc"></div>
     <a id="toc-button"><i class="far fa-bookmark"></i></a>
     
-    <div>
+    <div id="renderedContent">
       <h1>6EX</h1>
 <ol>
 <li>
-<p>(1)知在 \([0,+\infty)\) 上奇函数 \(f(x)=x(1+\sqrt[3]{x}),\)  那么在 \((-\infty,0]\) 上,  \(f(x)\) 的解析式是.
-(2)知在 \([0,+\infty)\) 上偶函数 \(f(x)=x(1+\sqrt[3]{x}),\)  那么在 \((-\infty,0]\) 上,  \(f(x)\) 的解析式是.</p>
+<p>(1)知在$[0,+\infty)$上奇函数$f(x)=x(1+\sqrt[3]{x}),$ 那么在$(-\infty,0]$上, $f(x)$的解析式是.
+(2)知在$[0,+\infty)$上偶函数$f(x)=x(1+\sqrt[3]{x}),$ 那么在$(-\infty,0]$上, $f(x)$的解析式是.</p>
 </li>
 <li>
-<p>(1) \(\mathbb{R}\) 上的偶函数 \(f(x)\) , 对于 \(\forall x_1, x_2\in [0,\infty)\) , 都有 \((f(x_1)-f(x_2))/(x_1-x_2)&lt;0\) , 问 \(f(1), f(-2), f(3)\) 的大小关系.
-(2)在 \(\mathbb{R}\) 上的偶函数 \(f(x)\) , 在 \([0,+\infty)\) 上单调递增, 求 \(f(2x-1)&lt;f(1/3)\) 的范围.
-(3) \(f(x)\) 是定义在 \((-1,1)\) 的奇函数, 且在 \([0,1)\) 上单调递增, 求 \(f(x)+f(2x-1)&lt;0\) 的取值范围.</p>
+<p>(1)$\R$上的偶函数$f(x)$, 对于$\forall x_1, x_2\in [0,\infty)$, 都有$(f(x_1)-f(x_2))/(x_1-x_2)&lt;0$, 问$f(1), f(-2), f(3)$的大小关系.
+(2)在$\R$上的偶函数$f(x)$, 在$[0,+\infty)$上单调递增, 求$f(2x-1)&lt;f(1/3)$的范围.
+(3)$f(x)$是定义在$(-1,1)$的奇函数, 且在$[0,1)$上单调递增, 求$f(x)+f(2x-1)&lt;0$的取值范围.</p>
 </li>
 <li>
-<p>(1)设函数   \(f(x)=\dfrac{x^{3}+|x|+2 x^{2}+x}{2 x^{2}+|x|}\)   的最大值为   \(M\)  , 是小值为   \(m\)  , 则   \(M\)   与   \(m\)   满足 ( ).
-A.   \(M+m=2\) 
-B.   \(M+m=4\) 
-C.   \(M-m=2\) 
-D.   \(M-m=4\) 
-(2) 已知 \(f(x)\) 为奇函数,  \(g(x)\) 为偶函数, 且 \(f(x)-g(x)={1\over x+1},\) 求 \(f(x), g(x)\) .
-(3) 现在有定义域对称的 \(h(x)\) , 现将其分解为一个奇函数 \(f(x)\) 和一个偶函数 \(g(x)\) 的和, 试构造出 \(f(x)\) 与 \(g(x)\) .</p>
+<p>(1)设函数  $f(x)=\dfrac{x^{3}+|x|+2 x^{2}+x}{2 x^{2}+|x|}$  的最大值为  $M$ , 是小值为  $m$ , 则  $M$  与  $m$  满足 ( ).
+A.  $M+m=2$
+B.  $M+m=4$
+C.  $M-m=2$
+D.  $M-m=4$
+(2) 已知$f(x)$为奇函数, $g(x)$为偶函数, 且$f(x)-g(x)={1\over x+1},$求$f(x), g(x)$.
+(3) 现在有定义域对称的$h(x)$, 现将其分解为一个奇函数$f(x)$和一个偶函数$g(x)$的和, 试构造出$f(x)$与$g(x)$.</p>
 </li>
 <li>
-<p>(1)若 \(f(x)=f(4-x)\) , 若 \(x\in (-\infty,2), f(x)=2x-1\) , 那么写出 \(x\in (2,\infty), f(x)\) 的解析式.
-(2)若 \(f(2+x)=f(4-x)\) , 若 \(f(x)\) 有三个不相等的实数根, 求这三个根的和是多少.
-(3)若 \(f(x)+f(4-x)=0, f(1+x)=f(1-x), x\in (0,1]\) 的时候 \(f(x)=2x-1\) ,  \(f(x)=0\) 在 \([-1,5]\) 上有多少个不同的实数根?
-(4)如果 \(f(x)\) 是奇函数,  \(-f(x+1)\) 等于 \(f(-x+1)\) 还是 \(f(-x-1)\) ?如果 \(f(x+1)\) 是奇函数, 那么 \(-f(x+1)\) 等于 \(f(-x+1)\) 还是 \(f(-x-1)\) ?</p>
+<p>(1)若$f(x)=f(4-x)$, 若$x\in (-\infty,2), f(x)=2x-1$, 那么写出$x\in (2,\infty), f(x)$的解析式.
+(2)若$f(2+x)=f(4-x)$, 若$f(x)$有三个不相等的实数根, 求这三个根的和是多少.
+(3)若$f(x)+f(4-x)=0, f(1+x)=f(1-x), x\in (0,1]$的时候$f(x)=2x-1$, $f(x)=0$在$[-1,5]$上有多少个不同的实数根?
+(4)如果$f(x)$是奇函数, $-f(x+1)$等于$f(-x+1)$还是$f(-x-1)$?如果$f(x+1)$是奇函数, 那么$-f(x+1)$等于$f(-x+1)$还是$f(-x-1)$?</p>
 </li>
 <li>
-<p>已知   \(f(x)\)   是定义在   \([-1,1]\)   上的奇函数, 且   \(f(1)=1\)  ; 对   \(a, b \in[-1,1], a+b \neq 0\)  , 有   \(\frac{f(a)+f(b)}{a+b}&gt;0\)  .
-(1)解不等式   \(f\left(x+\frac{1}{2}\right)&lt;f\left(\frac{1}{x-1}\right)\)  ;
-(2) 若   \(f(x) \leqslant m^{2}-2 a m+1\)   对所有   \(x\)   \(\in[-1,1], a \in[-1,1]\)   恒成立, 求实数   \(m\)   的取值范围.</p>
+<p>已知  $f(x)$  是定义在  $[-1,1]$  上的奇函数, 且  $f(1)=1$ ; 对  $a, b \in[-1,1], a+b \neq 0$ , 有  $\frac{f(a)+f(b)}{a+b}&gt;0$ .
+(1)解不等式  $f\left(x+\frac{1}{2}\right)&lt;f\left(\frac{1}{x-1}\right)$ ;
+(2) 若  $f(x) \leqslant m^{2}-2 a m+1$  对所有  $x$ $\in[-1,1], a \in[-1,1]$  恒成立, 求实数  $m$  的取值范围.</p>
 </li>
 <li>
-<p>定义在   \(\mathbf{R}\)   上的函数   \(f(x)\)   满足：对任意实数   \(m, n\)  , 总有   \(f(m+n)=f(m) \cdot f(n)\)  , 且当   \(x&gt;0\)   时,   \(0&lt;f(x)&lt;1\)  .
-(1) 判断   \(f(x)\)   的单调性;
-(2) 设   \(A=\left\{(x, y) \mid f\left(x^{2}\right) \cdot f\left(y^{2}\right)&gt;f(1)\right\} ,
-B=\{(x, y) \mid f(a x-y+\sqrt{2})=1, a \in \mathbf{R}\}\)  , 若   \(A \cap B=\varnothing\)  , 试确定   \(a\)   的取值范围.</p>
+<p>定义在  $\mathbf{R}$  上的函数  $f(x)$  满足：对任意实数  $m, n$ , 总有  $f(m+n)=f(m) \cdot f(n)$ , 且当  $x&gt;0$  时,  $0&lt;f(x)&lt;1$ .
+(1) 判断  $f(x)$  的单调性;
+(2) 设  $A=\left{(x, y) \mid f\left(x^{2}\right) \cdot f\left(y^{2}\right)&gt;f(1)\right} ,
+B={(x, y) \mid f(a x-y+\sqrt{2})=1, a \in \mathbf{R}}$ , 若  $A \cap B=\varnothing$ , 试确定  $a$  的取值范围.</p>
 </li>
 <li>
-<p>(1) 若   \(f(x)\)   是一次函数, 且   \(f[f(x)]=4 x-1\)  , 则   \(f(x)=\) 
-(2)已知函数   \(f(x)\)   在区间   \([-2,3]\)   是增函数, 则函数   \(y=f(2 x-1)\)   的递增区间是.</p>
+<p>(1) 若  $f(x)$  是一次函数, 且  $f[f(x)]=4 x-1$ , 则  $f(x)=$
+(2)已知函数  $f(x)$  在区间  $[-2,3]$  是增函数, 则函数  $y=f(2 x-1)$  的递增区间是.</p>
 </li>
 </ol>
 
     </div>
-
-   
-   
-   
     <hr>
-
-
-
-
-
-
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+          inlineMath: [ ['$','$'] ],
+          displayMath: [ ['$$','$$'] ],
+          processEscapes: true
+        },
+        "HTML-CSS": { fonts: ["TeX"] }
+      });
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
     <div id="disqus_thread"></div>
     <script type="text/javascript" async
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
     </script>
     <script>
-        /**
-        *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-        *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
-        
-        // var disqus_config = function () {
-        // this.page.url = ;  // Replace PAGE_URL with your page's canonical URL variable
-        // this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-        // };
-        
-        (function() { // DON'T EDIT BELOW THIS LINE
+        (function() { 
         var d = document, s = d.createElement('script');
         s.src = 'https://augpath.disqus.com/embed.js';
         s.setAttribute('data-timestamp', +new Date());

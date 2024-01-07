@@ -3,11 +3,11 @@
   <head>
     <link rel="stylesheet" href="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/style.css">
     <script src="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/plugin.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex, nofollow">
     <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
- 
     <script>
 const copyButtonLabel = "Copy Code";
 
@@ -59,14 +59,12 @@ async function copyCode(block) {
         code {
             font-family: 'Courier New', Courier, monospace;
         } 
-
         pre {
             font-family: 'Courier New', Courier, monospace;
         } 
         div{
             max-width: 100%;
             overflow: auto;
-            
         }
         .navbar {
             overflow: hidden;
@@ -75,7 +73,6 @@ async function copyCode(block) {
             top: 0; /* Position the navbar at the top of the page */
             width: 100%; /* Full width */
         }
-
         img {
         max-width: 80%;
         height: auto;
@@ -88,7 +85,6 @@ async function copyCode(block) {
             padding: 14px 16px;
             text-decoration: none;
         }
-
         a {
             color: #148bca;
             text-align: center;
@@ -96,41 +92,38 @@ async function copyCode(block) {
             padding-right: 2px;
             text-decoration: none;
         }
-
         p.hidden {
           overflow: hidden;
         }
-
     </style>
   </head>
   <body>
-    
     <div class="navbar">
         <a href="https://shzaiz.github.io">AUG's Wiki</a>
         <a href="index.html"> ↑ Back to contents</a>
-        Last updated at 2024-01-07 15:14:49.495791
+        Last updated at 2024-01-07 20:32:45.786614
     </div>
 
     <div class="toc"></div>
     <a id="toc-button"><i class="far fa-bookmark"></i></a>
     
-    <div>
+    <div id="renderedContent">
       <h1>多维空间概论</h1>
 <ul>
-<li>动机: 有更多的量需要认识, 如 \(PV=nRT\) ,  \(S=2\pi r(r+h)\) 等等.</li>
-<li>改进 \(f:\) R  \(\to\)  R, 变为 \(f:\) R \(^2\to\) R.</li>
+<li>动机: 有更多的量需要认识, 如$PV=nRT$, $S=2\pi r(r+h)$等等.</li>
+<li>改进$f:$R $\to$ R, 变为$f:$R$^2\to$R.</li>
 </ul>
-<p>回顾: 一元函数的导数的定义 \(f&#x27;(x)=\lim_{h\to 0}{f(x+h)-f(x)\over h}\) .</p>
+<p>回顾: 一元函数的导数的定义$f'(x)=\lim_{h\to 0}{f(x+h)-f(x)\over h}$.</p>
 <ul>
 <li>任务: 对于<strong>代数结构</strong>和<strong>距离结构</strong>进行考察.</li>
 </ul>
 <h1>代数结构和距离结构</h1>
 <p><img src="https://s2.loli.net/2023/04/23/SmFuKQOEXMHGetw.png" alt="Img" /></p>
 <ul>
-<li>代数结构: 使得R \(^m\) 成为一个实线性空间.</li>
-<li>距离结构: 可以通过范数(模)来刻画( \(||x||\) ).</li>
+<li>代数结构: 使得R$^m$成为一个实线性空间.</li>
+<li>距离结构: 可以通过范数(模)来刻画($||x||$).</li>
 </ul>
-<h1>R \(^n\) 中的收敛点列</h1>
+<h1>R$^n$中的收敛点列</h1>
 <p><img src="https://s2.loli.net/2023/04/23/VcNwRWKoZQdIGqh.png" alt="Img" /></p>
 <p>这样定义的点列的极限也满足上册的一些性质, 这里从略或者参考数学分析教科书.</p>
 <p>另一种方式:</p>
@@ -146,32 +139,28 @@ async function copyCode(block) {
 <h1>多元函数</h1>
 
     </div>
-
-   
-   
-   
     <hr>
-
-
-
-
-
-
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+          inlineMath: [ ['$','$'] ],
+          displayMath: [ ['$$','$$'] ],
+          processEscapes: true
+        },
+        "HTML-CSS": { fonts: ["TeX"] }
+      });
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
     <div id="disqus_thread"></div>
     <script type="text/javascript" async
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
     </script>
     <script>
-        /**
-        *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-        *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
-        
-        // var disqus_config = function () {
-        // this.page.url = ;  // Replace PAGE_URL with your page's canonical URL variable
-        // this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-        // };
-        
-        (function() { // DON'T EDIT BELOW THIS LINE
+        (function() { 
         var d = document, s = d.createElement('script');
         s.src = 'https://augpath.disqus.com/embed.js';
         s.setAttribute('data-timestamp', +new Date());

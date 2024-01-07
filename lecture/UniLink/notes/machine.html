@@ -3,11 +3,11 @@
   <head>
     <link rel="stylesheet" href="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/style.css">
     <script src="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/plugin.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex, nofollow">
     <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
- 
     <script>
 const copyButtonLabel = "Copy Code";
 
@@ -59,14 +59,12 @@ async function copyCode(block) {
         code {
             font-family: 'Courier New', Courier, monospace;
         } 
-
         pre {
             font-family: 'Courier New', Courier, monospace;
         } 
         div{
             max-width: 100%;
             overflow: auto;
-            
         }
         .navbar {
             overflow: hidden;
@@ -75,7 +73,6 @@ async function copyCode(block) {
             top: 0; /* Position the navbar at the top of the page */
             width: 100%; /* Full width */
         }
-
         img {
         max-width: 80%;
         height: auto;
@@ -88,7 +85,6 @@ async function copyCode(block) {
             padding: 14px 16px;
             text-decoration: none;
         }
-
         a {
             color: #148bca;
             text-align: center;
@@ -96,25 +92,22 @@ async function copyCode(block) {
             padding-right: 2px;
             text-decoration: none;
         }
-
         p.hidden {
           overflow: hidden;
         }
-
     </style>
   </head>
   <body>
-    
     <div class="navbar">
         <a href="https://shzaiz.github.io">AUG's Wiki</a>
         <a href="index.html"> ↑ Back to contents</a>
-        Last updated at 2024-01-07 15:14:49.360706
+        Last updated at 2024-01-07 20:32:45.704848
     </div>
 
     <div class="toc"></div>
     <a id="toc-button"><i class="far fa-bookmark"></i></a>
     
-    <div>
+    <div id="renderedContent">
       <title>Machines</title>
 <p>$$
 \Huge \textbf{Machines}
@@ -125,71 +118,66 @@ $$</p>
 <h1>Follow the Instructions</h1>
 <p>We have witnessed how powerful computers are. By inputing some instructions, the computer will get the desired output.</p>
 <p>For now, we will go to a slightly different routine about how computes are capable of doing things. That is exactly <em>following the instructions</em>.</p>
-<p>Imagine that, you are going to find a word in <em>Oxford Advanced Learners&#x27; Dictionary</em>. You definitely don&#x27;t want to examine the dictionary page by page. Instead, you may switch to half of the book, and gradually narrowing the search space.</p>
+<p>Imagine that, you are going to find a word in <em>Oxford Advanced Learners' Dictionary</em>. You definitely don't want to examine the dictionary page by page. Instead, you may switch to half of the book, and gradually narrowing the search space.</p>
 <p>When you decide to tell the techique to another person, here is a possibility of saying</p>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #19177C">To</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">find</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">a</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">given</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">word</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">in</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">the</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">dictionary</span>,<span style="color: #bbbbbb"> </span>
-<span style="color: #19177C">First</span>,<span style="color: #bbbbbb"> </span><span style="color: #19177C">open</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">the</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">dictionary</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">to</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">the</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">middle</span>,<span style="color: #bbbbbb"> </span>
-<span style="color: #008000; font-weight: bold">Then</span>,<span style="color: #bbbbbb"> </span><span style="color: #19177C">compare</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">the</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">given</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">word</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">and</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">decide</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">which</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">side</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">is</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">it</span>,<span style="color: #bbbbbb"> </span>
-<span style="color: #008000; font-weight: bold">Continue</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">this</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">pattern</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">to</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">the</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">left</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">or</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">right</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">part</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">of</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">the</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">dictionary</span>,<span style="color: #bbbbbb"> </span>
-<span style="color: #008000; font-weight: bold">until</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">you</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">have</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">only</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">one</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">page</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">left</span>.<span style="color: #bbbbbb"> </span>
-</pre></div>
-
+<pre><code>To find a given word in the dictionary, 
+First, open the dictionary to the middle, 
+Then, compare the given word and decide which side is it, 
+Continue this pattern to the left or right part of the dictionary, 
+until you have only one page left. 
+</code></pre>
 <p>Your friend sometimes find it vague, but after your careful demonstration, he is finally able to master this skill.</p>
 <p>In fact, there are many things that are <em>definite</em>. That is, the procedure of doing this is almost fixed, and you will have the <em>pattern</em> of the problem, and your <em>goal</em> is clear. As you have learnt in high school, if you can somehow prove your procedure will never end up into a infinite loop, your procedure is then called algorithm, with pattern of the problem called <em>input</em>, and the goal you needed called <em>output</em>. And the way translating input to output is known as an <em>algorithm</em>.</p>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #767600">Procedure:</span><span style="color: #bbbbbb"> </span><span style="color: #880000">Find</span><span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">the</span><span style="color: #bbbbbb"> </span><span style="color: #B00040">word</span><span style="color: #bbbbbb"> </span>
-<span style="border: 1px solid #FF0000">1</span><span style="color: #bbbbbb">  </span><span style="color: #880000">Get</span><span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">the</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">dictionary</span>
-<span style="border: 1px solid #FF0000">2</span><span style="color: #bbbbbb">  </span><span style="color: #0000FF">Open</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">to</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">the</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">middle</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">of</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">the</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">dictionary</span>
-<span style="border: 1px solid #FF0000">3</span><span style="color: #bbbbbb">  </span><span style="color: #0000FF">Look</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">at</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">the</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">page</span><span style="color: #bbbbbb"> </span>
-<span style="border: 1px solid #FF0000">4</span><span style="color: #bbbbbb">  </span><span style="color: #0000FF">If</span><span style="color: #bbbbbb"> </span><span style="color: #B00040">word</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">is</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">on</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">page</span><span style="color: #bbbbbb"> </span>
-<span style="border: 1px solid #FF0000">5</span><span style="color: #bbbbbb">      </span><span style="color: #880000">Read</span><span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">the</span><span style="color: #bbbbbb"> </span><span style="color: #B00040">word</span>
-<span style="border: 1px solid #FF0000">6</span><span style="color: #bbbbbb">  </span><span style="color: #0000FF">else</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">if</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">person</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">is</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">in</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">earlier</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">of</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">the</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">book</span>
-<span style="border: 1px solid #FF0000">7</span><span style="color: #bbbbbb">      </span><span style="color: #0000FF">Open</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">to</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">middle</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">of</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">left</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">half</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">of</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">book</span><span style="color: #bbbbbb"> </span>
-<span style="border: 1px solid #FF0000">8</span><span style="color: #bbbbbb">      </span><span style="color: #0000FF">go</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">back</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">to</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">line</span><span style="color: #bbbbbb"> </span><span style="color: #666666">3</span>
-<span style="border: 1px solid #FF0000">9</span><span style="color: #bbbbbb">  </span><span style="color: #0000FF">else</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">if</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">person</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">is</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">in</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">later</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">of</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">the</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">book</span>
-<span style="border: 1px solid #FF0000">10</span><span style="color: #bbbbbb">     </span><span style="color: #0000FF">Open</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">to</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">middle</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">of</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">right</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">half</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">of</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">book</span><span style="color: #bbbbbb"> </span>
-<span style="border: 1px solid #FF0000">11</span><span style="color: #bbbbbb">     </span><span style="color: #0000FF">go</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">back</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">to</span><span style="color: #bbbbbb"> </span><span style="color: #19177C">line</span><span style="color: #bbbbbb"> </span><span style="color: #666666">3</span>
-<span style="border: 1px solid #FF0000">12</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">else</span><span style="color: #bbbbbb"> </span>
-<span style="border: 1px solid #FF0000">13</span><span style="color: #bbbbbb">     </span><span style="color: #0000FF">Quit</span>
-</pre></div>
-
-<p>Some use the following diagram to represent the relationship between the input and the output. The <em>algorithm</em> is represent as a <em>black box</em> - that means we don&#x27;t care about how algorithms are implemented, and we sometimes only care about what inputs and outputs are, hence we are able to use them easier regardless of the details.</p>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #bbbbbb">               </span><span style="color: #666666">+---------------------+</span><span style="color: #bbbbbb">                  </span>
-<span style="color: #bbbbbb">               </span><span style="color: #666666">|</span><span style="color: #bbbbbb">                     </span><span style="color: #666666">|</span><span style="color: #bbbbbb">                  </span>
-<span style="color: #bbbbbb"> </span>Input<span style="color: #666666">&gt;---</span><span style="border: 1px solid #FF0000">\</span><span style="color: #bbbbbb">    </span><span style="color: #666666">|</span><span style="color: #bbbbbb">      </span>Algorithm<span style="color: #bbbbbb">      </span><span style="color: #666666">|</span><span style="color: #bbbbbb">     </span><span style="color: #666666">/-----&gt;</span><span style="color: #008000; font-weight: bold">Output</span>
-<span style="color: #bbbbbb">           </span><span style="color: #666666">-----</span><span style="color: #bbbbbb">    </span>the<span style="color: #bbbbbb"> </span>Black<span style="color: #bbbbbb"> </span>Box<span style="color: #bbbbbb">    </span><span style="color: #666666">------</span><span style="color: #bbbbbb">             </span>
-<span style="color: #bbbbbb">               </span><span style="color: #666666">|</span><span style="color: #bbbbbb">                     </span><span style="color: #666666">|</span><span style="color: #bbbbbb">                  </span>
-<span style="color: #bbbbbb">               </span><span style="color: #666666">|</span><span style="color: #bbbbbb">                     </span><span style="color: #666666">|</span><span style="color: #bbbbbb">                  </span>
-<span style="color: #bbbbbb">               </span><span style="color: #666666">+---------------------+</span><span style="color: #bbbbbb">                  </span>
-</pre></div>
-
+<pre><code>Procedure: Find the word 
+1  Get the dictionary
+2  Open to the middle of the dictionary
+3  Look at the page 
+4  If word is on page 
+5      Read the word
+6  else if person is in earlier of the book
+7      Open to middle of left half of book 
+8      go back to line 3
+9  else if person is in later of the book
+10     Open to middle of right half of book 
+11     go back to line 3
+12 else 
+13     Quit
+</code></pre>
+<p>Some use the following diagram to represent the relationship between the input and the output. The <em>algorithm</em> is represent as a <em>black box</em> - that means we don't care about how algorithms are implemented, and we sometimes only care about what inputs and outputs are, hence we are able to use them easier regardless of the details.</p>
+<pre><code>               +---------------------+                  
+               |                     |                  
+ Input&gt;---\    |      Algorithm      |     /-----&gt;Output
+           -----    the Black Box    ------             
+               |                     |                  
+               |                     |                  
+               +---------------------+                  
+</code></pre>
 <h2>Physical Representation of Program</h2>
 <p>How to eat noodles? Well, there is a <em>procedure</em> for this:</p>
 <p><img src="./FILES/machine.md/img-20230710133122.jpeg" alt="noodles-physical" /></p>
 <p>How do we fly an airplane? Well, here is a procedure for pilots to execute: (Side Note: Here is something about <a href="http://www.b737.org.uk/aircraftsystems.htm">Boeing 737</a>, Figure from <em>Air Crash Investigation</em>.)</p>
 <p><img src="./FILES/machine.md/img-20230710133706.png" alt="fly-an-airplane" /></p>
 <h1>Bits in Computers</h1>
-<p>We use computer to store documents, watch videos, and surfing the Internet. These information is stored usually as <em>bits</em>. It&#x27;s just like a small lever in computer system, indicating its state - on for 1 and off for 0.</p>
-<p>Let&#x27;s begin with the representation of a number. We have known that the pattern is like this:</p>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span>  o   o   o   o   o   o   o   o
+<p>We use computer to store documents, watch videos, and surfing the Internet. These information is stored usually as <em>bits</em>. It's just like a small lever in computer system, indicating its state - on for 1 and off for 0.</p>
+<p>Let's begin with the representation of a number. We have known that the pattern is like this:</p>
+<pre><code>  o   o   o   o   o   o   o   o
 128  64  32  16   8   4   2   1 
-</pre></div>
-
+</code></pre>
 <p>When a light is on, you add the label below to the number in your head. After examining all bits, you get your final number.</p>
 <p>But sometimes, we can alter the rules so that we can represent something different. For example, if I give the rule</p>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span>   o   o   o   o   o   o   o   o
+<pre><code>   o   o   o   o   o   o   o   o
 -128  64  32  16   8   4   2   1 
-</pre></div>
-
-<p>then it&#x27;s capable of representing negative numbers!</p>
+</code></pre>
+<p>then it's capable of representing negative numbers!</p>
 <p>So we can conclude that information we want to represent is bits + contexts. Videos, characters and even programs are expressed merely by bits!</p>
-<p><strong>Aside</strong>. We usually count 8 bits as a <em>byte</em>, usually denote as B. With the prefix  \(\texttt K=10^3, \texttt M=10^6, \texttt G=10^9\) , we may be easier to represent bigger numbers.</p>
+<p><strong>Aside</strong>. We usually count 8 bits as a <em>byte</em>, usually denote as B. With the prefix $\texttt K=10^3, \texttt M=10^6, \texttt G=10^9$, we may be easier to represent bigger numbers.</p>
 <h1>Visualize instructions via Scratch</h1>
 <p>Now we will use a more visual way to note the idea of &quot;algorithms&quot;. To do this, we need a new world with a sprite in it.</p>
 <p><img src="./FILES/machine.md/img-20230710144327.png" alt="scratch-intro" /></p>
-<p>This is Scratch. As you can see, a cat is standing in the center of the stage. Namely we can say it&#x27;s standing at croodinate  \((0,0)\) . Normally, the stage is 480 px(<code>px</code> is a unit representing length, like centimeter) wide and 360 px long. On the left, here are many instructions. From the motion of the character to the blocks.</p>
-<p>This is pretty like some jigsaw puzzles you have played earlier. Now let&#x27;s have a look at the pieces given.</p>
+<p>This is Scratch. As you can see, a cat is standing in the center of the stage. Namely we can say it's standing at croodinate $(0,0)$. Normally, the stage is 480 px(<code>px</code> is a unit representing length, like centimeter) wide and 360 px long. On the left, here are many instructions. From the motion of the character to the blocks.</p>
+<p>This is pretty like some jigsaw puzzles you have played earlier. Now let's have a look at the pieces given.</p>
 <ul>
-<li>Motion: This is mainly about the sprite&#x27;s movemrnt.</li>
+<li>Motion: This is mainly about the sprite's movemrnt.</li>
 <li>Looks: It changes what the sprite is thinking and speaking, or his dressings.</li>
 <li>Sound: This makes the sprite to pronunce sounds.</li>
 <li>Event: Like humans, this sprite can also respond to some of the event.</li>
@@ -198,10 +186,10 @@ $$</p>
 <li>Variables: Places to hold values that can be changed.</li>
 <li>My Block: You can build and compose your own block based on these!</li>
 </ul>
-<p>Now let&#x27;s start our exploration.</p>
+<p>Now let's start our exploration.</p>
 <h2>Greetings from Scratch</h2>
 <p>We may drag the pieces to let our cat greet to us.</p>
-<p>Let&#x27;s first use the &quot;say&quot; block from the left and typing in &quot;Hello, world. &quot; After clicking on it, we will see the cat saying: Hello, world.</p>
+<p>Let's first use the &quot;say&quot; block from the left and typing in &quot;Hello, world. &quot; After clicking on it, we will see the cat saying: Hello, world.</p>
 <p><img src="./FILES/machine.md/img-20230713142701.png" alt="hello-world" /></p>
 <p>Well, what if I want it to give a response of certain names? This involves grabbing different blocks into the blanks. After some trial, we build the following:</p>
 <p><img src="./FILES/machine.md/img-20230713142825.png" alt="block" /></p>
@@ -221,32 +209,28 @@ $$</p>
 $$</p>
 
     </div>
-
-   
-   
-   
     <hr>
-
-
-
-
-
-
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+          inlineMath: [ ['$','$'] ],
+          displayMath: [ ['$$','$$'] ],
+          processEscapes: true
+        },
+        "HTML-CSS": { fonts: ["TeX"] }
+      });
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
     <div id="disqus_thread"></div>
     <script type="text/javascript" async
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
     </script>
     <script>
-        /**
-        *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-        *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
-        
-        // var disqus_config = function () {
-        // this.page.url = ;  // Replace PAGE_URL with your page's canonical URL variable
-        // this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-        // };
-        
-        (function() { // DON'T EDIT BELOW THIS LINE
+        (function() { 
         var d = document, s = d.createElement('script');
         s.src = 'https://augpath.disqus.com/embed.js';
         s.setAttribute('data-timestamp', +new Date());

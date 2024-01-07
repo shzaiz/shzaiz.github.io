@@ -3,11 +3,11 @@
   <head>
     <link rel="stylesheet" href="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/style.css">
     <script src="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/plugin.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex, nofollow">
     <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
- 
     <script>
 const copyButtonLabel = "Copy Code";
 
@@ -59,14 +59,12 @@ async function copyCode(block) {
         code {
             font-family: 'Courier New', Courier, monospace;
         } 
-
         pre {
             font-family: 'Courier New', Courier, monospace;
         } 
         div{
             max-width: 100%;
             overflow: auto;
-            
         }
         .navbar {
             overflow: hidden;
@@ -75,7 +73,6 @@ async function copyCode(block) {
             top: 0; /* Position the navbar at the top of the page */
             width: 100%; /* Full width */
         }
-
         img {
         max-width: 80%;
         height: auto;
@@ -88,7 +85,6 @@ async function copyCode(block) {
             padding: 14px 16px;
             text-decoration: none;
         }
-
         a {
             color: #148bca;
             text-align: center;
@@ -96,25 +92,22 @@ async function copyCode(block) {
             padding-right: 2px;
             text-decoration: none;
         }
-
         p.hidden {
           overflow: hidden;
         }
-
     </style>
   </head>
   <body>
-    
     <div class="navbar">
         <a href="https://shzaiz.github.io">AUG's Wiki</a>
         <a href="index.html"> ↑ Back to contents</a>
-        Last updated at 2024-01-07 15:14:49.463638
+        Last updated at 2024-01-07 20:32:45.766148
     </div>
 
     <div class="toc"></div>
     <a id="toc-button"><i class="far fa-bookmark"></i></a>
     
-    <div>
+    <div id="renderedContent">
       <title>安装Linux To Go</title>
 <p>$$
 \Huge \textbf{安装Linux To Go}
@@ -127,7 +120,7 @@ $$</p>
 <p><strong>提示</strong>. 我们推荐大家使用机房的电脑安装. 因为机房的电脑带有自动还原的保护卡, 因此如果有什么问题, 格式化U盘之后, 重启计算机即可.</p>
 <p><strong>警告</strong>. 本操作有风险. 如果现在没有准备好, 或者认为基本知识不是很充足, 那么将来在做也不迟. 不用着急.</p>
 <h1>准备</h1>
-<p>我们需要的原料很简单: 一块 \(\geq 64\texttt G\) 的U盘, 一台<code>x86_64</code>架构的运行<code>windows</code>的计算机. 以及<code>WMWare</code>虚拟机. 我们可以不用序列号, 选择免费试用即可.</p>
+<p>我们需要的原料很简单: 一块$\geq 64\texttt G$的U盘, 一台<code>x86_64</code>架构的运行<code>windows</code>的计算机. 以及<code>WMWare</code>虚拟机. 我们可以不用序列号, 选择免费试用即可.</p>
 <p><strong>说明</strong>. 以下大部分插图来自<a href="https://www.bilibili.com/video/BV1D34y187P4">这个视频</a>, 因为我没有可以使用的电脑.</p>
 <h1>借助虚拟机</h1>
 <p>先把U盘插入计算机, 然后启动VMWare.</p>
@@ -135,7 +128,7 @@ $$</p>
 <p><img src="./FILES/linux-to-go.md/img-20230712175548.png" alt="vmware" /></p>
 <p>下面进入关键的一步骤: 选择安装虚拟机的磁盘为这个U盘. 选择如图所示的选项</p>
 <p><img src="./FILES/linux-to-go.md/img-20230712175713.png" alt="vm-step-10" /></p>
-<p>之后, 选择插入的USB.  \(\color{red}\boxed{一定再三确认这个盘就是你要装的盘. }\)  当只有一个的USB的时候, 一般会显示<code>PhysicalDrive1</code>, 并且选择使用整个磁盘.</p>
+<p>之后, 选择插入的USB. $\color{red}\boxed{一定再三确认这个盘就是你要装的盘. }$ 当只有一个的USB的时候, 一般会显示<code>PhysicalDrive1</code>, 并且选择使用整个磁盘.</p>
 <p><img src="./FILES/linux-to-go.md/img-20230712180007.png" alt="pdrive1" /></p>
 <p>然后一路下一步, 直到完成即可. 虚拟机的环境准备完毕.</p>
 <h1>下载Ubuntu的镜像</h1>
@@ -160,32 +153,28 @@ $$</p>
 $$</p>
 
     </div>
-
-   
-   
-   
     <hr>
-
-
-
-
-
-
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+          inlineMath: [ ['$','$'] ],
+          displayMath: [ ['$$','$$'] ],
+          processEscapes: true
+        },
+        "HTML-CSS": { fonts: ["TeX"] }
+      });
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
     <div id="disqus_thread"></div>
     <script type="text/javascript" async
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
     </script>
     <script>
-        /**
-        *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-        *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
-        
-        // var disqus_config = function () {
-        // this.page.url = ;  // Replace PAGE_URL with your page's canonical URL variable
-        // this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-        // };
-        
-        (function() { // DON'T EDIT BELOW THIS LINE
+        (function() { 
         var d = document, s = d.createElement('script');
         s.src = 'https://augpath.disqus.com/embed.js';
         s.setAttribute('data-timestamp', +new Date());

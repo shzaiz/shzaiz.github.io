@@ -3,11 +3,11 @@
   <head>
     <link rel="stylesheet" href="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/style.css">
     <script src="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/plugin.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex, nofollow">
     <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
- 
     <script>
 const copyButtonLabel = "Copy Code";
 
@@ -59,14 +59,12 @@ async function copyCode(block) {
         code {
             font-family: 'Courier New', Courier, monospace;
         } 
-
         pre {
             font-family: 'Courier New', Courier, monospace;
         } 
         div{
             max-width: 100%;
             overflow: auto;
-            
         }
         .navbar {
             overflow: hidden;
@@ -75,7 +73,6 @@ async function copyCode(block) {
             top: 0; /* Position the navbar at the top of the page */
             width: 100%; /* Full width */
         }
-
         img {
         max-width: 80%;
         height: auto;
@@ -88,7 +85,6 @@ async function copyCode(block) {
             padding: 14px 16px;
             text-decoration: none;
         }
-
         a {
             color: #148bca;
             text-align: center;
@@ -96,25 +92,22 @@ async function copyCode(block) {
             padding-right: 2px;
             text-decoration: none;
         }
-
         p.hidden {
           overflow: hidden;
         }
-
     </style>
   </head>
   <body>
-    
     <div class="navbar">
         <a href="https://shzaiz.github.io">AUG's Wiki</a>
         <a href="index.html"> ↑ Back to contents</a>
-        Last updated at 2024-01-07 15:14:49.442087
+        Last updated at 2024-01-07 20:32:45.745855
     </div>
 
     <div class="toc"></div>
     <a id="toc-button"><i class="far fa-bookmark"></i></a>
     
-    <div>
+    <div id="renderedContent">
       <title>Using Search Engines</title>
 <p>$$
 \Huge \textbf{Using Search Engines}
@@ -123,7 +116,7 @@ $$</p>
 \boxed{ \overbrace{\textit{degaokaolization}}^{\small{去高考化}} \text{ Discussion Group | Topic 00}}
 $$</p>
 <h1>Introduction</h1>
-<p>Following the college entrance examination, we have experienced a significant transformation in the way we acquire information. Instead of passively receiving information from teachers and parents, we have taken the initiative to actively comprehend various pieces of information. Now, let&#x27;s explore some intriguing methods that enhance the efficiency and simplicity of our information retrieval process.</p>
+<p>Following the college entrance examination, we have experienced a significant transformation in the way we acquire information. Instead of passively receiving information from teachers and parents, we have taken the initiative to actively comprehend various pieces of information. Now, let's explore some intriguing methods that enhance the efficiency and simplicity of our information retrieval process.</p>
 <h1>A Bit of History</h1>
 <p>After people gained access to the Internet, it became necessary to input specific web addresses in order to visit the websites they were familiar with. In their quest for a better browsing experience, people devised the following tricks:</p>
 <ul>
@@ -133,12 +126,12 @@ $$</p>
 Users leverage their own proactiveness, personal networks, and meticulously curated resource collections to make the process of information retrieval even more seamless and efficient.</li>
 </ul>
 <p>One suggestion is that: Is it feasible to devise a method for aggregating all this content into a single platform?</p>
-<p><strong>Question.</strong> If you were someone aiming to integrate all the available information at that time, how would you go about designing it? \(\#\) </p>
-<p>The aspiration at that time was to have a single keyword that could connect all the knowledge together. Therefore, they needed a text-matching method to locate the relevant content from the existing resources. For example, let&#x27;s assume the document library contains the following text:</p>
+<p><strong>Question.</strong> If you were someone aiming to integrate all the available information at that time, how would you go about designing it?$#$</p>
+<p>The aspiration at that time was to have a single keyword that could connect all the knowledge together. Therefore, they needed a text-matching method to locate the relevant content from the existing resources. For example, let's assume the document library contains the following text:</p>
 <p><img src="./FILES/searching.md/img-20230703231210.png" alt="Img" /></p>
 <p>Therefore, when using a search engine, it becomes crucial to differentiate keywords effectively. This way, searching for &quot;gcc set breakpoints&quot; would have a higher probability of being accurately matched. Now, you can understand the importance of properly distinguishing keywords in the context of using a search engine.</p>
 <p>Even though our search engines have become remarkably advanced, to the point where some can engage in natural language conversations, we can still achieve relatively satisfactory results by employing basic and straightforward operations.</p>
-<p><strong>Takeaway Message.</strong> It&#x27;s better to use pieces of phreases than a sentence to better match the information.  \(\#\) </p>
+<p><strong>Takeaway Message.</strong> It's better to use pieces of phreases than a sentence to better match the information. $#$</p>
 <h1>One step Further</h1>
 <p>Although the aforementioned methods are commendable, there are instances where they may not entirely fulfill our requirements. For instance, when using a tool on Linux, which is considered a relatively niche operating system compared to Windows, performing a keyword search may yield a plethora of results related to how the tool is used on Windows. This is not the desired outcome. Is there a method to address this issue?</p>
 <ul>
@@ -147,7 +140,7 @@ Users leverage their own proactiveness, personal networks, and meticulously cura
 <li>...</li>
 </ul>
 <p>Indeed, modern search engines today have already incorporated such features and functionalities.</p>
-<p><strong>Remark</strong>. Many reasonable and feasible functionalities have likely already been implemented in search engines. Therefore, the key is to find out where they are and use them straightforwardly! \(\#\) </p>
+<p><strong>Remark</strong>. Many reasonable and feasible functionalities have likely already been implemented in search engines. Therefore, the key is to find out where they are and use them straightforwardly!$#$</p>
 <p><strong>Possible filters</strong>.</p>
 <ul>
 <li><code>&quot;Exact match&quot;</code> Exact match words in the quotes.</li>
@@ -157,20 +150,19 @@ Users leverage their own proactiveness, personal networks, and meticulously cura
 <h1>Some Examples</h1>
 <h2>Example 1: Choosing College for the College Entrance Examination</h2>
 <p>In the month of June, every year, the entire nation gears up for the national college entrance examination. Following this significant milestone, a multitude of students will enter the realm of higher education. Certainly, during this transitional phase, I encourage everyone to reflect upon this everlasting question:</p>
-<p><strong>Question</strong>. Let&#x27;s take a moment to review the questions you have previously asked. Are there any questions that, from a fresh perspective, could provide new insights or perspectives? For example, questions such as &quot;Why is learning important?&quot; or others alike. \(\#\) </p>
-<p>However, choosing a college major for the college entrance examination is perhaps the first significant life decision for many students (excluding those who have already made important choices, such as competitive students). As <a href="https://mp.weixin.qq.com/s/5baq7UxOfpgLQ6fvzmMmFA">Mr. Zhu Fuhai</a> once said, &quot;Some argue that China&#x27;s education system focuses on teaching but lacks cultivation. Schools merely impart tangible knowledge to children&#x27;s minds rapidly, yet this knowledge fails to internalize as their inner qualities and abilities.&quot;</p>
-<p>Indeed, this aspect is fully demonstrated when it comes to making choices. Now, let&#x27;s approach this matter as we would solve any ordinary problem.</p>
-<p>Here, we assume that everyone already has a clear idea of their desired college major. However, it is worth noting that in the current highly competitive environment, answering this question has become increasingly challenging. Therefore, if one doesn&#x27;t have a definitive answer, it may require further exploration in the future. Taking the Henan province college entrance examination as an example, it allows candidates to select multiple parallel choices. So, what exactly are parallel choices?</p>
+<p><strong>Question</strong>. Let's take a moment to review the questions you have previously asked. Are there any questions that, from a fresh perspective, could provide new insights or perspectives? For example, questions such as &quot;Why is learning important?&quot; or others alike.$#$</p>
+<p>However, choosing a college major for the college entrance examination is perhaps the first significant life decision for many students (excluding those who have already made important choices, such as competitive students). As <a href="https://mp.weixin.qq.com/s/5baq7UxOfpgLQ6fvzmMmFA">Mr. Zhu Fuhai</a> once said, &quot;Some argue that China's education system focuses on teaching but lacks cultivation. Schools merely impart tangible knowledge to children's minds rapidly, yet this knowledge fails to internalize as their inner qualities and abilities.&quot;</p>
+<p>Indeed, this aspect is fully demonstrated when it comes to making choices. Now, let's approach this matter as we would solve any ordinary problem.</p>
+<p>Here, we assume that everyone already has a clear idea of their desired college major. However, it is worth noting that in the current highly competitive environment, answering this question has become increasingly challenging. Therefore, if one doesn't have a definitive answer, it may require further exploration in the future. Taking the Henan province college entrance examination as an example, it allows candidates to select multiple parallel choices. So, what exactly are parallel choices?</p>
 <p>When conducting a search on Baidu using relevant keywords, you will indeed come across various interpretations and explanations regarding parallel choices. However, the question of whether to trust these sources or not requires careful consideration. To enhance credibility, it is advisable to gather more information from reliable sources and consult trusted websites such as the Ministry of Education or the official website of the Chinese government. (One appoarch is to add a word to make the source more authoritative.)</p>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span>教育部 平行志愿
-</pre></div>
-
+<pre><code>教育部 平行志愿
+</code></pre>
 <p>Alternatively, you can refine your search by including specific domain names associated with trustworthy sources. This helps filter out less reliable information and prioritize content from reputable websites.</p>
 <p>Here, we can refer to this <a href="https://www.gov.cn/lianbo/bumen/202305/content_6875790.htm">link</a> followed from the procedure above.</p>
 <p>However, there is still a lot of information within the document. In such cases, you can use the Find function by pressing Ctrl-<strong>F</strong>. In the pop-up search box, enter &quot;平行志愿.&quot; This way, all instances of &quot;平行志愿&quot; will be highlighted in <em>yellow</em>, making them easier to locate.</p>
-<p><strong>Remark</strong>. Certainly, the majority of the current resources are sufficiently advanced to allow for &quot;<em>random reading</em>&quot; , that is focusing on specific points of interest without being constrained by a strict linear progression. In the event that you encounter something unfamiliar, you can easily refer back to previously mentioned concepts or contextual information for further comprehension. This approach not only saves unnecessary trouble but also promotes efficient knowledge acquisition.  \(\#\) </p>
-<p>After obtaining information from various sources, you now have an understanding of the college admission process. At this point, you may start estimating your scores and determining which school to attend. However, it&#x27;s important to note that this process, while it may seem discouraging, won&#x27;t be of much help beyond satisfying curiosity. Attending university doesn&#x27;t mean you can slack off and play all day; in fact, the academic workload in university can easily surpass that of three years in high school within a single academic year (or a single semester for some majors).</p>
-<p>Therefore, you patiently wait for the provincial rankings to be released. In reality, each university has different admission plans for each region every year. This information is usually available in the publication &quot;招生考试之友&quot; (Admissions Examination Companion). However, as for the specific rankings, it&#x27;s difficult to determine.</p>
+<p><strong>Remark</strong>. Certainly, the majority of the current resources are sufficiently advanced to allow for &quot;<em>random reading</em>&quot; , that is focusing on specific points of interest without being constrained by a strict linear progression. In the event that you encounter something unfamiliar, you can easily refer back to previously mentioned concepts or contextual information for further comprehension. This approach not only saves unnecessary trouble but also promotes efficient knowledge acquisition. $#$</p>
+<p>After obtaining information from various sources, you now have an understanding of the college admission process. At this point, you may start estimating your scores and determining which school to attend. However, it's important to note that this process, while it may seem discouraging, won't be of much help beyond satisfying curiosity. Attending university doesn't mean you can slack off and play all day; in fact, the academic workload in university can easily surpass that of three years in high school within a single academic year (or a single semester for some majors).</p>
+<p>Therefore, you patiently wait for the provincial rankings to be released. In reality, each university has different admission plans for each region every year. This information is usually available in the publication &quot;招生考试之友&quot; (Admissions Examination Companion). However, as for the specific rankings, it's difficult to determine.</p>
 <p>To address this issue, there was a popular app at that time called &quot;Quark Search.&quot; It claimed to provide information on the lowest provincial rankings for a specific major in recent years. The data used by the app was sourced from the Ministry of Education. It was like having a search engine specifically for this purpose.</p>
 <p>Once we have the lowest scores from the past few years and the enrollment information from &quot;Enrollment and Examination Companion,&quot; we can explore the future development trends. Our knowledge of linear regression from high school can be of some assistance here, but we can leverage modern spreadsheet software such as Excel to make predictions and analyze the data more effectively.</p>
 <p>Looking back, are there any areas where improvements can be made? This skill is essential and necessary because similar processes may be required in the future when choosing courses in university using the academic management system. To confidently face future challenges, take the time to fully experience and understand this process.</p>
@@ -178,12 +170,11 @@ Users leverage their own proactiveness, personal networks, and meticulously cura
 <h2>Example 2.  Save unaccessible Webpages</h2>
 <p>This story also takes place after the college entrance examination. After completing the exam, AUGPath found themselves with some free time at home and decided to revisit some topics in high school that they had always wanted to understand better. While casually browsing the internet, they stumbled upon the homepage of Professor <a href="jyywiki.cn">Yanyan Jiang</a> and clicked on a course titled &quot;Combinatorics&quot; by Professor <a href="http://tcs.nju.edu.cn/yinyt/">Yitong Yin</a> . However, to their disappointment, the server hosting the course content was no longer functional. Determined to find a solution, they reached out to fellow students at Nanjing University and discovered that the professor had stopped teaching the course, and the server had been taken down. Now, the question was, how should they proceed in such a situation?</p>
 <p>Try googling</p>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span>Webpage past states
-</pre></div>
-
+<pre><code>Webpage past states
+</code></pre>
 <p>This demand is reasonable since it allows most people to access the content they wanted to see before. Naturally, we received a clue: the &quot;Internet Wayback Machine.&quot; With this tool, we can find lecture notes and materials from around 2015 when the course was taught.</p>
 <p>However, the good news is that Professor Yin Yitong will be teaching &quot;Combinatorics&quot; again this year!(<a href="https://tcs.nju.edu.cn/wiki/index.php?title=%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6_(Spring_2023)">Home</a>)</p>
-<p>Teacher Yin Yitong has a very profound insight into education issues. This earnest attitude towards work and his professional academic level truly deserve the title of master. Here&#x27;s a quote:</p>
+<p>Teacher Yin Yitong has a very profound insight into education issues. This earnest attitude towards work and his professional academic level truly deserve the title of master. Here's a quote:</p>
 <blockquote>
 <p>我们的作业周五才截止。同学们还是尽量自己多花时间想一想，写好了再提交。作业和考试是两个性质的，作业的主要任务不是考核，而是做为一种训练。期末考试是有时间限制的，需要 在有限时间内检测出一个人的水平。而这门课不应该是所有的训练内容，都是在有限时间内以“力所能及”的方式就能顺理成章完 成的，不然就成了完成一些routine tasks了。“问题求解”能力的提升，势必需要对思维有一定程度的考验和挑战，尽量做出一些思维上的创新，克服一定的非平凡性 (nontriviality）才可以。大家还是不要老是觉得，所有的任务都应该是可以routinely完成的。这尤其在AI已经大行其道的今天，是一种不可取的态度了。 – 尹一通</p>
 </blockquote>
@@ -200,32 +191,28 @@ Users leverage their own proactiveness, personal networks, and meticulously cura
 </blockquote>
 
     </div>
-
-   
-   
-   
     <hr>
-
-
-
-
-
-
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+          inlineMath: [ ['$','$'] ],
+          displayMath: [ ['$$','$$'] ],
+          processEscapes: true
+        },
+        "HTML-CSS": { fonts: ["TeX"] }
+      });
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
     <div id="disqus_thread"></div>
     <script type="text/javascript" async
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
     </script>
     <script>
-        /**
-        *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-        *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
-        
-        // var disqus_config = function () {
-        // this.page.url = ;  // Replace PAGE_URL with your page's canonical URL variable
-        // this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-        // };
-        
-        (function() { // DON'T EDIT BELOW THIS LINE
+        (function() { 
         var d = document, s = d.createElement('script');
         s.src = 'https://augpath.disqus.com/embed.js';
         s.setAttribute('data-timestamp', +new Date());

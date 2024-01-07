@@ -3,11 +3,11 @@
   <head>
     <link rel="stylesheet" href="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/style.css">
     <script src="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/plugin.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex, nofollow">
     <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
- 
     <script>
 const copyButtonLabel = "Copy Code";
 
@@ -59,14 +59,12 @@ async function copyCode(block) {
         code {
             font-family: 'Courier New', Courier, monospace;
         } 
-
         pre {
             font-family: 'Courier New', Courier, monospace;
         } 
         div{
             max-width: 100%;
             overflow: auto;
-            
         }
         .navbar {
             overflow: hidden;
@@ -75,7 +73,6 @@ async function copyCode(block) {
             top: 0; /* Position the navbar at the top of the page */
             width: 100%; /* Full width */
         }
-
         img {
         max-width: 80%;
         height: auto;
@@ -88,7 +85,6 @@ async function copyCode(block) {
             padding: 14px 16px;
             text-decoration: none;
         }
-
         a {
             color: #148bca;
             text-align: center;
@@ -96,25 +92,22 @@ async function copyCode(block) {
             padding-right: 2px;
             text-decoration: none;
         }
-
         p.hidden {
           overflow: hidden;
         }
-
     </style>
   </head>
   <body>
-    
     <div class="navbar">
         <a href="https://shzaiz.github.io">AUG's Wiki</a>
         <a href="index.html"> ↑ Back to contents</a>
-        Last updated at 2024-01-07 15:14:48.981514
+        Last updated at 2024-01-07 20:32:45.338451
     </div>
 
     <div class="toc"></div>
     <a id="toc-button"><i class="far fa-bookmark"></i></a>
     
-    <div>
+    <div id="renderedContent">
       <h1>基本线性代数</h1>
 <ul>
 <li>实例化标量 <code>x = torch.tensor(3.0)</code></li>
@@ -134,17 +127,17 @@ async function copyCode(block) {
 </ul>
 <h2>练习</h2>
 <ol>
-<li>证明 \((A^T)^T=A\) .</li>
+<li>证明$(A^T)^T=A$.</li>
 </ol>
-<p>证明: 设 \(A=(a_{ij})\) , 对于 \(a_{ij}=a_{ji}\) , 继续的内容为 \(a_{ji}=a_{ij}\) . 于是 \((A^T)^T=A\) .</p>
+<p>证明: 设$A=(a_{ij})$, 对于$a_{ij}=a_{ji}$, 继续的内容为$a_{ji}=a_{ij}$. 于是$(A^T)^T=A$.</p>
 <ol start="2">
-<li>给出两个矩阵 \(A,B\) , 证明 \((A+B)^T=A^T+B^T\) .</li>
+<li>给出两个矩阵$A,B$, 证明$(A+B)^T=A^T+B^T$.</li>
 </ol>
 <p>证明: 略.</p>
 <ol start="3">
-<li>给定任意方阵 \(A\) ,  \(A+A^T\) 总是对称的吗?</li>
+<li>给定任意方阵$A$, $A+A^T$总是对称的吗?</li>
 </ol>
-<p>总是对称的. 因为 \((A+A^T)^T=A^T+A\) .</p>
+<p>总是对称的. 因为$(A+A^T)^T=A^T+A$.</p>
 <ol start="4">
 <li>本节中定义了(2,3,4), 的张量X。len(X)的输出结果是什么？</li>
 </ol>
@@ -169,107 +162,101 @@ async function copyCode(block) {
 <h1>可视化微积分</h1>
 <h2>一元微积分</h2>
 <p>尝试使用<code>matplotlib</code>可视化绘制函数:</p>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
-<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">matplotlib_inline</span> <span style="color: #008000; font-weight: bold">import</span> backend_inline
-<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">torch</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">d2l</span>
+<pre><code class="language-py">import numpy as np
+from matplotlib_inline import backend_inline
+import torch as d2l
 
-<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">use_svg_display</span>(): <span style="color: #3D7B7B; font-style: italic">#@save</span>
-   backend_inline<span style="color: #666666">.</span>set_matplotlib_formats(<span style="color: #BA2121">&#39;svg&#39;</span>)
+def use_svg_display(): #@save
+   backend_inline.set_matplotlib_formats('svg')
 
-<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">set_axes</span>(axes, xlabel, ylabel, xlim, ylim, xscale, yscale, legend):
-    axes<span style="color: #666666">.</span>set_xlabel(xlabel)
-    axes<span style="color: #666666">.</span>set_ylabel(ylabel)
-    axes<span style="color: #666666">.</span>set_xscale(xscale)
-    axes<span style="color: #666666">.</span>set_yscale(yscale)
-    axes<span style="color: #666666">.</span>set_xlim(xlim)
-    axes<span style="color: #666666">.</span>set_ylim(ylim)
-    <span style="color: #008000; font-weight: bold">if</span> legend:
-        axes<span style="color: #666666">.</span>legend(legend)
-    axes<span style="color: #666666">.</span>grid()
-</pre></div>
+def set_axes(axes, xlabel, ylabel, xlim, ylim, xscale, yscale, legend):
+    axes.set_xlabel(xlabel)
+    axes.set_ylabel(ylabel)
+    axes.set_xscale(xscale)
+    axes.set_yscale(yscale)
+    axes.set_xlim(xlim)
+    axes.set_ylim(ylim)
+    if legend:
+        axes.legend(legend)
+    axes.grid()
 
+</code></pre>
 <p>绘制切线:</p>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
-<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">matplotlib</span> <span style="color: #008000; font-weight: bold">import</span> pyplot <span style="color: #008000; font-weight: bold">as</span> plt
-<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f</span>(x):
-    <span style="color: #008000; font-weight: bold">return</span> x<span style="color: #666666">**3-</span>x<span style="color: #666666">**</span>(<span style="color: #666666">-1</span>)
+<pre><code class="language-py">import numpy as np
+from matplotlib import pyplot as plt
+def f(x):
+    return x**3-x**(-1)
 
-<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">get_tangent</span>(f, x, point): <span style="color: #3D7B7B; font-style: italic"># 切线</span>
-    h <span style="color: #666666">=</span> <span style="color: #666666">1e-4</span>
-    grad <span style="color: #666666">=</span> (f(point <span style="color: #666666">+</span> h) <span style="color: #666666">-</span> f(point)) <span style="color: #666666">/</span> h
-    <span style="color: #008000; font-weight: bold">return</span> grad<span style="color: #666666">*</span>(x<span style="color: #666666">-</span>point)<span style="color: #666666">+</span>f(point)
+def get_tangent(f, x, point): # 切线
+    h = 1e-4
+    grad = (f(point + h) - f(point)) / h
+    return grad*(x-point)+f(point)
 
-<span style="color: #3D7B7B; font-style: italic"># 画图    </span>
+# 画图    
 
-x <span style="color: #666666">=</span> np<span style="color: #666666">.</span>arange(<span style="color: #666666">0</span>, <span style="color: #666666">3</span>, <span style="color: #666666">0.1</span>)
-y <span style="color: #666666">=</span> f(x)
-y_tangent <span style="color: #666666">=</span> get_tangent(f,x,point<span style="color: #666666">=1</span>) <span style="color: #3D7B7B; font-style: italic"># 切线</span>
-plt<span style="color: #666666">.</span>plot(x,y,label<span style="color: #666666">=</span><span style="color: #BA2121">&#39;f(x)&#39;</span>)
-plt<span style="color: #666666">.</span>plot(x,y_tangent,<span style="color: #BA2121">&#39;m--&#39;</span>,label<span style="color: #666666">=</span><span style="color: #BA2121">&#39;Tangent line (x=1)&#39;</span>)
-plt<span style="color: #666666">.</span>legend()
-plt<span style="color: #666666">.</span>grid()
-</pre></div>
-
+x = np.arange(0, 3, 0.1)
+y = f(x)
+y_tangent = get_tangent(f,x,point=1) # 切线
+plt.plot(x,y,label='f(x)')
+plt.plot(x,y_tangent,'m--',label='Tangent line (x=1)')
+plt.legend()
+plt.grid()
+</code></pre>
 <p><img src="https://s2.loli.net/2023/03/25/JhMKU64i9pRkBgE.png" alt="Img" /></p>
 <h2>练习题</h2>
-<p>(1) 绘制函数 \(y = f(x) = x^3-1/x\) 和其在 \(x = 1\) 处切线的图像。</p>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
-<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">matplotlib</span> <span style="color: #008000; font-weight: bold">import</span> pyplot <span style="color: #008000; font-weight: bold">as</span> plt
-<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f</span>(x):
-    <span style="color: #008000; font-weight: bold">return</span> x<span style="color: #666666">**3-</span>(<span style="color: #666666">1/</span>x)
+<p>(1) 绘制函数$y = f(x) = x^3-1/x$和其在$x = 1$处切线的图像。</p>
+<pre><code class="language-py">import numpy as np
+from matplotlib import pyplot as plt
+def f(x):
+    return x**3-(1/x)
  
-<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">get_tangent</span>(f, x, point): <span style="color: #3D7B7B; font-style: italic"># 切线</span>
-    h <span style="color: #666666">=</span> <span style="color: #666666">1e-4</span>
-    grad <span style="color: #666666">=</span> (f(point <span style="color: #666666">+</span> h) <span style="color: #666666">-</span> f(point)) <span style="color: #666666">/</span> h
-    <span style="color: #008000; font-weight: bold">return</span> grad<span style="color: #666666">*</span>(x<span style="color: #666666">-</span>point)<span style="color: #666666">+</span>f(point)
+def get_tangent(f, x, point): # 切线
+    h = 1e-4
+    grad = (f(point + h) - f(point)) / h
+    return grad*(x-point)+f(point)
  
-<span style="color: #3D7B7B; font-style: italic"># 画图    </span>
+# 画图    
  
-x <span style="color: #666666">=</span> np<span style="color: #666666">.</span>arange(<span style="color: #666666">0</span>, <span style="color: #666666">3</span>, <span style="color: #666666">0.1</span>)
-y <span style="color: #666666">=</span> f(x)
-y_tangent <span style="color: #666666">=</span> get_tangent(f,x,point<span style="color: #666666">=1</span>) <span style="color: #3D7B7B; font-style: italic"># 切线</span>
-plt<span style="color: #666666">.</span>plot(x,y,label<span style="color: #666666">=</span><span style="color: #BA2121">&#39;f(x)&#39;</span>)
-plt<span style="color: #666666">.</span>plot(x,y_tangent,<span style="color: #BA2121">&#39;m--&#39;</span>,label<span style="color: #666666">=</span><span style="color: #BA2121">&#39;Tangent line (x=1)&#39;</span>)
-plt<span style="color: #666666">.</span>legend()
-plt<span style="color: #666666">.</span>grid()
-</pre></div>
-
-<p>(2) 求函数 \(f({\bf x})=3x_1^2+5e^{x_2}\) 的梯度.</p>
-<p>解.  \({\partial f\over x_1}=6x_1,{\partial f\over x_2}=5e^{x_2},\) 于是梯度为 \([6x_1,5e^{x_2}]\) .</p>
-<p>(3)函数 \(f({\bf x})=||{\bf x}||_2\) 的梯度是什么?</p>
-<p>解: 假设 \(x=(x_1,x_2,\cdots,x_n)\) , 那么</p>
+x = np.arange(0, 3, 0.1)
+y = f(x)
+y_tangent = get_tangent(f,x,point=1) # 切线
+plt.plot(x,y,label='f(x)')
+plt.plot(x,y_tangent,'m--',label='Tangent line (x=1)')
+plt.legend()
+plt.grid()
+</code></pre>
+<p>(2) 求函数$f({\bf x})=3x_1^2+5e^{x_2}$的梯度.</p>
+<p>解. ${\partial f\over x_1}=6x_1,{\partial f\over x_2}=5e^{x_2},$于是梯度为$[6x_1,5e^{x_2}]$.</p>
+<p>(3)函数$f({\bf x})=||{\bf x}||_2$的梯度是什么?</p>
+<p>解: 假设$x=(x_1,x_2,\cdots,x_n)$, 那么</p>
 <p>$$
 f(x)=\sqrt{\sum _{i=1}^n x_i^2}
 $$</p>
-<p>那么 \(\partial f/\partial x=\) </p>
+<p>那么$\partial f/\partial x=$</p>
 
     </div>
-
-   
-   
-   
     <hr>
-
-
-
-
-
-
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+          inlineMath: [ ['$','$'] ],
+          displayMath: [ ['$$','$$'] ],
+          processEscapes: true
+        },
+        "HTML-CSS": { fonts: ["TeX"] }
+      });
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
     <div id="disqus_thread"></div>
     <script type="text/javascript" async
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
     </script>
     <script>
-        /**
-        *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-        *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
-        
-        // var disqus_config = function () {
-        // this.page.url = ;  // Replace PAGE_URL with your page's canonical URL variable
-        // this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-        // };
-        
-        (function() { // DON'T EDIT BELOW THIS LINE
+        (function() { 
         var d = document, s = d.createElement('script');
         s.src = 'https://augpath.disqus.com/embed.js';
         s.setAttribute('data-timestamp', +new Date());

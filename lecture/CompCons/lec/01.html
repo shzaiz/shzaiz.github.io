@@ -3,11 +3,11 @@
   <head>
     <link rel="stylesheet" href="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/style.css">
     <script src="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/plugin.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex, nofollow">
     <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
- 
     <script>
 const copyButtonLabel = "Copy Code";
 
@@ -59,14 +59,12 @@ async function copyCode(block) {
         code {
             font-family: 'Courier New', Courier, monospace;
         } 
-
         pre {
             font-family: 'Courier New', Courier, monospace;
         } 
         div{
             max-width: 100%;
             overflow: auto;
-            
         }
         .navbar {
             overflow: hidden;
@@ -75,7 +73,6 @@ async function copyCode(block) {
             top: 0; /* Position the navbar at the top of the page */
             width: 100%; /* Full width */
         }
-
         img {
         max-width: 80%;
         height: auto;
@@ -88,7 +85,6 @@ async function copyCode(block) {
             padding: 14px 16px;
             text-decoration: none;
         }
-
         a {
             color: #148bca;
             text-align: center;
@@ -96,185 +92,176 @@ async function copyCode(block) {
             padding-right: 2px;
             text-decoration: none;
         }
-
         p.hidden {
           overflow: hidden;
         }
-
     </style>
   </head>
   <body>
-    
     <div class="navbar">
         <a href="https://shzaiz.github.io">AUG's Wiki</a>
         <a href="index.html"> ↑ Back to contents</a>
-        Last updated at 2024-01-07 15:14:49.738478
+        Last updated at 2024-01-07 20:32:46.005409
     </div>
 
     <div class="toc"></div>
     <a id="toc-button"><i class="far fa-bookmark"></i></a>
     
-    <div>
+    <div id="renderedContent">
       <h1>01 Roaming on Computer Systems</h1>
 <iframe src="https://www.slideshare.net/slideshow/embed_code/key/to08FBs110wY5r?hostedIn=slideshare&page=upload" width="476" height="400" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>
 <h2>目的: 理解计算机的行为</h2>
 <p>实例代码1: 为什么会出现这样的情况?</p>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #9C6500">#include</span><span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">&lt;stdio.h&gt;</span>
+<pre><code class="language-cpp">#include &lt;stdio.h&gt;
 
-<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>a[<span style="color: #666666">100</span>];
+int a[100];
 
-<span style="color: #3D7B7B; font-style: italic">// fill array a from 0 to n-1 to 1</span>
-<span style="color: #B00040">void</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">change</span>(<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>n){
-<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">for</span>(<span style="color: #B00040">unsigned</span><span style="color: #bbbbbb"> </span>i<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>;<span style="color: #bbbbbb"> </span>i<span style="color: #666666">&lt;=</span>n<span style="color: #666666">-1</span>;<span style="color: #bbbbbb"> </span>i<span style="color: #666666">++</span>){
-<span style="color: #bbbbbb">        </span>a[i]<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #666666">1</span>;
-<span style="color: #bbbbbb">    </span>}
+// fill array a from 0 to n-1 to 1
+void change(int n){
+    for(unsigned i = 0; i&lt;=n-1; i++){
+        a[i] = 1;
+    }
 }
 
-<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">main</span>(){
-<span style="color: #bbbbbb">    </span>change(<span style="color: #666666">0</span>);
+int main(){
+    change(0);
 }
-</pre></div>
-
+</code></pre>
 <p>实例代码2: 一个奇怪的编译错误</p>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #3D7B7B; font-style: italic">// Circle.h</span>
+<pre><code class="language-cpp">
+// Circle.h
 
-<span style="color: #9C6500">#include</span><span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">&lt;iostream&gt;</span>
-<span style="color: #9C6500">#include</span><span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">&quot;point.h&quot;</span>
-<span style="color: #008000; font-weight: bold">using</span><span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">namespace</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF; font-weight: bold">std</span>;
+#include &lt;iostream&gt;
+#include &quot;point.h&quot;
+using namespace std;
 
-<span style="color: #008000; font-weight: bold">class</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF; font-weight: bold">Circle</span><span style="color: #bbbbbb"> </span>{
-<span style="color: #bbbbbb">    </span><span style="color: #B00040">float</span><span style="color: #bbbbbb"> </span>r;
-<span style="color: #bbbbbb">    </span>Point<span style="color: #bbbbbb"> </span>center;
+class Circle {
+    float r;
+    Point center;
 
-<span style="color: #bbbbbb">   </span><span style="color: #008000; font-weight: bold">public</span><span style="color: #666666">:</span>
-<span style="color: #bbbbbb">    </span><span style="color: #B00040">void</span><span style="color: #bbbbbb"> </span>setR(<span style="color: #B00040">float</span><span style="color: #bbbbbb"> </span>i_r);
-<span style="color: #bbbbbb">    </span><span style="color: #B00040">float</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">getR</span>();
-<span style="color: #bbbbbb">    </span><span style="color: #B00040">void</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">setCenter</span>(<span style="color: #B00040">float</span><span style="color: #bbbbbb"> </span>x,<span style="color: #bbbbbb"> </span><span style="color: #B00040">float</span><span style="color: #bbbbbb"> </span>y);
-<span style="color: #bbbbbb">    </span><span style="color: #B00040">void</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">setCenter</span>(Point<span style="color: #bbbbbb"> </span>A);
-<span style="color: #bbbbbb">    </span>Point<span style="color: #bbbbbb"> </span><span style="color: #0000FF">getCenter</span>();
-<span style="color: #bbbbbb">    </span>string<span style="color: #bbbbbb"> </span><span style="color: #0000FF">rationshipWithAnother</span>(Circle<span style="color: #666666">&amp;</span><span style="color: #bbbbbb"> </span>c);
+   public:
+    void setR(float i_r);
+    float getR();
+    void setCenter(float x, float y);
+    void setCenter(Point A);
+    Point getCenter();
+    string rationshipWithAnother(Circle&amp; c);
 };
 
-<span style="color: #3D7B7B; font-style: italic">// Circle.h end</span>
-<span style="color: #3D7B7B; font-style: italic">// point.h</span>
+// Circle.h end
+// point.h
 
-<span style="color: #9C6500">#include</span><span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">&lt;iostream&gt;</span>
-<span style="color: #008000; font-weight: bold">using</span><span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">namespace</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF; font-weight: bold">std</span>;
-<span style="color: #008000; font-weight: bold">class</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF; font-weight: bold">Point</span><span style="color: #bbbbbb"> </span>{
-<span style="color: #bbbbbb">    </span><span style="color: #B00040">float</span><span style="color: #bbbbbb"> </span>x,<span style="color: #bbbbbb"> </span>y;
+#include &lt;iostream&gt;
+using namespace std;
+class Point {
+    float x, y;
 
-<span style="color: #bbbbbb">   </span><span style="color: #008000; font-weight: bold">public</span><span style="color: #666666">:</span>
-<span style="color: #bbbbbb">    </span><span style="color: #B00040">void</span><span style="color: #bbbbbb"> </span>setCord(<span style="color: #B00040">float</span><span style="color: #bbbbbb"> </span>i_x,<span style="color: #bbbbbb"> </span><span style="color: #B00040">float</span><span style="color: #bbbbbb"> </span>i_y);
-<span style="color: #bbbbbb">    </span><span style="color: #B00040">float</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">getX</span>();
-<span style="color: #bbbbbb">    </span><span style="color: #B00040">float</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">getY</span>();
+   public:
+    void setCord(float i_x, float i_y);
+    float getX();
+    float getY();
 };
 
-<span style="color: #3D7B7B; font-style: italic">// point.h end</span>
+// point.h end
 
-<span style="color: #3D7B7B; font-style: italic">// point.cpp</span>
-<span style="color: #9C6500">#include</span><span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">&quot;point.h&quot;</span>
-<span style="color: #9C6500">#include</span><span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">&lt;iostream&gt;</span>
-<span style="color: #008000; font-weight: bold">using</span><span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">namespace</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF; font-weight: bold">std</span>;
+// point.cpp
+#include &quot;point.h&quot;
+#include &lt;iostream&gt;
+using namespace std;
 
-<span style="color: #B00040">void</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">Point::setCord</span>(<span style="color: #B00040">float</span><span style="color: #bbbbbb"> </span>i_x,<span style="color: #bbbbbb"> </span><span style="color: #B00040">float</span><span style="color: #bbbbbb"> </span>i_y)<span style="color: #bbbbbb"> </span>{
-<span style="color: #bbbbbb">    </span>x<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>i_x,<span style="color: #bbbbbb"> </span>y<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>i_y;
+void Point::setCord(float i_x, float i_y) {
+    x = i_x, y = i_y;
 }
-<span style="color: #B00040">float</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">Point::getX</span>()<span style="color: #bbbbbb"> </span>{
-<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">return</span><span style="color: #bbbbbb"> </span>x;
+float Point::getX() {
+    return x;
 }
-<span style="color: #B00040">float</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">Point::getY</span>()<span style="color: #bbbbbb"> </span>{
-<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">return</span><span style="color: #bbbbbb"> </span>y;
+float Point::getY() {
+    return y;
 }
-<span style="color: #3D7B7B; font-style: italic">// point.cpp end</span>
+// point.cpp end
 
-<span style="color: #3D7B7B; font-style: italic">// circle.cpp</span>
+// circle.cpp
 
-<span style="color: #9C6500">#include</span><span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">&quot;circle.h&quot;</span>
-<span style="color: #9C6500">#include</span><span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">&lt;iostream&gt;</span>
-<span style="color: #9C6500">#include</span><span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">&quot;point.h&quot;</span>
-<span style="color: #008000; font-weight: bold">using</span><span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">namespace</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF; font-weight: bold">std</span>;
+#include &quot;circle.h&quot;
+#include &lt;iostream&gt;
+#include &quot;point.h&quot;
+using namespace std;
 
-<span style="color: #B00040">void</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">Circle::setR</span>(<span style="color: #B00040">float</span><span style="color: #bbbbbb"> </span>i_r)<span style="color: #bbbbbb"> </span>{
-<span style="color: #bbbbbb">    </span>r<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>i_r;
+void Circle::setR(float i_r) {
+    r = i_r;
 }
-<span style="color: #B00040">float</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">Circle::getR</span>()<span style="color: #bbbbbb"> </span>{
-<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">return</span><span style="color: #bbbbbb"> </span>r;
+float Circle::getR() {
+    return r;
 }
-<span style="color: #B00040">void</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">Circle::setCenter</span>(<span style="color: #B00040">float</span><span style="color: #bbbbbb"> </span>x,<span style="color: #bbbbbb"> </span><span style="color: #B00040">float</span><span style="color: #bbbbbb"> </span>y)<span style="color: #bbbbbb"> </span>{
-<span style="color: #bbbbbb">    </span>Point<span style="color: #bbbbbb"> </span>A;
-<span style="color: #bbbbbb">    </span>A.setCord(x,<span style="color: #bbbbbb"> </span>y);
-<span style="color: #bbbbbb">    </span>center<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>A;
+void Circle::setCenter(float x, float y) {
+    Point A;
+    A.setCord(x, y);
+    center = A;
 }
-<span style="color: #B00040">void</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">Circle::setCenter</span>(Point<span style="color: #bbbbbb"> </span>A)<span style="color: #bbbbbb"> </span>{
-<span style="color: #bbbbbb">    </span>center<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>A;
+void Circle::setCenter(Point A) {
+    center = A;
 }
-Point<span style="color: #bbbbbb"> </span><span style="color: #0000FF">Circle::getCenter</span>()<span style="color: #bbbbbb"> </span>{
-<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">return</span><span style="color: #bbbbbb"> </span>center;
-}
-
-string<span style="color: #bbbbbb"> </span><span style="color: #0000FF">Circle::rationshipWithAnother</span>(Circle<span style="color: #666666">&amp;</span><span style="color: #bbbbbb"> </span>c)<span style="color: #bbbbbb"> </span>{
-<span style="color: #bbbbbb">    </span><span style="color: #B00040">float</span><span style="color: #bbbbbb"> </span>distance<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>(center.getX()<span style="color: #bbbbbb"> </span><span style="color: #666666">-</span><span style="color: #bbbbbb"> </span>c.getCenter().getX())<span style="color: #bbbbbb"> </span><span style="color: #666666">*</span>
-<span style="color: #bbbbbb">                         </span>(center.getX()<span style="color: #bbbbbb"> </span><span style="color: #666666">-</span><span style="color: #bbbbbb"> </span>c.getCenter().getX())<span style="color: #bbbbbb"> </span><span style="color: #666666">+</span>
-<span style="color: #bbbbbb">                     </span>(center.getY()<span style="color: #bbbbbb"> </span><span style="color: #666666">-</span><span style="color: #bbbbbb"> </span>c.getCenter().getY())<span style="color: #bbbbbb"> </span><span style="color: #666666">*</span>
-<span style="color: #bbbbbb">                         </span>(center.getY()<span style="color: #bbbbbb"> </span><span style="color: #666666">-</span><span style="color: #bbbbbb"> </span>c.getCenter().getY());
-<span style="color: #bbbbbb">    </span><span style="color: #B00040">float</span><span style="color: #bbbbbb"> </span>r2<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>c.getR();
-<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">if</span><span style="color: #bbbbbb"> </span>(distance<span style="color: #bbbbbb"> </span><span style="color: #666666">&gt;</span><span style="color: #bbbbbb"> </span>(r<span style="color: #bbbbbb"> </span><span style="color: #666666">+</span><span style="color: #bbbbbb"> </span>r2)<span style="color: #bbbbbb"> </span><span style="color: #666666">*</span><span style="color: #bbbbbb"> </span>(r<span style="color: #bbbbbb"> </span><span style="color: #666666">+</span><span style="color: #bbbbbb"> </span>r2))
-<span style="color: #bbbbbb">        </span><span style="color: #008000; font-weight: bold">return</span><span style="color: #bbbbbb"> </span><span style="color: #BA2121">&quot;AAAA&quot;</span>;
-<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">else</span><span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">if</span><span style="color: #bbbbbb"> </span>(distance<span style="color: #bbbbbb"> </span><span style="color: #666666">==</span><span style="color: #bbbbbb"> </span>(r<span style="color: #bbbbbb"> </span><span style="color: #666666">+</span><span style="color: #bbbbbb"> </span>r2)<span style="color: #bbbbbb"> </span><span style="color: #666666">*</span><span style="color: #bbbbbb"> </span>(r<span style="color: #bbbbbb"> </span><span style="color: #666666">+</span><span style="color: #bbbbbb"> </span>r2))
-<span style="color: #bbbbbb">        </span><span style="color: #008000; font-weight: bold">return</span><span style="color: #bbbbbb"> </span><span style="color: #BA2121">&quot;BBBB&quot;</span>;
-<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">else</span><span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">if</span><span style="color: #bbbbbb"> </span>(distance<span style="color: #bbbbbb"> </span><span style="color: #666666">&gt;</span><span style="color: #bbbbbb"> </span>(r<span style="color: #bbbbbb"> </span><span style="color: #666666">-</span><span style="color: #bbbbbb"> </span>r2)<span style="color: #bbbbbb"> </span><span style="color: #666666">*</span><span style="color: #bbbbbb"> </span>(r<span style="color: #bbbbbb"> </span><span style="color: #666666">-</span><span style="color: #bbbbbb"> </span>r2))
-<span style="color: #bbbbbb">        </span><span style="color: #008000; font-weight: bold">return</span><span style="color: #bbbbbb"> </span><span style="color: #BA2121">&quot;CCCC&quot;</span>;
-<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">else</span><span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">if</span><span style="color: #bbbbbb"> </span>(distance<span style="color: #bbbbbb"> </span><span style="color: #666666">==</span><span style="color: #bbbbbb"> </span>(r<span style="color: #bbbbbb"> </span><span style="color: #666666">-</span><span style="color: #bbbbbb"> </span>r2)<span style="color: #bbbbbb"> </span><span style="color: #666666">*</span><span style="color: #bbbbbb"> </span>(r<span style="color: #bbbbbb"> </span><span style="color: #666666">-</span><span style="color: #bbbbbb"> </span>r2))
-<span style="color: #bbbbbb">        </span><span style="color: #008000; font-weight: bold">return</span><span style="color: #bbbbbb"> </span><span style="color: #BA2121">&quot;DDDD&quot;</span>;
-<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">else</span>
-<span style="color: #bbbbbb">        </span><span style="color: #008000; font-weight: bold">return</span><span style="color: #bbbbbb"> </span><span style="color: #BA2121">&quot;EEEE&quot;</span>;
+Point Circle::getCenter() {
+    return center;
 }
 
-<span style="color: #3D7B7B; font-style: italic">// Circle.cpp end</span>
-<span style="color: #3D7B7B; font-style: italic">// main.cpp</span>
-<span style="color: #9C6500">#include</span><span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">&lt;iostream&gt;</span>
-<span style="color: #9C6500">#include</span><span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">&quot;point.h&quot;</span>
-<span style="color: #9C6500">#include</span><span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">&quot;circle.h&quot;</span>
-<span style="color: #008000; font-weight: bold">using</span><span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">namespace</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF; font-weight: bold">std</span>;
-
-<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">main</span>()<span style="color: #bbbbbb"> </span>{
-<span style="color: #bbbbbb">    </span>Circle<span style="color: #bbbbbb"> </span>c1,<span style="color: #bbbbbb"> </span>c2;
-<span style="color: #bbbbbb">    </span>c1.setCenter(<span style="color: #666666">0</span>,<span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>);
-<span style="color: #bbbbbb">    </span>cout<span style="color: #bbbbbb"> </span><span style="color: #666666">&lt;&lt;</span><span style="color: #bbbbbb"> </span><span style="color: #BA2121">&quot;succeed&quot;</span><span style="color: #bbbbbb"> </span><span style="color: #666666">&lt;&lt;</span><span style="color: #bbbbbb"> </span>endl;
-<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">return</span><span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>;
+string Circle::rationshipWithAnother(Circle&amp; c) {
+    float distance = (center.getX() - c.getCenter().getX()) *
+                         (center.getX() - c.getCenter().getX()) +
+                     (center.getY() - c.getCenter().getY()) *
+                         (center.getY() - c.getCenter().getY());
+    float r2 = c.getR();
+    if (distance &gt; (r + r2) * (r + r2))
+        return &quot;AAAA&quot;;
+    else if (distance == (r + r2) * (r + r2))
+        return &quot;BBBB&quot;;
+    else if (distance &gt; (r - r2) * (r - r2))
+        return &quot;CCCC&quot;;
+    else if (distance == (r - r2) * (r - r2))
+        return &quot;DDDD&quot;;
+    else
+        return &quot;EEEE&quot;;
 }
-<span style="color: #3D7B7B; font-style: italic">// main.cpp end</span>
-</pre></div>
 
+// Circle.cpp end
+// main.cpp
+#include &lt;iostream&gt;
+#include &quot;point.h&quot;
+#include &quot;circle.h&quot;
+using namespace std;
+
+int main() {
+    Circle c1, c2;
+    c1.setCenter(0, 0);
+    cout &lt;&lt; &quot;succeed&quot; &lt;&lt; endl;
+    return 0;
+}
+// main.cpp end
+</code></pre>
 <iframe src="https://www.slideshare.net/slideshow/embed_code/key/1qFo3LYWsQ2LmM?hostedIn=slideshare&page=upload" width="476" height="400" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>
-
     </div>
-
-   
-   
-   
     <hr>
-
-
-
-
-
-
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+          inlineMath: [ ['$','$'] ],
+          displayMath: [ ['$$','$$'] ],
+          processEscapes: true
+        },
+        "HTML-CSS": { fonts: ["TeX"] }
+      });
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
     <div id="disqus_thread"></div>
     <script type="text/javascript" async
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
     </script>
     <script>
-        /**
-        *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-        *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
-        
-        // var disqus_config = function () {
-        // this.page.url = ;  // Replace PAGE_URL with your page's canonical URL variable
-        // this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-        // };
-        
-        (function() { // DON'T EDIT BELOW THIS LINE
+        (function() { 
         var d = document, s = d.createElement('script');
         s.src = 'https://augpath.disqus.com/embed.js';
         s.setAttribute('data-timestamp', +new Date());

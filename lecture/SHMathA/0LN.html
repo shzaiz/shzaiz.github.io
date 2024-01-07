@@ -3,11 +3,11 @@
   <head>
     <link rel="stylesheet" href="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/style.css">
     <script src="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/plugin.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex, nofollow">
     <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
- 
     <script>
 const copyButtonLabel = "Copy Code";
 
@@ -59,14 +59,12 @@ async function copyCode(block) {
         code {
             font-family: 'Courier New', Courier, monospace;
         } 
-
         pre {
             font-family: 'Courier New', Courier, monospace;
         } 
         div{
             max-width: 100%;
             overflow: auto;
-            
         }
         .navbar {
             overflow: hidden;
@@ -75,7 +73,6 @@ async function copyCode(block) {
             top: 0; /* Position the navbar at the top of the page */
             width: 100%; /* Full width */
         }
-
         img {
         max-width: 80%;
         height: auto;
@@ -88,7 +85,6 @@ async function copyCode(block) {
             padding: 14px 16px;
             text-decoration: none;
         }
-
         a {
             color: #148bca;
             text-align: center;
@@ -96,25 +92,22 @@ async function copyCode(block) {
             padding-right: 2px;
             text-decoration: none;
         }
-
         p.hidden {
           overflow: hidden;
         }
-
     </style>
   </head>
   <body>
-    
     <div class="navbar">
         <a href="https://shzaiz.github.io">AUG's Wiki</a>
         <a href="index.html"> ↑ Back to contents</a>
-        Last updated at 2024-01-07 15:14:49.042925
+        Last updated at 2024-01-07 20:32:45.394723
     </div>
 
     <div class="toc"></div>
     <a id="toc-button"><i class="far fa-bookmark"></i></a>
     
-    <div>
+    <div id="renderedContent">
       <hr />
 <h2>mainfont: Noto Sans Mono CJK TC</h2>
 <h1>LN0 - 初中内容拾遗(1)</h1>
@@ -137,8 +130,8 @@ async function copyCode(block) {
 <h2>数据: 新课改与高考的难度</h2>
 <ul>
 <li>逐渐减小的!</li>
-<li>2000年, 考取PKU的分数线是600分. 但现在可能不会那么低了.  \(600\to 690\) .</li>
-<li>打折了! &#x27;减负嘛!&#x27;</li>
+<li>2000年, 考取PKU的分数线是600分. 但现在可能不会那么低了. $600\to 690$.</li>
+<li>打折了! '减负嘛!'</li>
 <li>我们补上来好吧</li>
 </ul>
 <h2>注意: 代数的重要地位</h2>
@@ -154,7 +147,7 @@ async function copyCode(block) {
 <li>多玩玩数学</li>
 <li>解答完之后再看看有没有什么可以玩的东西!
 <ul>
-<li>例如: 第二题: 见到这个 \(x\) ,  \(y\) , 我有哪些想法, 那些思考?</li>
+<li>例如: 第二题: 见到这个$x$, $y$, 我有哪些想法, 那些思考?</li>
 <li>自己造一个吧!</li>
 </ul>
 </li>
@@ -167,9 +160,9 @@ async function copyCode(block) {
 </li>
 <li>拿例二试试:
 <ul>
-<li> \(x^3-y^3\) 可以求吗?  \(x^4-y^4\) 可以求吗?</li>
+<li>$x^3-y^3$可以求吗? $x^4-y^4$可以求吗?</li>
 <li>可以! 就像原子拼出来分子一样, 可以进行转化!</li>
-<li>那么 \(y/x+x/y\) 呢?...</li>
+<li>那么$y/x+x/y$呢?...</li>
 <li>Good luck and have fun!</li>
 </ul>
 </li>
@@ -258,7 +251,7 @@ $$</p>
 \end{aligned}
 $$</p>
 <ul>
-<li>把 \(b\) 换成 \(-b\) 就行了! 这才是用正确的方式做正确的事情!</li>
+<li>把$b$换成$-b$就行了! 这才是用正确的方式做正确的事情!</li>
 </ul>
 <p>$$
 \begin{aligned}
@@ -285,7 +278,7 @@ $$
 <li>你们的老学长到高三的时候才领悟到这件事, 导致了他的圆锥曲线计算一直比较慢(因为要适应, 还不能犯错)</li>
 <li>用正确的方法做正确的事!</li>
 </ul>
-<p>举例:  \((3x^2+2x+5)(x+3)=?x^3+?x^2+?x+?\) </p>
+<p>举例: $(3x^2+2x+5)(x+3)=?x^3+?x^2+?x+?$</p>
 <ul>
 <li>先观察形式结构!</li>
 <li>以后学圆锥曲线你就知道了.
@@ -293,17 +286,17 @@ $$
 $$
 x^2/4+y^2/3=1, y=3x+1.
 $$
-变成 \(?x^2+?x+?=0\) . 有目标再回去找人吧!</li>
+变成$?x^2+?x+?=0$. 有目标再回去找人吧!</li>
 </ul>
 <p>另外一个探索: 两位数乘两位数, 为什么列竖式是对的? 有没有什么更快速的方法? 《解题研究》</p>
-<p>找规律, 找出 \(a^5-b^5=(a-b)(?)\) </p>
+<p>找规律, 找出$a^5-b^5=(a-b)(?)$</p>
 <h2>看4.</h2>
 <ul>
 <li>看答案是不是很震惊!!!</li>
 <li>没错, 这东西不是整系数的.</li>
 <li>但是多项式的性质告诉我们, 任何一个高于3次的多项式都可以被分解为若干个一次和二次的因式的乘积! (在实数域上)</li>
 <li>好神奇! 参见《高等代数》.</li>
-<li> \(a^6+b^6=?\)   \(a^{114514}+b^{114514}=?\) </li>
+<li>$a^6+b^6=?$ $a^{114514}+b^{114514}=?$</li>
 </ul>
 <h2>为什么数学是科学?</h2>
 <ul>
@@ -322,15 +315,15 @@ $$
 <li>今天我们上课讲这个定律和5个例外. (你们学了就知道了)</li>
 </ul>
 </li>
-<li>生物:<del>(这算理科?)</del> 真正参与计算的你那一部分学好数学就行了, 剩下全背.</li>
+<li>生物:~~(这算理科?)~~ 真正参与计算的你那一部分学好数学就行了, 剩下全背.</li>
 </ul>
 <h2>韦达定理</h2>
-<p>说的是若 \(ax^2+bx+c=0(a\neq0)\) , 若存在两个实根,  \(x_1+x_2=-b/a\) ,  \(x_1x_2=c/a\) .</p>
-<p><del>韦达定理是十分伟大, 因为是韦达发现的.</del> 戳啦! 韦达定理不是韦达发现的(意味深).</p>
-<p>为什么?(不那么暴力的阐述) 任意一个二次方程, 都可以写成 \(a(x-x_1)(x-x_2)=0\) , 展开, 比对,  \(ax^2-a(x_1+x_2)x+a(x_1x_2)=0\) , 说明完毕.</p>
+<p>说的是若$ax^2+bx+c=0(a\neq0)$, 若存在两个实根, $x_1+x_2=-b/a$, $x_1x_2=c/a$.</p>
+<p>~~韦达定理是十分伟大, 因为是韦达发现的.~~ 戳啦! 韦达定理不是韦达发现的(意味深).</p>
+<p>为什么?(不那么暴力的阐述) 任意一个二次方程, 都可以写成$a(x-x_1)(x-x_2)=0$, 展开, 比对, $ax^2-a(x_1+x_2)x+a(x_1x_2)=0$, 说明完毕.</p>
 <ul>
 <li>
-<p>诶, 好像可以推广! 三次方程试试看!  \(ax^3+bx^2+cx+d=0(a\neq0)\) , 是不是也有类似的形式?</p>
+<p>诶, 好像可以推广! 三次方程试试看! $ax^3+bx^2+cx+d=0(a\neq0)$, 是不是也有类似的形式?</p>
 </li>
 <li>
 <p>但你已经可以写出来了! 有意思的, 对吧? 看6. 很自然的吧. 四次方程有吗? 100次有吗? 留个悬念!</p>
@@ -340,22 +333,22 @@ $$
 </li>
 </ul>
 <p>意义: 表达了根与系数的关系. 之后你会体会到这种方法的方便之处的.</p>
-<p>例子:  \(x_1^2+x_2^2, x_1^3+x_2^3\) .</p>
+<p>例子: $x_1^2+x_2^2, x_1^3+x_2^3$.</p>
 <ul>
 <li>我们还可以把它还原成一个方程...</li>
 </ul>
-<p>Takeaway: 一切<strong>对称形式</strong>都可以用韦达定理表示.(有时候叫做轮换对称式(就是把所有的 \(x\) 换成 \(y\) ,  \(y\) 换成 \(x\) , 形式还不变的式子))</p>
+<p>Takeaway: 一切<strong>对称形式</strong>都可以用韦达定理表示.(有时候叫做轮换对称式(就是把所有的$x$换成$y$, $y$换成$x$, 形式还不变的式子))</p>
 <ul>
 <li>你还会发现如果我们已经知道一个根的时候就可以用这个东西快速整出来, 不用再进行繁杂的计算了. Cool!</li>
 </ul>
-<p>例子:  \(x^2+2kx-k^2+3=0\) , 一个根是 \(2\) , 求另一个根.</p>
+<p>例子: $x^2+2kx-k^2+3=0$, 一个根是$2$, 求另一个根.</p>
 <p>学解析几何的时候你会知道的.</p>
 <h2>看6.</h2>
 <ul>
-<li>有实数根说明 \(\Delta &gt;0\) .</li>
-<li>那么是 \(x_1+x_2&gt;2, x_1x_2&gt;1\) . 这对吗?</li>
-<li>反例:  \(x_1=0.1, x_2=100\) .</li>
-<li>这样:  \((x_1-1)(x_2-1)&gt;0\) ,  \((x_1-1)+(x_2-1)&gt;0\) </li>
+<li>有实数根说明$\Delta &gt;0$.</li>
+<li>那么是$x_1+x_2&gt;2, x_1x_2&gt;1$. 这对吗?</li>
+<li>反例: $x_1=0.1, x_2=100$.</li>
+<li>这样: $(x_1-1)(x_2-1)&gt;0$, $(x_1-1)+(x_2-1)&gt;0$</li>
 <li>针不戳.</li>
 </ul>
 <h1>总结: 学到了什么</h1>
@@ -364,7 +357,7 @@ $$
 <li>举个例子, 以后可能会学习更多奇妙的领域, 肯定会接触到很多奇妙的定义/定理/证明.
 <ul>
 <li>整除:若整数b除以非零整数a，商为整数，且余数为零，b为被除数，a为除数，即a|b（“|”是整除符号），读作“a整除b”或“b能被a整除”。a叫做b的约数（或因数），b叫做a的倍数。</li>
-<li>对吗?  \(3|2 \qquad  2|6\qquad  a|3a\qquad\) </li>
+<li>对吗? $3|2 \qquad  2|6\qquad  a|3a\qquad$</li>
 <li>这个符号为什么这样写? 像不像从后面的数抽出一个因子放在了前面?</li>
 <li>...</li>
 </ul>
@@ -390,7 +383,7 @@ $$</p>
 </li>
 </ul>
 <h2>韦达定理 (非常基础, 建议刻进DNA)</h2>
-<p>若 \(ax^2+bx+c=0(a\neq0)\) , 若存在两个实根,  \(x_1+x_2=-b/a\) ,  \(x_1x_2=c/a\) .</p>
+<p>若$ax^2+bx+c=0(a\neq0)$, 若存在两个实根, $x_1+x_2=-b/a$, $x_1x_2=c/a$.</p>
 <h2>留下了那些悬念?</h2>
 <p>3个悬念!</p>
 <ul>
@@ -410,37 +403,33 @@ $$</p>
 <h1>End.</h1>
 <h2>Good luck and have fun!</h2>
 <p>最后附上(整个高中数学的)生存指南:</p>
-<p>核心指导原则: Don&#x27;t Panic. (不要慌)    ——The Hitchhiker&#x27;s Guide to the Galaxy</p>
-<p>Real power can&#x27;t be given, it must be taken. ——Godfather</p>
+<p>核心指导原则: Don't Panic. (不要慌)    ——The Hitchhiker's Guide to the Galaxy</p>
+<p>Real power can't be given, it must be taken. ——Godfather</p>
 <p>(不太全, 每一话的Lecture Notes应该会想到一点补一点.)</p>
 
     </div>
-
-   
-   
-   
     <hr>
-
-
-
-
-
-
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+          inlineMath: [ ['$','$'] ],
+          displayMath: [ ['$$','$$'] ],
+          processEscapes: true
+        },
+        "HTML-CSS": { fonts: ["TeX"] }
+      });
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
     <div id="disqus_thread"></div>
     <script type="text/javascript" async
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
     </script>
     <script>
-        /**
-        *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-        *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
-        
-        // var disqus_config = function () {
-        // this.page.url = ;  // Replace PAGE_URL with your page's canonical URL variable
-        // this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-        // };
-        
-        (function() { // DON'T EDIT BELOW THIS LINE
+        (function() { 
         var d = document, s = d.createElement('script');
         s.src = 'https://augpath.disqus.com/embed.js';
         s.setAttribute('data-timestamp', +new Date());

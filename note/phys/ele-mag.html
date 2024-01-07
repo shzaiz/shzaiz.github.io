@@ -3,11 +3,11 @@
   <head>
     <link rel="stylesheet" href="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/style.css">
     <script src="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/plugin.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex, nofollow">
     <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
- 
     <script>
 const copyButtonLabel = "Copy Code";
 
@@ -59,14 +59,12 @@ async function copyCode(block) {
         code {
             font-family: 'Courier New', Courier, monospace;
         } 
-
         pre {
             font-family: 'Courier New', Courier, monospace;
         } 
         div{
             max-width: 100%;
             overflow: auto;
-            
         }
         .navbar {
             overflow: hidden;
@@ -75,7 +73,6 @@ async function copyCode(block) {
             top: 0; /* Position the navbar at the top of the page */
             width: 100%; /* Full width */
         }
-
         img {
         max-width: 80%;
         height: auto;
@@ -88,7 +85,6 @@ async function copyCode(block) {
             padding: 14px 16px;
             text-decoration: none;
         }
-
         a {
             color: #148bca;
             text-align: center;
@@ -96,37 +92,34 @@ async function copyCode(block) {
             padding-right: 2px;
             text-decoration: none;
         }
-
         p.hidden {
           overflow: hidden;
         }
-
     </style>
   </head>
   <body>
-    
     <div class="navbar">
         <a href="https://shzaiz.github.io">AUG's Wiki</a>
         <a href="index.html"> ↑ Back to contents</a>
-        Last updated at 2024-01-07 15:14:48.567076
+        Last updated at 2024-01-07 20:32:45.075419
     </div>
 
     <div class="toc"></div>
     <a id="toc-button"><i class="far fa-bookmark"></i></a>
     
-    <div>
+    <div id="renderedContent">
       <h1>真空中的静电场</h1>
 <p><img src="https://s2.loli.net/2023/05/06/CcrTJGqjHxnybzF.png" alt="Img" /></p>
-<p>这里需要注意不同的内容所对应的不同的 \(dr\) 的选取, 以及 \(dq\) 与 \(dr\) 的关系.</p>
-<p><strong> \(dQ\) 与 \(dr\) 的关系</strong></p>
+<p>这里需要注意不同的内容所对应的不同的$dr$的选取, 以及$dq$与$dr$的关系.</p>
+<p><strong>$dQ$与$dr$的关系</strong></p>
 <ul>
-<li>线状分布:  \(dq=\lambda dl\) , 其中 \(\lambda=\) 总电荷量/总长度.
+<li>线状分布: $dq=\lambda dl$, 其中$\lambda=$总电荷量/总长度.
 <ul>
-<li> \(\lambda=\delta_0 dx\) , 面密度求导就是线密度, 其余类似</li>
+<li>$\lambda=\delta_0 dx$, 面密度求导就是线密度, 其余类似</li>
 </ul>
 </li>
-<li>面状分布:  \(dq=\delta ds\) ,其中 \(\lambda=\) 面电荷量/总面积.</li>
-<li>体状分布:  \(dq=\rho dV\) ,  其中 \(\lambda=\) 面电荷量/总体积.</li>
+<li>面状分布: $dq=\delta ds$,其中$\lambda=$面电荷量/总面积.</li>
+<li>体状分布: $dq=\rho dV$,  其中$\lambda=$面电荷量/总体积.</li>
 </ul>
 <p>题目类型: 使用叠加法求</p>
 <p><img src="https://s2.loli.net/2023/05/06/beOPZkoQ8zN2D5w.png" alt="Img" /></p>
@@ -139,24 +132,24 @@ async function copyCode(block) {
 <p>题目类型: 求孤立导体的电量分布</p>
 <p><img src="https://s2.loli.net/2023/05/06/mUYd4b6KuPwDa8Q.png" alt="Img" /></p>
 <p>要点: 电荷守恒, 导体内部无净电荷分布</p>
-<p>接地的导体不一定 \(E=0\) . 接地等于电势为0.</p>
+<p>接地的导体不一定$E=0$. 接地等于电势为0.</p>
 <p><img src="https://s2.loli.net/2023/05/06/VCnKjDTXmotGa3S.png" alt="Img" /></p>
 <p><img src="https://s2.loli.net/2023/05/06/Ys7dimZnSfuloKw.png" alt="Img" /></p>
 <p><img src="https://s2.loli.net/2023/05/06/6m4sUkTwCHEzRy2.png" alt="Img" /></p>
-<p>这里需要着重强调电极化强度矢量 \(D\) 和 \(E\) 的一些关系:</p>
+<p>这里需要着重强调电极化强度矢量$D$和$E$的一些关系:</p>
 <p><strong>电位移矢量</strong></p>
 <ul>
-<li>定义:  \(\epsilon_0E+P:=D\) 为点位移矢量</li>
-<li>单位:  \(C/m^2\) , 和面密度的单位一致</li>
-<li>与电场强度 \(E\) 的关系:  \(D=\epsilon_0 \epsilon_r E\) </li>
-<li>D的高斯定理:  \(\oint_S D \cdot dS=q_{0\text{内}}\) .</li>
+<li>定义: $\epsilon_0E+P:=D$为点位移矢量</li>
+<li>单位: $C/m^2$, 和面密度的单位一致</li>
+<li>与电场强度$E$的关系: $D=\epsilon_0 \epsilon_r E$</li>
+<li>D的高斯定理: $\oint_S D \cdot dS=q_{0\text{内}}$.</li>
 </ul>
 <p><img src="https://s2.loli.net/2023/05/06/vVMdKg16bUZqcnQ.png" alt="Img" /></p>
 <h1>总结</h1>
 <h2>静电平衡的条件</h2>
 <ul>
-<li>E \(_内\)  = 0</li>
-<li>E \(_表 \perp\)  导体表面</li>
+<li>E$_内$ = 0</li>
+<li>E$_表 \perp$ 导体表面</li>
 <li>表面的电势差为0</li>
 </ul>
 <p>常见设问:</p>
@@ -192,36 +185,32 @@ $$E={\sigma} (一个面)$$</li>
 </ul>
 <h2>电容</h2>
 <ul>
-<li>定义:  \(C\equiv Q/V\) .</li>
+<li>定义: $C\equiv Q/V$.</li>
 </ul>
 
     </div>
-
-   
-   
-   
     <hr>
-
-
-
-
-
-
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+          inlineMath: [ ['$','$'] ],
+          displayMath: [ ['$$','$$'] ],
+          processEscapes: true
+        },
+        "HTML-CSS": { fonts: ["TeX"] }
+      });
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
     <div id="disqus_thread"></div>
     <script type="text/javascript" async
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
     </script>
     <script>
-        /**
-        *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-        *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
-        
-        // var disqus_config = function () {
-        // this.page.url = ;  // Replace PAGE_URL with your page's canonical URL variable
-        // this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-        // };
-        
-        (function() { // DON'T EDIT BELOW THIS LINE
+        (function() { 
         var d = document, s = d.createElement('script');
         s.src = 'https://augpath.disqus.com/embed.js';
         s.setAttribute('data-timestamp', +new Date());

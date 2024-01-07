@@ -3,11 +3,11 @@
   <head>
     <link rel="stylesheet" href="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/style.css">
     <script src="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/plugin.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex, nofollow">
     <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
- 
     <script>
 const copyButtonLabel = "Copy Code";
 
@@ -59,14 +59,12 @@ async function copyCode(block) {
         code {
             font-family: 'Courier New', Courier, monospace;
         } 
-
         pre {
             font-family: 'Courier New', Courier, monospace;
         } 
         div{
             max-width: 100%;
             overflow: auto;
-            
         }
         .navbar {
             overflow: hidden;
@@ -75,7 +73,6 @@ async function copyCode(block) {
             top: 0; /* Position the navbar at the top of the page */
             width: 100%; /* Full width */
         }
-
         img {
         max-width: 80%;
         height: auto;
@@ -88,7 +85,6 @@ async function copyCode(block) {
             padding: 14px 16px;
             text-decoration: none;
         }
-
         a {
             color: #148bca;
             text-align: center;
@@ -96,142 +92,135 @@ async function copyCode(block) {
             padding-right: 2px;
             text-decoration: none;
         }
-
         p.hidden {
           overflow: hidden;
         }
-
     </style>
   </head>
   <body>
-    
     <div class="navbar">
         <a href="https://shzaiz.github.io">AUG's Wiki</a>
         <a href="index.html"> ↑ Back to contents</a>
-        Last updated at 2024-01-07 15:14:48.344139
+        Last updated at 2024-01-07 20:32:44.988310
     </div>
 
     <div class="toc"></div>
     <a id="toc-button"><i class="far fa-bookmark"></i></a>
     
-    <div>
-      <div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #9C6500">#include</span><span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">&lt;iostream&gt;</span>
-<span style="color: #9C6500">#include</span><span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">&lt;vector&gt;</span>
-<span style="color: #9C6500">#include</span><span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">&lt;functional&gt;</span>
-<span style="color: #9C6500">#include</span><span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">&lt;memory&gt;</span>
-<span style="color: #9C6500">#include</span><span style="color: #bbbbbb"> </span><span style="color: #3D7B7B; font-style: italic">&lt;utility&gt;</span>
+    <div id="renderedContent">
+      <pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;functional&gt;
+#include &lt;memory&gt;
+#include &lt;utility&gt;
 
-<span style="color: #3D7B7B; font-style: italic">// Forward declarations</span>
-<span style="color: #008000; font-weight: bold">class</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF; font-weight: bold">Parser</span>;
+// Forward declarations
+class Parser;
 
-<span style="color: #3D7B7B; font-style: italic">// Define the necessary C++ types and structures</span>
-<span style="color: #008000; font-weight: bold">enum</span><span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">class</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF; font-weight: bold">UnaryOp</span><span style="color: #bbbbbb"> </span>{
-<span style="color: #bbbbbb">    </span><span style="color: #3D7B7B; font-style: italic">// Define your unary operators here</span>
+// Define the necessary C++ types and structures
+enum class UnaryOp {
+    // Define your unary operators here
 };
 
-<span style="color: #008000; font-weight: bold">enum</span><span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">class</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF; font-weight: bold">Associativity</span><span style="color: #bbbbbb"> </span>{
-<span style="color: #bbbbbb">    </span><span style="color: #3D7B7B; font-style: italic">// Define your associativity types here</span>
+enum class Associativity {
+    // Define your associativity types here
 };
 
-<span style="color: #008000; font-weight: bold">struct</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF; font-weight: bold">Expr</span><span style="color: #bbbbbb"> </span>{
-<span style="color: #bbbbbb">    </span><span style="color: #3D7B7B; font-style: italic">// Define your Expr struct here</span>
+struct Expr {
+    // Define your Expr struct here
 };
 
-<span style="color: #008000; font-weight: bold">struct</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF; font-weight: bold">Range</span><span style="color: #bbbbbb"> </span>{
-<span style="color: #bbbbbb">    </span><span style="color: #B00040">size_t</span><span style="color: #bbbbbb"> </span>start;
-<span style="color: #bbbbbb">    </span><span style="color: #B00040">size_t</span><span style="color: #bbbbbb"> </span>end;
+struct Range {
+    size_t start;
+    size_t end;
 };
 
-<span style="color: #3D7B7B; font-style: italic">// Define the Unary struct in C++</span>
-<span style="color: #008000; font-weight: bold">struct</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF; font-weight: bold">Unary</span><span style="color: #bbbbbb"> </span>{
-<span style="color: #bbbbbb">    </span>std<span style="color: #666666">::</span>unique_ptr<span style="color: #666666">&lt;</span>Expr<span style="color: #666666">&gt;</span><span style="color: #bbbbbb"> </span>operand;
-<span style="color: #bbbbbb">    </span>UnaryOp<span style="color: #bbbbbb"> </span>op;
-<span style="color: #bbbbbb">    </span>Range<span style="color: #bbbbbb"> </span>span;
+// Define the Unary struct in C++
+struct Unary {
+    std::unique_ptr&lt;Expr&gt; operand;
+    UnaryOp op;
+    Range span;
 
-<span style="color: #bbbbbb">    </span>Range<span style="color: #bbbbbb"> </span><span style="color: #0000FF">span</span>()<span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">const</span><span style="color: #bbbbbb"> </span>{
-<span style="color: #bbbbbb">        </span><span style="color: #008000; font-weight: bold">return</span><span style="color: #bbbbbb"> </span>span;
-<span style="color: #bbbbbb">    </span>}
+    Range span() const {
+        return span;
+    }
 
-<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">static</span><span style="color: #bbbbbb"> </span>UnaryOp<span style="color: #bbbbbb"> </span><span style="color: #0000FF">try_parse_unary_op</span>(Parser<span style="color: #666666">&amp;</span><span style="color: #bbbbbb"> </span>input,<span style="color: #bbbbbb"> </span>Associativity<span style="color: #bbbbbb"> </span>associativity){
-<span style="color: #bbbbbb">    </span>}
-<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">static</span><span style="color: #bbbbbb"> </span>Unary<span style="color: #bbbbbb"> </span><span style="color: #0000FF">parse_with_associativity</span>(Parser<span style="color: #666666">&amp;</span><span style="color: #bbbbbb"> </span>input,<span style="color: #bbbbbb"> </span>Associativity<span style="color: #bbbbbb"> </span>associativity);
-<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">static</span><span style="color: #bbbbbb"> </span>Expr<span style="color: #bbbbbb"> </span><span style="color: #0000FF">parse_or_lower</span>(Parser<span style="color: #666666">&amp;</span><span style="color: #bbbbbb"> </span>input);
+    static UnaryOp try_parse_unary_op(Parser&amp; input, Associativity associativity){
+    }
+    static Unary parse_with_associativity(Parser&amp; input, Associativity associativity);
+    static Expr parse_or_lower(Parser&amp; input);
 };
 
-<span style="color: #008000; font-weight: bold">class</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF; font-weight: bold">Parser</span><span style="color: #bbbbbb"> </span>{
-<span style="color: #008000; font-weight: bold">public</span><span style="color: #666666">:</span>
-<span style="color: #bbbbbb">    </span><span style="color: #3D7B7B; font-style: italic">// Define your Parser class and methods here</span>
+class Parser {
+public:
+    // Define your Parser class and methods here
 };
 
-<span style="color: #008000; font-weight: bold">class</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF; font-weight: bold">Error</span><span style="color: #bbbbbb"> </span>{
-<span style="color: #008000; font-weight: bold">public</span><span style="color: #666666">:</span>
-<span style="color: #bbbbbb">    </span><span style="color: #3D7B7B; font-style: italic">// Define your Error class and methods here</span>
+class Error {
+public:
+    // Define your Error class and methods here
 };
 
-<span style="color: #008000; font-weight: bold">namespace</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF; font-weight: bold">kind</span><span style="color: #bbbbbb"> </span>{
-<span style="color: #bbbbbb">    </span><span style="color: #3D7B7B; font-style: italic">// Define your kind module or namespace here</span>
+namespace kind {
+    // Define your kind module or namespace here
 }
 
-<span style="color: #3D7B7B; font-style: italic">// Implement the static functions of the Unary struct</span>
-UnaryOp<span style="color: #bbbbbb"> </span>Unary<span style="color: #666666">::</span>try_parse_unary_op(Parser<span style="color: #666666">&amp;</span><span style="color: #bbbbbb"> </span>input,<span style="color: #bbbbbb"> </span>Associativity<span style="color: #bbbbbb"> </span>associativity)<span style="color: #bbbbbb"> </span>{
-<span style="color: #bbbbbb">    </span><span style="color: #3D7B7B; font-style: italic">// Implementation of try_parse_unary_op</span>
+// Implement the static functions of the Unary struct
+UnaryOp Unary::try_parse_unary_op(Parser&amp; input, Associativity associativity) {
+    // Implementation of try_parse_unary_op
 }
 
-Unary<span style="color: #bbbbbb"> </span>Unary<span style="color: #666666">::</span>parse_with_associativity(Parser<span style="color: #666666">&amp;</span><span style="color: #bbbbbb"> </span>input,<span style="color: #bbbbbb"> </span>Associativity<span style="color: #bbbbbb"> </span>associativity)<span style="color: #bbbbbb"> </span>{
-<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">if</span><span style="color: #bbbbbb"> </span>(associativity<span style="color: #bbbbbb"> </span><span style="color: #666666">==</span><span style="color: #bbbbbb"> </span>Associativity<span style="color: #666666">::</span>Left)<span style="color: #bbbbbb"> </span>{
-<span style="color: #bbbbbb">        </span><span style="color: #3D7B7B; font-style: italic">// Implementation of parse_with_associativity for Left associativity</span>
-<span style="color: #bbbbbb">    </span>}<span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">else</span><span style="color: #bbbbbb"> </span><span style="color: #008000; font-weight: bold">if</span><span style="color: #bbbbbb"> </span>(associativity<span style="color: #bbbbbb"> </span><span style="color: #666666">==</span><span style="color: #bbbbbb"> </span>Associativity<span style="color: #666666">::</span>Right)<span style="color: #bbbbbb"> </span>{
-<span style="color: #bbbbbb">        </span><span style="color: #3D7B7B; font-style: italic">// Implementation of parse_with_associativity for Right associativity</span>
-<span style="color: #bbbbbb">    </span>}
+Unary Unary::parse_with_associativity(Parser&amp; input, Associativity associativity) {
+    if (associativity == Associativity::Left) {
+        // Implementation of parse_with_associativity for Left associativity
+    } else if (associativity == Associativity::Right) {
+        // Implementation of parse_with_associativity for Right associativity
+    }
 
-<span style="color: #bbbbbb">    </span><span style="color: #3D7B7B; font-style: italic">// Return the parsed Unary object</span>
+    // Return the parsed Unary object
 }
 
-Expr<span style="color: #bbbbbb"> </span>Unary<span style="color: #666666">::</span>parse_or_lower(Parser<span style="color: #666666">&amp;</span><span style="color: #bbbbbb"> </span>input)<span style="color: #bbbbbb"> </span>{
-<span style="color: #bbbbbb">    </span><span style="color: #3D7B7B; font-style: italic">// Implementation of parse_or_lower</span>
+Expr Unary::parse_or_lower(Parser&amp; input) {
+    // Implementation of parse_or_lower
 }
 
-<span style="color: #B00040">int</span><span style="color: #bbbbbb"> </span>main()<span style="color: #bbbbbb"> </span>{
-<span style="color: #bbbbbb">    </span><span style="color: #3D7B7B; font-style: italic">// Implement your main function</span>
-<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">return</span><span style="color: #bbbbbb"> </span><span style="color: #666666">0</span>;
+int main() {
+    // Implement your main function
+    return 0;
 }
-</pre></div>
 
-<p>指数贝尔多项式编码了集合分割方式的相关信息。例如，对于集合 \(\{A, B, C\}\) ，可以以三种不同方式将其分割为两个非空、不重叠的子集：</p>
+</code></pre>
+<p>指数贝尔多项式编码了集合分割方式的相关信息。例如，对于集合${A, B, C}$，可以以三种不同方式将其分割为两个非空、不重叠的子集：</p>
 <p>[
 {{A}, {B, C}}
 {{B}, {A, C}}
 {{C}, {B, A}}
 ]</p>
-<p>因此，我们可以将这些分割的信息编码为 \(B_{3,2}(x_1,x_2) = 3x_1x_2\) 。这里， \(B_{3,2}\) 的下标表示我们考虑将一个包含3个元素的集合分割为2个块。每个 \(x_i\) 的下标表示在给定分割中有 \(i\) 个元素的块的存在。因此， \(x_2\) 表示存在一个包含两个元素的块， \(x_1\) 表示存在一个包含一个元素的块。指数 \(x_{ij}\) 表示在一个分割中有 \(j\) 个大小为 \(i\) 的块。在这个例子中，由于 \(x_1\) 和 \(x_2\) 的指数都为1，表示在每个分割中只有一个这样的块。单项式的系数表示存在多少个这样的分割。在我们的例子中，有3种将一个包含3个元素的集合分割为2个块的分割，其中每个分割将元素分成一个大小为1的块和一个大小为2的块。</p>
+<p>因此，我们可以将这些分割的信息编码为$B_{3,2}(x_1,x_2) = 3x_1x_2$。这里，$B_{3,2}$的下标表示我们考虑将一个包含3个元素的集合分割为2个块。每个$x_i$的下标表示在给定分割中有$i$个元素的块的存在。因此，$x_2$表示存在一个包含两个元素的块，$x_1$表示存在一个包含一个元素的块。指数$x_{ij}$表示在一个分割中有$j$个大小为$i$的块。在这个例子中，由于$x_1$和$x_2$的指数都为1，表示在每个分割中只有一个这样的块。单项式的系数表示存在多少个这样的分割。在我们的例子中，有3种将一个包含3个元素的集合分割为2个块的分割，其中每个分割将元素分成一个大小为1的块和一个大小为2的块。</p>
 
     </div>
-
-   
-   
-   
     <hr>
-
-
-
-
-
-
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+          inlineMath: [ ['$','$'] ],
+          displayMath: [ ['$$','$$'] ],
+          processEscapes: true
+        },
+        "HTML-CSS": { fonts: ["TeX"] }
+      });
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
     <div id="disqus_thread"></div>
     <script type="text/javascript" async
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
     </script>
     <script>
-        /**
-        *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-        *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
-        
-        // var disqus_config = function () {
-        // this.page.url = ;  // Replace PAGE_URL with your page's canonical URL variable
-        // this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-        // };
-        
-        (function() { // DON'T EDIT BELOW THIS LINE
+        (function() { 
         var d = document, s = d.createElement('script');
         s.src = 'https://augpath.disqus.com/embed.js';
         s.setAttribute('data-timestamp', +new Date());

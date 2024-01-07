@@ -3,11 +3,11 @@
   <head>
     <link rel="stylesheet" href="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/style.css">
     <script src="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/plugin.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex, nofollow">
     <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
- 
     <script>
 const copyButtonLabel = "Copy Code";
 
@@ -59,14 +59,12 @@ async function copyCode(block) {
         code {
             font-family: 'Courier New', Courier, monospace;
         } 
-
         pre {
             font-family: 'Courier New', Courier, monospace;
         } 
         div{
             max-width: 100%;
             overflow: auto;
-            
         }
         .navbar {
             overflow: hidden;
@@ -75,7 +73,6 @@ async function copyCode(block) {
             top: 0; /* Position the navbar at the top of the page */
             width: 100%; /* Full width */
         }
-
         img {
         max-width: 80%;
         height: auto;
@@ -88,7 +85,6 @@ async function copyCode(block) {
             padding: 14px 16px;
             text-decoration: none;
         }
-
         a {
             color: #148bca;
             text-align: center;
@@ -96,164 +92,155 @@ async function copyCode(block) {
             padding-right: 2px;
             text-decoration: none;
         }
-
         p.hidden {
           overflow: hidden;
         }
-
     </style>
   </head>
   <body>
-    
     <div class="navbar">
         <a href="https://shzaiz.github.io">AUG's Wiki</a>
         <a href="index.html"> ↑ Back to contents</a>
-        Last updated at 2024-01-07 15:14:48.489459
+        Last updated at 2024-01-07 20:32:45.012854
     </div>
 
     <div class="toc"></div>
     <a id="toc-button"><i class="far fa-bookmark"></i></a>
     
-    <div>
+    <div id="renderedContent">
       <h1>Stack applications</h1>
 <p>This is a postfix to prefix:</p>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #3D7B7B; font-style: italic"># you may find the following precedence dictionary useful</span>
-prec <span style="color: #666666">=</span> {<span style="color: #BA2121">&#39;*&#39;</span>: <span style="color: #666666">2</span>, <span style="color: #BA2121">&#39;/&#39;</span>: <span style="color: #666666">2</span>,
-        <span style="color: #BA2121">&#39;+&#39;</span>: <span style="color: #666666">1</span>, <span style="color: #BA2121">&#39;-&#39;</span>: <span style="color: #666666">1</span>}
+<pre><code class="language-py"># you may find the following precedence dictionary useful
+prec = {'*': 2, '/': 2,
+        '+': 1, '-': 1}
 
-<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">infix_to_postfix</span>(expr):
-<span style="color: #bbbbbb">    </span><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Returns the postfix form of the infix expression found in `expr`&quot;&quot;&quot;</span>
-    ops <span style="color: #666666">=</span> Stack()
-    postfix <span style="color: #666666">=</span> []
-    toks <span style="color: #666666">=</span> expr<span style="color: #666666">.</span>split()
-    <span style="color: #008000; font-weight: bold">for</span> tok <span style="color: #AA22FF; font-weight: bold">in</span> toks:
-        <span style="color: #008000; font-weight: bold">if</span> tok<span style="color: #666666">.</span>isdigit():
-            postfix<span style="color: #666666">.</span>append(tok)
-        <span style="color: #008000; font-weight: bold">elif</span> tok <span style="color: #AA22FF; font-weight: bold">in</span> delim_openers:
-            ops<span style="color: #666666">.</span>push(tok)
-        <span style="color: #008000; font-weight: bold">elif</span> tok <span style="color: #AA22FF; font-weight: bold">in</span> delim_closers:
-            <span style="color: #008000; font-weight: bold">while</span> ops <span style="color: #AA22FF; font-weight: bold">and</span> ops<span style="color: #666666">.</span>peek() <span style="color: #666666">!=</span> delim_openers[delim_closers<span style="color: #666666">.</span>index(tok)]:
-                postfix<span style="color: #666666">.</span>append(ops<span style="color: #666666">.</span>pop())
-            ops<span style="color: #666666">.</span>pop()
-        <span style="color: #008000; font-weight: bold">elif</span> tok <span style="color: #AA22FF; font-weight: bold">in</span> prec:
-            <span style="color: #008000; font-weight: bold">while</span> ops <span style="color: #AA22FF; font-weight: bold">and</span> ops<span style="color: #666666">.</span>peek() <span style="color: #666666">!=</span> <span style="color: #BA2121">&#39;(&#39;</span> <span style="color: #AA22FF; font-weight: bold">and</span> prec[ops<span style="color: #666666">.</span>peek()] <span style="color: #666666">&gt;=</span> prec[tok]:
-                postfix<span style="color: #666666">.</span>append(ops<span style="color: #666666">.</span>pop())
-            ops<span style="color: #666666">.</span>push(tok)
-    <span style="color: #008000; font-weight: bold">while</span> ops:
-        postfix<span style="color: #666666">.</span>append(ops<span style="color: #666666">.</span>pop())
+def infix_to_postfix(expr):
+    &quot;&quot;&quot;Returns the postfix form of the infix expression found in `expr`&quot;&quot;&quot;
+    ops = Stack()
+    postfix = []
+    toks = expr.split()
+    for tok in toks:
+        if tok.isdigit():
+            postfix.append(tok)
+        elif tok in delim_openers:
+            ops.push(tok)
+        elif tok in delim_closers:
+            while ops and ops.peek() != delim_openers[delim_closers.index(tok)]:
+                postfix.append(ops.pop())
+            ops.pop()
+        elif tok in prec:
+            while ops and ops.peek() != '(' and prec[ops.peek()] &gt;= prec[tok]:
+                postfix.append(ops.pop())
+            ops.push(tok)
+    while ops:
+        postfix.append(ops.pop())
 
             
-    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #BA2121">&#39; &#39;</span><span style="color: #666666">.</span>join(postfix)
-</pre></div>
-
+    return ' '.join(postfix)
+</code></pre>
 <h1>Circular queue</h1>
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%;"><span></span><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Queue</span>:
-    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__init__</span>(<span style="color: #008000">self</span>, limit<span style="color: #666666">=10</span>):
-        <span style="color: #008000">self</span><span style="color: #666666">.</span>data <span style="color: #666666">=</span> [<span style="color: #008000; font-weight: bold">None</span>] <span style="color: #666666">*</span> limit
-        <span style="color: #008000">self</span><span style="color: #666666">.</span>head <span style="color: #666666">=</span> <span style="color: #666666">-1</span>
-        <span style="color: #008000">self</span><span style="color: #666666">.</span>tail <span style="color: #666666">=</span> <span style="color: #666666">-1</span>
+<pre><code class="language-py">class Queue:
+    def __init__(self, limit=10):
+        self.data = [None] * limit
+        self.head = -1
+        self.tail = -1
 
-    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">nxt</span>(<span style="color: #008000">self</span>, <span style="color: #008000">id</span>, <span style="color: #008000">len</span>):
-        <span style="color: #008000; font-weight: bold">return</span> (<span style="color: #008000">id</span><span style="color: #666666">+1</span>)<span style="color: #666666">%</span><span style="color: #008000">len</span>
+    def nxt(self, id, len):
+        return (id+1)%len
 
-    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">enqueue</span>(<span style="color: #008000">self</span>, val):
-        <span style="color: #3D7B7B; font-style: italic"># We make sure that after it is init, no -1 are allowed</span>
-        <span style="color: #008000; font-weight: bold">if</span>(<span style="color: #008000">self</span><span style="color: #666666">.</span>tail <span style="color: #666666">==</span> <span style="color: #666666">-1</span> <span style="color: #AA22FF; font-weight: bold">or</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>head <span style="color: #666666">==</span> <span style="color: #666666">-1</span>):
-            <span style="color: #008000">self</span><span style="color: #666666">.</span>tail <span style="color: #666666">=</span> <span style="color: #666666">0</span>
-            <span style="color: #008000">self</span><span style="color: #666666">.</span>head <span style="color: #666666">=</span> <span style="color: #666666">0</span>
-            <span style="color: #008000">self</span><span style="color: #666666">.</span>len <span style="color: #666666">=</span> <span style="color: #666666">1</span>
-            <span style="color: #008000">self</span><span style="color: #666666">.</span>data[<span style="color: #666666">0</span>] <span style="color: #666666">=</span> val
-            <span style="color: #008000; font-weight: bold">return</span> 
-        l <span style="color: #666666">=</span> <span style="color: #008000">len</span>(<span style="color: #008000">self</span><span style="color: #666666">.</span>data)
-        nhd <span style="color: #666666">=</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>nxt(<span style="color: #008000">self</span><span style="color: #666666">.</span>head, l)
-        <span style="color: #008000; font-weight: bold">if</span>(nhd <span style="color: #666666">==</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>tail):
-            <span style="color: #008000; font-weight: bold">raise</span> <span style="color: #CB3F38; font-weight: bold">RuntimeError</span>(<span style="color: #BA2121">&quot;The Q is full!&quot;</span>)
-        <span style="color: #008000">self</span><span style="color: #666666">.</span>head <span style="color: #666666">=</span> nhd 
-        <span style="color: #008000">self</span><span style="color: #666666">.</span>data[nhd] <span style="color: #666666">=</span> val
-        <span style="color: #008000">self</span><span style="color: #666666">.</span>len <span style="color: #666666">+=</span> <span style="color: #666666">1</span>
+    def enqueue(self, val):
+        # We make sure that after it is init, no -1 are allowed
+        if(self.tail == -1 or self.head == -1):
+            self.tail = 0
+            self.head = 0
+            self.len = 1
+            self.data[0] = val
+            return 
+        l = len(self.data)
+        nhd = self.nxt(self.head, l)
+        if(nhd == self.tail):
+            raise RuntimeError(&quot;The Q is full!&quot;)
+        self.head = nhd 
+        self.data[nhd] = val
+        self.len += 1
         
         
-    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">dequeue</span>(<span style="color: #008000">self</span>):
-        <span style="color: #008000; font-weight: bold">if</span>(<span style="color: #008000">self</span><span style="color: #666666">.</span>tail <span style="color: #666666">==</span> <span style="color: #666666">-1</span> <span style="color: #AA22FF; font-weight: bold">or</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>head <span style="color: #666666">==</span> <span style="color: #666666">-1</span>):
-            <span style="color: #008000; font-weight: bold">raise</span> <span style="color: #CB3F38; font-weight: bold">RuntimeError</span>(<span style="color: #BA2121">&quot;The Q is empty!&quot;</span>)
-        l <span style="color: #666666">=</span> <span style="color: #008000">len</span>(<span style="color: #008000">self</span><span style="color: #666666">.</span>data)
-        ntl <span style="color: #666666">=</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>nxt(<span style="color: #008000">self</span><span style="color: #666666">.</span>tail, l)
-        <span style="color: #008000; font-weight: bold">if</span>(ntl <span style="color: #666666">==</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>tail):
-            <span style="color: #008000; font-weight: bold">raise</span> <span style="color: #CB3F38; font-weight: bold">RuntimeError</span>(<span style="color: #BA2121">&quot;The Q is empty!&quot;</span>)
-        ret <span style="color: #666666">=</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>data[<span style="color: #008000">self</span><span style="color: #666666">.</span>tail]
-        <span style="color: #008000">self</span><span style="color: #666666">.</span>data[<span style="color: #008000">self</span><span style="color: #666666">.</span>tail] <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">None</span>
-        <span style="color: #008000">self</span><span style="color: #666666">.</span>tail <span style="color: #666666">=</span> ntl 
-        <span style="color: #008000">self</span><span style="color: #666666">.</span>len <span style="color: #666666">-=1</span>
-        <span style="color: #008000; font-weight: bold">if</span>(<span style="color: #008000">self</span><span style="color: #666666">.</span>len <span style="color: #666666">==</span> <span style="color: #666666">0</span>):
-            <span style="color: #008000">self</span><span style="color: #666666">.</span>head <span style="color: #666666">=</span> <span style="color: #666666">-1</span>
-            <span style="color: #008000">self</span><span style="color: #666666">.</span>tail <span style="color: #666666">=</span> <span style="color: #666666">-1</span>
-        <span style="color: #008000; font-weight: bold">return</span> ret
+    def dequeue(self):
+        if(self.tail == -1 or self.head == -1):
+            raise RuntimeError(&quot;The Q is empty!&quot;)
+        l = len(self.data)
+        ntl = self.nxt(self.tail, l)
+        if(ntl == self.tail):
+            raise RuntimeError(&quot;The Q is empty!&quot;)
+        ret = self.data[self.tail]
+        self.data[self.tail] = None
+        self.tail = ntl 
+        self.len -=1
+        if(self.len == 0):
+            self.head = -1
+            self.tail = -1
+        return ret
         
 
     
-    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">resize</span>(<span style="color: #008000">self</span>, newsize):
-        <span style="color: #008000; font-weight: bold">assert</span>(<span style="color: #008000">len</span>(<span style="color: #008000">self</span><span style="color: #666666">.</span>data) <span style="color: #666666">&lt;</span> newsize)
-        l <span style="color: #666666">=</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>len
-        nhd <span style="color: #666666">=</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>len<span style="color: #666666">-1</span>
-        ntl <span style="color: #666666">=</span> <span style="color: #666666">0</span>
-        nlst <span style="color: #666666">=</span> [<span style="color: #008000; font-weight: bold">None</span>]<span style="color: #666666">*</span>newsize
+    def resize(self, newsize):
+        assert(len(self.data) &lt; newsize)
+        l = self.len
+        nhd = self.len-1
+        ntl = 0
+        nlst = [None]*newsize
 
-        <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(l):
-            nlst[i] <span style="color: #666666">=</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>data[(<span style="color: #008000">self</span><span style="color: #666666">.</span>tail<span style="color: #666666">+</span>i)<span style="color: #666666">%</span><span style="color: #008000">self</span><span style="color: #666666">.</span>len]
-        <span style="color: #008000">self</span><span style="color: #666666">.</span>data <span style="color: #666666">=</span> nlst
-        <span style="color: #008000">self</span><span style="color: #666666">.</span>head <span style="color: #666666">=</span> nhd
-        <span style="color: #008000">self</span><span style="color: #666666">.</span>tail <span style="color: #666666">=</span> ntl
+        for i in range(l):
+            nlst[i] = self.data[(self.tail+i)%self.len]
+        self.data = nlst
+        self.head = nhd
+        self.tail = ntl
 		
     
-    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">empty</span>(<span style="color: #008000">self</span>):
-        <span style="color: #008000; font-weight: bold">return</span> (<span style="color: #008000">self</span><span style="color: #666666">.</span>head <span style="color: #666666">==</span> <span style="color: #666666">-1</span> <span style="color: #AA22FF; font-weight: bold">or</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>len <span style="color: #666666">==</span> <span style="color: #666666">0</span>)
+    def empty(self):
+        return (self.head == -1 or self.len == 0)
     
-    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__bool__</span>(<span style="color: #008000">self</span>):
-        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #AA22FF; font-weight: bold">not</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>empty()
+    def __bool__(self):
+        return not self.empty()
     
-    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__str__</span>(<span style="color: #008000">self</span>):
-        <span style="color: #008000; font-weight: bold">if</span> <span style="color: #AA22FF; font-weight: bold">not</span>(<span style="color: #008000">self</span>):
-            <span style="color: #008000; font-weight: bold">return</span> <span style="color: #BA2121">&#39;&#39;</span>
-        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #BA2121">&#39;, &#39;</span><span style="color: #666666">.</span>join(<span style="color: #008000">str</span>(x) <span style="color: #008000; font-weight: bold">for</span> x <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">self</span>)
+    def __str__(self):
+        if not(self):
+            return ''
+        return ', '.join(str(x) for x in self)
     
-    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__repr__</span>(<span style="color: #008000">self</span>):
-        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">str</span>(<span style="color: #008000">self</span>)
+    def __repr__(self):
+        return str(self)
     
-    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__iter__</span>(<span style="color: #008000">self</span>):
-        <span style="color: #008000; font-weight: bold">if</span>(<span style="color: #008000">self</span><span style="color: #666666">.</span>head <span style="color: #666666">==</span> <span style="color: #666666">-1</span> <span style="color: #AA22FF; font-weight: bold">or</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>tail <span style="color: #666666">==</span> <span style="color: #666666">-1</span>):
-            <span style="color: #008000; font-weight: bold">raise</span> <span style="color: #CB3F38; font-weight: bold">StopIteration</span>
-        <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #008000">self</span><span style="color: #666666">.</span>len):
-            <span style="color: #008000; font-weight: bold">yield</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>data[(<span style="color: #008000">self</span><span style="color: #666666">.</span>tail<span style="color: #666666">+</span>i)<span style="color: #666666">%</span><span style="color: #008000">self</span><span style="color: #666666">.</span>len]
-</pre></div>
-
+    def __iter__(self):
+        if(self.head == -1 or self.tail == -1):
+            raise StopIteration
+        for i in range(self.len):
+            yield self.data[(self.tail+i)%self.len]
+</code></pre>
 
     </div>
-
-   
-   
-   
     <hr>
-
-
-
-
-
-
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+          inlineMath: [ ['$','$'] ],
+          displayMath: [ ['$$','$$'] ],
+          processEscapes: true
+        },
+        "HTML-CSS": { fonts: ["TeX"] }
+      });
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
     <div id="disqus_thread"></div>
     <script type="text/javascript" async
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
     </script>
     <script>
-        /**
-        *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-        *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
-        
-        // var disqus_config = function () {
-        // this.page.url = ;  // Replace PAGE_URL with your page's canonical URL variable
-        // this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-        // };
-        
-        (function() { // DON'T EDIT BELOW THIS LINE
+        (function() { 
         var d = document, s = d.createElement('script');
         s.src = 'https://augpath.disqus.com/embed.js';
         s.setAttribute('data-timestamp', +new Date());
