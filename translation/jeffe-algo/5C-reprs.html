@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <link rel="stylesheet" href="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/style.css">
+    <script src="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/plugin.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
+    <script>
+const copyButtonLabel = "Copy Code";
+
+// use a class selector if available
+let blocks = document.querySelectorAll("pre");
+
+blocks.forEach((block) => {
+  // only add button if browser supports Clipboard API
+  if (navigator.clipboard) {
+    let button = document.createElement("button");
+
+    button.innerText = copyButtonLabel;
+    block.appendChild(button);
+
+    button.addEventListener("click", async () => {
+      await copyCode(block);
+    });
+  }
+});
+
+async function copyCode(block) {
+  let code = block.querySelector("code");
+  let text = code.innerText;
+
+  await navigator.clipboard.writeText(text);
+}
+    </script>
+      <style>
+        body {counter-reset:section;}
+        h1 {counter-reset:subsection;font-size:x-large;}
+        h2 {font-size: large;}
+        
+        h1:before {
+        counter-increment:section;
+        content:counter(section) ". ";
+            font-weight:bold;
+            font-size: x-large;
+        }
+        h2:before {
+        counter-increment:subsection;
+        content:counter(section) "." counter(subsection) " ";
+        font-size: large;
+        }
+        html, body {
+            margin: 8%;
+            font-family: "Times New Roman","SimSun", "STSong", "Songti SC",Times, serif;
+            font-size: 110%;
+        }
+        code {
+            font-family: 'Courier New', Courier, monospace;
+        } 
+        pre {
+            font-family: 'Courier New', Courier, monospace;
+        } 
+        div{
+            max-width: 100%;
+            overflow: auto;
+        }
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+            position: fixed; /* Set the navbar to fixed position */
+            top: 0; /* Position the navbar at the top of the page */
+            width: 100%; /* Full width */
+        }
+        img {
+        max-width: 80%;
+        height: auto;
+        }
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        a {
+            color: #148bca;
+            text-align: center;
+            padding-left: 2px;
+            padding-right: 2px;
+            text-decoration: none;
+        }
+        p.hidden {
+          overflow: hidden;
+        }
+    </style>
+  </head>
+  <body>
+    <div class="navbar">
+        <a href="https://shzaiz.github.io">AUG's Wiki</a>
+        <a href="index.html"> ↑ Back to contents</a>
+        Last updated at 2024-01-18 23:10:34.746338
+    </div>
+
+    <div class="toc"></div>
+    <a id="toc-button"><i class="far fa-bookmark"></i></a>
+    
+    <div id="renderedContent">
+      <h1>图的表示和例子</h1>
+<p>图的最常见的表示方法就是把它们<strong>画出来</strong>! 这样, 我们就把图上的节点在纸上用一个小圆圈(或者别的什么形状)表示出来, 图上的边就通过这两个小圆圈之间的连线(直线或者曲线)表示出来了. 如果我们发现我们可以做到让这些边不交叉, 我们就称这个图为<strong>平面图</strong>(planar map), 也叫做图的<strong>嵌入</strong>(embedding). 一个图可以有多种画法, 所以, 看到一个画在平面上面的图有边交叉的时候, 先不要忙着断定这是个非平面图!</p>
+<p><img src="./FILES/5C-reprs.md/img-20240117230219.png" alt="Img" /></p>
+<p>(图5.4 同一张平面图的两个不同画法, 只有左边的画法叫做图的嵌入)</p>
+<p>实际上, 图除了能被画下来, 还可以有更好玩的应用! 比如, 对于一些几何对象来讲, 几何对象集合的<strong>交集图</strong>(intersection graph) 对于每个对象都有一个节点，对于每个相交的对象对都有一条边. 不同类型的集合对象（线段、矩形、圆形等）可以对应不同类别的图形. 一种特别有用的交集图类型是<strong>区间图</strong>(interval graph). 区间图的顶点是实线上的区间, 任何两个重叠的区间之间, 都有一条边相连.</p>
+<p><img src="./FILES/5C-reprs.md/img-20240118225502.png" alt="Img" /></p>
+<p>(图 5.5 图5.4实际上是(a)一堆线段(b)一堆圆圈的相交图)</p>
+<p>图的另一个有趣的应用是递归算法的<strong>依赖图</strong>(dependency graph). 依赖图是有向无环图, 这个图的顶点是在执行算法时出现的所有不同的递归子问题; 如果求解子问题$A$, 就要先求解子问题$B$, 那么我们就从$B$向$A$连一条边. 比如, 对于Fibonacci数列而言,
+$$
+F_n= \begin{cases}0 &amp; \text { if } n=0 \\ 1 &amp; \text { if } n=1 \\ F_{n-1}+F_{n-2} &amp; \text { otherwise }\end{cases}
+$$</p>
+<p>依赖图的顶点是整数$0,1,2,\cdots$; 边是$(i-1) \rightarrow i$ 和 $(i-2) \rightarrow i$ , 对于每一个 $i$ 在 2 到 $n$之间.</p>
+<p><img src="./FILES/5C-reprs.md/img-20240118230152.png" alt="Img" /></p>
+<p>(图5.6 Fibonacci问题的递归依赖调用关系图)</p>
+<p>对于一个更加复杂的例子, 回忆第三章介绍过的<strong>编辑距离</strong>问题, 它的递归关系如下:</p>
+<p>$$
+\operatorname{Edit}(i, j)= \begin{cases}i &amp; \text{ if }j=0 \\
+j &amp; \text{ if } i=0\\
+\min \left{\begin{array}{c}
+\operatorname{Edit}(i-1, j)+1 \\
+\operatorname{Edit}(i, j-1)+1 \\
+\operatorname{Edit}(i-1, j-1)+[A[i] \neq B[j]]
+\end{array}\right} &amp; o.w. \end{cases}
+$$</p>
+
+    </div>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+          inlineMath: [ ['$','$'] ],
+          displayMath: [ ['$$','$$'] ],
+          processEscapes: true
+        },
+        "HTML-CSS": { fonts: ["TeX"] }
+      });
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <hr>
+    <div id="disqus_thread"></div>
+    <script>
+        (function() { 
+        var d = document, s = d.createElement('script');
+        s.src = 'https://augpath.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <script id="dsq-count-scr" src="//augpath.disqus.com/count.js" async></script>
+  </body>
+</html>
