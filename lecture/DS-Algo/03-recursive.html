@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <link rel="stylesheet" href="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/style.css">
+    <script src="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/plugin.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
+    <script>
+const copyButtonLabel = "Copy Code";
+
+// use a class selector if available
+let blocks = document.querySelectorAll("pre");
+
+blocks.forEach((block) => {
+  // only add button if browser supports Clipboard API
+  if (navigator.clipboard) {
+    let button = document.createElement("button");
+
+    button.innerText = copyButtonLabel;
+    block.appendChild(button);
+
+    button.addEventListener("click", async () => {
+      await copyCode(block);
+    });
+  }
+});
+
+async function copyCode(block) {
+  let code = block.querySelector("code");
+  let text = code.innerText;
+
+  await navigator.clipboard.writeText(text);
+}
+    </script>
+      <style>
+        body {counter-reset:section;}
+        h1 {counter-reset:subsection;font-size:x-large;}
+        h2 {font-size: large;}
+        
+        h1:before {
+        counter-increment:section;
+        content:counter(section) ". ";
+            font-weight:bold;
+            font-size: x-large;
+        }
+        h2:before {
+        counter-increment:subsection;
+        content:counter(section) "." counter(subsection) " ";
+        font-size: large;
+        }
+        html, body {
+            margin: 8%;
+            font-family: "Times New Roman","SimSun", "STSong", "Songti SC",Times, serif;
+            font-size: 110%;
+        }
+        code {
+            font-family: 'Courier New', Courier, monospace;
+        } 
+        pre {
+            font-family: 'Courier New', Courier, monospace;
+        } 
+        div{
+            max-width: 100%;
+            overflow: auto;
+        }
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+            position: fixed; /* Set the navbar to fixed position */
+            top: 0; /* Position the navbar at the top of the page */
+            width: 100%; /* Full width */
+        }
+        img {
+        max-width: 80%;
+        height: auto;
+        }
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        a {
+            color: #148bca;
+            text-align: center;
+            padding-left: 2px;
+            padding-right: 2px;
+            text-decoration: none;
+        }
+        p.hidden {
+          overflow: hidden;
+        }
+    </style>
+  </head>
+  <body>
+    <div class="navbar">
+        <a href="https://shzaiz.github.io">AUG's Wiki</a>
+        <a href="index.html"> ↑ Back to contents</a>
+        Last updated at 2024-04-28 20:57:23.046683
+    </div>
+
+    <div class="toc"></div>
+    <a id="toc-button"><i class="far fa-bookmark"></i></a>
+    
+    <div id="renderedContent">
+      <h1>03. 递归算法</h1>
+<p>视频回放:</p>
+<ul>
+<li><a href="https://www.acfun.cn/v/ac43750364">3 递归地求解问题</a></li>
+<li><a href="https://www.acfun.cn/v/ac43753673">3 $\beta$ 函数调用和递归的机器级实现
+</a></li>
+</ul>
+<h2>回顾: 递归</h2>
+<p>The general principle:</p>
+<ul>
+<li>If the given instance of the problem can be solved directly, solve it directly,</li>
+<li>Otherwise, reduce it to one or more simpler instances of the same problem.</li>
+</ul>
+<p>&quot;Someone else is going to solve the simpler problems! &quot;</p>
+<h2>例子: Tower of Hanoi</h2>
+<p>Idea:</p>
+<ul>
+<li>concentrate on moving just the largest disk</li>
+<li>first, move those $n-1$ smaller disks to the spare peg</li>
+<li>move the largest disk directly to its destination</li>
+<li>to finish the puzzle, we have to move the $n-1$ smaller disks from the spare peg to their destination</li>
+</ul>
+<p>STOP THINKING $n-1$ pegs!</p>
+<ul>
+<li>we reduced the problem size by 1.</li>
+</ul>
+<pre><code>HANOI(n, src, dst, tmp){
+    if (n&gt;0){
+        HANOI(n-1, src, tmp, dst);
+        move disk n from src to dst
+        HANOI(n-1, tmp, dst, src);
+    }
+}
+</code></pre>
+<p>Running time</p>
+<ul>
+<li>$T(n)$ denote #moves to transfer disks</li>
+<li>$T(0)=0, T(n)=2T(n-1)+1$.</li>
+<li>solution is $T(n)=2^n-1$.</li>
+</ul>
+<h2>例子: Mergesort</h2>
+<p>Idea:</p>
+<ul>
+<li>Divide the input array into two subarrays of roughly equal size.</li>
+<li>Recursively mergesort each of the subarrays.</li>
+<li>Merge the newly-sorted subarrays into a single sorted array.</li>
+</ul>
+<p><img src="figures/merge-sort.png" alt="merge-sort" /></p>
+<pre><code class="language-cpp">// We need a tmp array to store relations...
+void mgsort(int a[], int tmp[], int l, int r){
+    if(l&gt;=r) return ;
+    //(1)
+    int mid = (l+r)&gt;&gt;1; // Bracket missing is also okay.
+    mgsort(a, tmp, l, mid);
+    mgsort(a, tmp, mid+1, r);
+    int k = 0, i = l, j = mid+1;
+    // merge
+    while(i&lt;=mid &amp;&amp; j&lt;=r){
+        if(a[i]&lt;=a[j]){
+            tmp[k++] = a[i++];
+        }else{
+            tmp[k++] = a[j++];
+        }
+    }
+    // Is there anything missing in the loop?
+    while(i&lt;=mid) tmp[k++] = a[i++];
+    while(j&lt;=r) tmp[k++] = a[j++];
+    for(i=l,j=0; i&lt;=r; i++, j++) a[i] = tmp[j];
+}
+</code></pre>
+<p>Correctness:</p>
+<ul>
+<li>by induction
+<ul>
+<li>on MERGE progress: Each time we always pick the smaller one</li>
+<li>on MergeSort progress</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>Proof
+Lemma 1.1. MERGE correctly merges the subarrays $A[1 . . m]$ and $A[m+1 . . n]$, assuming those subarrays are sorted in the input.</p>
+<p>Proof: Let $A[1 \ldots n]$ be any array and $m$ any integer such that the subarrays $A[1 \ldots m]$ and $A[m+1 . . n]$ are sorted. We prove that for all $k$ from 0 to $n$, the last $n-k-1$ iterations of the main loop correctly merge $A[i . . m]$ and $A[j . . n]$ into $B[k . . n]$. The proof proceeds by induction on $n-k+1$, the number of elements remaining to be merged.</p>
+<p>If $k&gt;n$, the algorithm correctly merges the two empty subarrays by doing absolutely nothing. (This is the base case of the inductive proof.) Otherwise, there are four cases to consider for the $k$ th iteration of the main loop.</p>
+<ul>
+<li>If $j&gt;n$, then subarray $A[j . . n]$ is empty, so $\min (A[i . . m] \cup A[j . . n])=A[i]$.</li>
+<li>If $i&gt;m$, then subarray $A[i$.. $m]$ is empty, so $\min (A[i . . m] \cup A[j . . n])=A[j]$.</li>
+<li>Otherwise, if $A[i]&lt;A[j]$, then $\min (A[i . . m] \cup A[j . . n])=A[i]$.</li>
+<li>Otherwise, we must have $A[i] \geq A[j]$, and $\min (A[i . . m] \cup A[j . . n])=A[j]$. In all four cases, $B[k]$ is correctly assigned the smallest element of $A[i$.. $m] \cup$ $A[j . . n]$. In the two cases with the assignment $B[k] \leftarrow A[i]$, the Recursion Fairy correctly merges - sorry, I mean the Induction Hypothesis implies that the last $n-k$ iterations of the main loop correctly merge $A[i+1 . . m]$ and $A[j . . n]$ into $B[k+1 . . n]$. Similarly, in the other two cases, the Recursion Fairy also correctly merges the rest of the subarrays</li>
+</ul>
+<p>Theorem 1.2. MERGESORT correctly sorts any input array $A[1 . . n]$.</p>
+<p>Proof: We prove the theorem by induction on $n$. If $n \leq 1$, the algorithm correctly does nothing. Otherwise, the Recursion Fairy correctly sorts-sorry, I mean the induction hypothesis implies that our algorithm correctly sorts the two smaller subarrays $A[1 . . m]$ and $A[m+1 . . n]$, after which they are correctly Merged into a single sorted array (by Lemma 1.1).</p>
+</blockquote>
+<p>Analysis:</p>
+<ul>
+<li>$T(n)=T(\lceil n / 2\rceil)+T(\lfloor n / 2\rfloor)+O(n)$</li>
+<li>ignore the ceilings and floors to get $O(n\log n)$. (We will talk about later)</li>
+</ul>
+<h2>例子: Quick Sort</h2>
+<p>Idea:</p>
+<ul>
+<li>Choose a pivot element from the array</li>
+<li>Partition the array into three subarrays
+<ul>
+<li>the elements smaller than the pivot;</li>
+<li>the pivot element itself;</li>
+<li>the elements larger than the pivot.</li>
+</ul>
+</li>
+<li>Recursively quicksort the first and last subarrays</li>
+</ul>
+<p>How do we partition?</p>
+<ul>
+<li>Naive appoarch: 2 new arrays</li>
+<li>Nico Lomuto:
+<ul>
+<li>(1) pointer $i$ holds the start, $j$ holds the end</li>
+<li>(2) continue increment $i$, till $a[i]&gt; x$; continue decrementing $j$, until $a[j]&lt; x$.</li>
+<li>(3) swap $A[i]$ with $A[j]$</li>
+<li>(4) goto (2), until $i&gt;j$.</li>
+</ul>
+</li>
+</ul>
+<p><img src="figures/quick-sort.png" alt="quick-sort" /></p>
+<pre><code class="language-cpp">void qst(int a[], int l, int r){
+    if(l&gt;=r) return;
+    //(1)
+    int x = a[l]; //Alterate r, (l+r)/2
+    int i = l-1, j=r+1; //Move first, then compare and swap
+    while(i&lt;j){
+        do i++; while(a[i]&lt;x);
+        do j--; while(a[j]&gt;x);
+        if(i&lt;j) swap(a[i],a[j]);
+    }
+    qst(a, l, j); // If x:=r, then this line should be qst(a,l,i-1)
+    qst(a,j+1,r); // and this line should be qst(a,i,r)
+}
+</code></pre>
+<p>Correctness</p>
+<ul>
+<li>two invariants</li>
+<li>Invariant:
+<ul>
+<li>At the end of each iteration of the main loop, everything in the subarray $A[1 . . \ell]$ is less than $A[n]$</li>
+<li>nothing in the subarray $A[\ell+1 . . i]$ is less than $A[n]$.</li>
+</ul>
+</li>
+</ul>
+<h2>Divide and conquer: The pattern</h2>
+<p>Both of them follows these 3 general steps:</p>
+<ul>
+<li><strong>Divide</strong> the given instance of the problem into several independent smaller instances of exactly the same problem.</li>
+<li><strong>Delegate</strong> each smaller instance to the Recursion Fairy,</li>
+<li><strong>Combine</strong> the solutions for the smaller instances into the final solution for the given instance.</li>
+</ul>
+<h2>Recursion trees</h2>
+<p>For a recursive algorithm, usually:</p>
+<ul>
+<li>spends $O(f(n))$ on non-recursive work</li>
+<li>makes $r$ recursive calls and each of size $n/c$.</li>
+</ul>
+<p>yields the recurrence</p>
+<p>$$T(n)=r T(n / c)+f(n).$$</p>
+<p><img src="figures/recursion-tree.png" alt="recursion-tree" /></p>
+<p>Take the summation, yields:</p>
+<p>$$T(n)=\sum_{i=0}^{\log_c n} r^i \cdot f\left(n / c^i\right)$$</p>
+<ul>
+<li>Decreasing: If the series decays exponentially, i.e. $T(n)=O(f(n))$, then dominated by the value at the root of the recursion tree;</li>
+<li>Equal: If all terms in the series are equal, we immediately have $T(n)=O(f(n) \cdot \log_c n)=O(f(n) \log n)$</li>
+<li>Increasing: If the series grows exponentially, $T(n)=O\left(n^{\log _c r}\right)$, dominated by leaves of the recursion tree.</li>
+</ul>
+
+    </div>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+          inlineMath: [ ['$','$'] ],
+          displayMath: [ ['$$','$$'] ],
+          processEscapes: true
+        },
+        "HTML-CSS": { fonts: ["TeX"] }
+      });
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <hr>
+    <div id="disqus_thread"></div>
+    <script>
+        (function() { 
+        var d = document, s = d.createElement('script');
+        s.src = 'https://augpath.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <script id="dsq-count-scr" src="//augpath.disqus.com/count.js" async></script>
+  </body>
+</html>

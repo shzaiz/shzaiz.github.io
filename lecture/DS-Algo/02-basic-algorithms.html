@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <link rel="stylesheet" href="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/style.css">
+    <script src="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/plugin.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
+    <script>
+const copyButtonLabel = "Copy Code";
+
+// use a class selector if available
+let blocks = document.querySelectorAll("pre");
+
+blocks.forEach((block) => {
+  // only add button if browser supports Clipboard API
+  if (navigator.clipboard) {
+    let button = document.createElement("button");
+
+    button.innerText = copyButtonLabel;
+    block.appendChild(button);
+
+    button.addEventListener("click", async () => {
+      await copyCode(block);
+    });
+  }
+});
+
+async function copyCode(block) {
+  let code = block.querySelector("code");
+  let text = code.innerText;
+
+  await navigator.clipboard.writeText(text);
+}
+    </script>
+      <style>
+        body {counter-reset:section;}
+        h1 {counter-reset:subsection;font-size:x-large;}
+        h2 {font-size: large;}
+        
+        h1:before {
+        counter-increment:section;
+        content:counter(section) ". ";
+            font-weight:bold;
+            font-size: x-large;
+        }
+        h2:before {
+        counter-increment:subsection;
+        content:counter(section) "." counter(subsection) " ";
+        font-size: large;
+        }
+        html, body {
+            margin: 8%;
+            font-family: "Times New Roman","SimSun", "STSong", "Songti SC",Times, serif;
+            font-size: 110%;
+        }
+        code {
+            font-family: 'Courier New', Courier, monospace;
+        } 
+        pre {
+            font-family: 'Courier New', Courier, monospace;
+        } 
+        div{
+            max-width: 100%;
+            overflow: auto;
+        }
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+            position: fixed; /* Set the navbar to fixed position */
+            top: 0; /* Position the navbar at the top of the page */
+            width: 100%; /* Full width */
+        }
+        img {
+        max-width: 80%;
+        height: auto;
+        }
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        a {
+            color: #148bca;
+            text-align: center;
+            padding-left: 2px;
+            padding-right: 2px;
+            text-decoration: none;
+        }
+        p.hidden {
+          overflow: hidden;
+        }
+    </style>
+  </head>
+  <body>
+    <div class="navbar">
+        <a href="https://shzaiz.github.io">AUG's Wiki</a>
+        <a href="index.html"> ↑ Back to contents</a>
+        Last updated at 2024-04-28 20:57:23.073393
+    </div>
+
+    <div class="toc"></div>
+    <a id="toc-button"><i class="far fa-bookmark"></i></a>
+    
+    <div id="renderedContent">
+      <h1>02. 一些常见的算法</h1>
+<p><strong>视频回放</strong>: <a href="https://www.acfun.cn/v/ac43745229">2 常见的算法和要思考的问题</a></p>
+<h2>排序算法</h2>
+<ul>
+<li>经典问题, 提出几个我们自己想到的方法, 然后进行分析.</li>
+</ul>
+<h3>年轻人的第一个排序算法:</h3>
+<p>过程描述:</p>
+<ul>
+<li>每一次挑出来一个最小的, 然后 &quot;叉掉&quot; 这个元素</li>
+<li>一直这样下去, 直到把每个都挑出来.</li>
+</ul>
+<p>细节:</p>
+<ul>
+<li>挑出来最小的怎么整?
+<ul>
+<li>开一个记忆的变量, 保存着当前最小的值</li>
+</ul>
+</li>
+<li>怎么叉掉?
+<ul>
+<li>开一个<code>bool</code>数组, 看一看这个数有没有标记</li>
+</ul>
+</li>
+<li>把每一个挑出来到另一个数组里面
+<ul>
+<li>新的数组用一个<code>cnt</code>指着, <code>cnt</code>之前的内容就是有效的长度</li>
+<li>也就是栈, 后续看更多的</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-cpp">// naive-sort.c
+
+int findmin(int a[], bool mark[], int size){
+    int min_val = INT_MAX;
+    int min_pos = -1;
+    for(int i=0; i&lt;size; i++){
+        if(min_val &gt; a[i] &amp;&amp; !mark[i]) {
+            min_val = a[i];
+            min_pos = i;
+        }
+    }
+    mark[min_pos] = true;
+    return min_val;
+}
+
+void sort(int a[], int res[], bool mk[], int size){
+    int cnt = 0;
+    for(int i=0; i&lt;size; i++){
+        int mi = findmin(a, mk, size);
+        res[cnt++] = mi;
+    }
+}
+</code></pre>
+<p>运行时间:</p>
+<ul>
+<li>理论分析: $n\times n$</li>
+<li>实际检验</li>
+</ul>
+<p>正确性:</p>
+<ul>
+<li>&quot;数学归纳法&quot; 是我们的朋友
+<ul>
+<li>循环不变量: a condition that is <em>true</em> at the <em>beginning</em> and <em>end</em> of <strong>every iteration</strong> of a loop.
+<ul>
+<li>Establishment (aka Initialization).</li>
+<li>Preservation (aka Maintenance).</li>
+<li>Postcondition: the loop exits when the condition is not met.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3>冒泡排序</h3>
+<p>背景: 交换位置?</p>
+<p>流程:</p>
+<ul>
+<li>(1)比较$A[0]$和$A[1]$, 如果$A[0]&gt;A[1]$, 那么就交换元素</li>
+<li>(2)继续看下一个元素$A[1]$, 把它与$A[2]$比较, 如果$A[1]&gt;A[2]$, 那么就交换他们. 对每对元素执行此操作, 直到列表末尾.</li>
+<li>(3)重复步骤1和2, 做$n$次.</li>
+</ul>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/c/c8/Bubble-sort-example-300px.gif" alt="bubble-sort" /></p>
+<pre><code>Bubble-sort(a)
+1  for i = a.length() to 1
+2       for j = 1 to i-1
+3                 if a[j]&gt;a[j+1]
+4                          swap(a[j],a[j+1]);
+5                 end if
+</code></pre>
+<pre><code class="language-c">void bubble_sort(int arr[], int size){
+    for(int i=size-1; i&gt;=0; i--){
+        for(int j=0; j&lt;i;j++){
+            if(arr[j]&gt;arr[j+1]){
+                // swap(a[j], a[j+1])
+                int tmp = arr[j];
+                arr[j] = arr[j+1];
+                arr[j+1] = tmp;
+            }
+        }
+    }
+}
+</code></pre>
+<p>正确性:</p>
+<ul>
+<li>每一次, 会把一个最大的数带到我们末端的有序区域</li>
+<li>不用标记了</li>
+</ul>
+<p>时间复杂度:</p>
+<ul>
+<li>$i=1$ 比较 0 次</li>
+<li>$i=2$ 比较 0+1 次</li>
+<li>...</li>
+<li>$i=n$ 比较$1+2+3+4+\cdots+(n-2)+(n-1)=\frac{n(n-1)}{2}$次.</li>
+</ul>
+<p>最好的情况和最坏的情况</p>
+<h2>实用案例: 数组</h2>
+<h3>数组索引(<code>indexing</code>)</h3>
+<ul>
+<li>随着数组长度的变化而变化吗?</li>
+<li>随着索引的序号往后变化而变化吗?</li>
+</ul>
+<p>原理: 初始的位置+偏移量(几乎很快!)</p>
+<h3>数组查找(linear search)</h3>
+<p>任务: 找找数组里面又没有一个值, 如果有, 是第几个? (如果有多个的话, 就看第一个就行了)</p>
+<h3>有序数组查找(binary search)</h3>
+<p>任务: 同上, 但是从小到大排序了</p>
+<h2>用数学的语言描述</h2>
+<ul>
+<li>要耗费多少时间? $\implies$ 要执行多少次?
+<ul>
+<li>将一些基本操作, 如运算、赋值、比较等, 令其时间代价均为1.</li>
+</ul>
+</li>
+<li>认为算法运行时间仅仅依赖于问题输入规模$n$, 表示为$T(n)$.</li>
+<li>实际上: 操作系统, 硬件等, 只是一个我们概念上的表示.</li>
+</ul>
+<p>函数的增长: 高等数学$O$和$o$</p>
+<ul>
+<li>忽略低阶项. 因为当n足够大时, 低阶项对算法时间的影响可忽略</li>
+<li>忽略高阶项的常数系数. 因为在考虑大规模输入下的计算效率时, 相对于增长率而言, 系数是次要的.</li>
+<li>只剩最高阶项, 称作渐进记号.</li>
+</ul>
+<h3>渐进记号</h3>
+<p><img src="figures/asyno.png" alt="asyno" /></p>
+<p>渐进记号表示<strong>一类函数</strong>, 定义如下:</p>
+<p>定义1: 渐进上界. 对于给定的函数$g(n)$, 渐进上界$O(g(n))$表示如下函数的集合：</p>
+<p>$$O(g(n))={T(n): \exists c, n_0&gt;0 \text {, 使得 } \forall n \geq n_0, 0 \leq T(n) \leq c g(n)}$$</p>
+<p>有时候为了方便起见, 常用等于记号代替属于记号.</p>
+<p>$$
+\begin{aligned}
+&amp; \cos (n)={O}(1)                                                                                                                                                \\
+&amp; \frac{n^2}{2}-12 n={O}\left({n}^2\right)                                                                                                                       \\
+&amp; \log _7^n=\log _2^n / \log _2^7={O}\left(\log <em>2^n\right)={O}(\log n)                                                                                          \\
+&amp; \sum</em>{i=1}^n \frac{1}{i} \text { (假设 } n \text { 是 } 2 \text { 的整数幂) }                                                                                  \\
+= &amp; \frac{1}{1}+\frac{1}{2}+\frac{1}{3}+\frac{1}{4}+\frac{1}{5}+\frac{1}{6}+\frac{1}{7}+\frac{1}{8}+\frac{1}{9}+\frac{1}{10}+\ldots+\frac{1}{n-1}+\frac{1}{n}      \\
+&lt; &amp; \frac{1}{1}+\frac{1}{2}+\frac{1}{2}: 1 \frac{1}{4}+\frac{1}{4}+\frac{1}{4}+\frac{1}{4}: \frac{1}{8}+\frac{1}{8}+\frac{1}{8}+\ldots+\frac{1}{n / 2}+\frac{1}{n} \\
+= &amp; 1+2 \cdot \frac{1}{2}+4 \cdot \frac{1}{4}+8 \cdot \frac{1}{8}+\ldots+\frac{n}{2} \cdot \frac{1}{n / 2}+\frac{1}{n}                                             \\
+= &amp; \log n+1 / n={O}(\log n)                                                                                                                                       \\
+&amp;
+\end{aligned}
+$$</p>
+<p>定义1'. 渐进下界. 对于给定的函数$g(n)$, 渐进下界$\Omega(g(n))$表示如下函数的集合：</p>
+<p>$${\Omega}({g}({n}))=\left{{T}({n}): \exists {c}, {n}<em>{{0}}&gt;{0} \text {, 使得 } \forall n \geq {n}</em>{{0}}, {0} \leq {c g}({n}) \leq {T}(n)\right}$$</p>
+<p>$$
+\begin{aligned}
+&amp; n^3-2 n=\Omega\left(n^3\right)                                                                                                                               \\
+&amp; n^2+12 n=\Omega\left(n^2\right)                                                                                                                              \\
+&amp; \sum_{i=1}^n \frac{1}{i} \text { (假设 } {n} \text { 是 } 2 \text { 的整数幂) }                                                                              \\
+&amp; =\frac{1}{1}+\frac{1}{2}+\frac{1}{3}+\frac{1}{4}+\frac{1}{5}+\frac{1}{6}+\frac{1}{7}+\frac{1}{8}+\frac{1}{9}+\frac{1}{10}+\ldots 1+\frac{1}{n-1}+\frac{1}{n} \\
+&amp; &lt;\frac{1}{1}+\frac{1}{2}+\frac{1}{4}+\frac{1}{4}+\frac{1}{8}+\frac{1}{8}+\frac{1}{8}+\frac{1}{8}+\frac{1}{16}+\frac{1}{16}+.1+\frac{1}{n}+\frac{1}{n}        \\
+&amp; =1+\frac{1}{2}+2 \cdot \frac{1}{4}+4 \cdot \frac{1}{8}+\ldots+\frac{n}{2} \cdot \frac{1}{n}                                                                  \\
+&amp; =1+\frac{1}{2} \log n=\Omega(\log n)                                                                                                                         \\
+&amp;
+\end{aligned}
+$$</p>
+<p>定义1''. 渐进紧界. 对于给定的函数$g(n)$, 渐进紧确界$\Theta(g(n))$表示如下函数的集合：</p>
+<p>$$\Theta(g(n))=\left{T(n): \exists c_1, c_2, n_0&gt;0 \text {, 使得 } \forall n \geq n_0, c_1 g(n) \leq T(n) \leq c_2 g(n)\right}$$</p>
+
+    </div>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+          inlineMath: [ ['$','$'] ],
+          displayMath: [ ['$$','$$'] ],
+          processEscapes: true
+        },
+        "HTML-CSS": { fonts: ["TeX"] }
+      });
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <hr>
+    <div id="disqus_thread"></div>
+    <script>
+        (function() { 
+        var d = document, s = d.createElement('script');
+        s.src = 'https://augpath.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <script id="dsq-count-scr" src="//augpath.disqus.com/count.js" async></script>
+  </body>
+</html>

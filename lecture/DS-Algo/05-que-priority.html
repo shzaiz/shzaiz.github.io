@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <link rel="stylesheet" href="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/style.css">
+    <script src="https://courses-at-nju-by-hfwei.github.io/cpl-lectures/node_modules/reveal.js-plugins/chalkboard/plugin.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
+    <script>
+const copyButtonLabel = "Copy Code";
+
+// use a class selector if available
+let blocks = document.querySelectorAll("pre");
+
+blocks.forEach((block) => {
+  // only add button if browser supports Clipboard API
+  if (navigator.clipboard) {
+    let button = document.createElement("button");
+
+    button.innerText = copyButtonLabel;
+    block.appendChild(button);
+
+    button.addEventListener("click", async () => {
+      await copyCode(block);
+    });
+  }
+});
+
+async function copyCode(block) {
+  let code = block.querySelector("code");
+  let text = code.innerText;
+
+  await navigator.clipboard.writeText(text);
+}
+    </script>
+      <style>
+        body {counter-reset:section;}
+        h1 {counter-reset:subsection;font-size:x-large;}
+        h2 {font-size: large;}
+        
+        h1:before {
+        counter-increment:section;
+        content:counter(section) ". ";
+            font-weight:bold;
+            font-size: x-large;
+        }
+        h2:before {
+        counter-increment:subsection;
+        content:counter(section) "." counter(subsection) " ";
+        font-size: large;
+        }
+        html, body {
+            margin: 8%;
+            font-family: "Times New Roman","SimSun", "STSong", "Songti SC",Times, serif;
+            font-size: 110%;
+        }
+        code {
+            font-family: 'Courier New', Courier, monospace;
+        } 
+        pre {
+            font-family: 'Courier New', Courier, monospace;
+        } 
+        div{
+            max-width: 100%;
+            overflow: auto;
+        }
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+            position: fixed; /* Set the navbar to fixed position */
+            top: 0; /* Position the navbar at the top of the page */
+            width: 100%; /* Full width */
+        }
+        img {
+        max-width: 80%;
+        height: auto;
+        }
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        a {
+            color: #148bca;
+            text-align: center;
+            padding-left: 2px;
+            padding-right: 2px;
+            text-decoration: none;
+        }
+        p.hidden {
+          overflow: hidden;
+        }
+    </style>
+  </head>
+  <body>
+    <div class="navbar">
+        <a href="https://shzaiz.github.io">AUG's Wiki</a>
+        <a href="index.html"> ↑ Back to contents</a>
+        Last updated at 2024-04-28 20:57:23.066777
+    </div>
+
+    <div class="toc"></div>
+    <a id="toc-button"><i class="far fa-bookmark"></i></a>
+    
+    <div id="renderedContent">
+      <h1>05. 队列, 堆和优先队列</h1>
+<p>视频回放: <a href="https://www.acfun.cn/v/ac43789313">5 队列 优先队列 二叉树</a></p>
+<h2>队列</h2>
+<ul>
+<li>先进先出</li>
+</ul>
+<p>模拟方法:</p>
+<ul>
+<li>(Easy take) 直接用数组, 头和尾用两个指针指着...</li>
+<li>(Hard take) ???</li>
+</ul>
+<p>现在: 希望让最大的值首先出来</p>
+<h2>Warmup: 二叉树</h2>
+<p>方法1:</p>
+<ul>
+<li>回顾: 链表
+<ul>
+<li><code>Node *</code></li>
+</ul>
+</li>
+<li>多来几个不就可以了吗?</li>
+</ul>
+<pre><code class="language-c">struct BinaryTree{
+    BinaryTree *left, *right;
+    int val;
+};
+</code></pre>
+<p>方法2: 如何二维的变为一维的?</p>
+<p>假设当前节点为$o$,</p>
+<ul>
+<li>左孩子: $2\times o$</li>
+<li>右孩子: $2\times o +1$</li>
+<li>父亲: $\lfloor o/2 \rfloor$</li>
+</ul>
+<h2>什么是堆</h2>
+<p>Defn:</p>
+<ul>
+<li>For a node and its left and right child
+<ul>
+<li>the node is the biggest(smallest) node</li>
+<li>left and right child is smaller(bigger) than the node</li>
+</ul>
+</li>
+</ul>
+<p><img src="./figures/heap.png" alt="heap" />
+{width=600px}</p>
+<p>Helpful when: extracting the max(min) number.</p>
+<p>Better to talk about how to <em>maintain</em> the structure.</p>
+<p>For convenience, we take the easy appoarch</p>
+<p><strong>存储</strong> 为了方便, 我们用一维数组来存储堆. 我们让 $x$ 的左儿子是 $2x$, 右儿子是 $2x+1$.</p>
+<p><strong>两个操作.</strong> 以小根堆为例:</p>
+<ul>
+<li>down: 把一个节点往下调整
+<ul>
+<li>目标: 某个数变大了, 往下移动</li>
+<li>找到自己和左右的儿子中最小者交换</li>
+</ul>
+</li>
+<li>up: 把一个节点往上调整
+<ul>
+<li>某个数变小了, 往上移动</li>
+<li>若自己比父亲节点小, 就交换</li>
+</ul>
+</li>
+</ul>
+<p><strong>使用拼凑</strong></p>
+<ul>
+<li>插入元素: 在堆的最后一个地方插入新的数, 不断往上移动.</li>
+<li>最小值: 堆中的第一个元素</li>
+<li>删除最小值:
+<ul>
+<li>把堆的最后一个元素覆盖堆顶的元素;</li>
+<li>然后把堆顶往下移动.</li>
+</ul>
+</li>
+<li>删除任意一个元素 $k$:
+<ul>
+<li>先与第 $k$ 个元素交换最后一个元素;</li>
+<li>分类讨论: 仅会执行下列三种之一:
+<ul>
+<li>不变: 不用动</li>
+<li>变大: 往下走</li>
+<li>变小: 往上走</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>修改任意一个元素 $k$: 就像删除一样.</li>
+</ul>
+<h2>优先队列</h2>
+<p>这样, 就可以实现优先队列了.</p>
+<h2>应用: 对顶堆与中位数(running median)</h2>
+<p>问题描述: 有一序列的数, 希望我们每次读取一个数的时候, 问一问这一序列的数的中位数是多少.</p>
+<p>解法:</p>
+<ul>
+<li>维护两个堆: 最大堆和最小堆(最小堆首就是中位数)</li>
+<li>每当读入数字:
+<ul>
+<li>这个数字比最小堆堆顶元素大? 插入最小堆: 插入最大堆</li>
+<li>之后检查堆最大堆是不是超过了$\lfloor n/2 \rfloor$, 最小堆是不是超过了$\lceil n/2\rceil$. 如果超过了, 就取出超出的那个扔到不足的那个堆里面.</li>
+</ul>
+</li>
+</ul>
+<h2>树基础</h2>
+
+    </div>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+          inlineMath: [ ['$','$'] ],
+          displayMath: [ ['$$','$$'] ],
+          processEscapes: true
+        },
+        "HTML-CSS": { fonts: ["TeX"] }
+      });
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <hr>
+    <div id="disqus_thread"></div>
+    <script>
+        (function() { 
+        var d = document, s = d.createElement('script');
+        s.src = 'https://augpath.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <script id="dsq-count-scr" src="//augpath.disqus.com/count.js" async></script>
+  </body>
+</html>
